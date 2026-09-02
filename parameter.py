@@ -55,6 +55,7 @@ CONTINUE_LOG_ALPHA = False  # Continue from log_alpha saved from model checkpoin
 SAVE_IMG_GAP = 201  
 VIZ_GRAPH_EDGES=True
 VIZ_GRAPH_EDGES_GROUND_TRUTH=False
+VIZ_CONNECTIVITY_RSSI_GROUND_TRUTH=True
 
 # --- RL Params --- # 
 REPLAY_SIZE = 10000  

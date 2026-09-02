@@ -12,6 +12,7 @@ else:
 import copy
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+from matplotlib.lines import Line2D
 import os
 from time import time
 from skimage import io
@@ -569,6 +570,53 @@ class Env():
                 self.visualize_flock_recurse_connectivity_graph(child_node, iter)
 
 
+    def visualize_connectivity_rssi(self):
+        """Plot good, warning, and disconnected links with their current RSSI."""
+        link_styles = {
+            2: ('#2ca02c', '-', 2.5, 0.9),
+            1: ('#ff9800', '-', 2.5, 0.9),
+            0: ('#d62728', '--', 1.5, 0.45),
+        }
+
+        for source in range(self.n_agent):
+            for target in range(source + 1, self.n_agent):
+                source_position = self.all_robot_positions_gt[source]
+                target_position = self.all_robot_positions_gt[target]
+                state = self.link_state_matrix[source, target]
+                color, line_style, line_width, alpha = link_styles[state]
+                plt.plot([source_position[0], target_position[0]],
+                         [source_position[1], target_position[1]],
+                         color=color, linestyle=line_style, linewidth=line_width,
+                         alpha=alpha, zorder=80)
+
+                rssi = self.rssi_matrix[source, target]
+                if np.isfinite(rssi):
+                    midpoint = (source_position + target_position) / 2
+                    plt.text(midpoint[0], midpoint[1], '{:.1f} dBm'.format(rssi),
+                             fontsize=7, ha='center', va='center', color=color,
+                             bbox=dict(facecolor='white', edgecolor='none', alpha=0.7, pad=1),
+                             zorder=81)
+
+        for robot_id, position in enumerate(self.all_robot_positions_gt):
+            if self.disconnect_steps[robot_id] > 0:
+                plt.plot(position[0], position[1], marker='o', markersize=20,
+                         markerfacecolor='none', markeredgecolor='#d62728',
+                         markeredgewidth=2.5, zorder=10000)
+                plt.text(position[0], position[1] - 12,
+                         'OFF {}'.format(self.disconnect_steps[robot_id]),
+                         fontsize=8, ha='center', color='#d62728', weight='bold',
+                         zorder=10001)
+
+        legend_handles = [
+            Line2D([0], [0], color='#2ca02c', linewidth=2.5, label='Good RSSI'),
+            Line2D([0], [0], color='#ff9800', linewidth=2.5, label='Warning RSSI'),
+            Line2D([0], [0], color='#d62728', linestyle='--', linewidth=1.5,
+                   label='Disconnected'),
+        ]
+        plt.legend(handles=legend_handles, loc='upper right', fontsize=8,
+                   framealpha=0.85)
+
+
     def generate_rendezvous_utility_layer(self, robot_id, eps):
         """ Generate map-delta utility layer for robot observation """
 
@@ -856,6 +904,7 @@ class Env():
 
         plt.switch_backend('agg')
         plt.cla()
+        plt.gcf().set_size_inches(8, 7)
         plt.imshow(self.agents_merged_belief, cmap='gray')
         plt.axis((0, self.ground_truth_size[1], self.ground_truth_size[0], 0))
         for robot_id in range(self.n_agent):
@@ -884,16 +933,29 @@ class Env():
             plt.plot(position[0], position[1], markersize=12, zorder=9999, marker="D", ls="-", c=robot_marker_color, mec="black")
         
         # Visualize Connectivity Graph
-        for agent_pose in list(self.graph_dict.keys()):
-            self.visited_dict = dict.fromkeys(self.visited_dict, False)
-            self.visualize_flock_recurse_connectivity_graph(agent_pose)
+        if VIZ_CONNECTIVITY_RSSI_GROUND_TRUTH:
+            self.visualize_connectivity_rssi()
+        else:
+            for agent_pose in list(self.graph_dict.keys()):
+                self.visited_dict = dict.fromkeys(self.visited_dict, False)
+                self.visualize_flock_recurse_connectivity_graph(agent_pose)
         
         # # Add legend
         # patches = [mpatches.Patch(color=color_list[i], label=color_list_label[i]) for i in range(len(self.all_robot_positions_gt))]
         # plt.legend(handles=patches, bbox_to_anchor=(1.2, 0.7), title="Robots", loc="upper right",  title_fontsize='large')       # fontsize='x-large',  title_fontsize='xx-large'  
 
-        plt.suptitle('Total Explored: {:.1f}%  Max Distance: {:.1f}\n(No Communication Constraints)'.format(self.all_explored_rate[robot_id]*100, travel_dist, robot_id + 1))
-        plt.tight_layout()
+        current_largest_component = max(len(group) for group in self.group_ids_list) / self.n_agent
+        weakest_rssi = ('{:.1f} dBm'.format(self.weakest_tree_rssi)
+                        if np.isfinite(self.weakest_tree_rssi) else 'N/A')
+        plt.suptitle(
+            'Step {} | Explored {:.1f}% | Max distance {:.1f}\n'
+            'Now {} | Episode connected {:.1f}% | Largest component {:.1f}%\n'
+            'Weakest tree link {}'.format(
+                step, self.explored_rate * 100, travel_dist,
+                'CONNECTED' if len(self.group_ids_list) == 1 else 'DISCONNECTED',
+                self.connectivity_rate * 100, current_largest_component * 100,
+                weakest_rssi), fontsize=10)
+        plt.tight_layout(rect=(0, 0, 1, 0.91))
         plt.savefig('{}/eps{}_step{}_merged.png'.format(path, n, step, dpi=150))
         # plt.show()
         frame = '{}/eps{}_step{}_merged.png'.format(path, n, step)

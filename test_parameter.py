@@ -45,6 +45,7 @@ SAVE_LENGTH = False                 # Do you want to save per-episode metrics
 SAVE_GIFS = True                    # Do you want to save GIFs
 VIZ_GRAPH_EDGES=True                # Visualize graph edhes (NOTE: Will be very slow)
 VIZ_GRAPH_EDGES_GROUND_TRUTH=False  # Visualize graph edhes (NOTE: Will be very slow)
+VIZ_CONNECTIVITY_RSSI_GROUND_TRUTH=True
 
 # --- GENERAL --- #
 USE_GPU = True

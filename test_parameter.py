@@ -61,7 +61,9 @@ log_path = f'{FOLDER_NAME}/test_results/log'
 
 # --- RL Params --- # 
 EMBEDDING_DIM = 128
-INPUT_DIM = 6
+USE_CONNECTIVITY_FEATURES = False  # Set True when evaluating a wall-aware checkpoint
+CONNECTIVITY_FEATURE_DIM = 5
+INPUT_DIM = 6 + CONNECTIVITY_FEATURE_DIM if USE_CONNECTIVITY_FEATURES else 6
 
 # --- Sensor Model --- # 
 # SS Reference: https://hal.science/hal-03365129/document
@@ -82,6 +84,11 @@ SS_XG_MAX=13
 SS_K_MIN=0
 SS_K_MAX=13
 MAX_DISCONNECTED_STEPS=10
+RSSI_MARGIN_NORMALIZATION=20
+WEAK_SIGNAL_PENALTY_WEIGHT=0.2
+DISCONNECT_PENALTY_WEIGHT=0.5
+DISCONNECT_DURATION_PENALTY_WEIGHT=0.5
+RECONNECT_REWARD_WEIGHT=0.5
 
 # --- Graph Params (General) --- # 
 NUM_DENSE_COORDS_WIDTH=50                 # How many node coords across width?

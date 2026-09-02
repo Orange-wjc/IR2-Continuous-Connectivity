@@ -33,7 +33,7 @@ def writeToTensorBoard(writer, tensorboardData, curr_episode):
 
     tensorboardData = np.array(tensorboardData)
     tensorboardData = list(np.nanmean(tensorboardData, axis=0))
-    reward, value, policyLoss, qValueLoss, entropy, policyGradNorm, qValueGradNorm, log_alpha, alphaLoss, travel_dist, success_rate, explored_rate, connectivity_rate, agents_connected_percentage = tensorboardData
+    reward, value, policyLoss, qValueLoss, entropy, policyGradNorm, qValueGradNorm, log_alpha, alphaLoss, travel_dist, success_rate, explored_rate, connectivity_rate, agents_connected_percentage, communication_reward = tensorboardData
 
     writer.add_scalar(tag='Losses/Value', scalar_value=value, global_step=curr_episode)
     writer.add_scalar(tag='Losses/Policy Loss', scalar_value=policyLoss, global_step=curr_episode)
@@ -49,6 +49,7 @@ def writeToTensorBoard(writer, tensorboardData, curr_episode):
     writer.add_scalar(tag='Perf/Success Rate', scalar_value=success_rate, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Connectivity Rate', scalar_value=connectivity_rate, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Agents Connected [%]', scalar_value=agents_connected_percentage, global_step=curr_episode)
+    writer.add_scalar(tag='Perf/Communication Reward', scalar_value=communication_reward, global_step=curr_episode)
 
     
 def main():
@@ -142,7 +143,8 @@ def main():
         curr_episode += 1
         job_list.append(meta_agent.job.remote(weights_set, curr_episode))
     
-    metric_name = ['travel_dist', 'success_rate', 'explored_rate', 'connectivity_rate', 'agents_connected_percentage']
+    metric_name = ['travel_dist', 'success_rate', 'explored_rate', 'connectivity_rate',
+                   'agents_connected_percentage', 'mean_communication_reward']
     training_data = []
     perf_metrics = {}
     for n in metric_name:
@@ -337,7 +339,10 @@ def main():
                                 "policy_lr_decay": policy_lr_decay.state_dict(),
                                 "q_net1_lr_decay": q_net1_lr_decay.state_dict(),
                                 "q_net2_lr_decay": q_net2_lr_decay.state_dict(),
-                                "log_alpha_lr_decay": log_alpha_lr_decay.state_dict()
+                                "log_alpha_lr_decay": log_alpha_lr_decay.state_dict(),
+                                "input_dim": INPUT_DIM,
+                                "connectivity_feature_dim": CONNECTIVITY_FEATURE_DIM,
+                                "use_connectivity_features": USE_CONNECTIVITY_FEATURES,
                         }
                 path_checkpoint = "./" + MODEL_PATH
                 torch.save(checkpoint, path_checkpoint)

@@ -177,9 +177,15 @@ class TestWorker:
                     occupied_node[index] = 1
 
         # Collate final augmented node_coords inputs
-        # node_inputs = np.concatenate((node_coords, node_utility_inputs, guidepost, occupied_node, nodes_ss), axis=1) - ABLATION
-        node_inputs = np.concatenate((node_coords, node_utility_inputs, rendezvous_utility_inputs, guidepost, occupied_node), axis=1)  
-        node_inputs = torch.FloatTensor(node_inputs).unsqueeze(0).to(self.device)  # (1, node_padding_size+1, 3)
+        node_input_parts = [node_coords, node_utility_inputs, rendezvous_utility_inputs,
+                            guidepost, occupied_node]
+        if USE_CONNECTIVITY_FEATURES:
+            connectivity_inputs = self.env.get_connectivity_node_features(
+                robot_id, self.env.all_node_coords[robot_id])
+            node_input_parts.append(connectivity_inputs)
+        node_inputs = np.concatenate(node_input_parts, axis=1)
+        assert node_inputs.shape[1] == INPUT_DIM
+        node_inputs = torch.FloatTensor(node_inputs).unsqueeze(0).to(self.device)  # (1, node_count, INPUT_DIM)
 
         # print("node_coords.shape[0]: ", node_coords.shape[0])
         if node_coords.shape[0] >= self.node_padding_size:

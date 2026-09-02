@@ -133,8 +133,7 @@ class Worker:
         self.perf_metrics['travel_dist'] = max(travel_dist_list)
         self.perf_metrics['explored_rate'] = self.env.explored_rate
         self.perf_metrics['success_rate'] = done
-        self.perf_metrics['connectivity_rate'] = self.env.connectivity_rate
-        self.perf_metrics['agents_connected_percentage'] = self.env.agents_connected_percentage
+        self.perf_metrics.update(self.env.get_connectivity_metrics())
 
         # save merged gif
         if self.save_image:
@@ -189,9 +188,15 @@ class Worker:
                     occupied_node[index] = 1
 
         # Collate final augmented node_coords inputs
-        # node_inputs = np.concatenate((node_coords, node_utility_inputs, guidepost, occupied_node, nodes_ss), axis=1)  # ABLATION
-        node_inputs = np.concatenate((node_coords, node_utility_inputs, rendezvous_utility_inputs, guidepost, occupied_node), axis=1)  
-        node_inputs = torch.FloatTensor(node_inputs).unsqueeze(0).to(self.device)  # (1, node_padding_size+1, 3)
+        node_input_parts = [node_coords, node_utility_inputs, rendezvous_utility_inputs,
+                            guidepost, occupied_node]
+        if USE_CONNECTIVITY_FEATURES:
+            connectivity_inputs = self.env.get_connectivity_node_features(
+                robot_id, self.env.all_node_coords[robot_id])
+            node_input_parts.append(connectivity_inputs)
+        node_inputs = np.concatenate(node_input_parts, axis=1)
+        assert node_inputs.shape[1] == INPUT_DIM
+        node_inputs = torch.FloatTensor(node_inputs).unsqueeze(0).to(self.device)  # (1, node_padding_size+1, INPUT_DIM)
 
         if node_coords.shape[0] >= self.node_padding_size:
             print(RED, "[Eps {} | Robot {} | Step {}] node_coords.shape[0] >= self.node_padding_size ({} >= {}). Skipping eps.".format(eps, robot_id+1, step, node_coords.shape[0], self.node_padding_size))

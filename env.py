@@ -60,6 +60,8 @@ class Env():
         self.weakest_tree_rssi = float('nan')
         self.weakest_tree_rssi_history = []
         self.emergency_reconnect_required = np.zeros(self.n_agent, dtype=bool)
+        self.communication_reward = 0.0
+        self.communication_reward_sum = 0.0
         self.explored_rate = 0
         self.all_explored_rate = [0.0 for _ in range(self.n_agent)]
         self.all_rendezvous_utility_inputs = [None for _ in range(self.n_agent)]
@@ -340,14 +342,38 @@ class Env():
 
     def update_env_and_get_team_rewards(self):
         """ Evaluate team performance and rewards """
+        reconnect_count_before = len(self.completed_reconnect_times)
         self.record_connectivity_metrics()
+        reconnect_count = len(self.completed_reconnect_times) - reconnect_count_before
+        self.communication_reward = self.calculate_communication_reward(reconnect_count)
+        self.communication_reward_sum += self.communication_reward
         self.explored_rate = self.evaluate_team_exploration_rate()
 
-        team_reward = 0
+        team_reward = self.communication_reward
         done = self.check_done()
         if done:
             team_reward += 40
         return team_reward
+
+
+    def calculate_communication_reward(self, reconnect_count):
+        """Return the team reward for weak links, outages, outage duration, and reconnection."""
+        weak_signal_penalty = 0.0
+        if USE_SIGNAL_STRENGTH_NOT_PROXIMITY and np.isfinite(self.weakest_tree_rssi):
+            margin = self.weakest_tree_rssi - self.ss_realistic_model.threshold_ss
+            weak_signal_penalty = np.clip(
+                (SS_WARNING_MARGIN - margin) / SS_WARNING_MARGIN, 0.0, 1.0)
+
+        disconnected_fraction = np.count_nonzero(self.disconnect_steps) / self.n_agent
+        duration_penalty = np.mean(np.clip(
+            self.disconnect_steps / MAX_DISCONNECTED_STEPS, 0.0, 1.0))
+        reconnect_fraction = reconnect_count / self.n_agent
+
+        return float(
+            -WEAK_SIGNAL_PENALTY_WEIGHT * weak_signal_penalty
+            -DISCONNECT_PENALTY_WEIGHT * disconnected_fraction
+            -DISCONNECT_DURATION_PENALTY_WEIGHT * duration_penalty
+            +RECONNECT_REWARD_WEIGHT * reconnect_fraction)
 
 
     def update_connectivity_graph(self, all_robot_positions_gt):
@@ -490,6 +516,8 @@ class Env():
                                 if self.communication_step_count else 0.0)
         mean_weakest_tree_rssi = (np.mean(self.weakest_tree_rssi_history)
                                   if self.weakest_tree_rssi_history else float('nan'))
+        mean_communication_reward = (self.communication_reward_sum / self.communication_step_count
+                                     if self.communication_step_count else 0.0)
 
         return {
             'connectivity_rate': float(self.connectivity_rate),
@@ -501,7 +529,97 @@ class Env():
             'largest_component_ratio': float(self.largest_component_ratio),
             'mean_component_count': float(mean_component_count),
             'weakest_tree_rssi': float(mean_weakest_tree_rssi),
+            'mean_communication_reward': float(mean_communication_reward),
         }
+
+
+    def get_connectivity_node_features(self, robot_id, node_coords):
+        """Predict communication quality for each node using only the robot's local beliefs.
+
+        Columns are normalized best RSSI margin, connected-neighbor ratio,
+        predicted component ratio, relay indicator, and disconnection duration.
+        """
+        features = np.zeros((len(node_coords), CONNECTIVITY_FEATURE_DIM), dtype=np.float32)
+        positions = self.all_robot_positions_belief[robot_id]
+        known_other_ids = [other_id for other_id, position in enumerate(positions)
+                           if other_id != robot_id and position is not None]
+        robot_belief = self.all_robot_belief[robot_id][robot_id]
+
+        other_graph = {other_id: set() for other_id in known_other_ids}
+        for index, source in enumerate(known_other_ids):
+            for target in known_other_ids[index + 1:]:
+                _, _, connected = self.estimate_link(
+                    robot_belief, positions[source], positions[target])
+                if connected:
+                    other_graph[source].add(target)
+                    other_graph[target].add(source)
+
+        component_labels = {}
+        component_index = 0
+        for other_id in known_other_ids:
+            if other_id in component_labels:
+                continue
+            stack = [other_id]
+            component_labels[other_id] = component_index
+            while stack:
+                current = stack.pop()
+                for neighbor in other_graph[current]:
+                    if neighbor not in component_labels:
+                        component_labels[neighbor] = component_index
+                        stack.append(neighbor)
+            component_index += 1
+
+        disconnect_ratio = min(
+            self.disconnect_steps[robot_id] / MAX_DISCONNECTED_STEPS, 1.0)
+        for node_index, candidate_position in enumerate(node_coords):
+            margins = []
+            connected_neighbors = []
+            for other_id in known_other_ids:
+                _, margin, connected = self.estimate_link(
+                    robot_belief, candidate_position, positions[other_id])
+                margins.append(margin)
+                if connected:
+                    connected_neighbors.append(other_id)
+
+            best_margin = max(margins) if margins else -RSSI_MARGIN_NORMALIZATION
+            connected_neighbor_ratio = (len(connected_neighbors) / (self.n_agent - 1)
+                                        if self.n_agent > 1 else 0.0)
+
+            connected_component = {robot_id}
+            stack = list(connected_neighbors)
+            while stack:
+                current = stack.pop()
+                if current in connected_component:
+                    continue
+                connected_component.add(current)
+                stack.extend(other_graph[current])
+
+            neighbor_components = {component_labels[neighbor]
+                                   for neighbor in connected_neighbors}
+            relay_score = float(len(neighbor_components) >= 2)
+
+            features[node_index] = [
+                np.clip(best_margin / RSSI_MARGIN_NORMALIZATION, -1.0, 1.0),
+                connected_neighbor_ratio,
+                len(connected_component) / self.n_agent,
+                relay_score,
+                disconnect_ratio,
+            ]
+
+        return features
+
+
+    def estimate_link(self, robot_belief, source_position, target_position):
+        """Estimate link RSSI, normalized margin source value, and connectivity."""
+        if USE_SIGNAL_STRENGTH_NOT_PROXIMITY:
+            signal = self.ss_realistic_model.get_signal_metrics(
+                robot_belief, source_position, target_position)
+            return signal['rssi'], signal['margin'], signal['rssi'] > self.ss_realistic_model.threshold_ss
+
+        distance = np.linalg.norm(source_position - target_position)
+        normalized_margin = ((self.max_comms_proximity - distance) /
+                             self.max_comms_proximity * RSSI_MARGIN_NORMALIZATION)
+        return float('nan'), normalized_margin, distance < self.max_comms_proximity
 
     ########################
 

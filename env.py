@@ -42,8 +42,23 @@ class Env():
 
         self.resolution = 4
         self.sensor_range = SENSOR_RANGE     
-        self.connectivity_rate = 0
+        self.connectivity_rate = 0.0
         self.agents_connected_percentage = 0
+        self.rssi_matrix = np.full((self.n_agent, self.n_agent), np.nan)
+        self.rssi_margin_matrix = np.full((self.n_agent, self.n_agent), np.nan)
+        self.link_state_matrix = np.zeros((self.n_agent, self.n_agent), dtype=np.int8)
+        self.communication_step_count = 0
+        self.connected_step_count = 0
+        self.component_count = self.n_agent
+        self.component_count_sum = 0
+        self.largest_component_ratio = 0.0
+        self.largest_component_ratio_sum = 0.0
+        self.disconnect_steps = np.zeros(self.n_agent, dtype=np.int32)
+        self.disconnect_count = 0
+        self.completed_reconnect_times = []
+        self.weakest_tree_rssi = float('nan')
+        self.weakest_tree_rssi_history = []
+        self.emergency_reconnect_required = np.zeros(self.n_agent, dtype=bool)
         self.explored_rate = 0
         self.all_explored_rate = [0.0 for _ in range(self.n_agent)]
         self.all_rendezvous_utility_inputs = [None for _ in range(self.n_agent)]
@@ -167,65 +182,7 @@ class Env():
         # Connectivity Graph
         ################################################
         
-        # Check if all agents are connected
-        self.graph_dict = {}
-        self.visited_dict = {}
-
-        # Add graph vertices (bidirectional)
-        closest_agent_proximity_list = [0.0 for _ in range(self.n_agent)]
-        for i, _ in enumerate(all_robot_positions_gt):
-            closest_agent_proximity = float('inf')
-
-            for j, _ in enumerate(all_robot_positions_gt):
-                if i != j:
-                    vertex1 = (all_robot_positions_gt[i][0], all_robot_positions_gt[i][1])
-                    vertex2 = (all_robot_positions_gt[j][0], all_robot_positions_gt[j][1])
-                    
-                    if vertex1 not in self.graph_dict:
-                        self.graph_dict[vertex1] = []
-                        self.visited_dict[vertex1] = False
-                    if vertex2 not in self.graph_dict:
-                        self.graph_dict[vertex2] = []
-                        self.visited_dict[vertex2] = False
-
-                    dist = np.linalg.norm(all_robot_positions_gt[i] - all_robot_positions_gt[j])
-
-                    # Proximity / Signal-Strength Based (NOTE: Assume connected = bidirectional communication)
-                    if (USE_SIGNAL_STRENGTH_NOT_PROXIMITY and self.ss_realistic_model.is_within_signal_strength(self.ground_truth, all_robot_positions_gt[i], all_robot_positions_gt[j])) \
-                        or (not USE_SIGNAL_STRENGTH_NOT_PROXIMITY and dist < self.max_comms_proximity):
-
-                        self.graph_dict[vertex1].append(vertex2)
-                        self.graph_dict[vertex2].append(vertex1)
-
-                    if dist < closest_agent_proximity:
-                        closest_agent_proximity = dist
-
-            closest_agent_proximity_list[i] = closest_agent_proximity
-
-        # Derive sizes of all subconnected graphs
-        unique_groups_list = self.unique_groups_list_from_connectivity_graph(self.graph_dict)
-
-        # # If multiple largest flock - consider all broken (no majority)
-        # # Else, consider everyone not in largest flock as broken (not majority)
-        group_size_list = [len(group) for group in unique_groups_list]
-        cur_max_flock_size = max(group_size_list)
-        max_counts = group_size_list.count(cur_max_flock_size)
-        self.agents_comms_broken = []
-        
-        if max_counts > 1:
-            self.agents_comms_broken = list(self.graph_dict.keys())
-        else:
-            argmax_group_idx = group_size_list.index(cur_max_flock_size)
-            for idx, group in enumerate(unique_groups_list):
-                if idx != argmax_group_idx:
-                    self.agents_comms_broken += group    # concat
-
-        # Redefine unique_groups in terms of robot_ids
-        self.group_ids_list = []
-        for unique_group in unique_groups_list:
-            group_ids = [id for id, pose in enumerate(all_robot_positions_gt) \
-                                if (pose[0], pose[1]) in unique_group ]
-            self.group_ids_list.append(group_ids)
+        self.update_connectivity_graph(all_robot_positions_gt)
 
         ################################################
         # Belief Propogation (hopping through graph)
@@ -382,8 +339,7 @@ class Env():
 
     def update_env_and_get_team_rewards(self):
         """ Evaluate team performance and rewards """
-        self.agents_connected_percentage = 1 - (len(self.agents_comms_broken) / self.n_agent)
-        self.connectivity_rate = (len(self.agents_comms_broken) == 0)
+        self.record_connectivity_metrics()
         self.explored_rate = self.evaluate_team_exploration_rate()
 
         team_reward = 0
@@ -391,6 +347,160 @@ class Env():
         if done:
             team_reward += 40
         return team_reward
+
+
+    def update_connectivity_graph(self, all_robot_positions_gt):
+        """Build the current multi-hop communication graph and continuous RSSI matrices."""
+        self.graph_dict = {}
+        self.visited_dict = {}
+        self.rssi_matrix.fill(np.nan)
+        self.rssi_margin_matrix.fill(np.nan)
+        self.link_state_matrix.fill(0)
+
+        for position in all_robot_positions_gt:
+            vertex = (position[0], position[1])
+            self.graph_dict[vertex] = []
+            self.visited_dict[vertex] = False
+
+        for i in range(self.n_agent):
+            for j in range(i + 1, self.n_agent):
+                vertex1 = (all_robot_positions_gt[i][0], all_robot_positions_gt[i][1])
+                vertex2 = (all_robot_positions_gt[j][0], all_robot_positions_gt[j][1])
+                dist = np.linalg.norm(all_robot_positions_gt[i] - all_robot_positions_gt[j])
+
+                if USE_SIGNAL_STRENGTH_NOT_PROXIMITY:
+                    signal = self.ss_realistic_model.get_signal_metrics(
+                        self.ground_truth, all_robot_positions_gt[i], all_robot_positions_gt[j])
+                    rssi = signal['rssi']
+                    margin = signal['margin']
+                    connected = rssi > self.ss_realistic_model.threshold_ss
+                    link_state = 2 if margin > SS_WARNING_MARGIN else int(connected)
+                    self.rssi_matrix[i, j] = self.rssi_matrix[j, i] = rssi
+                    self.rssi_margin_matrix[i, j] = self.rssi_margin_matrix[j, i] = margin
+                    self.link_state_matrix[i, j] = self.link_state_matrix[j, i] = link_state
+                else:
+                    connected = dist < self.max_comms_proximity
+                    self.link_state_matrix[i, j] = self.link_state_matrix[j, i] = int(connected) * 2
+
+                if connected:
+                    self.graph_dict[vertex1].append(vertex2)
+                    self.graph_dict[vertex2].append(vertex1)
+
+        unique_groups_list = self.unique_groups_list_from_connectivity_graph(self.graph_dict)
+        group_size_list = [len(group) for group in unique_groups_list]
+        cur_max_flock_size = max(group_size_list)
+        max_counts = group_size_list.count(cur_max_flock_size)
+        self.agents_comms_broken = []
+
+        if max_counts > 1:
+            self.agents_comms_broken = list(self.graph_dict.keys())
+        else:
+            argmax_group_idx = group_size_list.index(cur_max_flock_size)
+            for idx, group in enumerate(unique_groups_list):
+                if idx != argmax_group_idx:
+                    self.agents_comms_broken += group
+
+        self.group_ids_list = []
+        for unique_group in unique_groups_list:
+            group_ids = [id for id, pose in enumerate(all_robot_positions_gt)
+                         if (pose[0], pose[1]) in unique_group]
+            self.group_ids_list.append(group_ids)
+
+
+    def record_connectivity_metrics(self):
+        """Accumulate connectivity statistics once after a complete team step."""
+        if not self.group_ids_list:
+            return
+
+        self.communication_step_count += 1
+        group_sizes = [len(group) for group in self.group_ids_list]
+        largest_size = max(group_sizes)
+        fully_connected = len(self.group_ids_list) == 1
+
+        if fully_connected:
+            self.connected_step_count += 1
+        self.connectivity_rate = self.connected_step_count / self.communication_step_count
+
+        self.component_count = len(self.group_ids_list)
+        self.component_count_sum += self.component_count
+        current_largest_component_ratio = largest_size / self.n_agent
+        self.largest_component_ratio_sum += current_largest_component_ratio
+        self.largest_component_ratio = self.largest_component_ratio_sum / self.communication_step_count
+        self.agents_connected_percentage = self.largest_component_ratio
+
+        largest_groups = [group for group in self.group_ids_list if len(group) == largest_size]
+        if len(largest_groups) == 1:
+            connected_to_team = set(largest_groups[0])
+            disconnected_ids = set(range(self.n_agent)) - connected_to_team
+        else:
+            disconnected_ids = set(range(self.n_agent))
+
+        for robot_id in range(self.n_agent):
+            previous_duration = self.disconnect_steps[robot_id]
+            if robot_id in disconnected_ids:
+                if previous_duration == 0:
+                    self.disconnect_count += 1
+                self.disconnect_steps[robot_id] += 1
+            else:
+                if previous_duration > 0:
+                    self.completed_reconnect_times.append(int(previous_duration))
+                self.disconnect_steps[robot_id] = 0
+
+        self.emergency_reconnect_required = self.disconnect_steps >= MAX_DISCONNECTED_STEPS
+
+        largest_group = largest_groups[0]
+        self.weakest_tree_rssi = self.get_weakest_tree_rssi(largest_group)
+        if np.isfinite(self.weakest_tree_rssi):
+            self.weakest_tree_rssi_history.append(self.weakest_tree_rssi)
+
+
+    def get_weakest_tree_rssi(self, group_ids):
+        """Return the bottleneck RSSI of a maximum spanning tree for one component."""
+        if len(group_ids) < 2 or not USE_SIGNAL_STRENGTH_NOT_PROXIMITY:
+            return float('nan')
+
+        visited = {group_ids[0]}
+        tree_rssi = []
+        while len(visited) < len(group_ids):
+            best_edge = None
+            best_rssi = -np.inf
+            for source in visited:
+                for target in group_ids:
+                    rssi = self.rssi_matrix[source, target]
+                    if target not in visited and np.isfinite(rssi) and rssi > best_rssi:
+                        best_edge = target
+                        best_rssi = rssi
+            if best_edge is None:
+                return float('nan')
+            visited.add(best_edge)
+            tree_rssi.append(best_rssi)
+
+        return float(min(tree_rssi))
+
+
+    def get_connectivity_metrics(self):
+        """Return episode-level communication metrics using completed and active outages."""
+        active_disconnects = [int(duration) for duration in self.disconnect_steps if duration > 0]
+        disconnect_durations = self.completed_reconnect_times + active_disconnects
+        mean_disconnect_duration = np.mean(disconnect_durations) if disconnect_durations else 0.0
+        max_disconnect_duration = max(disconnect_durations) if disconnect_durations else 0
+        mean_reconnect_time = np.mean(self.completed_reconnect_times) if self.completed_reconnect_times else 0.0
+        mean_component_count = (self.component_count_sum / self.communication_step_count
+                                if self.communication_step_count else 0.0)
+        mean_weakest_tree_rssi = (np.mean(self.weakest_tree_rssi_history)
+                                  if self.weakest_tree_rssi_history else float('nan'))
+
+        return {
+            'connectivity_rate': float(self.connectivity_rate),
+            'agents_connected_percentage': float(self.agents_connected_percentage),
+            'disconnect_count': int(self.disconnect_count),
+            'mean_disconnect_duration': float(mean_disconnect_duration),
+            'max_disconnect_duration': int(max_disconnect_duration),
+            'mean_reconnect_time': float(mean_reconnect_time),
+            'largest_component_ratio': float(self.largest_component_ratio),
+            'mean_component_count': float(mean_component_count),
+            'weakest_tree_rssi': float(mean_weakest_tree_rssi),
+        }
 
     ########################
 

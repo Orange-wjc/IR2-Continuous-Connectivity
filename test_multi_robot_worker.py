@@ -120,8 +120,7 @@ class TestWorker:
         self.perf_metrics['travel_dist'] = max(travel_dist_list)
         self.perf_metrics['explored_rate'] = self.env.explored_rate
         self.perf_metrics['success_rate'] = done
-        self.perf_metrics['connectivity_rate'] = self.env.connectivity_rate
-        self.perf_metrics['agents_connected_percentage'] = self.env.agents_connected_percentage
+        self.perf_metrics.update(self.env.get_connectivity_metrics())
         self.perf_metrics['travel_steps'] = step + 1
 
         # save merged gif

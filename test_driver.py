@@ -14,6 +14,13 @@ from model import PolicyNet
 from test_multi_robot_worker import TestWorker
 from datetime import datetime
 
+CSV_FIELDNAMES = [
+    'eps', 'num_robots', 'max_dist', 'steps', 'explored', 'success',
+    'connectivity_rate', 'disconnect_count', 'mean_disconnect_duration',
+    'max_disconnect_duration', 'mean_reconnect_time', 'largest_component_ratio',
+    'mean_component_count', 'weakest_tree_rssi'
+]
+
 def run_test():
 
     # Create .csv file for data collection
@@ -26,8 +33,7 @@ def run_test():
         os.makedirs(log_path)
     if not os.path.exists(csv_file_path):
         with open(csv_file_path, mode='w') as csv_file:
-            fieldnames = ['eps', 'num_robots', 'max_dist', 'steps', 'explored', 'success', 'connectivity']
-            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+            writer = csv.DictWriter(csv_file, fieldnames=CSV_FIELDNAMES)
             writer.writeheader()
 
 
@@ -65,15 +71,21 @@ def run_test():
 
                     # Populate CSV file
                     with open(csv_file_path, mode='a') as csv_file:
-                        fieldnames = ['eps', 'num_robots', 'max_dist', 'steps', 'explored', 'success', 'connectivity']
-                        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+                        writer = csv.DictWriter(csv_file, fieldnames=CSV_FIELDNAMES)
                         writer.writerow({'eps': info['episode_number'], \
                                         'num_robots': info['n_agent'], \
                                         'max_dist': metrics['travel_dist'], \
                                         'steps': metrics['travel_steps'], \
                                         'explored': metrics['explored_rate'], \
                                         'success': metrics['success_rate'], \
-                                        'connectivity': metrics['connectivity_rate'] })
+                                        'connectivity_rate': metrics['connectivity_rate'], \
+                                        'disconnect_count': metrics['disconnect_count'], \
+                                        'mean_disconnect_duration': metrics['mean_disconnect_duration'], \
+                                        'max_disconnect_duration': metrics['max_disconnect_duration'], \
+                                        'mean_reconnect_time': metrics['mean_reconnect_time'], \
+                                        'largest_component_ratio': metrics['largest_component_ratio'], \
+                                        'mean_component_count': metrics['mean_component_count'], \
+                                        'weakest_tree_rssi': metrics['weakest_tree_rssi'] })
                 else:
                     eps_skipped.append(curr_test)
             if curr_test < (NUM_TEST + len(eps_skipped)):

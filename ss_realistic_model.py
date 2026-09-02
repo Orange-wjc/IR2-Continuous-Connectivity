@@ -26,18 +26,15 @@ class SS_realistic_model:
         """Return continuous signal metrics for the link between two locations."""
         X, Y = line(robot_a_location[0], robot_a_location[1], robot_b_location[0], robot_b_location[1])
 
-        # Count the number of obstacles and free in the line
-        num_obst = 0
-        wall_crossings = 0
-        in_obstacle = False
-        for (x, y) in zip(X[1:], Y[1:]):    # ignore first pose (source)
-            if robot_belief[y, x] != 255:   # Obstacle & Unknown
-                num_obst += 1
-                if not in_obstacle:
-                    wall_crossings += 1
-                    in_obstacle = True
-            else:
-                in_obstacle = False
+        # Count obstacle cells and obstacle segment starts in one vectorized pass.
+        obstacle_mask = robot_belief[Y[1:], X[1:]] != 255  # Obstacle & Unknown; ignore source
+        num_obst = np.count_nonzero(obstacle_mask)
+        if obstacle_mask.size:
+            segment_starts = obstacle_mask.copy()
+            segment_starts[1:] &= ~obstacle_mask[:-1]
+            wall_crossings = int(np.count_nonzero(segment_starts))
+        else:
+            wall_crossings = 0
         total_dist = np.linalg.norm(robot_a_location - robot_b_location)
         dist_obst = num_obst * 1               # * self.map_resolution (Assume res = 1m/px)
         dist_free = max(total_dist - dist_obst, 0)
@@ -74,4 +71,3 @@ class SS_realistic_model:
     def is_within_signal_strength(self, robot_belief, robot_a_location, robot_b_location):
         """Check whether the continuous RSSI is above the connection threshold."""
         return self.compute_rssi(robot_belief, robot_a_location, robot_b_location) > self.threshold_ss
-

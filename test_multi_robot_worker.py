@@ -56,7 +56,8 @@ class TestWorker:
                 success = self.env.update_graph(robot_id, self.env.find_frontier(self.env.all_downsampled_belief[robot_id]), eps=self.global_step, step=step)
                 if not success: astar_unsuccessful = True; break
                 
-                deciding_robot.observations, success = self.get_observations(deciding_robot.robot_position, robot_id, curr_episode, step, plot=True)
+                deciding_robot.observations, success = self.get_observations(
+                    deciding_robot.robot_position, robot_id, curr_episode, step, plot=self.save_image)
                 if not success: astar_unsuccessful = True; break
 
                 ### Forward pass through policy to get next position ###
@@ -79,7 +80,8 @@ class TestWorker:
                 reward_list.append(reward)
 
                 ### Update observations + rewards from action ###
-                deciding_robot.observations, success = self.get_observations(deciding_robot.robot_position, robot_id, curr_episode, step, plot=True)
+                deciding_robot.observations, success = self.get_observations(
+                    deciding_robot.robot_position, robot_id, curr_episode, step, plot=self.save_image)
                 if not success: astar_unsuccessful = True; break
 
                 ### Save a frame to generate gif of robot trajectories ###
@@ -150,10 +152,9 @@ class TestWorker:
         self.env.all_robot_map_belief_area_diff[robot_id] = map_delta_unnormalized
         self.env.all_rendezvous_utility_inputs[robot_id] = rendezvous_utility_inputs
 
-        node_coords = copy.deepcopy(self.env.all_node_coords[robot_id])
-        graph = copy.deepcopy(self.env.all_graph[robot_id])
-        node_utility = copy.deepcopy(self.env.all_node_utility[robot_id])
-        guidepost = copy.deepcopy(self.env.all_guidepost[robot_id])
+        node_coords = self.env.all_node_coords[robot_id]
+        node_utility = self.env.all_node_utility[robot_id]
+        guidepost = self.env.all_guidepost[robot_id]
 
         current_node_index = self.env.find_index_from_coords(robot_position, robot_id)
         current_index = torch.tensor([current_node_index]).unsqueeze(0).unsqueeze(0).to(self.device)  # (1,1,1)
@@ -166,7 +167,7 @@ class TestWorker:
 
         # Augment with all agents' positions
         occupied_node = np.zeros((n_nodes, 1))
-        all_robot_positions_belief = copy.deepcopy(self.env.all_robot_positions_belief[robot_id])
+        all_robot_positions_belief = self.env.all_robot_positions_belief[robot_id]
 
         for i, position in enumerate(all_robot_positions_belief):
             if position is not None:    # 'None' when outdated position belief that have been verified to no longer be there
@@ -195,7 +196,6 @@ class TestWorker:
         node_padding_mask = None
 
         # Order wrt self.node_coords indices
-        graph = list(graph.values())
         edge_inputs = []
         for coord in self.env.all_node_coords[robot_id]:
             node_edges = self.env.all_graph[robot_id][tuple(coord)].values()
@@ -255,10 +255,8 @@ class TestWorker:
         """ Generates 2D graph connectivity matrix """
         size = len(edge_inputs)
         bias_matrix = np.ones((size, size))
-        for i in range(size):
-            for j in range(size):
-                if j in edge_inputs[i]:
-                    bias_matrix[i][j] = 0
+        for node_index, neighbors in enumerate(edge_inputs):
+            bias_matrix[node_index, neighbors] = 0
         return bias_matrix
 
     def make_gif(self, path, n, robot_id):

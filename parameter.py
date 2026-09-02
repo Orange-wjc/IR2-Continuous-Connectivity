@@ -52,6 +52,7 @@ GIFS_DIR = f'gifs/{FOLDER_NAME}'
 MODEL_PATH = MODEL_DIR + '/checkpoint.pth' 
 LOAD_MODEL = False
 CONTINUE_LOG_ALPHA = False  # Continue from log_alpha saved from model checkpoint
+SAVE_TRAINING_GIFS = False
 SAVE_IMG_GAP = 201  
 VIZ_GRAPH_EDGES=True
 VIZ_GRAPH_EDGES_GROUND_TRUTH=False

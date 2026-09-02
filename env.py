@@ -90,6 +90,7 @@ class Env():
             self.all_downsampled_belief.append(None)
 
         self.all_graph_generator, self.all_node_coords, self.all_graph, self.all_node_utility, self.all_guidepost, self.all_frontiers = [], [], [], [], [], []
+        self.all_node_coord_to_index = [{} for _ in range(self.n_agent)]
         for id in range(self.n_agent):
             self.all_graph_generator.append(Graph_generator(robot_id=id, map_size=self.ground_truth_size, sensor_range=self.sensor_range, k_size=k_size, file_path=self.file_path, plot=plot))
             self.all_graph_generator[id].route_node.append(self.start_position)
@@ -117,8 +118,18 @@ class Env():
 
 
     def find_index_from_coords(self, position, agent_id):
-        index = np.argmin(np.linalg.norm(self.all_node_coords[agent_id] - position, axis=1))
-        return index
+        exact_index = self.all_node_coord_to_index[agent_id].get(tuple(position))
+        if exact_index is not None:
+            return exact_index
+        return np.argmin(np.linalg.norm(self.all_node_coords[agent_id] - position, axis=1))
+
+
+    def update_node_coord_index(self, agent_id):
+        """Cache exact node-coordinate lookups while preserving first-match behavior."""
+        coord_to_index = {}
+        for index, coord in enumerate(self.all_node_coords[agent_id]):
+            coord_to_index.setdefault(tuple(coord), index)
+        self.all_node_coord_to_index[agent_id] = coord_to_index
 
 
     def begin(self):
@@ -133,6 +144,7 @@ class Env():
 
             node_coords, graph, node_utility, guidepost = self.all_graph_generator[id].generate_graph(self.start_position, self.all_robot_belief[id][id], self.all_frontiers[id])
             self.all_node_coords[id] = node_coords
+            self.update_node_coord_index(id)
             self.all_graph[id] = graph
             self.all_node_utility[id] = node_utility
             self.all_guidepost[id] = guidepost
@@ -329,6 +341,7 @@ class Env():
                                                                                                                 extend_global_graph_towards_fronters=extend_global_graph_towards_fronters, \
                                                                                                                 eps=eps, step=step)
         self.all_node_coords[robot_id] = node_coords
+        self.update_node_coord_index(robot_id)
         self.all_graph[robot_id] = graph
         self.all_node_utility[robot_id] = node_utility
         self.all_guidepost[robot_id] = guidepost

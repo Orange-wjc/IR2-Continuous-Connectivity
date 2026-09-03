@@ -42,16 +42,16 @@ else:
 # --- GENERAL --- #
 USE_GPU = False         #  Collect training data using GPUs
 USE_GPU_GLOBAL = True   #  Train the network using GPUs
-NUM_GPU = 4
-NUM_META_AGENT = 32      # Number of parallel sims
+NUM_GPU = 1
+NUM_META_AGENT = 15      # Number of parallel sims
 SUMMARY_WINDOW = 32
 FOLDER_NAME = 'wall_aware_stage1'
 MODEL_DIR = f'model/{FOLDER_NAME}'
 TRAIN_DIR = f'train/{FOLDER_NAME}'
 GIFS_DIR = f'gifs/{FOLDER_NAME}'
 MODEL_PATH = MODEL_DIR + '/checkpoint.pth' 
-LOAD_MODEL = False
-CONTINUE_LOG_ALPHA = False  # Continue from log_alpha saved from model checkpoint
+LOAD_MODEL = True
+CONTINUE_LOG_ALPHA = True  # Continue from log_alpha saved from model checkpoint
 SAVE_TRAINING_GIFS = False
 SAVE_IMG_GAP = 201  
 VIZ_GRAPH_EDGES=True
@@ -136,4 +136,3 @@ GREEN='\033[1;32m'
 YELLOW='\033[1;93m'       
 NC_BOLD='\033[1m' # Bold, No Color 
 NC='\033[0m' # No Color 
-

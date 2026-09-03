@@ -208,7 +208,14 @@ class TestWorker:
         if current_index >= len(edge_inputs):
             print(RED, "[Eps {} | Robot {} | Step {}] current_index > len(edge_inputs) ({} >= {}). Skipping eps.".format(eps, robot_id+1, step, current_index, len(edge_inputs)))
             return [], False
-        edge = edge_inputs[current_index]
+        current_node_index = current_index.item()
+        edge = list(edge_inputs[current_node_index])
+        if len(edge) > self.k_size:
+            neighboring_edges = [index for index in edge if index != current_node_index]
+            neighboring_edges.sort(
+                key=lambda index: np.linalg.norm(
+                    self.env.all_node_coords[robot_id][index] - robot_position))
+            edge = [current_node_index] + neighboring_edges[:self.k_size - 1]
 
         if plot:
             self.env.all_curr_vertices[robot_id] = [self.env.all_node_coords[robot_id][e] if e != 0 else None for e in edge]  
@@ -217,7 +224,7 @@ class TestWorker:
             edge.append(0)
 
         edge_inputs = torch.tensor(edge).unsqueeze(0).unsqueeze(0).to(self.device)  # (1, 1, k_size)
-        edge_padding_mask = torch.zeros((1, 1, K_SIZE), dtype=torch.int64).to(self.device)
+        edge_padding_mask = torch.zeros((1, 1, self.k_size), dtype=torch.int64).to(self.device)
         one = torch.ones_like(edge_padding_mask, dtype=torch.int64).to(self.device)
         if not (edge_inputs.shape == one.shape == edge_padding_mask.shape):
             print(RED, "[Eps {} | Robot {} | Step {}] Not (edge_inputs.shape = one.shape == edge_padding_mask.shape) not (edge_inputs.shape == one.shape == edge_padding_mask.shape). Skipping eps.".format(eps, robot_id+1, step))

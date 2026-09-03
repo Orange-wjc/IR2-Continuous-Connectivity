@@ -14,7 +14,7 @@ from robot import Robot
 
 
 class Worker:
-    def __init__(self, meta_agent_id, n_agent, policy_net, q_net, global_step, device='cuda', greedy=False, save_image=False):
+    def __init__(self, meta_agent_id, n_agent, policy_net, global_step, device='cuda', greedy=False, save_image=False):
         self.device = device
         self.greedy = greedy
         self.n_agent = n_agent
@@ -26,7 +26,6 @@ class Worker:
 
         self.env = Env(map_index=self.global_step, n_agent=self.n_agent, k_size=self.k_size, plot=save_image)
         self.local_policy_net = policy_net
-        self.local_q_net = q_net
 
         # Distribute starting positions (NOTE: Every's belief is different)
         self.robot_list = []

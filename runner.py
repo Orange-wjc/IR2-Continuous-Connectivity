@@ -10,7 +10,7 @@ os.environ.setdefault('MKL_NUM_THREADS', '1')
 import torch
 import ray
 import numpy as np
-from model import PolicyNet, QNet
+from model import PolicyNet
 from multi_robot_worker import Worker
 
 
@@ -20,9 +20,7 @@ class Runner(object):
         torch.set_num_threads(1)
         self.device = torch.device('cuda') if USE_GPU else torch.device('cpu')
         self.local_network = PolicyNet(INPUT_DIM, EMBEDDING_DIM)
-        self.local_q_net = QNet(INPUT_DIM, EMBEDDING_DIM)
         self.local_network.to(self.device)
-        self.local_q_net.to(self.device)
 
     def get_weights(self):
         return self.local_network.state_dict()
@@ -30,27 +28,23 @@ class Runner(object):
     def set_policy_net_weights(self, weights):
         self.local_network.load_state_dict(weights)
 
-    def set_q_net_weights(self, weights1):
-        self.local_q_net.load_state_dict(weights1)
-
     def do_job(self, episode_number):
         """ Execute simulation episode and gather experience tuples & metrics """
         save_img = SAVE_TRAINING_GIFS and episode_number % SAVE_IMG_GAP == 0
         n_agent = np.random.randint(NUM_ROBOTS_MIN, NUM_ROBOTS_MAX+1, 1)[0]    
-        worker = Worker(self.meta_agent_id, n_agent, self.local_network, self.local_q_net, episode_number, device=self.device, save_image=save_img, greedy=False)
+        worker = Worker(self.meta_agent_id, n_agent, self.local_network, episode_number, device=self.device, save_image=save_img, greedy=False)
         succeess = worker.work(episode_number)
 
         job_results = worker.episode_buffer
         perf_metrics = worker.perf_metrics
         return succeess, job_results, perf_metrics
 
-    def job(self, weights_set, episode_number):
+    def job(self, policy_weights, episode_number):
         """ Executes simulation episode """
         print("\n", GREEN, "starting episode {} on metaAgent {}".format(episode_number, self.meta_agent_id), NC)
         
         # Set the local weights to the global weight values from the master network
-        self.set_policy_net_weights(weights_set[0])
-        self.set_q_net_weights(weights_set[1])
+        self.set_policy_net_weights(policy_weights)
 
         success, job_results, metrics = self.do_job(episode_number)
 

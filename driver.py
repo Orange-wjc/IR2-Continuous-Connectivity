@@ -51,6 +51,11 @@ def writeToTensorBoard(writer, tensorboardData, curr_episode):
     writer.add_scalar(tag='Perf/Agents Connected [%]', scalar_value=agents_connected_percentage, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Communication Reward', scalar_value=communication_reward, global_step=curr_episode)
 
+
+def get_cpu_state_dict(model):
+    """Copy model weights to CPU without moving the training model off its device."""
+    return {name: value.detach().to(device='cpu', copy=True) for name, value in model.state_dict().items()}
+
     
 def main():
 
@@ -117,31 +122,28 @@ def main():
     ### Launch meta agents ###
     meta_agents = [RLRunner.remote(i) for i in range(NUM_META_AGENT)]
 
-    ### Get initial weigths ###
-    weights_set = []
-    if device != local_device:
-        policy_weights = global_policy_net.to(local_device).state_dict()
-        q_net1_weights = global_q_net1.to(local_device).state_dict()
-        global_policy_net.to(device)
-        global_q_net1.to(device)
-    else:
-        policy_weights = global_policy_net.to(local_device).state_dict()
-        q_net1_weights = global_q_net1.to(local_device).state_dict()
-    weights_set.append(policy_weights)
-    weights_set.append(q_net1_weights)
+    ### Get initial actor weights ###
+    policy_weights = get_cpu_state_dict(global_policy_net)
 
     ### Allow for batch training parallization across GPU ###
-    dp_policy = nn.DataParallel(global_policy_net)              # Policy Net
-    dp_q_net1 = nn.DataParallel(global_q_net1)                  # Q Net 1 - Get min of the two (min overestimation)
-    dp_q_net2 = nn.DataParallel(global_q_net2)                  # Q Net 2 - Get min of the two (min overestimation)
-    dp_target_q_net1 = nn.DataParallel(global_target_q_net1)    # Q-target Net 1 - Train Q-net 1
-    dp_target_q_net2 = nn.DataParallel(global_target_q_net2)    # Q-target Net 2 - Train Q-net 2
+    if USE_GPU_GLOBAL and torch.cuda.device_count() > 1:
+        dp_policy = nn.DataParallel(global_policy_net)              # Policy Net
+        dp_q_net1 = nn.DataParallel(global_q_net1)                  # Q Net 1 - Get min of the two (min overestimation)
+        dp_q_net2 = nn.DataParallel(global_q_net2)                  # Q Net 2 - Get min of the two (min overestimation)
+        dp_target_q_net1 = nn.DataParallel(global_target_q_net1)    # Q-target Net 1 - Train Q-net 1
+        dp_target_q_net2 = nn.DataParallel(global_target_q_net2)    # Q-target Net 2 - Train Q-net 2
+    else:
+        dp_policy = global_policy_net
+        dp_q_net1 = global_q_net1
+        dp_q_net2 = global_q_net2
+        dp_target_q_net1 = global_target_q_net1
+        dp_target_q_net2 = global_target_q_net2
 
     ### Launch the first job on each runner ###
     job_list = []
     for i, meta_agent in enumerate(meta_agents):
         curr_episode += 1
-        job_list.append(meta_agent.job.remote(weights_set, curr_episode))
+        job_list.append(meta_agent.job.remote(policy_weights, curr_episode))
     
     metric_name = ['travel_dist', 'success_rate', 'explored_rate', 'connectivity_rate',
                    'agents_connected_percentage', 'mean_communication_reward']
@@ -176,7 +178,7 @@ def main():
 
 
             curr_episode += 1
-            job_list.append(meta_agents[info['id']].job.remote(weights_set, curr_episode))
+            job_list.append(meta_agents[info['id']].job.remote(policy_weights, curr_episode))
             
             if not success:
                 continue
@@ -294,6 +296,9 @@ def main():
                         entropy.mean().item(), policy_grad_norm.item(), q_grad_norm.item(), log_alpha.item(), alpha_loss.item(), *perf_data]
                 training_data.append(data)
 
+                ### Get the updated actor weights ###
+                policy_weights = get_cpu_state_dict(global_policy_net)
+
             ### Log training stats to tensorboard ###
             if len(training_data) >= SUMMARY_WINDOW:
                 writeToTensorBoard(writer, training_data, curr_episode)
@@ -302,20 +307,6 @@ def main():
                 for n in metric_name:
                     perf_metrics[n] = []
 
-            ### Get the updated global weights ###
-            weights_set = []
-            if device != local_device:
-                policy_weights = global_policy_net.to(local_device).state_dict()
-                q_net1_weights = global_q_net1.to(local_device).state_dict()
-                global_policy_net.to(device)
-                global_q_net1.to(device)
-            else:
-                policy_weights = global_policy_net.to(local_device).state_dict()
-                q_net1_weights = global_q_net1.to(local_device).state_dict()
-            weights_set.append(policy_weights)
-            weights_set.append(q_net1_weights)
-
-            
              ### Hard Q updates to get target Q-networks every 1024 steps ###
             if target_q_update_counter > 64:
                 print("update target q net")

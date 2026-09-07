@@ -45,7 +45,7 @@ else:
 USE_GPU = False         #  Collect training data using GPUs
 USE_GPU_GLOBAL = True   #  Train the network using GPUs
 NUM_GPU = 1
-NUM_META_AGENT = 15      # Number of parallel sims
+NUM_META_AGENT = 20      # Leave CPU capacity for the learner, Ray, and the OS
 SUMMARY_WINDOW = 32
 FOLDER_NAME = 'wall_aware_hybrid3_stage1'
 MODEL_DIR = f'model/{FOLDER_NAME}'

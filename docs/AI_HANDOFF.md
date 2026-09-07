@@ -71,9 +71,10 @@
 017a3ed Speed up training data collection
 b12adff Fix oversized action edge sets and resume config
 8af6d7f Reduce single-GPU training synchronization overhead
+85c050b Train three-agent policy on hybrid map split
 ```
 
-最新提交 `8af6d7f` 已推送到 `origin/wall-aware-connectivity`。
+以上提交均已推送到 `origin/wall-aware-connectivity`。
 
 实现摘要：
 
@@ -104,7 +105,7 @@ AutoDL正式训练环境：
 
 - Conda：`mrobot`
 - GPU：单卡NVIDIA GeForce RTX 4090
-- CPU：16核
+- CPU：25核
 - 项目目录：`/root/autodl-tmp/IR2-Continuous-Connectivity`
 - 启动：`python -u driver.py`
 
@@ -121,7 +122,7 @@ NODE_PADDING_SIZE = 360
 USE_GPU = False
 USE_GPU_GLOBAL = True
 NUM_GPU = 1
-NUM_META_AGENT = 15
+NUM_META_AGENT = 20
 SUMMARY_WINDOW = 32
 
 FOLDER_NAME = 'wall_aware_hybrid3_stage1'
@@ -146,7 +147,11 @@ INPUT_DIM = 11
 
 通信奖励权重：弱信号0.2、断连0.5、断连持续时间0.5、重连奖励0.5。
 
-环境仿真主要消耗CPU，网络更新使用GPU。监控中约15个CPU核心接近满载，GPU利用率在0%至100%之间脉冲变化，显存约20 GiB；主要瓶颈是CPU采样。不要继续盲目增加Actor、增大batch或设置 `USE_GPU=True`，否则容易产生Ray调度等待或显存不足。
+环境仿真主要消耗CPU，网络更新使用GPU。当前25核服务器先使用20个CPU Actor，
+为学习器、Ray和系统保留约5核；GPU利用率可能在0%至100%之间脉冲变化。不要直接
+把Actor开满25个，也不要设置`USE_GPU=True`让采样Actor争抢单块GPU。应比较15与20
+Actor各约100轮的episode吞吐；20个稳定且CPU仍有余量时才试22个。若出现Ray资源
+警告、CPU长期100%或吞吐下降，则退回18至20个。`BATCH_SIZE=128`暂不增加。
 
 ## 5. checkpoint与续训
 
@@ -296,8 +301,9 @@ tensorboard --logdir ./train/wall_aware_stage1 --host 0.0.0.0 --port 6006
 
 当前状态：
 
-- 分支为 `wall-aware-connectivity`，最新远程提交为 `8af6d7f`。
-- RTX 4090/16核服务器已能运行15个并行仿真和单GPU训练。
+- 分支为 `wall-aware-connectivity`；三机器人hybrid划分基线提交为`85c050b`。
+- RTX 4090/25核/90GB服务器配置为20个并行CPU仿真和单GPU训练；该值需通过约
+  100轮吞吐测试与15个Actor对照验证，不能仅凭硬件规格认定一定更快。
 - 候选边形状问题已经修复。
 - episode 928的11维checkpoint已找回并验证。
 - 服务器TensorBoard最后观察到约episode 1561；本地仓库的已验证checkpoint仍是

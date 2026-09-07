@@ -33,7 +33,7 @@ def writeToTensorBoard(writer, tensorboardData, curr_episode):
 
     tensorboardData = np.array(tensorboardData)
     tensorboardData = list(np.nanmean(tensorboardData, axis=0))
-    reward, value, policyLoss, qValueLoss, entropy, policyGradNorm, qValueGradNorm, log_alpha, alphaLoss, travel_dist, success_rate, explored_rate, connectivity_rate, agents_connected_percentage, communication_reward = tensorboardData
+    reward, value, policyLoss, qValueLoss, entropy, policyGradNorm, qValueGradNorm, log_alpha, alphaLoss, travel_dist, success_rate, explored_rate, connectivity_rate, agents_connected_percentage, communication_reward, exploration_progress_reward = tensorboardData
 
     writer.add_scalar(tag='Losses/Value', scalar_value=value, global_step=curr_episode)
     writer.add_scalar(tag='Losses/Policy Loss', scalar_value=policyLoss, global_step=curr_episode)
@@ -50,6 +50,7 @@ def writeToTensorBoard(writer, tensorboardData, curr_episode):
     writer.add_scalar(tag='Perf/Connectivity Rate', scalar_value=connectivity_rate, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Agents Connected [%]', scalar_value=agents_connected_percentage, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Communication Reward', scalar_value=communication_reward, global_step=curr_episode)
+    writer.add_scalar(tag='Perf/Exploration Progress Reward', scalar_value=exploration_progress_reward, global_step=curr_episode)
 
 
 def get_cpu_state_dict(model):
@@ -146,7 +147,8 @@ def main():
         job_list.append(meta_agent.job.remote(policy_weights, curr_episode))
     
     metric_name = ['travel_dist', 'success_rate', 'explored_rate', 'connectivity_rate',
-                   'agents_connected_percentage', 'mean_communication_reward']
+                   'agents_connected_percentage', 'mean_communication_reward',
+                   'mean_exploration_progress_reward']
     training_data = []
     perf_metrics = {}
     for n in metric_name:

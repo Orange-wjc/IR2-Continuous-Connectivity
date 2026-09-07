@@ -45,7 +45,15 @@ class Env():
         else:
             self.map_list = os.listdir(self.map_dir)
             self.map_list.sort(reverse=True)
-        self.map_index = map_index % np.size(self.map_list)
+        map_count = np.size(self.map_list)
+        if not self.test and globals().get('SHUFFLE_TRAIN_MAPS', False):
+            zero_based_episode = max(int(map_index) - 1, 0)
+            map_epoch, map_offset = divmod(zero_based_episode, map_count)
+            epoch_order = np.random.RandomState(
+                TRAIN_MAP_SHUFFLE_SEED + map_epoch).permutation(map_count)
+            self.map_index = int(epoch_order[map_offset])
+        else:
+            self.map_index = map_index % map_count
         self.file_path = self.map_list[self.map_index]
         self.ground_truth, self.start_position = self.import_ground_truth(
             self.map_dir + '/' + self.map_list[self.map_index])
@@ -72,6 +80,8 @@ class Env():
         self.emergency_reconnect_required = np.zeros(self.n_agent, dtype=bool)
         self.communication_reward = 0.0
         self.communication_reward_sum = 0.0
+        self.exploration_progress_reward = 0.0
+        self.exploration_progress_reward_sum = 0.0
         self.explored_rate = 0
         self.all_explored_rate = [0.0 for _ in range(self.n_agent)]
         self.all_rendezvous_utility_inputs = [None for _ in range(self.n_agent)]
@@ -125,6 +135,7 @@ class Env():
             self.max_comms_proximity = np.random.randint(PROXIMITY_COMMS_RANGE_MIN, PROXIMITY_COMMS_RANGE_MAX, 1)[0]  
         
         self.begin()
+        self.explored_rate = self.evaluate_team_exploration_rate()
 
 
     def find_index_from_coords(self, position, agent_id):
@@ -366,13 +377,18 @@ class Env():
     def update_env_and_get_team_rewards(self):
         """ Evaluate team performance and rewards """
         reconnect_count_before = len(self.completed_reconnect_times)
+        previous_explored_rate = self.explored_rate
         self.record_connectivity_metrics()
         reconnect_count = len(self.completed_reconnect_times) - reconnect_count_before
         self.communication_reward = self.calculate_communication_reward(reconnect_count)
         self.communication_reward_sum += self.communication_reward
         self.explored_rate = self.evaluate_team_exploration_rate()
+        exploration_progress = max(self.explored_rate - previous_explored_rate, 0.0)
+        self.exploration_progress_reward = (
+            TEAM_EXPLORATION_PROGRESS_WEIGHT * exploration_progress)
+        self.exploration_progress_reward_sum += self.exploration_progress_reward
 
-        team_reward = self.communication_reward
+        team_reward = self.communication_reward + self.exploration_progress_reward
         done = self.check_done()
         if done:
             team_reward += 40
@@ -388,8 +404,11 @@ class Env():
                 (SS_WARNING_MARGIN - margin) / SS_WARNING_MARGIN, 0.0, 1.0)
 
         disconnected_fraction = np.count_nonzero(self.disconnect_steps) / self.n_agent
+        duration_scale = max(MAX_DISCONNECTED_STEPS - DISCONNECT_GRACE_STEPS, 1)
+        penalized_disconnect_steps = np.maximum(
+            self.disconnect_steps - DISCONNECT_GRACE_STEPS, 0)
         duration_penalty = np.mean(np.clip(
-            self.disconnect_steps / MAX_DISCONNECTED_STEPS, 0.0, 1.0))
+            penalized_disconnect_steps / duration_scale, 0.0, 1.0))
         reconnect_fraction = reconnect_count / self.n_agent
 
         return float(
@@ -541,6 +560,9 @@ class Env():
                                   if self.weakest_tree_rssi_history else float('nan'))
         mean_communication_reward = (self.communication_reward_sum / self.communication_step_count
                                      if self.communication_step_count else 0.0)
+        mean_exploration_progress_reward = (
+            self.exploration_progress_reward_sum / self.communication_step_count
+            if self.communication_step_count else 0.0)
 
         return {
             'connectivity_rate': float(self.connectivity_rate),
@@ -553,6 +575,7 @@ class Env():
             'mean_component_count': float(mean_component_count),
             'weakest_tree_rssi': float(mean_weakest_tree_rssi),
             'mean_communication_reward': float(mean_communication_reward),
+            'mean_exploration_progress_reward': float(mean_exploration_progress_reward),
         }
 
 

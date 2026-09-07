@@ -12,6 +12,8 @@ from map_splits import HYBRID_TRAIN_MAP_FILES
 TRAIN_SET_NAME = "hybrid"
 TRAIN_SET_DIR = "DungeonMaps/test/hybrid"
 MAP_FILE_NAMES = HYBRID_TRAIN_MAP_FILES
+SHUFFLE_TRAIN_MAPS = True
+TRAIN_MAP_SHUFFLE_SEED = 20260907
 
 # Smaller-map configuration used by easy and hybrid sets.
 if TRAIN_SET_NAME == "easy" or TRAIN_SET_NAME == "hybrid":
@@ -45,14 +47,14 @@ else:
 USE_GPU = False         #  Collect training data using GPUs
 USE_GPU_GLOBAL = True   #  Train the network using GPUs
 NUM_GPU = 1
-NUM_META_AGENT = 22      # Maximum trial for the 25-core host; compare throughput with 20
+NUM_META_AGENT = 20      # Balance sampling throughput against asynchronous policy staleness
 SUMMARY_WINDOW = 32
-FOLDER_NAME = 'wall_aware_hybrid3_stage1'
+FOLDER_NAME = 'wall_aware_hybrid3_balanced_v2'
 MODEL_DIR = f'model/{FOLDER_NAME}'
 TRAIN_DIR = f'train/{FOLDER_NAME}'
 GIFS_DIR = f'gifs/{FOLDER_NAME}'
 MODEL_PATH = MODEL_DIR + '/checkpoint.pth' 
-LOAD_MODEL = True
+LOAD_MODEL = False
 CONTINUE_LOG_ALPHA = True  # Continue from log_alpha saved from model checkpoint
 SAVE_TRAINING_GIFS = False
 SAVE_IMG_GAP = 201  
@@ -91,11 +93,13 @@ SS_XG_MAX=13
 SS_K_MIN=0
 SS_K_MAX=13
 MAX_DISCONNECTED_STEPS=10
+DISCONNECT_GRACE_STEPS=3
 RSSI_MARGIN_NORMALIZATION=20
-WEAK_SIGNAL_PENALTY_WEIGHT=0.2
-DISCONNECT_PENALTY_WEIGHT=0.5
-DISCONNECT_DURATION_PENALTY_WEIGHT=0.5
-RECONNECT_REWARD_WEIGHT=0.5
+WEAK_SIGNAL_PENALTY_WEIGHT=0.05
+DISCONNECT_PENALTY_WEIGHT=0.10
+DISCONNECT_DURATION_PENALTY_WEIGHT=0.20
+RECONNECT_REWARD_WEIGHT=0.10
+TEAM_EXPLORATION_PROGRESS_WEIGHT=5.0
 
 # --- Graph Params (General) --- # 
 NUM_DENSE_COORDS_WIDTH=50                 # How many node coords across width?

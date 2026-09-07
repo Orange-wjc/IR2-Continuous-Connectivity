@@ -72,6 +72,8 @@
 b12adff Fix oversized action edge sets and resume config
 8af6d7f Reduce single-GPU training synchronization overhead
 85c050b Train three-agent policy on hybrid map split
+7de27bd Increase hybrid training to 20 CPU actors
+2302d18 Resume hybrid training with 22 CPU actors
 ```
 
 以上提交均已推送到 `origin/wall-aware-connectivity`。
@@ -122,12 +124,12 @@ NODE_PADDING_SIZE = 360
 USE_GPU = False
 USE_GPU_GLOBAL = True
 NUM_GPU = 1
-NUM_META_AGENT = 22
+NUM_META_AGENT = 20
 SUMMARY_WINDOW = 32
 
-FOLDER_NAME = 'wall_aware_hybrid3_stage1'
-MODEL_PATH = 'model/wall_aware_hybrid3_stage1/checkpoint.pth'
-LOAD_MODEL = True
+FOLDER_NAME = 'wall_aware_hybrid3_balanced_v2'
+MODEL_PATH = 'model/wall_aware_hybrid3_balanced_v2/checkpoint.pth'
+LOAD_MODEL = False
 CONTINUE_LOG_ALPHA = True
 SAVE_TRAINING_GIFS = False
 
@@ -143,17 +145,16 @@ INPUT_DIM = 11
 `map_splits.py`按固定种子`20260907`重新划分为300张训练、50张验证、50张测试；
 三个集合互不重叠，`hybrid/1.png`固定保留在测试集。文件仍位于原目录，逻辑划分由
 `MAP_FILE_NAMES`控制。批量测试固定3台机器人、遍历50张保留测试地图一次，并默认
-关闭GIF。新实验首次运行从头训练；服务器已有
-`model/wall_aware_hybrid3_stage1/checkpoint.pth`后使用`LOAD_MODEL=True`续训，且不
-覆盖或续接旧`wall_aware_stage1`实验。
+关闭GIF。v2实验从头训练，不加载已形成保守策略的hybrid3 stage1权重，也不覆盖
+任何旧实验。训练地图每300轮按固定种子重新排列，避免每轮重复相同顺序。
 
-通信奖励权重：弱信号0.2、断连0.5、断连持续时间0.5、重连奖励0.5。
+v2通信奖励权重：弱信号0.05、断连0.10、断连持续时间0.20、重连0.10；前3步为
+断连持续时间宽限期。另加入`5.0 × 平均个体覆盖率增量`的团队探索进度奖励，初始
+覆盖率在环境启动后设为基线，避免第一步产生虚假奖励。
 
-环境仿真主要消耗CPU，网络更新使用GPU。25核服务器当前试用22个CPU Actor，为
-学习器、Ray和系统保留约2核；GPU利用率曾约65%，显存约19.7/24.6 GiB。不要继续
-增加Actor或`BATCH_SIZE`，也不要设置`USE_GPU=True`让采样Actor争抢单块GPU。20个
-Actor在包含初始化和预热的前约22分钟完成约76轮，粗略约207轮/小时；应以相同口径
-测量22个Actor。若吞吐没有提高、出现Ray资源警告或输出长时间停顿，退回20个。
+环境仿真主要消耗CPU，网络更新使用GPU。v2使用20个CPU Actor，在吞吐和异步策略
+滞后之间折中；GPU利用率曾约65%，显存约19.7/24.6 GiB。不要继续增加Actor或
+`BATCH_SIZE`，也不要设置`USE_GPU=True`让采样Actor争抢单块GPU。
 
 ## 5. checkpoint与续训
 
@@ -171,13 +172,27 @@ SHA-256：f861e42f5a29461c586e51e782db8eed5d125d11edba16ef06566c7f5d331934
 
 checkpoint包含策略网络、两个Q网络、对应优化器、学习率调度器、`log_alpha` 和episode，结构完整，可以直接续训。
 
-服务器必须将其放到运行 `driver.py` 的项目根目录下：
+已保存的hybrid3 stage1失败基线：
+
+```text
+路径：model/wall_aware_hybrid3_stage1/checkpoint.pth
+大小：52,199,630 bytes
+episode：672
+input_dim：11
+优化器更新：4960
+SHA-256：77638cb934c47b62338ba5cc3e599ff3523ee00adb9d9124872b5a1fbbc58a9e
+```
+
+该权重数值完整，但策略过度偏向连通，不能作为最终模型；保留用于失败分析和消融。
+
+若专门续训历史`wall_aware_stage1`实验，服务器必须将旧权重放到：
 
 ```text
 /root/autodl-tmp/IR2-Continuous-Connectivity/model/wall_aware_stage1/checkpoint.pth
 ```
 
-保持 `LOAD_MODEL=True` 和 `CONTINUE_LOG_ALPHA=True`。启动成功应看到：
+该历史实验续训时才保持`LOAD_MODEL=True`和`CONTINUE_LOG_ALPHA=True`。v2首次启动
+必须使用`LOAD_MODEL=False`。旧实验续训成功时会看到：
 
 ```text
 Loading Model...
@@ -247,7 +262,7 @@ TypeError: MessageToJson() got an unexpected keyword argument 'including_default
 启动命令：
 
 ```bash
-tensorboard --logdir ./train/wall_aware_stage1 --host 0.0.0.0 --port 6006
+tensorboard --logdir ./train/wall_aware_hybrid3_balanced_v2 --host 0.0.0.0 --port 6006
 ```
 
 分析时只勾选最新run，并把Smoothing设为约0.2至0.3，避免多次重启和过度平滑干扰判断。
@@ -278,6 +293,12 @@ tensorboard --logdir ./train/wall_aware_stage1 --host 0.0.0.0 --port 6006
 `Perf/Reward` 是训练batch的平均单步奖励，`Travel Distance` 是最大单机器人累计路程。
 下一步应先做固定地图独立评估，再决定继续原样训练还是新开实验调奖励。
 
+2026-09-07的hybrid3 stage1曲线给出了更明确的失败证据：约episode 320时探索率
+达到0.94、成功率约0.47，随后连通率趋近1.0，而探索率跌至约0.56、成功率跌至0，
+路程和总奖励同时下降。episode 416权重在保留的`hybrid/1.png`上实现100%连通、
+零断连，但196步只达到40.11%平均个体覆盖率；同条件官方模型达到99.99%覆盖，
+但连通率仅37.93%。结论是奖励诱导了“抱团少移动”的局部最优，而非数值发散。
+
 当前代码的指标口径必须按实现解释：
 
 - `Explored Rate` 是各机器人自身belief覆盖率的平均值，不是融合后的全局地图覆盖率。
@@ -304,14 +325,14 @@ tensorboard --logdir ./train/wall_aware_stage1 --host 0.0.0.0 --port 6006
 当前状态：
 
 - 分支为 `wall-aware-connectivity`；三机器人hybrid划分基线提交为`85c050b`。
-- RTX 4090/25核/90GB服务器已用20个并行CPU仿真正常训练并保存checkpoint；当前
-  试用22个Actor，与20个Actor约207轮/小时的粗略吞吐比较，若无提升就退回20。
+- RTX 4090/25核/90GB服务器的v2配置使用20个并行CPU仿真和单GPU学习。
 - 候选边形状问题已经修复。
 - episode 928的11维checkpoint已找回并验证。
 - 服务器TensorBoard最后观察到约episode 1561；本地仓库的已验证checkpoint仍是
   episode 928。不要把服务器曲线轮数当成本地权重轮数；应下载并核验服务器最新
   checkpoint的`episode`字段。
-- 当前连通性显著改善，但探索率、成功率和奖励后期波动并下降，尚未形成最终结论。
+- hybrid3 stage1已判定为过强通信约束导致的策略退化；episode 672权重已下载并验证，
+  必须保留，v2不得续训或覆盖该权重。
 - 用户已确认以 `hybrid1_full_demo` 展示的行为作为训练目标：机器人在不同区域
   分散探索，接应位置随探索进度移动，必要时交接中继任务，最终达到地图探索
   完成条件，同时避免长时间断连。演示中的全图信息与硬连通动作检查仅用于构造
@@ -327,22 +348,24 @@ tensorboard --logdir ./train/wall_aware_stage1 --host 0.0.0.0 --port 6006
   `IDEAL_CONNECTIVITY_MODEL_DEMO.html`仍保留。
 - 当前代码中的“动态中继”主要由候选节点的relay特征和奖励间接学习；尚无中继
   占用时间统计。`emergency_reconnect_required`目前只是标志位，没有动作接管规则。
-- `test_parameter.py`已指向`wall_aware_hybrid3_stage1`的11维checkpoint，并固定使用
-  3台机器人和50张保留测试地图；新模型尚未训练完成前运行测试会找不到checkpoint。
+- `test_parameter.py`已指向`wall_aware_hybrid3_balanced_v2`的11维checkpoint，并固定
+  使用3台机器人和50张保留测试地图；v2尚未训练完成前运行会找不到checkpoint。
 
 下一步：
 
 1. 将当前代码部署到服务器，确认`DungeonMaps/test/hybrid`包含完整的1至400号地图。
-2. 保留服务器现有hybrid3 checkpoint，以`LOAD_MODEL=True`和22个Actor恢复训练；
-   启动日志必须出现`Loading Model...`及正确的`curr_episode`。Replay Buffer会重新
-   积累2000条transition，但策略、Q网络、优化器和学习率状态不会重置。
-3. 训练后用`test_parameter.py`加载新11维checkpoint，对50张保留地图各测试一次。
+2. 保留并备份hybrid3 stage1的episode 672 checkpoint；以`LOAD_MODEL=False`、20个
+   Actor从头启动`wall_aware_hybrid3_balanced_v2`。启动日志不应出现`Loading Model`。
+3. 先运行约300轮，观察探索率、成功率、连通率以及新增的
+   `Perf/Exploration Progress Reward`。探索率再次随连通率上升而持续下跌时应暂停，
+   不要盲目跑到1500轮。
+4. 训练后用`test_parameter.py`加载新11维checkpoint，对50张保留地图各测试一次。
    至少报告探索率、成功率、步骤/路径、连通率、断连次数、平均/最长断连时长和
    重连时间；训练曲线不能替代该评估。
-4. 在保留的`hybrid/1.png`上输出真实模型轨迹，与目标演示对照是否分散探索、是否
+5. 在保留的`hybrid/1.png`上输出真实模型轨迹，与目标演示对照是否分散探索、是否
    长期抱团、接应位置是否移动、是否发生中继交接以及是否完成探索。
-5. 保存旧episode 928和服务器1500+模型作为历史基线，不覆盖其checkpoint和曲线。
-6. 根据三机器人独立测试结果决定第二阶段：若效果达到要求，再引入4机器人微调；
+6. 保存旧episode 928、服务器1500+模型及hybrid3 stage1 episode 672作为历史基线。
+7. 根据三机器人独立测试结果决定第二阶段：若效果达到要求，再引入4机器人微调；
    若只提高连接却降低探索，则在新实验目录调整奖励，不在同一run中途改目标。
 
 ## 10. 新会话检查清单

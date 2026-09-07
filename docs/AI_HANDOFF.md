@@ -185,6 +185,23 @@ SHA-256：77638cb934c47b62338ba5cc3e599ff3523ee00adb9d9124872b5a1fbbc58a9e
 
 该权重数值完整，但策略过度偏向连通，不能作为最终模型；保留用于失败分析和消融。
 
+已下载并验证的balanced v2当前权重：
+
+```text
+路径：model/wall_aware_hybrid3_balanced_v2/checkpoint.pth
+大小：52,199,630 bytes
+episode：864
+input_dim：11
+connectivity_feature_dim：5
+use_connectivity_features：True
+优化器更新：6720
+log_alpha：-2.59563732147（alpha约0.07460）
+SHA-256：1218764e84a50f0872b142eda1c2dd29cc970508926feea0ea211254bc23d466
+```
+
+策略网络、两个Q网络及优化器状态均结构完整，未发现NaN或Inf。该权重是当前第一阶段
+的首选评估对象；继续训练前应另行备份，避免覆盖这个可复现节点。
+
 若专门续训历史`wall_aware_stage1`实验，服务器必须将旧权重放到：
 
 ```text
@@ -299,6 +316,18 @@ tensorboard --logdir ./train/wall_aware_hybrid3_balanced_v2 --host 0.0.0.0 --por
 零断连，但196步只达到40.11%平均个体覆盖率；同条件官方模型达到99.99%覆盖，
 但连通率仅37.93%。结论是奖励诱导了“抱团少移动”的局部最优，而非数值发散。
 
+2026-09-07的`wall_aware_hybrid3_balanced_v2`曲线记录到约episode 850。探索率在约
+episode 250升至0.90以上，此后稳定在约0.97至0.99；成功率从0升至后期约0.90至
+0.97。连通率在训练中段两次明显下降后恢复，末期约0.75；Agents Connected末期约
+0.90，通信奖励由低谷约-0.11恢复到约-0.02。探索进度奖励持续上升，末期约0.06，
+总奖励末期约0.7。训练地图在episode 300和600重排后没有再次出现v1的探索崩塌，
+说明奖励重平衡已明显改善“只顾连通、不去探索”的问题。
+
+Loss仍需谨慎解释：Value升至30以上，Q梯度范数后期约150且曾超过200，策略梯度
+范数约3.5并有尖峰；但权重有限且没有NaN/Inf，目前没有明确数值发散证据。Value
+尺度上升与成功终止奖励和高成功率一致，不能仅凭Loss绝对值判定模型失败。当前不应
+继续修改奖励，应先冻结episode 864并完成独立测试。
+
 当前代码的指标口径必须按实现解释：
 
 - `Explored Rate` 是各机器人自身belief覆盖率的平均值，不是融合后的全局地图覆盖率。
@@ -324,15 +353,21 @@ tensorboard --logdir ./train/wall_aware_hybrid3_balanced_v2 --host 0.0.0.0 --por
 
 当前状态：
 
-- 分支为 `wall-aware-connectivity`；三机器人hybrid划分基线提交为`85c050b`。
+- 分支为 `wall-aware-connectivity`；balanced v2代码已提交并推送至`cf78924`。
 - RTX 4090/25核/90GB服务器的v2配置使用20个并行CPU仿真和单GPU学习。
 - 候选边形状问题已经修复。
 - episode 928的11维checkpoint已找回并验证。
-- 服务器TensorBoard最后观察到约episode 1561；本地仓库的已验证checkpoint仍是
-  episode 928。不要把服务器曲线轮数当成本地权重轮数；应下载并核验服务器最新
-  checkpoint的`episode`字段。
+- 历史`wall_aware_stage1`服务器TensorBoard曾观察到约episode 1561，本地保留的
+  对应已验证checkpoint为episode 928；两者不能视为同一训练节点。
 - hybrid3 stage1已判定为过强通信约束导致的策略退化；episode 672权重已下载并验证，
   必须保留，v2不得续训或覆盖该权重。
+- balanced v2最新权重已下载到
+  `model/wall_aware_hybrid3_balanced_v2/checkpoint.pth`并验证为episode 864。曲线显示
+  探索率长期约0.97至0.99、后期成功率约0.90至0.97，未重现v1的探索崩塌。
+- episode 864在保留地图`hybrid/1.png`上的一次贪心实测达到99.795%平均个体覆盖率，
+  70个移动步、路径长度3162.02、连通率95.714%、最大连通分量比例98.571%，发生
+  2次短暂断连，平均1.5步、最长2步，并成功完成探索。这说明目标行为已在该样例上
+  出现，但单张地图不能替代50张保留地图的统计评估。
 - 用户已确认以 `hybrid1_full_demo` 展示的行为作为训练目标：机器人在不同区域
   分散探索，接应位置随探索进度移动，必要时交接中继任务，最终达到地图探索
   完成条件，同时避免长时间断连。演示中的全图信息与硬连通动作检查仅用于构造
@@ -349,23 +384,26 @@ tensorboard --logdir ./train/wall_aware_hybrid3_balanced_v2 --host 0.0.0.0 --por
 - 当前代码中的“动态中继”主要由候选节点的relay特征和奖励间接学习；尚无中继
   占用时间统计。`emergency_reconnect_required`目前只是标志位，没有动作接管规则。
 - `test_parameter.py`已指向`wall_aware_hybrid3_balanced_v2`的11维checkpoint，并固定
-  使用3台机器人和50张保留测试地图；v2尚未训练完成前运行会找不到checkpoint。
+  使用3台机器人和50张保留测试地图；当前episode 864权重已可直接评估。
+- 服务器重启后用户决定从balanced v2的episode 864继续训练；`parameter.py`已设置
+  `LOAD_MODEL=True`和`CONTINUE_LOG_ALPHA=True`。启动时必须确认日志显示
+  `Loading Model`及`curr_episode set to: 864`；Replay Buffer会从空状态重新收集
+  2000条transition，但网络、优化器和温度参数会从checkpoint恢复。
 
 下一步：
 
-1. 将当前代码部署到服务器，确认`DungeonMaps/test/hybrid`包含完整的1至400号地图。
-2. 保留并备份hybrid3 stage1的episode 672 checkpoint；以`LOAD_MODEL=False`、20个
-   Actor从头启动`wall_aware_hybrid3_balanced_v2`。启动日志不应出现`Loading Model`。
-3. 先运行约300轮，观察探索率、成功率、连通率以及新增的
-   `Perf/Exploration Progress Reward`。探索率再次随连通率上升而持续下跌时应暂停，
-   不要盲目跑到1500轮。
-4. 训练后用`test_parameter.py`加载新11维checkpoint，对50张保留地图各测试一次。
-   至少报告探索率、成功率、步骤/路径、连通率、断连次数、平均/最长断连时长和
-   重连时间；训练曲线不能替代该评估。
-5. 在保留的`hybrid/1.png`上输出真实模型轨迹，与目标演示对照是否分散探索、是否
+1. 立即备份balanced v2的episode 864权重，暂停修改奖励和实验定义。
+2. 运行`python -u test_driver.py`，使用episode 864权重对50张保留hybrid地图各测试
+   一次。汇总成功率，以及覆盖率、完成步数、路径长度、连通率、断连次数、平均/
+   最长断连时长和重连时间的均值与标准差；训练曲线不能替代该评估。
+3. 根据50图结果判断是否继续训练：若大多数地图保持高覆盖、高成功和短暂断连，
+   将episode 864作为第一阶段候选模型；若泛化不足，再决定继续训练或新开实验，
+   不在同一run中途改奖励。
+4. 在保留的`hybrid/1.png`上输出真实模型轨迹，与目标演示对照是否分散探索、是否
    长期抱团、接应位置是否移动、是否发生中继交接以及是否完成探索。
-6. 保存旧episode 928、服务器1500+模型及hybrid3 stage1 episode 672作为历史基线。
-7. 根据三机器人独立测试结果决定第二阶段：若效果达到要求，再引入4机器人微调；
+5. 保存旧episode 928、服务器1500+模型、hybrid3 stage1 episode 672和balanced v2
+   episode 864，作为历史基线和失败/成功对照。
+6. 根据三机器人独立测试结果决定第二阶段：若效果达到要求，再引入4机器人微调；
    若只提高连接却降低探索，则在新实验目录调整奖励，不在同一run中途改目标。
 
 ## 10. 新会话检查清单

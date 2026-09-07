@@ -122,12 +122,12 @@ NODE_PADDING_SIZE = 360
 USE_GPU = False
 USE_GPU_GLOBAL = True
 NUM_GPU = 1
-NUM_META_AGENT = 20
+NUM_META_AGENT = 22
 SUMMARY_WINDOW = 32
 
 FOLDER_NAME = 'wall_aware_hybrid3_stage1'
 MODEL_PATH = 'model/wall_aware_hybrid3_stage1/checkpoint.pth'
-LOAD_MODEL = False
+LOAD_MODEL = True
 CONTINUE_LOG_ALPHA = True
 SAVE_TRAINING_GIFS = False
 
@@ -143,15 +143,17 @@ INPUT_DIM = 11
 `map_splits.py`按固定种子`20260907`重新划分为300张训练、50张验证、50张测试；
 三个集合互不重叠，`hybrid/1.png`固定保留在测试集。文件仍位于原目录，逻辑划分由
 `MAP_FILE_NAMES`控制。批量测试固定3台机器人、遍历50张保留测试地图一次，并默认
-关闭GIF。新实验从头训练，不覆盖或续接旧`wall_aware_stage1`曲线。
+关闭GIF。新实验首次运行从头训练；服务器已有
+`model/wall_aware_hybrid3_stage1/checkpoint.pth`后使用`LOAD_MODEL=True`续训，且不
+覆盖或续接旧`wall_aware_stage1`实验。
 
 通信奖励权重：弱信号0.2、断连0.5、断连持续时间0.5、重连奖励0.5。
 
-环境仿真主要消耗CPU，网络更新使用GPU。当前25核服务器先使用20个CPU Actor，
-为学习器、Ray和系统保留约5核；GPU利用率可能在0%至100%之间脉冲变化。不要直接
-把Actor开满25个，也不要设置`USE_GPU=True`让采样Actor争抢单块GPU。应比较15与20
-Actor各约100轮的episode吞吐；20个稳定且CPU仍有余量时才试22个。若出现Ray资源
-警告、CPU长期100%或吞吐下降，则退回18至20个。`BATCH_SIZE=128`暂不增加。
+环境仿真主要消耗CPU，网络更新使用GPU。25核服务器当前试用22个CPU Actor，为
+学习器、Ray和系统保留约2核；GPU利用率曾约65%，显存约19.7/24.6 GiB。不要继续
+增加Actor或`BATCH_SIZE`，也不要设置`USE_GPU=True`让采样Actor争抢单块GPU。20个
+Actor在包含初始化和预热的前约22分钟完成约76轮，粗略约207轮/小时；应以相同口径
+测量22个Actor。若吞吐没有提高、出现Ray资源警告或输出长时间停顿，退回20个。
 
 ## 5. checkpoint与续训
 
@@ -302,8 +304,8 @@ tensorboard --logdir ./train/wall_aware_stage1 --host 0.0.0.0 --port 6006
 当前状态：
 
 - 分支为 `wall-aware-connectivity`；三机器人hybrid划分基线提交为`85c050b`。
-- RTX 4090/25核/90GB服务器配置为20个并行CPU仿真和单GPU训练；该值需通过约
-  100轮吞吐测试与15个Actor对照验证，不能仅凭硬件规格认定一定更快。
+- RTX 4090/25核/90GB服务器已用20个并行CPU仿真正常训练并保存checkpoint；当前
+  试用22个Actor，与20个Actor约207轮/小时的粗略吞吐比较，若无提升就退回20。
 - 候选边形状问题已经修复。
 - episode 928的11维checkpoint已找回并验证。
 - 服务器TensorBoard最后观察到约episode 1561；本地仓库的已验证checkpoint仍是
@@ -331,8 +333,9 @@ tensorboard --logdir ./train/wall_aware_stage1 --host 0.0.0.0 --port 6006
 下一步：
 
 1. 将当前代码部署到服务器，确认`DungeonMaps/test/hybrid`包含完整的1至400号地图。
-2. 从头启动`wall_aware_hybrid3_stage1`，先跑约100轮冒烟和计时测试，确认无大量
-   padding跳过、checkpoint正常保存、TensorBoard指标正常，再决定正式轮数。
+2. 保留服务器现有hybrid3 checkpoint，以`LOAD_MODEL=True`和22个Actor恢复训练；
+   启动日志必须出现`Loading Model...`及正确的`curr_episode`。Replay Buffer会重新
+   积累2000条transition，但策略、Q网络、优化器和学习率状态不会重置。
 3. 训练后用`test_parameter.py`加载新11维checkpoint，对50张保留地图各测试一次。
    至少报告探索率、成功率、步骤/路径、连通率、断连次数、平均/最长断连时长和
    重连时间；训练曲线不能替代该评估。

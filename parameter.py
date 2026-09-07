@@ -45,14 +45,14 @@ else:
 USE_GPU = False         #  Collect training data using GPUs
 USE_GPU_GLOBAL = True   #  Train the network using GPUs
 NUM_GPU = 1
-NUM_META_AGENT = 20      # Leave CPU capacity for the learner, Ray, and the OS
+NUM_META_AGENT = 22      # Maximum trial for the 25-core host; compare throughput with 20
 SUMMARY_WINDOW = 32
 FOLDER_NAME = 'wall_aware_hybrid3_stage1'
 MODEL_DIR = f'model/{FOLDER_NAME}'
 TRAIN_DIR = f'train/{FOLDER_NAME}'
 GIFS_DIR = f'gifs/{FOLDER_NAME}'
 MODEL_PATH = MODEL_DIR + '/checkpoint.pth' 
-LOAD_MODEL = False
+LOAD_MODEL = True
 CONTINUE_LOG_ALPHA = True  # Continue from log_alpha saved from model checkpoint
 SAVE_TRAINING_GIFS = False
 SAVE_IMG_GAP = 201  

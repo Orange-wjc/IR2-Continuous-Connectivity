@@ -1,407 +1,349 @@
 # IR²通信感知探索项目：AI交接文档
 
-> 最后更新：2026-09-02
-> 用途：供新的AI会话快速恢复项目上下文。开始工作前，先阅读本文，再按需阅读 [CONNECTIVITY_AWARE_PAPER_PLAN.md](./CONNECTIVITY_AWARE_PAPER_PLAN.md)。
+> 最后更新：2026-09-07
+> 用途：供新AI会话快速恢复项目状态。开始工作前先读本文，再按需阅读 [CONNECTIVITY_AWARE_PAPER_PLAN.md](./CONNECTIVITY_AWARE_PAPER_PLAN.md)。
 
-## 1. 用户目标
+## 1. 项目目标与边界
 
-用户准备写一篇多机器人探索小论文，并在官方 IR² 代码基础上实现改进。
+用户准备基于官方IR²撰写多机器人探索小论文。目标是：
 
-当前研究目标是：
+> 在存在距离损耗和墙体信号衰减的未知室内环境中，提高机器人团队的通信连通率；允许短暂断连，但尽量缩短断连时间、加快重连，并学习动态探索者与中继者行为。
 
-> 在存在距离损耗和墙体信号衰减的未知室内环境中，通过强化学习提高机器人团队的通信连通率，允许短暂断连，但尽量缩短断连时间、加快重连，并学习动态探索者与中继者行为。
+核心设定：
 
-通俗比喻是“弹力通信绳”：
-
-- 信号良好时，机器人可以自由分散。
-- 信号变弱时，策略逐渐增加通信约束。
-- 接近断连时，部分机器人可在门口、转角或走廊充当中继。
-- 允许短暂断连，但断连越久，重连优先级越高。
+- 使用连续RSSI，由距离和墙体共同决定通信质量。
+- 构建动态多机器人通信图，允许多跳连接。
+- 优化连通率、断连时间和重连速度。
 - 中继者不是固定角色，可以动态交接。
+- 不研究低带宽，不要求全程零断连，不用硬动作屏蔽保证绝对连通。
+- 暂不加入复杂时延、拥塞、在线墙体材料识别、无线电地图或真实机器人实验。
 
-## 2. 已确定的研究决策
+论文应使用“通信感知探索”“高连通率探索”“弹性连通约束”和“短时断连与快速重连”等表述。不能预先承诺固定95%连通率，也不能把“保持连接”“墙体影响RSSI”单独宣称为首次创新。
 
-### 保留
+相关工作：
 
-1. 距离和墙体共同决定通信质量。
-2. 使用连续 RSSI，而不只使用“连接/断开”二值状态。
-3. 构建动态多机器人通信图，允许多跳连接。
-4. 记录并优化连通率、断连时间和重连速度。
-5. 让策略学习动态探索者/中继者行为。
-6. 以 IR² 的图强化学习和重连机制为主要基础。
+- IR²：https://arxiv.org/abs/2409.04730
+- PRCL（仅作分布式学习参考）：https://arxiv.org/abs/2407.20203
+- 早期持续连接探索：https://doi.org/10.1016/j.conengprac.2006.08.007
+- DRL连通导航：https://proceedings.mlr.press/v100/lin20a.html
+- PropEM-L：https://www.roboticsproceedings.org/rss18/p014.html
+- DCM-RSSI：https://arxiv.org/abs/2410.05798
 
-### 不采用或暂缓
+## 2. 仓库与重要文件
 
-1. **不把低带宽作为当前论文重点。**
-2. **不要求全程零断连。**
-3. 不使用“所有可能断连的动作都被硬屏蔽”的严格持续连通方案。
-4. 第一版暂不加入复杂网络时延、拥塞、在线墙体材料识别、高斯过程无线电地图或真实机器人实验。
-
-### 研究表述
-
-不再使用“保证持续连通”作为主要表述，应使用：
-
-- 通信感知探索（connectivity-aware exploration）
-- 高连通率探索
-- 弹性连通约束
-- 短时断连与快速重连
-
-不能预先声称固定的 95% 连通率，也不能声称任意地图均可完成全部探索。最终数值应由基线实验决定。
-
-## 3. 与已有工作的关系
-
-### IR²
-
-- 论文：IR²: Implicit Rendezvous for Robotic Exploration Teams under Sparse Intermittent Connectivity
-- 重点：学习何时分开探索、何时重新连接和共享信息。
-- 本项目区别：使用连续 RSSI、墙体衰减、断连持续时间和动态中继倾向。
-- 链接：https://arxiv.org/abs/2409.04730
-
-### PRCL
-
-- 论文：Privileged Reinforcement and Communication Learning for Distributed, Bandwidth-limited Multi-robot Exploration
-- 重点：用固定长度学习消息减少通信量。
-- 当前项目不研究低带宽；PRCL仅作为分布式学习、图注意力和特权训练参考。
-- 链接：https://arxiv.org/abs/2407.20203
-
-### 必须注意的相近工作
-
-- 2007年已有“持续保持无线网络连接的多机器人探索”：https://doi.org/10.1016/j.conengprac.2006.08.007
-- 2020年已有DRL保证多机器人导航连通：https://proceedings.mlr.press/v100/lin20a.html
-- PropEM-L研究环境/墙体对RSSI预测的影响：https://www.roboticsproceedings.org/rss18/p014.html
-- DCM-RSSI研究在线RSSI学习与全局连通控制：https://arxiv.org/abs/2410.05798
-
-因此不能把“持续连接”“强化学习保持连接”或“墙体影响信号”单独宣称为首次创新。创新必须落在这些因素与未知环境探索、断连时间和动态中继的具体结合方式上。
-
-## 4. 仓库与分支
-
-### 正式开发仓库
+正式仓库：
 
 ```text
 /home/robot/test/IR2-Continuous-Connectivity/IR2-Multi-Robot-RL-Exploration
 ```
 
-GitHub：
-
-```text
-https://github.com/Orange-wjc/IR2-Continuous-Connectivity
-```
-
-当前分支：
-
-```text
-wall-aware-connectivity
-```
-
-远程关系：
-
+- GitHub：`https://github.com/Orange-wjc/IR2-Continuous-Connectivity`
+- 分支：`wall-aware-connectivity`
 - `origin`：`git@github.com:Orange-wjc/IR2-Continuous-Connectivity.git`
 - `upstream`：`https://github.com/marmotlab/IR2-Multi-Robot-RL-Exploration.git`
-- `main`：保留官方 IR² 基线。
-- `wall-aware-connectivity`：论文开发分支。
+- `main` 保留官方基线；开发只在 `wall-aware-connectivity` 进行。
+- 旧目录 `/home/robot/test/IR2-Multi-Robot-RL-Exploration` 仅供参考，不再修改。
 
-仓库已配置专用SSH认证。不要在文档或对话中输出私钥内容。
+文档：
 
-### 不再作为正式实现的旧项目
+- `docs/CONNECTIVITY_AWARE_PAPER_PLAN.md`：完整论文与实验方案。
+- `docs/AI_HANDOFF.md`：本交接文档。
+- `docs/IDEAL_CONNECTIVITY_MODEL_DEMO.html`：人工设计的概念展示，不是模型输出。
+- `docs/hybrid1_full_demo/index.html`：用户确认的最终目标行为参考。使用官方
+  `DungeonMaps/test/hybrid/1.png`，展示四机器人分散探索、移动接应、动态交接并
+  完成地图探索。该演示由全图规则规划器生成，不是强化学习模型输出，也不能
+  作为论文实验结果。
+- `docs/build_hybrid1_full_demo.py`、`docs/hybrid1_full_template.html`：最终目标演示
+  的生成脚本与页面模板；运行时还依赖 `docs/hybrid1_full_demo/opening_reference.json`。
 
-```text
-/home/robot/test/IR2-Multi-Robot-RL-Exploration
-```
+`CONNECTIVITY_AWARE_PAPER_PLAN.md` 和 `IDEAL_CONNECTIVITY_MODEL_DEMO.html` 是用户原有
+未跟踪文件；最终目标演示及生成文件也尚未跟踪。禁止误删、覆盖或随意提交。
+任何操作前先运行 `git status --short`。
 
-该目录曾被多次修改，仅可用于参考，后续实现不要在这里进行。
+## 3. 已实现代码与提交
 
-### PRCL参考项目
-
-```text
-/home/robot/test/Bandwidth-Limited-Multi-Robot-Exploration
-```
-
-当前不以它作为主实验平台。
-
-## 5. 文档与生成物
-
-### 新仓库文档
-
-- `docs/CONNECTIVITY_AWARE_PAPER_PLAN.md`
-  - 完整研究方案。
-  - 已更新为允许短暂断连的通信感知方案。
-- `docs/AI_HANDOFF.md`
-  - 本交接文档。
-- `docs/IDEAL_CONNECTIVITY_MODEL_DEMO.html`
-  - 自包含的交互式概念展示页，用于说明理想模型的探索者/中继者行为。
-  - 这是设计目标示意，不是训练模型实际输出。
-
-`AI_HANDOFF.md` 随本阶段代码一并维护；其余文档是否提交应以 `git status` 为准，不要误删或覆盖未跟踪文件。
-
-### 已删除的旧文档
-
-```text
-/home/robot/test/IR2-Multi-Robot-RL-Exploration/docs/CONTINUOUS_CONNECTIVITY_PAPER_PLAN.md
-```
-
-旧文档强调严格持续连接，已经删除。
-
-### 理想模型交互展示
-
-```text
-docs/IDEAL_CONNECTIVITY_MODEL_DEMO.html
-```
-
-这是人工设计的交互式概念页面，不是训练模型输出。它用于直观展示墙体衰减、动态多跳链路、短暂断连、快速重连和动态中继角色。
-
-## 6. Conda、CUDA与硬件
-
-使用的Conda环境：
-
-```bash
-conda activate BLMRE_py38
-```
-
-已验证环境：
-
-- Python：3.8.20
-- PyTorch：2.3.1+cu121
-- Ray：2.10.0
-- SciPy：1.10.1
-- scikit-learn：1.3.2
-- scikit-image：0.21.0
-- Matplotlib：3.7.5
-- pandas：2.0.3
-
-官方README声明的主要版本较旧：
-
-- PyTorch 1.10.0
-- Ray 1.10.0
-- scikit-image 0.19.3
-- scikit-learn 1.2.1
-- Matplotlib 3.6.3
-
-当前较新环境已经成功完成一次官方模型推理，但存在Ray工作目录兼容问题，见后文。
-
-GPU：
-
-- NVIDIA GeForce RTX 4060 Laptop GPU
-- 显存：8188 MiB
-- 驱动：580.173.02
-- 驱动支持CUDA：13.0
-- PyTorch编译CUDA：12.1
-- `torch.cuda.is_available() == True`
-- GPU数量：1
-
-注意：普通沙箱内执行时曾错误显示GPU不可用；需要允许访问宿主GPU后才可正确检测和运行。
-
-## 7. 官方IR²基线冒烟测试
-
-### 测试配置
-
-- 官方 `model/stage2/checkpoint.pth`
-- `hybrid` 测试集，第0张地图
-- 4台机器人
-- GPU推理
-- 1个回合
-- 保存GIF
-- 关闭图边可视化以缩短绘图时间
-- 未修改任何项目代码或参数文件
-
-### 测试结果
-
-- 测试成功：是
-- 探索步数：48（终端内部零起始显示为Step 47）
-- 地图覆盖率：0.9997123595505618，约99.971%
-- 最大机器人路径长度：2206.865001633915
-- 图节点数：234
-- 跳过回合：0
-- CSV中的 `connectivity=False`
-
-### 指标解释
-
-现有 `env.py` 中：
-
-```python
-self.agents_connected_percentage = 1 - (len(self.agents_comms_broken) / self.n_agent)
-self.connectivity_rate = (len(self.agents_comms_broken) == 0)
-```
-
-因此当前 `connectivity_rate` 实际是“当前/最终时刻是否所有机器人均连接”的布尔值，不是整个回合的连通率。CSV中的 `False` 不能解释为“全程连通率为0”。
-
-下一阶段首先应补充真正的时序指标：
-
-- 每一步是否全局连通。
-- 回合全程连通步数比例。
-- 每台机器人平均/最长连续断连步数。
-- 平均重连时间。
-- 最大连通分量比例。
-- 最弱通信边RSSI。
-
-### GIF位置
-
-全局：
-
-```text
-mar_inference/test_results/gifs/merged/eps0_merged_explored_rate_0.9997.gif
-```
-
-单机器人：
-
-```text
-mar_inference/test_results/gifs/robot_1/eps0_robot1_explored_rate_0.9997.gif
-mar_inference/test_results/gifs/robot_2/eps0_robot2_explored_rate_0.9997.gif
-mar_inference/test_results/gifs/robot_3/eps0_robot3_explored_rate_0.9997.gif
-mar_inference/test_results/gifs/robot_4/eps0_robot4_explored_rate_0.9997.gif
-```
-
-`mar_inference/test_results/*` 被 `.gitignore` 忽略，不会出现在普通Git状态中。
-
-CSV：
-
-```text
-/tmp/ir2_smoke_test/log/data_2026-09-02_135612.csv
-```
-
-另有一次失败启动产生的仅含表头文件：
-
-```text
-/tmp/ir2_smoke_test/log/data_2026-09-02_135537.csv
-```
-
-## 8. 已知运行问题
-
-### Ray工作进程找不到项目模块
-
-第一次使用Ray 2.10运行时，Actor创建失败：
-
-```text
-ModuleNotFoundError: No module named 'model'
-```
-
-原因：Ray工作进程没有继承项目目录作为Python模块搜索路径。运行时显式设置：
-
-```bash
-PYTHONPATH=/home/robot/test/IR2-Continuous-Connectivity/IR2-Multi-Robot-RL-Exploration
-```
-
-后测试成功。
-
-### 运行时参数覆盖对Ray Actor不完全生效
-
-主进程通过内存覆盖把日志路径设置到 `/tmp/ir2_smoke_test`，但Ray Actor重新导入了默认 `test_parameter.py`，所以GIF仍写入默认：
-
-```text
-mar_inference/test_results/gifs
-```
-
-后续应使用正式的小型测试配置文件或让Ray `runtime_env`显式传递环境，避免主进程与Actor参数不一致。
-
-## 9. 已完成的代码实现
-
-当前分支已有以下4个提交：
+关键提交：
 
 ```text
 9c6b785 Add continuous connectivity metrics
 7635180 Visualize RSSI connectivity in GIFs
 9aaf3bd Add connectivity-aware training features
 017a3ed Speed up training data collection
+b12adff Fix oversized action edge sets and resume config
+8af6d7f Reduce single-GPU training synchronization overhead
 ```
 
-主要实现如下：
+最新提交 `8af6d7f` 已推送到 `origin/wall-aware-connectivity`。
+
+实现摘要：
 
 - `ss_realistic_model.py`
-  - 输出连续RSSI、墙体穿越次数、障碍/自由空间距离和通信安全余量。
-  - 将逐像素Python循环改为NumPy向量化，保持原公式不变。
+  - 输出连续RSSI、墙体穿越次数、障碍/自由空间距离和安全余量。
+  - RSSI逐像素循环已向量化；200组随机地图/链路等价性检查通过。
 - `env.py`
-  - 维护通信质量、时序连通率、断连时长、重连时间和最大连通分量等指标。
-  - 加入通信相关软奖励，并缓存节点坐标到索引的精确查找。
+  - 维护时序连通率、断连时长、重连时间和最大连通分量等指标。
+  - 加入通信软奖励，并缓存节点坐标索引。
 - `multi_robot_worker.py`
-  - 训练观测加入5个通信特征，训练输入由官方6维扩展为11维。
-  - 删除无用深拷贝并优化图掩码生成。
+  - 观测由官方6维扩展为11维，其中5维是通信特征。
+  - 候选动作边限制在 `K_SIZE` 内，修复输入与mask形状不一致。
 - `test_multi_robot_worker.py`
-  - 记录并可视化RSSI链路；测试绘图仅在 `SAVE_GIFS=True` 时执行。
-- `parameter.py`
-  - 训练默认启用通信特征，使用新的训练目录 `wall_aware_stage1`。
-  - `SAVE_TRAINING_GIFS=False`，正式训练默认不生成GIF。
-- `test_parameter.py`
-  - 默认关闭新增通信输入，保持官方6维预训练模型兼容。
+  - 测试时记录并可视化RSSI链路，同样限制候选边数量。
 - `runner.py`
-  - CPU训练Actor不再预留GPU份额，并限制每个Actor内部计算线程数，减少资源争抢。
+  - CPU Actor不再预留GPU份额，限制Actor内部线程数。
+  - 删除Actor中未使用的Q网络副本及无效Q权重同步。
+- `driver.py`
+  - 单GPU不再使用无收益的 `DataParallel`。
+  - 用独立CPU快照同步策略权重，避免全局模型频繁往返CPU/GPU。
+  - 只在真正完成策略更新后刷新Actor权重。
 
-兼容关系必须注意：
+这些性能修改不改变网络结构、奖励、地图分布、机器人数量、更新比例和checkpoint格式。完整episode冒烟测试曾按用户要求省略；语法、接口和权重快照等价性检查已完成。
 
-- 官方 checkpoint：6维输入，应保持测试配置 `USE_CONNECTIVITY_FEATURES=False`。
-- 新训练模型：11维输入，应在训练和测试中启用通信特征，并加载新 checkpoint。
-- 官方6维 checkpoint 不能直接加载到11维网络中。
+## 4. 当前训练环境与参数
 
-## 10. 实验设计摘要
+AutoDL正式训练环境：
 
-建议主要对比：
+- Conda：`mrobot`
+- GPU：单卡NVIDIA GeForce RTX 4090
+- CPU：16核
+- 项目目录：`/root/autodl-tmp/IR2-Continuous-Connectivity`
+- 启动：`python -u driver.py`
 
-1. 原始 IR²。
-2. 只按距离判断通信的 IR²。
-3. 考虑墙体 RSSI、但没有断连时长设计的 IR²。
-4. 完整方法：连续 RSSI + 断连时长约束 + 动态中继。
+本地代码验证环境为 `BLMRE_py38`。AutoDL和本地环境名称不同，不要混淆。
 
-主要指标：
+`parameter.py` 关键配置：
 
-- 覆盖率、完成步数、总路径长度和成功率。
-- 真正的回合连通率。
-- 断连次数、平均/最长断连时长。
-- 平均重连时间。
-- 最大连通分量比例。
-- 最弱通信树边RSSI。
-- 关键中继占用时间。
+```python
+TRAIN_SET_NAME = "hybrid"
+MAX_EPS_STEPS = 196
+K_SIZE = 30
+NODE_PADDING_SIZE = 360
 
-最终目标是在探索效率没有明显下降的前提下，提高连通率并缩短断连与重连时间。
+USE_GPU = False
+USE_GPU_GLOBAL = True
+NUM_GPU = 1
+NUM_META_AGENT = 15
+SUMMARY_WINDOW = 32
 
-## 11. 当前状态
+FOLDER_NAME = 'wall_aware_hybrid3_stage1'
+MODEL_PATH = 'model/wall_aware_hybrid3_stage1/checkpoint.pth'
+LOAD_MODEL = False
+CONTINUE_LOG_ALPHA = True
+SAVE_TRAINING_GIFS = False
 
-- 正式代码已完成连续RSSI指标、通信可视化、通信感知状态/奖励和训练加速修改。
-- 官方预训练模型已在修改后的环境中成功完成GPU推理测试。
-- 用户随后直接运行 `python test_driver.py`，GIF已正常生成。
-- 该测试组合是“官方6维预训练模型 + 修改后的环境”，不是新11维通信感知模型。
-- 训练加速修改不改变网络结构、奖励权重、地图分布、机器人数量、更新比例或训练轮数。
-- RSSI新旧实现经过200组随机地图/链路等价性检查，结果一致。
-- 节点索引缓存和图掩码经过新旧实现等价性检查，结果一致。
-- 3机器人单步训练数据采集测试通过，且未生成训练图片。
-- 2500条链路的局部微基准中，RSSI子程序由约0.108秒降至0.039秒，约快2.79倍；这不是整体训练速度倍数。
-- 当前开发分支：`wall-aware-connectivity`。
-- 最新代码提交：`017a3ed Speed up training data collection`。
-- 测试GIF是被忽略文件，不属于待提交代码。
-- 方案目标为弹性、高连通率探索，允许短暂断连但要求尽快重连。
+REPLAY_SIZE = 10000
+MINIMUM_BUFFER_SIZE = 2000
+BATCH_SIZE = 128
+USE_CONNECTIVITY_FEATURES = True
+CONNECTIVITY_FEATURE_DIM = 5
+INPUT_DIM = 11
+```
 
-## 12. 下一步任务
+第一阶段训练固定使用3台机器人。原`DungeonMaps/test/hybrid`的400张地图由
+`map_splits.py`按固定种子`20260907`重新划分为300张训练、50张验证、50张测试；
+三个集合互不重叠，`hybrid/1.png`固定保留在测试集。文件仍位于原目录，逻辑划分由
+`MAP_FILE_NAMES`控制。批量测试固定3台机器人、遍历50张保留测试地图一次，并默认
+关闭GIF。新实验从头训练，不覆盖或续接旧`wall_aware_stage1`曲线。
 
-按以下顺序继续：
+通信奖励权重：弱信号0.2、断连0.5、断连持续时间0.5、重连奖励0.5。
 
-1. 将 `wall-aware-connectivity` 分支部署到GPU服务器。
-2. 创建与本地一致的 `BLMRE_py38` 环境并确认CUDA、Ray和项目 `PYTHONPATH`。
-3. 检查 `parameter.py`：`USE_CONNECTIVITY_FEATURES=True`、`INPUT_DIM=11`、`SAVE_TRAINING_GIFS=False`、`LOAD_MODEL=False`。
-4. 先运行少量训练回合，确认经验采集、梯度更新、checkpoint和TensorBoard日志正常。
-5. 冒烟测试通过后再启动正式训练：`python driver.py`。
-6. 定期保存checkpoint，但训练阶段保持GIF关闭；需要观察轨迹时单独运行 `python test_driver.py`。
-7. 新模型训练完成后，在 `test_parameter.py` 启用通信特征并指向11维新checkpoint。
-8. 使用固定地图和随机种子比较官方IR²与新模型的探索和连通性指标。
+环境仿真主要消耗CPU，网络更新使用GPU。监控中约15个CPU核心接近满载，GPU利用率在0%至100%之间脉冲变化，显存约20 GiB；主要瓶颈是CPU采样。不要继续盲目增加Actor、增大batch或设置 `USE_GPU=True`，否则容易产生Ray调度等待或显存不足。
 
-服务器训练前不要使用官方6维 checkpoint 继续训练11维网络；除非额外实现并验证部分权重迁移。
+## 5. checkpoint与续训
 
-## 13. 新AI开始工作时的检查清单
+已找回并验证的训练权重：
 
-1. 确认当前目录是正式新仓库，而不是旧修改版。
-2. 阅读本文和 `docs/CONNECTIVITY_AWARE_PAPER_PLAN.md`。
-3. 确认分支为 `wall-aware-connectivity`。
-4. 激活 `BLMRE_py38`。
-5. 在GPU相关命令中确认宿主GPU可见。
-6. 运行Ray时显式设置项目 `PYTHONPATH`。
-7. 先检查工作区，保护用户已有改动。
-8. 任何新指标先写小范围测试，再修改训练逻辑。
-9. 不重新引入低带宽主线或硬性零断连目标，除非用户明确改变决定。
+```text
+相对路径：model/wall_aware_stage1/checkpoint.pth
+本地路径：/home/robot/test/IR2-Continuous-Connectivity/IR2-Multi-Robot-RL-Exploration/model/wall_aware_stage1/checkpoint.pth
+大小：52,199,630 bytes（约50 MB）
+episode：928
+input_dim：11
+connectivity_feature_dim：5
+SHA-256：f861e42f5a29461c586e51e782db8eed5d125d11edba16ef06566c7f5d331934
+```
 
-## 14. 交接信息维护规则
+checkpoint包含策略网络、两个Q网络、对应优化器、学习率调度器、`log_alpha` 和episode，结构完整，可以直接续训。
 
-后续每完成一个阶段，应增量更新本文以下部分：
+服务器必须将其放到运行 `driver.py` 的项目根目录下：
 
-- “文件与生成物”
-- “测试结果”
-- “已知运行问题”
-- “当前状态”
-- “下一步任务”
+```text
+/root/autodl-tmp/IR2-Continuous-Connectivity/model/wall_aware_stage1/checkpoint.pth
+```
 
-不要每次重写整份文档，避免历史决策和精确路径在多次摘要中丢失。
+保持 `LOAD_MODEL=True` 和 `CONTINUE_LOG_ALPHA=True`。启动成功应看到：
+
+```text
+Loading Model...
+curr_episode set to: 928
+```
+
+Replay Buffer仅在内存中，不写入checkpoint。每次进程重启后都要重新采集 `MINIMUM_BUFFER_SIZE=2000` 条transition才恢复梯度更新；这是2000条transition，不是2000个episode，也不表示网络权重重置。
+
+checkpoint每32个episode覆盖保存一次，日志显示 `Saving model` / `Saved model`。服务器迁移前必须单独下载 `.pth`；`train/wall_aware_stage1` 只有TensorBoard日志，不能恢复模型。
+
+兼容约束：
+
+- 官方checkpoint是6维输入，测试时保持 `USE_CONNECTIVITY_FEATURES=False`。
+- 新模型是11维输入，训练和测试都必须启用通信特征。
+- 官方6维checkpoint不能直接加载进11维网络。
+
+## 6. 已知问题与处理原则
+
+### Ray CPU警告
+
+Docker CPU检测警告本身不会阻止训练。15个Actor占用16核时资源接近饱和；若出现持续的 `resource request cannot be scheduled`，先减少Actor，不要给Actor分配GPU。
+
+### 候选边形状不一致
+
+旧错误：
+
+```text
+Not (edge_inputs.shape = one.shape == edge_padding_mask.shape). Skipping eps.
+```
+
+原因是候选边超过 `K_SIZE=30`，已由 `b12adff` 修复。修复后可继续使用原checkpoint，无需重训。
+
+### 节点数超过padding
+
+偶发日志：
+
+```text
+node_coords.shape[0] >= self.node_padding_size (372 >= 360). Skipping eps.
+```
+
+这是保护性跳过单个回合，不会停止训练。若占比低于约1%至2%，暂不处理；若超过5%，再统计触发条件。不要随意增大 `NODE_PADDING_SIZE`，图注意力开销近似按节点数平方增长，当前显存余量有限。
+
+### checkpoint找不到
+
+```text
+FileNotFoundError: model/wall_aware_stage1/checkpoint.pth
+```
+
+表示权重未放到相对于当前工作目录的正确位置，不是模型损坏。搜索命令：
+
+```bash
+find /root/autodl-tmp -type f -name "checkpoint.pth" -ls
+```
+
+### Ray Actor找不到模块
+
+若出现 `ModuleNotFoundError: No module named 'model'`，确认从项目根目录启动，并在必要时将项目根目录加入 `PYTHONPATH`。Ray Actor会重新导入配置，主进程中的临时参数覆盖不一定会传递给Actor。
+
+## 7. TensorBoard与当前曲线
+
+已验证兼容组合：TensorBoard 2.14.0 + protobuf 4.25.3。protobuf 5.29.6会导致：
+
+```text
+TypeError: MessageToJson() got an unexpected keyword argument 'including_default_value_fields'
+```
+
+启动命令：
+
+```bash
+tensorboard --logdir ./train/wall_aware_stage1 --host 0.0.0.0 --port 6006
+```
+
+分析时只勾选最新run，并把Smoothing设为约0.2至0.3，避免多次重启和过度平滑干扰判断。
+
+截至约episode 850的早期趋势：
+
+- Agents Connected：约0.72 → 0.99
+- Connectivity Rate：约0.42 → 0.99
+- Communication Reward：约-0.30 → 接近0
+- Explored Rate：约episode 450达到0.96，随后降至约0.74
+- Success Rate：峰值约0.70，随后降至约0.40
+- Reward：峰值约0.20，随后降至约0.08
+- Travel Distance：后期约升至5400
+
+2026-09-06读取TensorBoard最新run
+`Sep06_08-38-57_autodl-container-vv2u1fwe7h-67b4e717`，记录范围约episode 985至1561。
+应将Smoothing设为0.2至0.3，只选最新run；0.999会掩盖真实波动。部分原始记录点：
+
+| episode | Explored Rate | Success Rate | Connectivity Rate | Travel Distance |
+|---:|---:|---:|---:|---:|
+| 1497 | 0.7517 | 0.4235 | 0.9208 | 4734.7 |
+| 1529 | 0.7419 | 0.5480 | 0.8568 | 4354.9 |
+| 1561 | 0.5811 | 0.2496 | 0.8823 | 6131.7 |
+
+这些是训练日志窗口统计，不是独立测试结果；不能根据最后一个点下结论。约1000至
+1500轮的总体判断是：连通性较高，但探索率和成功率波动且较早期下降，存在策略
+偏向保守连通的风险。Loss未显示明确数值发散，但Loss下降不等于任务效果改善。
+`Perf/Reward` 是训练batch的平均单步奖励，`Travel Distance` 是最大单机器人累计路程。
+下一步应先做固定地图独立评估，再决定继续原样训练还是新开实验调奖励。
+
+当前代码的指标口径必须按实现解释：
+
+- `Explored Rate` 是各机器人自身belief覆盖率的平均值，不是融合后的全局地图覆盖率。
+- `Success Rate` 只有在每台机器人自己的belief地图都达到99%覆盖时才算成功，因此比
+  “团队合并后覆盖完成”更严格。
+- 断连机器人相对唯一最大连通分量判定；若多个连通分量并列最大，代码会把它们都
+  视为不属于唯一主分量。比较实验时必须沿用相同实现，或先修订并明确新口径。
+
+## 8. 实验设计
+
+建议对比：
+
+1. 原始IR²。
+2. 仅按距离判断通信的IR²。
+3. 墙体RSSI、无断连时长设计的IR²。
+4. 完整方法：连续RSSI + 断连时长约束 + 动态中继。
+
+主要指标：覆盖率、完成步数、路径长度、成功率、回合连通率、断连次数、平均/最长断连时长、平均重连时间、最大连通分量比例、最弱通信树边RSSI和关键中继占用时间。
+
+最终目标是在探索效率没有明显下降的前提下，提高连通率并缩短断连与重连时间。奖励或任务定义发生变化时必须使用新实验名称和目录，保留当前checkpoint作为可复现实验基线。
+
+## 9. 当前状态与下一步
+
+当前状态：
+
+- 分支为 `wall-aware-connectivity`，最新远程提交为 `8af6d7f`。
+- RTX 4090/16核服务器已能运行15个并行仿真和单GPU训练。
+- 候选边形状问题已经修复。
+- episode 928的11维checkpoint已找回并验证。
+- 服务器TensorBoard最后观察到约episode 1561；本地仓库的已验证checkpoint仍是
+  episode 928。不要把服务器曲线轮数当成本地权重轮数；应下载并核验服务器最新
+  checkpoint的`episode`字段。
+- 当前连通性显著改善，但探索率、成功率和奖励后期波动并下降，尚未形成最终结论。
+- 用户已确认以 `hybrid1_full_demo` 展示的行为作为训练目标：机器人在不同区域
+  分散探索，接应位置随探索进度移动，必要时交接中继任务，最终达到地图探索
+  完成条件，同时避免长时间断连。演示中的全图信息与硬连通动作检查仅用于构造
+  目标参考，不能直接加入论文方法或冒充模型能力。
+- 用户决定继续使用原作者提供的训练/测试地图，不再生成新的训练地图。
+- 当前第一阶段已收窄为固定3机器人、仅使用原作者hybrid地图分布。400张hybrid地图
+  固定划分为300/50/50；训练与测试隔离，`hybrid/1.png`只用于最终测试。完成这一
+  阶段并评估效果后，再决定是否加入4机器人训练。
+- 最终目标演示使用项目`hybrid/1.png`、原`sensor.py`和固定无噪声RSSI参数；其
+  规则轨迹保持简化通信图全程连通，发现107455/107500个自由像素，覆盖率
+  99.958%，剩余45像素。共有13885个插值脚本帧；这些数字只验证演示内部一致性。
+- 其他由AI生成的临时地图与演示已删除，只保留最终`hybrid1_full_demo`。用户原有
+  `IDEAL_CONNECTIVITY_MODEL_DEMO.html`仍保留。
+- 当前代码中的“动态中继”主要由候选节点的relay特征和奖励间接学习；尚无中继
+  占用时间统计。`emergency_reconnect_required`目前只是标志位，没有动作接管规则。
+- `test_parameter.py`已指向`wall_aware_hybrid3_stage1`的11维checkpoint，并固定使用
+  3台机器人和50张保留测试地图；新模型尚未训练完成前运行测试会找不到checkpoint。
+
+下一步：
+
+1. 将当前代码部署到服务器，确认`DungeonMaps/test/hybrid`包含完整的1至400号地图。
+2. 从头启动`wall_aware_hybrid3_stage1`，先跑约100轮冒烟和计时测试，确认无大量
+   padding跳过、checkpoint正常保存、TensorBoard指标正常，再决定正式轮数。
+3. 训练后用`test_parameter.py`加载新11维checkpoint，对50张保留地图各测试一次。
+   至少报告探索率、成功率、步骤/路径、连通率、断连次数、平均/最长断连时长和
+   重连时间；训练曲线不能替代该评估。
+4. 在保留的`hybrid/1.png`上输出真实模型轨迹，与目标演示对照是否分散探索、是否
+   长期抱团、接应位置是否移动、是否发生中继交接以及是否完成探索。
+5. 保存旧episode 928和服务器1500+模型作为历史基线，不覆盖其checkpoint和曲线。
+6. 根据三机器人独立测试结果决定第二阶段：若效果达到要求，再引入4机器人微调；
+   若只提高连接却降低探索，则在新实验目录调整奖励，不在同一run中途改目标。
+
+## 10. 新会话检查清单
+
+1. 确认位于正式仓库和 `wall-aware-connectivity` 分支。
+2. 阅读本文和论文方案文档。
+3. 运行 `git status --short`，保护用户未跟踪文件。
+4. 本地使用 `BLMRE_py38`；AutoDL使用 `mrobot`。
+5. 确认GPU可见、checkpoint存在，并核对续训episode。
+6. 不重新引入低带宽或硬性零断连目标，除非用户明确改变研究方向。
+7. 修改奖励、网络结构或实验定义前先说明对checkpoint兼容性和论文对比的影响。
+
+后续只增量维护本文件的“当前状态与下一步”；不要重新加入已完成的对话过程和临时输出。

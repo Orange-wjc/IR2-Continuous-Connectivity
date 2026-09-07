@@ -33,8 +33,18 @@ class Env():
         else:
             self.map_dir = TRAIN_SET_DIR
 
-        self.map_list = os.listdir(self.map_dir)
-        self.map_list.sort(reverse=True)
+        configured_map_files = globals().get('MAP_FILE_NAMES')
+        if configured_map_files:
+            self.map_list = list(configured_map_files)
+            missing_map_files = [name for name in self.map_list
+                                 if not os.path.isfile(os.path.join(self.map_dir, name))]
+            if missing_map_files:
+                raise FileNotFoundError(
+                    'Configured map files are missing from {}: {}'.format(
+                        self.map_dir, missing_map_files[:5]))
+        else:
+            self.map_list = os.listdir(self.map_dir)
+            self.map_list.sort(reverse=True)
         self.map_index = map_index % np.size(self.map_list)
         self.file_path = self.map_list[self.map_index]
         self.ground_truth, self.start_position = self.import_ground_truth(

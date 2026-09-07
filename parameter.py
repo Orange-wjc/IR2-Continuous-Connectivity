@@ -4,19 +4,21 @@
 #######################################################################
 
 import sys
-sys.modules['TRAINING'] = True   # False = Inference Testing                                                                                            
+sys.modules['TRAINING'] = True   # False = Inference Testing
+from map_splits import HYBRID_TRAIN_MAP_FILES
 
 # --- MAPS --- #
-# TODO: Set train set
-TRAIN_SET_NAME = "easy"          # stage 1: "easy" ; stage 2: "difficult"
-TRAIN_SET_DIR = "DungeonMaps/train/" + TRAIN_SET_NAME
+# Stage 1: three-robot training on the hybrid training split.
+TRAIN_SET_NAME = "hybrid"
+TRAIN_SET_DIR = "DungeonMaps/test/hybrid"
+MAP_FILE_NAMES = HYBRID_TRAIN_MAP_FILES
 
-# Stage 1: Easy Train Set
-if TRAIN_SET_NAME == "easy":
+# Smaller-map configuration used by easy and hybrid sets.
+if TRAIN_SET_NAME == "easy" or TRAIN_SET_NAME == "hybrid":
     MAX_EPS_STEPS=196    
     K_SIZE = 30
     NUM_ROBOTS_MIN=3
-    NUM_ROBOTS_MAX=5
+    NUM_ROBOTS_MAX=3
     NODE_COORDS_SCALING_FACTOR=1/640    
     NODE_UTILITY_SCALING_FACTOR=1/50    
     GLOBAL_GRAPH_NODE_COORDS_THRESH=200       # Num node coords before start to perform graph merger
@@ -45,12 +47,12 @@ USE_GPU_GLOBAL = True   #  Train the network using GPUs
 NUM_GPU = 1
 NUM_META_AGENT = 15      # Number of parallel sims
 SUMMARY_WINDOW = 32
-FOLDER_NAME = 'wall_aware_stage1'
+FOLDER_NAME = 'wall_aware_hybrid3_stage1'
 MODEL_DIR = f'model/{FOLDER_NAME}'
 TRAIN_DIR = f'train/{FOLDER_NAME}'
 GIFS_DIR = f'gifs/{FOLDER_NAME}'
 MODEL_PATH = MODEL_DIR + '/checkpoint.pth' 
-LOAD_MODEL = True
+LOAD_MODEL = False
 CONTINUE_LOG_ALPHA = True  # Continue from log_alpha saved from model checkpoint
 SAVE_TRAINING_GIFS = False
 SAVE_IMG_GAP = 201  

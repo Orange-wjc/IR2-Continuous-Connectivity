@@ -4,19 +4,21 @@
 #######################################################################
 
 import sys
-sys.modules['TRAINING'] = False           # False = Inference Testing                                                                                            
+sys.modules['TRAINING'] = False           # False = Inference Testing
+from map_splits import HYBRID_TEST_MAP_FILES
 
 # --- MAPS --- #
-# TODO: Set train set
+# Held-out hybrid evaluation split.
 TEST_SET_NAME = "hybrid"        # "hybrid", "corridor", "complex", 
 TEST_SET_DIR = "DungeonMaps/test/" + TEST_SET_NAME
+MAP_FILE_NAMES = HYBRID_TEST_MAP_FILES
 
-# Easier maps
+# Smaller test maps
 if TEST_SET_NAME == "hybrid" or TEST_SET_NAME == "corridor":
     MAX_EPS_STEPS=196   
     K_SIZE = 30
-    NUM_ROBOTS_MIN=4
-    NUM_ROBOTS_MAX=4
+    NUM_ROBOTS_MIN=3
+    NUM_ROBOTS_MAX=3
     NODE_COORDS_SCALING_FACTOR=1/640    
     NODE_UTILITY_SCALING_FACTOR=1/50   
     GLOBAL_GRAPH_NODE_COORDS_THRESH=200       # Num node coords before start to perform graph merger
@@ -38,11 +40,11 @@ else:
 
 
 # --- Test Specific --- #
-NUM_TEST = 100                      # Number of runs in this test
+NUM_TEST = len(MAP_FILE_NAMES)      # Evaluate every held-out hybrid map once
 NUM_RUN = 1                         # How many times to run this set of tests
 SAVE_TRAJECTORY = False             # Do you want to save per-step metrics 
 SAVE_LENGTH = False                 # Do you want to save per-episode metrics 
-SAVE_GIFS = True                    # Do you want to save GIFs
+SAVE_GIFS = False                   # Keep bulk evaluation fast; enable for selected cases
 VIZ_GRAPH_EDGES=True                # Visualize graph edhes (NOTE: Will be very slow)
 VIZ_GRAPH_EDGES_GROUND_TRUTH=False  # Visualize graph edhes (NOTE: Will be very slow)
 VIZ_CONNECTIVITY_RSSI_GROUND_TRUTH=True
@@ -51,8 +53,8 @@ VIZ_CONNECTIVITY_RSSI_GROUND_TRUTH=True
 USE_GPU = True
 NUM_GPU = 1
 NUM_META_AGENT = 1  # Number of parallel sims
-FOLDER_NAME = 'mar_inference' 
-MODEL_DIR = f'model/stage2'
+FOLDER_NAME = 'wall_aware_hybrid3_stage1_inference'
+MODEL_DIR = f'model/wall_aware_hybrid3_stage1'
 GIFS_DIR = f'{FOLDER_NAME}/test_results/gifs'
 MODEL_PATH = MODEL_DIR + '/checkpoint.pth' 
 trajectory_path = f'{FOLDER_NAME}/test_results/trajectory'
@@ -61,7 +63,7 @@ log_path = f'{FOLDER_NAME}/test_results/log'
 
 # --- RL Params --- # 
 EMBEDDING_DIM = 128
-USE_CONNECTIVITY_FEATURES = False  # Set True when evaluating a wall-aware checkpoint
+USE_CONNECTIVITY_FEATURES = True
 CONNECTIVITY_FEATURE_DIM = 5
 INPUT_DIM = 6 + CONNECTIVITY_FEATURE_DIM if USE_CONNECTIVITY_FEATURES else 6
 
@@ -131,4 +133,3 @@ GREEN='\033[1;32m'
 YELLOW='\033[1;93m'       
 NC_BOLD='\033[1m' # Bold, No Color 
 NC='\033[0m' # No Color 
-

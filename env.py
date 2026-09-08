@@ -70,13 +70,17 @@ class Env():
         self.connected_step_count = 0
         self.component_count = self.n_agent
         self.component_count_sum = 0
+        self.current_largest_component_ratio = 1.0
         self.largest_component_ratio = 0.0
         self.largest_component_ratio_sum = 0.0
         self.disconnect_steps = np.zeros(self.n_agent, dtype=np.int32)
         self.disconnect_count = 0
+        self.new_disconnect_count = 0
         self.completed_reconnect_times = []
         self.weakest_tree_rssi = float('nan')
         self.weakest_tree_rssi_history = []
+        self.team_bottleneck_rssi = float('nan')
+        self.team_bottleneck_rssi_history = []
         self.emergency_reconnect_required = np.zeros(self.n_agent, dtype=bool)
         self.communication_reward = 0.0
         self.communication_reward_sum = 0.0
@@ -380,7 +384,8 @@ class Env():
         previous_explored_rate = self.explored_rate
         self.record_connectivity_metrics()
         reconnect_count = len(self.completed_reconnect_times) - reconnect_count_before
-        self.communication_reward = self.calculate_communication_reward(reconnect_count)
+        self.communication_reward = self.calculate_communication_reward(
+            reconnect_count, self.new_disconnect_count)
         self.communication_reward_sum += self.communication_reward
         self.explored_rate = self.evaluate_team_exploration_rate()
         exploration_progress = max(self.explored_rate - previous_explored_rate, 0.0)
@@ -395,26 +400,33 @@ class Env():
         return team_reward
 
 
-    def calculate_communication_reward(self, reconnect_count):
-        """Return the team reward for weak links, outages, outage duration, and reconnection."""
+    def calculate_communication_reward(self, reconnect_count, new_disconnect_count):
+        """Reward robust team connectivity while allowing brief recoverable outages."""
         weak_signal_penalty = 0.0
-        if USE_SIGNAL_STRENGTH_NOT_PROXIMITY and np.isfinite(self.weakest_tree_rssi):
-            margin = self.weakest_tree_rssi - self.ss_realistic_model.threshold_ss
-            weak_signal_penalty = np.clip(
-                (SS_WARNING_MARGIN - margin) / SS_WARNING_MARGIN, 0.0, 1.0)
+        if USE_SIGNAL_STRENGTH_NOT_PROXIMITY and np.isfinite(self.team_bottleneck_rssi):
+            margin = self.team_bottleneck_rssi - self.ss_realistic_model.threshold_ss
+            warning_penalty = np.clip(
+                (SS_WARNING_MARGIN - margin) / max(SS_WARNING_MARGIN, 1),
+                0.0, 1.0)
+            outage_severity = np.clip(
+                -margin / max(RSSI_MARGIN_NORMALIZATION, 1), 0.0, 1.0)
+            weak_signal_penalty = 0.5 * (warning_penalty + outage_severity)
 
-        disconnected_fraction = np.count_nonzero(self.disconnect_steps) / self.n_agent
-        duration_scale = max(MAX_DISCONNECTED_STEPS - DISCONNECT_GRACE_STEPS, 1)
+        component_deficit = 1.0 - self.current_largest_component_ratio
+        duration_scale = max(
+            DISCONNECT_DURATION_SATURATION_STEPS - DISCONNECT_GRACE_STEPS, 1)
         penalized_disconnect_steps = np.maximum(
             self.disconnect_steps - DISCONNECT_GRACE_STEPS, 0)
-        duration_penalty = np.mean(np.clip(
+        duration_penalty = np.max(np.clip(
             penalized_disconnect_steps / duration_scale, 0.0, 1.0))
+        new_disconnect_fraction = new_disconnect_count / self.n_agent
         reconnect_fraction = reconnect_count / self.n_agent
 
         return float(
             -WEAK_SIGNAL_PENALTY_WEIGHT * weak_signal_penalty
-            -DISCONNECT_PENALTY_WEIGHT * disconnected_fraction
+            -COMPONENT_DEFICIT_PENALTY_WEIGHT * component_deficit
             -DISCONNECT_DURATION_PENALTY_WEIGHT * duration_penalty
+            -NEW_DISCONNECT_PENALTY_WEIGHT * new_disconnect_fraction
             +RECONNECT_REWARD_WEIGHT * reconnect_fraction)
 
 
@@ -492,8 +504,8 @@ class Env():
 
         self.component_count = len(self.group_ids_list)
         self.component_count_sum += self.component_count
-        current_largest_component_ratio = largest_size / self.n_agent
-        self.largest_component_ratio_sum += current_largest_component_ratio
+        self.current_largest_component_ratio = largest_size / self.n_agent
+        self.largest_component_ratio_sum += self.current_largest_component_ratio
         self.largest_component_ratio = self.largest_component_ratio_sum / self.communication_step_count
         self.agents_connected_percentage = self.largest_component_ratio
 
@@ -504,11 +516,13 @@ class Env():
         else:
             disconnected_ids = set(range(self.n_agent))
 
+        self.new_disconnect_count = 0
         for robot_id in range(self.n_agent):
             previous_duration = self.disconnect_steps[robot_id]
             if robot_id in disconnected_ids:
                 if previous_duration == 0:
                     self.disconnect_count += 1
+                    self.new_disconnect_count += 1
                 self.disconnect_steps[robot_id] += 1
             else:
                 if previous_duration > 0:
@@ -521,6 +535,11 @@ class Env():
         self.weakest_tree_rssi = self.get_weakest_tree_rssi(largest_group)
         if np.isfinite(self.weakest_tree_rssi):
             self.weakest_tree_rssi_history.append(self.weakest_tree_rssi)
+
+        self.team_bottleneck_rssi = self.get_weakest_tree_rssi(
+            list(range(self.n_agent)))
+        if np.isfinite(self.team_bottleneck_rssi):
+            self.team_bottleneck_rssi_history.append(self.team_bottleneck_rssi)
 
 
     def get_weakest_tree_rssi(self, group_ids):
@@ -558,6 +577,8 @@ class Env():
                                 if self.communication_step_count else 0.0)
         mean_weakest_tree_rssi = (np.mean(self.weakest_tree_rssi_history)
                                   if self.weakest_tree_rssi_history else float('nan'))
+        mean_team_bottleneck_rssi = (np.mean(self.team_bottleneck_rssi_history)
+                                     if self.team_bottleneck_rssi_history else float('nan'))
         mean_communication_reward = (self.communication_reward_sum / self.communication_step_count
                                      if self.communication_step_count else 0.0)
         mean_exploration_progress_reward = (
@@ -574,6 +595,7 @@ class Env():
             'largest_component_ratio': float(self.largest_component_ratio),
             'mean_component_count': float(mean_component_count),
             'weakest_tree_rssi': float(mean_weakest_tree_rssi),
+            'team_bottleneck_rssi': float(mean_team_bottleneck_rssi),
             'mean_communication_reward': float(mean_communication_reward),
             'mean_exploration_progress_reward': float(mean_exploration_progress_reward),
         }
@@ -583,7 +605,7 @@ class Env():
         """Predict communication quality for each node using only the robot's local beliefs.
 
         Columns are normalized best RSSI margin, connected-neighbor ratio,
-        predicted component ratio, relay indicator, and disconnection duration.
+        predicted component ratio, relay/recovery score, and disconnection duration.
         """
         features = np.zeros((len(node_coords), CONNECTIVITY_FEATURE_DIM), dtype=np.float32)
         positions = self.all_robot_positions_belief[robot_id]
@@ -615,17 +637,27 @@ class Env():
                         stack.append(neighbor)
             component_index += 1
 
+        component_sizes = {}
+        for label in component_labels.values():
+            component_sizes[label] = component_sizes.get(label, 0) + 1
+
         disconnect_ratio = min(
             self.disconnect_steps[robot_id] / MAX_DISCONNECTED_STEPS, 1.0)
+        recovery_urgency = np.clip(
+            (self.disconnect_steps[robot_id] - DISCONNECT_GRACE_STEPS) /
+            max(MAX_DISCONNECTED_STEPS - DISCONNECT_GRACE_STEPS, 1),
+            0.0, 1.0)
         for node_index, candidate_position in enumerate(node_coords):
             margins = []
             connected_neighbors = []
+            connected_margins = []
             for other_id in known_other_ids:
                 _, margin, connected = self.estimate_link(
                     robot_belief, candidate_position, positions[other_id])
                 margins.append(margin)
                 if connected:
                     connected_neighbors.append(other_id)
+                    connected_margins.append(margin)
 
             best_margin = max(margins) if margins else -RSSI_MARGIN_NORMALIZATION
             connected_neighbor_ratio = (len(connected_neighbors) / (self.n_agent - 1)
@@ -642,13 +674,30 @@ class Env():
 
             neighbor_components = {component_labels[neighbor]
                                    for neighbor in connected_neighbors}
-            relay_score = float(len(neighbor_components) >= 2)
+            predicted_component_ratio = len(connected_component) / self.n_agent
+            relay_score = 0.0
+            if len(neighbor_components) >= 2:
+                bridged_robot_count = sum(
+                    component_sizes[label] for label in neighbor_components)
+                bridge_fraction = bridged_robot_count / max(self.n_agent - 1, 1)
+                weakest_connected_margin = min(connected_margins)
+                margin_quality = np.clip(
+                    (weakest_connected_margin + RSSI_MARGIN_NORMALIZATION) /
+                    (RSSI_MARGIN_NORMALIZATION + SS_WARNING_MARGIN), 0.0, 1.0)
+                relay_score = bridge_fraction * margin_quality
+
+            best_link_quality = np.clip(
+                (best_margin + RSSI_MARGIN_NORMALIZATION) /
+                (RSSI_MARGIN_NORMALIZATION + SS_WARNING_MARGIN), 0.0, 1.0)
+            recovery_score = (
+                recovery_urgency * predicted_component_ratio * best_link_quality)
+            relay_recovery_score = max(relay_score, recovery_score)
 
             features[node_index] = [
                 np.clip(best_margin / RSSI_MARGIN_NORMALIZATION, -1.0, 1.0),
                 connected_neighbor_ratio,
-                len(connected_component) / self.n_agent,
-                relay_score,
+                predicted_component_ratio,
+                relay_recovery_score,
                 disconnect_ratio,
             ]
 

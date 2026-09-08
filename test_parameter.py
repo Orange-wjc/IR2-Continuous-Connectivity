@@ -42,6 +42,7 @@ else:
 # --- Test Specific --- #
 NUM_TEST = len(MAP_FILE_NAMES)      # Evaluate every held-out hybrid map once
 NUM_RUN = 1                         # How many times to run this set of tests
+TEST_RANDOM_SEED = 20260908         # Same map/channel realization across checkpoints
 SAVE_TRAJECTORY = False             # Do you want to save per-step metrics 
 SAVE_LENGTH = False                 # Do you want to save per-episode metrics 
 SAVE_GIFS = False                   # Keep bulk evaluation fast; enable for selected cases
@@ -53,8 +54,8 @@ VIZ_CONNECTIVITY_RSSI_GROUND_TRUTH=True
 USE_GPU = True
 NUM_GPU = 1
 NUM_META_AGENT = 1  # Number of parallel sims
-FOLDER_NAME = 'wall_aware_hybrid3_balanced_v2_3520_inference'
-MODEL_DIR = 'model/wall_aware_hybrid3_balanced_v2_3520'
+FOLDER_NAME = 'wall_aware_hybrid3_balanced_v3_inference'
+MODEL_DIR = 'model/wall_aware_hybrid3_balanced_v3'
 GIFS_DIR = f'{FOLDER_NAME}/test_results/gifs'
 MODEL_PATH = MODEL_DIR + '/checkpoint.pth' 
 trajectory_path = f'{FOLDER_NAME}/test_results/trajectory'
@@ -87,11 +88,13 @@ SS_K_MIN=0
 SS_K_MAX=13
 MAX_DISCONNECTED_STEPS=10
 DISCONNECT_GRACE_STEPS=3
+DISCONNECT_DURATION_SATURATION_STEPS=30
 RSSI_MARGIN_NORMALIZATION=20
-WEAK_SIGNAL_PENALTY_WEIGHT=0.05
-DISCONNECT_PENALTY_WEIGHT=0.10
-DISCONNECT_DURATION_PENALTY_WEIGHT=0.20
-RECONNECT_REWARD_WEIGHT=0.10
+WEAK_SIGNAL_PENALTY_WEIGHT=0.10
+COMPONENT_DEFICIT_PENALTY_WEIGHT=0.25
+DISCONNECT_DURATION_PENALTY_WEIGHT=0.25
+NEW_DISCONNECT_PENALTY_WEIGHT=0.10
+RECONNECT_REWARD_WEIGHT=0.03
 TEAM_EXPLORATION_PROGRESS_WEIGHT=5.0
 
 # --- Graph Params (General) --- # 

@@ -25,7 +25,7 @@ if TRAIN_SET_NAME == "easy" or TRAIN_SET_NAME == "hybrid":
     NODE_UTILITY_SCALING_FACTOR=1/50    
     GLOBAL_GRAPH_NODE_COORDS_THRESH=200       # Num node coords before start to perform graph merger
     NODE_PADDING_SIZE = 360 
-    INITIAL_LOG_ALPHA = -2  # If CONTINUE_LOG_ALPHA = False
+    INITIAL_LOG_ALPHA = -2.6  # Restore exploration when transferring the v2 policy
 
 # Stage 2: Difficult Train Set
 else:
@@ -49,13 +49,16 @@ USE_GPU_GLOBAL = True   #  Train the network using GPUs
 NUM_GPU = 1
 NUM_META_AGENT = 20      # Balance sampling throughput against asynchronous policy staleness
 SUMMARY_WINDOW = 32
-FOLDER_NAME = 'wall_aware_hybrid3_balanced_v2'
+ARCHIVE_CHECKPOINT_EVERY = 320
+FOLDER_NAME = 'wall_aware_hybrid3_balanced_v3'
 MODEL_DIR = f'model/{FOLDER_NAME}'
 TRAIN_DIR = f'train/{FOLDER_NAME}'
 GIFS_DIR = f'gifs/{FOLDER_NAME}'
 MODEL_PATH = MODEL_DIR + '/checkpoint.pth' 
-LOAD_MODEL = True
-CONTINUE_LOG_ALPHA = True  # Continue from log_alpha saved from model checkpoint
+LOAD_MODEL = False
+LOAD_POLICY_ONLY = True
+POLICY_PRETRAINED_PATH = 'model/wall_aware_hybrid3_balanced_v2_3520/checkpoint.pth'
+CONTINUE_LOG_ALPHA = False  # Full-checkpoint resume only; v3 resets alpha and critics
 SAVE_TRAINING_GIFS = False
 SAVE_IMG_GAP = 201  
 VIZ_GRAPH_EDGES=True
@@ -73,6 +76,7 @@ EMBEDDING_DIM = 128
 LR = 1e-5
 GAMMA = 0.995
 DECAY_STEP = 256
+POLICY_TRANSFER_CRITIC_WARMUP_UPDATES = 1024
 
 # --- Sensor Model --- # 
 # SS Reference: https://hal.science/hal-03365129/document
@@ -94,11 +98,13 @@ SS_K_MIN=0
 SS_K_MAX=13
 MAX_DISCONNECTED_STEPS=10
 DISCONNECT_GRACE_STEPS=3
+DISCONNECT_DURATION_SATURATION_STEPS=30
 RSSI_MARGIN_NORMALIZATION=20
-WEAK_SIGNAL_PENALTY_WEIGHT=0.05
-DISCONNECT_PENALTY_WEIGHT=0.10
-DISCONNECT_DURATION_PENALTY_WEIGHT=0.20
-RECONNECT_REWARD_WEIGHT=0.10
+WEAK_SIGNAL_PENALTY_WEIGHT=0.10
+COMPONENT_DEFICIT_PENALTY_WEIGHT=0.25
+DISCONNECT_DURATION_PENALTY_WEIGHT=0.25
+NEW_DISCONNECT_PENALTY_WEIGHT=0.10
+RECONNECT_REWARD_WEIGHT=0.03
 TEAM_EXPLORATION_PROGRESS_WEIGHT=5.0
 
 # --- Graph Params (General) --- # 

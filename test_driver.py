@@ -10,18 +10,19 @@ import os
 import torch
 import csv
 import pandas as pd
+import random
 from model import PolicyNet
 from test_multi_robot_worker import TestWorker
 from datetime import datetime
 
 CSV_FIELDNAMES = [
-    'eps', 'num_robots', 'max_dist', 'steps', 'explored', 'success',
+    'run', 'eps', 'test_seed', 'num_robots', 'max_dist', 'steps', 'explored', 'success',
     'connectivity_rate', 'disconnect_count', 'mean_disconnect_duration',
     'max_disconnect_duration', 'mean_reconnect_time', 'largest_component_ratio',
-    'mean_component_count', 'weakest_tree_rssi'
+    'mean_component_count', 'weakest_tree_rssi', 'team_bottleneck_rssi'
 ]
 
-def run_test():
+def run_test(run_index):
 
     # Create .csv file for data collection
     current_datetime = datetime.now().strftime("%Y-%m-%d_%H%M%S")
@@ -55,7 +56,7 @@ def run_test():
 
     job_list = []
     for i, meta_agent in enumerate(meta_agents):
-        job_list.append(meta_agent.job.remote(weights, curr_test))
+        job_list.append(meta_agent.job.remote(weights, curr_test, run_index))
         curr_test += 1
 
     try:
@@ -72,7 +73,9 @@ def run_test():
                     # Populate CSV file
                     with open(csv_file_path, mode='a') as csv_file:
                         writer = csv.DictWriter(csv_file, fieldnames=CSV_FIELDNAMES)
-                        writer.writerow({'eps': info['episode_number'], \
+                        writer.writerow({'run': info['run_index'], \
+                                        'eps': info['episode_number'], \
+                                        'test_seed': info['test_seed'], \
                                         'num_robots': info['n_agent'], \
                                         'max_dist': metrics['travel_dist'], \
                                         'steps': metrics['travel_steps'], \
@@ -85,11 +88,13 @@ def run_test():
                                         'mean_reconnect_time': metrics['mean_reconnect_time'], \
                                         'largest_component_ratio': metrics['largest_component_ratio'], \
                                         'mean_component_count': metrics['mean_component_count'], \
-                                        'weakest_tree_rssi': metrics['weakest_tree_rssi'] })
+                                        'weakest_tree_rssi': metrics['weakest_tree_rssi'], \
+                                        'team_bottleneck_rssi': metrics['team_bottleneck_rssi'] })
                 else:
                     eps_skipped.append(curr_test)
             if curr_test < (NUM_TEST + len(eps_skipped)):
-                job_list.append(meta_agents[info['id']].job.remote(weights, curr_test))
+                job_list.append(meta_agents[info['id']].job.remote(
+                    weights, curr_test, run_index))
                 curr_test += 1
 
         # Sort CSV file by episode number
@@ -120,28 +125,37 @@ class Runner(object):
     def set_weights(self, weights):
         self.local_network.load_state_dict(weights)
 
-    def do_job(self, episode_number):
+    def do_job(self, episode_number, run_index):
         """ Execute simulation episode and gather experience tuples & metrics """
+        test_seed = TEST_RANDOM_SEED + run_index * NUM_TEST + episode_number
+        random.seed(test_seed)
+        np.random.seed(test_seed)
+        torch.manual_seed(test_seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(test_seed)
         n_agent = np.random.randint(NUM_ROBOTS_MIN, NUM_ROBOTS_MAX+1, 1)[0]     
         worker = TestWorker(self.meta_agent_id, n_agent, self.local_network, episode_number, device=self.device, save_image=SAVE_GIFS, greedy=True)
         success = worker.work(episode_number)
 
         perf_metrics = worker.perf_metrics
-        return success, perf_metrics, n_agent
+        return success, perf_metrics, n_agent, test_seed
 
-    def job(self, weights, episode_number):
+    def job(self, weights, episode_number, run_index):
         """ Executes simulation episode """
         print(GREEN, "starting episode {} on metaAgent {}".format(episode_number, self.meta_agent_id), NC)
         
         # Set the local weights to the global weight values from the master network
         self.set_weights(weights)
 
-        success, metrics, n_agent = self.do_job(episode_number)
+        success, metrics, n_agent, test_seed = self.do_job(
+            episode_number, run_index)
 
         info = {
             "id": self.meta_agent_id,
             "episode_number": episode_number,
-            "n_agent": n_agent
+            "run_index": run_index,
+            "n_agent": n_agent,
+            "test_seed": test_seed
         }
 
         return success, metrics, info
@@ -151,4 +165,4 @@ if __name__ == '__main__':
     ray.init()
     print("Welcome to IR2-MARL Exploration Inference Sim!")
     for i in range(NUM_RUN):
-        run_test()
+        run_test(i)

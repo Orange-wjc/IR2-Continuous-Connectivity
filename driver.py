@@ -33,7 +33,13 @@ def writeToTensorBoard(writer, tensorboardData, curr_episode):
 
     tensorboardData = np.array(tensorboardData)
     tensorboardData = list(np.nanmean(tensorboardData, axis=0))
-    reward, value, policyLoss, qValueLoss, entropy, policyGradNorm, qValueGradNorm, log_alpha, alphaLoss, travel_dist, success_rate, explored_rate, connectivity_rate, agents_connected_percentage, communication_reward, exploration_progress_reward = tensorboardData
+    (reward, value, policyLoss, qValueLoss, entropy, policyGradNorm,
+     qValueGradNorm, log_alpha, alphaLoss, travel_dist, success_rate,
+     explored_rate, connectivity_rate, agents_connected_percentage,
+     communication_reward, exploration_progress_reward, disconnect_count,
+     mean_disconnect_duration, max_disconnect_duration, mean_reconnect_time,
+     largest_component_ratio, mean_component_count,
+     team_bottleneck_rssi) = tensorboardData
 
     writer.add_scalar(tag='Losses/Value', scalar_value=value, global_step=curr_episode)
     writer.add_scalar(tag='Losses/Policy Loss', scalar_value=policyLoss, global_step=curr_episode)
@@ -51,6 +57,13 @@ def writeToTensorBoard(writer, tensorboardData, curr_episode):
     writer.add_scalar(tag='Perf/Agents Connected [%]', scalar_value=agents_connected_percentage, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Communication Reward', scalar_value=communication_reward, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Exploration Progress Reward', scalar_value=exploration_progress_reward, global_step=curr_episode)
+    writer.add_scalar(tag='Perf/Disconnect Count', scalar_value=disconnect_count, global_step=curr_episode)
+    writer.add_scalar(tag='Perf/Mean Disconnect Duration', scalar_value=mean_disconnect_duration, global_step=curr_episode)
+    writer.add_scalar(tag='Perf/Max Disconnect Duration', scalar_value=max_disconnect_duration, global_step=curr_episode)
+    writer.add_scalar(tag='Perf/Mean Reconnect Time', scalar_value=mean_reconnect_time, global_step=curr_episode)
+    writer.add_scalar(tag='Perf/Largest Component Ratio', scalar_value=largest_component_ratio, global_step=curr_episode)
+    writer.add_scalar(tag='Perf/Mean Component Count', scalar_value=mean_component_count, global_step=curr_episode)
+    writer.add_scalar(tag='Perf/Team Bottleneck RSSI', scalar_value=team_bottleneck_rssi, global_step=curr_episode)
 
 
 def get_cpu_state_dict(model):
@@ -64,13 +77,22 @@ def main():
     device = torch.device('cuda') if USE_GPU_GLOBAL else torch.device('cpu')
     local_device = torch.device('cuda') if USE_GPU else torch.device('cpu')
 
-    # Special handling for log alpha
+    if LOAD_MODEL and LOAD_POLICY_ONLY:
+        raise ValueError('LOAD_MODEL and LOAD_POLICY_ONLY cannot both be True')
+
+    checkpoint = None
+    policy_checkpoint = None
+
+    # Full resume restores every training state; v3 transfers only the policy.
     if LOAD_MODEL:
         print('Loading Model...')
-        checkpoint = torch.load(MODEL_PATH)
+        checkpoint = torch.load(MODEL_PATH, map_location=device)
         log_alpha = checkpoint['log_alpha'] if CONTINUE_LOG_ALPHA else torch.FloatTensor([INITIAL_LOG_ALPHA]).to(device) 
     else:
         log_alpha = torch.FloatTensor([INITIAL_LOG_ALPHA]).to(device)
+        if LOAD_POLICY_ONLY:
+            print('Loading pretrained policy only from: ', POLICY_PRETRAINED_PATH)
+            policy_checkpoint = torch.load(POLICY_PRETRAINED_PATH, map_location='cpu')
     log_alpha.requires_grad = True
 
     # Init key networks & params
@@ -95,6 +117,11 @@ def main():
 
     curr_episode = 0
     target_q_update_counter = 1
+    gradient_update_count = 0
+    policy_warmup_updates = (
+        POLICY_TRANSFER_CRITIC_WARMUP_UPDATES if LOAD_POLICY_ONLY else 0)
+    initial_policy_source = POLICY_PRETRAINED_PATH if LOAD_POLICY_ONLY else None
+    initial_policy_episode = None
 
     ### Load models from checkpts ###
     if LOAD_MODEL:
@@ -110,10 +137,25 @@ def main():
         q_net2_lr_decay.load_state_dict(checkpoint['q_net2_lr_decay'])
         log_alpha_lr_decay.load_state_dict(checkpoint['log_alpha_lr_decay'])
         curr_episode = checkpoint['episode']
+        gradient_update_count = checkpoint.get('gradient_update_count', 0)
+        policy_warmup_updates = checkpoint.get('policy_warmup_updates', 0)
+        initial_policy_source = checkpoint.get('initial_policy_source')
+        initial_policy_episode = checkpoint.get('initial_policy_episode')
 
         print("curr_episode set to: ", curr_episode)
         print("log_alpha: ", log_alpha)
         print(global_policy_optimizer.state_dict()['param_groups'][0]['lr'])
+    elif LOAD_POLICY_ONLY:
+        source_input_dim = policy_checkpoint.get('input_dim', INPUT_DIM)
+        if source_input_dim != INPUT_DIM:
+            raise ValueError(
+                'Pretrained policy input_dim {} does not match {}'.format(
+                    source_input_dim, INPUT_DIM))
+        global_policy_net.load_state_dict(policy_checkpoint['policy_model'])
+        initial_policy_episode = policy_checkpoint.get('episode')
+        print('Loaded policy from episode: ', initial_policy_episode or 'unknown')
+        print('Critics, optimizers, alpha, and episode counter are newly initialized.')
+        del policy_checkpoint
 
     global_target_q_net1.load_state_dict(global_q_net1.state_dict())
     global_target_q_net2.load_state_dict(global_q_net2.state_dict())
@@ -148,7 +190,10 @@ def main():
     
     metric_name = ['travel_dist', 'success_rate', 'explored_rate', 'connectivity_rate',
                    'agents_connected_percentage', 'mean_communication_reward',
-                   'mean_exploration_progress_reward']
+                   'mean_exploration_progress_reward', 'disconnect_count',
+                   'mean_disconnect_duration', 'max_disconnect_duration',
+                   'mean_reconnect_time', 'largest_component_ratio',
+                   'mean_component_count', 'team_bottleneck_rssi']
     training_data = []
     perf_metrics = {}
     for n in metric_name:
@@ -266,10 +311,14 @@ def main():
                     q2_loss = mse_loss(q2, target_q_batch.detach()).mean()
 
                     ### Train all networks via backpropogation ###
-                    global_policy_optimizer.zero_grad()
-                    policy_loss.backward()
-                    policy_grad_norm = torch.nn.utils.clip_grad_norm_(global_policy_net.parameters(), max_norm=5, norm_type=2)
-                    global_policy_optimizer.step()
+                    gradient_update_count += 1
+                    if gradient_update_count > policy_warmup_updates:
+                        global_policy_optimizer.zero_grad()
+                        policy_loss.backward()
+                        policy_grad_norm = torch.nn.utils.clip_grad_norm_(global_policy_net.parameters(), max_norm=5, norm_type=2)
+                        global_policy_optimizer.step()
+                    else:
+                        policy_grad_norm = torch.tensor(0.0, device=device)
 
                     global_q_net1_optimizer.zero_grad()
                     q1_loss.backward()
@@ -284,9 +333,12 @@ def main():
                     entropy = (logp * logp.exp()).sum(dim=-1)
                     alpha_loss = -(log_alpha * (entropy.detach() + entropy_target)).mean()
 
-                    log_alpha_optimizer.zero_grad()
-                    alpha_loss.backward()
-                    log_alpha_optimizer.step()
+                    if gradient_update_count > policy_warmup_updates:
+                        log_alpha_optimizer.zero_grad()
+                        alpha_loss.backward()
+                        log_alpha_optimizer.step()
+                    elif gradient_update_count == policy_warmup_updates:
+                        print('Critic warmup complete; enabling policy and alpha updates.')
 
                     target_q_update_counter += 1
                     #print("target q update counter", target_q_update_counter % 1024)
@@ -336,9 +388,29 @@ def main():
                                 "input_dim": INPUT_DIM,
                                 "connectivity_feature_dim": CONNECTIVITY_FEATURE_DIM,
                                 "use_connectivity_features": USE_CONNECTIVITY_FEATURES,
+                                "reward_version": "balanced_v3",
+                                "initial_policy_source": initial_policy_source,
+                                "initial_policy_episode": initial_policy_episode,
+                                "gradient_update_count": gradient_update_count,
+                                "policy_warmup_updates": policy_warmup_updates,
+                                "reward_config": {
+                                    "weak_signal": WEAK_SIGNAL_PENALTY_WEIGHT,
+                                    "component_deficit": COMPONENT_DEFICIT_PENALTY_WEIGHT,
+                                    "disconnect_duration": DISCONNECT_DURATION_PENALTY_WEIGHT,
+                                    "new_disconnect": NEW_DISCONNECT_PENALTY_WEIGHT,
+                                    "reconnect": RECONNECT_REWARD_WEIGHT,
+                                    "duration_saturation_steps": DISCONNECT_DURATION_SATURATION_STEPS,
+                                    "disconnect_grace_steps": DISCONNECT_GRACE_STEPS,
+                                    "team_exploration_progress": TEAM_EXPLORATION_PROGRESS_WEIGHT,
+                                },
                         }
                 path_checkpoint = "./" + MODEL_PATH
                 torch.save(checkpoint, path_checkpoint)
+                if curr_episode % ARCHIVE_CHECKPOINT_EVERY == 0:
+                    archive_path = os.path.join(
+                        MODEL_DIR, 'checkpoint_{}.pth'.format(curr_episode))
+                    torch.save(checkpoint, archive_path)
+                    print('Archived model to: ', archive_path)
                 print('Saved model', end='\n')
                     
     

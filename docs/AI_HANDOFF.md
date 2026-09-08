@@ -1,6 +1,6 @@
 # IR²通信感知探索项目：AI交接文档
 
-> 最后更新：2026-09-08
+> 最后更新：2026-09-09
 > 用途：供新AI会话快速恢复项目状态。开始工作前先读本文，再按需阅读 [CONNECTIVITY_AWARE_PAPER_PLAN.md](./CONNECTIVITY_AWARE_PAPER_PLAN.md)。
 
 ## 1. 项目目标与边界
@@ -74,6 +74,7 @@ b12adff Fix oversized action edge sets and resume config
 85c050b Train three-agent policy on hybrid map split
 7de27bd Increase hybrid training to 20 CPU actors
 2302d18 Resume hybrid training with 22 CPU actors
+9885440 Add balanced v3 connectivity fine-tuning
 ```
 
 以上提交均已推送到 `origin/wall-aware-connectivity`。
@@ -275,6 +276,25 @@ find /root/autodl-tmp -type f -name "checkpoint.pth" -ls
 
 若出现 `ModuleNotFoundError: No module named 'model'`，确认从项目根目录启动，并在必要时将项目根目录加入 `PYTHONPATH`。Ray Actor会重新导入配置，主进程中的临时参数覆盖不一定会传递给Actor。
 
+### v3首次更新时CUDA显存不足
+
+2026-09-09服务器首次启动v3时，episode 3520的policy已正确加载，critic、
+优化器、alpha和episode计数也已按设计重置，但在第一次梯度更新的第二个Q网络
+前向计算处出现CUDA OOM。`ray stop --force`后无Ray残留进程，`nvidia-smi`显示
+RTX 4090的24564 MiB显存基本全部空闲，因此这是单次SAC更新同时保留多个
+注意力计算图导致的峰值显存问题，不是其他进程占用，也不是checkpoint损坏。
+
+`driver.py`已保持`BATCH_SIZE=128`并做以下等价的显存优化：
+
+- critic预热期不更新policy，因此policy前向改为`torch.no_grad()`。
+- policy损失所需的计算图在critic训练前释放。
+- Q1前向、反向、更新并释放后，再计算Q2，避免两个critic计算图同时驻留。
+
+修复不改变奖励、网络结构、更新次数、checkpoint格式或目标Q值的计算时点。
+本地CPU最小更新测试已确认：预热期只更新Q1/Q2，预热后policy、alpha、Q1/Q2
+都能正常更新。如果服务器应用此修复后仍在第一次更新OOM，再将
+`BATCH_SIZE`降为96并作为独立配置变更；不要在未验证时同时改动更多参数。
+
 ## 7. TensorBoard与当前曲线
 
 已验证兼容组合：TensorBoard 2.14.0 + protobuf 4.25.3。protobuf 5.29.6会导致：
@@ -418,12 +438,17 @@ Loss仍需谨慎解释：Value升至30以上，Q梯度范数后期约150且曾�
 - v3本地验证已完成：五个相关Python文件AST解析通过，episode 3520策略严格加载通过，
   奖励随5/10/30步断连持续增强，全队RSSI最大生成树与软恢复特征数值检查通过；另有
   一个不保存GIF的完整CPU回合成功完成，15路episode buffer长度一致且新增指标齐全。
+- v3在服务器上已确认正确读取v2 episode 3520策略，但洁净的24 GB GPU在
+  首次更新时出现峰值显存不足。`driver.py`已改为预热时禁用policy梯度、提前释放
+  policy计算图并串行更新Q1/Q2；本地最小训练步已覆盖预热与正常更新两条路径。
 
 下一步：
 
-1. 在服务器确认`model/wall_aware_hybrid3_balanced_v2_3520/checkpoint.pth`存在，再运行
-   `python -u driver.py`启动v3。启动日志必须显示从episode 3520加载policy、critic等
-   状态重新初始化；v3的episode从0开始，不能出现`curr_episode set to: 3520`。
+1. 服务器先拉取包含显存优化的最新提交，确认
+   `model/wall_aware_hybrid3_balanced_v2_3520/checkpoint.pth`存在，执行
+   `ray stop --force`后再运行`python -u driver.py`。启动日志必须显示从episode 3520
+   加载policy、critic等状态重新初始化；v3的episode从0开始，不能出现
+   `curr_episode set to: 3520`。
 2. 等待2000条transition填满Replay Buffer及1024次critic预热完成。日志出现
    `Critic warmup complete; enabling policy and alpha updates.`后，策略才开始微调。
 3. 重点监控成功率、探索率、完成步数、连通率和新增的最长断连/重连曲线。若探索率

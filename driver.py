@@ -284,16 +284,10 @@ def main():
                         next_edge_mask_batch = next_edge_mask_batch.to(device)
                         next_edge_padding_mask_batch = next_edge_padding_mask_batch.to(device)
 
-                    ### Obtain losses via SAC (Soft Actor-Critic) ###
-                    with torch.no_grad():
-                        q_values1, _ = dp_q_net1(node_inputs_batch, edge_inputs_batch, current_inputs_batch, node_padding_mask_batch, edge_padding_mask_batch, edge_mask_batch)
-                        q_values2, _ = dp_q_net2(node_inputs_batch, edge_inputs_batch, current_inputs_batch, node_padding_mask_batch, edge_padding_mask_batch, edge_mask_batch)
-                        q_values = torch.min(q_values1, q_values2)
+                    gradient_update_count += 1
+                    update_policy = gradient_update_count > policy_warmup_updates
 
-                    ### Formulated in SAC paper: https://arxiv.org/pdf/1801.01290.pdf ###
-                    logp = dp_policy(node_inputs_batch, edge_inputs_batch, current_inputs_batch, node_padding_mask_batch, edge_padding_mask_batch, edge_mask_batch)
-                    policy_loss = torch.sum((logp.exp().unsqueeze(2) * (log_alpha.exp().detach() * logp.unsqueeze(2) - q_values.detach())), dim=1).mean()
-
+                    ### Obtain target values via SAC (Soft Actor-Critic) ###
                     with torch.no_grad():
                         next_logp = dp_policy(next_node_inputs_batch, next_edge_inputs_batch, next_current_inputs_batch, next_node_padding_mask_batch, next_edge_padding_mask_batch, next_edge_mask_batch)
                         next_q_values1, _ = dp_target_q_net1(next_node_inputs_batch, next_edge_inputs_batch, next_current_inputs_batch, next_node_padding_mask_batch, next_edge_padding_mask_batch, next_edge_mask_batch)
@@ -302,17 +296,27 @@ def main():
                         value_prime_batch = torch.sum(next_logp.unsqueeze(2).exp() * (next_q_values - log_alpha.exp() * next_logp.unsqueeze(2)), dim=1).unsqueeze(1)
                         target_q_batch = reward_batch + GAMMA * (1 - done_batch) * value_prime_batch
 
-                    q_values1, _ = dp_q_net1(node_inputs_batch, edge_inputs_batch, current_inputs_batch, node_padding_mask_batch, edge_padding_mask_batch, edge_mask_batch)
-                    q_values2, _ = dp_q_net2(node_inputs_batch, edge_inputs_batch, current_inputs_batch, node_padding_mask_batch, edge_padding_mask_batch, edge_mask_batch)
-                    q1 = torch.gather(q_values1, 1, action_batch)
-                    q2 = torch.gather(q_values2, 1, action_batch)
-                    mse_loss = nn.MSELoss()
-                    q1_loss = mse_loss(q1, target_q_batch.detach()).mean()
-                    q2_loss = mse_loss(q2, target_q_batch.detach()).mean()
+                        policy_q_values1, _ = dp_q_net1(node_inputs_batch, edge_inputs_batch, current_inputs_batch, node_padding_mask_batch, edge_padding_mask_batch, edge_mask_batch)
+                        policy_q_values2, _ = dp_q_net2(node_inputs_batch, edge_inputs_batch, current_inputs_batch, node_padding_mask_batch, edge_padding_mask_batch, edge_mask_batch)
+                        policy_q_values = torch.min(policy_q_values1, policy_q_values2)
+
+                    ### Formulated in SAC paper: https://arxiv.org/pdf/1801.01290.pdf ###
+                    if update_policy:
+                        logp = dp_policy(node_inputs_batch, edge_inputs_batch, current_inputs_batch, node_padding_mask_batch, edge_padding_mask_batch, edge_mask_batch)
+                    else:
+                        with torch.no_grad():
+                            logp = dp_policy(node_inputs_batch, edge_inputs_batch, current_inputs_batch, node_padding_mask_batch, edge_padding_mask_batch, edge_mask_batch)
+                    policy_loss = torch.sum((logp.exp().unsqueeze(2) * (log_alpha.exp().detach() * logp.unsqueeze(2) - policy_q_values)), dim=1).mean()
+                    del (next_logp, next_q_values1, next_q_values2,
+                         next_q_values, policy_q_values1, policy_q_values2)
+                    entropy = (logp.detach() * logp.detach().exp()).sum(dim=-1)
+                    alpha_loss = -(log_alpha * (entropy + entropy_target)).mean()
+                    policy_loss_value = policy_loss.item()
+                    entropy_value = entropy.mean().item()
+                    alpha_loss_value = alpha_loss.item()
 
                     ### Train all networks via backpropogation ###
-                    gradient_update_count += 1
-                    if gradient_update_count > policy_warmup_updates:
+                    if update_policy:
                         global_policy_optimizer.zero_grad()
                         policy_loss.backward()
                         policy_grad_norm = torch.nn.utils.clip_grad_norm_(global_policy_net.parameters(), max_norm=5, norm_type=2)
@@ -320,25 +324,35 @@ def main():
                     else:
                         policy_grad_norm = torch.tensor(0.0, device=device)
 
-                    global_q_net1_optimizer.zero_grad()
-                    q1_loss.backward()
-                    q_grad_norm = torch.nn.utils.clip_grad_norm_(global_q_net1.parameters(), max_norm=2000, norm_type=2)
-                    global_q_net1_optimizer.step()
-
-                    global_q_net2_optimizer.zero_grad()
-                    q2_loss.backward()
-                    q_grad_norm = torch.nn.utils.clip_grad_norm_(global_q_net2.parameters(), max_norm=2000, norm_type=2)
-                    global_q_net2_optimizer.step()
-
-                    entropy = (logp * logp.exp()).sum(dim=-1)
-                    alpha_loss = -(log_alpha * (entropy.detach() + entropy_target)).mean()
-
-                    if gradient_update_count > policy_warmup_updates:
+                    if update_policy:
                         log_alpha_optimizer.zero_grad()
                         alpha_loss.backward()
                         log_alpha_optimizer.step()
                     elif gradient_update_count == policy_warmup_updates:
                         print('Critic warmup complete; enabling policy and alpha updates.')
+
+                    del logp, policy_loss, policy_q_values
+
+                    # Update critics sequentially so their attention graphs never coexist.
+                    mse_loss = nn.MSELoss()
+                    q_values1, _ = dp_q_net1(node_inputs_batch, edge_inputs_batch, current_inputs_batch, node_padding_mask_batch, edge_padding_mask_batch, edge_mask_batch)
+                    q1 = torch.gather(q_values1, 1, action_batch)
+                    q1_loss = mse_loss(q1, target_q_batch.detach()).mean()
+                    q1_loss_value = q1_loss.item()
+                    global_q_net1_optimizer.zero_grad()
+                    q1_loss.backward()
+                    q_grad_norm = torch.nn.utils.clip_grad_norm_(global_q_net1.parameters(), max_norm=2000, norm_type=2)
+                    global_q_net1_optimizer.step()
+                    del q_values1, q1, q1_loss
+
+                    q_values2, _ = dp_q_net2(node_inputs_batch, edge_inputs_batch, current_inputs_batch, node_padding_mask_batch, edge_padding_mask_batch, edge_mask_batch)
+                    q2 = torch.gather(q_values2, 1, action_batch)
+                    q2_loss = mse_loss(q2, target_q_batch.detach()).mean()
+                    global_q_net2_optimizer.zero_grad()
+                    q2_loss.backward()
+                    q_grad_norm = torch.nn.utils.clip_grad_norm_(global_q_net2.parameters(), max_norm=2000, norm_type=2)
+                    global_q_net2_optimizer.step()
+                    del q_values2, q2, q2_loss, target_q_batch
 
                     target_q_update_counter += 1
                     #print("target q update counter", target_q_update_counter % 1024)
@@ -346,8 +360,8 @@ def main():
                 perf_data = []
                 for n in metric_name:
                     perf_data.append(np.nanmean(perf_metrics[n]))
-                data = [reward_batch.mean().item(), value_prime_batch.mean().item(), policy_loss.item(), q1_loss.item(),
-                        entropy.mean().item(), policy_grad_norm.item(), q_grad_norm.item(), log_alpha.item(), alpha_loss.item(), *perf_data]
+                data = [reward_batch.mean().item(), value_prime_batch.mean().item(), policy_loss_value, q1_loss_value,
+                        entropy_value, policy_grad_norm.item(), q_grad_norm.item(), log_alpha.item(), alpha_loss_value, *perf_data]
                 training_data.append(data)
 
                 ### Get the updated actor weights ###

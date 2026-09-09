@@ -129,8 +129,8 @@ NUM_META_AGENT = 20
 SUMMARY_WINDOW = 32
 ARCHIVE_CHECKPOINT_EVERY = 320
 
-FOLDER_NAME = 'wall_aware_hybrid3_balanced_v3_1'
-MODEL_PATH = 'model/wall_aware_hybrid3_balanced_v3_1/checkpoint.pth'
+FOLDER_NAME = 'wall_aware_hybrid3_balanced_v3_2'
+MODEL_PATH = 'model/wall_aware_hybrid3_balanced_v3_2/checkpoint.pth'
 LOAD_MODEL = False
 LOAD_POLICY_ONLY = True
 POLICY_PRETRAINED_PATH = 'model/wall_aware_hybrid3_balanced_v2_3520/checkpoint.pth'
@@ -146,19 +146,23 @@ INPUT_DIM = 11
 INITIAL_LOG_ALPHA = -2.6
 POLICY_LR = 3e-6
 Q_LR = 1e-5
+POLICY_ANCHOR_KL_WEIGHT = 0.5
 POLICY_TRANSFER_CRITIC_WARMUP_UPDATES = 1024
 
 CONNECTIVITY_TARGET_RATE = 0.90
 CONNECTIVITY_BUDGET_WINDOW = 20
 CONNECTIVITY_PRESSURE_RAMP = 0.10
 RECONNECT_REWARD_WEIGHT = 0.0
+NO_EXPLORATION_PROGRESS_GRACE_STEPS = 5
+NO_EXPLORATION_PROGRESS_SATURATION_STEPS = 20
+NO_EXPLORATION_PROGRESS_PENALTY_WEIGHT = 0.02
 ```
 
 第一阶段训练固定使用3台机器人。原`DungeonMaps/test/hybrid`的400张地图由
 `map_splits.py`按固定种子`20260907`重新划分为300张训练、50张验证、50张测试；
 三个集合互不重叠，`hybrid/1.png`固定保留在测试集。文件仍位于原目录，逻辑划分由
 `MAP_FILE_NAMES`控制。批量测试固定3台机器人、遍历50张保留测试地图一次，并默认
-关闭GIF。v3.1只迁移balanced v2 episode 3520的策略，不覆盖任何旧实验。训练地图
+关闭GIF。v3.2只迁移balanced v2 episode 3520的策略，不覆盖任何旧实验。训练地图
 每300轮按固定种子重新排列，避免每轮重复相同顺序。
 
 v2通信奖励权重：弱信号0.05、断连0.10、断连持续时间0.20、重连0.10；前3步为
@@ -438,7 +442,7 @@ Loss仍需谨慎解释：Value升至30以上，Q梯度范数后期约150且曾�
 - TensorBoard新增断连次数、平均/最长断连时长、平均重连时间、最大连通分量比例、
   平均分量数和全队瓶颈RSSI。每320轮额外归档`checkpoint_<episode>.pth`，日常
   `checkpoint.pth`仍每32轮更新。
-- `test_parameter.py`已指向未来的v3权重，50图测试为每个地图使用
+- `test_parameter.py`已指向未来的v3.2权重，50图测试为每个地图使用
   `TEST_RANDOM_SEED + run_index * NUM_TEST + episode_number`固定Python、NumPy和PyTorch
   随机种子，CSV同时记录run、种子及`team_bottleneck_rssi`，以便不同checkpoint使用
   相同RSSI条件复现实验。`NUM_RUN>1`时每轮使用不同但可复现的信道种子。
@@ -459,24 +463,41 @@ Loss仍需谨慎解释：Value升至30以上，Q梯度范数后期约150且曾�
   探索进度权重5.0、完成奖励40、预热1024次和11维网络结构均不变。新实验目录为
   `wall_aware_hybrid3_balanced_v3_1`，仍从v2 episode 3520只迁移policy。TensorBoard新增
   `Recent Connectivity Rate`和`Communication Pressure`用于检查预算门控。
+- v3.1继续训练至约episode 1400后也已判定失败：全连通率约98%、最近连通率
+  接近100%、通信压力接近0，但探索率降至约77%、成功率降至约10%。这证明
+  90%预算门控本身正常，但只关闭通信惩罚不足以防止长期微调遗忘v2的探索策略。
+  v3.1的归档权重仅作失败分析，不作最终模型。
+- v3.2恢复了v2权重训练时使用的二值relay特征语义，不再将该列混合为连续
+  relay/recovery分数。训练主策略时同时加载一个冻结的v2 episode 3520参考策略，
+  用权重0.5的动作分布KL约束防止新策略快速偏离已验证的探索行为，但不冻结主策略。
+- v3.2保留v3.1的90%通信预算和长断连惩罚，另加入轻量探索停滞惩罚：连续5步
+  无新探索不处罚，之后在20步内线性增长，每步最多0.02。这一设计直接消除
+  “抱团不动且收益为0”的安全局部最优，同时保留穿越已知区域的宽限。新实验目录为
+  `wall_aware_hybrid3_balanced_v3_2`，仍从v2 episode 3520重新迁移，不继承v3/v3.1权重。
+- v3.2本地验证已确认：主策略与冻结v2参考策略的初始输出逐元素一致，
+  KL只对主策略产生梯度，二值relay特征检查通过，停滞惩罚的宽限/饱和/重置均正确。
+  一个不保存GIF的完整CPU回合在93个团队步后成功，探索率99.953%、全连通率88.17%、
+  最长断连4步；该单回合只是接口冒烟测试，不是独立评估结果。
 
 下一步：
 
-1. 停止已退化的v3训练但不删除其目录或权重。服务器拉取v3.1最新提交，确认
+1. 停止已退化的v3.1训练但不删除其目录或权重。服务器拉取v3.2最新提交，确认
    `model/wall_aware_hybrid3_balanced_v2_3520/checkpoint.pth`存在，执行
    `ray stop --force`后再运行`python -u driver.py`。启动日志必须显示从episode 3520
-   加载policy、critic等状态重新初始化；v3.1的episode从0开始，不能出现
+   加载policy、critic等状态重新初始化，并显示冻结参考策略来自episode 3520；
+   v3.2的episode从0开始，不能出现
    `curr_episode set to: 3520`。
 2. 等待2000条transition填满Replay Buffer及1024次critic预热完成。日志出现
    `Critic warmup complete; enabling policy and alpha updates.`后，策略才开始微调。
-3. 重点监控成功率、探索率、完成步数、`Recent Connectivity Rate`、
+3. 重点监控成功率、探索率、完成步数、`Policy Anchor KL`、
+   `Max No Exploration Progress Steps`、`Recent Connectivity Rate`、
    `Communication Pressure`和最长断连。近20步连通率不低于90%时压力应接近0；
    低于90%时应升高。若探索率或成功率再次连续退化，不要盲目长训；保留每320轮
    归档权重并在验证集上选择候选模型。
 4. 调参和模型选择只使用固定验证集，不再根据50张保留测试地图逐图调整；达到候选
    状态后才用固定随机种子运行最终测试，避免进一步测试集泄漏。
 5. 保存episode 928、hybrid3 stage1 episode 672、balanced v2 episode 864和3520权重，
-   作为历史基线和失败/成功对照。v3.1验证达标后再决定是否进入4机器人阶段。
+   作为历史基线和失败/成功对照。v3.2验证达标后再决定是否进入4机器人阶段。
 
 ## 10. 新会话检查清单
 

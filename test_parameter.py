@@ -54,8 +54,8 @@ VIZ_CONNECTIVITY_RSSI_GROUND_TRUTH=True
 USE_GPU = True
 NUM_GPU = 1
 NUM_META_AGENT = 1  # Number of parallel sims
-FOLDER_NAME = 'wall_aware_hybrid3_balanced_v3_1_inference'
-MODEL_DIR = 'model/wall_aware_hybrid3_balanced_v3_1'
+FOLDER_NAME = 'wall_aware_hybrid3_balanced_v3_2_inference'
+MODEL_DIR = 'model/wall_aware_hybrid3_balanced_v3_2'
 GIFS_DIR = f'{FOLDER_NAME}/test_results/gifs'
 MODEL_PATH = MODEL_DIR + '/checkpoint.pth' 
 trajectory_path = f'{FOLDER_NAME}/test_results/trajectory'
@@ -99,6 +99,9 @@ DISCONNECT_DURATION_PENALTY_WEIGHT=0.25
 NEW_DISCONNECT_PENALTY_WEIGHT=0.10
 RECONNECT_REWARD_WEIGHT=0.0
 TEAM_EXPLORATION_PROGRESS_WEIGHT=5.0
+NO_EXPLORATION_PROGRESS_GRACE_STEPS=5
+NO_EXPLORATION_PROGRESS_SATURATION_STEPS=20
+NO_EXPLORATION_PROGRESS_PENALTY_WEIGHT=0.02
 
 # --- Graph Params (General) --- # 
 NUM_DENSE_COORDS_WIDTH=50                 # How many node coords across width?

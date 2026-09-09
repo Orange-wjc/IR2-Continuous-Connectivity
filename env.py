@@ -89,6 +89,10 @@ class Env():
         self.communication_reward_sum = 0.0
         self.exploration_progress_reward = 0.0
         self.exploration_progress_reward_sum = 0.0
+        self.no_exploration_progress_steps = 0
+        self.max_no_exploration_progress_steps = 0
+        self.no_exploration_progress_penalty = 0.0
+        self.no_exploration_progress_penalty_sum = 0.0
         self.explored_rate = 0
         self.all_explored_rate = [0.0 for _ in range(self.n_agent)]
         self.all_rendezvous_utility_inputs = [None for _ in range(self.n_agent)]
@@ -396,7 +400,27 @@ class Env():
             TEAM_EXPLORATION_PROGRESS_WEIGHT * exploration_progress)
         self.exploration_progress_reward_sum += self.exploration_progress_reward
 
-        team_reward = self.communication_reward + self.exploration_progress_reward
+        if exploration_progress > 0:
+            self.no_exploration_progress_steps = 0
+        else:
+            self.no_exploration_progress_steps += 1
+        self.max_no_exploration_progress_steps = max(
+            self.max_no_exploration_progress_steps,
+            self.no_exploration_progress_steps)
+        penalized_stagnation_steps = max(
+            self.no_exploration_progress_steps
+            - NO_EXPLORATION_PROGRESS_GRACE_STEPS, 0)
+        stagnation_scale = max(
+            NO_EXPLORATION_PROGRESS_SATURATION_STEPS, 1)
+        self.no_exploration_progress_penalty = (
+            NO_EXPLORATION_PROGRESS_PENALTY_WEIGHT * np.clip(
+                penalized_stagnation_steps / stagnation_scale, 0.0, 1.0))
+        self.no_exploration_progress_penalty_sum += (
+            self.no_exploration_progress_penalty)
+
+        team_reward = (
+            self.communication_reward + self.exploration_progress_reward
+            - self.no_exploration_progress_penalty)
         done = self.check_done()
         if done:
             team_reward += 40
@@ -599,6 +623,9 @@ class Env():
         mean_exploration_progress_reward = (
             self.exploration_progress_reward_sum / self.communication_step_count
             if self.communication_step_count else 0.0)
+        mean_no_exploration_progress_penalty = (
+            self.no_exploration_progress_penalty_sum / self.communication_step_count
+            if self.communication_step_count else 0.0)
 
         return {
             'connectivity_rate': float(self.connectivity_rate),
@@ -615,6 +642,10 @@ class Env():
             'team_bottleneck_rssi': float(mean_team_bottleneck_rssi),
             'mean_communication_reward': float(mean_communication_reward),
             'mean_exploration_progress_reward': float(mean_exploration_progress_reward),
+            'mean_no_exploration_progress_penalty': float(
+                mean_no_exploration_progress_penalty),
+            'max_no_exploration_progress_steps': int(
+                self.max_no_exploration_progress_steps),
         }
 
 
@@ -622,7 +653,7 @@ class Env():
         """Predict communication quality for each node using only the robot's local beliefs.
 
         Columns are normalized best RSSI margin, connected-neighbor ratio,
-        predicted component ratio, relay/recovery score, and disconnection duration.
+        predicted component ratio, binary relay score, and disconnection duration.
         """
         features = np.zeros((len(node_coords), CONNECTIVITY_FEATURE_DIM), dtype=np.float32)
         positions = self.all_robot_positions_belief[robot_id]
@@ -654,27 +685,17 @@ class Env():
                         stack.append(neighbor)
             component_index += 1
 
-        component_sizes = {}
-        for label in component_labels.values():
-            component_sizes[label] = component_sizes.get(label, 0) + 1
-
         disconnect_ratio = min(
             self.disconnect_steps[robot_id] / MAX_DISCONNECTED_STEPS, 1.0)
-        recovery_urgency = np.clip(
-            (self.disconnect_steps[robot_id] - DISCONNECT_GRACE_STEPS) /
-            max(MAX_DISCONNECTED_STEPS - DISCONNECT_GRACE_STEPS, 1),
-            0.0, 1.0)
         for node_index, candidate_position in enumerate(node_coords):
             margins = []
             connected_neighbors = []
-            connected_margins = []
             for other_id in known_other_ids:
                 _, margin, connected = self.estimate_link(
                     robot_belief, candidate_position, positions[other_id])
                 margins.append(margin)
                 if connected:
                     connected_neighbors.append(other_id)
-                    connected_margins.append(margin)
 
             best_margin = max(margins) if margins else -RSSI_MARGIN_NORMALIZATION
             connected_neighbor_ratio = (len(connected_neighbors) / (self.n_agent - 1)
@@ -692,29 +713,13 @@ class Env():
             neighbor_components = {component_labels[neighbor]
                                    for neighbor in connected_neighbors}
             predicted_component_ratio = len(connected_component) / self.n_agent
-            relay_score = 0.0
-            if len(neighbor_components) >= 2:
-                bridged_robot_count = sum(
-                    component_sizes[label] for label in neighbor_components)
-                bridge_fraction = bridged_robot_count / max(self.n_agent - 1, 1)
-                weakest_connected_margin = min(connected_margins)
-                margin_quality = np.clip(
-                    (weakest_connected_margin + RSSI_MARGIN_NORMALIZATION) /
-                    (RSSI_MARGIN_NORMALIZATION + SS_WARNING_MARGIN), 0.0, 1.0)
-                relay_score = bridge_fraction * margin_quality
-
-            best_link_quality = np.clip(
-                (best_margin + RSSI_MARGIN_NORMALIZATION) /
-                (RSSI_MARGIN_NORMALIZATION + SS_WARNING_MARGIN), 0.0, 1.0)
-            recovery_score = (
-                recovery_urgency * predicted_component_ratio * best_link_quality)
-            relay_recovery_score = max(relay_score, recovery_score)
+            relay_score = float(len(neighbor_components) >= 2)
 
             features[node_index] = [
                 np.clip(best_margin / RSSI_MARGIN_NORMALIZATION, -1.0, 1.0),
                 connected_neighbor_ratio,
                 predicted_component_ratio,
-                relay_recovery_score,
+                relay_score,
                 disconnect_ratio,
             ]
 

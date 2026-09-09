@@ -34,10 +34,13 @@ def writeToTensorBoard(writer, tensorboardData, curr_episode):
     tensorboardData = np.array(tensorboardData)
     tensorboardData = list(np.nanmean(tensorboardData, axis=0))
     (reward, value, policyLoss, qValueLoss, entropy, policyGradNorm,
-     qValueGradNorm, log_alpha, alphaLoss, travel_dist, success_rate,
+     qValueGradNorm, log_alpha, alphaLoss, policy_anchor_kl,
+     travel_dist, success_rate,
      explored_rate, connectivity_rate, recent_connectivity_rate,
      communication_pressure, agents_connected_percentage,
-     communication_reward, exploration_progress_reward, disconnect_count,
+     communication_reward, exploration_progress_reward,
+     no_exploration_progress_penalty, max_no_exploration_progress_steps,
+     disconnect_count,
      mean_disconnect_duration, max_disconnect_duration, mean_reconnect_time,
      largest_component_ratio, mean_component_count,
      team_bottleneck_rssi) = tensorboardData
@@ -50,6 +53,7 @@ def writeToTensorBoard(writer, tensorboardData, curr_episode):
     writer.add_scalar(tag='Losses/Policy Grad Norm', scalar_value=policyGradNorm, global_step=curr_episode)
     writer.add_scalar(tag='Losses/Q Value Grad Norm', scalar_value=qValueGradNorm, global_step=curr_episode)
     writer.add_scalar(tag='Losses/Log Alpha', scalar_value=log_alpha, global_step=curr_episode)
+    writer.add_scalar(tag='Losses/Policy Anchor KL', scalar_value=policy_anchor_kl, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Reward', scalar_value=reward, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Travel Distance', scalar_value=travel_dist, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Explored Rate', scalar_value=explored_rate, global_step=curr_episode)
@@ -60,6 +64,8 @@ def writeToTensorBoard(writer, tensorboardData, curr_episode):
     writer.add_scalar(tag='Perf/Agents Connected [%]', scalar_value=agents_connected_percentage, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Communication Reward', scalar_value=communication_reward, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Exploration Progress Reward', scalar_value=exploration_progress_reward, global_step=curr_episode)
+    writer.add_scalar(tag='Perf/No Exploration Progress Penalty', scalar_value=no_exploration_progress_penalty, global_step=curr_episode)
+    writer.add_scalar(tag='Perf/Max No Exploration Progress Steps', scalar_value=max_no_exploration_progress_steps, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Disconnect Count', scalar_value=disconnect_count, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Mean Disconnect Duration', scalar_value=mean_disconnect_duration, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Max Disconnect Duration', scalar_value=max_disconnect_duration, global_step=curr_episode)
@@ -86,7 +92,7 @@ def main():
     checkpoint = None
     policy_checkpoint = None
 
-    # Full resume restores every training state; v3 transfers only the policy.
+    # Full resume restores every training state; v3.2 transfers only the policy.
     if LOAD_MODEL:
         print('Loading Model...')
         checkpoint = torch.load(MODEL_PATH, map_location=device)
@@ -100,6 +106,7 @@ def main():
 
     # Init key networks & params
     global_policy_net = PolicyNet(INPUT_DIM, EMBEDDING_DIM).to(device)
+    reference_policy_net = PolicyNet(INPUT_DIM, EMBEDDING_DIM).to(device)
     global_q_net1 = QNet(INPUT_DIM, EMBEDDING_DIM).to(device)
     global_q_net2 = QNet(INPUT_DIM, EMBEDDING_DIM).to(device)
 
@@ -158,7 +165,24 @@ def main():
         initial_policy_episode = policy_checkpoint.get('episode')
         print('Loaded policy from episode: ', initial_policy_episode or 'unknown')
         print('Critics, optimizers, alpha, and episode counter are newly initialized.')
-        del policy_checkpoint
+
+    if policy_checkpoint is None:
+        reference_checkpoint = torch.load(
+            POLICY_PRETRAINED_PATH, map_location='cpu')
+    else:
+        reference_checkpoint = policy_checkpoint
+    reference_input_dim = reference_checkpoint.get('input_dim', INPUT_DIM)
+    if reference_input_dim != INPUT_DIM:
+        raise ValueError(
+            'Reference policy input_dim {} does not match {}'.format(
+                reference_input_dim, INPUT_DIM))
+    reference_policy_net.load_state_dict(reference_checkpoint['policy_model'])
+    reference_policy_net.eval()
+    for parameter in reference_policy_net.parameters():
+        parameter.requires_grad = False
+    print('Anchoring policy to pretrained episode: ',
+          reference_checkpoint.get('episode', 'unknown'))
+    del reference_checkpoint, policy_checkpoint
 
     global_target_q_net1.load_state_dict(global_q_net1.state_dict())
     global_target_q_net2.load_state_dict(global_q_net2.state_dict())
@@ -174,12 +198,14 @@ def main():
     ### Allow for batch training parallization across GPU ###
     if USE_GPU_GLOBAL and torch.cuda.device_count() > 1:
         dp_policy = nn.DataParallel(global_policy_net)              # Policy Net
+        dp_reference_policy = nn.DataParallel(reference_policy_net) # Frozen v2 policy anchor
         dp_q_net1 = nn.DataParallel(global_q_net1)                  # Q Net 1 - Get min of the two (min overestimation)
         dp_q_net2 = nn.DataParallel(global_q_net2)                  # Q Net 2 - Get min of the two (min overestimation)
         dp_target_q_net1 = nn.DataParallel(global_target_q_net1)    # Q-target Net 1 - Train Q-net 1
         dp_target_q_net2 = nn.DataParallel(global_target_q_net2)    # Q-target Net 2 - Train Q-net 2
     else:
         dp_policy = global_policy_net
+        dp_reference_policy = reference_policy_net
         dp_q_net1 = global_q_net1
         dp_q_net2 = global_q_net2
         dp_target_q_net1 = global_target_q_net1
@@ -194,7 +220,9 @@ def main():
     metric_name = ['travel_dist', 'success_rate', 'explored_rate', 'connectivity_rate',
                    'recent_connectivity_rate', 'communication_pressure',
                    'agents_connected_percentage', 'mean_communication_reward',
-                   'mean_exploration_progress_reward', 'disconnect_count',
+                   'mean_exploration_progress_reward',
+                   'mean_no_exploration_progress_penalty',
+                   'max_no_exploration_progress_steps', 'disconnect_count',
                    'mean_disconnect_duration', 'max_disconnect_duration',
                    'mean_reconnect_time', 'largest_component_ratio',
                    'mean_component_count', 'team_bottleneck_rssi']
@@ -303,6 +331,7 @@ def main():
                         policy_q_values1, _ = dp_q_net1(node_inputs_batch, edge_inputs_batch, current_inputs_batch, node_padding_mask_batch, edge_padding_mask_batch, edge_mask_batch)
                         policy_q_values2, _ = dp_q_net2(node_inputs_batch, edge_inputs_batch, current_inputs_batch, node_padding_mask_batch, edge_padding_mask_batch, edge_mask_batch)
                         policy_q_values = torch.min(policy_q_values1, policy_q_values2)
+                        reference_logp = dp_reference_policy(node_inputs_batch, edge_inputs_batch, current_inputs_batch, node_padding_mask_batch, edge_padding_mask_batch, edge_mask_batch)
 
                     ### Formulated in SAC paper: https://arxiv.org/pdf/1801.01290.pdf ###
                     if update_policy:
@@ -310,12 +339,19 @@ def main():
                     else:
                         with torch.no_grad():
                             logp = dp_policy(node_inputs_batch, edge_inputs_batch, current_inputs_batch, node_padding_mask_batch, edge_padding_mask_batch, edge_mask_batch)
-                    policy_loss = torch.sum((logp.exp().unsqueeze(2) * (log_alpha.exp().detach() * logp.unsqueeze(2) - policy_q_values)), dim=1).mean()
+                    policy_sac_loss = torch.sum((logp.exp().unsqueeze(2) * (log_alpha.exp().detach() * logp.unsqueeze(2) - policy_q_values)), dim=1).mean()
+                    policy_anchor_kl = torch.sum(
+                        logp.exp() * (logp - reference_logp), dim=1).mean()
+                    policy_loss = (
+                        policy_sac_loss
+                        + POLICY_ANCHOR_KL_WEIGHT * policy_anchor_kl)
                     del (next_logp, next_q_values1, next_q_values2,
-                         next_q_values, policy_q_values1, policy_q_values2)
+                         next_q_values, policy_q_values1, policy_q_values2,
+                         reference_logp)
                     entropy = (logp.detach() * logp.detach().exp()).sum(dim=-1)
                     alpha_loss = -(log_alpha * (entropy + entropy_target)).mean()
                     policy_loss_value = policy_loss.item()
+                    policy_anchor_kl_value = policy_anchor_kl.item()
                     entropy_value = entropy.mean().item()
                     alpha_loss_value = alpha_loss.item()
 
@@ -335,7 +371,8 @@ def main():
                     elif gradient_update_count == policy_warmup_updates:
                         print('Critic warmup complete; enabling policy and alpha updates.')
 
-                    del logp, policy_loss, policy_q_values
+                    del (logp, policy_sac_loss, policy_anchor_kl,
+                         policy_loss, policy_q_values)
 
                     # Update critics sequentially so their attention graphs never coexist.
                     mse_loss = nn.MSELoss()
@@ -365,7 +402,8 @@ def main():
                 for n in metric_name:
                     perf_data.append(np.nanmean(perf_metrics[n]))
                 data = [reward_batch.mean().item(), value_prime_batch.mean().item(), policy_loss_value, q1_loss_value,
-                        entropy_value, policy_grad_norm.item(), q_grad_norm.item(), log_alpha.item(), alpha_loss_value, *perf_data]
+                        entropy_value, policy_grad_norm.item(), q_grad_norm.item(), log_alpha.item(), alpha_loss_value,
+                        policy_anchor_kl_value, *perf_data]
                 training_data.append(data)
 
                 ### Get the updated actor weights ###
@@ -406,7 +444,7 @@ def main():
                                 "input_dim": INPUT_DIM,
                                 "connectivity_feature_dim": CONNECTIVITY_FEATURE_DIM,
                                 "use_connectivity_features": USE_CONNECTIVITY_FEATURES,
-                                "reward_version": "balanced_v3_1_target_90",
+                                "reward_version": "balanced_v3_2_anchored_target_90",
                                 "initial_policy_source": initial_policy_source,
                                 "initial_policy_episode": initial_policy_episode,
                                 "gradient_update_count": gradient_update_count,
@@ -423,9 +461,13 @@ def main():
                                     "duration_saturation_steps": DISCONNECT_DURATION_SATURATION_STEPS,
                                     "disconnect_grace_steps": DISCONNECT_GRACE_STEPS,
                                     "team_exploration_progress": TEAM_EXPLORATION_PROGRESS_WEIGHT,
+                                    "no_exploration_progress_grace_steps": NO_EXPLORATION_PROGRESS_GRACE_STEPS,
+                                    "no_exploration_progress_saturation_steps": NO_EXPLORATION_PROGRESS_SATURATION_STEPS,
+                                    "no_exploration_progress_penalty": NO_EXPLORATION_PROGRESS_PENALTY_WEIGHT,
                                 },
                                 "policy_lr": POLICY_LR,
                                 "q_lr": Q_LR,
+                                "policy_anchor_kl_weight": POLICY_ANCHOR_KL_WEIGHT,
                         }
                 path_checkpoint = "./" + MODEL_PATH
                 torch.save(checkpoint, path_checkpoint)

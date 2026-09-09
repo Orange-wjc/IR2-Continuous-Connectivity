@@ -68,6 +68,9 @@ class Env():
         self.link_state_matrix = np.zeros((self.n_agent, self.n_agent), dtype=np.int8)
         self.communication_step_count = 0
         self.connected_step_count = 0
+        self.recent_full_connectivity = [1.0] * CONNECTIVITY_BUDGET_WINDOW
+        self.recent_connectivity_rate = 1.0
+        self.communication_pressure = 0.0
         self.component_count = self.n_agent
         self.component_count_sum = 0
         self.current_largest_component_ratio = 1.0
@@ -413,6 +416,10 @@ class Env():
             weak_signal_penalty = 0.5 * (warning_penalty + outage_severity)
 
         component_deficit = 1.0 - self.current_largest_component_ratio
+        rate_deficit = max(
+            CONNECTIVITY_TARGET_RATE - self.recent_connectivity_rate, 0.0)
+        self.communication_pressure = float(np.clip(
+            rate_deficit / max(CONNECTIVITY_PRESSURE_RAMP, 1e-6), 0.0, 1.0))
         duration_scale = max(
             DISCONNECT_DURATION_SATURATION_STEPS - DISCONNECT_GRACE_STEPS, 1)
         penalized_disconnect_steps = np.maximum(
@@ -422,11 +429,14 @@ class Env():
         new_disconnect_fraction = new_disconnect_count / self.n_agent
         reconnect_fraction = reconnect_count / self.n_agent
 
+        instantaneous_penalty = (
+            WEAK_SIGNAL_PENALTY_WEIGHT * weak_signal_penalty
+            + COMPONENT_DEFICIT_PENALTY_WEIGHT * component_deficit
+            + NEW_DISCONNECT_PENALTY_WEIGHT * new_disconnect_fraction)
+
         return float(
-            -WEAK_SIGNAL_PENALTY_WEIGHT * weak_signal_penalty
-            -COMPONENT_DEFICIT_PENALTY_WEIGHT * component_deficit
+            -self.communication_pressure * instantaneous_penalty
             -DISCONNECT_DURATION_PENALTY_WEIGHT * duration_penalty
-            -NEW_DISCONNECT_PENALTY_WEIGHT * new_disconnect_fraction
             +RECONNECT_REWARD_WEIGHT * reconnect_fraction)
 
 
@@ -497,6 +507,11 @@ class Env():
         group_sizes = [len(group) for group in self.group_ids_list]
         largest_size = max(group_sizes)
         fully_connected = len(self.group_ids_list) == 1
+        self.recent_full_connectivity.append(float(fully_connected))
+        self.recent_full_connectivity = self.recent_full_connectivity[
+            -CONNECTIVITY_BUDGET_WINDOW:]
+        self.recent_connectivity_rate = float(np.mean(
+            self.recent_full_connectivity))
 
         if fully_connected:
             self.connected_step_count += 1
@@ -587,6 +602,8 @@ class Env():
 
         return {
             'connectivity_rate': float(self.connectivity_rate),
+            'recent_connectivity_rate': float(self.recent_connectivity_rate),
+            'communication_pressure': float(self.communication_pressure),
             'agents_connected_percentage': float(self.agents_connected_percentage),
             'disconnect_count': int(self.disconnect_count),
             'mean_disconnect_duration': float(mean_disconnect_duration),

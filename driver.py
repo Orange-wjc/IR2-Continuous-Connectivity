@@ -35,7 +35,8 @@ def writeToTensorBoard(writer, tensorboardData, curr_episode):
     tensorboardData = list(np.nanmean(tensorboardData, axis=0))
     (reward, value, policyLoss, qValueLoss, entropy, policyGradNorm,
      qValueGradNorm, log_alpha, alphaLoss, travel_dist, success_rate,
-     explored_rate, connectivity_rate, agents_connected_percentage,
+     explored_rate, connectivity_rate, recent_connectivity_rate,
+     communication_pressure, agents_connected_percentage,
      communication_reward, exploration_progress_reward, disconnect_count,
      mean_disconnect_duration, max_disconnect_duration, mean_reconnect_time,
      largest_component_ratio, mean_component_count,
@@ -54,6 +55,8 @@ def writeToTensorBoard(writer, tensorboardData, curr_episode):
     writer.add_scalar(tag='Perf/Explored Rate', scalar_value=explored_rate, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Success Rate', scalar_value=success_rate, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Connectivity Rate', scalar_value=connectivity_rate, global_step=curr_episode)
+    writer.add_scalar(tag='Perf/Recent Connectivity Rate', scalar_value=recent_connectivity_rate, global_step=curr_episode)
+    writer.add_scalar(tag='Perf/Communication Pressure', scalar_value=communication_pressure, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Agents Connected [%]', scalar_value=agents_connected_percentage, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Communication Reward', scalar_value=communication_reward, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Exploration Progress Reward', scalar_value=exploration_progress_reward, global_step=curr_episode)
@@ -103,9 +106,9 @@ def main():
     global_target_q_net1 = QNet(INPUT_DIM, EMBEDDING_DIM).to(device)
     global_target_q_net2 = QNet(INPUT_DIM, EMBEDDING_DIM).to(device)
     
-    global_policy_optimizer = optim.Adam(global_policy_net.parameters(), lr=LR)
-    global_q_net1_optimizer = optim.Adam(global_q_net1.parameters(), lr=LR)
-    global_q_net2_optimizer = optim.Adam(global_q_net2.parameters(), lr=LR)
+    global_policy_optimizer = optim.Adam(global_policy_net.parameters(), lr=POLICY_LR)
+    global_q_net1_optimizer = optim.Adam(global_q_net1.parameters(), lr=Q_LR)
+    global_q_net2_optimizer = optim.Adam(global_q_net2.parameters(), lr=Q_LR)
     log_alpha_optimizer = optim.Adam([log_alpha], lr=1e-4) 
 
     policy_lr_decay = optim.lr_scheduler.StepLR(global_policy_optimizer, step_size=DECAY_STEP, gamma=0.96)
@@ -189,6 +192,7 @@ def main():
         job_list.append(meta_agent.job.remote(policy_weights, curr_episode))
     
     metric_name = ['travel_dist', 'success_rate', 'explored_rate', 'connectivity_rate',
+                   'recent_connectivity_rate', 'communication_pressure',
                    'agents_connected_percentage', 'mean_communication_reward',
                    'mean_exploration_progress_reward', 'disconnect_count',
                    'mean_disconnect_duration', 'max_disconnect_duration',
@@ -402,12 +406,15 @@ def main():
                                 "input_dim": INPUT_DIM,
                                 "connectivity_feature_dim": CONNECTIVITY_FEATURE_DIM,
                                 "use_connectivity_features": USE_CONNECTIVITY_FEATURES,
-                                "reward_version": "balanced_v3",
+                                "reward_version": "balanced_v3_1_target_90",
                                 "initial_policy_source": initial_policy_source,
                                 "initial_policy_episode": initial_policy_episode,
                                 "gradient_update_count": gradient_update_count,
                                 "policy_warmup_updates": policy_warmup_updates,
                                 "reward_config": {
+                                    "connectivity_target_rate": CONNECTIVITY_TARGET_RATE,
+                                    "connectivity_budget_window": CONNECTIVITY_BUDGET_WINDOW,
+                                    "connectivity_pressure_ramp": CONNECTIVITY_PRESSURE_RAMP,
                                     "weak_signal": WEAK_SIGNAL_PENALTY_WEIGHT,
                                     "component_deficit": COMPONENT_DEFICIT_PENALTY_WEIGHT,
                                     "disconnect_duration": DISCONNECT_DURATION_PENALTY_WEIGHT,
@@ -417,6 +424,8 @@ def main():
                                     "disconnect_grace_steps": DISCONNECT_GRACE_STEPS,
                                     "team_exploration_progress": TEAM_EXPLORATION_PROGRESS_WEIGHT,
                                 },
+                                "policy_lr": POLICY_LR,
+                                "q_lr": Q_LR,
                         }
                 path_checkpoint = "./" + MODEL_PATH
                 torch.save(checkpoint, path_checkpoint)

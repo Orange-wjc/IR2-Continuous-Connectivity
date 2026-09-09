@@ -444,7 +444,7 @@ def main():
                                 "input_dim": INPUT_DIM,
                                 "connectivity_feature_dim": CONNECTIVITY_FEATURE_DIM,
                                 "use_connectivity_features": USE_CONNECTIVITY_FEATURES,
-                                "reward_version": "balanced_v3_2_anchored_target_90",
+                                "reward_version": "balanced_v3_3_anchored_target_90",
                                 "initial_policy_source": initial_policy_source,
                                 "initial_policy_episode": initial_policy_episode,
                                 "gradient_update_count": gradient_update_count,

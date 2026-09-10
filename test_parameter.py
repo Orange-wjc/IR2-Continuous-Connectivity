@@ -58,7 +58,7 @@ VIZ_CONNECTIVITY_RSSI_GROUND_TRUTH=True
 # --- GENERAL --- #
 USE_GPU = True
 NUM_GPU = 1
-NUM_META_AGENT = 1  # Number of parallel sims
+NUM_META_AGENT = 5  # Parallel validation/test simulations on the 25-core server
 FOLDER_NAME = 'wall_aware_hybrid3_balanced_v3_4_' + EVALUATION_SPLIT
 MODEL_DIR = 'model/wall_aware_hybrid3_balanced_v3_4'
 GIFS_DIR = f'{FOLDER_NAME}/test_results/gifs'

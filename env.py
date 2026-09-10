@@ -185,183 +185,166 @@ class Env():
         self.agents_merged_belief_frontiers = self.find_frontier(self.downsampled_agents_merged_belief)
 
 
-    def single_robot_step(self, robot_id, all_robot_positions_gt, curr_eps, sim_step, dist_travelled): 
-        """ Execute policy in environment """
-
-        all_curr_frontiers = [[] for _ in range(self.n_agent)]
-        all_num_new_frontiers = [[] for _ in range(self.n_agent)]
-        self.all_robot_positions_gt = all_robot_positions_gt
-        robot_position = all_robot_positions_gt[robot_id]
-
-        self.all_graph_generator[robot_id].route_node.append(robot_position)
-        self.all_robot_global_graph_step_updated[robot_id][robot_id] = sim_step                       
-        self.all_robot_global_graph_belief[robot_id][robot_id][0].append(copy.deepcopy(robot_position))    # MOVED INTO UPDATE_GRAPH
-
-        ### Update each agent's map belief ###
-        next_node_index = self.find_index_from_coords(robot_position, agent_id=robot_id)
-        self.all_graph_generator[robot_id].nodes_list[next_node_index].set_visited()
-        self.all_robot_belief[robot_id][robot_id] = self.update_robot_belief(robot_position, self.sensor_range, self.all_robot_belief[robot_id][robot_id], self.ground_truth)
-        self.all_downsampled_belief[robot_id] = block_reduce(self.all_robot_belief[robot_id][robot_id].copy(), block_size=(self.resolution, self.resolution), func=np.min)     
-        
-        ### Update global merged belief ###
-        self.agents_merged_belief = self.merge_beliefs( [self.agents_merged_belief, self.all_robot_belief[robot_id][robot_id]] )
-        self.downsampled_agents_merged_belief = block_reduce(self.agents_merged_belief.copy(), block_size=(self.resolution, self.resolution), func=np.min)
-        curr_agents_merged_belief_frontiers = self.find_frontier(self.downsampled_agents_merged_belief)
-        all_num_new_frontiers[robot_id] = self.calculate_num_observed_frontiers(self.agents_merged_belief_frontiers, curr_agents_merged_belief_frontiers)
-        self.agents_merged_belief_frontiers = curr_agents_merged_belief_frontiers
-
-        ### Compute agent's reward ###
-        all_curr_frontiers[robot_id] = self.find_frontier(self.all_downsampled_belief[robot_id])
-        new_pose_explore_util = self.all_node_utility[robot_id][next_node_index]
-        new_pose_rendezvous_util = self.all_rendezvous_utility_inputs[robot_id][next_node_index].item()
-        new_pose_guidepost_penalty = self.all_guidepost[robot_id][next_node_index].item()
-
-        # NOTE: new_pose_rendezvous_util already normalized
-        individual_reward = (all_num_new_frontiers[robot_id] / 25) + (new_pose_explore_util / 50) + (new_pose_rendezvous_util) - (dist_travelled / 512) #- (new_pose_guidepost_penalty / 10) #   
-
-        ### Update each agent's graphs & utility ###
-        success = self.update_graph(robot_id, all_curr_frontiers[robot_id], extend_global_graph_towards_fronters=True, eps=curr_eps, step=sim_step)
-        if not success:
-            return success, None, None
+    def initialize_team(self, positions, curr_eps):
+        """Align initial poses, sensing and beliefs before the first joint decision."""
+        self.all_robot_positions_gt = [position.copy() for position in positions]
+        for robot_id, position in enumerate(self.all_robot_positions_gt):
+            self.all_robot_positions_belief[robot_id][robot_id] = position.copy()
+            self.all_robot_belief[robot_id][robot_id] = self.update_robot_belief(
+                position, self.sensor_range, self.all_robot_belief[robot_id][robot_id].copy(),
+                self.ground_truth)
+            self.all_graph_generator[robot_id].route_node.append(position.copy())
+            self.all_robot_global_graph_belief[robot_id][robot_id][0].append(position.copy())
+        self.update_connectivity_graph(self.all_robot_positions_gt)
+        self.share_team_beliefs(0)
+        self.refresh_merged_belief()
+        self.explored_rate = self.evaluate_team_exploration_rate()
+        for robot_id in range(self.n_agent):
+            frontiers = self.find_frontier(self.all_downsampled_belief[robot_id])
+            if not self.update_graph(robot_id, frontiers, eps=curr_eps, step=0):
+                return False
+        return True
 
 
-        ################################################
-        # Connectivity Graph
-        ################################################
-        
-        self.update_connectivity_graph(all_robot_positions_gt)
+    def step_team(self, positions, curr_eps, sim_step, distances):
+        """Sense every joint-action endpoint before any communication takes place."""
+        old_maps = [self.all_robot_belief[i][i] for i in range(self.n_agent)]
+        old_global = self.agents_merged_belief
+        old_frontiers = self.agents_merged_belief_frontiers
+        old_frontier_keys = old_frontiers[:, 0] + old_frontiers[:, 1] * 1j
+        sensed_maps, utilities, rendezvous_utilities = [], [], []
+        frontier_observers = []
 
-        ################################################
-        # Belief Propogation (hopping through graph)
-        ################################################
+        # Snapshot all action rewards and sensor updates against the same state.
+        for robot_id, position in enumerate(positions):
+            index = self.find_index_from_coords(position, robot_id)
+            utilities.append(float(self.all_node_utility[robot_id][index]) / 50)
+            rendezvous_utilities.append(float(
+                self.all_rendezvous_utility_inputs[robot_id][index].item()))
+            self.all_graph_generator[robot_id].nodes_list[index].set_visited()
+            sensed = self.update_robot_belief(
+                position, self.sensor_range, old_maps[robot_id].copy(), self.ground_truth)
+            sensed_maps.append(sensed)
+            # Split overlapping frontier discoveries rather than rewarding ID order.
+            candidate_global = self.merge_beliefs([old_global, sensed])
+            downsampled = block_reduce(candidate_global, block_size=(self.resolution, self.resolution), func=np.min)
+            frontiers = self.find_frontier(downsampled)
+            keys = frontiers[:, 0] + frontiers[:, 1] * 1j
+            frontier_observers.append(~np.isin(old_frontier_keys, keys))
 
-        ### Map & Pose Belief Merger ###
-        for group_ids in self.group_ids_list:
-            if robot_id in group_ids:
+        self.all_robot_positions_gt = [position.copy() for position in positions]
+        for robot_id, position in enumerate(self.all_robot_positions_gt):
+            self.all_robot_positions_belief[robot_id][robot_id] = position.copy()
+            self.all_robot_positions_step_updated[robot_id][robot_id] = sim_step
+            self.all_robot_belief[robot_id][robot_id] = sensed_maps[robot_id]
+            self.all_robot_belief_step_updated[robot_id][robot_id] = sim_step
+            self.all_graph_generator[robot_id].route_node.append(position.copy())
+            self.all_robot_global_graph_belief[robot_id][robot_id][0].append(position.copy())
+            self.all_robot_global_graph_step_updated[robot_id][robot_id] = sim_step
+            self.all_downsampled_belief[robot_id] = block_reduce(
+                sensed_maps[robot_id], block_size=(self.resolution, self.resolution), func=np.min)
 
-                ### [Local Update] Merging map beliefs for agents that are connected ###
-                merged_belief = self.merge_beliefs( [self.all_robot_belief[id][id] for id in group_ids] )
-                for own_id in group_ids:
-                    self.all_robot_belief[own_id][own_id] = merged_belief
-                    self.all_robot_belief_step_updated[own_id][own_id] = sim_step
-                    self.all_downsampled_belief[own_id] = block_reduce(self.all_robot_belief[own_id][own_id].copy(), block_size=(self.resolution, self.resolution), func=np.min)
+        # Extend each robot's route before publishing it to connected peers.
+        for robot_id in range(self.n_agent):
+            frontiers = self.find_frontier(self.all_downsampled_belief[robot_id])
+            if not self.update_graph(robot_id, frontiers, extend_global_graph_towards_fronters=True,
+                                     eps=curr_eps, step=sim_step):
+                return False, None, None, None
+        self.update_connectivity_graph(self.all_robot_positions_gt)
+        self.share_team_beliefs(sim_step)
+        for robot_id in range(self.n_agent):
+            self.remove_missing_pose_beliefs(robot_id)
+        self.refresh_merged_belief()
 
-                    for other_id_in_group in group_ids:
+        observers = np.asarray(frontier_observers, dtype=float)
+        counts = np.maximum(observers.sum(axis=0), 1)
+        frontier_rewards = (observers / counts).sum(axis=1) / 25
+        self.individual_reward_components = []
+        for robot_id, distance in enumerate(distances):
+            gained_information = np.any(
+                self.all_robot_belief[robot_id][robot_id] != old_maps[robot_id])
+            gained_sensing = np.any(sensed_maps[robot_id] != old_maps[robot_id])
+            # A stationary robot cannot collect unchanged node utilities repeatedly.
+            exploration_utility = utilities[robot_id] if distance > 0 or gained_sensing else 0.0
+            rendezvous_utility = rendezvous_utilities[robot_id] if distance > 0 or gained_information else 0.0
+            self.individual_reward_components.append([
+                float(frontier_rewards[robot_id]), exploration_utility,
+                rendezvous_utility, -float(distance) / 512])
+            frontiers = self.find_frontier(self.all_downsampled_belief[robot_id])
+            if not self.update_graph(robot_id, frontiers, eps=curr_eps, step=sim_step):
+                return False, None, None, None
 
-                        if own_id != other_id_in_group:
-                            self.all_robot_belief[own_id][other_id_in_group] = merged_belief
-                            self.all_robot_belief_step_updated[own_id][other_id_in_group] = sim_step
-                
-                        ### [Global Update] Merging map beliefs of other agents' beliefs of other agents ###
-                        for other_id_out_group in range(self.n_agent):
-                            if other_id_out_group not in group_ids:
-
-                                own_step_updated = self.all_robot_belief_step_updated[own_id][other_id_out_group]
-                                other_step_updated = self.all_robot_belief_step_updated[other_id_in_group][other_id_out_group]
-
-                                # # Cond 1: Own belief is None, but other's belief is not None
-                                # # Cond 2: Own belief is more outdated and other's belief not None
-                                if own_step_updated < other_step_updated and \
-                                    self.all_robot_belief[other_id_in_group][other_id_out_group] is not None:
-
-                                    self.all_robot_belief[own_id][other_id_out_group] = \
-                                            self.all_robot_belief[other_id_in_group][other_id_out_group]
-                                    self.all_robot_belief_step_updated[own_id][other_id_out_group] = \
-                                            self.all_robot_belief_step_updated[other_id_in_group][other_id_out_group]
-
-
-                ### Merging position beliefs for agents that are connected, and agents' belief of other agents (if not as outdated) ###
-                for own_id in group_ids:
-                    
-                    for other_id_in_group in group_ids:
-                        
-                        # [Local Update] Updating positions belief with agents in direct connectivity
-                        if own_id != other_id_in_group:
-                            self.all_robot_positions_belief[own_id][other_id_in_group] = all_robot_positions_gt[other_id_in_group]
-                            self.all_robot_positions_step_updated[own_id][other_id_in_group] = sim_step
-
-                        # [Global Update] Merging in belief of other agents' belief of other agents
-                        for other_id_out_group in range(self.n_agent):
-                            if other_id_out_group not in group_ids:
-                                
-                                own_step_updated = self.all_robot_positions_step_updated[own_id][other_id_out_group]
-                                other_step_updated = self.all_robot_positions_step_updated[other_id_in_group][other_id_out_group]
-                                
-                                # # Cond 1: Own belief is None, but other's belief is not None
-                                # # Cond 2: Own belief is more outdated and other's belief not None
-                                if own_step_updated < other_step_updated and \
-                                    self.all_robot_positions_belief[other_id_in_group][other_id_out_group] is not None:
-
-                                    self.all_robot_positions_belief[own_id][other_id_out_group] = \
-                                            self.all_robot_positions_belief[other_id_in_group][other_id_out_group]
-                                    self.all_robot_positions_step_updated[own_id][other_id_out_group] = \
-                                            self.all_robot_positions_step_updated[other_id_in_group][other_id_out_group]
-
-                ### Merge route history belief of all agents 
-                for own_id in group_ids:
-                    
-                    for other_id_in_group in group_ids:
-                        
-                        # [Local Update] Updating positions belief with agents in direct connectivity
-                        if own_id != other_id_in_group:
-                            self.all_robot_global_graph_belief[own_id][other_id_in_group] = copy.deepcopy(self.all_robot_global_graph_belief[other_id_in_group][other_id_in_group])
-                            self.all_robot_global_graph_step_updated[own_id][other_id_in_group] = copy.deepcopy(sim_step)
-
-                        # [Global Update] Merging in belief of other agents' belief of other agents
-                        for other_id_out_group in range(self.n_agent):
-                            if other_id_out_group not in group_ids:
-                                
-                                own_step_updated = self.all_robot_global_graph_step_updated[own_id][other_id_out_group]
-                                other_step_updated = self.all_robot_global_graph_step_updated[other_id_in_group][other_id_out_group]
-                                
-                                # # Cond 1: Own belief is None, but other's belief is not None
-                                # # Cond 2: Own belief is more outdated and other's belief not None
-                                if own_step_updated < other_step_updated and \
-                                    self.all_robot_global_graph_belief[other_id_in_group][other_id_out_group] is not None:
-
-                                    self.all_robot_global_graph_belief[own_id][other_id_out_group] = \
-                                            copy.deepcopy(self.all_robot_global_graph_belief[other_id_in_group][other_id_out_group])
-                                    self.all_robot_global_graph_step_updated[own_id][other_id_out_group] = \
-                                            copy.deepcopy(self.all_robot_global_graph_step_updated[other_id_in_group][other_id_out_group])
+        team_reward = self.update_env_and_get_team_rewards()
+        rewards = [sum(parts) for parts in self.individual_reward_components]
+        return True, rewards, team_reward, self.check_done()
 
 
-                    ### Update of essential params after map update ### 
-                    if own_id == robot_id: 
-                        all_curr_frontiers[robot_id] = self.find_frontier(self.all_downsampled_belief[robot_id])
-                        success = self.update_graph(robot_id, all_curr_frontiers[robot_id], eps=curr_eps, step=sim_step)
-                        if not success:
-                            return success, None, None
+    def share_team_beliefs(self, sim_step):
+        """Exchange one immutable snapshot within each final connected component."""
+        # Maps are never sensed in place: references here remain valid snapshots.
+        maps = [row[:] for row in self.all_robot_belief]
+        map_times = [row[:] for row in self.all_robot_belief_step_updated]
+        positions = [row[:] for row in self.all_robot_positions_belief]
+        position_times = [row[:] for row in self.all_robot_positions_step_updated]
+        routes = copy.deepcopy(self.all_robot_global_graph_belief)
+        route_times = [row[:] for row in self.all_robot_global_graph_step_updated]
+        for group in self.group_ids_list:
+            merged = self.merge_beliefs([maps[i][i] for i in group])
+            for own_id in group:
+                for other_id in group:
+                    self.all_robot_belief[own_id][other_id] = merged
+                    self.all_robot_belief_step_updated[own_id][other_id] = sim_step
+                    self.all_robot_positions_belief[own_id][other_id] = self.all_robot_positions_gt[other_id].copy()
+                    self.all_robot_positions_step_updated[own_id][other_id] = sim_step
+                    self.all_robot_global_graph_belief[own_id][other_id] = copy.deepcopy(routes[other_id][other_id])
+                    self.all_robot_global_graph_step_updated[own_id][other_id] = sim_step
+                self.all_downsampled_belief[own_id] = block_reduce(
+                    merged, block_size=(self.resolution, self.resolution), func=np.min)
+                # Forward only the freshest information actually held by this group.
+                for other_id in set(range(self.n_agent)) - set(group):
+                    for beliefs, timestamps, source_beliefs, source_times in (
+                        (self.all_robot_belief, self.all_robot_belief_step_updated, maps, map_times),
+                        (self.all_robot_positions_belief, self.all_robot_positions_step_updated, positions, position_times),
+                        (self.all_robot_global_graph_belief, self.all_robot_global_graph_step_updated, routes, route_times),
+                    ):
+                        sources = [i for i in group if source_beliefs[i][other_id] is not None]
+                        if not sources:
+                            continue
+                        source = max(sources, key=lambda i: source_times[i][other_id])
+                        if source_times[source][other_id] > source_times[own_id][other_id]:
+                            beliefs[own_id][other_id] = copy.deepcopy(source_beliefs[source][other_id])
+                            timestamps[own_id][other_id] = source_times[source][other_id]
 
-        ###################################################################
 
-        ### Removing agents' pose belief if belief within comms range, but cannot comms that agent  ###
-        for other_id in range(len(self.all_robot_positions_belief[robot_id])):
-            if robot_id != other_id and self.all_robot_positions_belief[robot_id][other_id] is not None:
+    def refresh_merged_belief(self):
+        self.agents_merged_belief = self.merge_beliefs(
+            [self.agents_merged_belief] + [self.all_robot_belief[i][i] for i in range(self.n_agent)])
+        self.downsampled_agents_merged_belief = block_reduce(
+            self.agents_merged_belief, block_size=(self.resolution, self.resolution), func=np.min)
+        self.agents_merged_belief_frontiers = self.find_frontier(self.downsampled_agents_merged_belief)
 
-                if USE_SIGNAL_STRENGTH_NOT_PROXIMITY:
-                    belief_in_comms_range = self.ss_realistic_model.is_within_signal_strength(self.ground_truth, self.all_robot_positions_belief[robot_id][robot_id], self.all_robot_positions_belief[robot_id][other_id])
-                    gt_in_comms_range = self.ss_realistic_model.is_within_signal_strength(self.ground_truth, self.all_robot_positions_gt[robot_id], self.all_robot_positions_gt[other_id])
-                else:
-                    belief_in_comms_range = (np.linalg.norm(self.all_robot_positions_belief[robot_id][other_id] - self.all_robot_positions_belief[robot_id][robot_id]) < self.max_comms_proximity)
-                    gt_in_comms_range = (np.linalg.norm(self.all_robot_positions_gt[other_id] - self.all_robot_positions_gt[robot_id]) < self.max_comms_proximity)
-                if belief_in_comms_range and not gt_in_comms_range:
-                    self.all_robot_positions_missing_counts[robot_id][other_id] += 1
-                elif (belief_in_comms_range and gt_in_comms_range) or (not belief_in_comms_range and gt_in_comms_range):
-                    self.all_robot_positions_missing_counts[robot_id][other_id] = 0
 
-                if self.all_robot_positions_missing_counts[robot_id][other_id] >= REMOVE_POSE_BELIEF_MISSING_COUNT:
-                    self.all_robot_positions_belief[robot_id][other_id] = None
-                    self.all_robot_belief[robot_id][other_id] = None
-                    self.all_robot_positions_missing_counts[robot_id][other_id] = 0
-
-        ### Done only if all agents have explored most of the map ###
-        done = self.check_done()
-
-        # ### Store for tensorboard logs ###
-        self.all_explored_rate[robot_id] = self.evaluate_exploration_rate(agent_id=robot_id)
-
-        success = True
-        return success, individual_reward, done
+    def remove_missing_pose_beliefs(self, robot_id):
+        """Preserve the existing stale-pose rule, evaluated at a team boundary."""
+        for other_id, position in enumerate(self.all_robot_positions_belief[robot_id]):
+            if other_id == robot_id or position is None:
+                continue
+            if USE_SIGNAL_STRENGTH_NOT_PROXIMITY:
+                belief_in_range = self.ss_realistic_model.is_within_signal_strength(
+                    self.ground_truth, self.all_robot_positions_gt[robot_id], position)
+                actual_in_range = self.ss_realistic_model.is_within_signal_strength(
+                    self.ground_truth, self.all_robot_positions_gt[robot_id], self.all_robot_positions_gt[other_id])
+            else:
+                belief_in_range = np.linalg.norm(position - self.all_robot_positions_gt[robot_id]) < self.max_comms_proximity
+                actual_in_range = np.linalg.norm(self.all_robot_positions_gt[other_id] - self.all_robot_positions_gt[robot_id]) < self.max_comms_proximity
+            if belief_in_range and not actual_in_range:
+                self.all_robot_positions_missing_counts[robot_id][other_id] += 1
+            elif actual_in_range:
+                self.all_robot_positions_missing_counts[robot_id][other_id] = 0
+            if self.all_robot_positions_missing_counts[robot_id][other_id] >= REMOVE_POSE_BELIEF_MISSING_COUNT:
+                self.all_robot_positions_belief[robot_id][other_id] = None
+                self.all_robot_belief[robot_id][other_id] = None
+                self.all_robot_positions_missing_counts[robot_id][other_id] = 0
 
 
     def update_graph(self, robot_id, curr_frontiers, extend_global_graph_towards_fronters=False, eps=None, step=None):
@@ -966,14 +949,10 @@ class Env():
 
     def import_ground_truth(self, map_index):
         """ Import map (occupied 1, free 255, unexplored 127) """
-        try:
-            ground_truth = (io.imread(map_index, 1)).astype(int)
-            if np.all(ground_truth == 0):
-                ground_truth = (io.imread(map_index, 1) * 255).astype(int)
-        except:
-            new_map_index = self.map_dir + '/' + self.map_list[0]
-            ground_truth = (io.imread(new_map_index, 1)).astype(int)
-            print('could not read the map_path ({}), hence skipping it and using ({}).'.format(map_index, new_map_index))
+        # Never silently substitute another map during a fixed-map evaluation.
+        ground_truth = (io.imread(map_index, 1)).astype(int)
+        if np.all(ground_truth == 0):
+            ground_truth = (io.imread(map_index, 1) * 255).astype(int)
 
         robot_location = np.nonzero(ground_truth == 208)
         robot_location = np.array([np.array(robot_location)[1, 127], np.array(robot_location)[0, 127]])

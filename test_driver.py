@@ -16,105 +16,78 @@ from test_multi_robot_worker import TestWorker
 from datetime import datetime
 
 CSV_FIELDNAMES = [
-    'run', 'eps', 'test_seed', 'num_robots', 'max_dist', 'steps', 'explored', 'success',
+    'run', 'eps', 'map_file', 'split', 'status', 'error', 'test_seed', 'num_robots', 'max_dist', 'steps', 'explored', 'success',
     'connectivity_rate', 'disconnect_count', 'mean_disconnect_duration',
     'max_disconnect_duration', 'mean_reconnect_time', 'largest_component_ratio',
-    'mean_component_count', 'weakest_tree_rssi', 'team_bottleneck_rssi'
+    'mean_component_count', 'weakest_tree_rssi', 'team_bottleneck_rssi', 'stay_rate', 'time_limit_reached'
 ]
 
 def run_test(run_index):
-
-    # Create .csv file for data collection
-    current_datetime = datetime.now().strftime("%Y-%m-%d_%H%M%S")
-    csv_file_name = "data_{}.csv".format(current_datetime)
+    """Evaluate each configured map exactly once, including failed executions."""
+    current_datetime = datetime.now().strftime('%Y-%m-%d_%H%M%S_%f')
+    csv_file_name = 'data_{}_run_{}.csv'.format(current_datetime, run_index)
     csv_file_path = os.path.join(log_path, csv_file_name)
+    os.makedirs(log_path, exist_ok=True)
+    with open(csv_file_path, mode='w', newline='') as csv_file:
+        csv.DictWriter(csv_file, fieldnames=CSV_FIELDNAMES).writeheader()
 
-    # Create CSV file
-    if not os.path.exists(log_path):
-        os.makedirs(log_path)
-    if not os.path.exists(csv_file_path):
-        with open(csv_file_path, mode='w') as csv_file:
-            writer = csv.DictWriter(csv_file, fieldnames=CSV_FIELDNAMES)
-            writer.writeheader()
-
-
-    device = torch.device('cuda') if USE_GPU else torch.device('cpu')
-    global_network = PolicyNet(INPUT_DIM, EMBEDDING_DIM).to(device)
-
-    if device == 'cuda':
-        checkpoint = torch.load(MODEL_PATH)
-    else:
-        checkpoint = torch.load(MODEL_PATH, map_location = torch.device('cpu'))
-
+    global_network = PolicyNet(INPUT_DIM, EMBEDDING_DIM)
+    checkpoint = torch.load(MODEL_PATH, map_location='cpu')
     global_network.load_state_dict(checkpoint['policy_model'])
-
-    meta_agents = [Runner.remote(i) for i in range(NUM_META_AGENT)]
     weights = global_network.state_dict()
+    meta_agents = [Runner.remote(i) for i in range(min(NUM_META_AGENT, NUM_TEST))]
     curr_test = 0
-
-    dist_history = []
-
+    dist_history, failed_episodes = [], []
     job_list = []
-    for i, meta_agent in enumerate(meta_agents):
+    for meta_agent in meta_agents:
         job_list.append(meta_agent.job.remote(weights, curr_test, run_index))
         curr_test += 1
 
     try:
-        eps_skipped = []
-        while len(dist_history) < NUM_TEST:
-            done_id, job_list = ray.wait(job_list)
-            done_jobs = ray.get(done_id)
-
-            for job in done_jobs:
-                success, metrics, info = job
-                if success:
-                    dist_history.append(metrics['travel_dist'])
-
-                    # Populate CSV file
-                    with open(csv_file_path, mode='a') as csv_file:
-                        writer = csv.DictWriter(csv_file, fieldnames=CSV_FIELDNAMES)
-                        writer.writerow({'run': info['run_index'], \
-                                        'eps': info['episode_number'], \
-                                        'test_seed': info['test_seed'], \
-                                        'num_robots': info['n_agent'], \
-                                        'max_dist': metrics['travel_dist'], \
-                                        'steps': metrics['travel_steps'], \
-                                        'explored': metrics['explored_rate'], \
-                                        'success': metrics['success_rate'], \
-                                        'connectivity_rate': metrics['connectivity_rate'], \
-                                        'disconnect_count': metrics['disconnect_count'], \
-                                        'mean_disconnect_duration': metrics['mean_disconnect_duration'], \
-                                        'max_disconnect_duration': metrics['max_disconnect_duration'], \
-                                        'mean_reconnect_time': metrics['mean_reconnect_time'], \
-                                        'largest_component_ratio': metrics['largest_component_ratio'], \
-                                        'mean_component_count': metrics['mean_component_count'], \
-                                        'weakest_tree_rssi': metrics['weakest_tree_rssi'], \
-                                        'team_bottleneck_rssi': metrics['team_bottleneck_rssi'] })
-                else:
-                    eps_skipped.append(curr_test)
-            if curr_test < (NUM_TEST + len(eps_skipped)):
-                job_list.append(meta_agents[info['id']].job.remote(
-                    weights, curr_test, run_index))
+        while job_list:
+            done_ids, job_list = ray.wait(job_list)
+            success, metrics, info = ray.get(done_ids[0])
+            row = {
+                'run': run_index, 'eps': info['episode_number'],
+                'map_file': MAP_FILE_NAMES[info['episode_number']],
+                'split': EVALUATION_SPLIT,
+                'status': 'ok' if success else 'error',
+                'error': metrics.get('error', ''),
+                'test_seed': info['test_seed'], 'num_robots': info['n_agent'],
+            }
+            if success:
+                dist_history.append(metrics['travel_dist'])
+                row.update({
+                    'max_dist': metrics['travel_dist'], 'steps': metrics['travel_steps'],
+                    'explored': metrics['explored_rate'], 'success': metrics['success_rate'],
+                })
+                for name in CSV_FIELDNAMES:
+                    if name in metrics:
+                        row[name] = metrics[name]
+            else:
+                failed_episodes.append(info['episode_number'])
+            with open(csv_file_path, mode='a', newline='') as csv_file:
+                csv.DictWriter(csv_file, fieldnames=CSV_FIELDNAMES).writerow(row)
+            if curr_test < NUM_TEST:
+                job_list.append(meta_agents[info['id']].job.remote(weights, curr_test, run_index))
                 curr_test += 1
 
-        # Sort CSV file by episode number
-        df = pd.read_csv(csv_file_path)
-        sorted_df = df.sort_values(by='eps')
-        sorted_df.to_csv(csv_file_path, index=False)
+        df = pd.read_csv(csv_file_path).sort_values(by='eps')
+        df.to_csv(csv_file_path, index=False)
+        print('|#Configured maps:', NUM_TEST)
+        print('|#Execution failures:', failed_episodes)
+        if failed_episodes:
+            print('Evaluation incomplete: resolve the recorded errors; no replacement maps were used.')
+        else:
+            print('|#Average (Max) length:', np.mean(dist_history))
+            print('|#Average explored:', df['explored'].mean())
+            print('|#Average connectivity:', df['connectivity_rate'].mean())
+    finally:
+        for meta_agent in meta_agents:
+            ray.kill(meta_agent)
 
-        print('|#Total test:', NUM_TEST)
-        print('|#Average (Max) length:', np.array(dist_history).mean())
-        print('|#Length std:', np.array(dist_history).std())
-        print('|#Eps skipped:', eps_skipped)
 
-
-    except KeyboardInterrupt:
-        print("CTRL_C pressed. Killing remote workers")
-        for a in meta_agents:
-            ray.kill(a)
- 
-
-@ray.remote(num_cpus=1, num_gpus=NUM_GPU/NUM_META_AGENT)
+@ray.remote(num_cpus=1, num_gpus=NUM_GPU/NUM_META_AGENT if USE_GPU else 0)
 class Runner(object):
     def __init__(self, meta_agent_id):
         self.meta_agent_id = meta_agent_id
@@ -134,10 +107,16 @@ class Runner(object):
         if torch.cuda.is_available():
             torch.cuda.manual_seed_all(test_seed)
         n_agent = np.random.randint(NUM_ROBOTS_MIN, NUM_ROBOTS_MAX+1, 1)[0]     
-        worker = TestWorker(self.meta_agent_id, n_agent, self.local_network, episode_number, device=self.device, save_image=SAVE_GIFS, greedy=True)
-        success = worker.work(episode_number)
-
-        perf_metrics = worker.perf_metrics
+        try:
+            worker = TestWorker(self.meta_agent_id, n_agent, self.local_network, episode_number,
+                                device=self.device, save_image=SAVE_GIFS, greedy=True)
+            success = worker.work(episode_number)
+            perf_metrics = worker.perf_metrics
+            if not success:
+                perf_metrics['error'] = 'Graph/observation construction failed; see worker log'
+        except Exception as error:
+            success = False
+            perf_metrics = {'error': '{}: {}'.format(type(error).__name__, error)}
         return success, perf_metrics, n_agent, test_seed
 
     def job(self, weights, episode_number, run_index):

@@ -6,6 +6,11 @@
 import torch
 from copy import deepcopy
 
+# First 15 fields retain the SAC tensor layout. Additional fields stay aligned
+# in replay: [episode, team_step, robot_id], then raw reward/termination parts.
+REPLAY_FIELD_COUNT = 17
+
+
 class Robot:
     def __init__(self, robot_id, position, plot=False):
         self.robot_id = robot_id
@@ -15,7 +20,7 @@ class Robot:
         self.observations = None
         
         self.episode_buffer = []
-        for i in range(15):
+        for i in range(REPLAY_FIELD_COUNT):
             self.episode_buffer.append([])
 
         if self.plot:
@@ -33,7 +38,7 @@ class Robot:
         self.episode_buffer[5] += deepcopy(edge_mask).to('cpu')
 
     def save_action(self, action_index):
-        self.episode_buffer[6] += action_index.unsqueeze(0).unsqueeze(0)
+        self.episode_buffer[6] += action_index.detach().cpu().unsqueeze(0).unsqueeze(0)
 
     def save_robot_position(self):
         self.xPoints.append(self.robot_position[0])
@@ -51,3 +56,15 @@ class Robot:
         self.episode_buffer[12] += deepcopy(node_padding_mask).to('cpu')
         self.episode_buffer[13] += deepcopy(edge_padding_mask).to('cpu')
         self.episode_buffer[14] += deepcopy(edge_mask).to('cpu')
+
+    def save_transition(self, observations, action, reward, terminal,
+                        next_observations, episode, team_step, reward_parts):
+        self.save_observations(observations)
+        self.save_action(action)
+        self.save_reward_done(reward, terminal)
+        self.save_next_observations(next_observations)
+        self.episode_buffer[15].append(torch.tensor(
+            [episode, team_step, self.robot_id], dtype=torch.long))
+        # frontier, node utility, rendezvous, travel cost, team reward,
+        # communication, exploration progress, stagnation, completion, timeout.
+        self.episode_buffer[16].append(torch.tensor(reward_parts, dtype=torch.float32))

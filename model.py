@@ -8,6 +8,34 @@ import torch.nn as nn
 import math
 
 
+def action_mask(edge_inputs, current_index, edge_padding_mask):
+    """Return an independent mask with a per-sample stay fallback."""
+    mask = (torch.zeros_like(edge_inputs, dtype=torch.bool) if edge_padding_mask is None
+            else edge_padding_mask.bool().clone())
+    stay = edge_inputs == current_index
+    first_stay = stay & (stay.long().cumsum(dim=-1) == 1)
+    mask = mask & ~(mask.all(dim=-1, keepdim=True) & first_stay)
+    if mask.all(dim=-1).any():
+        raise ValueError('Each sample needs a legal action or an explicit stay candidate')
+    return mask
+
+
+def movement_anchor_kl(logp, reference_logp, edge_inputs, current_index, edge_padding_mask):
+    """Anchor only the conditional distribution over legal movement actions.
+
+    Conditioning removes the stay logit from this objective. Samples without
+    movement actions contribute zero and are excluded from the averaging count.
+    """
+    moves = ((edge_inputs != current_index) & (edge_padding_mask == 0)).squeeze(1)
+    move_logp = logp.masked_fill(~moves, -1e8)
+    reference_moves = reference_logp.detach().masked_fill(~moves, -1e8)
+    move_logp = move_logp - torch.logsumexp(move_logp, dim=-1, keepdim=True)
+    reference_moves = reference_moves - torch.logsumexp(reference_moves, dim=-1, keepdim=True)
+    terms = move_logp.exp() * (move_logp - reference_moves)
+    per_sample = terms.masked_fill(~moves, 0).sum(dim=-1)
+    return per_sample.sum() / moves.any(dim=-1).sum().clamp(min=1)
+
+
 class SingleHeadAttention(nn.Module):
     def __init__(self, embedding_dim):
         super(SingleHeadAttention, self).__init__()
@@ -230,14 +258,7 @@ class PolicyNet(nn.Module):
 
         current_node_feature = torch.gather(enhanced_node_feature, 1, current_index.repeat(1, 1, embedding_dim))
 
-        if edge_padding_mask is not None:
-            current_mask = edge_padding_mask
-        else:
-            current_mask = None
-        current_mask[:,:,0] = 1 # don't stay at current position
-        
-        if not 0 in current_mask:
-            current_mask[:,:,0] = 0
+        current_mask = action_mask(edge_inputs, current_index, edge_padding_mask)
 
         enhanced_current_node_feature, _ = self.decoder(current_node_feature, enhanced_node_feature, node_padding_mask)
         enhanced_current_node_feature = self.current_embedding(torch.cat((enhanced_current_node_feature, current_node_feature), dim=-1))
@@ -283,14 +304,7 @@ class QNet(nn.Module):
         action_features = self.action_embedding(action_features)
         q_values = self.q_values_layer(action_features)
 
-        if edge_padding_mask is not None:
-            current_mask = edge_padding_mask
-        else:
-            current_mask = None
-        current_mask[:, :, 0] = 1  # don't stay at current position
-        
-        if not 0 in current_mask:
-            current_mask[:,:,0] = 0
+        current_mask = action_mask(edge_inputs, current_index, edge_padding_mask)
         current_mask = current_mask.permute(0, 2, 1)
         zero = torch.zeros_like(q_values).to(q_values.device)
         q_values = torch.where(current_mask == 1, zero, q_values)

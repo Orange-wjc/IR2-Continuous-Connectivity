@@ -13,7 +13,8 @@ import numpy as np
 import random
 import socket
 from torch.utils.tensorboard import SummaryWriter
-from model import PolicyNet, QNet
+from model import PolicyNet, QNet, movement_anchor_kl
+from robot import REPLAY_FIELD_COUNT
 from runner import RLRunner
 from datetime import datetime
 
@@ -43,7 +44,7 @@ def writeToTensorBoard(writer, tensorboardData, curr_episode):
      disconnect_count,
      mean_disconnect_duration, max_disconnect_duration, mean_reconnect_time,
      largest_component_ratio, mean_component_count,
-     team_bottleneck_rssi) = tensorboardData
+     team_bottleneck_rssi, stay_rate, time_limit_reached) = tensorboardData
 
     writer.add_scalar(tag='Losses/Value', scalar_value=value, global_step=curr_episode)
     writer.add_scalar(tag='Losses/Policy Loss', scalar_value=policyLoss, global_step=curr_episode)
@@ -73,6 +74,8 @@ def writeToTensorBoard(writer, tensorboardData, curr_episode):
     writer.add_scalar(tag='Perf/Largest Component Ratio', scalar_value=largest_component_ratio, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Mean Component Count', scalar_value=mean_component_count, global_step=curr_episode)
     writer.add_scalar(tag='Perf/Team Bottleneck RSSI', scalar_value=team_bottleneck_rssi, global_step=curr_episode)
+    writer.add_scalar(tag='Perf/Stay Rate', scalar_value=stay_rate, global_step=curr_episode)
+    writer.add_scalar(tag='Perf/Time Limit Reached', scalar_value=time_limit_reached, global_step=curr_episode)
 
 
 def get_cpu_state_dict(model):
@@ -92,10 +95,12 @@ def main():
     checkpoint = None
     policy_checkpoint = None
 
-    # Full resume restores every training state; v3.2 transfers only the policy.
+    # Full resume restores every training state; v3.4 transfers only the policy.
     if LOAD_MODEL:
         print('Loading Model...')
         checkpoint = torch.load(MODEL_PATH, map_location=device)
+        if checkpoint.get('transition_version') != 'synchronous_team_v1':
+            raise ValueError('v3.4 full resume requires a synchronous-team checkpoint; use policy-only transfer for older runs')
         log_alpha = checkpoint['log_alpha'] if CONTINUE_LOG_ALPHA else torch.FloatTensor([INITIAL_LOG_ALPHA]).to(device) 
     else:
         log_alpha = torch.FloatTensor([INITIAL_LOG_ALPHA]).to(device)
@@ -180,7 +185,7 @@ def main():
     reference_policy_net.eval()
     for parameter in reference_policy_net.parameters():
         parameter.requires_grad = False
-    print('Anchoring policy to pretrained episode: ',
+    print('Anchoring conditional movement policy to pretrained episode: ',
           reference_checkpoint.get('episode', 'unknown'))
     del reference_checkpoint, policy_checkpoint
 
@@ -225,14 +230,14 @@ def main():
                    'max_no_exploration_progress_steps', 'disconnect_count',
                    'mean_disconnect_duration', 'max_disconnect_duration',
                    'mean_reconnect_time', 'largest_component_ratio',
-                   'mean_component_count', 'team_bottleneck_rssi']
+                   'mean_component_count', 'team_bottleneck_rssi', 'stay_rate', 'time_limit_reached']
     training_data = []
     perf_metrics = {}
     for n in metric_name:
         perf_metrics[n] = []
 
     experience_buffer = []
-    for i in range(15):     # 15dims of inputs
+    for i in range(REPLAY_FIELD_COUNT):     # SAC tensors plus aligned team metadata
         experience_buffer.append([])
     
     try:
@@ -340,8 +345,9 @@ def main():
                         with torch.no_grad():
                             logp = dp_policy(node_inputs_batch, edge_inputs_batch, current_inputs_batch, node_padding_mask_batch, edge_padding_mask_batch, edge_mask_batch)
                     policy_sac_loss = torch.sum((logp.exp().unsqueeze(2) * (log_alpha.exp().detach() * logp.unsqueeze(2) - policy_q_values)), dim=1).mean()
-                    policy_anchor_kl = torch.sum(
-                        logp.exp() * (logp - reference_logp), dim=1).mean()
+                    policy_anchor_kl = movement_anchor_kl(
+                        logp, reference_logp, edge_inputs_batch,
+                        current_inputs_batch, edge_padding_mask_batch)
                     policy_loss = (
                         policy_sac_loss
                         + POLICY_ANCHOR_KL_WEIGHT * policy_anchor_kl)
@@ -444,7 +450,12 @@ def main():
                                 "input_dim": INPUT_DIM,
                                 "connectivity_feature_dim": CONNECTIVITY_FEATURE_DIM,
                                 "use_connectivity_features": USE_CONNECTIVITY_FEATURES,
-                                "reward_version": "balanced_v3_3_anchored_target_90",
+                                "reward_version": "balanced_v3_4_sync_stay_target_90",
+                                "transition_version": "synchronous_team_v1",
+                                "action_version": "explicit_stay_length_mask_v1",
+                                "policy_anchor_mode": "conditional_movement_kl",
+                                "replay_field_count": REPLAY_FIELD_COUNT,
+                                "time_limit_is_terminal": True,
                                 "initial_policy_source": initial_policy_source,
                                 "initial_policy_episode": initial_policy_episode,
                                 "gradient_update_count": gradient_update_count,

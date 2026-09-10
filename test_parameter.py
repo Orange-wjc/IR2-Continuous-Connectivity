@@ -3,15 +3,20 @@
 # Inference parameters.
 #######################################################################
 
+import os
 import sys
 sys.modules['TRAINING'] = False           # False = Inference Testing
-from map_splits import HYBRID_TEST_MAP_FILES
+from map_splits import HYBRID_TEST_MAP_FILES, HYBRID_VALIDATION_MAP_FILES
 
 # --- MAPS --- #
 # Held-out hybrid evaluation split.
 TEST_SET_NAME = "hybrid"        # "hybrid", "corridor", "complex", 
 TEST_SET_DIR = "DungeonMaps/test/" + TEST_SET_NAME
-MAP_FILE_NAMES = HYBRID_TEST_MAP_FILES
+EVALUATION_SPLIT = os.environ.get('IR2_EVAL_SPLIT', 'validation')
+if EVALUATION_SPLIT not in ('validation', 'test'):
+    raise ValueError('IR2_EVAL_SPLIT must be validation or test')
+MAP_FILE_NAMES = (HYBRID_VALIDATION_MAP_FILES if EVALUATION_SPLIT == 'validation'
+                  else HYBRID_TEST_MAP_FILES)
 
 # Smaller test maps
 if TEST_SET_NAME == "hybrid" or TEST_SET_NAME == "corridor":
@@ -54,10 +59,10 @@ VIZ_CONNECTIVITY_RSSI_GROUND_TRUTH=True
 USE_GPU = True
 NUM_GPU = 1
 NUM_META_AGENT = 1  # Number of parallel sims
-FOLDER_NAME = 'wall_aware_hybrid3_balanced_v3_3_inference'
-MODEL_DIR = 'model/wall_aware_hybrid3_balanced_v3_3'
+FOLDER_NAME = 'wall_aware_hybrid3_balanced_v3_4_' + EVALUATION_SPLIT
+MODEL_DIR = 'model/wall_aware_hybrid3_balanced_v3_4'
 GIFS_DIR = f'{FOLDER_NAME}/test_results/gifs'
-MODEL_PATH = MODEL_DIR + '/checkpoint.pth' 
+MODEL_PATH = os.environ.get('IR2_EVAL_MODEL_PATH', MODEL_DIR + '/checkpoint.pth')
 trajectory_path = f'{FOLDER_NAME}/test_results/trajectory'
 length_path = f'{FOLDER_NAME}/test_results/length'
 log_path = f'{FOLDER_NAME}/test_results/log'

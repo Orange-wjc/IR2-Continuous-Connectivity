@@ -10,7 +10,8 @@ import imageio
 import numpy as np
 import torch
 from env import Env
-from robot import Robot
+from robot import Robot, REPLAY_FIELD_COUNT
+from team_rollout import action_candidates, run_team_episode
 
 
 class Worker:
@@ -39,116 +40,15 @@ class Worker:
 
         self.perf_metrics = dict()
         self.episode_buffer = []
-        for i in range(15):
+        for i in range(REPLAY_FIELD_COUNT):
             self.episode_buffer.append([])
 
         self.max_node_coords = 0
 
 
     def run_episode(self, curr_episode):
-        """ Run simulation episode for multiple robots """
-        done = False
-        astar_unsuccessful = False
-
-        ### Run episode ###
-        for step in range(MAX_EPS_STEPS):
-            reward_list = []
-            travel_dist_list = []
-
-            for robot_id, deciding_robot in enumerate(self.robot_list):
-
-                ### Update each agent's graphs & utility (if map updated from map_merge) ###
-                success = self.env.update_graph(robot_id, self.env.find_frontier(self.env.all_downsampled_belief[robot_id]), eps=self.global_step, step=step)
-                if not success: astar_unsuccessful = True; break
-            
-                deciding_robot.observations, success = self.get_observations(
-                    deciding_robot.robot_position, robot_id, curr_episode, step, plot=self.save_image)
-                if not success: astar_unsuccessful = True; break
-                deciding_robot.save_observations(deciding_robot.observations)
-
-                ### Forward pass through policy to get next position ###
-                next_position, action_index = self.select_node(deciding_robot.observations, robot_id)
-                deciding_robot.save_action(action_index)
-
-                ### Take Action ###
-                dist_travelled = np.linalg.norm(next_position - deciding_robot.robot_position)
-                deciding_robot.travel_dist += dist_travelled
-                deciding_robot.robot_position = next_position
-
-                ### Log results of action (e.g. distance travelled) ###
-                travel_dist_list.append(deciding_robot.travel_dist)
-                self.all_robot_positions[robot_id] = next_position                    
-                self.env.all_robot_positions_belief[robot_id][robot_id] = next_position     
-                self.env.all_robot_positions_step_updated[robot_id][robot_id] = step
-
-                ### Execute step in env
-                success, reward, done = self.env.single_robot_step(robot_id, self.all_robot_positions, self.global_step, step, dist_travelled)
-                if not success: astar_unsuccessful = True; break
-                reward_list.append(reward)
-
-                ### Update observations + rewards from action ###
-                deciding_robot.observations, success = self.get_observations(
-                    deciding_robot.robot_position, robot_id, curr_episode, step, plot=self.save_image)
-                if not success: astar_unsuccessful = True; break
-                deciding_robot.save_next_observations(deciding_robot.observations)
-
-                ### Save a frame to generate gif of robot trajectories ###
-                if self.save_image:
-                    deciding_robot.save_robot_position()    
-                    robots_route = []
-                    robots_route.append([deciding_robot.xPoints, deciding_robot.yPoints])
-                    robot_gifs_path = copy.deepcopy(GIFS_DIR) + "/robot_{}".format(robot_id+1)
-                    if not os.path.exists(robot_gifs_path):
-                        os.makedirs(robot_gifs_path)
-                    self.env.plot_env(self.global_step, robot_gifs_path, step, travel_dist_list[robot_id], robots_route, robot_id)
-
-            if astar_unsuccessful:
-                break
-
-            team_reward = self.env.update_env_and_get_team_rewards()
-            for i in range(len(reward_list)):
-                reward_list[i] += team_reward
-                self.robot_list[i].save_reward_done(reward_list[i], done)
-
-            ### [Ground Truth] Save a frame to generate gif of robot trajectories ###
-            if self.save_image:
-                robots_route = []
-                for robot in self.robot_list:
-                    robots_route.append([robot.xPoints, robot.yPoints])
-                for _ in range(self.n_agent):
-                    robot_gifs_path = copy.deepcopy(GIFS_DIR) + "/merged"
-                if not os.path.exists(robot_gifs_path):
-                    os.makedirs(robot_gifs_path)
-                self.env.plot_env_ground_truth(self.global_step, robot_gifs_path, step, max(travel_dist_list), robots_route)
-            
-            if done:
-                break
-
-        for robot in self.robot_list:
-            for i in range(15):
-                self.episode_buffer[i] += robot.episode_buffer[i]
-
-        if astar_unsuccessful:
-            return False
-
-        self.perf_metrics['travel_dist'] = max(travel_dist_list)
-        self.perf_metrics['explored_rate'] = self.env.explored_rate
-        self.perf_metrics['success_rate'] = done
-        self.perf_metrics.update(self.env.get_connectivity_metrics())
-
-        # save merged gif
-        if self.save_image:
-            for robot_id in range(self.n_agent):
-                robot_gifs_path = copy.deepcopy(GIFS_DIR) + "/robot_{}".format(robot_id+1)
-                self.make_gif(robot_gifs_path, curr_episode, robot_id)
-            robot_gifs_path = copy.deepcopy(GIFS_DIR) + "/merged"
-            self.make_gif_ground_truth(robot_gifs_path, curr_episode)
-
-        num_node_coords = len(max(self.env.all_node_coords, key=len))
-        if self.max_node_coords < num_node_coords:
-            self.max_node_coords = num_node_coords
-        print(YELLOW, f"[Eps {curr_episode} Completed] Steps: {step}, Node Coords: {num_node_coords}, Max Dist: {max(travel_dist_list):.2f}", NC)
-        return True
+        return run_team_episode(
+            self, curr_episode, MAX_EPS_STEPS, GIFS_DIR, collect_experience=True)
 
 
     def get_observations(self, robot_position, robot_id, eps, step, plot=True):
@@ -230,27 +130,12 @@ class Worker:
             print(RED, "[Eps {} | Robot {} | Step {}] current_index > len(edge_inputs) ({} >= {}). Skipping eps.".format(eps, robot_id+1, step, current_index, len(edge_inputs)))
             return [], False
         current_node_index = current_index.item()
-        edge = list(edge_inputs[current_node_index])
-        if len(edge) > self.k_size:
-            neighboring_edges = [index for index in edge if index != current_node_index]
-            neighboring_edges.sort(
-                key=lambda index: np.linalg.norm(
-                    self.env.all_node_coords[robot_id][index] - robot_position))
-            edge = [current_node_index] + neighboring_edges[:self.k_size - 1]
+        edge_inputs, edge_padding_mask, valid_edges = action_candidates(
+            edge_inputs[current_node_index], current_node_index,
+            self.env.all_node_coords[robot_id], self.k_size, self.device)
         if plot:
-            self.env.all_curr_vertices[robot_id] = [self.env.all_node_coords[robot_id][e] if e != 0 else None for e in edge]  
-
-        while len(edge) < self.k_size:
-            edge.append(0)
-
-        edge_inputs = torch.tensor(edge).unsqueeze(0).unsqueeze(0).to(self.device)  # (1, 1, k_size)
-        edge_padding_mask = torch.zeros((1, 1, self.k_size), dtype=torch.int64).to(self.device)
-        one = torch.ones_like(edge_padding_mask, dtype=torch.int64).to(self.device)
-        if not (edge_inputs.shape == one.shape == edge_padding_mask.shape):
-            print(RED, "[Eps {} | Robot {} | Step {}] Not (edge_inputs.shape = one.shape == edge_padding_mask.shape) not (edge_inputs.shape == one.shape == edge_padding_mask.shape). Skipping eps.".format(eps, robot_id+1, step))
-            return [], False
-
-        edge_padding_mask = torch.where(edge_inputs == 0, one, edge_padding_mask)
+            self.env.all_curr_vertices[robot_id] = [
+                self.env.all_node_coords[robot_id][index] for index in valid_edges]
 
         observations = node_inputs, edge_inputs, current_index, node_padding_mask, edge_padding_mask, edge_mask
         return observations, True   # success

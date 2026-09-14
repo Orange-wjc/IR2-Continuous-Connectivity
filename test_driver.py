@@ -16,7 +16,8 @@ from test_multi_robot_worker import TestWorker
 from datetime import datetime
 
 CSV_FIELDNAMES = [
-    'run', 'eps', 'map_file', 'split', 'status', 'error', 'test_seed', 'num_robots', 'max_dist', 'steps', 'explored', 'success',
+    'run', 'eps', 'map_file', 'split', 'model_path', 'checkpoint_file', 'checkpoint_episode',
+    'status', 'error', 'test_seed', 'num_robots', 'max_dist', 'steps', 'explored', 'success',
     'connectivity_rate', 'disconnect_count', 'mean_disconnect_duration',
     'max_disconnect_duration', 'mean_reconnect_time', 'largest_component_ratio',
     'mean_component_count', 'weakest_tree_rssi', 'team_bottleneck_rssi', 'stay_rate', 'time_limit_reached'
@@ -33,6 +34,11 @@ def run_test(run_index):
 
     global_network = PolicyNet(INPUT_DIM, EMBEDDING_DIM)
     checkpoint = torch.load(MODEL_PATH, map_location='cpu')
+    model_path = os.path.abspath(MODEL_PATH)
+    checkpoint_file = os.path.basename(MODEL_PATH)
+    checkpoint_episode = checkpoint.get('episode', '')
+    print('|Model path:', model_path)
+    print('|Checkpoint episode:', checkpoint_episode)
     global_network.load_state_dict(checkpoint['policy_model'])
     weights = global_network.state_dict()
     meta_agents = [Runner.remote(i) for i in range(min(NUM_META_AGENT, NUM_TEST))]
@@ -51,6 +57,9 @@ def run_test(run_index):
                 'run': run_index, 'eps': info['episode_number'],
                 'map_file': MAP_FILE_NAMES[info['episode_number']],
                 'split': EVALUATION_SPLIT,
+                'model_path': model_path,
+                'checkpoint_file': checkpoint_file,
+                'checkpoint_episode': checkpoint_episode,
                 'status': 'ok' if success else 'error',
                 'error': metrics.get('error', ''),
                 'test_seed': info['test_seed'], 'num_robots': info['n_agent'],

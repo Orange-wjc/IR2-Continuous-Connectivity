@@ -46,7 +46,9 @@ else:
 
 # --- Test Specific --- #
 NUM_TEST = len(MAP_FILE_NAMES)      # Evaluate every held-out hybrid map once
-NUM_RUN = 1                         # How many times to run this set of tests
+NUM_RUN = int(os.environ.get('IR2_EVAL_NUM_RUN', '1'))
+if NUM_RUN < 1:
+    raise ValueError('IR2_EVAL_NUM_RUN must be a positive integer')
 TEST_RANDOM_SEED = 20260908         # Same map/channel realization across checkpoints
 SAVE_TRAJECTORY = False             # Do you want to save per-step metrics 
 SAVE_LENGTH = False                 # Do you want to save per-episode metrics 

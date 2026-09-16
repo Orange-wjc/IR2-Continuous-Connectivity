@@ -15,7 +15,8 @@ from team_rollout import action_candidates, run_team_episode
 
 
 class TestWorker:
-    def __init__(self, meta_agent_id, n_agent, policy_net, global_step, device='cuda', greedy=False, save_image=False):
+    def __init__(self, meta_agent_id, n_agent, policy_net, global_step, device='cuda', greedy=False,
+                 save_image=False, gifs_dir=GIFS_DIR):
         self.device = device
         self.greedy = greedy
         self.n_agent = n_agent
@@ -24,6 +25,7 @@ class TestWorker:
         self.node_padding_size = NODE_PADDING_SIZE
         self.k_size = K_SIZE
         self.save_image = save_image
+        self.gifs_dir = gifs_dir
 
         self.env = Env(map_index=self.global_step, n_agent=self.n_agent, k_size=self.k_size, plot=save_image)
         self.local_policy_net = policy_net
@@ -43,7 +45,7 @@ class TestWorker:
 
     def run_episode(self, curr_episode):
         return run_team_episode(
-            self, curr_episode, MAX_EPS_STEPS, GIFS_DIR, collect_experience=False)
+            self, curr_episode, MAX_EPS_STEPS, self.gifs_dir, collect_experience=False)
 
 
     def get_observations(self, robot_position, robot_id, eps, step, plot=True):

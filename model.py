@@ -8,6 +8,28 @@ import torch.nn as nn
 import math
 
 
+def expand_policy_input_state_dict(state_dict, source_input_dim, target_input_dim):
+    """Preserve an old actor while adding zero-initialized observation columns."""
+    if source_input_dim == target_input_dim:
+        return state_dict
+    if source_input_dim > target_input_dim:
+        raise ValueError(
+            'Cannot shrink pretrained policy input_dim {} to {}'.format(
+                source_input_dim, target_input_dim))
+    expanded = dict(state_dict)
+    key = 'initial_embedding.weight'
+    source_weight = state_dict[key]
+    if source_weight.shape[1] != source_input_dim:
+        raise ValueError(
+            'Checkpoint {} has width {}, expected {}'.format(
+                key, source_weight.shape[1], source_input_dim))
+    target_weight = source_weight.new_zeros(
+        (source_weight.shape[0], target_input_dim))
+    target_weight[:, :source_input_dim] = source_weight
+    expanded[key] = target_weight
+    return expanded
+
+
 def action_mask(edge_inputs, current_index, edge_padding_mask):
     """Return an independent mask with a per-sample stay fallback."""
     mask = (torch.zeros_like(edge_inputs, dtype=torch.bool) if edge_padding_mask is None
@@ -316,4 +338,3 @@ class QNet(nn.Module):
         enhanced_node_feature = self.encode_graph(node_inputs, node_padding_mask, edge_mask)
         q_values, attention_weights = self.output_q_values(enhanced_node_feature, edge_inputs, current_index, edge_padding_mask, node_padding_mask)
         return q_values, attention_weights
-

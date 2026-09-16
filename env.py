@@ -77,6 +77,12 @@ class Env():
         self.largest_component_ratio = 0.0
         self.largest_component_ratio_sum = 0.0
         self.disconnect_steps = np.zeros(self.n_agent, dtype=np.int32)
+        self.local_reachability_history = [[] for _ in range(self.n_agent)]
+        self.local_recent_reachability = np.ones(self.n_agent, dtype=np.float32)
+        self.previous_best_observed_margin = [None for _ in range(self.n_agent)]
+        self.rssi_margin_trend = np.zeros(self.n_agent, dtype=np.float32)
+        self.last_fully_connected_positions = [
+            self.start_position.copy() for _ in range(self.n_agent)]
         self.disconnect_count = 0
         self.new_disconnect_count = 0
         self.completed_reconnect_times = []
@@ -504,6 +510,41 @@ class Env():
                          if (pose[0], pose[1]) in unique_group]
             self.group_ids_list.append(group_ids)
 
+        self.update_local_connectivity_state()
+
+
+    def update_local_connectivity_state(self):
+        """Update recovery memory from information observable within each component."""
+        for group in self.group_ids_list:
+            component_ratio = len(group) / self.n_agent
+            for robot_id in group:
+                history = self.local_reachability_history[robot_id]
+                history.append(component_ratio)
+                del history[:-LOCAL_REACHABILITY_WINDOW]
+                self.local_recent_reachability[robot_id] = float(np.mean(history))
+
+                connected_margins = [
+                    self.rssi_margin_matrix[robot_id, other_id]
+                    for other_id in group if other_id != robot_id
+                    and self.link_state_matrix[robot_id, other_id] > 0
+                    and np.isfinite(self.rssi_margin_matrix[robot_id, other_id])]
+                best_margin = (max(connected_margins) if connected_margins
+                               else -RSSI_MARGIN_NORMALIZATION)
+                previous_margin = self.previous_best_observed_margin[robot_id]
+                if previous_margin is None:
+                    self.rssi_margin_trend[robot_id] = 0.0
+                else:
+                    self.rssi_margin_trend[robot_id] = np.clip(
+                        (best_margin - previous_margin) / RSSI_TREND_NORMALIZATION,
+                        -1.0, 1.0)
+                self.previous_best_observed_margin[robot_id] = best_margin
+
+                # A robot can infer this condition after messages from every ID
+                # are reachable through its current communication component.
+                if len(group) == self.n_agent:
+                    self.last_fully_connected_positions[robot_id] = (
+                        self.all_robot_positions_gt[robot_id].copy())
+
 
     def record_connectivity_metrics(self):
         """Accumulate connectivity statistics once after a complete team step."""
@@ -635,9 +676,12 @@ class Env():
     def get_connectivity_node_features(self, robot_id, node_coords):
         """Predict communication quality for each node using only the robot's local beliefs.
 
-        Columns are normalized best RSSI margin, connected-neighbor ratio,
-        predicted component ratio, binary relay score, and disconnection duration.
+        The first five columns retain the v3.4 layout. v3.5-A appends long-outage
+        urgency, RSSI trend, teammate-information age, a candidate recovery score,
+        and recent locally-observed component reachability.
         """
+        if CONNECTIVITY_FEATURE_DIM not in (5, 10):
+            raise ValueError('Connectivity feature dimension must be 5 or 10')
         features = np.zeros((len(node_coords), CONNECTIVITY_FEATURE_DIM), dtype=np.float32)
         positions = self.all_robot_positions_belief[robot_id]
         known_other_ids = [other_id for other_id, position in enumerate(positions)
@@ -670,6 +714,21 @@ class Env():
 
         disconnect_ratio = min(
             self.disconnect_steps[robot_id] / MAX_DISCONNECTED_STEPS, 1.0)
+        long_disconnect_urgency = min(
+            self.disconnect_steps[robot_id] /
+            max(DISCONNECT_DURATION_SATURATION_STEPS, 1), 1.0)
+        current_step = self.all_robot_positions_step_updated[robot_id][robot_id]
+        teammate_ages = [
+            (current_step - self.all_robot_positions_step_updated[robot_id][other_id])
+            if positions[other_id] is not None
+            else TEAMMATE_INFO_AGE_SATURATION_STEPS
+            for other_id in range(self.n_agent) if other_id != robot_id]
+        max_teammate_age = max(teammate_ages, default=0)
+        teammate_info_age = np.clip(
+            max_teammate_age / max(TEAMMATE_INFO_AGE_SATURATION_STEPS, 1),
+            0.0, 1.0)
+        local_recent_reachability = self.local_recent_reachability[robot_id]
+        last_connected_position = self.last_fully_connected_positions[robot_id]
         for node_index, candidate_position in enumerate(node_coords):
             margins = []
             connected_neighbors = []
@@ -698,13 +757,28 @@ class Env():
             predicted_component_ratio = len(connected_component) / self.n_agent
             relay_score = float(len(neighbor_components) >= 2)
 
-            features[node_index] = [
+            feature_values = [
                 np.clip(best_margin / RSSI_MARGIN_NORMALIZATION, -1.0, 1.0),
                 connected_neighbor_ratio,
                 predicted_component_ratio,
                 relay_score,
                 disconnect_ratio,
             ]
+            if CONNECTIVITY_FEATURE_DIM == 10:
+                recovery_distance = np.linalg.norm(
+                    candidate_position - last_connected_position)
+                recovery_score = long_disconnect_urgency * (
+                    1.0 - 2.0 * np.clip(
+                        recovery_distance / max(RECOVERY_DISTANCE_NORMALIZATION, 1),
+                        0.0, 1.0))
+                feature_values.extend([
+                    long_disconnect_urgency,
+                    self.rssi_margin_trend[robot_id],
+                    teammate_info_age,
+                    recovery_score,
+                    local_recent_reachability,
+                ])
+            features[node_index] = feature_values
 
         return features
 

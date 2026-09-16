@@ -13,7 +13,8 @@ import numpy as np
 import random
 import socket
 from torch.utils.tensorboard import SummaryWriter
-from model import PolicyNet, QNet, movement_anchor_kl
+from model import (PolicyNet, QNet, expand_policy_input_state_dict,
+                   movement_anchor_kl)
 from robot import REPLAY_FIELD_COUNT
 from runner import RLRunner
 from datetime import datetime
@@ -82,7 +83,7 @@ def get_cpu_state_dict(model):
     """Copy model weights to CPU without moving the training model off its device."""
     return {name: value.detach().to(device='cpu', copy=True) for name, value in model.state_dict().items()}
 
-    
+
 def main():
 
     ### Defining model & params ###
@@ -95,12 +96,12 @@ def main():
     checkpoint = None
     policy_checkpoint = None
 
-    # Full resume restores every training state; v3.4 transfers only the policy.
+    # Full resume restores every training state; v3.5-A transfers only the policy.
     if LOAD_MODEL:
         print('Loading Model...')
         checkpoint = torch.load(MODEL_PATH, map_location=device)
         if checkpoint.get('transition_version') != 'synchronous_team_v1':
-            raise ValueError('v3.4 full resume requires a synchronous-team checkpoint; use policy-only transfer for older runs')
+            raise ValueError('v3.5-A full resume requires a synchronous-team checkpoint; use policy-only transfer for older runs')
         log_alpha = checkpoint['log_alpha'] if CONTINUE_LOG_ALPHA else torch.FloatTensor([INITIAL_LOG_ALPHA]).to(device) 
     else:
         log_alpha = torch.FloatTensor([INITIAL_LOG_ALPHA]).to(device)
@@ -162,11 +163,9 @@ def main():
         print(global_policy_optimizer.state_dict()['param_groups'][0]['lr'])
     elif LOAD_POLICY_ONLY:
         source_input_dim = policy_checkpoint.get('input_dim', INPUT_DIM)
-        if source_input_dim != INPUT_DIM:
-            raise ValueError(
-                'Pretrained policy input_dim {} does not match {}'.format(
-                    source_input_dim, INPUT_DIM))
-        global_policy_net.load_state_dict(policy_checkpoint['policy_model'])
+        transferred_policy = expand_policy_input_state_dict(
+            policy_checkpoint['policy_model'], source_input_dim, INPUT_DIM)
+        global_policy_net.load_state_dict(transferred_policy)
         initial_policy_episode = policy_checkpoint.get('episode')
         print('Loaded policy from episode: ', initial_policy_episode or 'unknown')
         print('Critics, optimizers, alpha, and episode counter are newly initialized.')
@@ -177,11 +176,9 @@ def main():
     else:
         reference_checkpoint = policy_checkpoint
     reference_input_dim = reference_checkpoint.get('input_dim', INPUT_DIM)
-    if reference_input_dim != INPUT_DIM:
-        raise ValueError(
-            'Reference policy input_dim {} does not match {}'.format(
-                reference_input_dim, INPUT_DIM))
-    reference_policy_net.load_state_dict(reference_checkpoint['policy_model'])
+    reference_policy = expand_policy_input_state_dict(
+        reference_checkpoint['policy_model'], reference_input_dim, INPUT_DIM)
+    reference_policy_net.load_state_dict(reference_policy)
     reference_policy_net.eval()
     for parameter in reference_policy_net.parameters():
         parameter.requires_grad = False
@@ -450,7 +447,8 @@ def main():
                                 "input_dim": INPUT_DIM,
                                 "connectivity_feature_dim": CONNECTIVITY_FEATURE_DIM,
                                 "use_connectivity_features": USE_CONNECTIVITY_FEATURES,
-                                "reward_version": "balanced_v3_4_sync_stay_target_90",
+                                "reward_version": "balanced_v3_5_a_local_recovery",
+                                "observation_version": "local_recovery_v1",
                                 "transition_version": "synchronous_team_v1",
                                 "action_version": "explicit_stay_length_mask_v1",
                                 "policy_anchor_mode": "conditional_movement_kl",

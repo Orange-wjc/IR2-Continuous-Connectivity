@@ -49,20 +49,53 @@ NUM_TEST = len(MAP_FILE_NAMES)      # Evaluate every held-out hybrid map once
 NUM_RUN = int(os.environ.get('IR2_EVAL_NUM_RUN', '1'))
 if NUM_RUN < 1:
     raise ValueError('IR2_EVAL_NUM_RUN must be a positive integer')
+run_indices_text = os.environ.get('IR2_EVAL_RUN_INDICES', '').strip()
+if run_indices_text:
+    EVALUATION_RUN_INDICES = [int(value.strip()) for value in run_indices_text.split(',')]
+    if any(value < 0 for value in EVALUATION_RUN_INDICES):
+        raise ValueError('IR2_EVAL_RUN_INDICES must contain non-negative integers')
+    if len(set(EVALUATION_RUN_INDICES)) != len(EVALUATION_RUN_INDICES):
+        raise ValueError('IR2_EVAL_RUN_INDICES must not contain duplicates')
+else:
+    EVALUATION_RUN_INDICES = list(range(NUM_RUN))
+
+map_files_text = os.environ.get('IR2_EVAL_MAP_FILES', '').strip()
+if map_files_text:
+    requested_map_files = [value.strip() for value in map_files_text.split(',')]
+    unknown_map_files = [value for value in requested_map_files if value not in MAP_FILE_NAMES]
+    if unknown_map_files:
+        raise ValueError('IR2_EVAL_MAP_FILES not in {} split: {}'.format(
+            EVALUATION_SPLIT, ', '.join(unknown_map_files)))
+    if len(set(requested_map_files)) != len(requested_map_files):
+        raise ValueError('IR2_EVAL_MAP_FILES must not contain duplicates')
+    EVALUATION_EPISODE_INDICES = [MAP_FILE_NAMES.index(value) for value in requested_map_files]
+else:
+    EVALUATION_EPISODE_INDICES = list(range(NUM_TEST))
+
 TEST_RANDOM_SEED = 20260908         # Same map/channel realization across checkpoints
 SAVE_TRAJECTORY = False             # Do you want to save per-step metrics 
 SAVE_LENGTH = False                 # Do you want to save per-episode metrics 
-SAVE_GIFS = False                   # Keep bulk evaluation fast; enable for selected cases
+save_gifs_text = os.environ.get('IR2_EVAL_SAVE_GIFS', '0').strip().lower()
+if save_gifs_text not in ('0', '1', 'false', 'true'):
+    raise ValueError('IR2_EVAL_SAVE_GIFS must be 0, 1, false, or true')
+SAVE_GIFS = save_gifs_text in ('1', 'true')
 VIZ_GRAPH_EDGES=True                # Visualize graph edhes (NOTE: Will be very slow)
 VIZ_GRAPH_EDGES_GROUND_TRUTH=False  # Visualize graph edhes (NOTE: Will be very slow)
 VIZ_CONNECTIVITY_RSSI_GROUND_TRUTH=True
 
 # --- GENERAL --- #
-USE_GPU = True
+use_gpu_text = os.environ.get('IR2_EVAL_USE_GPU', '1').strip().lower()
+if use_gpu_text not in ('0', '1', 'false', 'true'):
+    raise ValueError('IR2_EVAL_USE_GPU must be 0, 1, false, or true')
+USE_GPU = use_gpu_text in ('1', 'true')
 NUM_GPU = 1
-NUM_META_AGENT = 5  # Parallel validation/test simulations on the 25-core server
-FOLDER_NAME = 'wall_aware_hybrid3_balanced_v3_4_' + EVALUATION_SPLIT
-MODEL_DIR = 'model/wall_aware_hybrid3_balanced_v3_4'
+NUM_META_AGENT = int(os.environ.get('IR2_EVAL_NUM_META_AGENT', '5'))
+if NUM_META_AGENT < 1:
+    raise ValueError('IR2_EVAL_NUM_META_AGENT must be a positive integer')
+EXPERIMENT_NAME = os.environ.get(
+    'IR2_EVAL_EXPERIMENT_NAME', 'wall_aware_hybrid3_balanced_v3_4')
+FOLDER_NAME = EXPERIMENT_NAME + '_' + EVALUATION_SPLIT
+MODEL_DIR = 'model/' + EXPERIMENT_NAME
 GIFS_DIR = f'{FOLDER_NAME}/test_results/gifs'
 MODEL_PATH = os.environ.get('IR2_EVAL_MODEL_PATH', MODEL_DIR + '/checkpoint.pth')
 trajectory_path = f'{FOLDER_NAME}/test_results/trajectory'
@@ -72,7 +105,10 @@ log_path = f'{FOLDER_NAME}/test_results/log'
 # --- RL Params --- # 
 EMBEDDING_DIM = 128
 USE_CONNECTIVITY_FEATURES = True
-CONNECTIVITY_FEATURE_DIM = 5
+CONNECTIVITY_FEATURE_DIM = int(os.environ.get(
+    'IR2_EVAL_CONNECTIVITY_FEATURE_DIM', '5'))
+if CONNECTIVITY_FEATURE_DIM not in (5, 10):
+    raise ValueError('IR2_EVAL_CONNECTIVITY_FEATURE_DIM must be 5 or 10')
 INPUT_DIM = 6 + CONNECTIVITY_FEATURE_DIM if USE_CONNECTIVITY_FEATURES else 6
 
 # --- Sensor Model --- # 
@@ -97,6 +133,10 @@ MAX_DISCONNECTED_STEPS=10
 DISCONNECT_GRACE_STEPS=3
 DISCONNECT_DURATION_SATURATION_STEPS=30
 RSSI_MARGIN_NORMALIZATION=20
+RSSI_TREND_NORMALIZATION=10
+TEAMMATE_INFO_AGE_SATURATION_STEPS=30
+RECOVERY_DISTANCE_NORMALIZATION=160
+LOCAL_REACHABILITY_WINDOW=20
 CONNECTIVITY_TARGET_RATE=0.90
 CONNECTIVITY_BUDGET_WINDOW=20
 CONNECTIVITY_PRESSURE_RAMP=0.10

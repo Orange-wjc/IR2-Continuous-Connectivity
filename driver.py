@@ -14,7 +14,7 @@ import random
 import socket
 from torch.utils.tensorboard import SummaryWriter
 from model import (PolicyNet, QNet, expand_policy_input_state_dict,
-                   movement_anchor_kl)
+                   movement_anchor_kl, require_checkpoint_metadata)
 from robot import REPLAY_FIELD_COUNT
 from runner import RLRunner
 from datetime import datetime
@@ -89,9 +89,29 @@ def main():
     ### Defining model & params ###
     device = torch.device('cuda') if USE_GPU_GLOBAL else torch.device('cpu')
     local_device = torch.device('cuda') if USE_GPU else torch.device('cpu')
+    reward_config = {
+        "connectivity_target_rate": CONNECTIVITY_TARGET_RATE,
+        "connectivity_budget_window": CONNECTIVITY_BUDGET_WINDOW,
+        "connectivity_pressure_ramp": CONNECTIVITY_PRESSURE_RAMP,
+        "weak_signal": WEAK_SIGNAL_PENALTY_WEIGHT,
+        "component_deficit": COMPONENT_DEFICIT_PENALTY_WEIGHT,
+        "disconnect_duration": DISCONNECT_DURATION_PENALTY_WEIGHT,
+        "new_disconnect": NEW_DISCONNECT_PENALTY_WEIGHT,
+        "reconnect": RECONNECT_REWARD_WEIGHT,
+        "duration_saturation_steps": DISCONNECT_DURATION_SATURATION_STEPS,
+        "disconnect_grace_steps": DISCONNECT_GRACE_STEPS,
+        "team_exploration_progress": TEAM_EXPLORATION_PROGRESS_WEIGHT,
+        "no_exploration_progress_grace_steps": NO_EXPLORATION_PROGRESS_GRACE_STEPS,
+        "no_exploration_progress_saturation_steps": NO_EXPLORATION_PROGRESS_SATURATION_STEPS,
+        "no_exploration_progress_penalty": NO_EXPLORATION_PROGRESS_PENALTY_WEIGHT,
+    }
 
     if LOAD_MODEL and LOAD_POLICY_ONLY:
         raise ValueError('LOAD_MODEL and LOAD_POLICY_ONLY cannot both be True')
+    if LOAD_MODEL and not CONTINUE_LOG_ALPHA:
+        raise ValueError(
+            'v3.5-A full resume requires CONTINUE_LOG_ALPHA=True; '
+            'use LOAD_POLICY_ONLY for a fresh optimizer/temperature run')
 
     checkpoint = None
     policy_checkpoint = None
@@ -100,8 +120,19 @@ def main():
     if LOAD_MODEL:
         print('Loading Model...')
         checkpoint = torch.load(MODEL_PATH, map_location=device)
-        if checkpoint.get('transition_version') != 'synchronous_team_v1':
-            raise ValueError('v3.5-A full resume requires a synchronous-team checkpoint; use policy-only transfer for older runs')
+        require_checkpoint_metadata(checkpoint, {
+            'input_dim': INPUT_DIM,
+            'connectivity_feature_dim': CONNECTIVITY_FEATURE_DIM,
+            'reward_version': REWARD_VERSION,
+            'observation_version': OBSERVATION_VERSION,
+            'transition_version': TRANSITION_VERSION,
+            'action_version': ACTION_VERSION,
+            'policy_anchor_mode': POLICY_ANCHOR_MODE,
+            'replay_field_count': REPLAY_FIELD_COUNT,
+            'time_limit_is_terminal': True,
+            'policy_anchor_kl_weight': POLICY_ANCHOR_KL_WEIGHT,
+            'reward_config': reward_config,
+        }, 'v3.5-A resume checkpoint')
         log_alpha = checkpoint['log_alpha'] if CONTINUE_LOG_ALPHA else torch.FloatTensor([INITIAL_LOG_ALPHA]).to(device) 
     else:
         log_alpha = torch.FloatTensor([INITIAL_LOG_ALPHA]).to(device)
@@ -162,6 +193,15 @@ def main():
         print("log_alpha: ", log_alpha)
         print(global_policy_optimizer.state_dict()['param_groups'][0]['lr'])
     elif LOAD_POLICY_ONLY:
+        require_checkpoint_metadata(policy_checkpoint, {
+            'episode': PRETRAINED_POLICY_EPISODE,
+            'input_dim': PRETRAINED_POLICY_INPUT_DIM,
+            'connectivity_feature_dim': PRETRAINED_POLICY_CONNECTIVITY_FEATURE_DIM,
+            'reward_version': PRETRAINED_POLICY_REWARD_VERSION,
+            'transition_version': TRANSITION_VERSION,
+            'action_version': ACTION_VERSION,
+            'policy_anchor_mode': POLICY_ANCHOR_MODE,
+        }, 'v3.5-A source policy')
         source_input_dim = policy_checkpoint.get('input_dim', INPUT_DIM)
         transferred_policy = expand_policy_input_state_dict(
             policy_checkpoint['policy_model'], source_input_dim, INPUT_DIM)
@@ -171,10 +211,30 @@ def main():
         print('Critics, optimizers, alpha, and episode counter are newly initialized.')
 
     if policy_checkpoint is None:
+        if LOAD_MODEL:
+            saved_policy_source = checkpoint.get('initial_policy_source')
+            if (saved_policy_source is None or
+                    os.path.normpath(saved_policy_source) != os.path.normpath(POLICY_PRETRAINED_PATH)):
+                raise ValueError(
+                    'Resume checkpoint policy anchor {!r} does not match configured {!r}'.format(
+                        saved_policy_source, POLICY_PRETRAINED_PATH))
         reference_checkpoint = torch.load(
             POLICY_PRETRAINED_PATH, map_location='cpu')
     else:
         reference_checkpoint = policy_checkpoint
+    require_checkpoint_metadata(reference_checkpoint, {
+        'episode': PRETRAINED_POLICY_EPISODE,
+        'input_dim': PRETRAINED_POLICY_INPUT_DIM,
+        'connectivity_feature_dim': PRETRAINED_POLICY_CONNECTIVITY_FEATURE_DIM,
+        'reward_version': PRETRAINED_POLICY_REWARD_VERSION,
+        'transition_version': TRANSITION_VERSION,
+        'action_version': ACTION_VERSION,
+        'policy_anchor_mode': POLICY_ANCHOR_MODE,
+    }, 'v3.5-A reference policy')
+    if LOAD_MODEL and checkpoint.get('initial_policy_episode') != reference_checkpoint.get('episode'):
+        raise ValueError(
+            'Resume checkpoint anchor episode {} does not match reference episode {}'.format(
+                checkpoint.get('initial_policy_episode'), reference_checkpoint.get('episode')))
     reference_input_dim = reference_checkpoint.get('input_dim', INPUT_DIM)
     reference_policy = expand_policy_input_state_dict(
         reference_checkpoint['policy_model'], reference_input_dim, INPUT_DIM)
@@ -447,33 +507,18 @@ def main():
                                 "input_dim": INPUT_DIM,
                                 "connectivity_feature_dim": CONNECTIVITY_FEATURE_DIM,
                                 "use_connectivity_features": USE_CONNECTIVITY_FEATURES,
-                                "reward_version": "balanced_v3_5_a_local_recovery",
-                                "observation_version": "local_recovery_v1",
-                                "transition_version": "synchronous_team_v1",
-                                "action_version": "explicit_stay_length_mask_v1",
-                                "policy_anchor_mode": "conditional_movement_kl",
+                                "reward_version": REWARD_VERSION,
+                                "observation_version": OBSERVATION_VERSION,
+                                "transition_version": TRANSITION_VERSION,
+                                "action_version": ACTION_VERSION,
+                                "policy_anchor_mode": POLICY_ANCHOR_MODE,
                                 "replay_field_count": REPLAY_FIELD_COUNT,
                                 "time_limit_is_terminal": True,
                                 "initial_policy_source": initial_policy_source,
                                 "initial_policy_episode": initial_policy_episode,
                                 "gradient_update_count": gradient_update_count,
                                 "policy_warmup_updates": policy_warmup_updates,
-                                "reward_config": {
-                                    "connectivity_target_rate": CONNECTIVITY_TARGET_RATE,
-                                    "connectivity_budget_window": CONNECTIVITY_BUDGET_WINDOW,
-                                    "connectivity_pressure_ramp": CONNECTIVITY_PRESSURE_RAMP,
-                                    "weak_signal": WEAK_SIGNAL_PENALTY_WEIGHT,
-                                    "component_deficit": COMPONENT_DEFICIT_PENALTY_WEIGHT,
-                                    "disconnect_duration": DISCONNECT_DURATION_PENALTY_WEIGHT,
-                                    "new_disconnect": NEW_DISCONNECT_PENALTY_WEIGHT,
-                                    "reconnect": RECONNECT_REWARD_WEIGHT,
-                                    "duration_saturation_steps": DISCONNECT_DURATION_SATURATION_STEPS,
-                                    "disconnect_grace_steps": DISCONNECT_GRACE_STEPS,
-                                    "team_exploration_progress": TEAM_EXPLORATION_PROGRESS_WEIGHT,
-                                    "no_exploration_progress_grace_steps": NO_EXPLORATION_PROGRESS_GRACE_STEPS,
-                                    "no_exploration_progress_saturation_steps": NO_EXPLORATION_PROGRESS_SATURATION_STEPS,
-                                    "no_exploration_progress_penalty": NO_EXPLORATION_PROGRESS_PENALTY_WEIGHT,
-                                },
+                                "reward_config": reward_config,
                                 "policy_lr": POLICY_LR,
                                 "q_lr": Q_LR,
                                 "policy_anchor_kl_weight": POLICY_ANCHOR_KL_WEIGHT,

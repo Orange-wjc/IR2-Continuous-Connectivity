@@ -58,7 +58,7 @@ MODEL_PATH = MODEL_DIR + '/checkpoint.pth'
 LOAD_MODEL = False
 LOAD_POLICY_ONLY = True
 POLICY_PRETRAINED_PATH = 'model/wall_aware_hybrid3_balanced_v3_4/checkpoint_960.pth'
-CONTINUE_LOG_ALPHA = False  # Full-checkpoint resume only; v3 resets alpha and critics
+CONTINUE_LOG_ALPHA = False  # Set True together with LOAD_MODEL for an exact v3.5-A resume
 SAVE_TRAINING_GIFS = False
 SAVE_IMG_GAP = 201  
 VIZ_GRAPH_EDGES=True
@@ -79,6 +79,15 @@ POLICY_ANCHOR_KL_WEIGHT = 0.5
 GAMMA = 0.995
 DECAY_STEP = 256
 POLICY_TRANSFER_CRITIC_WARMUP_UPDATES = 1024
+REWARD_VERSION = 'balanced_v3_5_a_local_recovery'
+OBSERVATION_VERSION = 'local_recovery_v1'
+TRANSITION_VERSION = 'synchronous_team_v1'
+ACTION_VERSION = 'explicit_stay_length_mask_v1'
+POLICY_ANCHOR_MODE = 'conditional_movement_kl'
+PRETRAINED_POLICY_EPISODE = 960
+PRETRAINED_POLICY_INPUT_DIM = 11
+PRETRAINED_POLICY_CONNECTIVITY_FEATURE_DIM = 5
+PRETRAINED_POLICY_REWARD_VERSION = 'balanced_v3_4_sync_stay_target_90'
 
 # --- Sensor Model --- # 
 # SS Reference: https://hal.science/hal-03365129/document

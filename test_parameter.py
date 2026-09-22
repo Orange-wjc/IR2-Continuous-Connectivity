@@ -93,7 +93,7 @@ NUM_META_AGENT = int(os.environ.get('IR2_EVAL_NUM_META_AGENT', '5'))
 if NUM_META_AGENT < 1:
     raise ValueError('IR2_EVAL_NUM_META_AGENT must be a positive integer')
 EXPERIMENT_NAME = os.environ.get(
-    'IR2_EVAL_EXPERIMENT_NAME', 'wall_aware_hybrid3_balanced_v3_4')
+    'IR2_EVAL_EXPERIMENT_NAME', 'wall_aware_hybrid3_recovery_v3_5_a')
 FOLDER_NAME = EXPERIMENT_NAME + '_' + EVALUATION_SPLIT
 MODEL_DIR = 'model/' + EXPERIMENT_NAME
 GIFS_DIR = f'{FOLDER_NAME}/test_results/gifs'
@@ -106,10 +106,15 @@ log_path = f'{FOLDER_NAME}/test_results/log'
 EMBEDDING_DIM = 128
 USE_CONNECTIVITY_FEATURES = True
 CONNECTIVITY_FEATURE_DIM = int(os.environ.get(
-    'IR2_EVAL_CONNECTIVITY_FEATURE_DIM', '5'))
+    'IR2_EVAL_CONNECTIVITY_FEATURE_DIM', '10'))
 if CONNECTIVITY_FEATURE_DIM not in (5, 10):
     raise ValueError('IR2_EVAL_CONNECTIVITY_FEATURE_DIM must be 5 or 10')
 INPUT_DIM = 6 + CONNECTIVITY_FEATURE_DIM if USE_CONNECTIVITY_FEATURES else 6
+EXPECTED_OBSERVATION_VERSION = os.environ.get(
+    'IR2_EVAL_OBSERVATION_VERSION',
+    'local_recovery_v1' if CONNECTIVITY_FEATURE_DIM == 10 else '').strip()
+EXPECTED_TRANSITION_VERSION = 'synchronous_team_v1'
+EXPECTED_ACTION_VERSION = 'explicit_stay_length_mask_v1'
 
 # --- Sensor Model --- # 
 # SS Reference: https://hal.science/hal-03365129/document

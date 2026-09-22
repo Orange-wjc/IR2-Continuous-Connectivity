@@ -8,6 +8,20 @@ import torch.nn as nn
 import math
 
 
+def require_checkpoint_metadata(checkpoint, expected, context):
+    """Fail early when a checkpoint belongs to a different experiment contract."""
+    mismatches = []
+    for key, expected_value in expected.items():
+        actual_value = checkpoint.get(key)
+        if actual_value != expected_value:
+            mismatches.append(
+                '{}={!r} (expected {!r})'.format(
+                    key, actual_value, expected_value))
+    if mismatches:
+        raise ValueError(
+            '{} metadata mismatch: {}'.format(context, '; '.join(mismatches)))
+
+
 def expand_policy_input_state_dict(state_dict, source_input_dim, target_input_dim):
     """Preserve an old actor while adding zero-initialized observation columns."""
     if source_input_dim == target_input_dim:

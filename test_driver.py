@@ -17,6 +17,8 @@ from datetime import datetime
 
 CSV_FIELDNAMES = [
     'run', 'eps', 'map_file', 'split', 'model_path', 'checkpoint_file', 'checkpoint_episode',
+    'input_dim', 'connectivity_feature_dim', 'observation_version', 'reward_version',
+    'transition_version', 'action_version', 'policy_anchor_mode',
     'status', 'error', 'test_seed', 'num_robots', 'max_dist', 'steps', 'explored', 'success',
     'connectivity_rate', 'disconnect_count', 'mean_disconnect_duration',
     'max_disconnect_duration', 'mean_reconnect_time', 'largest_component_ratio',
@@ -25,13 +27,6 @@ CSV_FIELDNAMES = [
 
 def run_test(run_index):
     """Evaluate each configured map exactly once, including failed executions."""
-    current_datetime = datetime.now().strftime('%Y-%m-%d_%H%M%S_%f')
-    csv_file_name = 'data_{}_run_{}.csv'.format(current_datetime, run_index)
-    csv_file_path = os.path.join(log_path, csv_file_name)
-    os.makedirs(log_path, exist_ok=True)
-    with open(csv_file_path, mode='w', newline='') as csv_file:
-        csv.DictWriter(csv_file, fieldnames=CSV_FIELDNAMES).writeheader()
-
     global_network = PolicyNet(INPUT_DIM, EMBEDDING_DIM)
     checkpoint = torch.load(MODEL_PATH, map_location='cpu')
     checkpoint_input_dim = checkpoint.get('input_dim', INPUT_DIM)
@@ -40,15 +35,48 @@ def run_test(run_index):
             'Checkpoint input_dim {} does not match configured input_dim {}. '
             'Set IR2_EVAL_CONNECTIVITY_FEATURE_DIM to 10 for v3.5-A or 5 for v3.4.'
             .format(checkpoint_input_dim, INPUT_DIM))
+    checkpoint_feature_dim = checkpoint.get('connectivity_feature_dim')
+    if checkpoint_feature_dim != CONNECTIVITY_FEATURE_DIM:
+        raise ValueError(
+            'Checkpoint connectivity_feature_dim {} does not match configured {}.'
+            .format(checkpoint_feature_dim, CONNECTIVITY_FEATURE_DIM))
+    if (EXPECTED_OBSERVATION_VERSION and
+            checkpoint.get('observation_version') != EXPECTED_OBSERVATION_VERSION):
+        raise ValueError(
+            'Checkpoint observation_version {!r} does not match configured {!r}.'
+            .format(checkpoint.get('observation_version'),
+                    EXPECTED_OBSERVATION_VERSION))
+    if checkpoint.get('transition_version') != EXPECTED_TRANSITION_VERSION:
+        raise ValueError(
+            'Checkpoint transition_version {!r} does not match required {!r}.'
+            .format(checkpoint.get('transition_version'),
+                    EXPECTED_TRANSITION_VERSION))
+    if checkpoint.get('action_version') != EXPECTED_ACTION_VERSION:
+        raise ValueError(
+            'Checkpoint action_version {!r} does not match required {!r}.'
+            .format(checkpoint.get('action_version'), EXPECTED_ACTION_VERSION))
     model_path = os.path.abspath(MODEL_PATH)
     checkpoint_file = os.path.basename(MODEL_PATH)
     checkpoint_episode = checkpoint.get('episode', '')
+    checkpoint_identity = {
+        name: checkpoint.get(name, '') for name in (
+            'input_dim', 'connectivity_feature_dim', 'observation_version',
+            'reward_version', 'transition_version', 'action_version',
+            'policy_anchor_mode')
+    }
     print('|Model path:', model_path)
     print('|Checkpoint episode:', checkpoint_episode)
+    print('|Checkpoint identity:', checkpoint_identity)
     run_gifs_dir = os.path.join(
         GIFS_DIR, os.path.splitext(checkpoint_file)[0], 'run_{}'.format(run_index))
     global_network.load_state_dict(checkpoint['policy_model'])
     weights = global_network.state_dict()
+    current_datetime = datetime.now().strftime('%Y-%m-%d_%H%M%S_%f')
+    csv_file_name = 'data_{}_run_{}.csv'.format(current_datetime, run_index)
+    csv_file_path = os.path.join(log_path, csv_file_name)
+    os.makedirs(log_path, exist_ok=True)
+    with open(csv_file_path, mode='w', newline='') as csv_file:
+        csv.DictWriter(csv_file, fieldnames=CSV_FIELDNAMES).writeheader()
     meta_agents = [Runner.remote(i) for i in range(
         min(NUM_META_AGENT, len(EVALUATION_EPISODE_INDICES)))]
     curr_test = 0
@@ -71,6 +99,7 @@ def run_test(run_index):
                 'model_path': model_path,
                 'checkpoint_file': checkpoint_file,
                 'checkpoint_episode': checkpoint_episode,
+                **checkpoint_identity,
                 'status': 'ok' if success else 'error',
                 'error': metrics.get('error', ''),
                 'test_seed': info['test_seed'], 'num_robots': info['n_agent'],

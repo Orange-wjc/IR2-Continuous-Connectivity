@@ -79,7 +79,7 @@ class Env():
         self.disconnect_steps = np.zeros(self.n_agent, dtype=np.int32)
         self.local_reachability_history = [[] for _ in range(self.n_agent)]
         self.local_recent_reachability = np.ones(self.n_agent, dtype=np.float32)
-        self.previous_best_observed_margin = [None for _ in range(self.n_agent)]
+        self.previous_best_local_margin = [None for _ in range(self.n_agent)]
         self.rssi_margin_trend = np.zeros(self.n_agent, dtype=np.float32)
         self.last_fully_connected_positions = [
             self.start_position.copy() for _ in range(self.n_agent)]
@@ -203,6 +203,7 @@ class Env():
             self.all_robot_global_graph_belief[robot_id][robot_id][0].append(position.copy())
         self.update_connectivity_graph(self.all_robot_positions_gt)
         self.share_team_beliefs(0)
+        self.update_local_connectivity_state()
         self.refresh_merged_belief()
         self.explored_rate = self.evaluate_team_exploration_rate()
         for robot_id in range(self.n_agent):
@@ -258,6 +259,7 @@ class Env():
                 return False, None, None, None
         self.update_connectivity_graph(self.all_robot_positions_gt)
         self.share_team_beliefs(sim_step)
+        self.update_local_connectivity_state()
         for robot_id in range(self.n_agent):
             self.remove_missing_pose_beliefs(robot_id)
         self.refresh_merged_belief()
@@ -510,9 +512,6 @@ class Env():
                          if (pose[0], pose[1]) in unique_group]
             self.group_ids_list.append(group_ids)
 
-        self.update_local_connectivity_state()
-
-
     def update_local_connectivity_state(self):
         """Update recovery memory from information observable within each component."""
         for group in self.group_ids_list:
@@ -523,27 +522,38 @@ class Env():
                 del history[:-LOCAL_REACHABILITY_WINDOW]
                 self.local_recent_reachability[robot_id] = float(np.mean(history))
 
-                connected_margins = [
-                    self.rssi_margin_matrix[robot_id, other_id]
-                    for other_id in group if other_id != robot_id
-                    and self.link_state_matrix[robot_id, other_id] > 0
-                    and np.isfinite(self.rssi_margin_matrix[robot_id, other_id])]
-                best_margin = (max(connected_margins) if connected_margins
-                               else -RSSI_MARGIN_NORMALIZATION)
-                previous_margin = self.previous_best_observed_margin[robot_id]
-                if previous_margin is None:
-                    self.rssi_margin_trend[robot_id] = 0.0
-                else:
-                    self.rssi_margin_trend[robot_id] = np.clip(
-                        (best_margin - previous_margin) / RSSI_TREND_NORMALIZATION,
-                        -1.0, 1.0)
-                self.previous_best_observed_margin[robot_id] = best_margin
+                if CONNECTIVITY_FEATURE_DIM == 10:
+                    best_margin = self.get_best_local_estimated_margin(robot_id)
+                    previous_margin = self.previous_best_local_margin[robot_id]
+                    if previous_margin is None:
+                        self.rssi_margin_trend[robot_id] = 0.0
+                    else:
+                        self.rssi_margin_trend[robot_id] = np.clip(
+                            (best_margin - previous_margin) / RSSI_TREND_NORMALIZATION,
+                            -1.0, 1.0)
+                    self.previous_best_local_margin[robot_id] = best_margin
 
                 # A robot can infer this condition after messages from every ID
                 # are reachable through its current communication component.
                 if len(group) == self.n_agent:
                     self.last_fully_connected_positions[robot_id] = (
                         self.all_robot_positions_gt[robot_id].copy())
+
+
+    def get_best_local_estimated_margin(self, robot_id):
+        """Estimate the strongest link from local state, including sub-threshold RSSI."""
+        positions = self.all_robot_positions_belief[robot_id]
+        source_position = positions[robot_id]
+        robot_belief = self.all_robot_belief[robot_id][robot_id]
+        margins = []
+        for other_id, target_position in enumerate(positions):
+            if other_id == robot_id or target_position is None:
+                continue
+            _, margin, _ = self.estimate_link(
+                robot_belief, source_position, target_position)
+            if np.isfinite(margin):
+                margins.append(margin)
+        return max(margins) if margins else -RSSI_MARGIN_NORMALIZATION
 
 
     def record_connectivity_metrics(self):

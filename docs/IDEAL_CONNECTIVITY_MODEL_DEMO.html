@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>理想通信感知多机器人探索模型</title>
+  <style>
+    :root {
+      --bg: #08111f;
+      --panel: rgba(17, 31, 51, .88);
+      --panel-2: #10243a;
+      --text: #e9f3ff;
+      --muted: #91a8bf;
+      --line: rgba(147, 181, 214, .18);
+      --cyan: #36d6d0;
+      --green: #52dc8c;
+      --orange: #ffb454;
+      --red: #ff6673;
+      --purple: #a98cff;
+      --blue: #58a6ff;
+      --shadow: 0 24px 70px rgba(0, 0, 0, .34);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(54, 214, 208, .12), transparent 28rem),
+        radial-gradient(circle at 85% 22%, rgba(169, 140, 255, .10), transparent 30rem),
+        var(--bg);
+      font: 15px/1.7 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    button, input { font: inherit; }
+    .shell { width: min(1240px, calc(100% - 32px)); margin: 0 auto; }
+    .hero { padding: 70px 0 36px; }
+    .eyebrow { color: var(--cyan); letter-spacing: .18em; font-size: 12px; font-weight: 800; }
+    h1 { max-width: 900px; margin: 12px 0 16px; font-size: clamp(34px, 6vw, 68px); line-height: 1.08; }
+    .lede { max-width: 820px; margin: 0; color: #b9cce0; font-size: clamp(16px, 2vw, 20px); }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .badge { padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.03); color: #c9daeb; }
+    .badge.warn { color: #ffd69d; border-color: rgba(255,180,84,.35); background: rgba(255,180,84,.08); }
+
+    .section { padding: 30px 0; }
+    .section-head { display: flex; justify-content: space-between; gap: 24px; align-items: end; margin-bottom: 16px; }
+    .section-head h2 { margin: 0; font-size: clamp(24px, 4vw, 38px); line-height: 1.2; }
+    .section-head p { max-width: 650px; margin: 0; color: var(--muted); }
+    .panel { border: 1px solid var(--line); border-radius: 22px; background: var(--panel); box-shadow: var(--shadow); overflow: hidden; }
+
+    .sim-layout { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(285px, .75fr); }
+    .map-wrap { min-width: 0; padding: 18px; background: linear-gradient(145deg, rgba(255,255,255,.025), transparent); }
+    .map-bar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+    .map-status { display: flex; gap: 9px; align-items: center; color: #c8d9ea; font-weight: 700; }
+    .pulse { width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 6px rgba(82,220,140,.12); }
+    .legend { display: flex; flex-wrap: wrap; gap: 12px; color: var(--muted); font-size: 12px; }
+    .legend span::before { content: ""; display: inline-block; width: 18px; height: 3px; margin: 0 6px 3px 0; border-radius: 3px; background: currentColor; }
+    .legend .good { color: var(--green); }
+    .legend .warning { color: var(--orange); }
+    .legend .off { color: var(--red); }
+
+    #world { display: block; width: 100%; border-radius: 16px; background: #0a1726; border: 1px solid rgba(255,255,255,.06); }
+    .floor { fill: #13283c; stroke: #27435c; stroke-width: 2; }
+    .room-label { fill: #7390aa; font-size: 12px; letter-spacing: .08em; }
+    .wall { stroke: #7890a7; stroke-width: 12; stroke-linecap: square; }
+    .door { stroke: #13283c; stroke-width: 15; }
+    .frontier { fill: none; stroke: var(--cyan); stroke-width: 2; stroke-dasharray: 7 7; opacity: .55; }
+    .route { fill: none; stroke-width: 3; opacity: .4; stroke-linecap: round; stroke-linejoin: round; }
+    .link { stroke-width: 5; stroke-linecap: round; transition: all .45s ease; }
+    .link.warning { stroke-dasharray: 12 7; }
+    .link.off { stroke-dasharray: 8 8; opacity: .65; }
+    .rssi-label { fill: #f2f7fc; font-size: 12px; font-weight: 800; paint-order: stroke; stroke: #08111f; stroke-width: 5px; }
+    .robot { transition: transform .65s cubic-bezier(.2,.8,.2,1); }
+    .robot circle.core { stroke: #f4fbff; stroke-width: 3; }
+    .robot circle.ring { fill: none; stroke-width: 3; opacity: 0; }
+    .robot.offline circle.ring { opacity: 1; stroke: var(--red); stroke-dasharray: 6 4; }
+    .robot text.id { fill: white; font-size: 14px; font-weight: 900; text-anchor: middle; dominant-baseline: central; }
+    .robot text.role { fill: #dcecff; font-size: 11px; text-anchor: middle; paint-order: stroke; stroke: #08111f; stroke-width: 4px; }
+
+    .control-row { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; margin-top: 14px; }
+    .play { border: 0; color: #04131c; background: var(--cyan); padding: 9px 16px; border-radius: 10px; font-weight: 900; cursor: pointer; }
+    .play:hover { filter: brightness(1.08); }
+    #timeline { width: 100%; accent-color: var(--cyan); }
+    .step-count { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+    .story { border-left: 1px solid var(--line); padding: 22px; }
+    .story-kicker { color: var(--cyan); font-size: 12px; letter-spacing: .12em; font-weight: 800; }
+    #phaseTitle { margin: 6px 0 8px; font-size: 27px; line-height: 1.2; }
+    #phaseText { min-height: 108px; margin: 0 0 16px; color: #b8cadc; }
+    .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .metric { padding: 13px; background: rgba(255,255,255,.035); border: 1px solid var(--line); border-radius: 13px; }
+    .metric label { display: block; color: var(--muted); font-size: 11px; }
+    .metric strong { display: block; margin-top: 2px; font-size: 21px; font-variant-numeric: tabular-nums; }
+    .note { margin-top: 14px; padding: 12px; border-radius: 12px; color: #ffd9a6; background: rgba(255,180,84,.08); border: 1px solid rgba(255,180,84,.2); font-size: 12px; }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .card { padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: rgba(16,36,58,.78); }
+    .card .num { color: var(--cyan); font-size: 12px; font-weight: 900; letter-spacing: .1em; }
+    .card h3 { margin: 6px 0; font-size: 19px; }
+    .card p { margin: 0; color: var(--muted); }
+
+    .feature-layout { display: grid; grid-template-columns: .9fr 1.1fr; gap: 16px; }
+    .feature-stack { padding: 20px; }
+    .feature { display: grid; grid-template-columns: 42px 1fr auto; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .feature:last-child { border-bottom: 0; }
+    .feature .icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; color: var(--cyan); background: rgba(54,214,208,.09); font-weight: 900; }
+    .feature b, .feature small { display: block; }
+    .feature small { color: var(--muted); }
+    .feature code { color: #bde9ff; background: rgba(88,166,255,.08); padding: 3px 7px; border-radius: 7px; }
+    .flow { display: grid; align-content: center; gap: 12px; padding: 28px; }
+    .flow-box { padding: 15px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.035); }
+    .flow-box b { color: #fff; }
+    .flow-box span { display: block; color: var(--muted); }
+    .arrow { color: var(--cyan); text-align: center; font-size: 24px; }
+
+    .reward { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .reward-side { padding: 22px; }
+    .reward-side h3 { margin-top: 0; }
+    .reward-item { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+    .reward-item:last-child { border: 0; }
+    .minus { color: var(--red); }
+    .plus { color: var(--green); }
+
+    .compare { width: 100%; border-collapse: collapse; }
+    .compare th, .compare td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--line); }
+    .compare th { color: var(--muted); font-size: 12px; letter-spacing: .08em; }
+    .compare td:nth-child(2) { color: #adc0d4; }
+    .compare td:nth-child(3) { color: var(--green); font-weight: 800; }
+    .footer { padding: 42px 0 70px; color: var(--muted); }
+
+    @media (max-width: 900px) {
+      .sim-layout, .feature-layout, .reward { grid-template-columns: 1fr; }
+      .story { border-left: 0; border-top: 1px solid var(--line); }
+      .cards { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .shell { width: min(100% - 20px, 1240px); }
+      .hero { padding-top: 42px; }
+      .cards { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 8px; }
+      .map-wrap { padding: 10px; }
+      .story { padding: 17px; }
+      .compare { font-size: 12px; }
+      .compare th, .compare td { padding: 10px 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero shell">
+    <div class="eyebrow">WALL-AWARE CONNECTIVITY · IDEAL POLICY BLUEPRINT</div>
+    <h1>理想模型不是“永不断连”，而是知道何时探索、何时接力、何时回来。</h1>
+    <p class="lede">它像给机器人团队系上一根有弹性的通信绳：空间足够时主动分散，墙体削弱信号时提前安排中继，短暂断连后迅速恢复，并在任务推进中动态交换角色。</p>
+    <div class="badges">
+      <span class="badge">连续 RSSI 感知</span>
+      <span class="badge">多跳通信图</span>
+      <span class="badge">动态中继</span>
+      <span class="badge">弹性断连预算</span>
+      <span class="badge warn">以下数值为理想行为示意，不是实验结果</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="section shell">
+      <div class="section-head">
+        <h2>一次理想决策过程</h2>
+        <p>拖动时间轴或点击播放，观察模型如何从自由探索过渡到信号预警、中继接力、短时断连和主动恢复。</p>
+      </div>
+      <div class="panel sim-layout">
+        <div class="map-wrap">
+          <div class="map-bar">
+            <div class="map-status"><i class="pulse" id="statusPulse"></i><span id="statusText">团队多跳连通</span></div>
+            <div class="legend"><span class="good">良好</span><span class="warning">预警</span><span class="off">断连</span></div>
+          </div>
+          <svg id="world" viewBox="0 0 900 500" role="img" aria-label="多机器人通信感知探索动画">
+            <rect width="900" height="500" fill="#091522"/>
+            <rect class="floor" x="36" y="38" width="828" height="424" rx="12"/>
+            <path class="frontier" d="M705 76h120v142H705z M620 290h205v130H620z"/>
+            <text class="room-label" x="82" y="78">START / 已探索区域</text>
+            <text class="room-label" x="710" y="97">未知房间 A</text>
+            <text class="room-label" x="635" y="316">未知房间 B</text>
+            <path class="wall" d="M300 40v145 M300 240v220 M540 40v95 M540 195v265 M300 185h150 M500 185h160 M720 185h142 M540 300h95 M700 300h162"/>
+            <path class="door" d="M300 187v50 M452 185h46 M662 185h56 M540 138v55 M637 300h61"/>
+            <g id="routes"></g>
+            <g id="links"></g>
+            <g id="robots"></g>
+          </svg>
+          <div class="control-row">
+            <button class="play" id="playButton" type="button">▶ 播放</button>
+            <input id="timeline" type="range" min="0" max="5" value="0" step="1" aria-label="演示阶段">
+            <span class="step-count"><span id="stepNumber">1</span> / 6</span>
+          </div>
+        </div>
+
+        <aside class="story">
+          <div class="story-kicker" id="phaseKicker">阶段 01 · EXPLORE</div>
+          <h3 id="phaseTitle">信号充足，自由分散</h3>
+          <p id="phaseText">机器人优先选择探索收益高的候选节点。团队仍通过直接或多跳链路连接，因此不必为了通信而挤在一起。</p>
+          <div class="metric-grid">
+            <div class="metric"><label>当前状态</label><strong id="metricConnected">连通</strong></div>
+            <div class="metric"><label>最弱树边</label><strong id="metricRssi">−55 dBm</strong></div>
+            <div class="metric"><label>最大连通分量</label><strong id="metricComponent">100%</strong></div>
+            <div class="metric"><label>断连计时</label><strong id="metricBudget">0 / 10</strong></div>
+          </div>
+          <div class="note">理想模型追求的是更好的折中：通信可靠性提高，同时探索效率只付出可接受的代价。</div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-head">
+        <h2>训练后希望学会的 6 种行为</h2>
+        <p>这些行为不是写死的规则，而是由候选节点特征和团队奖励共同诱导出来的策略。</p>
+      </div>
+      <div class="cards">
+        <article class="card"><div class="num">01 · SPREAD</div><h3>有把握地分散</h3><p>信号余量大时选择高探索收益节点，不因过度保守而失去覆盖速度。</p></article>
+        <article class="card"><div class="num">02 · ANTICIPATE</div><h3>断连前预警</h3><p>看到候选位置的 RSSI 接近门限后，提前降低继续深入的倾向。</p></article>
+        <article class="card"><div class="num">03 · RELAY</div><h3>自动形成中继</h3><p>机器人停在门口、转角或走廊，使远端探索者仍能接入主通信分量。</p></article>
+        <article class="card"><div class="num">04 · TOLERATE</div><h3>容忍短时断连</h3><p>如果远端区域探索价值足够高，允许在断连预算内完成短暂探索。</p></article>
+        <article class="card"><div class="num">05 · RECOVER</div><h3>主动快速重连</h3><p>断连时间越长，返回队友或靠近可用中继的动作越有吸引力。</p></article>
+        <article class="card"><div class="num">06 · ROTATE</div><h3>动态交换角色</h3><p>中继不是固定岗位；链路稳定后，原中继重新探索，由更合适的机器人接替。</p></article>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-head">
+        <h2>模型到底“看见”了什么</h2>
+        <p>原始 6 维节点信息保留，再为每个候选节点增加 5 个通信特征，最终形成 11 维输入。</p>
+      </div>
+      <div class="panel feature-layout">
+        <div class="feature-stack">
+          <div class="feature"><span class="icon">①</span><div><b>最佳 RSSI 余量</b><small>去这个节点后，最可靠直接链路离断连门限还有多远</small></div><code>−1…1</code></div>
+          <div class="feature"><span class="icon">②</span><div><b>直连邻居比例</b><small>移动后可以直接联系多少已知队友</small></div><code>0…1</code></div>
+          <div class="feature"><span class="icon">③</span><div><b>预测分量比例</b><small>通过多跳通信，自己预计能加入多大的团队</small></div><code>0…1</code></div>
+          <div class="feature"><span class="icon">④</span><div><b>中继标记</b><small>该候选位置是否能把两个原本分开的通信分量连起来</small></div><code>0 / 1</code></div>
+          <div class="feature"><span class="icon">⑤</span><div><b>断连持续时间</b><small>失联越久，模型越应该重视恢复连接</small></div><code>0…1</code></div>
+        </div>
+        <div class="flow">
+          <div class="flow-box"><b>候选节点</b><span>探索收益、位置、会合效用、占用状态 + 5 个通信特征</span></div>
+          <div class="arrow">↓</div>
+          <div class="flow-box"><b>图注意力编码器</b><span>理解地图拓扑、队友分布和潜在多跳链路</span></div>
+          <div class="arrow">↓</div>
+          <div class="flow-box"><b>策略网络</b><span>为当前可达的 30 个邻接动作分配概率</span></div>
+          <div class="arrow">↓</div>
+          <div class="flow-box"><b>理想动作</b><span>在探索价值和通信风险之间做动态取舍</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-head">
+        <h2>奖励怎样塑造行为</h2>
+        <p>模型不会被要求“永远站在一起”。它同时收到探索收益与通信反馈，自己学习何时值得冒险。</p>
+      </div>
+      <div class="panel reward">
+        <div class="reward-side">
+          <h3>继续探索的动力</h3>
+          <div class="reward-item"><span>发现新区域与新前沿</span><b class="plus">正奖励</b></div>
+          <div class="reward-item"><span>成功完成团队任务</span><b class="plus">大正奖励</b></div>
+          <div class="reward-item"><span>恢复通信连接</span><b class="plus">重连奖励</b></div>
+        </div>
+        <div class="reward-side">
+          <h3>控制通信风险</h3>
+          <div class="reward-item"><span>通信树最弱边进入预警区</span><b class="minus">弱信号惩罚</b></div>
+          <div class="reward-item"><span>机器人离开团队主分量</span><b class="minus">断连惩罚</b></div>
+          <div class="reward-item"><span>断连时间持续增加</span><b class="minus">递增惩罚</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-head">
+        <h2>训练成功后，结果应该朝哪个方向变化</h2>
+        <p>不预设“必须达到 95%”之类的结论；是否成功应由多随机种子实验与基线比较决定。</p>
+      </div>
+      <div class="panel">
+        <table class="compare">
+          <thead><tr><th>指标</th><th>官方 IR² 基线</th><th>理想通信感知模型</th></tr></thead>
+          <tbody>
+            <tr><td>地图覆盖率</td><td>保持较高</td><td>基本保持，不应明显下降</td></tr>
+            <tr><td>探索完成步数</td><td>原始水平</td><td>允许小幅增加，但不可失控</td></tr>
+            <tr><td>全程连通率</td><td>容易在房间与墙后下降</td><td>明显提高 ↑</td></tr>
+            <tr><td>平均/最长断连时间</td><td>可能持续较久</td><td>明显缩短 ↓</td></tr>
+            <tr><td>平均重连时间</td><td>依赖原始会合行为</td><td>主动恢复，更快 ↓</td></tr>
+            <tr><td>最大连通分量比例</td><td>团队可能分裂</td><td>大多数机器人留在主分量 ↑</td></tr>
+            <tr><td>最弱通信树边 RSSI</td><td>经常逼近门限</td><td>获得更大的安全余量 ↑</td></tr>
+            <tr><td>中继行为</td><td>偶然出现</td><td>在门口和走廊稳定、自发出现</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer shell">
+    <b>判断“理想模型”是否真的学成：</b>不仅要看奖励曲线上升，还要在独立地图和多个随机种子上同时验证探索效率、连通率、断连时长、重连时间与中继行为。
+  </footer>
+
+  <script>
+    const colors = ["#ff6673", "#36d6d0", "#a98cff", "#52dc8c"];
+    const phases = [
+      {
+        kicker: "阶段 01 · EXPLORE", title: "信号充足，自由分散",
+        text: "机器人优先选择探索收益高的候选节点。团队仍通过直接或多跳链路连接，因此不必为了通信而挤在一起。",
+        connected: true, rssi: "−55 dBm", component: "100%", budget: "0 / 10",
+        robots: [[125,130,"探索"],[245,120,"探索"],[390,145,"探索"],[510,120,"探索"]],
+        links: [[0,1,-51,"good"],[1,2,-55,"good"],[2,3,-53,"good"]]
+      },
+      {
+        kicker: "阶段 02 · ANTICIPATE", title: "墙体出现，信号进入预警",
+        text: "R4 准备进入右侧房间。模型看到候选位置的 RSSI 余量正在缩小，于是开始权衡：继续深入，还是先把通信链拉稳。",
+        connected: true, rssi: "−67 dBm", component: "100%", budget: "0 / 10",
+        robots: [[150,145,"探索"],[290,215,"跟进"],[485,170,"观察"],[655,135,"探索"]],
+        links: [[0,1,-57,"good"],[1,2,-62,"good"],[2,3,-67,"warning"]]
+      },
+      {
+        kicker: "阶段 03 · RELAY", title: "先建立中继，再释放探索者",
+        text: "R3 停在门口成为中继，使 R4 可以进入房间。中继位置牺牲了一点即时探索收益，却保住了整个团队的多跳路径。",
+        connected: true, rssi: "−64 dBm", component: "100%", budget: "0 / 10",
+        robots: [[180,330,"探索"],[355,270,"探索"],[540,170,"中继"],[745,120,"探索"]],
+        links: [[0,1,-58,"good"],[1,2,-61,"good"],[2,3,-64,"good"]]
+      },
+      {
+        kicker: "阶段 04 · TOLERATE", title: "允许一次有价值的短时断连",
+        text: "R4 为观察高价值未知区域短暂越过门限。模型没有立刻放弃任务，但断连计时器开始增长，继续深入的代价迅速变高。",
+        connected: false, rssi: "−74 dBm", component: "75%", budget: "3 / 10",
+        robots: [[190,365,"探索"],[370,330,"探索"],[555,190,"中继"],[805,105,"短探" ]],
+        links: [[0,1,-59,"good"],[1,2,-63,"good"],[2,3,-74,"off"]], offline: [3]
+      },
+      {
+        kicker: "阶段 05 · RECOVER", title: "断连压力推动主动重连",
+        text: "随着断连时间增加，R4 主动返回，R3 同时向门口微调。两台机器人共同缩短恢复时间，而不是等待偶然相遇。",
+        connected: true, rssi: "−68 dBm", component: "100%", budget: "0 / 10",
+        robots: [[210,390,"探索"],[405,355,"探索"],[565,205,"接应"],[690,155,"返回"]],
+        links: [[0,1,-58,"good"],[1,2,-62,"good"],[2,3,-68,"warning"]]
+      },
+      {
+        kicker: "阶段 06 · ROTATE", title: "链路稳定后，动态交换角色",
+        text: "R4 接管右侧中继位置，原中继 R3 进入下方未知房间继续探索。理想模型不会把某台机器人永久固定成通信基站。",
+        connected: true, rssi: "−63 dBm", component: "100%", budget: "0 / 10",
+        robots: [[225,405,"探索"],[425,365,"探索"],[650,350,"探索"],[555,190,"中继"]],
+        links: [[0,1,-57,"good"],[1,3,-61,"good"],[3,2,-63,"good"]]
+      }
+    ];
+
+    const robotGroup = document.querySelector("#robots");
+    const linkGroup = document.querySelector("#links");
+    const routeGroup = document.querySelector("#routes");
+    const timeline = document.querySelector("#timeline");
+    const playButton = document.querySelector("#playButton");
+    let active = 0;
+    let timer = null;
+
+    function svg(tag, attrs = {}) {
+      const node = document.createElementNS("http://www.w3.org/2000/svg", tag);
+      Object.entries(attrs).forEach(([key, value]) => node.setAttribute(key, value));
+      return node;
+    }
+
+    function setup() {
+      phases[0].robots.forEach((robot, id) => {
+        const route = svg("polyline", { id: `route-${id}`, class: "route", stroke: colors[id], points: `${robot[0]},${robot[1]}` });
+        routeGroup.appendChild(route);
+        const group = svg("g", { id: `robot-${id}`, class: "robot" });
+        group.appendChild(svg("circle", { class: "ring", r: 25 }));
+        group.appendChild(svg("circle", { class: "core", r: 18, fill: colors[id] }));
+        const label = svg("text", { class: "id", y: 1 }); label.textContent = `R${id + 1}`; group.appendChild(label);
+        const role = svg("text", { class: "role", y: 39 }); role.textContent = robot[2]; group.appendChild(role);
+        robotGroup.appendChild(group);
+      });
+      render(0);
+    }
+
+    function render(index) {
+      active = Number(index);
+      const phase = phases[active];
+      timeline.value = active;
+      document.querySelector("#stepNumber").textContent = active + 1;
+      document.querySelector("#phaseKicker").textContent = phase.kicker;
+      document.querySelector("#phaseTitle").textContent = phase.title;
+      document.querySelector("#phaseText").textContent = phase.text;
+      document.querySelector("#metricConnected").textContent = phase.connected ? "连通" : "短时断连";
+      document.querySelector("#metricRssi").textContent = phase.rssi;
+      document.querySelector("#metricComponent").textContent = phase.component;
+      document.querySelector("#metricBudget").textContent = phase.budget;
+      document.querySelector("#statusText").textContent = phase.connected ? "团队多跳连通" : "检测到断连，恢复压力上升";
+      const pulse = document.querySelector("#statusPulse");
+      pulse.style.background = phase.connected ? "var(--green)" : "var(--red)";
+      pulse.style.boxShadow = phase.connected ? "0 0 0 6px rgba(82,220,140,.12)" : "0 0 0 6px rgba(255,102,115,.13)";
+
+      phase.robots.forEach((robot, id) => {
+        const group = document.querySelector(`#robot-${id}`);
+        group.style.transform = `translate(${robot[0]}px, ${robot[1]}px)`;
+        group.classList.toggle("offline", (phase.offline || []).includes(id));
+        group.querySelector(".role").textContent = robot[2];
+        const points = phases.slice(0, active + 1).map(p => `${p.robots[id][0]},${p.robots[id][1]}`).join(" ");
+        document.querySelector(`#route-${id}`).setAttribute("points", points);
+      });
+
+      linkGroup.replaceChildren();
+      phase.links.forEach(([a, b, rssi, state]) => {
+        const pa = phase.robots[a], pb = phase.robots[b];
+        const color = state === "good" ? "var(--green)" : state === "warning" ? "var(--orange)" : "var(--red)";
+        const line = svg("line", { x1: pa[0], y1: pa[1], x2: pb[0], y2: pb[1], class: `link ${state}`, stroke: color });
+        linkGroup.appendChild(line);
+        const label = svg("text", { x: (pa[0] + pb[0]) / 2, y: (pa[1] + pb[1]) / 2 - 9, class: "rssi-label", "text-anchor": "middle" });
+        label.textContent = `${rssi} dBm`;
+        linkGroup.appendChild(label);
+      });
+    }
+
+    function togglePlay() {
+      if (timer) {
+        clearInterval(timer); timer = null; playButton.textContent = "▶ 播放"; return;
+      }
+      playButton.textContent = "Ⅱ 暂停";
+      timer = setInterval(() => {
+        const next = (active + 1) % phases.length;
+        render(next);
+      }, 2300);
+    }
+
+    timeline.addEventListener("input", event => { render(event.target.value); });
+    playButton.addEventListener("click", togglePlay);
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowRight") render(Math.min(active + 1, phases.length - 1));
+      if (event.key === "ArrowLeft") render(Math.max(active - 1, 0));
+      if (event.key === " ") { event.preventDefault(); togglePlay(); }
+    });
+    setup();
+  </script>
+</body>
+</html>

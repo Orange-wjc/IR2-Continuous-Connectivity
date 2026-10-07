@@ -1,0 +1,768 @@
+{
+  "selected_exact_overlap_count": 51,
+  "selected_overlap_up_to_symmetry": 86,
+  "selected_unique_layouts": {
+    "hybrid": 30,
+    "corridor": 100,
+    "complex": 51
+  },
+  "selected_layout_groups": {
+    "hybrid": {
+      "08c25f8c21e1ed275d8265aa18b1dd86bd81832603ccb5210f8b83d32f8c54bd": [
+        "DungeonMaps/test/hybrid/99.png",
+        "DungeonMaps/test/hybrid/98.png",
+        "DungeonMaps/test/hybrid/97.png"
+      ],
+      "074327ada0aa94bb06f7e757f828d75ede8d684af2ea8b9d3485e79bcd0bae6f": [
+        "DungeonMaps/test/hybrid/96.png",
+        "DungeonMaps/test/hybrid/95.png",
+        "DungeonMaps/test/hybrid/94.png",
+        "DungeonMaps/test/hybrid/92.png"
+      ],
+      "15b9c820067129b101870fc4449a3695f672e19e3538990d6e326dd865542b86": [
+        "DungeonMaps/test/hybrid/93.png",
+        "DungeonMaps/test/hybrid/82.png",
+        "DungeonMaps/test/hybrid/71.png"
+      ],
+      "312a8c3af8f93998d605dee751814743778013574f497330c83581befa4b840c": [
+        "DungeonMaps/test/hybrid/91.png",
+        "DungeonMaps/test/hybrid/90.png",
+        "DungeonMaps/test/hybrid/89.png",
+        "DungeonMaps/test/hybrid/88.png"
+      ],
+      "39eabf9a57d77692ee8c550dc1b1af6fc132a5d0018549cfd33bee7683c1e383": [
+        "DungeonMaps/test/hybrid/9.png"
+      ],
+      "34c5881022f3995f39adfe07a87413beb72bd0e759221199ca7fc5a3725af55f": [
+        "DungeonMaps/test/hybrid/87.png",
+        "DungeonMaps/test/hybrid/86.png",
+        "DungeonMaps/test/hybrid/85.png",
+        "DungeonMaps/test/hybrid/84.png"
+      ],
+      "063f017be33bd7eaff87ab8c1cc66ff4d0ffe81cc33718bd809a9e8e55cd9f4a": [
+        "DungeonMaps/test/hybrid/83.png",
+        "DungeonMaps/test/hybrid/81.png",
+        "DungeonMaps/test/hybrid/80.png",
+        "DungeonMaps/test/hybrid/79.png"
+      ],
+      "28a3a8e39174a7e4a001491f27162b52c28ace7544499fc2441c2ab6dc939c9e": [
+        "DungeonMaps/test/hybrid/8.png",
+        "DungeonMaps/test/hybrid/7.png",
+        "DungeonMaps/test/hybrid/6.png",
+        "DungeonMaps/test/hybrid/4.png"
+      ],
+      "0743963d4d8a1536898d67ced866b5a4dd377163590ef52e160876dabbf34b00": [
+        "DungeonMaps/test/hybrid/78.png",
+        "DungeonMaps/test/hybrid/77.png",
+        "DungeonMaps/test/hybrid/76.png",
+        "DungeonMaps/test/hybrid/75.png"
+      ],
+      "2a23f4f5cee2fb6872d3be7a310eb6620d76c88905a99920a9a117af4bebcb2b": [
+        "DungeonMaps/test/hybrid/74.png",
+        "DungeonMaps/test/hybrid/73.png",
+        "DungeonMaps/test/hybrid/72.png",
+        "DungeonMaps/test/hybrid/70.png"
+      ],
+      "034ad252418197fcc5ebec20c01fd590fc414f385e7fa8d001c95eddf0feef94": [
+        "DungeonMaps/test/hybrid/69.png",
+        "DungeonMaps/test/hybrid/68.png",
+        "DungeonMaps/test/hybrid/67.png",
+        "DungeonMaps/test/hybrid/66.png"
+      ],
+      "28d10d11c4e223717d98805184c828e110c1be8077eadfc0bb0bbbcd16f3373c": [
+        "DungeonMaps/test/hybrid/65.png",
+        "DungeonMaps/test/hybrid/64.png",
+        "DungeonMaps/test/hybrid/63.png",
+        "DungeonMaps/test/hybrid/62.png"
+      ],
+      "21bd48c597d02ca52a453c374ca66af0e151540acfb7859786485bfe2ff108a7": [
+        "DungeonMaps/test/hybrid/61.png",
+        "DungeonMaps/test/hybrid/59.png",
+        "DungeonMaps/test/hybrid/58.png",
+        "DungeonMaps/test/hybrid/57.png"
+      ],
+      "3408ea68413dfb679c7fd7ec8921588f523fd60630f7dab313f64c04c5c99c32": [
+        "DungeonMaps/test/hybrid/60.png",
+        "DungeonMaps/test/hybrid/49.png",
+        "DungeonMaps/test/hybrid/38.png"
+      ],
+      "0bceb87b6dcea353deb75abbdc00b7057164dd1b1b4249337793b05f199db6d0": [
+        "DungeonMaps/test/hybrid/56.png",
+        "DungeonMaps/test/hybrid/55.png",
+        "DungeonMaps/test/hybrid/54.png",
+        "DungeonMaps/test/hybrid/53.png"
+      ],
+      "2e8165711e0f6fbc52ed033a2490bc3148972041f78eb55bc21b68fc928aa252": [
+        "DungeonMaps/test/hybrid/52.png",
+        "DungeonMaps/test/hybrid/51.png",
+        "DungeonMaps/test/hybrid/50.png",
+        "DungeonMaps/test/hybrid/48.png"
+      ],
+      "4b2d2b1a6170becfb075a73cebb61e61bcf3a43aa29dc8201d02551c4221404b": [
+        "DungeonMaps/test/hybrid/5.png"
+      ],
+      "1cbe3d2b4f451e60b8b207e4a75aa6da19a04e19c702e48f1a4e4c4b87082614": [
+        "DungeonMaps/test/hybrid/47.png",
+        "DungeonMaps/test/hybrid/46.png",
+        "DungeonMaps/test/hybrid/45.png",
+        "DungeonMaps/test/hybrid/44.png"
+      ],
+      "23ec114ca7eb3b2f21d9ed65b7ebce7f380fa80e2efb5a36aeee66f677f1c185": [
+        "DungeonMaps/test/hybrid/43.png",
+        "DungeonMaps/test/hybrid/42.png",
+        "DungeonMaps/test/hybrid/41.png",
+        "DungeonMaps/test/hybrid/40.png"
+      ],
+      "1a133372984100d832a1dacaeadf4a6307bb9b48272a829fd9b46cbeec848964": [
+        "DungeonMaps/test/hybrid/400.png",
+        "DungeonMaps/test/hybrid/399.png"
+      ],
+      "2a65a0bc6aa770cb03a7cd5793560fde19681c78d40d527d908c35c3be969f79": [
+        "DungeonMaps/test/hybrid/398.png",
+        "DungeonMaps/test/hybrid/387.png",
+        "DungeonMaps/test/hybrid/376.png"
+      ],
+      "09361fca5cb708f4dae4c0c0c40ec23f8b7e0e40d000b54a6471e967488045c8": [
+        "DungeonMaps/test/hybrid/397.png",
+        "DungeonMaps/test/hybrid/396.png",
+        "DungeonMaps/test/hybrid/395.png",
+        "DungeonMaps/test/hybrid/394.png"
+      ],
+      "19225c3f3601d7cf430d8ac1a2d9ddfe8e03631bfa63ac6a45c24b0a1ae80fad": [
+        "DungeonMaps/test/hybrid/393.png",
+        "DungeonMaps/test/hybrid/390.png",
+        "DungeonMaps/test/hybrid/389.png",
+        "DungeonMaps/test/hybrid/388.png"
+      ],
+      "0b5cf76182ce3c7d96524588791aecfcd5dee0181d9d425e40e7b81adefa91a2": [
+        "DungeonMaps/test/hybrid/392.png",
+        "DungeonMaps/test/hybrid/379.png"
+      ],
+      "523ff24b46510de94f4fca92516728716a54d40761eac5b6c57ef7317ba269e7": [
+        "DungeonMaps/test/hybrid/391.png"
+      ],
+      "0cd02719db22799d7ffed8497322e6b4a05e606e49a5bf4670c7355ab0906d07": [
+        "DungeonMaps/test/hybrid/39.png",
+        "DungeonMaps/test/hybrid/37.png"
+      ],
+      "0cc5e7285d20eb52f44609fd7a9b1d2feb7e5cfb7e5516c25875e78d677184e8": [
+        "DungeonMaps/test/hybrid/386.png",
+        "DungeonMaps/test/hybrid/385.png",
+        "DungeonMaps/test/hybrid/384.png",
+        "DungeonMaps/test/hybrid/383.png"
+      ],
+      "0de5dbc6c7777f06f15374133e5917c63a2f4cbc683f41c6a4a0e7f56e884239": [
+        "DungeonMaps/test/hybrid/382.png",
+        "DungeonMaps/test/hybrid/381.png",
+        "DungeonMaps/test/hybrid/380.png",
+        "DungeonMaps/test/hybrid/378.png"
+      ],
+      "1228ec365b0ec4a01a0ce3b48d2ee77746a4a5a41f4f33c9974577fa571fd500": [
+        "DungeonMaps/test/hybrid/377.png",
+        "DungeonMaps/test/hybrid/375.png",
+        "DungeonMaps/test/hybrid/374.png",
+        "DungeonMaps/test/hybrid/373.png"
+      ],
+      "063a4fd61590f6a11d87e09087beb11e82a398152eafc117d22087f80694efba": [
+        "DungeonMaps/test/hybrid/372.png",
+        "DungeonMaps/test/hybrid/371.png",
+        "DungeonMaps/test/hybrid/370.png"
+      ]
+    },
+    "corridor": {
+      "16dd37a4f46d1eb679fc82346189222e6f6ac32a7030d51ce2207e4407fe7422": [
+        "DungeonMaps/test/corridor/99.png"
+      ],
+      "06d1cc0186870414a5c28226f34e07215842838318e6e6700b09afeb1b7fe15f": [
+        "DungeonMaps/test/corridor/97.png"
+      ],
+      "74fd7cce15d6a8b1b580cf080281b0347643596a6b7b411a40abc8d2a193ca68": [
+        "DungeonMaps/test/corridor/96.png"
+      ],
+      "39690f11571a8003be18c411333a39442bbba90aa7fbce9c7c3104bbdac8f115": [
+        "DungeonMaps/test/corridor/98.png"
+      ],
+      "78a9534f723eb1594ad72f989bc266114e15469dd29cf88c13c28985f62e3334": [
+        "DungeonMaps/test/corridor/95.png"
+      ],
+      "221ffd94e8c51f0e73279883bd44546f13a1d17233b9ac4beee0b2468cd9249b": [
+        "DungeonMaps/test/corridor/94.png"
+      ],
+      "076b695b8eff583c343b4906c9c256129acfdf15f6c7e92f7a39924fc57d8528": [
+        "DungeonMaps/test/corridor/92.png"
+      ],
+      "424085be1dc705de9a48817c628f69ffcd897ddfe99bd702edadcb23c82ca784": [
+        "DungeonMaps/test/corridor/93.png"
+      ],
+      "217931941f10b885cf42e8923e80f7c884f2b640a9a426c23cdb6fbec5d55901": [
+        "DungeonMaps/test/corridor/91.png"
+      ],
+      "0b8ba2900baa3110850b8b8f53ffbcb4f4d64df9aff540e4832ccac8072c340f": [
+        "DungeonMaps/test/corridor/90.png"
+      ],
+      "40b81b7697cb29578738495b0b7db474fb4c68036951f8ff274e3c1c541469cc": [
+        "DungeonMaps/test/corridor/9.png"
+      ],
+      "13d18faa21a1bdd3914f74f560052a7d775ec1c6e486fb9a9410bce0bc3c8978": [
+        "DungeonMaps/test/corridor/89.png"
+      ],
+      "1f9a89f6ae475dd4c3d3865c47780c06bfbc44a9575fc2bdb9d22ab488ba0b84": [
+        "DungeonMaps/test/corridor/88.png"
+      ],
+      "2a2b561b1eb4f81d33dacaf0383dffe654bc753fe82b09aeb3bee82c9205243d": [
+        "DungeonMaps/test/corridor/87.png"
+      ],
+      "070b848c68d0965be3669d6b5de2694353adc957236805f078436d2258108684": [
+        "DungeonMaps/test/corridor/86.png"
+      ],
+      "230cf9a3102948c3ba0b62bbd64e0f541ffb3331047b759a8c38660f19656ea0": [
+        "DungeonMaps/test/corridor/85.png"
+      ],
+      "10486508a5969443474638f30dad2a15633c98736e9db10b374c2ab948eadf2b": [
+        "DungeonMaps/test/corridor/84.png"
+      ],
+      "6724fd5088305dfec453c1bdf6af8807163f9ec275ae2c6ec2fbac7c13b58d31": [
+        "DungeonMaps/test/corridor/83.png"
+      ],
+      "11d47477dbc63d0561e89ed63812b057dd53a17fe7bcd8f3e08c49d7c04d7c65": [
+        "DungeonMaps/test/corridor/82.png"
+      ],
+      "078e5e68e507614128f9ec574294d2bac24fa1eccab3b439b98e90e084a32681": [
+        "DungeonMaps/test/corridor/81.png"
+      ],
+      "073e11f1272536839f58ad63a1e4e2ee67007d46b52a0c510ea2b27ea25aa603": [
+        "DungeonMaps/test/corridor/80.png"
+      ],
+      "08a4255fafbd5c76e032408b9a5c9c6020752bad8e4c1d6b26831f7932a1922b": [
+        "DungeonMaps/test/corridor/79.png"
+      ],
+      "083ff34d04b81117fe7265d4662cc4d5f7ee849ee850a8d85ee63a041f57ac1f": [
+        "DungeonMaps/test/corridor/8.png"
+      ],
+      "092f2752b7af41f0aceab6e380f0d753e477b4f346884d973eeebfe33401153f": [
+        "DungeonMaps/test/corridor/78.png"
+      ],
+      "0aeba5a7ed6cf6c1f9f5919b199d98f1ae378c57280f8c5318d87c4fff8e005c": [
+        "DungeonMaps/test/corridor/77.png"
+      ],
+      "89d8d1f3264213b0229c19eb264dd5a2bfb44dff93652926553b801194458525": [
+        "DungeonMaps/test/corridor/76.png"
+      ],
+      "58cfff38b4eae3a37519a692190c351bace55e84595d9ee9c0983e4330d87277": [
+        "DungeonMaps/test/corridor/75.png"
+      ],
+      "0a5039160d2c98adf214909abf243153c453743106f848c4b4120617f6f6e851": [
+        "DungeonMaps/test/corridor/74.png"
+      ],
+      "0aa87056627fa1d93404eaf5271b219243dd06408fdaa440863411a00442ad2d": [
+        "DungeonMaps/test/corridor/73.png"
+      ],
+      "0fd088a4c0e179468abe5d4e3655892bc086601afc4043abb9fc0bf90850841c": [
+        "DungeonMaps/test/corridor/72.png"
+      ],
+      "13e28de8544cb229ec4ff8e37af42c4356802cf1086fa0200c4563a1dc824d3f": [
+        "DungeonMaps/test/corridor/71.png"
+      ],
+      "14b91da82e1d5471e0d6ac08de4e10a06461856d45b29ae530d11a98d1ee1d25": [
+        "DungeonMaps/test/corridor/70.png"
+      ],
+      "32eef3727666af8b398c67f5140a6167a54d7b9c31e4c09bf00f53038a07aa19": [
+        "DungeonMaps/test/corridor/7.png"
+      ],
+      "30839d79cb982e5a3b55ed1eb1f86495ab06fb98184fe5967e90c2ef28e52626": [
+        "DungeonMaps/test/corridor/69.png"
+      ],
+      "119e0bf8ea3af26dc9fc252adb3f2e4fcd048e3c9affe8ef193986afd54b8196": [
+        "DungeonMaps/test/corridor/68.png"
+      ],
+      "10f1f1ee51fb837030968b17b80424624d7a4fad6e2faf0ac77c0a4a4f27216e": [
+        "DungeonMaps/test/corridor/67.png"
+      ],
+      "1e07bec8570349af20ac89ab76f2516fc8f0ebe0381a96e110dc450a18b4bcd3": [
+        "DungeonMaps/test/corridor/66.png"
+      ],
+      "32df37d0fd02086a464363f9aaefd6619ed9cf6c5654de181c2bc851ab74eb9b": [
+        "DungeonMaps/test/corridor/65.png"
+      ],
+      "2a16b16ce579cd677a947dfff54aae0ef0356a3d24aadb70f1f07e182420e811": [
+        "DungeonMaps/test/corridor/64.png"
+      ],
+      "02edc70c4931bb98821fe869c8d795171b52847493cdd47cde64a9a99be3b0cf": [
+        "DungeonMaps/test/corridor/62.png"
+      ],
+      "391a98f38b115c562713fb87265551c657205d6c537ab8fee8619b61c8bd3d46": [
+        "DungeonMaps/test/corridor/63.png"
+      ],
+      "0e77a62411a78a80de51b7ec7af80d41333139de2934edd60359e61285692929": [
+        "DungeonMaps/test/corridor/61.png"
+      ],
+      "03aaac2aefd80fb3c83569644f52a38ad372c90b7d2a0f3a7921680705129018": [
+        "DungeonMaps/test/corridor/60.png"
+      ],
+      "0f8b5e9f71eb6e0b6d41e9fc4c16acc193fa118071878c4ceb2c2a820da99fc7": [
+        "DungeonMaps/test/corridor/6.png"
+      ],
+      "09bb7b9084bebcd8482950d8b50d47538183fd11ccf376ca01592188be788056": [
+        "DungeonMaps/test/corridor/58.png"
+      ],
+      "34a1ffc9123cc0bfbcea2f9457400a351cd92416cf7828ea6994f040390c579c": [
+        "DungeonMaps/test/corridor/59.png"
+      ],
+      "14a868fb9c8b6bf07ac28200f3efab250ec69554175083739c077212fb358531": [
+        "DungeonMaps/test/corridor/57.png"
+      ],
+      "20d3ad4869326fd0d9f7eff20b8234e74583e51d552a26b091b356a101cf6256": [
+        "DungeonMaps/test/corridor/56.png"
+      ],
+      "1064ef89e49509b0576a781cb98b8e5c379ddd085206fcdb4c92629242428a8b": [
+        "DungeonMaps/test/corridor/55.png"
+      ],
+      "21b27e5b2c4599ff27fe60574b1b584b491e6f68ff377a56203b02313a5e3465": [
+        "DungeonMaps/test/corridor/53.png"
+      ],
+      "25fe6caeb4127d832d48d71f18ba3b4db7678c2e51bb5bc46f02b0426b4dfb2f": [
+        "DungeonMaps/test/corridor/54.png"
+      ],
+      "51d9dee897a77256a005777f5ff5327b77c3f4f8667bd6106553199977d3a3b2": [
+        "DungeonMaps/test/corridor/52.png"
+      ],
+      "0ba2f3ca537c4c28abd362518ef464a5dfa3f68b6d4a2814cb65c57a9e1636ab": [
+        "DungeonMaps/test/corridor/51.png"
+      ],
+      "08a766f12cf94c1618cf73858e9122c06cf53267f849d08fb2a6e06f0135a465": [
+        "DungeonMaps/test/corridor/50.png"
+      ],
+      "04826ee39774d1c67915a2303dd821db866deaf5e58958b6b575ff3f1b83ddc1": [
+        "DungeonMaps/test/corridor/5.png"
+      ],
+      "01373a4e0014eb9e8d19f304ce7f12934d1db2659d09b0992beb0f07251ae1ae": [
+        "DungeonMaps/test/corridor/49.png"
+      ],
+      "08bb687987ec7cec1121a6a7feaf8c1403f613f392c23a5b03949840b8fcb1a4": [
+        "DungeonMaps/test/corridor/48.png"
+      ],
+      "041ac5db2feb53a91476696aa9cf0acb815683cd3215790809693b82af7bae44": [
+        "DungeonMaps/test/corridor/47.png"
+      ],
+      "1ab4d86a63ef8258e1b9757eda0b50707654ba52b140cd60e25ed8f3e4beb286": [
+        "DungeonMaps/test/corridor/46.png"
+      ],
+      "56d86d67097ff5ed7f9f484081cc60686af5f92f84a88768d49b2b4fe8cb12ae": [
+        "DungeonMaps/test/corridor/45.png"
+      ],
+      "11d1b335c1b3b12d39b240af237559b3921d298a66f699ec66a9f5f64079bb7b": [
+        "DungeonMaps/test/corridor/44.png"
+      ],
+      "01cb64bcf9f75c40b229226798d85cc3c19050f2a521dd6e859bfc33638d0f30": [
+        "DungeonMaps/test/corridor/42.png"
+      ],
+      "16fdf5c7128d81ae4e60260c48e8b00ac6e0cb92884bb1e25fe1c9b34497870a": [
+        "DungeonMaps/test/corridor/43.png"
+      ],
+      "261e6d831b09ba6d8887a2c0eba1b19bdbd2450a5cd5828aed6f5a85e65ac510": [
+        "DungeonMaps/test/corridor/41.png"
+      ],
+      "0e7e60d244855913a6cc765ae0c05a80a78541b3c4dea4ef34961b29d1cc7468": [
+        "DungeonMaps/test/corridor/400.png"
+      ],
+      "26a1e1df92cc41a4afa635cb07e372399091b89263df8468ea7d7f83131d70bd": [
+        "DungeonMaps/test/corridor/40.png"
+      ],
+      "03b5501fba794bf89ac6f5deefa3285368375a4ce2bbb5bd82d69331d8489109": [
+        "DungeonMaps/test/corridor/4.png"
+      ],
+      "228c33af6d31b4d86aa5f8774c8cbc535992b285132923bbd20a4e41293c7dfc": [
+        "DungeonMaps/test/corridor/398.png"
+      ],
+      "3023af1ad178ff0441f9060715b3e9b562c4f7bd877aa3d0c7359e03fcc4b15e": [
+        "DungeonMaps/test/corridor/399.png"
+      ],
+      "0a33f53cbae67d2283d3ee2def9a288b97c83e487dbf2238682d27397d697637": [
+        "DungeonMaps/test/corridor/397.png"
+      ],
+      "14807e17d6c80f2c5bd06abe24d8b7df0a5f80e2b052c0fca1a2f608cc539b62": [
+        "DungeonMaps/test/corridor/396.png"
+      ],
+      "298702afce3fed14b00f98c4abb6ecb016255d9b5e0790c1362c0d8bc17da7f3": [
+        "DungeonMaps/test/corridor/395.png"
+      ],
+      "198ef9cc4dc8064ddc37cf86f1a29a186c9575c1dcd881a379b1c1fc20a914eb": [
+        "DungeonMaps/test/corridor/394.png"
+      ],
+      "17db12af270545fdf2f8fe5fb28c458cd229ef4ee8203263a5175fdaff7cf3e5": [
+        "DungeonMaps/test/corridor/392.png"
+      ],
+      "3248fc65ceb20a7de690bcf6c2a216a55287157579ad808fdaae92d13f2aeca2": [
+        "DungeonMaps/test/corridor/393.png"
+      ],
+      "1eaf7358f485619ac2aa3235424d8e630fa086b9fd96b1eacaf1d18ae59a0fd4": [
+        "DungeonMaps/test/corridor/391.png"
+      ],
+      "36af0aaa7b7c44210907d705bd07c3d3e382425637b7699bdaf2b48d0c5fb078": [
+        "DungeonMaps/test/corridor/390.png"
+      ],
+      "24bd6a0b8e4c8b0357b6746519760675cd548965f6e781e2ae786c47aeba59aa": [
+        "DungeonMaps/test/corridor/39.png"
+      ],
+      "3dacff8931c3335678698f077ee2f84faaf86e4135f10e72033f0000f42016e6": [
+        "DungeonMaps/test/corridor/389.png"
+      ],
+      "56aa8e075e1f6c15d3ca421816e1f450e8e4d4f0442fcf3a0771d3fff9458d17": [
+        "DungeonMaps/test/corridor/388.png"
+      ],
+      "0cd2cba4ca8087f6bb113bdaf46fce29448507fc030bbe60e8f354adbddecf3b": [
+        "DungeonMaps/test/corridor/387.png"
+      ],
+      "0003bed2e73423307f44995fe85b463301230aeb52deb0909dfdbbdca6962322": [
+        "DungeonMaps/test/corridor/386.png"
+      ],
+      "1c27716592e3ed71b573cc5cc8381ebd523a53399dad34262249a595f289098f": [
+        "DungeonMaps/test/corridor/385.png"
+      ],
+      "28f3a6ac6a1a58990b05e4edb5d2daf9a6726d541b51dd75e8bb911f4314a8e1": [
+        "DungeonMaps/test/corridor/384.png"
+      ],
+      "26c89cf8aabd28aab8959b8729ccfabb1c126d124f308ed73c7bc7527d83c617": [
+        "DungeonMaps/test/corridor/383.png"
+      ],
+      "08edea49c46a47006c97a93a86e3094907b28fb7e9c46631d4e53e2e688d3a71": [
+        "DungeonMaps/test/corridor/382.png"
+      ],
+      "2a09eb695c7abbe1937e32e3ac679961b0ffe30c492cc7c2aec596cc5baaa8fe": [
+        "DungeonMaps/test/corridor/381.png"
+      ],
+      "053b962696e14a6070cdb7f9f9f2c55d2fcedb88d83bf00b11d7d50dc7fdd09a": [
+        "DungeonMaps/test/corridor/380.png"
+      ],
+      "0668dd42d503117c78932c6f42932639a2ecb87deb4314ee2413b68389e1f748": [
+        "DungeonMaps/test/corridor/38.png"
+      ],
+      "144fe49a03a03ed061c3d3f45de602312975493418ca4e23111f7fed3004c2bd": [
+        "DungeonMaps/test/corridor/379.png"
+      ],
+      "253a65cf930ce79bbe7577fd504746828b15310e553bdd268e5b9675ac0c6824": [
+        "DungeonMaps/test/corridor/377.png"
+      ],
+      "191106235c5878d9e377fd73b99db4da02051aacdcd1d12389dca079df82a9ed": [
+        "DungeonMaps/test/corridor/378.png"
+      ],
+      "39ba60c0417e454d84f8c64c89d31731029b094c3b712c10b68a1aae506dcdd1": [
+        "DungeonMaps/test/corridor/376.png"
+      ],
+      "0dbb585ede5825f7bd8bd971e1603d61817a869f613cdfb86b304ca18294befa": [
+        "DungeonMaps/test/corridor/374.png"
+      ],
+      "2bab45ba73e51700bce1333755c7bdc985a210eb37abc56957610c784bd7b18c": [
+        "DungeonMaps/test/corridor/373.png"
+      ],
+      "08ede81c6c1be98f18919bad6b05695138f8c9c4bd0351b9a8555f672f954e2e": [
+        "DungeonMaps/test/corridor/375.png"
+      ],
+      "167c47adc0cb3756fb0660a54cb571dc35d5d83b4ea70b6eb8587fc9e67f92e3": [
+        "DungeonMaps/test/corridor/372.png"
+      ],
+      "229f8e27901da632e84ffe0f9cacecc4f95a2c9d500d1b669677831745dc02f7": [
+        "DungeonMaps/test/corridor/371.png"
+      ],
+      "119d181c48c154408516988b88a5344767afafff7740ee9fe72e67fd79107a4c": [
+        "DungeonMaps/test/corridor/370.png"
+      ],
+      "24e0d401234e3d7590f647bde6f54147344541d70eefa1f31a027210ca6f2d91": [
+        "DungeonMaps/test/corridor/37.png"
+      ]
+    },
+    "complex": {
+      "7b9e323e9cf7e42fb4875c8eb6e1ab669ae10acf6aaf3798b4696da0053448af": [
+        "DungeonMaps/test/complex/97.png",
+        "DungeonMaps/test/complex/98.png"
+      ],
+      "096dce2d2ff7480e1949d4dd09589d95fd2651c6730f172384efcbaf554c1171": [
+        "DungeonMaps/test/complex/99.png"
+      ],
+      "0d824246a5aef69384deae5c24068f6ffbe7973b0cbc3dc74bef6a1b8449059f": [
+        "DungeonMaps/test/complex/91.png",
+        "DungeonMaps/test/complex/92.png"
+      ],
+      "18c1817754d6a9e6568ff9ee4832e045c6c76f541d5f3fed7f2a27f275c4683a": [
+        "DungeonMaps/test/complex/95.png",
+        "DungeonMaps/test/complex/96.png"
+      ],
+      "356e698c223e32993217793de93bafe2ada07a1c5bd7091c19c80a7362d9f084": [
+        "DungeonMaps/test/complex/90.png",
+        "DungeonMaps/test/complex/89.png"
+      ],
+      "1d36d33fc9ec35a2ce2cbb299277e8107365813490d95dee78941a376f5b79cc": [
+        "DungeonMaps/test/complex/93.png",
+        "DungeonMaps/test/complex/94.png"
+      ],
+      "085308b2553200cf318b7b9cd8cba8ded3fb649e804c44b8376e9dbdd6faa70e": [
+        "DungeonMaps/test/complex/9.png"
+      ],
+      "0f8b65d21794a243d4f8b62921ac4be1b52f171472169081f47da2f679754596": [
+        "DungeonMaps/test/complex/86.png",
+        "DungeonMaps/test/complex/85.png"
+      ],
+      "05798b9faa47b8c84e49f211e5ca9da41dd66d8badefaadfcbc27eda50e9d48f": [
+        "DungeonMaps/test/complex/88.png",
+        "DungeonMaps/test/complex/87.png"
+      ],
+      "1028b6fdb5ddeb30027037c7fedb3a5db8af85fb4e483f33f5dc0be92bb11e75": [
+        "DungeonMaps/test/complex/84.png",
+        "DungeonMaps/test/complex/83.png"
+      ],
+      "00d47dc8d3966b7f8770dbb33229c9166ca047bbaa7904745fe740b534b360d3": [
+        "DungeonMaps/test/complex/82.png",
+        "DungeonMaps/test/complex/81.png"
+      ],
+      "27d192ad362146b94ba0985b003176700570abfb31f35f9174ccfdf74e51973d": [
+        "DungeonMaps/test/complex/8.png",
+        "DungeonMaps/test/complex/7.png"
+      ],
+      "480fea56f3e6d523db617fb9f5de345345ff6c3dc03eafbce53061b34bd5f106": [
+        "DungeonMaps/test/complex/80.png",
+        "DungeonMaps/test/complex/79.png"
+      ],
+      "28d6de69d9dcfd7ecd27961cc2892e4ea63feca773cd749a02b9105bb50d25f1": [
+        "DungeonMaps/test/complex/77.png",
+        "DungeonMaps/test/complex/78.png"
+      ],
+      "0db72ae098eba3822e7cf879fe215ea97b7af98f472584f93c00df50d4209d24": [
+        "DungeonMaps/test/complex/76.png",
+        "DungeonMaps/test/complex/75.png"
+      ],
+      "2a6ccac4c20dae3b928011b067334167345a48f9d57e61feda3f3ea4a8e57b0f": [
+        "DungeonMaps/test/complex/74.png",
+        "DungeonMaps/test/complex/73.png"
+      ],
+      "0190bdab4f72c0b6f496eb5ca73b9a5226a1f99640cb5163202d1d02e22d6daa": [
+        "DungeonMaps/test/complex/72.png",
+        "DungeonMaps/test/complex/71.png",
+        "DungeonMaps/test/complex/486.png",
+        "DungeonMaps/test/complex/485.png"
+      ],
+      "4da24ca4b4ba3482a11797ed38851e3a406c262227168cd667c60571a62b82bf": [
+        "DungeonMaps/test/complex/70.png",
+        "DungeonMaps/test/complex/69.png"
+      ],
+      "0d87f0c3c99e84e8170df80502d24bed56a27a1afbe66a6cfb7910660e52abcc": [
+        "DungeonMaps/test/complex/68.png",
+        "DungeonMaps/test/complex/67.png"
+      ],
+      "006d1a962b9ee004e6b8eb0d0be84bd183a516dabcfa46940d62e816b69821ea": [
+        "DungeonMaps/test/complex/66.png",
+        "DungeonMaps/test/complex/65.png"
+      ],
+      "356cb5b67b8ff314985f0f982be0c18e8edc86395ed71f6468bd7e934f7fd4e2": [
+        "DungeonMaps/test/complex/64.png",
+        "DungeonMaps/test/complex/63.png"
+      ],
+      "3bff19816787ad0a52e23b699e78ebec516dc8e566822ed4059152008897165d": [
+        "DungeonMaps/test/complex/62.png",
+        "DungeonMaps/test/complex/61.png"
+      ],
+      "2043fc8677389ae660413a8e4271c8ac408ddb913eef49532ae4992c6dc3cffa": [
+        "DungeonMaps/test/complex/6.png",
+        "DungeonMaps/test/complex/5.png"
+      ],
+      "0386c63538d4027bd8b9f10ab38e22a812d3e17fe92e1fb0124d59ac266be84c": [
+        "DungeonMaps/test/complex/60.png",
+        "DungeonMaps/test/complex/59.png"
+      ],
+      "2749c3e0d9c86d3674171a21b64d18f824acae7716b5925f8b2fed8f21c3c51f": [
+        "DungeonMaps/test/complex/54.png",
+        "DungeonMaps/test/complex/53.png"
+      ],
+      "012f3695bfac528f3b91060db8487b1dab5f6c6d2aa1ff00f13e78d6f4263640": [
+        "DungeonMaps/test/complex/57.png",
+        "DungeonMaps/test/complex/58.png"
+      ],
+      "03192c49b89f2eaa5504ea644e4274057d7f3ab74e1f419af8770018f5b112d6": [
+        "DungeonMaps/test/complex/55.png",
+        "DungeonMaps/test/complex/56.png"
+      ],
+      "1b1708c1b3587849f49b3bf06de99222e35d039724cfeeaab898956189bb009f": [
+        "DungeonMaps/test/complex/52.png",
+        "DungeonMaps/test/complex/51.png"
+      ],
+      "06b7f83b2bbfeaf4f5430de12986cba89f2992d9762e62c06dd17184bee6b03b": [
+        "DungeonMaps/test/complex/500.png",
+        "DungeonMaps/test/complex/499.png"
+      ],
+      "263a838341d4f94f0397f8bb134265d16533451a6fb371380a12dfd7e0be1809": [
+        "DungeonMaps/test/complex/50.png",
+        "DungeonMaps/test/complex/49.png"
+      ],
+      "094e1fdc2f1b6376317083e059b5a591428dbfbdf2d4a61b3961dfb9979de3ed": [
+        "DungeonMaps/test/complex/498.png",
+        "DungeonMaps/test/complex/497.png"
+      ],
+      "0dfb66a6798b083401bf9134d6e345a412c9a4b9e27819218ef18eb150360af7": [
+        "DungeonMaps/test/complex/496.png",
+        "DungeonMaps/test/complex/495.png"
+      ],
+      "09fb0b9bb8e0047843c0e77227222092c335c19c60f0d0fa6dd5301be5b369eb": [
+        "DungeonMaps/test/complex/493.png",
+        "DungeonMaps/test/complex/494.png"
+      ],
+      "028150d64c28080caf03c66513c451095ca73ee58a51bf06bbc6c2aa0afc1282": [
+        "DungeonMaps/test/complex/491.png",
+        "DungeonMaps/test/complex/492.png"
+      ],
+      "09cc6391ab20f24e9873d324db6caefd96968f028ae6b7535eec9e2c01c2693d": [
+        "DungeonMaps/test/complex/490.png",
+        "DungeonMaps/test/complex/489.png"
+      ],
+      "681ac4b9d5effe1c04dfe57dedb92fe1cd95a12ad72a87dfcc9ea28fcaab6790": [
+        "DungeonMaps/test/complex/488.png",
+        "DungeonMaps/test/complex/487.png"
+      ],
+      "21af5b48a06e6ebfd0644c7d4dca1fa0754823211769b81fb674323777aab423": [
+        "DungeonMaps/test/complex/484.png",
+        "DungeonMaps/test/complex/483.png"
+      ],
+      "1c6a9eb54b3137ce37b206f3fe708ddbe435aac83761c4f78d43e00f27dd3b51": [
+        "DungeonMaps/test/complex/48.png",
+        "DungeonMaps/test/complex/47.png"
+      ],
+      "33341fb0fff50d95a8d7a01026f9559ca6f125521fb9621bfda644f145dbcc2f": [
+        "DungeonMaps/test/complex/480.png",
+        "DungeonMaps/test/complex/479.png"
+      ],
+      "1221ca0d0d618083504cafbe43432a3350d9250886ca37b178bd812eb9e33750": [
+        "DungeonMaps/test/complex/478.png",
+        "DungeonMaps/test/complex/477.png"
+      ],
+      "190081dbd8997a8233a160a8957b9390d0ab46f0c03f4f2deafe234b31e015e5": [
+        "DungeonMaps/test/complex/475.png",
+        "DungeonMaps/test/complex/476.png"
+      ],
+      "0597d287ecd834ea0b9e624f2f02a5565150d0fa6c224b7f66a25d42fa022638": [
+        "DungeonMaps/test/complex/481.png",
+        "DungeonMaps/test/complex/482.png"
+      ],
+      "21cc3a101f3302ae8784e9e11246539b9f73a6e80cf7890e707daccf70c4dc03": [
+        "DungeonMaps/test/complex/474.png",
+        "DungeonMaps/test/complex/473.png"
+      ],
+      "3b9d02aa80328b95e80f09b5b40bc2a83fde2a78cfdd540ef0065ef25d78aba0": [
+        "DungeonMaps/test/complex/471.png",
+        "DungeonMaps/test/complex/472.png"
+      ],
+      "13fb230fbaeac06f452d5657ed302cfa49db6376e3ee8ec977c3d2cdc88feed4": [
+        "DungeonMaps/test/complex/470.png",
+        "DungeonMaps/test/complex/469.png"
+      ],
+      "0545899a987bcc269ae6b49036bc167ba0b47dd0ecb155ec69156aa4d756fe71": [
+        "DungeonMaps/test/complex/468.png",
+        "DungeonMaps/test/complex/467.png"
+      ],
+      "04560fbb9c118f5108b0b1855e0c477d9625d132194ca77f093c4f1b9fa943cb": [
+        "DungeonMaps/test/complex/465.png",
+        "DungeonMaps/test/complex/466.png"
+      ],
+      "00b3a9ab7bd8889f9b67217d3e94af3ee1e9079c5fe6dc4fc93f70cc0aed87b8": [
+        "DungeonMaps/test/complex/464.png",
+        "DungeonMaps/test/complex/463.png"
+      ],
+      "0b889291295dde15ee73959596a26d590c8956fd6540ceb06a444bae4a3fc6c6": [
+        "DungeonMaps/test/complex/461.png",
+        "DungeonMaps/test/complex/462.png"
+      ],
+      "14ae53f348b936cf7af65fa67fb8118588457e2a2ce16a0bdfc3930267daa18a": [
+        "DungeonMaps/test/complex/46.png"
+      ],
+      "074f20d76e8fd48822993738b6de751504cea52b5f96f85f8ce128ef2539ab51": [
+        "DungeonMaps/test/complex/460.png"
+      ]
+    }
+  },
+  "stratified_evaluation": {
+    "corridor": {
+      "overlapping_geometry": {
+        "original": {
+          "n": 0,
+          "success": 0,
+          "steps_mean": null
+        },
+        "corrected": {
+          "n": 0,
+          "success": 0,
+          "steps_mean": null
+        }
+      },
+      "no_detected_overlap": {
+        "original": {
+          "n": 100,
+          "success": 93,
+          "steps_mean": 95.88
+        },
+        "corrected": {
+          "n": 100,
+          "success": 92,
+          "steps_mean": 91.57
+        }
+      }
+    },
+    "hybrid": {
+      "overlapping_geometry": {
+        "original": {
+          "n": 0,
+          "success": 0,
+          "steps_mean": null
+        },
+        "corrected": {
+          "n": 0,
+          "success": 0,
+          "steps_mean": null
+        }
+      },
+      "no_detected_overlap": {
+        "original": {
+          "n": 100,
+          "success": 100,
+          "steps_mean": 49.41
+        },
+        "corrected": {
+          "n": 100,
+          "success": 100,
+          "steps_mean": 50.34
+        }
+      }
+    },
+    "complex": {
+      "overlapping_geometry": {
+        "original": {
+          "n": 86,
+          "success": 76,
+          "steps_mean": 180.8139534883721
+        },
+        "corrected": {
+          "n": 86,
+          "success": 74,
+          "steps_mean": 171.22093023255815
+        }
+      },
+      "no_detected_overlap": {
+        "original": {
+          "n": 14,
+          "success": 12,
+          "steps_mean": 169.35714285714286
+        },
+        "corrected": {
+          "n": 14,
+          "success": 14,
+          "steps_mean": 133.78571428571428
+        }
+      }
+    }
+  },
+  "all_test_overlap_counts": {
+    "complex": 426
+  },
+  "eligible_unique_layout_counts": {
+    "complex": 30,
+    "corridor": 400,
+    "hybrid": 105
+  },
+  "limitations": "No matched geometry is not proof of unfamiliarity to checkpoint; subgroup selection is post hoc and Complex disjoint subgroup has only 14 episodes; near-duplicates not audited"
+}

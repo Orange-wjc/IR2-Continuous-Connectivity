@@ -1,0 +1,4092 @@
+{
+  "complex": [
+    {
+      "layout_sha256": "028dd2a3ace6eec59929fbe5c34e78dfbebf8aaaa0802f97667138eaff4b0b4e",
+      "representative": "DungeonMaps/test/complex/433.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/433.png",
+        "DungeonMaps/test/complex/434.png"
+      ]
+    },
+    {
+      "layout_sha256": "0307a583c891c92dfc9e60a6b3ddef338df85a9e68a225bae7b7a83ceadd5475",
+      "representative": "DungeonMaps/test/complex/235.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/235.png",
+        "DungeonMaps/test/complex/236.png",
+        "DungeonMaps/test/complex/349.png",
+        "DungeonMaps/test/complex/350.png"
+      ]
+    },
+    {
+      "layout_sha256": "0386c63538d4027bd8b9f10ab38e22a812d3e17fe92e1fb0124d59ac266be84c",
+      "representative": "DungeonMaps/test/complex/59.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/59.png",
+        "DungeonMaps/test/complex/60.png"
+      ]
+    },
+    {
+      "layout_sha256": "04193df2c7a2b6693951f17718cbc625cce69cf5bc4ed18d66e7f252fbe601a5",
+      "representative": "DungeonMaps/test/complex/355.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/355.png",
+        "DungeonMaps/test/complex/356.png"
+      ]
+    },
+    {
+      "layout_sha256": "04560fbb9c118f5108b0b1855e0c477d9625d132194ca77f093c4f1b9fa943cb",
+      "representative": "DungeonMaps/test/complex/465.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/465.png",
+        "DungeonMaps/test/complex/466.png"
+      ]
+    },
+    {
+      "layout_sha256": "04c4927cf24096c7174a45004e73392b489d989a599d58145e834f5744f553a4",
+      "representative": "DungeonMaps/test/complex/395.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/395.png",
+        "DungeonMaps/test/complex/396.png"
+      ]
+    },
+    {
+      "layout_sha256": "053ade8b7ad9a21ff1d42bfc70f55ebf0fa297ecf3468adac180eb675410181b",
+      "representative": "DungeonMaps/test/complex/177.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/177.png",
+        "DungeonMaps/test/complex/178.png"
+      ]
+    },
+    {
+      "layout_sha256": "05abd3cbf4da3d47e96b0b87739ec3e629a59eb59428bdfcabe006f09d452260",
+      "representative": "DungeonMaps/test/complex/217.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/217.png",
+        "DungeonMaps/test/complex/218.png"
+      ]
+    },
+    {
+      "layout_sha256": "05b595ac4b7e865b107440c3cb19b1ed883571d2fbd11ae0d9dcc97e85b4a342",
+      "representative": "DungeonMaps/test/complex/159.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/159.png",
+        "DungeonMaps/test/complex/160.png"
+      ]
+    },
+    {
+      "layout_sha256": "06077f31ee2cbca1a73fd616f91487606e0f13db71de0462e24adfddbace83c0",
+      "representative": "DungeonMaps/test/complex/13.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/13.png",
+        "DungeonMaps/test/complex/14.png",
+        "DungeonMaps/test/complex/141.png",
+        "DungeonMaps/test/complex/142.png"
+      ]
+    },
+    {
+      "layout_sha256": "07277477c9ff286675a6a7615431f1c830ed8eb85d4d874bf402e3266326f0dc",
+      "representative": "DungeonMaps/test/complex/259.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/259.png",
+        "DungeonMaps/test/complex/260.png"
+      ]
+    },
+    {
+      "layout_sha256": "09fb0b9bb8e0047843c0e77227222092c335c19c60f0d0fa6dd5301be5b369eb",
+      "representative": "DungeonMaps/test/complex/493.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/493.png",
+        "DungeonMaps/test/complex/494.png"
+      ]
+    },
+    {
+      "layout_sha256": "0cf5f120f4cb318d057b7ea435683d98d48040f2d2826224f1f8f62d259d92f9",
+      "representative": "DungeonMaps/test/complex/321.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/321.png",
+        "DungeonMaps/test/complex/322.png"
+      ]
+    },
+    {
+      "layout_sha256": "0d824246a5aef69384deae5c24068f6ffbe7973b0cbc3dc74bef6a1b8449059f",
+      "representative": "DungeonMaps/test/complex/91.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/91.png",
+        "DungeonMaps/test/complex/92.png"
+      ]
+    },
+    {
+      "layout_sha256": "0dee08a11a5c0bb19ed2410c2aca12986af2305e91cf62dbe76fe85c2b9a819f",
+      "representative": "DungeonMaps/test/complex/107.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/107.png",
+        "DungeonMaps/test/complex/108.png"
+      ]
+    },
+    {
+      "layout_sha256": "0ed438102ecee3dbe3c7df9aba825e7764c5926ffc1d07ce303e5a765a825c1d",
+      "representative": "DungeonMaps/test/complex/227.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/227.png",
+        "DungeonMaps/test/complex/228.png",
+        "DungeonMaps/test/complex/237.png",
+        "DungeonMaps/test/complex/238.png"
+      ]
+    },
+    {
+      "layout_sha256": "10efa3868f64369ceb24a53efc2698a64e43635fea6a7aa148cf17875f3ee242",
+      "representative": "DungeonMaps/test/complex/165.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/165.png",
+        "DungeonMaps/test/complex/166.png"
+      ]
+    },
+    {
+      "layout_sha256": "129f91f93be4894089f2bb8726bf8a1ad207c0293285d1284e61ef53d0100152",
+      "representative": "DungeonMaps/test/complex/25.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/25.png",
+        "DungeonMaps/test/complex/26.png"
+      ]
+    },
+    {
+      "layout_sha256": "13fb230fbaeac06f452d5657ed302cfa49db6376e3ee8ec977c3d2cdc88feed4",
+      "representative": "DungeonMaps/test/complex/35.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/35.png",
+        "DungeonMaps/test/complex/36.png",
+        "DungeonMaps/test/complex/469.png",
+        "DungeonMaps/test/complex/470.png"
+      ]
+    },
+    {
+      "layout_sha256": "1649f1e2520c6ebd83894fb22b60f7febf2d5e07ba550a53ea7fd9171c5cfbf3",
+      "representative": "DungeonMaps/test/complex/357.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/357.png",
+        "DungeonMaps/test/complex/358.png",
+        "DungeonMaps/test/complex/361.png",
+        "DungeonMaps/test/complex/362.png"
+      ]
+    },
+    {
+      "layout_sha256": "1795172501eee586236a827089825d138755f90eb8058263f3e82a41b25786dc",
+      "representative": "DungeonMaps/test/complex/257.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/257.png",
+        "DungeonMaps/test/complex/258.png"
+      ]
+    },
+    {
+      "layout_sha256": "18e9250f379b22820cdae94ac02b6789c9ad61843e37395e2652c6e7f9d36590",
+      "representative": "DungeonMaps/test/complex/381.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/381.png",
+        "DungeonMaps/test/complex/382.png"
+      ]
+    },
+    {
+      "layout_sha256": "1b671574fd1eb5bf91b278f7cc0a6a5921a63f229f9b552d1b32606874a02268",
+      "representative": "DungeonMaps/test/complex/229.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/229.png",
+        "DungeonMaps/test/complex/230.png",
+        "DungeonMaps/test/complex/377.png",
+        "DungeonMaps/test/complex/378.png"
+      ]
+    },
+    {
+      "layout_sha256": "1c6a9eb54b3137ce37b206f3fe708ddbe435aac83761c4f78d43e00f27dd3b51",
+      "representative": "DungeonMaps/test/complex/47.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/47.png",
+        "DungeonMaps/test/complex/48.png"
+      ]
+    },
+    {
+      "layout_sha256": "20a38f9652c710e8ab9e90fe5f6ff98ecc71235d7128a80a9b415cf72b138ed6",
+      "representative": "DungeonMaps/test/complex/183.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/183.png",
+        "DungeonMaps/test/complex/184.png",
+        "DungeonMaps/test/complex/29.png",
+        "DungeonMaps/test/complex/30.png"
+      ]
+    },
+    {
+      "layout_sha256": "24ac783165ae33a5a4667db98b5234023102bdaf530e93421360bde64a0bd48c",
+      "representative": "DungeonMaps/test/complex/279.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/279.png",
+        "DungeonMaps/test/complex/280.png"
+      ]
+    },
+    {
+      "layout_sha256": "28ff783879cc8e7d41d651ebeae29c9cf58f52bbf9d134cb038a235d6ead3238",
+      "representative": "DungeonMaps/test/complex/167.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/167.png",
+        "DungeonMaps/test/complex/168.png"
+      ]
+    },
+    {
+      "layout_sha256": "3d356a0db5ee35876c7b70db94fea48b92ec21f7f29e42614627a2e8c14252df",
+      "representative": "DungeonMaps/test/complex/437.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/437.png",
+        "DungeonMaps/test/complex/438.png"
+      ]
+    },
+    {
+      "layout_sha256": "3ed95162a7090ba822b5ed7d740d7035c144e3c4e43b57aff39cd685e4926103",
+      "representative": "DungeonMaps/test/complex/281.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/281.png",
+        "DungeonMaps/test/complex/282.png"
+      ]
+    },
+    {
+      "layout_sha256": "681ac4b9d5effe1c04dfe57dedb92fe1cd95a12ad72a87dfcc9ea28fcaab6790",
+      "representative": "DungeonMaps/test/complex/487.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/complex/487.png",
+        "DungeonMaps/test/complex/488.png"
+      ]
+    }
+  ],
+  "corridor": [
+    {
+      "layout_sha256": "0003bed2e73423307f44995fe85b463301230aeb52deb0909dfdbbdca6962322",
+      "representative": "DungeonMaps/test/corridor/386.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/386.png"
+      ]
+    },
+    {
+      "layout_sha256": "00267e099aae31032354d1e33db5ffd936ea20e42ab8d5a99fa7444a9de4cf26",
+      "representative": "DungeonMaps/test/corridor/105.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/105.png"
+      ]
+    },
+    {
+      "layout_sha256": "0032e5a79a335c53e466037ff5575327ee2debdd6ebe24520a4cc37164cc3862",
+      "representative": "DungeonMaps/test/corridor/225.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/225.png"
+      ]
+    },
+    {
+      "layout_sha256": "006a83c4574d01b1443dd3fa18a46dbc0762dc5aa0d24d423869d5641123ebff",
+      "representative": "DungeonMaps/test/corridor/168.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/168.png"
+      ]
+    },
+    {
+      "layout_sha256": "00751a84315ed0582e67f25ed89da73a2c06e829ca27d7d911616f14b86ee9dc",
+      "representative": "DungeonMaps/test/corridor/330.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/330.png"
+      ]
+    },
+    {
+      "layout_sha256": "009f4381ccd0b19c629a20505b53a878d2fc0230f0b084edfabe898963cdd737",
+      "representative": "DungeonMaps/test/corridor/126.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/126.png"
+      ]
+    },
+    {
+      "layout_sha256": "00aa31af8dee13ff8f383a0680be80b457c0e9dfc99fd20ac0e05b74f32a84db",
+      "representative": "DungeonMaps/test/corridor/316.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/316.png"
+      ]
+    },
+    {
+      "layout_sha256": "00b8f689112fae38be41f6c8730dc183e616530d02d0905fd813307fefbb8e09",
+      "representative": "DungeonMaps/test/corridor/234.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/234.png"
+      ]
+    },
+    {
+      "layout_sha256": "00bff746e1453a0020bb7309df56d9a94814486b9306d2bc819b90d440adf650",
+      "representative": "DungeonMaps/test/corridor/255.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/255.png"
+      ]
+    },
+    {
+      "layout_sha256": "00c3d4ee6d045587f40294e03584d3a91eaa3f81dd97d9d6637be5c134b760bc",
+      "representative": "DungeonMaps/test/corridor/212.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/212.png"
+      ]
+    },
+    {
+      "layout_sha256": "00d1d2e2841b58a690b29e0be3f43ac5aa8e5c4f1bcbb36c6d5f8cd677d696af",
+      "representative": "DungeonMaps/test/corridor/306.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/306.png"
+      ]
+    },
+    {
+      "layout_sha256": "00e17a4cb8cfe0a2785beb63f8525dc47c132896f439463db51eee7fa00770bf",
+      "representative": "DungeonMaps/test/corridor/251.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/251.png"
+      ]
+    },
+    {
+      "layout_sha256": "011ae10aa9bd93d80df8146b6279ffaf8c4388835ef28b60003598c09d00c51a",
+      "representative": "DungeonMaps/test/corridor/324.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/324.png"
+      ]
+    },
+    {
+      "layout_sha256": "01373a4e0014eb9e8d19f304ce7f12934d1db2659d09b0992beb0f07251ae1ae",
+      "representative": "DungeonMaps/test/corridor/49.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/49.png"
+      ]
+    },
+    {
+      "layout_sha256": "013ad7e47a08d28addf3e75f4ced90bba2d3764da3872a1f77ec54b243576e54",
+      "representative": "DungeonMaps/test/corridor/245.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/245.png"
+      ]
+    },
+    {
+      "layout_sha256": "018b8581f4ca9f47c6eb4c37a71e5349cb2b72871c78b1ce8f744a41930e9638",
+      "representative": "DungeonMaps/test/corridor/183.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/183.png"
+      ]
+    },
+    {
+      "layout_sha256": "019ae86cceaa08bb0298adfedff67423dd4ff5c68e39435cf7d0eb7b99856ad3",
+      "representative": "DungeonMaps/test/corridor/305.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/305.png"
+      ]
+    },
+    {
+      "layout_sha256": "01ab5632f42fd7eb329a87602195ad0391b6a8516a076259610cce03c98375c0",
+      "representative": "DungeonMaps/test/corridor/155.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/155.png"
+      ]
+    },
+    {
+      "layout_sha256": "01b23e63eae644bdb2642335ec080ba24c5895ff6600bf9ceb8b4906cb759910",
+      "representative": "DungeonMaps/test/corridor/146.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/146.png"
+      ]
+    },
+    {
+      "layout_sha256": "01c19b4cef24dbb87b3b660423f5c629ad28583e20c6479da596d0b05705b942",
+      "representative": "DungeonMaps/test/corridor/299.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/299.png"
+      ]
+    },
+    {
+      "layout_sha256": "01cb64bcf9f75c40b229226798d85cc3c19050f2a521dd6e859bfc33638d0f30",
+      "representative": "DungeonMaps/test/corridor/42.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/42.png"
+      ]
+    },
+    {
+      "layout_sha256": "01e7e2bdab60fc262ed2cf2621d43bb188dbb3b543f7280b88a72a1dbfe75ee1",
+      "representative": "DungeonMaps/test/corridor/311.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/311.png"
+      ]
+    },
+    {
+      "layout_sha256": "02283669373f1a7f5ad5ca1fc916cbcfe30398afa4c53cc1b2178f60b93f0ace",
+      "representative": "DungeonMaps/test/corridor/268.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/268.png"
+      ]
+    },
+    {
+      "layout_sha256": "022f30fa4df02f380a5829b1bf3e7a28e68a06de520f3adcaa69a180509330e1",
+      "representative": "DungeonMaps/test/corridor/205.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/205.png"
+      ]
+    },
+    {
+      "layout_sha256": "023ec6419f58c5fbd595ec4e3b5b289aac77c7e319da2695cedd41741f2ccb00",
+      "representative": "DungeonMaps/test/corridor/113.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/113.png"
+      ]
+    },
+    {
+      "layout_sha256": "0254a0644772efae544dbf5fb0cf8b33c02482a6465f53f7b706cc15cd28e090",
+      "representative": "DungeonMaps/test/corridor/210.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/210.png"
+      ]
+    },
+    {
+      "layout_sha256": "02594dc4286c828ee8179c80fcddc59f5a3932fb696e5c18d2bde38d3c3290ff",
+      "representative": "DungeonMaps/test/corridor/229.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/229.png"
+      ]
+    },
+    {
+      "layout_sha256": "0272ea285d2ed1f53eba0060e231b80318c63bb5023de8e750e61ce0be4f1d00",
+      "representative": "DungeonMaps/test/corridor/224.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/224.png"
+      ]
+    },
+    {
+      "layout_sha256": "027612cf24ceaec76f9c174c94d652d9d73ebc39616969488cb732b397acc86a",
+      "representative": "DungeonMaps/test/corridor/161.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/161.png"
+      ]
+    },
+    {
+      "layout_sha256": "02a50ca70964be6528e88779e4cb19815429a7709eb62c872b9f606ffb910c1e",
+      "representative": "DungeonMaps/test/corridor/116.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/116.png"
+      ]
+    },
+    {
+      "layout_sha256": "02d07f618239fca196474a75fddd8c41c5d8dbf0f50b732288104302e69b2f4f",
+      "representative": "DungeonMaps/test/corridor/367.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/367.png"
+      ]
+    },
+    {
+      "layout_sha256": "02e4f7734b938c6fb57918e6afdbd112b4e759071947a0e36d69616712927747",
+      "representative": "DungeonMaps/test/corridor/292.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/292.png"
+      ]
+    },
+    {
+      "layout_sha256": "02edc70c4931bb98821fe869c8d795171b52847493cdd47cde64a9a99be3b0cf",
+      "representative": "DungeonMaps/test/corridor/62.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/62.png"
+      ]
+    },
+    {
+      "layout_sha256": "02f5520e42dcf50c540a125e4efd63e108c1fd65b2697eb1c7a85a95d75e8690",
+      "representative": "DungeonMaps/test/corridor/281.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/281.png"
+      ]
+    },
+    {
+      "layout_sha256": "02f857c5d91f666adce2a9ca8718f6f92139187c0c7774fa0979a919995e7b57",
+      "representative": "DungeonMaps/test/corridor/359.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/359.png"
+      ]
+    },
+    {
+      "layout_sha256": "030772a4d9141467d07e6871596a3c078e39ff678333859272a2988799561539",
+      "representative": "DungeonMaps/test/corridor/227.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/227.png"
+      ]
+    },
+    {
+      "layout_sha256": "031eb0fd5036d906873ff05f91518c8ef89a632e8bb68a40f514870d6bffe153",
+      "representative": "DungeonMaps/test/corridor/152.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/152.png"
+      ]
+    },
+    {
+      "layout_sha256": "03465b8300454112f28dd0f70e1f2c56286a47beb10b17f00533968ffa40810f",
+      "representative": "DungeonMaps/test/corridor/178.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/178.png"
+      ]
+    },
+    {
+      "layout_sha256": "0360c63f8f304d686e7e2bb325ba2c364f3d6972db0d5056d853d38a6a075197",
+      "representative": "DungeonMaps/test/corridor/339.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/339.png"
+      ]
+    },
+    {
+      "layout_sha256": "0388e667c53c7f769a85cfbcd2338954ecf1d52da964d8789bff7bf262605e20",
+      "representative": "DungeonMaps/test/corridor/163.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/163.png"
+      ]
+    },
+    {
+      "layout_sha256": "0396a64810e91a3bae87e9c290d8858f79d7f14bf8f3777f5f59ebb42e4fe87a",
+      "representative": "DungeonMaps/test/corridor/204.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/204.png"
+      ]
+    },
+    {
+      "layout_sha256": "03aaac2aefd80fb3c83569644f52a38ad372c90b7d2a0f3a7921680705129018",
+      "representative": "DungeonMaps/test/corridor/60.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/60.png"
+      ]
+    },
+    {
+      "layout_sha256": "03b5501fba794bf89ac6f5deefa3285368375a4ce2bbb5bd82d69331d8489109",
+      "representative": "DungeonMaps/test/corridor/4.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/4.png"
+      ]
+    },
+    {
+      "layout_sha256": "03be04e9c5bb64a178e7ddd37bcd56766d63cb92cc607dbe68e1e532a7d8ad87",
+      "representative": "DungeonMaps/test/corridor/231.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/231.png"
+      ]
+    },
+    {
+      "layout_sha256": "03ff96094f188d67da1ca7c1ef95acf4096e84fb4cc24bd81f6ff733580fd95a",
+      "representative": "DungeonMaps/test/corridor/194.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/194.png"
+      ]
+    },
+    {
+      "layout_sha256": "040ea968cb402aa06dfb23d7381900a17a94e43f76c03229fba3dd199ef39d76",
+      "representative": "DungeonMaps/test/corridor/322.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/322.png"
+      ]
+    },
+    {
+      "layout_sha256": "041ac5db2feb53a91476696aa9cf0acb815683cd3215790809693b82af7bae44",
+      "representative": "DungeonMaps/test/corridor/47.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/47.png"
+      ]
+    },
+    {
+      "layout_sha256": "042d61004d079a03dfb9f493e0152edb8f109a6f853a25cbc394dd239d6bbee6",
+      "representative": "DungeonMaps/test/corridor/100.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/100.png"
+      ]
+    },
+    {
+      "layout_sha256": "04504e932e5c55f99a8ea32490f87d4865f59a8bbe7a90d2ef3df9623f297f77",
+      "representative": "DungeonMaps/test/corridor/2.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/2.png"
+      ]
+    },
+    {
+      "layout_sha256": "0473a190b10529d5fb61331939bc4a5002f38c89ab4afb8bc2073bfa78687dbe",
+      "representative": "DungeonMaps/test/corridor/252.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/252.png"
+      ]
+    },
+    {
+      "layout_sha256": "04826ee39774d1c67915a2303dd821db866deaf5e58958b6b575ff3f1b83ddc1",
+      "representative": "DungeonMaps/test/corridor/5.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/5.png"
+      ]
+    },
+    {
+      "layout_sha256": "04b003d149abdedc89941b4478a2eb00bb575163de1fe2b986b5bd9c36a70a25",
+      "representative": "DungeonMaps/test/corridor/31.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/31.png"
+      ]
+    },
+    {
+      "layout_sha256": "04c38a91f6709ef3ae99e8c5fbf5c3c0b8e6227d0f70d01d339a1f4c81ccc976",
+      "representative": "DungeonMaps/test/corridor/171.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/171.png"
+      ]
+    },
+    {
+      "layout_sha256": "04d5f9e0baad34023a13f8cca82ae9e7fe739491e0796c75c00a0fcd71e552c2",
+      "representative": "DungeonMaps/test/corridor/185.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/185.png"
+      ]
+    },
+    {
+      "layout_sha256": "04e450427da181e19d506ddb6af52b1b5a6ff89cb3194403bc00ad243c274b3e",
+      "representative": "DungeonMaps/test/corridor/179.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/179.png"
+      ]
+    },
+    {
+      "layout_sha256": "04ea09f11550be9cc0b97335e9486caca9922dc3fe88b90251c821fc7dac4e98",
+      "representative": "DungeonMaps/test/corridor/343.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/343.png"
+      ]
+    },
+    {
+      "layout_sha256": "04fa92a364b81a0d5fc297cd375a25eb2b0a86063484f2efaed039a664d6442e",
+      "representative": "DungeonMaps/test/corridor/172.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/172.png"
+      ]
+    },
+    {
+      "layout_sha256": "05004232c975f8c100809bf8e6f6796d41cfd0dbc942151fd3036b111b0be030",
+      "representative": "DungeonMaps/test/corridor/12.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/12.png"
+      ]
+    },
+    {
+      "layout_sha256": "051a126e5dfb0289cab02d01e891a838de18572a8b6ceda8a957b64bf96753fc",
+      "representative": "DungeonMaps/test/corridor/143.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/143.png"
+      ]
+    },
+    {
+      "layout_sha256": "05216566daa0ae8a0771e16bd9b6bcca41a5ac23251b8ea93cf140cd22f0fdd1",
+      "representative": "DungeonMaps/test/corridor/276.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/276.png"
+      ]
+    },
+    {
+      "layout_sha256": "053b962696e14a6070cdb7f9f9f2c55d2fcedb88d83bf00b11d7d50dc7fdd09a",
+      "representative": "DungeonMaps/test/corridor/380.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/380.png"
+      ]
+    },
+    {
+      "layout_sha256": "054226cd5e887f311329d8811cde2c7ea676cd9f5a081b95f8dffa07e389e2b7",
+      "representative": "DungeonMaps/test/corridor/366.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/366.png"
+      ]
+    },
+    {
+      "layout_sha256": "057fe3c1e4ca1c9563d04d7f0ef85111c325992f0281e380038eead3a57828dd",
+      "representative": "DungeonMaps/test/corridor/303.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/303.png"
+      ]
+    },
+    {
+      "layout_sha256": "05cf84a2097212475279eecdf0d869480e350b0a96eaf6862ff0a833c4e3482c",
+      "representative": "DungeonMaps/test/corridor/283.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/283.png"
+      ]
+    },
+    {
+      "layout_sha256": "05ec1149e811803ef52d8ecab49a09bd3b7026290d7698dd2bf051cacaadd700",
+      "representative": "DungeonMaps/test/corridor/122.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/122.png"
+      ]
+    },
+    {
+      "layout_sha256": "05f52559aa86e0291c9d9adc51c90cb051e8b0b50771ab964c6a7d8d3910ac2b",
+      "representative": "DungeonMaps/test/corridor/274.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/274.png"
+      ]
+    },
+    {
+      "layout_sha256": "0638b999c20e2e75c801c009f2e51385fa31941cf341913f149dd9afb87bb89b",
+      "representative": "DungeonMaps/test/corridor/222.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/222.png"
+      ]
+    },
+    {
+      "layout_sha256": "0643704243aae4c329c3ef0ac9e7b1653f13a7eb5620a26efb6f9f240abf6848",
+      "representative": "DungeonMaps/test/corridor/277.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/277.png"
+      ]
+    },
+    {
+      "layout_sha256": "0668dd42d503117c78932c6f42932639a2ecb87deb4314ee2413b68389e1f748",
+      "representative": "DungeonMaps/test/corridor/38.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/38.png"
+      ]
+    },
+    {
+      "layout_sha256": "0678839a84b6e441302e4678579dc01b700e0331ac84b7e1974818349691f098",
+      "representative": "DungeonMaps/test/corridor/221.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/221.png"
+      ]
+    },
+    {
+      "layout_sha256": "068020273990e2b3bc8785b5d257541a5fbe4862b24079d71ebe253e367e0941",
+      "representative": "DungeonMaps/test/corridor/329.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/329.png"
+      ]
+    },
+    {
+      "layout_sha256": "06d1cc0186870414a5c28226f34e07215842838318e6e6700b09afeb1b7fe15f",
+      "representative": "DungeonMaps/test/corridor/97.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/97.png"
+      ]
+    },
+    {
+      "layout_sha256": "070b848c68d0965be3669d6b5de2694353adc957236805f078436d2258108684",
+      "representative": "DungeonMaps/test/corridor/86.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/86.png"
+      ]
+    },
+    {
+      "layout_sha256": "0713e04ec8021c39806066ad5a6390e48ca62c6e7489a6460d1834cba0ed8d85",
+      "representative": "DungeonMaps/test/corridor/314.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/314.png"
+      ]
+    },
+    {
+      "layout_sha256": "071798769e18e7106e443d3e8786e6d137d4d897fc23899f841343b1f465f9cd",
+      "representative": "DungeonMaps/test/corridor/355.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/355.png"
+      ]
+    },
+    {
+      "layout_sha256": "073e11f1272536839f58ad63a1e4e2ee67007d46b52a0c510ea2b27ea25aa603",
+      "representative": "DungeonMaps/test/corridor/80.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/80.png"
+      ]
+    },
+    {
+      "layout_sha256": "073e1c72aceac97b8975e60bdbf8a95244e99f983239eff35a2fbfdfa972291e",
+      "representative": "DungeonMaps/test/corridor/169.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/169.png"
+      ]
+    },
+    {
+      "layout_sha256": "076733d83971b0cbdadaf059d16418e55236f50c949e02eb1cfd7c556150b63d",
+      "representative": "DungeonMaps/test/corridor/270.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/270.png"
+      ]
+    },
+    {
+      "layout_sha256": "076b695b8eff583c343b4906c9c256129acfdf15f6c7e92f7a39924fc57d8528",
+      "representative": "DungeonMaps/test/corridor/92.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/92.png"
+      ]
+    },
+    {
+      "layout_sha256": "078e5e68e507614128f9ec574294d2bac24fa1eccab3b439b98e90e084a32681",
+      "representative": "DungeonMaps/test/corridor/81.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/81.png"
+      ]
+    },
+    {
+      "layout_sha256": "07c8225b0dd1e1370abd200aecef8ce384c854a393692d18d0c333bcdff99c35",
+      "representative": "DungeonMaps/test/corridor/349.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/349.png"
+      ]
+    },
+    {
+      "layout_sha256": "07de1525bbc3530774d195b851c60986dbb0659b14b07538d356420c1255eabf",
+      "representative": "DungeonMaps/test/corridor/13.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/13.png"
+      ]
+    },
+    {
+      "layout_sha256": "07ec74a987cc16fd26726d29d9cec758a3e7f685bd0f5d677fcc51553bd5f6a0",
+      "representative": "DungeonMaps/test/corridor/243.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/243.png"
+      ]
+    },
+    {
+      "layout_sha256": "081fdbb0552a829219ad5cfae96a31c4e23f8f06210d978fa56409a86cbff730",
+      "representative": "DungeonMaps/test/corridor/174.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/174.png"
+      ]
+    },
+    {
+      "layout_sha256": "0822f483e1e3e4b2cdb2a08e3c41cb591ff70d6d8a5691d2cd31c029ec73add7",
+      "representative": "DungeonMaps/test/corridor/202.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/202.png"
+      ]
+    },
+    {
+      "layout_sha256": "083ff34d04b81117fe7265d4662cc4d5f7ee849ee850a8d85ee63a041f57ac1f",
+      "representative": "DungeonMaps/test/corridor/8.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/8.png"
+      ]
+    },
+    {
+      "layout_sha256": "08415ea762e52cac5f46646b9888bd6c90315850935d433f403b93aec82dfeca",
+      "representative": "DungeonMaps/test/corridor/141.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/141.png"
+      ]
+    },
+    {
+      "layout_sha256": "084a4fd43bfc02eeaa3d6cd628d917c85169445a72e034dfd461cf41271af459",
+      "representative": "DungeonMaps/test/corridor/157.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/157.png"
+      ]
+    },
+    {
+      "layout_sha256": "0870f7d43141b849b49bbcdfa155cab1cd49278fa3cf1ae85ba4fc2ae04d64b8",
+      "representative": "DungeonMaps/test/corridor/263.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/263.png"
+      ]
+    },
+    {
+      "layout_sha256": "08a4255fafbd5c76e032408b9a5c9c6020752bad8e4c1d6b26831f7932a1922b",
+      "representative": "DungeonMaps/test/corridor/79.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/79.png"
+      ]
+    },
+    {
+      "layout_sha256": "08a766f12cf94c1618cf73858e9122c06cf53267f849d08fb2a6e06f0135a465",
+      "representative": "DungeonMaps/test/corridor/50.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/50.png"
+      ]
+    },
+    {
+      "layout_sha256": "08bb687987ec7cec1121a6a7feaf8c1403f613f392c23a5b03949840b8fcb1a4",
+      "representative": "DungeonMaps/test/corridor/48.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/48.png"
+      ]
+    },
+    {
+      "layout_sha256": "08ede81c6c1be98f18919bad6b05695138f8c9c4bd0351b9a8555f672f954e2e",
+      "representative": "DungeonMaps/test/corridor/375.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/375.png"
+      ]
+    },
+    {
+      "layout_sha256": "08edea49c46a47006c97a93a86e3094907b28fb7e9c46631d4e53e2e688d3a71",
+      "representative": "DungeonMaps/test/corridor/382.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/382.png"
+      ]
+    },
+    {
+      "layout_sha256": "08f34aa228ce2b64a600af878b5bcad32adc4ce83994122294d2f0106d05243b",
+      "representative": "DungeonMaps/test/corridor/214.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/214.png"
+      ]
+    },
+    {
+      "layout_sha256": "092f2752b7af41f0aceab6e380f0d753e477b4f346884d973eeebfe33401153f",
+      "representative": "DungeonMaps/test/corridor/78.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/78.png"
+      ]
+    },
+    {
+      "layout_sha256": "09a3e5c42e20ab1371f3a47c02d716fc67eec7ff09af0c9b569453bf8af42392",
+      "representative": "DungeonMaps/test/corridor/150.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/150.png"
+      ]
+    },
+    {
+      "layout_sha256": "09b51a0df17cfcedc52246df51a1bde30dd09e3d5727fd79fae326c807eb88a9",
+      "representative": "DungeonMaps/test/corridor/127.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/127.png"
+      ]
+    },
+    {
+      "layout_sha256": "09bb7b9084bebcd8482950d8b50d47538183fd11ccf376ca01592188be788056",
+      "representative": "DungeonMaps/test/corridor/58.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/58.png"
+      ]
+    },
+    {
+      "layout_sha256": "09c009ba174883748b50140f5e19d4c34e300702928b482de01563b73696417a",
+      "representative": "DungeonMaps/test/corridor/302.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/302.png"
+      ]
+    },
+    {
+      "layout_sha256": "0a18d38283c0fda3ffe32c783636aaa59a2c55afd54d49a4dad827e23de29baa",
+      "representative": "DungeonMaps/test/corridor/368.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/368.png"
+      ]
+    },
+    {
+      "layout_sha256": "0a2914807bb92f8ce2f10a6a52f9d7ba0abbc9259a75e3886a5f8b11db912672",
+      "representative": "DungeonMaps/test/corridor/328.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/328.png"
+      ]
+    },
+    {
+      "layout_sha256": "0a33f53cbae67d2283d3ee2def9a288b97c83e487dbf2238682d27397d697637",
+      "representative": "DungeonMaps/test/corridor/397.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/397.png"
+      ]
+    },
+    {
+      "layout_sha256": "0a5039160d2c98adf214909abf243153c453743106f848c4b4120617f6f6e851",
+      "representative": "DungeonMaps/test/corridor/74.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/74.png"
+      ]
+    },
+    {
+      "layout_sha256": "0a57e4f92b4b7b45a26c273839b889c0b2318a5583bd04a55ee9d327f2fa2232",
+      "representative": "DungeonMaps/test/corridor/362.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/362.png"
+      ]
+    },
+    {
+      "layout_sha256": "0aa654df23e0dccb7432a09013c2de1f9b4f220379f1eea0ee0285f0f5925249",
+      "representative": "DungeonMaps/test/corridor/196.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/196.png"
+      ]
+    },
+    {
+      "layout_sha256": "0aa87056627fa1d93404eaf5271b219243dd06408fdaa440863411a00442ad2d",
+      "representative": "DungeonMaps/test/corridor/73.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/73.png"
+      ]
+    },
+    {
+      "layout_sha256": "0abb488ac9a426edd2ef420998864ee3238f61aa5e78e1860fc601c789f06761",
+      "representative": "DungeonMaps/test/corridor/29.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/29.png"
+      ]
+    },
+    {
+      "layout_sha256": "0ac9ff9e646025154afdb856bff987393394775972f7c43a15156793eaa034b9",
+      "representative": "DungeonMaps/test/corridor/18.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/18.png"
+      ]
+    },
+    {
+      "layout_sha256": "0aeba5a7ed6cf6c1f9f5919b199d98f1ae378c57280f8c5318d87c4fff8e005c",
+      "representative": "DungeonMaps/test/corridor/77.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/77.png"
+      ]
+    },
+    {
+      "layout_sha256": "0aef5c2383fcfad9415de7c7d0babddd9c05de3ffe27898c6b1525ebc37d5e0c",
+      "representative": "DungeonMaps/test/corridor/351.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/351.png"
+      ]
+    },
+    {
+      "layout_sha256": "0b0d4359954dd325c1b9f5122bb6e72edc24e38bc59d819425d5ccad25aad754",
+      "representative": "DungeonMaps/test/corridor/301.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/301.png"
+      ]
+    },
+    {
+      "layout_sha256": "0b1f6a02f1f74495da833d719a076bcf1e4f4bdfa8467583d771faade6f12f22",
+      "representative": "DungeonMaps/test/corridor/289.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/289.png"
+      ]
+    },
+    {
+      "layout_sha256": "0b46f79dfa4f95c5f2f1369b110876579aec8d1f8f7e2265659f47637ffce1d3",
+      "representative": "DungeonMaps/test/corridor/28.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/28.png"
+      ]
+    },
+    {
+      "layout_sha256": "0b602b8422f16525a6d18dc15c37d3765a16c669934213b7c354953b28cd90cf",
+      "representative": "DungeonMaps/test/corridor/286.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/286.png"
+      ]
+    },
+    {
+      "layout_sha256": "0b6e9422c7b30b12b5f1ccdf5203ad0b2fab6c442c17a3e2c3a6cafc20ec5687",
+      "representative": "DungeonMaps/test/corridor/327.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/327.png"
+      ]
+    },
+    {
+      "layout_sha256": "0b8ba2900baa3110850b8b8f53ffbcb4f4d64df9aff540e4832ccac8072c340f",
+      "representative": "DungeonMaps/test/corridor/90.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/90.png"
+      ]
+    },
+    {
+      "layout_sha256": "0ba2f3ca537c4c28abd362518ef464a5dfa3f68b6d4a2814cb65c57a9e1636ab",
+      "representative": "DungeonMaps/test/corridor/51.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/51.png"
+      ]
+    },
+    {
+      "layout_sha256": "0bce0b4cefd94cb7615e7732f77a1e29899def633884f532c0cf5b9c85665313",
+      "representative": "DungeonMaps/test/corridor/325.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/325.png"
+      ]
+    },
+    {
+      "layout_sha256": "0bd615ed5fce28c8acc5dd3f48a1a11da73dd4aa85da4fd7e04508d694dfabad",
+      "representative": "DungeonMaps/test/corridor/1.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/1.png"
+      ]
+    },
+    {
+      "layout_sha256": "0c1887b01f398dcc2faa01219150ffbfe69d5eba761e324a3e6cd8aac675a4bd",
+      "representative": "DungeonMaps/test/corridor/365.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/365.png"
+      ]
+    },
+    {
+      "layout_sha256": "0c432106fb0a4b39bdc7ac301a49b142b45bdfa5d770634456df39d692e213fd",
+      "representative": "DungeonMaps/test/corridor/310.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/310.png"
+      ]
+    },
+    {
+      "layout_sha256": "0c527c4fb11eed86e76b6bf15545d9fb3708ab3a090ac63674d2b45619e32b70",
+      "representative": "DungeonMaps/test/corridor/138.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/138.png"
+      ]
+    },
+    {
+      "layout_sha256": "0c6302ebbe95a506310a185ea8603340f3abe0760c12766aabe5572f28b029a2",
+      "representative": "DungeonMaps/test/corridor/11.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/11.png"
+      ]
+    },
+    {
+      "layout_sha256": "0c6835dc05b9b2027be8432e785bbc9ed2a001fdc68a6ddbb1e70b216994974f",
+      "representative": "DungeonMaps/test/corridor/110.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/110.png"
+      ]
+    },
+    {
+      "layout_sha256": "0c6bdfddf878c0e398864f7f491a88c711bcd358f3798d76011776049ca3c3c3",
+      "representative": "DungeonMaps/test/corridor/216.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/216.png"
+      ]
+    },
+    {
+      "layout_sha256": "0c75d6444406816e5e65322b14b34fa916116b5221f792a7d47390d92a5bdfd3",
+      "representative": "DungeonMaps/test/corridor/309.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/309.png"
+      ]
+    },
+    {
+      "layout_sha256": "0c78541912a7e696f720af3e5b7d6f8a59f84f5051e5eda4e6fabc7759d71f0a",
+      "representative": "DungeonMaps/test/corridor/189.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/189.png"
+      ]
+    },
+    {
+      "layout_sha256": "0c7f013577cc1f625822824e5d311d7bc1cec79c903a79798abd2d912d5a64c0",
+      "representative": "DungeonMaps/test/corridor/326.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/326.png"
+      ]
+    },
+    {
+      "layout_sha256": "0c944333bb1fa802678afe7f17845589bd0861d0258c84f60f2c157818509ecf",
+      "representative": "DungeonMaps/test/corridor/114.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/114.png"
+      ]
+    },
+    {
+      "layout_sha256": "0ca6483dfe9377066ffa7e259d62a88884c3293a57734413340b1c55211fe661",
+      "representative": "DungeonMaps/test/corridor/364.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/364.png"
+      ]
+    },
+    {
+      "layout_sha256": "0ca811019aa18c3815526447fdafa642e178dfa83452d24cd7b67c2418f6fb20",
+      "representative": "DungeonMaps/test/corridor/17.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/17.png"
+      ]
+    },
+    {
+      "layout_sha256": "0cb93732f84cd63ee139759a1406af2c270c61b27b3036dc1b496478253d064f",
+      "representative": "DungeonMaps/test/corridor/333.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/333.png"
+      ]
+    },
+    {
+      "layout_sha256": "0cd2cba4ca8087f6bb113bdaf46fce29448507fc030bbe60e8f354adbddecf3b",
+      "representative": "DungeonMaps/test/corridor/387.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/387.png"
+      ]
+    },
+    {
+      "layout_sha256": "0cdb1d757bcc9d35022116ebe9be2de3aa35721d3520a4d2ca721f9257ff658e",
+      "representative": "DungeonMaps/test/corridor/140.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/140.png"
+      ]
+    },
+    {
+      "layout_sha256": "0d537b2109281526590c93997ec8173ab6d21f84db7f6962b7ac8dd5f2ccf430",
+      "representative": "DungeonMaps/test/corridor/21.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/21.png"
+      ]
+    },
+    {
+      "layout_sha256": "0d72ae55ffdbf35cf6176c233709e0a0364fa634d285f22c3df298683590c5d1",
+      "representative": "DungeonMaps/test/corridor/158.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/158.png"
+      ]
+    },
+    {
+      "layout_sha256": "0d7ac0c40efdf30c8600ad409e12b0982d7df9e78122e71decc59365d6c253db",
+      "representative": "DungeonMaps/test/corridor/237.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/237.png"
+      ]
+    },
+    {
+      "layout_sha256": "0d8fa1b93c75100142df47e886892450893492a95bfa506829af167d735685fd",
+      "representative": "DungeonMaps/test/corridor/16.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/16.png"
+      ]
+    },
+    {
+      "layout_sha256": "0d9698bdda978c60fd03fb986a6d325bf585b0ac5968b91052bd313dc72c884b",
+      "representative": "DungeonMaps/test/corridor/232.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/232.png"
+      ]
+    },
+    {
+      "layout_sha256": "0dbb585ede5825f7bd8bd971e1603d61817a869f613cdfb86b304ca18294befa",
+      "representative": "DungeonMaps/test/corridor/374.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/374.png"
+      ]
+    },
+    {
+      "layout_sha256": "0dc93cccefc50927f9addab30bf2cb1f121f191a49e566c42059bd87ba9ec734",
+      "representative": "DungeonMaps/test/corridor/213.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/213.png"
+      ]
+    },
+    {
+      "layout_sha256": "0df8d150f1871b3b715296e60c7e561d429ae38aa88b197d2d3c5a2bb49d9b93",
+      "representative": "DungeonMaps/test/corridor/121.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/121.png"
+      ]
+    },
+    {
+      "layout_sha256": "0e0841ce2d405379fc234dfd713a867e146a4875dcadcadff4449657ace44d63",
+      "representative": "DungeonMaps/test/corridor/184.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/184.png"
+      ]
+    },
+    {
+      "layout_sha256": "0e36688c00c67f6862afe5e9299c82e3dac20662ea3660da262bfd3addc5ed23",
+      "representative": "DungeonMaps/test/corridor/253.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/253.png"
+      ]
+    },
+    {
+      "layout_sha256": "0e4677635b15dbc77be446517736acbeb86e7a268b068e5d17da0a2171ab53fc",
+      "representative": "DungeonMaps/test/corridor/331.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/331.png"
+      ]
+    },
+    {
+      "layout_sha256": "0e77a62411a78a80de51b7ec7af80d41333139de2934edd60359e61285692929",
+      "representative": "DungeonMaps/test/corridor/61.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/61.png"
+      ]
+    },
+    {
+      "layout_sha256": "0e7e60d244855913a6cc765ae0c05a80a78541b3c4dea4ef34961b29d1cc7468",
+      "representative": "DungeonMaps/test/corridor/400.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/400.png"
+      ]
+    },
+    {
+      "layout_sha256": "0eaa64bdad47980b7bc74a8a47457c553524ccccb7aa54725c86e95da8c8acab",
+      "representative": "DungeonMaps/test/corridor/164.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/164.png"
+      ]
+    },
+    {
+      "layout_sha256": "0eb62889a7c4e727b53a4c3d9790966a590c2f09492a8e97988d4e761f11819b",
+      "representative": "DungeonMaps/test/corridor/119.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/119.png"
+      ]
+    },
+    {
+      "layout_sha256": "0efdee05e9ace8eab235728acade3aea58429c20e7221136d09ed24f2a4a7aa5",
+      "representative": "DungeonMaps/test/corridor/348.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/348.png"
+      ]
+    },
+    {
+      "layout_sha256": "0f5842480a5b38a26f9f38a3ec25847c2d504c66860bb43a326164091c26cb71",
+      "representative": "DungeonMaps/test/corridor/160.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/160.png"
+      ]
+    },
+    {
+      "layout_sha256": "0f6aa3c68ed0e49b79fab7134fbb4a62a6221b2997dd485919c5c7fc4de6bcb2",
+      "representative": "DungeonMaps/test/corridor/136.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/136.png"
+      ]
+    },
+    {
+      "layout_sha256": "0f7596b9de3d735275ca064278419567bb0086819e59a1685b7db39b8daa884c",
+      "representative": "DungeonMaps/test/corridor/280.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/280.png"
+      ]
+    },
+    {
+      "layout_sha256": "0f8305a216187b70cde03808663f217a80f851b4cb6525e3f8ae61128a9359a2",
+      "representative": "DungeonMaps/test/corridor/238.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/238.png"
+      ]
+    },
+    {
+      "layout_sha256": "0f8b5e9f71eb6e0b6d41e9fc4c16acc193fa118071878c4ceb2c2a820da99fc7",
+      "representative": "DungeonMaps/test/corridor/6.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/6.png"
+      ]
+    },
+    {
+      "layout_sha256": "0f91e5b2ba41054cd1ba04cd20023610206ca10febf3daf95c9a5240721fe80a",
+      "representative": "DungeonMaps/test/corridor/159.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/159.png"
+      ]
+    },
+    {
+      "layout_sha256": "0fa09077c02527109d6ab4d7e57dd3df8e72ee5c5c5585d4129ee131e0844ed7",
+      "representative": "DungeonMaps/test/corridor/200.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/200.png"
+      ]
+    },
+    {
+      "layout_sha256": "0fd088a4c0e179468abe5d4e3655892bc086601afc4043abb9fc0bf90850841c",
+      "representative": "DungeonMaps/test/corridor/72.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/72.png"
+      ]
+    },
+    {
+      "layout_sha256": "0fec163539bb8a95b3929726f1bb73b84e258b2e81ef37c1a90b84f2b76e1d27",
+      "representative": "DungeonMaps/test/corridor/19.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/19.png"
+      ]
+    },
+    {
+      "layout_sha256": "1028b97f4d982fcbbe2adfe99199578970583d72346815233459cbbb4bff1ede",
+      "representative": "DungeonMaps/test/corridor/134.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/134.png"
+      ]
+    },
+    {
+      "layout_sha256": "10486508a5969443474638f30dad2a15633c98736e9db10b374c2ab948eadf2b",
+      "representative": "DungeonMaps/test/corridor/84.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/84.png"
+      ]
+    },
+    {
+      "layout_sha256": "1064ef89e49509b0576a781cb98b8e5c379ddd085206fcdb4c92629242428a8b",
+      "representative": "DungeonMaps/test/corridor/55.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/55.png"
+      ]
+    },
+    {
+      "layout_sha256": "106b1913ed6aa7b0100f83258e4526327b974c1ec379520e9f4f89478da66382",
+      "representative": "DungeonMaps/test/corridor/10.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/10.png"
+      ]
+    },
+    {
+      "layout_sha256": "1098cc4071ae2423e9564430e41d404a752d0e8fff224bc70245adf51252d428",
+      "representative": "DungeonMaps/test/corridor/258.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/258.png"
+      ]
+    },
+    {
+      "layout_sha256": "10f1f1ee51fb837030968b17b80424624d7a4fad6e2faf0ac77c0a4a4f27216e",
+      "representative": "DungeonMaps/test/corridor/67.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/67.png"
+      ]
+    },
+    {
+      "layout_sha256": "111c7f972e4019f9fb98f51163aa1fbf6547645931eabfd0eb29bcc73910e70e",
+      "representative": "DungeonMaps/test/corridor/129.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/129.png"
+      ]
+    },
+    {
+      "layout_sha256": "113e5667b86dbfe3624d927c275b671bf9bd59cba2f76c80f751d7fe26bd72ce",
+      "representative": "DungeonMaps/test/corridor/337.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/337.png"
+      ]
+    },
+    {
+      "layout_sha256": "119a13de47d1a57a2573e2812e3364c491bd099776dc86ef72fdbf61d7b42aea",
+      "representative": "DungeonMaps/test/corridor/135.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/135.png"
+      ]
+    },
+    {
+      "layout_sha256": "119d181c48c154408516988b88a5344767afafff7740ee9fe72e67fd79107a4c",
+      "representative": "DungeonMaps/test/corridor/370.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/370.png"
+      ]
+    },
+    {
+      "layout_sha256": "119e0bf8ea3af26dc9fc252adb3f2e4fcd048e3c9affe8ef193986afd54b8196",
+      "representative": "DungeonMaps/test/corridor/68.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/68.png"
+      ]
+    },
+    {
+      "layout_sha256": "11c93dfaa605b96d2cb1df3be0680313c4e8ce5e3d0f7d89cbd39e0f24905d1a",
+      "representative": "DungeonMaps/test/corridor/215.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/215.png"
+      ]
+    },
+    {
+      "layout_sha256": "11d1b335c1b3b12d39b240af237559b3921d298a66f699ec66a9f5f64079bb7b",
+      "representative": "DungeonMaps/test/corridor/44.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/44.png"
+      ]
+    },
+    {
+      "layout_sha256": "11d47477dbc63d0561e89ed63812b057dd53a17fe7bcd8f3e08c49d7c04d7c65",
+      "representative": "DungeonMaps/test/corridor/82.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/82.png"
+      ]
+    },
+    {
+      "layout_sha256": "11dca26d25fc4009da5545d41cdd36f96f5b7c8fc6fd7858eff6883f634b2d7a",
+      "representative": "DungeonMaps/test/corridor/137.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/137.png"
+      ]
+    },
+    {
+      "layout_sha256": "1204f5ac1c5a258edfb0d70cf41fbf6980cbe010f17aaf5f28210cdf29c3ea2b",
+      "representative": "DungeonMaps/test/corridor/181.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/181.png"
+      ]
+    },
+    {
+      "layout_sha256": "122adc02d26aff52272f61e536bc78cdb62ade1d9fbc9cfbc4086f3252395565",
+      "representative": "DungeonMaps/test/corridor/153.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/153.png"
+      ]
+    },
+    {
+      "layout_sha256": "124be52c59cf6566750be73d283727536c2326f1da018607c85477e71d451e79",
+      "representative": "DungeonMaps/test/corridor/36.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/36.png"
+      ]
+    },
+    {
+      "layout_sha256": "12939d0706137c2d080657a406993ae8a29e5ee89374d0920f361b716d7d1170",
+      "representative": "DungeonMaps/test/corridor/187.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/187.png"
+      ]
+    },
+    {
+      "layout_sha256": "12e1d8a76936b96f91ead39d2df95b9b411a01fccdbfb63b382362bb6062971b",
+      "representative": "DungeonMaps/test/corridor/125.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/125.png"
+      ]
+    },
+    {
+      "layout_sha256": "12f517b05fdb161e5aa4867ac19fbac777cf17a242250819da9849d11e16946f",
+      "representative": "DungeonMaps/test/corridor/272.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/272.png"
+      ]
+    },
+    {
+      "layout_sha256": "12fbb1034f8433fe0c4561b4554afdd963e43db5bc38d25c614e25af73016357",
+      "representative": "DungeonMaps/test/corridor/107.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/107.png"
+      ]
+    },
+    {
+      "layout_sha256": "133749d84d3bcc2bb5c387e4b8d2454fe782f1ba00acf6fc5a7517f9c369fe46",
+      "representative": "DungeonMaps/test/corridor/219.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/219.png"
+      ]
+    },
+    {
+      "layout_sha256": "13524ce5a439553bbb92030c881fba5c41e36c1c8ef790a4e3f4a134903e4a12",
+      "representative": "DungeonMaps/test/corridor/167.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/167.png"
+      ]
+    },
+    {
+      "layout_sha256": "13a4d7a3fa2da4d396e42a16d8aac2d58b46d0365ae49da51d6910ef54942f4c",
+      "representative": "DungeonMaps/test/corridor/334.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/334.png"
+      ]
+    },
+    {
+      "layout_sha256": "13aa264eb25963c1aca9c90ba8152d76b0fbc94cca947083c81b9d5f7ebf8ab9",
+      "representative": "DungeonMaps/test/corridor/307.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/307.png"
+      ]
+    },
+    {
+      "layout_sha256": "13b87042206ab431837c06fb4f96f2887430e6f5f57c460462f0445e43ab5738",
+      "representative": "DungeonMaps/test/corridor/369.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/369.png"
+      ]
+    },
+    {
+      "layout_sha256": "13cb312167b106b3a98f5dd455719678bc30cfc3932635fbf06d870bf1cbb803",
+      "representative": "DungeonMaps/test/corridor/199.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/199.png"
+      ]
+    },
+    {
+      "layout_sha256": "13d18faa21a1bdd3914f74f560052a7d775ec1c6e486fb9a9410bce0bc3c8978",
+      "representative": "DungeonMaps/test/corridor/89.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/89.png"
+      ]
+    },
+    {
+      "layout_sha256": "13e1e38d64ea36fd58c6c76c7db1fa1692a4f0b83655b8335bab14dc0fb4a06e",
+      "representative": "DungeonMaps/test/corridor/188.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/188.png"
+      ]
+    },
+    {
+      "layout_sha256": "13e28de8544cb229ec4ff8e37af42c4356802cf1086fa0200c4563a1dc824d3f",
+      "representative": "DungeonMaps/test/corridor/71.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/71.png"
+      ]
+    },
+    {
+      "layout_sha256": "140e6ea4dca3f18a5f7f458f794d7e9c60b42dd939b7d03756e0773bb9f34c88",
+      "representative": "DungeonMaps/test/corridor/3.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/3.png"
+      ]
+    },
+    {
+      "layout_sha256": "140fea7eb2aed58b235633b0467916f0425ee432504ec9ec601dfc206db1f3d3",
+      "representative": "DungeonMaps/test/corridor/291.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/291.png"
+      ]
+    },
+    {
+      "layout_sha256": "1417cf8fee2e2f6d56a95ebe3d179b2a5c6df9125a449a928a701a37c3aa91fb",
+      "representative": "DungeonMaps/test/corridor/290.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/290.png"
+      ]
+    },
+    {
+      "layout_sha256": "14407d6ca83d797f083e224d2e33451132d3fae2025b800e33ad22b8437ea0f7",
+      "representative": "DungeonMaps/test/corridor/154.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/154.png"
+      ]
+    },
+    {
+      "layout_sha256": "144fe49a03a03ed061c3d3f45de602312975493418ca4e23111f7fed3004c2bd",
+      "representative": "DungeonMaps/test/corridor/379.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/379.png"
+      ]
+    },
+    {
+      "layout_sha256": "14609f99c3791bfd5763cce41ceebaceaf504ea5b9c1405adefb4fc7b8aa9013",
+      "representative": "DungeonMaps/test/corridor/244.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/244.png"
+      ]
+    },
+    {
+      "layout_sha256": "1467c8850bf0e236c4134205bdb34865334d9bbc35cc1f4184aa9c3268e03091",
+      "representative": "DungeonMaps/test/corridor/117.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/117.png"
+      ]
+    },
+    {
+      "layout_sha256": "146cfe2675dcdb83837551faa0fa43c897078ad205cfcbb92b9bc11ef1520c38",
+      "representative": "DungeonMaps/test/corridor/257.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/257.png"
+      ]
+    },
+    {
+      "layout_sha256": "14807e17d6c80f2c5bd06abe24d8b7df0a5f80e2b052c0fca1a2f608cc539b62",
+      "representative": "DungeonMaps/test/corridor/396.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/396.png"
+      ]
+    },
+    {
+      "layout_sha256": "14a868fb9c8b6bf07ac28200f3efab250ec69554175083739c077212fb358531",
+      "representative": "DungeonMaps/test/corridor/57.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/57.png"
+      ]
+    },
+    {
+      "layout_sha256": "14a8e7cbd89f2b4bc76b4d08e981dc5d7e74fda5d46e6560281b161f2fe56899",
+      "representative": "DungeonMaps/test/corridor/101.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/101.png"
+      ]
+    },
+    {
+      "layout_sha256": "14aeb8103b94ea0556df515f9dce8a65577196d22095f47fa2383bb731356248",
+      "representative": "DungeonMaps/test/corridor/285.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/285.png"
+      ]
+    },
+    {
+      "layout_sha256": "14b91da82e1d5471e0d6ac08de4e10a06461856d45b29ae530d11a98d1ee1d25",
+      "representative": "DungeonMaps/test/corridor/70.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/70.png"
+      ]
+    },
+    {
+      "layout_sha256": "1507cc4f245954e7d10c8cacdfcdbcb41b670a018b1e1cc661699eb5891738a1",
+      "representative": "DungeonMaps/test/corridor/193.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/193.png"
+      ]
+    },
+    {
+      "layout_sha256": "150cd97f9280a36af771d4d643cd1afe7e753471e0cb99601928d2abe2fc6cb6",
+      "representative": "DungeonMaps/test/corridor/32.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/32.png"
+      ]
+    },
+    {
+      "layout_sha256": "155b55946a4424bd4de96e830fc60277697737f0a4e299ecc3920ebbf00563bd",
+      "representative": "DungeonMaps/test/corridor/207.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/207.png"
+      ]
+    },
+    {
+      "layout_sha256": "159c169f7f515ad65da8ed203caa798e2356183c7446110f48fb4bbe3fce4a73",
+      "representative": "DungeonMaps/test/corridor/288.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/288.png"
+      ]
+    },
+    {
+      "layout_sha256": "15ba4bb4183922d5cb3551c9d49b2e8294becdceee032dea6c61bae013853d8e",
+      "representative": "DungeonMaps/test/corridor/203.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/203.png"
+      ]
+    },
+    {
+      "layout_sha256": "15c2b4bfa29e2dc41a3f9aefd027f398cac307d5e89c718a85b9e233ac530c5b",
+      "representative": "DungeonMaps/test/corridor/145.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/145.png"
+      ]
+    },
+    {
+      "layout_sha256": "15d07961322bd8ecf84c8e6226a602c255abad2790e0caa57bfd41eedf0d88a8",
+      "representative": "DungeonMaps/test/corridor/259.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/259.png"
+      ]
+    },
+    {
+      "layout_sha256": "1621154e2df6196c48f292f6ba50d41f7ecd36f56f501fec2af05f681dd3fea1",
+      "representative": "DungeonMaps/test/corridor/300.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/300.png"
+      ]
+    },
+    {
+      "layout_sha256": "16625058cbaf8a69f99e7e0fc432ed36de82022a33b847b2d61cfd37b4859b1f",
+      "representative": "DungeonMaps/test/corridor/166.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/166.png"
+      ]
+    },
+    {
+      "layout_sha256": "166fb084cf182b6c4ff33de8b6464146a20540db0823da47ecae849be0a73dec",
+      "representative": "DungeonMaps/test/corridor/23.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/23.png"
+      ]
+    },
+    {
+      "layout_sha256": "167c47adc0cb3756fb0660a54cb571dc35d5d83b4ea70b6eb8587fc9e67f92e3",
+      "representative": "DungeonMaps/test/corridor/372.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/372.png"
+      ]
+    },
+    {
+      "layout_sha256": "168f78c03660de1a95cb8c21c3e6cd520b49b9cbae2e59c7cf39c0c086836e15",
+      "representative": "DungeonMaps/test/corridor/33.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/33.png"
+      ]
+    },
+    {
+      "layout_sha256": "16dd37a4f46d1eb679fc82346189222e6f6ac32a7030d51ce2207e4407fe7422",
+      "representative": "DungeonMaps/test/corridor/99.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/99.png"
+      ]
+    },
+    {
+      "layout_sha256": "16fdf5c7128d81ae4e60260c48e8b00ac6e0cb92884bb1e25fe1c9b34497870a",
+      "representative": "DungeonMaps/test/corridor/43.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/43.png"
+      ]
+    },
+    {
+      "layout_sha256": "172994fea8b6f0df03ade340a042f431c30a186b5fb7fecb457f249bd30e6bf4",
+      "representative": "DungeonMaps/test/corridor/254.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/254.png"
+      ]
+    },
+    {
+      "layout_sha256": "1736a9d323fb0a5679b9f3a38e1d1057df6c5e8f2d86bc8ced3363912ec5f376",
+      "representative": "DungeonMaps/test/corridor/269.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/269.png"
+      ]
+    },
+    {
+      "layout_sha256": "173987d3b2268a30852df778bb39a2b668dd87e70f1bcb631c55099028f326b6",
+      "representative": "DungeonMaps/test/corridor/273.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/273.png"
+      ]
+    },
+    {
+      "layout_sha256": "175000743ecef5bed4e7dbb037af9476b690c54c46692d9ac68e3aa529ab8bbd",
+      "representative": "DungeonMaps/test/corridor/239.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/239.png"
+      ]
+    },
+    {
+      "layout_sha256": "17564b8ddfa8fc9814f563f84d642f4938653eea9228a153e570949f78f39019",
+      "representative": "DungeonMaps/test/corridor/22.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/22.png"
+      ]
+    },
+    {
+      "layout_sha256": "17db12af270545fdf2f8fe5fb28c458cd229ef4ee8203263a5175fdaff7cf3e5",
+      "representative": "DungeonMaps/test/corridor/392.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/392.png"
+      ]
+    },
+    {
+      "layout_sha256": "17eb36127a61a7a333511ee1a98aadd4580dcd56d7776277ed029f33a58fe46d",
+      "representative": "DungeonMaps/test/corridor/264.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/264.png"
+      ]
+    },
+    {
+      "layout_sha256": "180306c2e7d1ce0404603f71d8618137b275367580be9bb17079b5d89bc6e10b",
+      "representative": "DungeonMaps/test/corridor/241.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/241.png"
+      ]
+    },
+    {
+      "layout_sha256": "188d6163372834974e3941638d9cdc8a8a62f115812c65407ce17b67d57774a7",
+      "representative": "DungeonMaps/test/corridor/112.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/112.png"
+      ]
+    },
+    {
+      "layout_sha256": "18dd195bdcbc6f8f47fcc0a7804fc542521e4ec024c40a4e1b444e27e872fc80",
+      "representative": "DungeonMaps/test/corridor/249.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/249.png"
+      ]
+    },
+    {
+      "layout_sha256": "191106235c5878d9e377fd73b99db4da02051aacdcd1d12389dca079df82a9ed",
+      "representative": "DungeonMaps/test/corridor/378.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/378.png"
+      ]
+    },
+    {
+      "layout_sha256": "194495a7bbdb2e4be17f9c9bc07a345564cec0fa191d3386f02706ce6e6b61f5",
+      "representative": "DungeonMaps/test/corridor/271.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/271.png"
+      ]
+    },
+    {
+      "layout_sha256": "198ef9cc4dc8064ddc37cf86f1a29a186c9575c1dcd881a379b1c1fc20a914eb",
+      "representative": "DungeonMaps/test/corridor/394.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/394.png"
+      ]
+    },
+    {
+      "layout_sha256": "19b838b6bb769031a9a8556a3229369fc2cf7dfa9a7803bf31ab99d0c23ba598",
+      "representative": "DungeonMaps/test/corridor/247.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/247.png"
+      ]
+    },
+    {
+      "layout_sha256": "1a023f64ebc884f0ebb0da29bf76cb7ab2cc8d1037c2c5fba0b380fe80b30b16",
+      "representative": "DungeonMaps/test/corridor/27.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/27.png"
+      ]
+    },
+    {
+      "layout_sha256": "1a3de32ed9521fb1392a820218a787031c8d60ff9d19040f54e9158ca0c54b9c",
+      "representative": "DungeonMaps/test/corridor/233.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/233.png"
+      ]
+    },
+    {
+      "layout_sha256": "1a66def8f3596d1aa3a1789465d98f1d619d4322da012455a7787ca30cae604d",
+      "representative": "DungeonMaps/test/corridor/266.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/266.png"
+      ]
+    },
+    {
+      "layout_sha256": "1a81335dd5ab17936c0bd0ba7cb02d992527ddd91469753a8717ceb3ec649817",
+      "representative": "DungeonMaps/test/corridor/250.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/250.png"
+      ]
+    },
+    {
+      "layout_sha256": "1a91e575b3e4f7f7729011bf57b3513d28c9c389e68ee4b8f29ae88f9e349b0a",
+      "representative": "DungeonMaps/test/corridor/360.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/360.png"
+      ]
+    },
+    {
+      "layout_sha256": "1aa7b9cc3499a14a913b5b1f6a56d7244742db1e732549a8af978197d3b8bb18",
+      "representative": "DungeonMaps/test/corridor/198.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/198.png"
+      ]
+    },
+    {
+      "layout_sha256": "1ab4d86a63ef8258e1b9757eda0b50707654ba52b140cd60e25ed8f3e4beb286",
+      "representative": "DungeonMaps/test/corridor/46.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/46.png"
+      ]
+    },
+    {
+      "layout_sha256": "1acd1f8473710b41df7a57b328e369cc033a43ebe11da3cdb0119b597349cd33",
+      "representative": "DungeonMaps/test/corridor/256.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/256.png"
+      ]
+    },
+    {
+      "layout_sha256": "1adbc5f5aa84ccfadacdac76335546c8bc18655b08b7de932fe17605a4d74fa9",
+      "representative": "DungeonMaps/test/corridor/197.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/197.png"
+      ]
+    },
+    {
+      "layout_sha256": "1badd4a5e82f5f18cf6c72a525e88da1c48cdb55b3191f43acb7b31839644269",
+      "representative": "DungeonMaps/test/corridor/20.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/20.png"
+      ]
+    },
+    {
+      "layout_sha256": "1bceb3f9e39fd6e0407287e9f91afb61c39e40e5e480632deeea6dfe4a24b3b0",
+      "representative": "DungeonMaps/test/corridor/24.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/24.png"
+      ]
+    },
+    {
+      "layout_sha256": "1c08c88d8f29ff03520d6b28ee75456feeab620d31140fb8e91350d3760693f5",
+      "representative": "DungeonMaps/test/corridor/147.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/147.png"
+      ]
+    },
+    {
+      "layout_sha256": "1c0daef7d3e75d1eb849bfe555b8cdebde7b0122f40edf8d00b11307dd1fe480",
+      "representative": "DungeonMaps/test/corridor/319.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/319.png"
+      ]
+    },
+    {
+      "layout_sha256": "1c1ea0351fc3c070fdd1391fbe8f5f29f39ab3bf0cfeace1080537317e32f016",
+      "representative": "DungeonMaps/test/corridor/195.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/195.png"
+      ]
+    },
+    {
+      "layout_sha256": "1c27716592e3ed71b573cc5cc8381ebd523a53399dad34262249a595f289098f",
+      "representative": "DungeonMaps/test/corridor/385.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/385.png"
+      ]
+    },
+    {
+      "layout_sha256": "1ca020c1c4685f469845dab0b91ddbe358559e49e416f31657178e8b395f96e0",
+      "representative": "DungeonMaps/test/corridor/275.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/275.png"
+      ]
+    },
+    {
+      "layout_sha256": "1cddce63d09efc03784512227ca2692356235326fef9612e705d0855d46ee816",
+      "representative": "DungeonMaps/test/corridor/287.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/287.png"
+      ]
+    },
+    {
+      "layout_sha256": "1d30c50b6a7c2d1bae92b74715b55f3c59fcee1722a9cc566c9b1080727d8c77",
+      "representative": "DungeonMaps/test/corridor/118.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/118.png"
+      ]
+    },
+    {
+      "layout_sha256": "1dd5aa2dad348205a69873ae5a3f5113365b3aadcb680a6609cd903d937c8eed",
+      "representative": "DungeonMaps/test/corridor/15.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/15.png"
+      ]
+    },
+    {
+      "layout_sha256": "1e07bec8570349af20ac89ab76f2516fc8f0ebe0381a96e110dc450a18b4bcd3",
+      "representative": "DungeonMaps/test/corridor/66.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/66.png"
+      ]
+    },
+    {
+      "layout_sha256": "1ea61ebc42e5d1920437ce555c34b8c9661125a7a46f6210246f56551363ceae",
+      "representative": "DungeonMaps/test/corridor/295.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/295.png"
+      ]
+    },
+    {
+      "layout_sha256": "1eaf7358f485619ac2aa3235424d8e630fa086b9fd96b1eacaf1d18ae59a0fd4",
+      "representative": "DungeonMaps/test/corridor/391.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/391.png"
+      ]
+    },
+    {
+      "layout_sha256": "1ee8bb216030f2cd049ccfc3e0e6ebab49b31ee5fbe80bc6ad1d4223ac85c990",
+      "representative": "DungeonMaps/test/corridor/180.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/180.png"
+      ]
+    },
+    {
+      "layout_sha256": "1f0344e7c152bb528b23aaf79dc5f4f86c08b2b4cc4fe3dd1ee80e980bae6029",
+      "representative": "DungeonMaps/test/corridor/30.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/30.png"
+      ]
+    },
+    {
+      "layout_sha256": "1f29a0c8df4c5f25714004cf542d472b459fc5ebb39def91a082ab3f2d6dbde4",
+      "representative": "DungeonMaps/test/corridor/262.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/262.png"
+      ]
+    },
+    {
+      "layout_sha256": "1f2fc864e7bd13d7f95ed993bc68cd21da63c03d2e8905f0cc07f004937e0926",
+      "representative": "DungeonMaps/test/corridor/335.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/335.png"
+      ]
+    },
+    {
+      "layout_sha256": "1f9a89f6ae475dd4c3d3865c47780c06bfbc44a9575fc2bdb9d22ab488ba0b84",
+      "representative": "DungeonMaps/test/corridor/88.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/88.png"
+      ]
+    },
+    {
+      "layout_sha256": "1fe8fe0089569a7fe8ed6217b1baf6d0aba075eebaa15853bcba5d9af7275f57",
+      "representative": "DungeonMaps/test/corridor/142.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/142.png"
+      ]
+    },
+    {
+      "layout_sha256": "200b9fde438d447c8a69c38e0bbe4b469e3789f0f0f497a512c3208e66d5647b",
+      "representative": "DungeonMaps/test/corridor/347.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/347.png"
+      ]
+    },
+    {
+      "layout_sha256": "2014bab76defc6e476ecf20b773dd7cd926ec6d43188e434aaa15d8e80392faa",
+      "representative": "DungeonMaps/test/corridor/357.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/357.png"
+      ]
+    },
+    {
+      "layout_sha256": "2051f2206b97a6d2178e37b418898a39c210d2a3d2c0326f2909b180c5fa08ce",
+      "representative": "DungeonMaps/test/corridor/312.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/312.png"
+      ]
+    },
+    {
+      "layout_sha256": "208d1972801b251ad091fdf6f7413b4a38f8b3c845b637d80bee088cbeb15283",
+      "representative": "DungeonMaps/test/corridor/345.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/345.png"
+      ]
+    },
+    {
+      "layout_sha256": "20c8a9ca2d18b42d9e8895a49bc8f030381c0a7ec6f5f449bdfefb6ee093eb4d",
+      "representative": "DungeonMaps/test/corridor/298.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/298.png"
+      ]
+    },
+    {
+      "layout_sha256": "20d3ad4869326fd0d9f7eff20b8234e74583e51d552a26b091b356a101cf6256",
+      "representative": "DungeonMaps/test/corridor/56.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/56.png"
+      ]
+    },
+    {
+      "layout_sha256": "210505e0e6650f6591481c543eafcebcf56a111ca08b8b45f74d72cba4139da9",
+      "representative": "DungeonMaps/test/corridor/313.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/313.png"
+      ]
+    },
+    {
+      "layout_sha256": "217931941f10b885cf42e8923e80f7c884f2b640a9a426c23cdb6fbec5d55901",
+      "representative": "DungeonMaps/test/corridor/91.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/91.png"
+      ]
+    },
+    {
+      "layout_sha256": "21b27e5b2c4599ff27fe60574b1b584b491e6f68ff377a56203b02313a5e3465",
+      "representative": "DungeonMaps/test/corridor/53.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/53.png"
+      ]
+    },
+    {
+      "layout_sha256": "21fa2ebb57869798b368eec1d24a7c0033de4ac5d5bb2f78b3c3fb3ed2af94d4",
+      "representative": "DungeonMaps/test/corridor/332.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/332.png"
+      ]
+    },
+    {
+      "layout_sha256": "21feb99b62352039f6a235f8eb55c7661f5e3514d3c27eecc50cbddfd9cace4d",
+      "representative": "DungeonMaps/test/corridor/190.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/190.png"
+      ]
+    },
+    {
+      "layout_sha256": "221608aae2bcaeb014c250d34dcb35b242dced29061e0f5c3ef85cc2ffe4eeb3",
+      "representative": "DungeonMaps/test/corridor/201.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/201.png"
+      ]
+    },
+    {
+      "layout_sha256": "221ffd94e8c51f0e73279883bd44546f13a1d17233b9ac4beee0b2468cd9249b",
+      "representative": "DungeonMaps/test/corridor/94.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/94.png"
+      ]
+    },
+    {
+      "layout_sha256": "228c33af6d31b4d86aa5f8774c8cbc535992b285132923bbd20a4e41293c7dfc",
+      "representative": "DungeonMaps/test/corridor/398.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/398.png"
+      ]
+    },
+    {
+      "layout_sha256": "229f8e27901da632e84ffe0f9cacecc4f95a2c9d500d1b669677831745dc02f7",
+      "representative": "DungeonMaps/test/corridor/371.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/371.png"
+      ]
+    },
+    {
+      "layout_sha256": "22dd04f401924e3d513931cc2117b0cf5c746d56e4e0b5e8cef2da856c616ef3",
+      "representative": "DungeonMaps/test/corridor/132.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/132.png"
+      ]
+    },
+    {
+      "layout_sha256": "230cf9a3102948c3ba0b62bbd64e0f541ffb3331047b759a8c38660f19656ea0",
+      "representative": "DungeonMaps/test/corridor/85.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/85.png"
+      ]
+    },
+    {
+      "layout_sha256": "232a8cf4d4c7f91dff851005197ed27c33864855d2b0aba00c8f91ce09409237",
+      "representative": "DungeonMaps/test/corridor/144.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/144.png"
+      ]
+    },
+    {
+      "layout_sha256": "233e59bcc476d6ed604cb2cbd4976b9e191540a2ded21db467db0a404c786473",
+      "representative": "DungeonMaps/test/corridor/133.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/133.png"
+      ]
+    },
+    {
+      "layout_sha256": "2391d336ed0472064fd02e678f61607698738afeb4e8127aee6c61c843a03276",
+      "representative": "DungeonMaps/test/corridor/124.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/124.png"
+      ]
+    },
+    {
+      "layout_sha256": "23923039683873e0bca444b94af3a2ff08f1a35b1197382190bf1d5078426cd6",
+      "representative": "DungeonMaps/test/corridor/177.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/177.png"
+      ]
+    },
+    {
+      "layout_sha256": "23dc34d0d503c9027944d557c7d3bcd4a5416b2aed2b8976a05d86cd34e89a5b",
+      "representative": "DungeonMaps/test/corridor/120.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/120.png"
+      ]
+    },
+    {
+      "layout_sha256": "2444b6de9d7daf7b28ed6d934e997a087548766009d9ceb2a91c33c0a74f34d6",
+      "representative": "DungeonMaps/test/corridor/218.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/218.png"
+      ]
+    },
+    {
+      "layout_sha256": "24535b2a5b149938a84e585d31e920a304859633c812ca81e7b5498ef46ebde5",
+      "representative": "DungeonMaps/test/corridor/246.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/246.png"
+      ]
+    },
+    {
+      "layout_sha256": "2461b3fc0555d22b5ff377cfe00a9398f2b92c551747ac1851ffedbd4a723d5b",
+      "representative": "DungeonMaps/test/corridor/294.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/294.png"
+      ]
+    },
+    {
+      "layout_sha256": "24b9973155b056d62237e1d97cb85541705bda9bdc64f0eb0d82d8d287fc71f1",
+      "representative": "DungeonMaps/test/corridor/296.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/296.png"
+      ]
+    },
+    {
+      "layout_sha256": "24bd6a0b8e4c8b0357b6746519760675cd548965f6e781e2ae786c47aeba59aa",
+      "representative": "DungeonMaps/test/corridor/39.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/39.png"
+      ]
+    },
+    {
+      "layout_sha256": "24e0d401234e3d7590f647bde6f54147344541d70eefa1f31a027210ca6f2d91",
+      "representative": "DungeonMaps/test/corridor/37.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/37.png"
+      ]
+    },
+    {
+      "layout_sha256": "253a65cf930ce79bbe7577fd504746828b15310e553bdd268e5b9675ac0c6824",
+      "representative": "DungeonMaps/test/corridor/377.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/377.png"
+      ]
+    },
+    {
+      "layout_sha256": "25fe6caeb4127d832d48d71f18ba3b4db7678c2e51bb5bc46f02b0426b4dfb2f",
+      "representative": "DungeonMaps/test/corridor/54.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/54.png"
+      ]
+    },
+    {
+      "layout_sha256": "261e6d831b09ba6d8887a2c0eba1b19bdbd2450a5cd5828aed6f5a85e65ac510",
+      "representative": "DungeonMaps/test/corridor/41.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/41.png"
+      ]
+    },
+    {
+      "layout_sha256": "266ac8bb31369c2bda20c6ac7b6568da32aadfe5cf1f09ec82ff9f526825ae0f",
+      "representative": "DungeonMaps/test/corridor/282.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/282.png"
+      ]
+    },
+    {
+      "layout_sha256": "26a1e1df92cc41a4afa635cb07e372399091b89263df8468ea7d7f83131d70bd",
+      "representative": "DungeonMaps/test/corridor/40.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/40.png"
+      ]
+    },
+    {
+      "layout_sha256": "26c89cf8aabd28aab8959b8729ccfabb1c126d124f308ed73c7bc7527d83c617",
+      "representative": "DungeonMaps/test/corridor/383.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/383.png"
+      ]
+    },
+    {
+      "layout_sha256": "27075f10da515aef7eee9e407b4b08c8d5c669edfe78d6dc7400d14a2773a7a8",
+      "representative": "DungeonMaps/test/corridor/186.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/186.png"
+      ]
+    },
+    {
+      "layout_sha256": "271ec913c4f5031ed3b54e2f0d170309b09c94b087e25ac973f4905e9e842203",
+      "representative": "DungeonMaps/test/corridor/267.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/267.png"
+      ]
+    },
+    {
+      "layout_sha256": "275473d6f5c30bb03680582e68ae254ee571553c81fa0002b7010a9ac45f983d",
+      "representative": "DungeonMaps/test/corridor/149.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/149.png"
+      ]
+    },
+    {
+      "layout_sha256": "285f80b9cae1089c062627598db0c572253172bd4e0ab423cba6d5938d2a1294",
+      "representative": "DungeonMaps/test/corridor/115.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/115.png"
+      ]
+    },
+    {
+      "layout_sha256": "286d0a9a5a3f984140d4bdbdb23bb6d25f0a14e07d77030cba46fa705be9a008",
+      "representative": "DungeonMaps/test/corridor/208.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/208.png"
+      ]
+    },
+    {
+      "layout_sha256": "287afc67fcca67262d07902a57efe329e70f08e3a41f97d6061e4d11e60e3ac6",
+      "representative": "DungeonMaps/test/corridor/260.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/260.png"
+      ]
+    },
+    {
+      "layout_sha256": "28e5c47d6d229b54038809e3c3d74367beda2a9232d4bbecc078bc61c9d8248a",
+      "representative": "DungeonMaps/test/corridor/206.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/206.png"
+      ]
+    },
+    {
+      "layout_sha256": "28f1752be9f57370b230c2eaa2550b6530d1a149098016ae52afa3364f1d8a54",
+      "representative": "DungeonMaps/test/corridor/182.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/182.png"
+      ]
+    },
+    {
+      "layout_sha256": "28f3a6ac6a1a58990b05e4edb5d2daf9a6726d541b51dd75e8bb911f4314a8e1",
+      "representative": "DungeonMaps/test/corridor/384.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/384.png"
+      ]
+    },
+    {
+      "layout_sha256": "291c675ba5b2a324cc5a10127b336051d027ffb5cd8ae0cf54aee559d697ce49",
+      "representative": "DungeonMaps/test/corridor/151.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/151.png"
+      ]
+    },
+    {
+      "layout_sha256": "298702afce3fed14b00f98c4abb6ecb016255d9b5e0790c1362c0d8bc17da7f3",
+      "representative": "DungeonMaps/test/corridor/395.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/395.png"
+      ]
+    },
+    {
+      "layout_sha256": "29d270fa378d2a24752f655e9280f89b529a6f2e466bd4647fe1e0b546f8626d",
+      "representative": "DungeonMaps/test/corridor/240.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/240.png"
+      ]
+    },
+    {
+      "layout_sha256": "29dc2037ffd69d892918186b49601a9b0daaf10f2fedf24ea4dbf4f25efc316f",
+      "representative": "DungeonMaps/test/corridor/265.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/265.png"
+      ]
+    },
+    {
+      "layout_sha256": "2a09eb695c7abbe1937e32e3ac679961b0ffe30c492cc7c2aec596cc5baaa8fe",
+      "representative": "DungeonMaps/test/corridor/381.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/381.png"
+      ]
+    },
+    {
+      "layout_sha256": "2a16b16ce579cd677a947dfff54aae0ef0356a3d24aadb70f1f07e182420e811",
+      "representative": "DungeonMaps/test/corridor/64.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/64.png"
+      ]
+    },
+    {
+      "layout_sha256": "2a2b561b1eb4f81d33dacaf0383dffe654bc753fe82b09aeb3bee82c9205243d",
+      "representative": "DungeonMaps/test/corridor/87.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/87.png"
+      ]
+    },
+    {
+      "layout_sha256": "2a8d5efd583310d73669b9138db00634daa1f2db6be39750b3deb0fe73ce0934",
+      "representative": "DungeonMaps/test/corridor/344.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/344.png"
+      ]
+    },
+    {
+      "layout_sha256": "2ac5858cbde03781e89705270965338035b80f5a15de6bd7cc38824f56ba36f5",
+      "representative": "DungeonMaps/test/corridor/342.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/342.png"
+      ]
+    },
+    {
+      "layout_sha256": "2b2db486c876d61c77f1bc4dd94aea31de9a38af2c38844eaf42bad74ed6bcb6",
+      "representative": "DungeonMaps/test/corridor/346.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/346.png"
+      ]
+    },
+    {
+      "layout_sha256": "2b91c8ea865c4dad4c1da49a3bc970aadfb548447364d221b56a220bc3fcb3b5",
+      "representative": "DungeonMaps/test/corridor/156.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/156.png"
+      ]
+    },
+    {
+      "layout_sha256": "2bab45ba73e51700bce1333755c7bdc985a210eb37abc56957610c784bd7b18c",
+      "representative": "DungeonMaps/test/corridor/373.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/373.png"
+      ]
+    },
+    {
+      "layout_sha256": "2c11fa80ee5fef568cb77c9101dc77072e40065ea418a756f87c05a63b5cc816",
+      "representative": "DungeonMaps/test/corridor/108.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/108.png"
+      ]
+    },
+    {
+      "layout_sha256": "2e872aa74ba8741c5cbf63acb4db5c7c73a67a459b7c7eb051bb53f62798d7a6",
+      "representative": "DungeonMaps/test/corridor/308.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/308.png"
+      ]
+    },
+    {
+      "layout_sha256": "2eaf161c2334e4406f46a1d62c1b9b31e749c2ae8e3d80896675c027a9de2111",
+      "representative": "DungeonMaps/test/corridor/226.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/226.png"
+      ]
+    },
+    {
+      "layout_sha256": "2ebaf18aa7bacc834f6ad2b58e2586d774ca07e24e2ec5bc647460a9d3c479ab",
+      "representative": "DungeonMaps/test/corridor/176.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/176.png"
+      ]
+    },
+    {
+      "layout_sha256": "2fba60dadaa85ac4baf07a5183d96add4662387b032083063ae2b1dfdc61b3e6",
+      "representative": "DungeonMaps/test/corridor/26.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/26.png"
+      ]
+    },
+    {
+      "layout_sha256": "301d8341fc5d30db45963a65d0e5b91b515c3b5b634b4f235d5a32424651223e",
+      "representative": "DungeonMaps/test/corridor/318.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/318.png"
+      ]
+    },
+    {
+      "layout_sha256": "3023af1ad178ff0441f9060715b3e9b562c4f7bd877aa3d0c7359e03fcc4b15e",
+      "representative": "DungeonMaps/test/corridor/399.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/399.png"
+      ]
+    },
+    {
+      "layout_sha256": "30750ae088f6cd1d51d4576dc5a556952e28967e16bd7ee55f563d6c8563d589",
+      "representative": "DungeonMaps/test/corridor/353.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/353.png"
+      ]
+    },
+    {
+      "layout_sha256": "30839d79cb982e5a3b55ed1eb1f86495ab06fb98184fe5967e90c2ef28e52626",
+      "representative": "DungeonMaps/test/corridor/69.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/69.png"
+      ]
+    },
+    {
+      "layout_sha256": "30bc7ab3f547522a1ea6fba7cd6bc148a8d39a4ebbd114fd4ba6b20620ec0a7e",
+      "representative": "DungeonMaps/test/corridor/173.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/173.png"
+      ]
+    },
+    {
+      "layout_sha256": "30dd4e1e68897a25625cacf22cabebd1540a0aa4e015f7de30aec6dd2dab6a54",
+      "representative": "DungeonMaps/test/corridor/162.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/162.png"
+      ]
+    },
+    {
+      "layout_sha256": "31996a2eb2c4f0ebfe46ba5bbf9e9b8668a3b452185f7395205f6886d6f3239e",
+      "representative": "DungeonMaps/test/corridor/284.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/284.png"
+      ]
+    },
+    {
+      "layout_sha256": "31a43bb9cfa58a5dd1f0177a84ba864229b11754faf00bf2f58f6998ccc4583a",
+      "representative": "DungeonMaps/test/corridor/220.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/220.png"
+      ]
+    },
+    {
+      "layout_sha256": "31d6a1679bf1911a40bf1e2c82985b152b5bbcad5393fa7c6f1fbda4c4215df1",
+      "representative": "DungeonMaps/test/corridor/230.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/230.png"
+      ]
+    },
+    {
+      "layout_sha256": "3211cc23ded609873fbd8a65912da1851f4d3dd76f19555d97966ee618fe4c8d",
+      "representative": "DungeonMaps/test/corridor/111.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/111.png"
+      ]
+    },
+    {
+      "layout_sha256": "3223033cc02abb5d5a7c21ed766e4587bd928be93cb6548da7ae66f1971af40a",
+      "representative": "DungeonMaps/test/corridor/356.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/356.png"
+      ]
+    },
+    {
+      "layout_sha256": "3248fc65ceb20a7de690bcf6c2a216a55287157579ad808fdaae92d13f2aeca2",
+      "representative": "DungeonMaps/test/corridor/393.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/393.png"
+      ]
+    },
+    {
+      "layout_sha256": "326d4b015bf347f761f744c713889f6e89ac4ffdd2c25f419e418f28b36e52a0",
+      "representative": "DungeonMaps/test/corridor/103.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/103.png"
+      ]
+    },
+    {
+      "layout_sha256": "32df37d0fd02086a464363f9aaefd6619ed9cf6c5654de181c2bc851ab74eb9b",
+      "representative": "DungeonMaps/test/corridor/65.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/65.png"
+      ]
+    },
+    {
+      "layout_sha256": "32eef3727666af8b398c67f5140a6167a54d7b9c31e4c09bf00f53038a07aa19",
+      "representative": "DungeonMaps/test/corridor/7.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/7.png"
+      ]
+    },
+    {
+      "layout_sha256": "3318d4873dac8537f18c6a854ec27f597321eb697e70be4c7d092cecbd3d3dad",
+      "representative": "DungeonMaps/test/corridor/228.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/228.png"
+      ]
+    },
+    {
+      "layout_sha256": "336b6ea00262bb87540eddfa90a0b87812bb73537f41beb25b78e511f79df42f",
+      "representative": "DungeonMaps/test/corridor/358.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/358.png"
+      ]
+    },
+    {
+      "layout_sha256": "339ca9a7742876e2494ec3542e20bf07fed013306818454d7e930cbf04245870",
+      "representative": "DungeonMaps/test/corridor/279.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/279.png"
+      ]
+    },
+    {
+      "layout_sha256": "33cc000e91e0b2e98c453c38e5e652347d1b95ed587a5e640f7314357b4ca4f9",
+      "representative": "DungeonMaps/test/corridor/130.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/130.png"
+      ]
+    },
+    {
+      "layout_sha256": "33daa66a6020404f281a1fd60854a29ac42aca742040a68eab7ab5fc1d97d2b6",
+      "representative": "DungeonMaps/test/corridor/321.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/321.png"
+      ]
+    },
+    {
+      "layout_sha256": "33dec576dca89f2f28bd15f33bd0fa38a22e77142ebeb2a3d4a3fd5eff84a6d5",
+      "representative": "DungeonMaps/test/corridor/104.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/104.png"
+      ]
+    },
+    {
+      "layout_sha256": "348c64bf27dffad809884dc47a4830c557df7bb10cc4fa7c3cb2c4b40d0f508e",
+      "representative": "DungeonMaps/test/corridor/248.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/248.png"
+      ]
+    },
+    {
+      "layout_sha256": "349edd22dbc97ece841607c4d4e8841e60b0bc3fd147f05c0b73e48417b53cdf",
+      "representative": "DungeonMaps/test/corridor/192.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/192.png"
+      ]
+    },
+    {
+      "layout_sha256": "34a1ffc9123cc0bfbcea2f9457400a351cd92416cf7828ea6994f040390c579c",
+      "representative": "DungeonMaps/test/corridor/59.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/59.png"
+      ]
+    },
+    {
+      "layout_sha256": "34ae3314086ddb84f2aa68c2c7ff0241ccf3aef025fe63fad6373b2a77e5a86a",
+      "representative": "DungeonMaps/test/corridor/361.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/361.png"
+      ]
+    },
+    {
+      "layout_sha256": "35d7b01700992b60e3bd9c78cb689d342c597cf5f7eb892880d77e62c8289fcc",
+      "representative": "DungeonMaps/test/corridor/175.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/175.png"
+      ]
+    },
+    {
+      "layout_sha256": "36af0aaa7b7c44210907d705bd07c3d3e382425637b7699bdaf2b48d0c5fb078",
+      "representative": "DungeonMaps/test/corridor/390.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/390.png"
+      ]
+    },
+    {
+      "layout_sha256": "381db275aba4c51d4e4876a917bea0d5c8b5dde3d7fa49cf116be9100879dbbc",
+      "representative": "DungeonMaps/test/corridor/354.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/354.png"
+      ]
+    },
+    {
+      "layout_sha256": "391a98f38b115c562713fb87265551c657205d6c537ab8fee8619b61c8bd3d46",
+      "representative": "DungeonMaps/test/corridor/63.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/63.png"
+      ]
+    },
+    {
+      "layout_sha256": "39690f11571a8003be18c411333a39442bbba90aa7fbce9c7c3104bbdac8f115",
+      "representative": "DungeonMaps/test/corridor/98.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/98.png"
+      ]
+    },
+    {
+      "layout_sha256": "3976504f9d8569f027796bbb087a9348c77d2802cdc924d7de44ee04938015df",
+      "representative": "DungeonMaps/test/corridor/148.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/148.png"
+      ]
+    },
+    {
+      "layout_sha256": "39ba60c0417e454d84f8c64c89d31731029b094c3b712c10b68a1aae506dcdd1",
+      "representative": "DungeonMaps/test/corridor/376.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/376.png"
+      ]
+    },
+    {
+      "layout_sha256": "3a574435b6dbe434a79b7f11d21e110d38db506d7ad415de8c276de8c50be63f",
+      "representative": "DungeonMaps/test/corridor/217.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/217.png"
+      ]
+    },
+    {
+      "layout_sha256": "3a98cf6287c522420ddc2a9d643a6704cf380375ec63e61eb881044f9f6ce83a",
+      "representative": "DungeonMaps/test/corridor/236.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/236.png"
+      ]
+    },
+    {
+      "layout_sha256": "3ba7604cd9d3c7c9136294d1ba2282a7cce7e8ee9517f077df104ae3a83800cd",
+      "representative": "DungeonMaps/test/corridor/128.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/128.png"
+      ]
+    },
+    {
+      "layout_sha256": "3c057c177122c893049840f35f280c8165bca857a37311f8026af4f53f69e6ac",
+      "representative": "DungeonMaps/test/corridor/106.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/106.png"
+      ]
+    },
+    {
+      "layout_sha256": "3d2d7a240da19a2a714072f92709760f8888328e8091ee5ff8ae92d03e0a9f5a",
+      "representative": "DungeonMaps/test/corridor/191.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/191.png"
+      ]
+    },
+    {
+      "layout_sha256": "3d9f2c5f5d729818bc2da1cb5da9ee9c958a1c9277e01893bc27e9b92bc04d3c",
+      "representative": "DungeonMaps/test/corridor/242.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/242.png"
+      ]
+    },
+    {
+      "layout_sha256": "3dacff8931c3335678698f077ee2f84faaf86e4135f10e72033f0000f42016e6",
+      "representative": "DungeonMaps/test/corridor/389.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/389.png"
+      ]
+    },
+    {
+      "layout_sha256": "3dc2ceed46dd62ba63113e520b59f4cca6079a9df825d07a0008450cd370c758",
+      "representative": "DungeonMaps/test/corridor/317.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/317.png"
+      ]
+    },
+    {
+      "layout_sha256": "3ef6ae419589f5447c608f13ab496298da0c503ef7fce2220411eb7bccaee05c",
+      "representative": "DungeonMaps/test/corridor/34.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/34.png"
+      ]
+    },
+    {
+      "layout_sha256": "3f61cfb3516d457320570fbf4d391d35c3e40fe5e5635a530214c3f979dbb119",
+      "representative": "DungeonMaps/test/corridor/209.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/209.png"
+      ]
+    },
+    {
+      "layout_sha256": "40b81b7697cb29578738495b0b7db474fb4c68036951f8ff274e3c1c541469cc",
+      "representative": "DungeonMaps/test/corridor/9.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/9.png"
+      ]
+    },
+    {
+      "layout_sha256": "410f56810b7d591cee31a406085d853817d48e1c7a658c0861a44cac4fd7016b",
+      "representative": "DungeonMaps/test/corridor/338.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/338.png"
+      ]
+    },
+    {
+      "layout_sha256": "415f263b94030d4fc03a85c146ba686cee9312b1b489476eda181852c96b9d3a",
+      "representative": "DungeonMaps/test/corridor/165.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/165.png"
+      ]
+    },
+    {
+      "layout_sha256": "41c6b6004c281184dc3c395a4d2cf112d61a9c87fa4d80a999b1afbd3a1bb191",
+      "representative": "DungeonMaps/test/corridor/25.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/25.png"
+      ]
+    },
+    {
+      "layout_sha256": "424085be1dc705de9a48817c628f69ffcd897ddfe99bd702edadcb23c82ca784",
+      "representative": "DungeonMaps/test/corridor/93.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/93.png"
+      ]
+    },
+    {
+      "layout_sha256": "44250d66aa23e2ba52ffa5bb98f2e18f92d9dece22fd455a68162e950ab7e03b",
+      "representative": "DungeonMaps/test/corridor/102.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/102.png"
+      ]
+    },
+    {
+      "layout_sha256": "459753f1f7732664be00390a2f1c3459d5731ba3044c3f672c00f8ed554a4d81",
+      "representative": "DungeonMaps/test/corridor/109.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/109.png"
+      ]
+    },
+    {
+      "layout_sha256": "46f235256cb59b3f388e6364ca076e647106850e610f9492b93d4415b27c10ee",
+      "representative": "DungeonMaps/test/corridor/363.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/363.png"
+      ]
+    },
+    {
+      "layout_sha256": "471572e99975108762cf8743c212feb3dc0bc78717b730355649b5c15ce5b712",
+      "representative": "DungeonMaps/test/corridor/261.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/261.png"
+      ]
+    },
+    {
+      "layout_sha256": "4845587ffa545df00967f87fcbf04ac896c7e67f861c171a9f34c85be8d36f57",
+      "representative": "DungeonMaps/test/corridor/340.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/340.png"
+      ]
+    },
+    {
+      "layout_sha256": "4b3bec3ff45cd2690eb1b1445e53878d892c42db279f384e6a264f87fb95c181",
+      "representative": "DungeonMaps/test/corridor/223.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/223.png"
+      ]
+    },
+    {
+      "layout_sha256": "4b97be048b127e3a25964469ffa7b3c75c2f1a665013edc42a50f020a60de328",
+      "representative": "DungeonMaps/test/corridor/352.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/352.png"
+      ]
+    },
+    {
+      "layout_sha256": "4e26b84f1e312b49acfe70d91027e38abb45662bf3a69899fe84f0f3f0c19c9e",
+      "representative": "DungeonMaps/test/corridor/123.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/123.png"
+      ]
+    },
+    {
+      "layout_sha256": "4fd22def3202379107660c79b6e99d55f787549a8fbfd620876f9d290eeb0262",
+      "representative": "DungeonMaps/test/corridor/35.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/35.png"
+      ]
+    },
+    {
+      "layout_sha256": "4fee0a35a229ea9d8648938cecc1c3677484bbd72ba7517a2a414edac4c0fa76",
+      "representative": "DungeonMaps/test/corridor/278.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/278.png"
+      ]
+    },
+    {
+      "layout_sha256": "515cc41bebb03fd132dba147b675c84acc59676a8620b15a1123b8b68b060891",
+      "representative": "DungeonMaps/test/corridor/323.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/323.png"
+      ]
+    },
+    {
+      "layout_sha256": "518b069f7c1f16c7c978f74b98bb6f28922b67438b455ae2f80e0876b1021a33",
+      "representative": "DungeonMaps/test/corridor/336.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/336.png"
+      ]
+    },
+    {
+      "layout_sha256": "51d9dee897a77256a005777f5ff5327b77c3f4f8667bd6106553199977d3a3b2",
+      "representative": "DungeonMaps/test/corridor/52.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/52.png"
+      ]
+    },
+    {
+      "layout_sha256": "5300cd3b96bc85135c30a39139e31de9843abea69624c54b9bede7c9c5155c52",
+      "representative": "DungeonMaps/test/corridor/320.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/320.png"
+      ]
+    },
+    {
+      "layout_sha256": "53c4bb30f05bc7b3648669ab7197512c01c198f116058ecd7e34f56a8bd082dd",
+      "representative": "DungeonMaps/test/corridor/297.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/297.png"
+      ]
+    },
+    {
+      "layout_sha256": "54e24ce4e2f5d19caf007180fb6168e88df6873195ddc8e897128d15789ebbe0",
+      "representative": "DungeonMaps/test/corridor/350.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/350.png"
+      ]
+    },
+    {
+      "layout_sha256": "56aa8e075e1f6c15d3ca421816e1f450e8e4d4f0442fcf3a0771d3fff9458d17",
+      "representative": "DungeonMaps/test/corridor/388.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/388.png"
+      ]
+    },
+    {
+      "layout_sha256": "56d86d67097ff5ed7f9f484081cc60686af5f92f84a88768d49b2b4fe8cb12ae",
+      "representative": "DungeonMaps/test/corridor/45.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/45.png"
+      ]
+    },
+    {
+      "layout_sha256": "58372708b0280ace1a358e17d40ff4115bb30268c551ac2646c50afc90f50d44",
+      "representative": "DungeonMaps/test/corridor/293.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/293.png"
+      ]
+    },
+    {
+      "layout_sha256": "58cfff38b4eae3a37519a692190c351bace55e84595d9ee9c0983e4330d87277",
+      "representative": "DungeonMaps/test/corridor/75.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/75.png"
+      ]
+    },
+    {
+      "layout_sha256": "5f882a0348f1a8366bd90c65f716688c292a8f5a0ea3f47f450ce7d5e3b84a42",
+      "representative": "DungeonMaps/test/corridor/211.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/211.png"
+      ]
+    },
+    {
+      "layout_sha256": "6542f90b231bb170bf7ce74a9c744e010c2cb0369d813b686ca10b07c76753d7",
+      "representative": "DungeonMaps/test/corridor/139.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/139.png"
+      ]
+    },
+    {
+      "layout_sha256": "6724fd5088305dfec453c1bdf6af8807163f9ec275ae2c6ec2fbac7c13b58d31",
+      "representative": "DungeonMaps/test/corridor/83.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/83.png"
+      ]
+    },
+    {
+      "layout_sha256": "67b44efef4e3bdab5c36591046b374bf04ebaa8064039e6f613cf402737fc644",
+      "representative": "DungeonMaps/test/corridor/14.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/14.png"
+      ]
+    },
+    {
+      "layout_sha256": "6b43ff358dda8835da63d3e2f3040c789561831349393a885290b2f7002d59c2",
+      "representative": "DungeonMaps/test/corridor/131.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/131.png"
+      ]
+    },
+    {
+      "layout_sha256": "74fd7cce15d6a8b1b580cf080281b0347643596a6b7b411a40abc8d2a193ca68",
+      "representative": "DungeonMaps/test/corridor/96.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/96.png"
+      ]
+    },
+    {
+      "layout_sha256": "78a9534f723eb1594ad72f989bc266114e15469dd29cf88c13c28985f62e3334",
+      "representative": "DungeonMaps/test/corridor/95.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/95.png"
+      ]
+    },
+    {
+      "layout_sha256": "78e3b6aa8a56d29a446b77daaf2621724ddab78dfda13b23178f025eb2b1aa77",
+      "representative": "DungeonMaps/test/corridor/341.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/341.png"
+      ]
+    },
+    {
+      "layout_sha256": "7ba9f9bd35c039385911fd3f2f8553fefa6c86bce396101b9621544c602335d0",
+      "representative": "DungeonMaps/test/corridor/315.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/315.png"
+      ]
+    },
+    {
+      "layout_sha256": "7cb61d1a9eff35902c8566bcae587fcf464ea9eec7c1a6136b127f5103b6c3e5",
+      "representative": "DungeonMaps/test/corridor/304.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/304.png"
+      ]
+    },
+    {
+      "layout_sha256": "7f91fc0ae629dcc41c55a9ad1fe8dbe3e7a557bab53e3134b7f90a55f5ab4e00",
+      "representative": "DungeonMaps/test/corridor/235.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/235.png"
+      ]
+    },
+    {
+      "layout_sha256": "89d8d1f3264213b0229c19eb264dd5a2bfb44dff93652926553b801194458525",
+      "representative": "DungeonMaps/test/corridor/76.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/76.png"
+      ]
+    },
+    {
+      "layout_sha256": "90d88217cd14c9938a61cf1dfabef07f4cc933b69b32392033eb88a240fd7d8b",
+      "representative": "DungeonMaps/test/corridor/170.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/corridor/170.png"
+      ]
+    }
+  ],
+  "hybrid": [
+    {
+      "layout_sha256": "000996286a094d3760ce0c01ae519f545b845bdf256db2a2fa19925179af143f",
+      "representative": "DungeonMaps/test/hybrid/167.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/167.png",
+        "DungeonMaps/test/hybrid/168.png",
+        "DungeonMaps/test/hybrid/169.png",
+        "DungeonMaps/test/hybrid/171.png"
+      ]
+    },
+    {
+      "layout_sha256": "012421425d9ec28390ed32b28fbf6a24dff8da021b8acec4b0fc8faec0afd0ab",
+      "representative": "DungeonMaps/test/hybrid/295.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/295.png",
+        "DungeonMaps/test/hybrid/296.png",
+        "DungeonMaps/test/hybrid/297.png",
+        "DungeonMaps/test/hybrid/299.png"
+      ]
+    },
+    {
+      "layout_sha256": "016a40d85a09dc73c25fe438aef5bee704c5fe394a57b639ccbfdde6ffe31426",
+      "representative": "DungeonMaps/test/hybrid/275.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/275.png",
+        "DungeonMaps/test/hybrid/277.png",
+        "DungeonMaps/test/hybrid/278.png",
+        "DungeonMaps/test/hybrid/279.png"
+      ]
+    },
+    {
+      "layout_sha256": "01b8dde49e6254b254a2d6de4f681c167b640010ba99b96ceb56136bcf5bb124",
+      "representative": "DungeonMaps/test/hybrid/251.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/251.png",
+        "DungeonMaps/test/hybrid/252.png"
+      ]
+    },
+    {
+      "layout_sha256": "0247654351c46316378b964e8b30494ab858b207c12074fc6f84eab8fcf7f1c1",
+      "representative": "DungeonMaps/test/hybrid/150.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/150.png",
+        "DungeonMaps/test/hybrid/151.png",
+        "DungeonMaps/test/hybrid/152.png",
+        "DungeonMaps/test/hybrid/153.png"
+      ]
+    },
+    {
+      "layout_sha256": "0307738580f0814be6b4ccf06f4fd9c967a25aaf4adc7bd207e0bb7e27f5ca65",
+      "representative": "DungeonMaps/test/hybrid/338.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/338.png",
+        "DungeonMaps/test/hybrid/339.png",
+        "DungeonMaps/test/hybrid/340.png",
+        "DungeonMaps/test/hybrid/343.png"
+      ]
+    },
+    {
+      "layout_sha256": "034ad252418197fcc5ebec20c01fd590fc414f385e7fa8d001c95eddf0feef94",
+      "representative": "DungeonMaps/test/hybrid/66.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/66.png",
+        "DungeonMaps/test/hybrid/67.png",
+        "DungeonMaps/test/hybrid/68.png",
+        "DungeonMaps/test/hybrid/69.png"
+      ]
+    },
+    {
+      "layout_sha256": "0362d022bf9ffb8527dcbff09f8a7e21d07bb3cc55ce3ed7f1cf6bd6e5b39e4e",
+      "representative": "DungeonMaps/test/hybrid/202.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/202.png",
+        "DungeonMaps/test/hybrid/204.png",
+        "DungeonMaps/test/hybrid/205.png",
+        "DungeonMaps/test/hybrid/206.png"
+      ]
+    },
+    {
+      "layout_sha256": "04aee3120dd81b6dda151fceaa81e2a9a02a71b0d9280334dc3e20b6a10b7116",
+      "representative": "DungeonMaps/test/hybrid/224.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/224.png",
+        "DungeonMaps/test/hybrid/226.png",
+        "DungeonMaps/test/hybrid/227.png",
+        "DungeonMaps/test/hybrid/228.png"
+      ]
+    },
+    {
+      "layout_sha256": "052ba4ff60897d201fe862950b7834f4f871655d64a6948c2ea55741b2fe71ab",
+      "representative": "DungeonMaps/test/hybrid/176.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/176.png",
+        "DungeonMaps/test/hybrid/177.png",
+        "DungeonMaps/test/hybrid/178.png",
+        "DungeonMaps/test/hybrid/179.png"
+      ]
+    },
+    {
+      "layout_sha256": "054fe1bdf6fabd66ff2e80866f8a52a87ae1bcdf31699b9693490b7939869ab2",
+      "representative": "DungeonMaps/test/hybrid/280.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/280.png",
+        "DungeonMaps/test/hybrid/282.png",
+        "DungeonMaps/test/hybrid/283.png",
+        "DungeonMaps/test/hybrid/284.png"
+      ]
+    },
+    {
+      "layout_sha256": "0619e7666c5b58873dcaaaa32e230ba556b12c85f10a7a39d8650ac9006d4e19",
+      "representative": "DungeonMaps/test/hybrid/246.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/246.png",
+        "DungeonMaps/test/hybrid/248.png",
+        "DungeonMaps/test/hybrid/249.png",
+        "DungeonMaps/test/hybrid/250.png"
+      ]
+    },
+    {
+      "layout_sha256": "063a4fd61590f6a11d87e09087beb11e82a398152eafc117d22087f80694efba",
+      "representative": "DungeonMaps/test/hybrid/369.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/369.png",
+        "DungeonMaps/test/hybrid/370.png",
+        "DungeonMaps/test/hybrid/371.png",
+        "DungeonMaps/test/hybrid/372.png"
+      ]
+    },
+    {
+      "layout_sha256": "063f017be33bd7eaff87ab8c1cc66ff4d0ffe81cc33718bd809a9e8e55cd9f4a",
+      "representative": "DungeonMaps/test/hybrid/79.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/79.png",
+        "DungeonMaps/test/hybrid/80.png",
+        "DungeonMaps/test/hybrid/81.png",
+        "DungeonMaps/test/hybrid/83.png"
+      ]
+    },
+    {
+      "layout_sha256": "074327ada0aa94bb06f7e757f828d75ede8d684af2ea8b9d3485e79bcd0bae6f",
+      "representative": "DungeonMaps/test/hybrid/92.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/92.png",
+        "DungeonMaps/test/hybrid/94.png",
+        "DungeonMaps/test/hybrid/95.png",
+        "DungeonMaps/test/hybrid/96.png"
+      ]
+    },
+    {
+      "layout_sha256": "0743963d4d8a1536898d67ced866b5a4dd377163590ef52e160876dabbf34b00",
+      "representative": "DungeonMaps/test/hybrid/75.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/75.png",
+        "DungeonMaps/test/hybrid/76.png",
+        "DungeonMaps/test/hybrid/77.png",
+        "DungeonMaps/test/hybrid/78.png"
+      ]
+    },
+    {
+      "layout_sha256": "078a9f614c0e2af3c5e15e9e3aa08cf9ef43a015e89f5417695ee48ffd8710c4",
+      "representative": "DungeonMaps/test/hybrid/22.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/22.png",
+        "DungeonMaps/test/hybrid/23.png",
+        "DungeonMaps/test/hybrid/24.png",
+        "DungeonMaps/test/hybrid/25.png"
+      ]
+    },
+    {
+      "layout_sha256": "0814166adac3346227d26efbec48e9484d228396ee5bbe7f2351823c953a948d",
+      "representative": "DungeonMaps/test/hybrid/276.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/276.png",
+        "DungeonMaps/test/hybrid/298.png",
+        "DungeonMaps/test/hybrid/309.png",
+        "DungeonMaps/test/hybrid/320.png"
+      ]
+    },
+    {
+      "layout_sha256": "085308e6fb4a6ae2df6a4a911b1f863060737d0d85c13769ecbd182b5de1c7af",
+      "representative": "DungeonMaps/test/hybrid/115.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/115.png",
+        "DungeonMaps/test/hybrid/126.png",
+        "DungeonMaps/test/hybrid/137.png",
+        "DungeonMaps/test/hybrid/148.png"
+      ]
+    },
+    {
+      "layout_sha256": "086b9722490958a32d40463f3ec46e056b5716b242200f6f32ac0714ef5f17dc",
+      "representative": "DungeonMaps/test/hybrid/172.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/172.png",
+        "DungeonMaps/test/hybrid/173.png",
+        "DungeonMaps/test/hybrid/174.png",
+        "DungeonMaps/test/hybrid/175.png"
+      ]
+    },
+    {
+      "layout_sha256": "08c25f8c21e1ed275d8265aa18b1dd86bd81832603ccb5210f8b83d32f8c54bd",
+      "representative": "DungeonMaps/test/hybrid/100.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/100.png",
+        "DungeonMaps/test/hybrid/97.png",
+        "DungeonMaps/test/hybrid/98.png",
+        "DungeonMaps/test/hybrid/99.png"
+      ]
+    },
+    {
+      "layout_sha256": "092befb8fa5fb38750e7298073532d9bf20443d61ca12d2b0202fa8024ba46f7",
+      "representative": "DungeonMaps/test/hybrid/233.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/233.png",
+        "DungeonMaps/test/hybrid/234.png",
+        "DungeonMaps/test/hybrid/235.png",
+        "DungeonMaps/test/hybrid/237.png"
+      ]
+    },
+    {
+      "layout_sha256": "09361fca5cb708f4dae4c0c0c40ec23f8b7e0e40d000b54a6471e967488045c8",
+      "representative": "DungeonMaps/test/hybrid/394.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/394.png",
+        "DungeonMaps/test/hybrid/395.png",
+        "DungeonMaps/test/hybrid/396.png",
+        "DungeonMaps/test/hybrid/397.png"
+      ]
+    },
+    {
+      "layout_sha256": "094485696a575664e9d0dc3bea4d2048896835faf39d28b72e265194ee34cb8b",
+      "representative": "DungeonMaps/test/hybrid/194.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/194.png",
+        "DungeonMaps/test/hybrid/195.png",
+        "DungeonMaps/test/hybrid/196.png",
+        "DungeonMaps/test/hybrid/197.png"
+      ]
+    },
+    {
+      "layout_sha256": "096ed3663452db3d704742f75d752aa90dd4bbda47aedcc43b8c5ca3a56ea345",
+      "representative": "DungeonMaps/test/hybrid/211.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/211.png",
+        "DungeonMaps/test/hybrid/212.png",
+        "DungeonMaps/test/hybrid/213.png",
+        "DungeonMaps/test/hybrid/215.png"
+      ]
+    },
+    {
+      "layout_sha256": "09ca6c29607dd045bccd9dfbbb7cc75fd05d87213ee1cc192040cc08f22f1cba",
+      "representative": "DungeonMaps/test/hybrid/324.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/324.png",
+        "DungeonMaps/test/hybrid/325.png",
+        "DungeonMaps/test/hybrid/326.png",
+        "DungeonMaps/test/hybrid/327.png"
+      ]
+    },
+    {
+      "layout_sha256": "0a3791ad7a369b5eb2b86e8188811a74398369a56e30d9ecf4f4bd406b91ae53",
+      "representative": "DungeonMaps/test/hybrid/163.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/163.png",
+        "DungeonMaps/test/hybrid/164.png",
+        "DungeonMaps/test/hybrid/165.png",
+        "DungeonMaps/test/hybrid/166.png"
+      ]
+    },
+    {
+      "layout_sha256": "0aa356b5374e9adc3a29ad6d6c3ea27fe7406c63a4ed717bed55ffc088a7d043",
+      "representative": "DungeonMaps/test/hybrid/260.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/260.png",
+        "DungeonMaps/test/hybrid/261.png",
+        "DungeonMaps/test/hybrid/262.png",
+        "DungeonMaps/test/hybrid/263.png"
+      ]
+    },
+    {
+      "layout_sha256": "0b475173030fb220561cfd4a84cb2d7a13412c67570436309ab1cb66f1a0b7dc",
+      "representative": "DungeonMaps/test/hybrid/300.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/300.png",
+        "DungeonMaps/test/hybrid/301.png",
+        "DungeonMaps/test/hybrid/302.png",
+        "DungeonMaps/test/hybrid/303.png"
+      ]
+    },
+    {
+      "layout_sha256": "0b5cf76182ce3c7d96524588791aecfcd5dee0181d9d425e40e7b81adefa91a2",
+      "representative": "DungeonMaps/test/hybrid/379.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/379.png",
+        "DungeonMaps/test/hybrid/392.png"
+      ]
+    },
+    {
+      "layout_sha256": "0bceb87b6dcea353deb75abbdc00b7057164dd1b1b4249337793b05f199db6d0",
+      "representative": "DungeonMaps/test/hybrid/53.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/53.png",
+        "DungeonMaps/test/hybrid/54.png",
+        "DungeonMaps/test/hybrid/55.png",
+        "DungeonMaps/test/hybrid/56.png"
+      ]
+    },
+    {
+      "layout_sha256": "0cc5e7285d20eb52f44609fd7a9b1d2feb7e5cfb7e5516c25875e78d677184e8",
+      "representative": "DungeonMaps/test/hybrid/383.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/383.png",
+        "DungeonMaps/test/hybrid/384.png",
+        "DungeonMaps/test/hybrid/385.png",
+        "DungeonMaps/test/hybrid/386.png"
+      ]
+    },
+    {
+      "layout_sha256": "0cd02719db22799d7ffed8497322e6b4a05e606e49a5bf4670c7355ab0906d07",
+      "representative": "DungeonMaps/test/hybrid/35.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/35.png",
+        "DungeonMaps/test/hybrid/36.png",
+        "DungeonMaps/test/hybrid/37.png",
+        "DungeonMaps/test/hybrid/39.png"
+      ]
+    },
+    {
+      "layout_sha256": "0de5dbc6c7777f06f15374133e5917c63a2f4cbc683f41c6a4a0e7f56e884239",
+      "representative": "DungeonMaps/test/hybrid/378.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/378.png",
+        "DungeonMaps/test/hybrid/380.png",
+        "DungeonMaps/test/hybrid/381.png",
+        "DungeonMaps/test/hybrid/382.png"
+      ]
+    },
+    {
+      "layout_sha256": "0eb6eb2920b760f07f8fa1d790abec16c5f0034fd489fd58b3577b1848a99940",
+      "representative": "DungeonMaps/test/hybrid/344.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/344.png",
+        "DungeonMaps/test/hybrid/345.png",
+        "DungeonMaps/test/hybrid/346.png",
+        "DungeonMaps/test/hybrid/347.png"
+      ]
+    },
+    {
+      "layout_sha256": "0fbc9a6c1fccb98dbcba6ce8423f137abffc593c353d9600457eeaea6c43f059",
+      "representative": "DungeonMaps/test/hybrid/331.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/331.png",
+        "DungeonMaps/test/hybrid/342.png",
+        "DungeonMaps/test/hybrid/353.png",
+        "DungeonMaps/test/hybrid/365.png"
+      ]
+    },
+    {
+      "layout_sha256": "1167688d60d749765379d72e20318a8db5582b42538be35ea8c6f95f52bda50f",
+      "representative": "DungeonMaps/test/hybrid/255.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/255.png",
+        "DungeonMaps/test/hybrid/257.png",
+        "DungeonMaps/test/hybrid/258.png",
+        "DungeonMaps/test/hybrid/259.png"
+      ]
+    },
+    {
+      "layout_sha256": "11f12c287a043f285bd1983a8c92819af3883a3f2ce1c346f33dfc24d79a1a54",
+      "representative": "DungeonMaps/test/hybrid/198.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/198.png",
+        "DungeonMaps/test/hybrid/199.png",
+        "DungeonMaps/test/hybrid/200.png",
+        "DungeonMaps/test/hybrid/201.png"
+      ]
+    },
+    {
+      "layout_sha256": "1228ec365b0ec4a01a0ce3b48d2ee77746a4a5a41f4f33c9974577fa571fd500",
+      "representative": "DungeonMaps/test/hybrid/373.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/373.png",
+        "DungeonMaps/test/hybrid/374.png",
+        "DungeonMaps/test/hybrid/375.png",
+        "DungeonMaps/test/hybrid/377.png"
+      ]
+    },
+    {
+      "layout_sha256": "122c330c2111681b4f41aa504c4b096a00c5654ea68c77f7c13ba5cfc3530a45",
+      "representative": "DungeonMaps/test/hybrid/13.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/13.png",
+        "DungeonMaps/test/hybrid/14.png",
+        "DungeonMaps/test/hybrid/15.png",
+        "DungeonMaps/test/hybrid/17.png"
+      ]
+    },
+    {
+      "layout_sha256": "1276e455bb6481b9debd99a5e1f69d3684695034e3fe235e1f10acb5f4138fc4",
+      "representative": "DungeonMaps/test/hybrid/26.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/26.png",
+        "DungeonMaps/test/hybrid/28.png",
+        "DungeonMaps/test/hybrid/29.png",
+        "DungeonMaps/test/hybrid/30.png"
+      ]
+    },
+    {
+      "layout_sha256": "136ba358d23b0b916bb47f31918ec2c81d0d7991ed319b1ce5691f1cc0ee9dd1",
+      "representative": "DungeonMaps/test/hybrid/114.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/114.png",
+        "DungeonMaps/test/hybrid/116.png",
+        "DungeonMaps/test/hybrid/117.png",
+        "DungeonMaps/test/hybrid/118.png"
+      ]
+    },
+    {
+      "layout_sha256": "143e91e9e3a1572c0a81a353cd2b7cd08d2c2a8410ec68f1a2a7952ee1f0cdb7",
+      "representative": "DungeonMaps/test/hybrid/101.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/101.png",
+        "DungeonMaps/test/hybrid/102.png",
+        "DungeonMaps/test/hybrid/103.png",
+        "DungeonMaps/test/hybrid/105.png"
+      ]
+    },
+    {
+      "layout_sha256": "14b2e52c29675eb89407fd5c6cc861a824608d0cb763014afec9215b98bc9cf9",
+      "representative": "DungeonMaps/test/hybrid/128.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/128.png",
+        "DungeonMaps/test/hybrid/129.png",
+        "DungeonMaps/test/hybrid/130.png",
+        "DungeonMaps/test/hybrid/131.png"
+      ]
+    },
+    {
+      "layout_sha256": "15b7905826ced70300c683aeef453a6aea538b0602e97e6d7f5f216eb66a8fd0",
+      "representative": "DungeonMaps/test/hybrid/154.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/154.png",
+        "DungeonMaps/test/hybrid/155.png",
+        "DungeonMaps/test/hybrid/156.png",
+        "DungeonMaps/test/hybrid/157.png"
+      ]
+    },
+    {
+      "layout_sha256": "15b9c820067129b101870fc4449a3695f672e19e3538990d6e326dd865542b86",
+      "representative": "DungeonMaps/test/hybrid/104.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/104.png",
+        "DungeonMaps/test/hybrid/71.png",
+        "DungeonMaps/test/hybrid/82.png",
+        "DungeonMaps/test/hybrid/93.png"
+      ]
+    },
+    {
+      "layout_sha256": "15d703968ff1ede239ef9141aee70d601de786ba7e249fdc4e47321a64566a50",
+      "representative": "DungeonMaps/test/hybrid/247.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/247.png"
+      ]
+    },
+    {
+      "layout_sha256": "16a58360d475e90a0818ffaca3c9dc786465fa99d35c0e36c2d97a1dcc439a2c",
+      "representative": "DungeonMaps/test/hybrid/285.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/285.png",
+        "DungeonMaps/test/hybrid/286.png",
+        "DungeonMaps/test/hybrid/288.png",
+        "DungeonMaps/test/hybrid/289.png"
+      ]
+    },
+    {
+      "layout_sha256": "170f222c9b2830c768ff97632909f59e184d5f4f468953f543923ab3dee28c76",
+      "representative": "DungeonMaps/test/hybrid/256.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/256.png",
+        "DungeonMaps/test/hybrid/269.png"
+      ]
+    },
+    {
+      "layout_sha256": "1722fad4597754103928d78efc34f440135feac090a17b6895a6ae672229fe83",
+      "representative": "DungeonMaps/test/hybrid/290.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/290.png",
+        "DungeonMaps/test/hybrid/291.png",
+        "DungeonMaps/test/hybrid/292.png",
+        "DungeonMaps/test/hybrid/294.png"
+      ]
+    },
+    {
+      "layout_sha256": "177311a0c0210cc0974662e4ce0626d8e6123814570127f3f2a27d8af634873c",
+      "representative": "DungeonMaps/test/hybrid/158.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/158.png",
+        "DungeonMaps/test/hybrid/160.png",
+        "DungeonMaps/test/hybrid/161.png",
+        "DungeonMaps/test/hybrid/162.png"
+      ]
+    },
+    {
+      "layout_sha256": "19225c3f3601d7cf430d8ac1a2d9ddfe8e03631bfa63ac6a45c24b0a1ae80fad",
+      "representative": "DungeonMaps/test/hybrid/388.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/388.png",
+        "DungeonMaps/test/hybrid/389.png",
+        "DungeonMaps/test/hybrid/390.png",
+        "DungeonMaps/test/hybrid/393.png"
+      ]
+    },
+    {
+      "layout_sha256": "1a133372984100d832a1dacaeadf4a6307bb9b48272a829fd9b46cbeec848964",
+      "representative": "DungeonMaps/test/hybrid/399.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/399.png",
+        "DungeonMaps/test/hybrid/400.png"
+      ]
+    },
+    {
+      "layout_sha256": "1b11e1b18f4028480edc592ddc0194766b06d4c9ee3c80bb57ab7e4fc1052ddb",
+      "representative": "DungeonMaps/test/hybrid/328.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/328.png",
+        "DungeonMaps/test/hybrid/330.png",
+        "DungeonMaps/test/hybrid/332.png",
+        "DungeonMaps/test/hybrid/333.png"
+      ]
+    },
+    {
+      "layout_sha256": "1b2944675a15bc0b19a8b623ee653cf089d1c08cf3c551c9200a983e45796ed9",
+      "representative": "DungeonMaps/test/hybrid/141.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/141.png",
+        "DungeonMaps/test/hybrid/142.png",
+        "DungeonMaps/test/hybrid/143.png",
+        "DungeonMaps/test/hybrid/144.png"
+      ]
+    },
+    {
+      "layout_sha256": "1b62753aa5f588fba57eb85774e75dd339dcaf6e02d4291e5acba015e1842d66",
+      "representative": "DungeonMaps/test/hybrid/242.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/242.png",
+        "DungeonMaps/test/hybrid/243.png",
+        "DungeonMaps/test/hybrid/244.png",
+        "DungeonMaps/test/hybrid/245.png"
+      ]
+    },
+    {
+      "layout_sha256": "1bc07eb402ca217543a409f4a14e06d1ae75c1c6b91e42303587cc6f0c7f6e8b",
+      "representative": "DungeonMaps/test/hybrid/329.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/329.png",
+        "DungeonMaps/test/hybrid/341.png",
+        "DungeonMaps/test/hybrid/354.png",
+        "DungeonMaps/test/hybrid/367.png"
+      ]
+    },
+    {
+      "layout_sha256": "1bc15e329c9144c309a050dc1fbc15d869dc275be6b5427ec4d241c0ef92f48e",
+      "representative": "DungeonMaps/test/hybrid/348.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/348.png",
+        "DungeonMaps/test/hybrid/349.png",
+        "DungeonMaps/test/hybrid/350.png",
+        "DungeonMaps/test/hybrid/351.png"
+      ]
+    },
+    {
+      "layout_sha256": "1c2f97a02483b72b6728b30ce9032ed5eb359481db9f973a13ff35c1010d1266",
+      "representative": "DungeonMaps/test/hybrid/216.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/216.png",
+        "DungeonMaps/test/hybrid/217.png",
+        "DungeonMaps/test/hybrid/218.png",
+        "DungeonMaps/test/hybrid/219.png"
+      ]
+    },
+    {
+      "layout_sha256": "1c36b07c6d17836cec1ef83484f1da096426d68cd1e17050d9d5b8832b20ba73",
+      "representative": "DungeonMaps/test/hybrid/189.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/189.png",
+        "DungeonMaps/test/hybrid/190.png",
+        "DungeonMaps/test/hybrid/191.png",
+        "DungeonMaps/test/hybrid/193.png"
+      ]
+    },
+    {
+      "layout_sha256": "1ca289de7709278f1bf2df01ed8234eea0f36a842d001345bd3022f2f11fe1c2",
+      "representative": "DungeonMaps/test/hybrid/119.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/119.png",
+        "DungeonMaps/test/hybrid/120.png",
+        "DungeonMaps/test/hybrid/121.png",
+        "DungeonMaps/test/hybrid/122.png"
+      ]
+    },
+    {
+      "layout_sha256": "1cbe3d2b4f451e60b8b207e4a75aa6da19a04e19c702e48f1a4e4c4b87082614",
+      "representative": "DungeonMaps/test/hybrid/44.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/44.png",
+        "DungeonMaps/test/hybrid/45.png",
+        "DungeonMaps/test/hybrid/46.png",
+        "DungeonMaps/test/hybrid/47.png"
+      ]
+    },
+    {
+      "layout_sha256": "1cf84025aaa5a7bdf1711e150b44390c7a15878e179ae5704175d4a40df333c8",
+      "representative": "DungeonMaps/test/hybrid/1.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/1.png",
+        "DungeonMaps/test/hybrid/2.png",
+        "DungeonMaps/test/hybrid/3.png"
+      ]
+    },
+    {
+      "layout_sha256": "1e861ea0f84dce9c2f43574b7bfbe8aec2353b3279cfd31a71af003efdb7b0e8",
+      "representative": "DungeonMaps/test/hybrid/281.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/281.png",
+        "DungeonMaps/test/hybrid/293.png",
+        "DungeonMaps/test/hybrid/305.png",
+        "DungeonMaps/test/hybrid/317.png"
+      ]
+    },
+    {
+      "layout_sha256": "1e90d50a308036e50d2d7e5bf53ac4d032463eee5ca42d4c88110b3ab376a0cb",
+      "representative": "DungeonMaps/test/hybrid/238.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/238.png",
+        "DungeonMaps/test/hybrid/239.png",
+        "DungeonMaps/test/hybrid/240.png",
+        "DungeonMaps/test/hybrid/241.png"
+      ]
+    },
+    {
+      "layout_sha256": "1fee0f582aa98012fcf4c495f93291a22f53e55fe71e91fd48679226f6e81a57",
+      "representative": "DungeonMaps/test/hybrid/271.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/271.png",
+        "DungeonMaps/test/hybrid/272.png",
+        "DungeonMaps/test/hybrid/273.png",
+        "DungeonMaps/test/hybrid/274.png"
+      ]
+    },
+    {
+      "layout_sha256": "202d145d26f33818bdc27eff036639000c670f6196586275fdec06a951fda4d8",
+      "representative": "DungeonMaps/test/hybrid/123.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/123.png",
+        "DungeonMaps/test/hybrid/124.png",
+        "DungeonMaps/test/hybrid/125.png",
+        "DungeonMaps/test/hybrid/127.png"
+      ]
+    },
+    {
+      "layout_sha256": "2064cee2641b2080f6b0affed5ba6c98cca38044dfb90d5e7d65d8fa6ece632a",
+      "representative": "DungeonMaps/test/hybrid/185.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/185.png",
+        "DungeonMaps/test/hybrid/186.png",
+        "DungeonMaps/test/hybrid/187.png",
+        "DungeonMaps/test/hybrid/188.png"
+      ]
+    },
+    {
+      "layout_sha256": "2117f00fe034fe8ea8900ffe6cb7e0d611e4fbef6500ff34cebe598d045b3500",
+      "representative": "DungeonMaps/test/hybrid/352.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/352.png",
+        "DungeonMaps/test/hybrid/355.png",
+        "DungeonMaps/test/hybrid/356.png",
+        "DungeonMaps/test/hybrid/357.png"
+      ]
+    },
+    {
+      "layout_sha256": "21bd48c597d02ca52a453c374ca66af0e151540acfb7859786485bfe2ff108a7",
+      "representative": "DungeonMaps/test/hybrid/57.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/57.png",
+        "DungeonMaps/test/hybrid/58.png",
+        "DungeonMaps/test/hybrid/59.png",
+        "DungeonMaps/test/hybrid/61.png"
+      ]
+    },
+    {
+      "layout_sha256": "23ec114ca7eb3b2f21d9ed65b7ebce7f380fa80e2efb5a36aeee66f677f1c185",
+      "representative": "DungeonMaps/test/hybrid/40.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/40.png",
+        "DungeonMaps/test/hybrid/41.png",
+        "DungeonMaps/test/hybrid/42.png",
+        "DungeonMaps/test/hybrid/43.png"
+      ]
+    },
+    {
+      "layout_sha256": "27757ede337bdbe6a67e4cbc455b8a7556dfeb1dd53b5f45641a2817e5b4760a",
+      "representative": "DungeonMaps/test/hybrid/310.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/310.png",
+        "DungeonMaps/test/hybrid/311.png",
+        "DungeonMaps/test/hybrid/312.png",
+        "DungeonMaps/test/hybrid/313.png"
+      ]
+    },
+    {
+      "layout_sha256": "2793f28b14655374576aa9673b5167efc1ffa382cd45a01f91da90d3017cee88",
+      "representative": "DungeonMaps/test/hybrid/358.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/358.png",
+        "DungeonMaps/test/hybrid/359.png",
+        "DungeonMaps/test/hybrid/360.png",
+        "DungeonMaps/test/hybrid/361.png"
+      ]
+    },
+    {
+      "layout_sha256": "28985620d56832c2209e479c60b98277944e8138b1736d4c441fab1664b30874",
+      "representative": "DungeonMaps/test/hybrid/334.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/334.png",
+        "DungeonMaps/test/hybrid/335.png",
+        "DungeonMaps/test/hybrid/336.png",
+        "DungeonMaps/test/hybrid/337.png"
+      ]
+    },
+    {
+      "layout_sha256": "28a3a8e39174a7e4a001491f27162b52c28ace7544499fc2441c2ab6dc939c9e",
+      "representative": "DungeonMaps/test/hybrid/4.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/4.png",
+        "DungeonMaps/test/hybrid/6.png",
+        "DungeonMaps/test/hybrid/7.png",
+        "DungeonMaps/test/hybrid/8.png"
+      ]
+    },
+    {
+      "layout_sha256": "28d10d11c4e223717d98805184c828e110c1be8077eadfc0bb0bbbcd16f3373c",
+      "representative": "DungeonMaps/test/hybrid/62.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/62.png",
+        "DungeonMaps/test/hybrid/63.png",
+        "DungeonMaps/test/hybrid/64.png",
+        "DungeonMaps/test/hybrid/65.png"
+      ]
+    },
+    {
+      "layout_sha256": "2a23f4f5cee2fb6872d3be7a310eb6620d76c88905a99920a9a117af4bebcb2b",
+      "representative": "DungeonMaps/test/hybrid/70.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/70.png",
+        "DungeonMaps/test/hybrid/72.png",
+        "DungeonMaps/test/hybrid/73.png",
+        "DungeonMaps/test/hybrid/74.png"
+      ]
+    },
+    {
+      "layout_sha256": "2a65a0bc6aa770cb03a7cd5793560fde19681c78d40d527d908c35c3be969f79",
+      "representative": "DungeonMaps/test/hybrid/376.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/376.png",
+        "DungeonMaps/test/hybrid/387.png",
+        "DungeonMaps/test/hybrid/398.png"
+      ]
+    },
+    {
+      "layout_sha256": "2a8141e2cad06fe00f1c1fea5f7b731e12aaf9542afe21bbecb9e0108250679e",
+      "representative": "DungeonMaps/test/hybrid/229.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/229.png",
+        "DungeonMaps/test/hybrid/230.png",
+        "DungeonMaps/test/hybrid/231.png",
+        "DungeonMaps/test/hybrid/232.png"
+      ]
+    },
+    {
+      "layout_sha256": "2ac0de128fa2a8416c0a245bd6cd0409570ea549b93c1ae9b38c6702155facaa",
+      "representative": "DungeonMaps/test/hybrid/159.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/159.png",
+        "DungeonMaps/test/hybrid/170.png",
+        "DungeonMaps/test/hybrid/181.png",
+        "DungeonMaps/test/hybrid/192.png"
+      ]
+    },
+    {
+      "layout_sha256": "2b2ce05debbe7d03906b4535ca6465e40014befc58d3ef77e771aab227745352",
+      "representative": "DungeonMaps/test/hybrid/304.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/304.png",
+        "DungeonMaps/test/hybrid/306.png",
+        "DungeonMaps/test/hybrid/307.png",
+        "DungeonMaps/test/hybrid/308.png"
+      ]
+    },
+    {
+      "layout_sha256": "2b8162f93acbb60a107787f738b11a2b0d0ff810d6dc9c7537297e78d73ee146",
+      "representative": "DungeonMaps/test/hybrid/220.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/220.png",
+        "DungeonMaps/test/hybrid/221.png",
+        "DungeonMaps/test/hybrid/222.png",
+        "DungeonMaps/test/hybrid/223.png"
+      ]
+    },
+    {
+      "layout_sha256": "2c47547267dd73107052f33eb9daf753bd85f0551cad8bb0a03d81b1552b225a",
+      "representative": "DungeonMaps/test/hybrid/110.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/110.png",
+        "DungeonMaps/test/hybrid/111.png",
+        "DungeonMaps/test/hybrid/112.png",
+        "DungeonMaps/test/hybrid/113.png"
+      ]
+    },
+    {
+      "layout_sha256": "2e313e4249c368241a58ee8b310444142922c8d9c5eecba287094fdebf16b35c",
+      "representative": "DungeonMaps/test/hybrid/362.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/362.png",
+        "DungeonMaps/test/hybrid/363.png",
+        "DungeonMaps/test/hybrid/366.png",
+        "DungeonMaps/test/hybrid/368.png"
+      ]
+    },
+    {
+      "layout_sha256": "2e8165711e0f6fbc52ed033a2490bc3148972041f78eb55bc21b68fc928aa252",
+      "representative": "DungeonMaps/test/hybrid/48.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/48.png",
+        "DungeonMaps/test/hybrid/50.png",
+        "DungeonMaps/test/hybrid/51.png",
+        "DungeonMaps/test/hybrid/52.png"
+      ]
+    },
+    {
+      "layout_sha256": "2f173fca7db521df6e2d3a28fb1040850e42c42a2009217e2385b1a0a616263a",
+      "representative": "DungeonMaps/test/hybrid/319.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/319.png",
+        "DungeonMaps/test/hybrid/321.png",
+        "DungeonMaps/test/hybrid/322.png",
+        "DungeonMaps/test/hybrid/323.png"
+      ]
+    },
+    {
+      "layout_sha256": "2f497ae327458e87d54102b5d7663d7def19526ce14b19ae03b1f570f77d8df3",
+      "representative": "DungeonMaps/test/hybrid/132.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/132.png",
+        "DungeonMaps/test/hybrid/133.png",
+        "DungeonMaps/test/hybrid/134.png",
+        "DungeonMaps/test/hybrid/135.png"
+      ]
+    },
+    {
+      "layout_sha256": "2fa55be4660ed8982942d447d0ff6ddf4388492ed7432f3d72f0e69c6572616e",
+      "representative": "DungeonMaps/test/hybrid/145.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/145.png",
+        "DungeonMaps/test/hybrid/146.png",
+        "DungeonMaps/test/hybrid/147.png",
+        "DungeonMaps/test/hybrid/149.png"
+      ]
+    },
+    {
+      "layout_sha256": "30c8ce61b28b5d716f8258b335e0e7759bc170c7efddac8c92838e8df50bdabd",
+      "representative": "DungeonMaps/test/hybrid/18.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/18.png",
+        "DungeonMaps/test/hybrid/19.png",
+        "DungeonMaps/test/hybrid/20.png",
+        "DungeonMaps/test/hybrid/21.png"
+      ]
+    },
+    {
+      "layout_sha256": "312921662a232bb3ca20b497713fc52fcd9f373152d4d4099282c0a28a643b2b",
+      "representative": "DungeonMaps/test/hybrid/314.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/314.png",
+        "DungeonMaps/test/hybrid/315.png",
+        "DungeonMaps/test/hybrid/316.png",
+        "DungeonMaps/test/hybrid/318.png"
+      ]
+    },
+    {
+      "layout_sha256": "312a8c3af8f93998d605dee751814743778013574f497330c83581befa4b840c",
+      "representative": "DungeonMaps/test/hybrid/88.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/88.png",
+        "DungeonMaps/test/hybrid/89.png",
+        "DungeonMaps/test/hybrid/90.png",
+        "DungeonMaps/test/hybrid/91.png"
+      ]
+    },
+    {
+      "layout_sha256": "3408ea68413dfb679c7fd7ec8921588f523fd60630f7dab313f64c04c5c99c32",
+      "representative": "DungeonMaps/test/hybrid/27.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/27.png",
+        "DungeonMaps/test/hybrid/38.png",
+        "DungeonMaps/test/hybrid/49.png",
+        "DungeonMaps/test/hybrid/60.png"
+      ]
+    },
+    {
+      "layout_sha256": "34c5881022f3995f39adfe07a87413beb72bd0e759221199ca7fc5a3725af55f",
+      "representative": "DungeonMaps/test/hybrid/84.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/84.png",
+        "DungeonMaps/test/hybrid/85.png",
+        "DungeonMaps/test/hybrid/86.png",
+        "DungeonMaps/test/hybrid/87.png"
+      ]
+    },
+    {
+      "layout_sha256": "368a35fffb19f8969b77a31bda8f344c140c8b973d1880d4610800726a7d4a8f",
+      "representative": "DungeonMaps/test/hybrid/207.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/207.png",
+        "DungeonMaps/test/hybrid/208.png",
+        "DungeonMaps/test/hybrid/209.png",
+        "DungeonMaps/test/hybrid/210.png"
+      ]
+    },
+    {
+      "layout_sha256": "39eabf9a57d77692ee8c550dc1b1af6fc132a5d0018549cfd33bee7683c1e383",
+      "representative": "DungeonMaps/test/hybrid/10.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/10.png",
+        "DungeonMaps/test/hybrid/11.png",
+        "DungeonMaps/test/hybrid/12.png",
+        "DungeonMaps/test/hybrid/9.png"
+      ]
+    },
+    {
+      "layout_sha256": "3d0801aa4c412b1a95774dce50f3046ce3bb5932ddd5317cdaff15b7ba58e562",
+      "representative": "DungeonMaps/test/hybrid/136.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/136.png",
+        "DungeonMaps/test/hybrid/138.png",
+        "DungeonMaps/test/hybrid/139.png",
+        "DungeonMaps/test/hybrid/140.png"
+      ]
+    },
+    {
+      "layout_sha256": "4561d280346164f80ced989c67f64bdd3b418e8781911e079154a3ef146cef2b",
+      "representative": "DungeonMaps/test/hybrid/31.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/31.png",
+        "DungeonMaps/test/hybrid/32.png",
+        "DungeonMaps/test/hybrid/33.png",
+        "DungeonMaps/test/hybrid/34.png"
+      ]
+    },
+    {
+      "layout_sha256": "4a3af760f6f184fae9bf9d47355eb3453db19b25b8748666a17831b55c3f6e66",
+      "representative": "DungeonMaps/test/hybrid/254.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/254.png",
+        "DungeonMaps/test/hybrid/265.png"
+      ]
+    },
+    {
+      "layout_sha256": "4b2d2b1a6170becfb075a73cebb61e61bcf3a43aa29dc8201d02551c4221404b",
+      "representative": "DungeonMaps/test/hybrid/16.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/16.png",
+        "DungeonMaps/test/hybrid/5.png"
+      ]
+    },
+    {
+      "layout_sha256": "4c83ea09e8ce3d3d60dcb33efba09f7c94f218c41970f252f3f09ca9f10aa956",
+      "representative": "DungeonMaps/test/hybrid/180.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/180.png",
+        "DungeonMaps/test/hybrid/182.png",
+        "DungeonMaps/test/hybrid/183.png",
+        "DungeonMaps/test/hybrid/184.png"
+      ]
+    },
+    {
+      "layout_sha256": "51bdb292487b2a9b26749191c399c3cf2572ab781ba05fb6815ad7ea4261ce42",
+      "representative": "DungeonMaps/test/hybrid/106.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/106.png",
+        "DungeonMaps/test/hybrid/107.png",
+        "DungeonMaps/test/hybrid/108.png",
+        "DungeonMaps/test/hybrid/109.png"
+      ]
+    },
+    {
+      "layout_sha256": "523ff24b46510de94f4fca92516728716a54d40761eac5b6c57ef7317ba269e7",
+      "representative": "DungeonMaps/test/hybrid/253.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/253.png",
+        "DungeonMaps/test/hybrid/268.png",
+        "DungeonMaps/test/hybrid/391.png"
+      ]
+    },
+    {
+      "layout_sha256": "54ed851368564333df81c5b3ad963d17f49272481dc4d0757197afaa9c6c4d64",
+      "representative": "DungeonMaps/test/hybrid/287.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/287.png",
+        "DungeonMaps/test/hybrid/364.png"
+      ]
+    },
+    {
+      "layout_sha256": "5960a6edeabfc7ea60ac860942c5e6777d90013b1e1fac63e42cf9297e976100",
+      "representative": "DungeonMaps/test/hybrid/264.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/264.png",
+        "DungeonMaps/test/hybrid/266.png",
+        "DungeonMaps/test/hybrid/267.png",
+        "DungeonMaps/test/hybrid/270.png"
+      ]
+    },
+    {
+      "layout_sha256": "665e74761d9be446eddcc05289b18112e997dc443fb9de330175378519d7d421",
+      "representative": "DungeonMaps/test/hybrid/203.png",
+      "all_start_or_orientation_variants": [
+        "DungeonMaps/test/hybrid/203.png",
+        "DungeonMaps/test/hybrid/214.png",
+        "DungeonMaps/test/hybrid/225.png",
+        "DungeonMaps/test/hybrid/236.png"
+      ]
+    }
+  ]
+}

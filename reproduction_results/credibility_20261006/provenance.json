@@ -1,0 +1,10 @@
+{
+  "checkpoint_sha256": "cd72ac7dbf164b8be089394154794416fc969a47d79c1072c437f6f2aa363cf3",
+  "scripts_sha256": {
+    "audit_map_split.py": "cbee7bc1f81153c2853e31fa3afa5f5efcb72d2e694efd042b13468c0ab5767d",
+    "audit_trajectories.py": "f203c77fb14d58897fe9bfcb36b2f8da578f6cea7019012d2a38880152b86a0f",
+    "report_credibility.py": "d80e8e3f46731e6edee0c725a9d4710b1f741eb8dce38289b99f701909ea686d"
+  },
+  "official_commit": "1ef6d224ae18503f4763c3cec20e05a737f95783",
+  "no_retraining": true
+}

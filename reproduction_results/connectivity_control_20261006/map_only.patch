@@ -1,0 +1,11 @@
+--- upstream/Env.single_robot_step
++++ map_only/Env.single_robot_step
+@@ -13,7 +13,7 @@
+     ### Update each agent's map belief ###
+     next_node_index = self.find_index_from_coords(robot_position, agent_id=robot_id)
+     self.all_graph_generator[robot_id].nodes_list[next_node_index].set_visited()
+-    self.all_robot_belief[robot_id][robot_id] = self.update_robot_belief(robot_position, self.sensor_range, self.all_robot_belief[robot_id][robot_id], self.ground_truth)
++    self.all_robot_belief[robot_id][robot_id] = self.update_robot_belief(robot_position, self.sensor_range, self.all_robot_belief[robot_id][robot_id].copy(), self.ground_truth)
+     self.all_downsampled_belief[robot_id] = block_reduce(self.all_robot_belief[robot_id][robot_id].copy(), block_size=(self.resolution, self.resolution), func=np.min)     
+ 
+     ### Update global merged belief ###

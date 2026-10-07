@@ -1,0 +1,93 @@
+[
+  {
+    "test": "multi_hop_chain",
+    "passed": true,
+    "components": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        3
+      ]
+    ]
+  },
+  {
+    "test": "independent_snapshot_copy_control",
+    "passed": true,
+    "scope": "in-memory test fixture only; core source unchanged"
+  },
+  {
+    "test": "multi_hop_fresher_cached_information",
+    "passed": true,
+    "cached_position": [
+      170,
+      50
+    ],
+    "actual_disconnected_position": [
+      450,
+      450
+    ]
+  },
+  {
+    "test": "disconnect_transition_map_isolation",
+    "passed": true,
+    "shared_before": true,
+    "observer_new_pixels": 0,
+    "observer_cached_map_changed": 0,
+    "components": [
+      [
+        0
+      ],
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3
+      ]
+    ],
+    "expected": "observer receives zero new cells after all links are broken"
+  },
+  {
+    "test": "already_disconnected_independent_maps",
+    "passed": true
+  },
+  {
+    "test": "disconnected_true_pose_not_forwarded",
+    "passed": true
+  },
+  {
+    "test": "observation_remote_private_state_and_partition_invariance",
+    "passed": true,
+    "all_six_observation_tensors_identical": true
+  },
+  {
+    "test": "hidden_terrain_stale_pose_erasure_noninterference",
+    "passed": true,
+    "noise_X_g": 5,
+    "noise_K": 5,
+    "lidar_identical": true,
+    "actual_ego_links_a": [
+      false,
+      false,
+      false
+    ],
+    "actual_ego_links_b": [
+      false,
+      false,
+      false
+    ],
+    "truth_reference_stale_link_a": true,
+    "truth_reference_stale_link_b": false,
+    "local_stale_link_a": false,
+    "local_stale_link_b": false,
+    "pose_removed_a": false,
+    "pose_removed_b": false,
+    "observation_feature_cells_changed": 0,
+    "scope": "real sensor, signal-strength, propagation and erasure; graph update stubbed, surplus fixed to zero to isolate position feature"
+  }
+]

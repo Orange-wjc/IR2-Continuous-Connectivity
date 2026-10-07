@@ -1,0 +1,425 @@
+{
+  "layouts": [
+    {
+      "layout_index": 0,
+      "layout_sha256": "028dd2a3ace6eec59929fbe5c34e78dfbebf8aaaa0802f97667138eaff4b0b4e",
+      "map_path": "DungeonMaps/test/complex/433.png",
+      "free_cells": 389375,
+      "start_xy": [
+        234,
+        449
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 1,
+      "layout_sha256": "0307a583c891c92dfc9e60a6b3ddef338df85a9e68a225bae7b7a83ceadd5475",
+      "map_path": "DungeonMaps/test/complex/235.png",
+      "free_cells": 566250,
+      "start_xy": [
+        909,
+        436
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 2,
+      "layout_sha256": "0386c63538d4027bd8b9f10ab38e22a812d3e17fe92e1fb0124d59ac266be84c",
+      "map_path": "DungeonMaps/test/complex/59.png",
+      "free_cells": 502500,
+      "start_xy": [
+        925,
+        818
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 3,
+      "layout_sha256": "04193df2c7a2b6693951f17718cbc625cce69cf5bc4ed18d66e7f252fbe601a5",
+      "map_path": "DungeonMaps/test/complex/355.png",
+      "free_cells": 498750,
+      "start_xy": [
+        251,
+        86
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 4,
+      "layout_sha256": "04560fbb9c118f5108b0b1855e0c477d9625d132194ca77f093c4f1b9fa943cb",
+      "map_path": "DungeonMaps/test/complex/465.png",
+      "free_cells": 455625,
+      "start_xy": [
+        44,
+        109
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 5,
+      "layout_sha256": "04c4927cf24096c7174a45004e73392b489d989a599d58145e834f5744f553a4",
+      "map_path": "DungeonMaps/test/complex/395.png",
+      "free_cells": 465000,
+      "start_xy": [
+        495,
+        236
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 6,
+      "layout_sha256": "053ade8b7ad9a21ff1d42bfc70f55ebf0fa297ecf3468adac180eb675410181b",
+      "map_path": "DungeonMaps/test/complex/177.png",
+      "free_cells": 456250,
+      "start_xy": [
+        789,
+        533
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 7,
+      "layout_sha256": "05abd3cbf4da3d47e96b0b87739ec3e629a59eb59428bdfcabe006f09d452260",
+      "map_path": "DungeonMaps/test/complex/217.png",
+      "free_cells": 410625,
+      "start_xy": [
+        540,
+        231
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 8,
+      "layout_sha256": "05b595ac4b7e865b107440c3cb19b1ed883571d2fbd11ae0d9dcc97e85b4a342",
+      "map_path": "DungeonMaps/test/complex/159.png",
+      "free_cells": 490000,
+      "start_xy": [
+        444,
+        718
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 9,
+      "layout_sha256": "06077f31ee2cbca1a73fd616f91487606e0f13db71de0462e24adfddbace83c0",
+      "map_path": "DungeonMaps/test/complex/13.png",
+      "free_cells": 452500,
+      "start_xy": [
+        894,
+        81
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 10,
+      "layout_sha256": "07277477c9ff286675a6a7615431f1c830ed8eb85d4d874bf402e3266326f0dc",
+      "map_path": "DungeonMaps/test/complex/259.png",
+      "free_cells": 523750,
+      "start_xy": [
+        232,
+        264
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 11,
+      "layout_sha256": "09fb0b9bb8e0047843c0e77227222092c335c19c60f0d0fa6dd5301be5b369eb",
+      "map_path": "DungeonMaps/test/complex/493.png",
+      "free_cells": 502500,
+      "start_xy": [
+        880,
+        324
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 12,
+      "layout_sha256": "0cf5f120f4cb318d057b7ea435683d98d48040f2d2826224f1f8f62d259d92f9",
+      "map_path": "DungeonMaps/test/complex/321.png",
+      "free_cells": 496250,
+      "start_xy": [
+        490,
+        780
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 13,
+      "layout_sha256": "0d824246a5aef69384deae5c24068f6ffbe7973b0cbc3dc74bef6a1b8449059f",
+      "map_path": "DungeonMaps/test/complex/91.png",
+      "free_cells": 463750,
+      "start_xy": [
+        548,
+        355
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 14,
+      "layout_sha256": "0dee08a11a5c0bb19ed2410c2aca12986af2305e91cf62dbe76fe85c2b9a819f",
+      "map_path": "DungeonMaps/test/complex/107.png",
+      "free_cells": 342500,
+      "start_xy": [
+        889,
+        853
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 15,
+      "layout_sha256": "0ed438102ecee3dbe3c7df9aba825e7764c5926ffc1d07ce303e5a765a825c1d",
+      "map_path": "DungeonMaps/test/complex/227.png",
+      "free_cells": 400625,
+      "start_xy": [
+        330,
+        628
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 16,
+      "layout_sha256": "10efa3868f64369ceb24a53efc2698a64e43635fea6a7aa148cf17875f3ee242",
+      "map_path": "DungeonMaps/test/complex/165.png",
+      "free_cells": 429375,
+      "start_xy": [
+        183,
+        908
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 17,
+      "layout_sha256": "129f91f93be4894089f2bb8726bf8a1ad207c0293285d1284e61ef53d0100152",
+      "map_path": "DungeonMaps/test/complex/25.png",
+      "free_cells": 433750,
+      "start_xy": [
+        862,
+        789
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 18,
+      "layout_sha256": "13fb230fbaeac06f452d5657ed302cfa49db6376e3ee8ec977c3d2cdc88feed4",
+      "map_path": "DungeonMaps/test/complex/35.png",
+      "free_cells": 435000,
+      "start_xy": [
+        921,
+        39
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 19,
+      "layout_sha256": "1649f1e2520c6ebd83894fb22b60f7febf2d5e07ba550a53ea7fd9171c5cfbf3",
+      "map_path": "DungeonMaps/test/complex/357.png",
+      "free_cells": 528125,
+      "start_xy": [
+        219,
+        923
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 20,
+      "layout_sha256": "1795172501eee586236a827089825d138755f90eb8058263f3e82a41b25786dc",
+      "map_path": "DungeonMaps/test/complex/257.png",
+      "free_cells": 439375,
+      "start_xy": [
+        126,
+        931
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 21,
+      "layout_sha256": "18e9250f379b22820cdae94ac02b6789c9ad61843e37395e2652c6e7f9d36590",
+      "map_path": "DungeonMaps/test/complex/381.png",
+      "free_cells": 530000,
+      "start_xy": [
+        810,
+        605
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 22,
+      "layout_sha256": "1b671574fd1eb5bf91b278f7cc0a6a5921a63f229f9b552d1b32606874a02268",
+      "map_path": "DungeonMaps/test/complex/229.png",
+      "free_cells": 442500,
+      "start_xy": [
+        77,
+        815
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 23,
+      "layout_sha256": "1c6a9eb54b3137ce37b206f3fe708ddbe435aac83761c4f78d43e00f27dd3b51",
+      "map_path": "DungeonMaps/test/complex/47.png",
+      "free_cells": 490625,
+      "start_xy": [
+        438,
+        558
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 24,
+      "layout_sha256": "20a38f9652c710e8ab9e90fe5f6ff98ecc71235d7128a80a9b415cf72b138ed6",
+      "map_path": "DungeonMaps/test/complex/183.png",
+      "free_cells": 477500,
+      "start_xy": [
+        37,
+        593
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 25,
+      "layout_sha256": "24ac783165ae33a5a4667db98b5234023102bdaf530e93421360bde64a0bd48c",
+      "map_path": "DungeonMaps/test/complex/279.png",
+      "free_cells": 465625,
+      "start_xy": [
+        363,
+        849
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 26,
+      "layout_sha256": "28ff783879cc8e7d41d651ebeae29c9cf58f52bbf9d134cb038a235d6ead3238",
+      "map_path": "DungeonMaps/test/complex/167.png",
+      "free_cells": 428125,
+      "start_xy": [
+        555,
+        291
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 27,
+      "layout_sha256": "3d356a0db5ee35876c7b70db94fea48b92ec21f7f29e42614627a2e8c14252df",
+      "map_path": "DungeonMaps/test/complex/437.png",
+      "free_cells": 455625,
+      "start_xy": [
+        785,
+        929
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 28,
+      "layout_sha256": "3ed95162a7090ba822b5ed7d740d7035c144e3c4e43b57aff39cd685e4926103",
+      "map_path": "DungeonMaps/test/complex/281.png",
+      "free_cells": 528125,
+      "start_xy": [
+        555,
+        554
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    },
+    {
+      "layout_index": 29,
+      "layout_sha256": "681ac4b9d5effe1c04dfe57dedb92fe1cd95a12ad72a87dfcc9ea28fcaab6790",
+      "map_path": "DungeonMaps/test/complex/487.png",
+      "free_cells": 403750,
+      "start_xy": [
+        497,
+        723
+      ],
+      "four_components": 1,
+      "four_start_component_fraction": 1.0,
+      "eight_components": 1,
+      "eight_start_component_fraction": 1.0
+    }
+  ],
+  "interpretation": "Descriptive free-cell connectivity from ground truth for evaluation only; no map filtering or policy access; point-robot 8-connected component is a feasibility diagnostic, not a dynamics/footprint proof"
+}

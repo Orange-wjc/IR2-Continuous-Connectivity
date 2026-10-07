@@ -1,0 +1,73 @@
+"""Write the audit report from completed machine-readable checks."""
+import json, hashlib, subprocess
+from pathlib import Path
+ROOT=Path(__file__).resolve().parent
+OUT=ROOT/'reproduction_results/audit_20261006'
+def main():
+    metrics=json.loads((OUT/'metric_verification.json').read_text())
+    information=json.loads((OUT/'information_tests.json').read_text())
+    core=['env.py','sensor.py','test_multi_robot_worker.py','test_parameter.py','graph_generator.py','node.py','graph.py','robot.py','model.py','ss_realistic_model.py','model/stage2/checkpoint.pth']
+    diff=subprocess.check_output(['git','diff','HEAD','--']+core,text=True)
+    provenance=dict(git_head=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),original_core_unchanged=not diff,checkpoint_sha256=hashlib.sha256((ROOT/'model/stage2/checkpoint.pth').read_bytes()).hexdigest(),core_sha256={p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in core if p!='model/stage2/checkpoint.pth'})
+    (OUT/'audit_provenance.json').write_text(json.dumps(provenance,indent=2))
+    lines=['# 预训练权重复现：指标核算与信息泄漏审计','',
+        '测试范围：原有 300 次评估的汇总复核；6 次同种子 GPU 重放的完整轨迹及最终个人地图核算；8 项定向信息隔离测试。核心代码与预训练权重未修改，没有重新训练。',
+        '', '**结论：指标算术核算通过；信息隔离审计未通过，确认两处问题。因此现有结果支持公开代码的成绩可复现，但不能据此证明严格断联条件下的论文性能，更不能判定论文原始数据造假。**','',
+        '## 1. 独立指标核算','',
+        '`verify_audit.py` 不导入 Env、TestWorker、模型或原评估统计函数。直接读取轨迹 JSON、个人地图 NPZ 和原始 PNG。', '',
+        '- 距离：每个机器人相邻轨迹点的欧氏距离求和，再取机器人之间的最大值。',
+        '- 步数：轨迹转移次数，同时核对逐动作事件与每轮机器人数量；完整回合中所有机器人动作次数一致。',
+        '- 覆盖率：个人地图标为自由且原始真值 PNG 也为自由的像素数 / 真值自由像素总数。额外检查错误自由像素为零。',
+        '- 成功：所有个人覆盖率达到 99%；失败案例保留在统计中，并检查是否达到步数上限。', '',
+        '原 300 次数据用 Python statistics 独立重新计算均值、总体标准差、成功数，均与已有统计一致。这里的复核对象是本地复现数据，不是作者未公开的原始实验日志。', '',
+        '| 场景 | 样本数 | 成功 / 失败 | 平均步数 | 平均最大路程（坐标单位） | 汇总复核 |',
+        '|---|---:|---:|---:|---:|---|']
+    for kind,r in metrics['aggregate300'].items():
+        lines.append(f"| {kind} | {r['count']} | {r['successes']} / {r['failures']} | {r['steps_mean']:.2f} | {r['distance_mean_coordinate_units']:.3f} | {'通过' if r['passed'] else '未通过'} |")
+    lines += ['', '6 次原始数据重放包含两例超时失败，沿用原种子 20261005 + 地图索引、贪心策略、原始信号强度通信设置。重放结果逐例与原 300 次记录一致。', '', '| 案例 | 独立步数 | 独立最大路程（坐标单位） | 最低个人覆盖率 | 成功 | 核算 |', '|---|---:|---:|---:|---|---|']
+    for r in metrics['raw_replays6']:
+        lines.append(f"| {r['name']} | {r['independent_steps']} | {r['independent_max_distance']:.6f} | {min(r['independent_coverages'])*100:.4f}% | {'是' if r['success'] else '否'} | {'通过' if r['passed'] else '未通过'} |")
+    lines += ['', '所有重放地图的错误自由像素数均为 0。旧 Hybrid 演示轨迹的距离也独立核算一致。**完整轨迹与地图层面的核算只覆盖这 6 例，不是全部 300 例。**', '',
+        '物理单位限制：论文地图尺寸与图片像素数对应 0.25 m/px，但 PNG 未提供独立标定，信号模型源码又写有 1 m/px 假设。已确认坐标单位下的路程算术正确；米制通信距离的标定仍不能视为已验证。', '',
+        '## 2. 信息泄漏审计','',
+        '### 2.1 已确认：断联后的地图数组共享写入','',
+        '`env.py:241` 将同一个 merged_belief 数组赋给连通组多个机器人的个人地图，`:248` 又赋给缓存地图。下一次移动后，`:141` 的传感器先更新地图；`sensor.py` 的 itemset 原地修改数组；当前通信分组在此之后才计算。若新位置已断联，其他机器人仍通过数组别名获得扫描结果。', '',
+        '定向测试：先连通 A-B-C，再断开全部链路，只让 A 扫描一个新单元。B 的个人地图及缓存地图均改变了 1 个单元，违反断联隔离。仅在测试夹具中为地图快照各自复制数组，此问题消失，支持共享引用是原因。', '',
+        '真实原代码 GPU 重放的被动记录如下。事件指“一次传感器写入导致一个不在当前通信连通分量的观察机器人个人地图改变”，不是独立 episode 数，也不是去重像素数。', '',
+        '| 案例 | 断联地图写入事件 | 双方传感器范围不相交且出现新增自由像素的事件 |', '|---|---:|---:|']
+    for r in metrics['raw_replays6']:
+        lines.append(f"| {r['name']} | {r['alias_leak_events']} | {r['disjoint_sensor_footprint_leak_events']} |")
+    evidence=next((e for r in metrics['raw_replays6'] for e in r['first_disjoint_footprint_leak']),None)
+    if evidence:
+        lines += ['', f"实例：轮次 {evidence['round']}（从 0 开始），执行机器人 {evidence['actor']} 在 {evidence['actor_position']}，观察机器人 {evidence['observer']} 在 {evidence['observer_position']}，相距 {evidence['actor_observer_distance']:.2f} 像素，超过两个 80 像素雷达半径之和。当前执行者的连通分量为 {evidence['component']}，不含观察者；观察者却获得 {evidence['new_free']} 个新增自由像素（总改变 {evidence['changed_pixels']} 个像素）。编号均从 0 开始。"]
+    lines += ['', '### 2.2 已确认：清除旧队友位置时读取未观测真值','',
+        '`env.py:338` 用 ground_truth 计算自己到旧队友位置认知的“假想连接”，并决定是否累计缺失次数；达到 3 次后清除位置。当前实际连接由环境真值模拟是正常的，但对假想旧位置路径使用未观测障碍会将额外信息传入决策状态。', '',
+        '定向反事实测试：固定 X_g=5、K=5（均在项目 0–13 噪声范围内），相同个人认知、相同雷达返回、相同实际连接状态（与其他机器人均断联），仅在雷达范围外加入隐藏障碍。没有该障碍时旧位置被清除，有该障碍时保留；原 get_observations 的位置特征有 1 个单元不同。', '',
+        '此测试使用真实传感器、信号模型、原位置清除及观测构造函数；为隔离原因，图更新在夹具中被替换为成功返回，盈余层固定为零。它证明代码存在隐藏真值依赖，但没有量化该问题在原 300 个回合中对成绩的影响。', '',
+        '### 2.3 通过的检查与合法真值用途','',
+        '- A-B-C 多跳地图交换通过；D 不在该连通分量中，其私有地图不参与该次合并。',
+        '- C 持有的 D 的较新缓存地图、旧位置及时间戳可以经多跳合法转发给 A，未替换为 D 的当前真实位置。',
+        '- 起始地图彼此独立且始终断联时，单个机器人的传感器写入不改变另一个机器人地图。',
+        '- 断联时改变队友真实位置，未直接更新本机器人缓存位置。',
+        '- 固定本机器人个人与缓存认知，仅改变队友私有地图、真实位置、全局合并地图及其他连通分量的划分，六项策略观测张量保持一致。',
+        '- ground_truth 用于物理雷达、实际链路、终止判断和特权奖励是合理的环境用途；全局合并奖励未作为推理策略输入。已知地图矩形边界和初始相对位置是论文设定，不按隐藏占据信息泄漏处理。', '',
+        '## 3. 证据解释与后续验证','',
+        '距离、覆盖率、步数的核算通过，只说明日志计算自洽。它不会排除不符合预期通信约束的环境机制。发现公开实现问题也不等于证明作者捏造数据；缺少作者原始日志、训练版本和实验全配置，无法完成真实性取证。', '',
+        '下一步应在单独对照实现中消除共享地图快照别名，并让旧位置可通信性的预测仅使用本机器人可获得的信息；然后用同一预训练权重、同一 300 张地图与种子做修复前后配对评估。这样才能量化这些问题对成绩的影响。该评估可以先不重新训练。', '',
+        '## 4. 复核文件与命令','',
+        '- `metric_verification.json`：独立计算结果、逐例检查、距离与覆盖率、真实断联写入证据。',
+        '- `information_tests.json`：8 项定向测试，6 项通过、2 项信息隔离要求失败；全部测试正常执行完成。',
+        '- `<场景>_<索引>.json`：逐机器人完整轨迹、执行事件、原指标、断联写入事件。',
+        '- `<场景>_<索引>_maps.npz`：最终个人地图；真值直接使用原数据集 PNG。',
+        '- `audit_provenance.json`：原代码未修改证明、Git 提交与权重及核心文件哈希。', '',
+        '在仓库根目录，使用 BLMRE_py38 环境运行：', '',
+        '```bash',
+        'MPLBACKEND=Agg OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -B audit_reproduction.py',
+        'MPLBACKEND=Agg OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -B audit_information.py',
+        'python -B verify_audit.py',
+        'python -B report_audit.py',
+        '```', '',
+        '重放脚本已有结果时会跳过；独立核算与定向测试可以重复运行。']
+    (OUT/'审计报告.md').write_text('\n'.join(lines)+'\n')
+    print(json.dumps(dict(report=str(OUT/'审计报告.md'),original_core_unchanged=provenance['original_core_unchanged'],aggregate_all_pass=all(r['passed'] for r in metrics['aggregate300'].values()),raw_replays_all_pass=all(r['passed'] for r in metrics['raw_replays6']),information_checks=len(information),information_failures=[r['test'] for r in information if not r['passed']],alias_events=sum(r['alias_leak_events'] for r in metrics['raw_replays6'])),ensure_ascii=False,indent=2))
+if __name__=='__main__': main()

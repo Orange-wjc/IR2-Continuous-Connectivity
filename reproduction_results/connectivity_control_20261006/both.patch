@@ -1,0 +1,20 @@
+--- upstream/Env.single_robot_step
++++ both/Env.single_robot_step
+@@ -13,7 +13,7 @@
+     ### Update each agent's map belief ###
+     next_node_index = self.find_index_from_coords(robot_position, agent_id=robot_id)
+     self.all_graph_generator[robot_id].nodes_list[next_node_index].set_visited()
+-    self.all_robot_belief[robot_id][robot_id] = self.update_robot_belief(robot_position, self.sensor_range, self.all_robot_belief[robot_id][robot_id], self.ground_truth)
++    self.all_robot_belief[robot_id][robot_id] = self.update_robot_belief(robot_position, self.sensor_range, self.all_robot_belief[robot_id][robot_id].copy(), self.ground_truth)
+     self.all_downsampled_belief[robot_id] = block_reduce(self.all_robot_belief[robot_id][robot_id].copy(), block_size=(self.resolution, self.resolution), func=np.min)     
+ 
+     ### Update global merged belief ###
+@@ -210,7 +210,7 @@
+         if robot_id != other_id and self.all_robot_positions_belief[robot_id][other_id] is not None:
+ 
+             if USE_SIGNAL_STRENGTH_NOT_PROXIMITY:
+-                belief_in_comms_range = self.ss_realistic_model.is_within_signal_strength(self.ground_truth, self.all_robot_positions_belief[robot_id][robot_id], self.all_robot_positions_belief[robot_id][other_id])
++                belief_in_comms_range = self.ss_realistic_model.is_within_signal_strength(self.all_robot_belief[robot_id][robot_id], self.all_robot_positions_belief[robot_id][robot_id], self.all_robot_positions_belief[robot_id][other_id])
+                 gt_in_comms_range = self.ss_realistic_model.is_within_signal_strength(self.ground_truth, self.all_robot_positions_gt[robot_id], self.all_robot_positions_gt[other_id])
+             else:
+                 belief_in_comms_range = (np.linalg.norm(self.all_robot_positions_belief[robot_id][other_id] - self.all_robot_positions_belief[robot_id][robot_id]) < self.max_comms_proximity)

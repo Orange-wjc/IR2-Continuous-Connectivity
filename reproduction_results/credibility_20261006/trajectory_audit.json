@@ -1,0 +1,4996 @@
+{
+  "records": 312,
+  "counts_by_mode": {
+    "both": 300,
+    "map_only": 6,
+    "original": 6
+  },
+  "totals": {
+    "both": {
+      "poses": 141054,
+      "segments": 139754,
+      "obstructed_segments_4_connected": 15
+    },
+    "map_only": {
+      "poses": 2643,
+      "segments": 2617
+    },
+    "original": {
+      "poses": 4442,
+      "segments": 4416,
+      "obstructed_segments_4_connected": 2
+    }
+  },
+  "rows": [
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 0,
+      "map_file": "99.png",
+      "counts": {
+        "poses": 730,
+        "invalid_poses": 0,
+        "segments": 725,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 1,
+      "map_file": "98.png",
+      "counts": {
+        "poses": 590,
+        "invalid_poses": 0,
+        "segments": 585,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 10,
+      "map_file": "9.png",
+      "counts": {
+        "poses": 695,
+        "invalid_poses": 0,
+        "segments": 690,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 11,
+      "map_file": "89.png",
+      "counts": {
+        "poses": 985,
+        "invalid_poses": 0,
+        "segments": 980,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 12,
+      "map_file": "88.png",
+      "counts": {
+        "poses": 695,
+        "invalid_poses": 0,
+        "segments": 690,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 13,
+      "map_file": "87.png",
+      "counts": {
+        "poses": 600,
+        "invalid_poses": 0,
+        "segments": 595,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 1,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": [
+        {
+          "robot": 2,
+          "step": 85,
+          "start": [
+            816,
+            816
+          ],
+          "end": [
+            917,
+            917
+          ],
+          "raster8": false,
+          "raster4": true,
+          "raster4_reverse": false,
+          "obstacle_interior": false
+        }
+      ]
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 14,
+      "map_file": "86.png",
+      "counts": {
+        "poses": 795,
+        "invalid_poses": 0,
+        "segments": 790,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 15,
+      "map_file": "85.png",
+      "counts": {
+        "poses": 695,
+        "invalid_poses": 0,
+        "segments": 690,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 16,
+      "map_file": "84.png",
+      "counts": {
+        "poses": 540,
+        "invalid_poses": 0,
+        "segments": 535,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 17,
+      "map_file": "83.png",
+      "counts": {
+        "poses": 625,
+        "invalid_poses": 0,
+        "segments": 620,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 18,
+      "map_file": "82.png",
+      "counts": {
+        "poses": 910,
+        "invalid_poses": 0,
+        "segments": 905,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 19,
+      "map_file": "81.png",
+      "counts": {
+        "poses": 610,
+        "invalid_poses": 0,
+        "segments": 605,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 2,
+      "map_file": "97.png",
+      "counts": {
+        "poses": 655,
+        "invalid_poses": 0,
+        "segments": 650,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 20,
+      "map_file": "80.png",
+      "counts": {
+        "poses": 780,
+        "invalid_poses": 0,
+        "segments": 775,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 21,
+      "map_file": "8.png",
+      "counts": {
+        "poses": 515,
+        "invalid_poses": 0,
+        "segments": 510,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 22,
+      "map_file": "79.png",
+      "counts": {
+        "poses": 1925,
+        "invalid_poses": 0,
+        "segments": 1920,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 23,
+      "map_file": "78.png",
+      "counts": {
+        "poses": 1015,
+        "invalid_poses": 0,
+        "segments": 1010,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 1,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": [
+        {
+          "robot": 2,
+          "step": 149,
+          "start": [
+            285,
+            510
+          ],
+          "end": [
+            224,
+            449
+          ],
+          "raster8": false,
+          "raster4": true,
+          "raster4_reverse": false,
+          "obstacle_interior": false
+        }
+      ]
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 24,
+      "map_file": "77.png",
+      "counts": {
+        "poses": 585,
+        "invalid_poses": 0,
+        "segments": 580,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 25,
+      "map_file": "76.png",
+      "counts": {
+        "poses": 620,
+        "invalid_poses": 0,
+        "segments": 615,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 26,
+      "map_file": "75.png",
+      "counts": {
+        "poses": 670,
+        "invalid_poses": 0,
+        "segments": 665,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 27,
+      "map_file": "74.png",
+      "counts": {
+        "poses": 680,
+        "invalid_poses": 0,
+        "segments": 675,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 28,
+      "map_file": "73.png",
+      "counts": {
+        "poses": 1925,
+        "invalid_poses": 0,
+        "segments": 1920,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 2,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": [
+        {
+          "robot": 0,
+          "step": 107,
+          "start": [
+            143,
+            856
+          ],
+          "end": [
+            61,
+            938
+          ],
+          "raster8": false,
+          "raster4": true,
+          "raster4_reverse": false,
+          "obstacle_interior": false
+        },
+        {
+          "robot": 4,
+          "step": 106,
+          "start": [
+            143,
+            856
+          ],
+          "end": [
+            61,
+            938
+          ],
+          "raster8": false,
+          "raster4": true,
+          "raster4_reverse": false,
+          "obstacle_interior": false
+        }
+      ]
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 29,
+      "map_file": "72.png",
+      "counts": {
+        "poses": 700,
+        "invalid_poses": 0,
+        "segments": 695,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 3,
+      "map_file": "96.png",
+      "counts": {
+        "poses": 1925,
+        "invalid_poses": 0,
+        "segments": 1920,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 30,
+      "map_file": "71.png",
+      "counts": {
+        "poses": 500,
+        "invalid_poses": 0,
+        "segments": 495,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 31,
+      "map_file": "70.png",
+      "counts": {
+        "poses": 970,
+        "invalid_poses": 0,
+        "segments": 965,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 32,
+      "map_file": "7.png",
+      "counts": {
+        "poses": 1925,
+        "invalid_poses": 0,
+        "segments": 1920,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 33,
+      "map_file": "69.png",
+      "counts": {
+        "poses": 835,
+        "invalid_poses": 0,
+        "segments": 830,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 34,
+      "map_file": "68.png",
+      "counts": {
+        "poses": 545,
+        "invalid_poses": 0,
+        "segments": 540,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 35,
+      "map_file": "67.png",
+      "counts": {
+        "poses": 505,
+        "invalid_poses": 0,
+        "segments": 500,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 36,
+      "map_file": "66.png",
+      "counts": {
+        "poses": 1220,
+        "invalid_poses": 0,
+        "segments": 1215,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 37,
+      "map_file": "65.png",
+      "counts": {
+        "poses": 1925,
+        "invalid_poses": 0,
+        "segments": 1920,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 38,
+      "map_file": "64.png",
+      "counts": {
+        "poses": 560,
+        "invalid_poses": 0,
+        "segments": 555,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 39,
+      "map_file": "63.png",
+      "counts": {
+        "poses": 750,
+        "invalid_poses": 0,
+        "segments": 745,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 4,
+      "map_file": "95.png",
+      "counts": {
+        "poses": 560,
+        "invalid_poses": 0,
+        "segments": 555,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 40,
+      "map_file": "62.png",
+      "counts": {
+        "poses": 655,
+        "invalid_poses": 0,
+        "segments": 650,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 41,
+      "map_file": "61.png",
+      "counts": {
+        "poses": 435,
+        "invalid_poses": 0,
+        "segments": 430,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 42,
+      "map_file": "60.png",
+      "counts": {
+        "poses": 675,
+        "invalid_poses": 0,
+        "segments": 670,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 43,
+      "map_file": "6.png",
+      "counts": {
+        "poses": 660,
+        "invalid_poses": 0,
+        "segments": 655,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 44,
+      "map_file": "59.png",
+      "counts": {
+        "poses": 480,
+        "invalid_poses": 0,
+        "segments": 475,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 45,
+      "map_file": "58.png",
+      "counts": {
+        "poses": 475,
+        "invalid_poses": 0,
+        "segments": 470,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 46,
+      "map_file": "57.png",
+      "counts": {
+        "poses": 840,
+        "invalid_poses": 0,
+        "segments": 835,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 47,
+      "map_file": "56.png",
+      "counts": {
+        "poses": 1195,
+        "invalid_poses": 0,
+        "segments": 1190,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 1,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": [
+        {
+          "robot": 2,
+          "step": 68,
+          "start": [
+            714,
+            714
+          ],
+          "end": [
+            652,
+            652
+          ],
+          "raster8": false,
+          "raster4": true,
+          "raster4_reverse": false,
+          "obstacle_interior": false
+        }
+      ]
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 48,
+      "map_file": "55.png",
+      "counts": {
+        "poses": 1925,
+        "invalid_poses": 0,
+        "segments": 1920,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 49,
+      "map_file": "54.png",
+      "counts": {
+        "poses": 780,
+        "invalid_poses": 0,
+        "segments": 775,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 1,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": [
+        {
+          "robot": 0,
+          "step": 11,
+          "start": [
+            693,
+            510
+          ],
+          "end": [
+            816,
+            469
+          ],
+          "raster8": false,
+          "raster4": true,
+          "raster4_reverse": false,
+          "obstacle_interior": false
+        }
+      ]
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 5,
+      "map_file": "94.png",
+      "counts": {
+        "poses": 785,
+        "invalid_poses": 0,
+        "segments": 780,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 50,
+      "map_file": "53.png",
+      "counts": {
+        "poses": 420,
+        "invalid_poses": 0,
+        "segments": 415,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 51,
+      "map_file": "52.png",
+      "counts": {
+        "poses": 665,
+        "invalid_poses": 0,
+        "segments": 660,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 52,
+      "map_file": "51.png",
+      "counts": {
+        "poses": 635,
+        "invalid_poses": 0,
+        "segments": 630,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 53,
+      "map_file": "500.png",
+      "counts": {
+        "poses": 595,
+        "invalid_poses": 0,
+        "segments": 590,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 54,
+      "map_file": "50.png",
+      "counts": {
+        "poses": 510,
+        "invalid_poses": 0,
+        "segments": 505,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 55,
+      "map_file": "5.png",
+      "counts": {
+        "poses": 375,
+        "invalid_poses": 0,
+        "segments": 370,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 56,
+      "map_file": "499.png",
+      "counts": {
+        "poses": 525,
+        "invalid_poses": 0,
+        "segments": 520,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 57,
+      "map_file": "498.png",
+      "counts": {
+        "poses": 445,
+        "invalid_poses": 0,
+        "segments": 440,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 58,
+      "map_file": "497.png",
+      "counts": {
+        "poses": 670,
+        "invalid_poses": 0,
+        "segments": 665,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 59,
+      "map_file": "496.png",
+      "counts": {
+        "poses": 835,
+        "invalid_poses": 0,
+        "segments": 830,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 6,
+      "map_file": "93.png",
+      "counts": {
+        "poses": 575,
+        "invalid_poses": 0,
+        "segments": 570,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 60,
+      "map_file": "495.png",
+      "counts": {
+        "poses": 1170,
+        "invalid_poses": 0,
+        "segments": 1165,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 61,
+      "map_file": "494.png",
+      "counts": {
+        "poses": 760,
+        "invalid_poses": 0,
+        "segments": 755,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 62,
+      "map_file": "493.png",
+      "counts": {
+        "poses": 565,
+        "invalid_poses": 0,
+        "segments": 560,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 63,
+      "map_file": "492.png",
+      "counts": {
+        "poses": 1005,
+        "invalid_poses": 0,
+        "segments": 1000,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 64,
+      "map_file": "491.png",
+      "counts": {
+        "poses": 545,
+        "invalid_poses": 0,
+        "segments": 540,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 65,
+      "map_file": "490.png",
+      "counts": {
+        "poses": 1925,
+        "invalid_poses": 0,
+        "segments": 1920,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 66,
+      "map_file": "49.png",
+      "counts": {
+        "poses": 525,
+        "invalid_poses": 0,
+        "segments": 520,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 67,
+      "map_file": "489.png",
+      "counts": {
+        "poses": 780,
+        "invalid_poses": 0,
+        "segments": 775,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 68,
+      "map_file": "488.png",
+      "counts": {
+        "poses": 365,
+        "invalid_poses": 0,
+        "segments": 360,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 69,
+      "map_file": "487.png",
+      "counts": {
+        "poses": 565,
+        "invalid_poses": 0,
+        "segments": 560,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 7,
+      "map_file": "92.png",
+      "counts": {
+        "poses": 525,
+        "invalid_poses": 0,
+        "segments": 520,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 70,
+      "map_file": "486.png",
+      "counts": {
+        "poses": 550,
+        "invalid_poses": 0,
+        "segments": 545,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 71,
+      "map_file": "485.png",
+      "counts": {
+        "poses": 505,
+        "invalid_poses": 0,
+        "segments": 500,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 72,
+      "map_file": "484.png",
+      "counts": {
+        "poses": 555,
+        "invalid_poses": 0,
+        "segments": 550,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 73,
+      "map_file": "483.png",
+      "counts": {
+        "poses": 535,
+        "invalid_poses": 0,
+        "segments": 530,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 74,
+      "map_file": "482.png",
+      "counts": {
+        "poses": 1925,
+        "invalid_poses": 0,
+        "segments": 1920,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 75,
+      "map_file": "481.png",
+      "counts": {
+        "poses": 575,
+        "invalid_poses": 0,
+        "segments": 570,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 76,
+      "map_file": "480.png",
+      "counts": {
+        "poses": 765,
+        "invalid_poses": 0,
+        "segments": 760,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 77,
+      "map_file": "48.png",
+      "counts": {
+        "poses": 1395,
+        "invalid_poses": 0,
+        "segments": 1390,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 1,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": [
+        {
+          "robot": 1,
+          "step": 198,
+          "start": [
+            122,
+            347
+          ],
+          "end": [
+            183,
+            408
+          ],
+          "raster8": false,
+          "raster4": true,
+          "raster4_reverse": false,
+          "obstacle_interior": false
+        }
+      ]
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 78,
+      "map_file": "479.png",
+      "counts": {
+        "poses": 805,
+        "invalid_poses": 0,
+        "segments": 800,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 79,
+      "map_file": "478.png",
+      "counts": {
+        "poses": 1925,
+        "invalid_poses": 0,
+        "segments": 1920,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 8,
+      "map_file": "91.png",
+      "counts": {
+        "poses": 530,
+        "invalid_poses": 0,
+        "segments": 525,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 1,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": [
+        {
+          "robot": 0,
+          "step": 64,
+          "start": [
+            836,
+            836
+          ],
+          "end": [
+            897,
+            897
+          ],
+          "raster8": false,
+          "raster4": true,
+          "raster4_reverse": false,
+          "obstacle_interior": false
+        }
+      ]
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 80,
+      "map_file": "477.png",
+      "counts": {
+        "poses": 680,
+        "invalid_poses": 0,
+        "segments": 675,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 81,
+      "map_file": "476.png",
+      "counts": {
+        "poses": 550,
+        "invalid_poses": 0,
+        "segments": 545,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 82,
+      "map_file": "475.png",
+      "counts": {
+        "poses": 930,
+        "invalid_poses": 0,
+        "segments": 925,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 83,
+      "map_file": "474.png",
+      "counts": {
+        "poses": 710,
+        "invalid_poses": 0,
+        "segments": 705,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 84,
+      "map_file": "473.png",
+      "counts": {
+        "poses": 685,
+        "invalid_poses": 0,
+        "segments": 680,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 85,
+      "map_file": "472.png",
+      "counts": {
+        "poses": 985,
+        "invalid_poses": 0,
+        "segments": 980,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 1,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": [
+        {
+          "robot": 4,
+          "step": 79,
+          "start": [
+            510,
+            510
+          ],
+          "end": [
+            571,
+            571
+          ],
+          "raster8": false,
+          "raster4": true,
+          "raster4_reverse": false,
+          "obstacle_interior": false
+        }
+      ]
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 86,
+      "map_file": "471.png",
+      "counts": {
+        "poses": 500,
+        "invalid_poses": 0,
+        "segments": 495,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 87,
+      "map_file": "470.png",
+      "counts": {
+        "poses": 915,
+        "invalid_poses": 0,
+        "segments": 910,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 88,
+      "map_file": "47.png",
+      "counts": {
+        "poses": 565,
+        "invalid_poses": 0,
+        "segments": 560,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 89,
+      "map_file": "469.png",
+      "counts": {
+        "poses": 840,
+        "invalid_poses": 0,
+        "segments": 835,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 9,
+      "map_file": "90.png",
+      "counts": {
+        "poses": 915,
+        "invalid_poses": 0,
+        "segments": 910,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 90,
+      "map_file": "468.png",
+      "counts": {
+        "poses": 620,
+        "invalid_poses": 0,
+        "segments": 615,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 91,
+      "map_file": "467.png",
+      "counts": {
+        "poses": 665,
+        "invalid_poses": 0,
+        "segments": 660,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 92,
+      "map_file": "466.png",
+      "counts": {
+        "poses": 650,
+        "invalid_poses": 0,
+        "segments": 645,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 93,
+      "map_file": "465.png",
+      "counts": {
+        "poses": 605,
+        "invalid_poses": 0,
+        "segments": 600,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 94,
+      "map_file": "464.png",
+      "counts": {
+        "poses": 820,
+        "invalid_poses": 0,
+        "segments": 815,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 95,
+      "map_file": "463.png",
+      "counts": {
+        "poses": 600,
+        "invalid_poses": 0,
+        "segments": 595,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 96,
+      "map_file": "462.png",
+      "counts": {
+        "poses": 1925,
+        "invalid_poses": 0,
+        "segments": 1920,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 97,
+      "map_file": "461.png",
+      "counts": {
+        "poses": 1925,
+        "invalid_poses": 0,
+        "segments": 1920,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 98,
+      "map_file": "460.png",
+      "counts": {
+        "poses": 1925,
+        "invalid_poses": 0,
+        "segments": 1920,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 1,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": [
+        {
+          "robot": 3,
+          "step": 63,
+          "start": [
+            61,
+            938
+          ],
+          "end": [
+            122,
+            877
+          ],
+          "raster8": false,
+          "raster4": true,
+          "raster4_reverse": false,
+          "obstacle_interior": false
+        }
+      ]
+    },
+    {
+      "mode": "both",
+      "map_type": "complex",
+      "map_index": 99,
+      "map_file": "46.png",
+      "counts": {
+        "poses": 770,
+        "invalid_poses": 0,
+        "segments": 765,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 0,
+      "map_file": "99.png",
+      "counts": {
+        "poses": 340,
+        "invalid_poses": 0,
+        "segments": 336,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 1,
+      "map_file": "98.png",
+      "counts": {
+        "poses": 504,
+        "invalid_poses": 0,
+        "segments": 500,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 1,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": [
+        {
+          "robot": 2,
+          "step": 24,
+          "start": [
+            222,
+            420
+          ],
+          "end": [
+            248,
+            342
+          ],
+          "raster8": false,
+          "raster4": true,
+          "raster4_reverse": false,
+          "obstacle_interior": false
+        }
+      ]
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 10,
+      "map_file": "9.png",
+      "counts": {
+        "poses": 320,
+        "invalid_poses": 0,
+        "segments": 316,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 11,
+      "map_file": "89.png",
+      "counts": {
+        "poses": 280,
+        "invalid_poses": 0,
+        "segments": 276,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 12,
+      "map_file": "88.png",
+      "counts": {
+        "poses": 308,
+        "invalid_poses": 0,
+        "segments": 304,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 13,
+      "map_file": "87.png",
+      "counts": {
+        "poses": 320,
+        "invalid_poses": 0,
+        "segments": 316,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 14,
+      "map_file": "86.png",
+      "counts": {
+        "poses": 312,
+        "invalid_poses": 0,
+        "segments": 308,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 15,
+      "map_file": "85.png",
+      "counts": {
+        "poses": 292,
+        "invalid_poses": 0,
+        "segments": 288,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 16,
+      "map_file": "84.png",
+      "counts": {
+        "poses": 280,
+        "invalid_poses": 0,
+        "segments": 276,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 17,
+      "map_file": "83.png",
+      "counts": {
+        "poses": 260,
+        "invalid_poses": 0,
+        "segments": 256,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 18,
+      "map_file": "82.png",
+      "counts": {
+        "poses": 436,
+        "invalid_poses": 0,
+        "segments": 432,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 19,
+      "map_file": "81.png",
+      "counts": {
+        "poses": 292,
+        "invalid_poses": 0,
+        "segments": 288,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 2,
+      "map_file": "97.png",
+      "counts": {
+        "poses": 336,
+        "invalid_poses": 0,
+        "segments": 332,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 20,
+      "map_file": "80.png",
+      "counts": {
+        "poses": 256,
+        "invalid_poses": 0,
+        "segments": 252,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 21,
+      "map_file": "8.png",
+      "counts": {
+        "poses": 272,
+        "invalid_poses": 0,
+        "segments": 268,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 22,
+      "map_file": "79.png",
+      "counts": {
+        "poses": 304,
+        "invalid_poses": 0,
+        "segments": 300,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 23,
+      "map_file": "78.png",
+      "counts": {
+        "poses": 788,
+        "invalid_poses": 0,
+        "segments": 784,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 24,
+      "map_file": "77.png",
+      "counts": {
+        "poses": 308,
+        "invalid_poses": 0,
+        "segments": 304,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 25,
+      "map_file": "76.png",
+      "counts": {
+        "poses": 320,
+        "invalid_poses": 0,
+        "segments": 316,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 26,
+      "map_file": "75.png",
+      "counts": {
+        "poses": 308,
+        "invalid_poses": 0,
+        "segments": 304,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 27,
+      "map_file": "74.png",
+      "counts": {
+        "poses": 464,
+        "invalid_poses": 0,
+        "segments": 460,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 28,
+      "map_file": "73.png",
+      "counts": {
+        "poses": 788,
+        "invalid_poses": 0,
+        "segments": 784,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 29,
+      "map_file": "72.png",
+      "counts": {
+        "poses": 304,
+        "invalid_poses": 0,
+        "segments": 300,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 3,
+      "map_file": "96.png",
+      "counts": {
+        "poses": 272,
+        "invalid_poses": 0,
+        "segments": 268,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 30,
+      "map_file": "71.png",
+      "counts": {
+        "poses": 328,
+        "invalid_poses": 0,
+        "segments": 324,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 31,
+      "map_file": "70.png",
+      "counts": {
+        "poses": 432,
+        "invalid_poses": 0,
+        "segments": 428,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 32,
+      "map_file": "7.png",
+      "counts": {
+        "poses": 360,
+        "invalid_poses": 0,
+        "segments": 356,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 1,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": [
+        {
+          "robot": 3,
+          "step": 10,
+          "start": [
+            65,
+            59
+          ],
+          "end": [
+            39,
+            137
+          ],
+          "raster8": false,
+          "raster4": true,
+          "raster4_reverse": false,
+          "obstacle_interior": false
+        }
+      ]
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 33,
+      "map_file": "69.png",
+      "counts": {
+        "poses": 300,
+        "invalid_poses": 0,
+        "segments": 296,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 34,
+      "map_file": "68.png",
+      "counts": {
+        "poses": 340,
+        "invalid_poses": 0,
+        "segments": 336,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 35,
+      "map_file": "67.png",
+      "counts": {
+        "poses": 300,
+        "invalid_poses": 0,
+        "segments": 296,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 36,
+      "map_file": "66.png",
+      "counts": {
+        "poses": 324,
+        "invalid_poses": 0,
+        "segments": 320,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 37,
+      "map_file": "65.png",
+      "counts": {
+        "poses": 244,
+        "invalid_poses": 0,
+        "segments": 240,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 38,
+      "map_file": "64.png",
+      "counts": {
+        "poses": 292,
+        "invalid_poses": 0,
+        "segments": 288,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 39,
+      "map_file": "63.png",
+      "counts": {
+        "poses": 492,
+        "invalid_poses": 0,
+        "segments": 488,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 4,
+      "map_file": "95.png",
+      "counts": {
+        "poses": 300,
+        "invalid_poses": 0,
+        "segments": 296,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 40,
+      "map_file": "62.png",
+      "counts": {
+        "poses": 340,
+        "invalid_poses": 0,
+        "segments": 336,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 41,
+      "map_file": "61.png",
+      "counts": {
+        "poses": 260,
+        "invalid_poses": 0,
+        "segments": 256,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 42,
+      "map_file": "60.png",
+      "counts": {
+        "poses": 296,
+        "invalid_poses": 0,
+        "segments": 292,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 43,
+      "map_file": "6.png",
+      "counts": {
+        "poses": 284,
+        "invalid_poses": 0,
+        "segments": 280,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 44,
+      "map_file": "59.png",
+      "counts": {
+        "poses": 380,
+        "invalid_poses": 0,
+        "segments": 376,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 45,
+      "map_file": "58.png",
+      "counts": {
+        "poses": 284,
+        "invalid_poses": 0,
+        "segments": 280,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 46,
+      "map_file": "57.png",
+      "counts": {
+        "poses": 336,
+        "invalid_poses": 0,
+        "segments": 332,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 47,
+      "map_file": "56.png",
+      "counts": {
+        "poses": 556,
+        "invalid_poses": 0,
+        "segments": 552,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 48,
+      "map_file": "55.png",
+      "counts": {
+        "poses": 252,
+        "invalid_poses": 0,
+        "segments": 248,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 49,
+      "map_file": "54.png",
+      "counts": {
+        "poses": 304,
+        "invalid_poses": 0,
+        "segments": 300,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 5,
+      "map_file": "94.png",
+      "counts": {
+        "poses": 260,
+        "invalid_poses": 0,
+        "segments": 256,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 50,
+      "map_file": "53.png",
+      "counts": {
+        "poses": 232,
+        "invalid_poses": 0,
+        "segments": 228,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 51,
+      "map_file": "52.png",
+      "counts": {
+        "poses": 540,
+        "invalid_poses": 0,
+        "segments": 536,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 52,
+      "map_file": "51.png",
+      "counts": {
+        "poses": 336,
+        "invalid_poses": 0,
+        "segments": 332,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 53,
+      "map_file": "50.png",
+      "counts": {
+        "poses": 312,
+        "invalid_poses": 0,
+        "segments": 308,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 54,
+      "map_file": "5.png",
+      "counts": {
+        "poses": 288,
+        "invalid_poses": 0,
+        "segments": 284,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 55,
+      "map_file": "49.png",
+      "counts": {
+        "poses": 420,
+        "invalid_poses": 0,
+        "segments": 416,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 56,
+      "map_file": "48.png",
+      "counts": {
+        "poses": 348,
+        "invalid_poses": 0,
+        "segments": 344,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 57,
+      "map_file": "47.png",
+      "counts": {
+        "poses": 348,
+        "invalid_poses": 0,
+        "segments": 344,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 58,
+      "map_file": "46.png",
+      "counts": {
+        "poses": 276,
+        "invalid_poses": 0,
+        "segments": 272,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 59,
+      "map_file": "45.png",
+      "counts": {
+        "poses": 296,
+        "invalid_poses": 0,
+        "segments": 292,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 6,
+      "map_file": "93.png",
+      "counts": {
+        "poses": 572,
+        "invalid_poses": 0,
+        "segments": 568,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 60,
+      "map_file": "44.png",
+      "counts": {
+        "poses": 316,
+        "invalid_poses": 0,
+        "segments": 312,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 61,
+      "map_file": "43.png",
+      "counts": {
+        "poses": 348,
+        "invalid_poses": 0,
+        "segments": 344,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 62,
+      "map_file": "42.png",
+      "counts": {
+        "poses": 276,
+        "invalid_poses": 0,
+        "segments": 272,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 63,
+      "map_file": "41.png",
+      "counts": {
+        "poses": 488,
+        "invalid_poses": 0,
+        "segments": 484,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 64,
+      "map_file": "400.png",
+      "counts": {
+        "poses": 788,
+        "invalid_poses": 0,
+        "segments": 784,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 65,
+      "map_file": "40.png",
+      "counts": {
+        "poses": 308,
+        "invalid_poses": 0,
+        "segments": 304,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 66,
+      "map_file": "4.png",
+      "counts": {
+        "poses": 340,
+        "invalid_poses": 0,
+        "segments": 336,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 67,
+      "map_file": "399.png",
+      "counts": {
+        "poses": 500,
+        "invalid_poses": 0,
+        "segments": 496,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 68,
+      "map_file": "398.png",
+      "counts": {
+        "poses": 364,
+        "invalid_poses": 0,
+        "segments": 360,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 69,
+      "map_file": "397.png",
+      "counts": {
+        "poses": 308,
+        "invalid_poses": 0,
+        "segments": 304,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 7,
+      "map_file": "92.png",
+      "counts": {
+        "poses": 320,
+        "invalid_poses": 0,
+        "segments": 316,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 70,
+      "map_file": "396.png",
+      "counts": {
+        "poses": 372,
+        "invalid_poses": 0,
+        "segments": 368,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 71,
+      "map_file": "395.png",
+      "counts": {
+        "poses": 316,
+        "invalid_poses": 0,
+        "segments": 312,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 72,
+      "map_file": "394.png",
+      "counts": {
+        "poses": 324,
+        "invalid_poses": 0,
+        "segments": 320,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 73,
+      "map_file": "393.png",
+      "counts": {
+        "poses": 788,
+        "invalid_poses": 0,
+        "segments": 784,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 74,
+      "map_file": "392.png",
+      "counts": {
+        "poses": 376,
+        "invalid_poses": 0,
+        "segments": 372,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 75,
+      "map_file": "391.png",
+      "counts": {
+        "poses": 280,
+        "invalid_poses": 0,
+        "segments": 276,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 76,
+      "map_file": "390.png",
+      "counts": {
+        "poses": 788,
+        "invalid_poses": 0,
+        "segments": 784,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 1,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": [
+        {
+          "robot": 2,
+          "step": 98,
+          "start": [
+            326,
+            371
+          ],
+          "end": [
+            300,
+            293
+          ],
+          "raster8": false,
+          "raster4": true,
+          "raster4_reverse": false,
+          "obstacle_interior": false
+        }
+      ]
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 77,
+      "map_file": "39.png",
+      "counts": {
+        "poses": 300,
+        "invalid_poses": 0,
+        "segments": 296,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 78,
+      "map_file": "389.png",
+      "counts": {
+        "poses": 788,
+        "invalid_poses": 0,
+        "segments": 784,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 79,
+      "map_file": "388.png",
+      "counts": {
+        "poses": 448,
+        "invalid_poses": 0,
+        "segments": 444,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 8,
+      "map_file": "91.png",
+      "counts": {
+        "poses": 432,
+        "invalid_poses": 0,
+        "segments": 428,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 80,
+      "map_file": "387.png",
+      "counts": {
+        "poses": 312,
+        "invalid_poses": 0,
+        "segments": 308,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 81,
+      "map_file": "386.png",
+      "counts": {
+        "poses": 252,
+        "invalid_poses": 0,
+        "segments": 248,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 82,
+      "map_file": "385.png",
+      "counts": {
+        "poses": 296,
+        "invalid_poses": 0,
+        "segments": 292,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 83,
+      "map_file": "384.png",
+      "counts": {
+        "poses": 336,
+        "invalid_poses": 0,
+        "segments": 332,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 84,
+      "map_file": "383.png",
+      "counts": {
+        "poses": 288,
+        "invalid_poses": 0,
+        "segments": 284,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 85,
+      "map_file": "382.png",
+      "counts": {
+        "poses": 276,
+        "invalid_poses": 0,
+        "segments": 272,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 86,
+      "map_file": "381.png",
+      "counts": {
+        "poses": 336,
+        "invalid_poses": 0,
+        "segments": 332,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 87,
+      "map_file": "380.png",
+      "counts": {
+        "poses": 344,
+        "invalid_poses": 0,
+        "segments": 340,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 88,
+      "map_file": "38.png",
+      "counts": {
+        "poses": 308,
+        "invalid_poses": 0,
+        "segments": 304,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 89,
+      "map_file": "379.png",
+      "counts": {
+        "poses": 524,
+        "invalid_poses": 0,
+        "segments": 520,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 9,
+      "map_file": "90.png",
+      "counts": {
+        "poses": 368,
+        "invalid_poses": 0,
+        "segments": 364,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 90,
+      "map_file": "378.png",
+      "counts": {
+        "poses": 788,
+        "invalid_poses": 0,
+        "segments": 784,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 91,
+      "map_file": "377.png",
+      "counts": {
+        "poses": 324,
+        "invalid_poses": 0,
+        "segments": 320,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 92,
+      "map_file": "376.png",
+      "counts": {
+        "poses": 284,
+        "invalid_poses": 0,
+        "segments": 280,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 93,
+      "map_file": "375.png",
+      "counts": {
+        "poses": 788,
+        "invalid_poses": 0,
+        "segments": 784,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 94,
+      "map_file": "374.png",
+      "counts": {
+        "poses": 312,
+        "invalid_poses": 0,
+        "segments": 308,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 95,
+      "map_file": "373.png",
+      "counts": {
+        "poses": 276,
+        "invalid_poses": 0,
+        "segments": 272,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 96,
+      "map_file": "372.png",
+      "counts": {
+        "poses": 324,
+        "invalid_poses": 0,
+        "segments": 320,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 97,
+      "map_file": "371.png",
+      "counts": {
+        "poses": 260,
+        "invalid_poses": 0,
+        "segments": 256,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 98,
+      "map_file": "370.png",
+      "counts": {
+        "poses": 320,
+        "invalid_poses": 0,
+        "segments": 316,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "corridor",
+      "map_index": 99,
+      "map_file": "37.png",
+      "counts": {
+        "poses": 248,
+        "invalid_poses": 0,
+        "segments": 244,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 0,
+      "map_file": "99.png",
+      "counts": {
+        "poses": 196,
+        "invalid_poses": 0,
+        "segments": 192,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 1,
+      "map_file": "98.png",
+      "counts": {
+        "poses": 224,
+        "invalid_poses": 0,
+        "segments": 220,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 10,
+      "map_file": "9.png",
+      "counts": {
+        "poses": 272,
+        "invalid_poses": 0,
+        "segments": 268,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 11,
+      "map_file": "89.png",
+      "counts": {
+        "poses": 164,
+        "invalid_poses": 0,
+        "segments": 160,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 12,
+      "map_file": "88.png",
+      "counts": {
+        "poses": 172,
+        "invalid_poses": 0,
+        "segments": 168,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 13,
+      "map_file": "87.png",
+      "counts": {
+        "poses": 216,
+        "invalid_poses": 0,
+        "segments": 212,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 14,
+      "map_file": "86.png",
+      "counts": {
+        "poses": 300,
+        "invalid_poses": 0,
+        "segments": 296,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 15,
+      "map_file": "85.png",
+      "counts": {
+        "poses": 180,
+        "invalid_poses": 0,
+        "segments": 176,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 16,
+      "map_file": "84.png",
+      "counts": {
+        "poses": 348,
+        "invalid_poses": 0,
+        "segments": 344,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 17,
+      "map_file": "83.png",
+      "counts": {
+        "poses": 188,
+        "invalid_poses": 0,
+        "segments": 184,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 18,
+      "map_file": "82.png",
+      "counts": {
+        "poses": 188,
+        "invalid_poses": 0,
+        "segments": 184,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 19,
+      "map_file": "81.png",
+      "counts": {
+        "poses": 200,
+        "invalid_poses": 0,
+        "segments": 196,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 2,
+      "map_file": "97.png",
+      "counts": {
+        "poses": 212,
+        "invalid_poses": 0,
+        "segments": 208,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 20,
+      "map_file": "80.png",
+      "counts": {
+        "poses": 196,
+        "invalid_poses": 0,
+        "segments": 192,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 21,
+      "map_file": "8.png",
+      "counts": {
+        "poses": 228,
+        "invalid_poses": 0,
+        "segments": 224,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 22,
+      "map_file": "79.png",
+      "counts": {
+        "poses": 256,
+        "invalid_poses": 0,
+        "segments": 252,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 23,
+      "map_file": "78.png",
+      "counts": {
+        "poses": 224,
+        "invalid_poses": 0,
+        "segments": 220,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 24,
+      "map_file": "77.png",
+      "counts": {
+        "poses": 176,
+        "invalid_poses": 0,
+        "segments": 172,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 25,
+      "map_file": "76.png",
+      "counts": {
+        "poses": 180,
+        "invalid_poses": 0,
+        "segments": 176,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 26,
+      "map_file": "75.png",
+      "counts": {
+        "poses": 156,
+        "invalid_poses": 0,
+        "segments": 152,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 27,
+      "map_file": "74.png",
+      "counts": {
+        "poses": 192,
+        "invalid_poses": 0,
+        "segments": 188,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 28,
+      "map_file": "73.png",
+      "counts": {
+        "poses": 284,
+        "invalid_poses": 0,
+        "segments": 280,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 29,
+      "map_file": "72.png",
+      "counts": {
+        "poses": 236,
+        "invalid_poses": 0,
+        "segments": 232,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 3,
+      "map_file": "96.png",
+      "counts": {
+        "poses": 184,
+        "invalid_poses": 0,
+        "segments": 180,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 30,
+      "map_file": "71.png",
+      "counts": {
+        "poses": 168,
+        "invalid_poses": 0,
+        "segments": 164,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 31,
+      "map_file": "70.png",
+      "counts": {
+        "poses": 260,
+        "invalid_poses": 0,
+        "segments": 256,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 32,
+      "map_file": "7.png",
+      "counts": {
+        "poses": 260,
+        "invalid_poses": 0,
+        "segments": 256,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 33,
+      "map_file": "69.png",
+      "counts": {
+        "poses": 292,
+        "invalid_poses": 0,
+        "segments": 288,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 34,
+      "map_file": "68.png",
+      "counts": {
+        "poses": 324,
+        "invalid_poses": 0,
+        "segments": 320,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 35,
+      "map_file": "67.png",
+      "counts": {
+        "poses": 160,
+        "invalid_poses": 0,
+        "segments": 156,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 36,
+      "map_file": "66.png",
+      "counts": {
+        "poses": 292,
+        "invalid_poses": 0,
+        "segments": 288,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 37,
+      "map_file": "65.png",
+      "counts": {
+        "poses": 176,
+        "invalid_poses": 0,
+        "segments": 172,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 38,
+      "map_file": "64.png",
+      "counts": {
+        "poses": 208,
+        "invalid_poses": 0,
+        "segments": 204,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 39,
+      "map_file": "63.png",
+      "counts": {
+        "poses": 200,
+        "invalid_poses": 0,
+        "segments": 196,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 4,
+      "map_file": "95.png",
+      "counts": {
+        "poses": 316,
+        "invalid_poses": 0,
+        "segments": 312,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 40,
+      "map_file": "62.png",
+      "counts": {
+        "poses": 200,
+        "invalid_poses": 0,
+        "segments": 196,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 41,
+      "map_file": "61.png",
+      "counts": {
+        "poses": 184,
+        "invalid_poses": 0,
+        "segments": 180,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 42,
+      "map_file": "60.png",
+      "counts": {
+        "poses": 180,
+        "invalid_poses": 0,
+        "segments": 176,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 43,
+      "map_file": "6.png",
+      "counts": {
+        "poses": 220,
+        "invalid_poses": 0,
+        "segments": 216,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 44,
+      "map_file": "59.png",
+      "counts": {
+        "poses": 208,
+        "invalid_poses": 0,
+        "segments": 204,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 45,
+      "map_file": "58.png",
+      "counts": {
+        "poses": 184,
+        "invalid_poses": 0,
+        "segments": 180,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 46,
+      "map_file": "57.png",
+      "counts": {
+        "poses": 180,
+        "invalid_poses": 0,
+        "segments": 176,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 47,
+      "map_file": "56.png",
+      "counts": {
+        "poses": 204,
+        "invalid_poses": 0,
+        "segments": 200,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 48,
+      "map_file": "55.png",
+      "counts": {
+        "poses": 180,
+        "invalid_poses": 0,
+        "segments": 176,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 49,
+      "map_file": "54.png",
+      "counts": {
+        "poses": 248,
+        "invalid_poses": 0,
+        "segments": 244,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 5,
+      "map_file": "94.png",
+      "counts": {
+        "poses": 160,
+        "invalid_poses": 0,
+        "segments": 156,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 50,
+      "map_file": "53.png",
+      "counts": {
+        "poses": 176,
+        "invalid_poses": 0,
+        "segments": 172,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 51,
+      "map_file": "52.png",
+      "counts": {
+        "poses": 196,
+        "invalid_poses": 0,
+        "segments": 192,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 52,
+      "map_file": "51.png",
+      "counts": {
+        "poses": 216,
+        "invalid_poses": 0,
+        "segments": 212,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 53,
+      "map_file": "50.png",
+      "counts": {
+        "poses": 188,
+        "invalid_poses": 0,
+        "segments": 184,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 54,
+      "map_file": "5.png",
+      "counts": {
+        "poses": 168,
+        "invalid_poses": 0,
+        "segments": 164,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 55,
+      "map_file": "49.png",
+      "counts": {
+        "poses": 180,
+        "invalid_poses": 0,
+        "segments": 176,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 56,
+      "map_file": "48.png",
+      "counts": {
+        "poses": 180,
+        "invalid_poses": 0,
+        "segments": 176,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 57,
+      "map_file": "47.png",
+      "counts": {
+        "poses": 184,
+        "invalid_poses": 0,
+        "segments": 180,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 58,
+      "map_file": "46.png",
+      "counts": {
+        "poses": 172,
+        "invalid_poses": 0,
+        "segments": 168,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 59,
+      "map_file": "45.png",
+      "counts": {
+        "poses": 136,
+        "invalid_poses": 0,
+        "segments": 132,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 6,
+      "map_file": "93.png",
+      "counts": {
+        "poses": 184,
+        "invalid_poses": 0,
+        "segments": 180,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 60,
+      "map_file": "44.png",
+      "counts": {
+        "poses": 176,
+        "invalid_poses": 0,
+        "segments": 172,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 61,
+      "map_file": "43.png",
+      "counts": {
+        "poses": 200,
+        "invalid_poses": 0,
+        "segments": 196,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 62,
+      "map_file": "42.png",
+      "counts": {
+        "poses": 188,
+        "invalid_poses": 0,
+        "segments": 184,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 63,
+      "map_file": "41.png",
+      "counts": {
+        "poses": 272,
+        "invalid_poses": 0,
+        "segments": 268,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 64,
+      "map_file": "400.png",
+      "counts": {
+        "poses": 184,
+        "invalid_poses": 0,
+        "segments": 180,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 65,
+      "map_file": "40.png",
+      "counts": {
+        "poses": 220,
+        "invalid_poses": 0,
+        "segments": 216,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 66,
+      "map_file": "4.png",
+      "counts": {
+        "poses": 188,
+        "invalid_poses": 0,
+        "segments": 184,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 67,
+      "map_file": "399.png",
+      "counts": {
+        "poses": 140,
+        "invalid_poses": 0,
+        "segments": 136,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 68,
+      "map_file": "398.png",
+      "counts": {
+        "poses": 176,
+        "invalid_poses": 0,
+        "segments": 172,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 69,
+      "map_file": "397.png",
+      "counts": {
+        "poses": 216,
+        "invalid_poses": 0,
+        "segments": 212,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 7,
+      "map_file": "92.png",
+      "counts": {
+        "poses": 152,
+        "invalid_poses": 0,
+        "segments": 148,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 70,
+      "map_file": "396.png",
+      "counts": {
+        "poses": 168,
+        "invalid_poses": 0,
+        "segments": 164,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 71,
+      "map_file": "395.png",
+      "counts": {
+        "poses": 188,
+        "invalid_poses": 0,
+        "segments": 184,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 72,
+      "map_file": "394.png",
+      "counts": {
+        "poses": 172,
+        "invalid_poses": 0,
+        "segments": 168,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 73,
+      "map_file": "393.png",
+      "counts": {
+        "poses": 140,
+        "invalid_poses": 0,
+        "segments": 136,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 74,
+      "map_file": "392.png",
+      "counts": {
+        "poses": 160,
+        "invalid_poses": 0,
+        "segments": 156,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 75,
+      "map_file": "391.png",
+      "counts": {
+        "poses": 204,
+        "invalid_poses": 0,
+        "segments": 200,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 76,
+      "map_file": "390.png",
+      "counts": {
+        "poses": 136,
+        "invalid_poses": 0,
+        "segments": 132,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 77,
+      "map_file": "39.png",
+      "counts": {
+        "poses": 208,
+        "invalid_poses": 0,
+        "segments": 204,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 78,
+      "map_file": "389.png",
+      "counts": {
+        "poses": 168,
+        "invalid_poses": 0,
+        "segments": 164,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 79,
+      "map_file": "388.png",
+      "counts": {
+        "poses": 148,
+        "invalid_poses": 0,
+        "segments": 144,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 8,
+      "map_file": "91.png",
+      "counts": {
+        "poses": 200,
+        "invalid_poses": 0,
+        "segments": 196,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 80,
+      "map_file": "387.png",
+      "counts": {
+        "poses": 192,
+        "invalid_poses": 0,
+        "segments": 188,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 81,
+      "map_file": "386.png",
+      "counts": {
+        "poses": 256,
+        "invalid_poses": 0,
+        "segments": 252,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 82,
+      "map_file": "385.png",
+      "counts": {
+        "poses": 388,
+        "invalid_poses": 0,
+        "segments": 384,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 2,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": [
+        {
+          "robot": 2,
+          "step": 32,
+          "start": [
+            173,
+            173
+          ],
+          "end": [
+            244,
+            244
+          ],
+          "raster8": false,
+          "raster4": true,
+          "raster4_reverse": false,
+          "obstacle_interior": false
+        },
+        {
+          "robot": 3,
+          "step": 20,
+          "start": [
+            183,
+            183
+          ],
+          "end": [
+            244,
+            244
+          ],
+          "raster8": false,
+          "raster4": true,
+          "raster4_reverse": false,
+          "obstacle_interior": false
+        }
+      ]
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 83,
+      "map_file": "384.png",
+      "counts": {
+        "poses": 264,
+        "invalid_poses": 0,
+        "segments": 260,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 84,
+      "map_file": "383.png",
+      "counts": {
+        "poses": 224,
+        "invalid_poses": 0,
+        "segments": 220,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 85,
+      "map_file": "382.png",
+      "counts": {
+        "poses": 200,
+        "invalid_poses": 0,
+        "segments": 196,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 86,
+      "map_file": "381.png",
+      "counts": {
+        "poses": 188,
+        "invalid_poses": 0,
+        "segments": 184,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 87,
+      "map_file": "380.png",
+      "counts": {
+        "poses": 264,
+        "invalid_poses": 0,
+        "segments": 260,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 88,
+      "map_file": "38.png",
+      "counts": {
+        "poses": 196,
+        "invalid_poses": 0,
+        "segments": 192,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 89,
+      "map_file": "379.png",
+      "counts": {
+        "poses": 296,
+        "invalid_poses": 0,
+        "segments": 292,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 9,
+      "map_file": "90.png",
+      "counts": {
+        "poses": 208,
+        "invalid_poses": 0,
+        "segments": 204,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 90,
+      "map_file": "378.png",
+      "counts": {
+        "poses": 204,
+        "invalid_poses": 0,
+        "segments": 200,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 91,
+      "map_file": "377.png",
+      "counts": {
+        "poses": 192,
+        "invalid_poses": 0,
+        "segments": 188,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 92,
+      "map_file": "376.png",
+      "counts": {
+        "poses": 204,
+        "invalid_poses": 0,
+        "segments": 200,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 93,
+      "map_file": "375.png",
+      "counts": {
+        "poses": 188,
+        "invalid_poses": 0,
+        "segments": 184,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 94,
+      "map_file": "374.png",
+      "counts": {
+        "poses": 212,
+        "invalid_poses": 0,
+        "segments": 208,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 95,
+      "map_file": "373.png",
+      "counts": {
+        "poses": 184,
+        "invalid_poses": 0,
+        "segments": 180,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 96,
+      "map_file": "372.png",
+      "counts": {
+        "poses": 188,
+        "invalid_poses": 0,
+        "segments": 184,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 97,
+      "map_file": "371.png",
+      "counts": {
+        "poses": 172,
+        "invalid_poses": 0,
+        "segments": 168,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 98,
+      "map_file": "370.png",
+      "counts": {
+        "poses": 188,
+        "invalid_poses": 0,
+        "segments": 184,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "both",
+      "map_type": "hybrid",
+      "map_index": 99,
+      "map_file": "37.png",
+      "counts": {
+        "poses": 168,
+        "invalid_poses": 0,
+        "segments": 164,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "map_only",
+      "map_type": "complex",
+      "map_index": 0,
+      "map_file": "99.png",
+      "counts": {
+        "poses": 730,
+        "invalid_poses": 0,
+        "segments": 725,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "map_only",
+      "map_type": "complex",
+      "map_index": 5,
+      "map_file": "94.png",
+      "counts": {
+        "poses": 785,
+        "invalid_poses": 0,
+        "segments": 780,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "map_only",
+      "map_type": "corridor",
+      "map_index": 0,
+      "map_file": "99.png",
+      "counts": {
+        "poses": 340,
+        "invalid_poses": 0,
+        "segments": 336,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "map_only",
+      "map_type": "corridor",
+      "map_index": 9,
+      "map_file": "90.png",
+      "counts": {
+        "poses": 368,
+        "invalid_poses": 0,
+        "segments": 364,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "map_only",
+      "map_type": "hybrid",
+      "map_index": 0,
+      "map_file": "99.png",
+      "counts": {
+        "poses": 196,
+        "invalid_poses": 0,
+        "segments": 192,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "map_only",
+      "map_type": "hybrid",
+      "map_index": 1,
+      "map_file": "98.png",
+      "counts": {
+        "poses": 224,
+        "invalid_poses": 0,
+        "segments": 220,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "original",
+      "map_type": "corridor",
+      "map_index": 0,
+      "map_file": "99.png",
+      "counts": {
+        "poses": 364,
+        "invalid_poses": 0,
+        "segments": 360,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "original",
+      "map_type": "corridor",
+      "map_index": 9,
+      "map_file": "90.png",
+      "counts": {
+        "poses": 788,
+        "invalid_poses": 0,
+        "segments": 784,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "original",
+      "map_type": "hybrid",
+      "map_index": 0,
+      "map_file": "99.png",
+      "counts": {
+        "poses": 196,
+        "invalid_poses": 0,
+        "segments": 192,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "original",
+      "map_type": "hybrid",
+      "map_index": 1,
+      "map_file": "98.png",
+      "counts": {
+        "poses": 224,
+        "invalid_poses": 0,
+        "segments": 220,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "original",
+      "map_type": "complex",
+      "map_index": 0,
+      "map_file": "99.png",
+      "counts": {
+        "poses": 945,
+        "invalid_poses": 0,
+        "segments": 940,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 0,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": []
+    },
+    {
+      "mode": "original",
+      "map_type": "complex",
+      "map_index": 5,
+      "map_file": "94.png",
+      "counts": {
+        "poses": 1925,
+        "invalid_poses": 0,
+        "segments": 1920,
+        "obstructed_segments_8_connected": 0,
+        "obstructed_segments_4_connected": 2,
+        "obstacle_interior_crossings": 0
+      },
+      "examples": [
+        {
+          "robot": 0,
+          "step": 43,
+          "start": [
+            469,
+            816
+          ],
+          "end": [
+            510,
+            693
+          ],
+          "raster8": false,
+          "raster4": true,
+          "raster4_reverse": false,
+          "obstacle_interior": false
+        },
+        {
+          "robot": 2,
+          "step": 83,
+          "start": [
+            469,
+            816
+          ],
+          "end": [
+            510,
+            693
+          ],
+          "raster8": false,
+          "raster4": true,
+          "raster4_reverse": false,
+          "obstacle_interior": false
+        }
+      ]
+    }
+  ],
+  "unique_segments": 122873,
+  "method": "Raw PNG grayscale >150 free; integer finite in-bounds free endpoints; independent skimage 8-connected raster plus 4-connected raster matching source convention, both including endpoints; continuous point-segment traversal partitioned at all half-integer cell boundaries to detect positive-length obstacle interior crossings",
+  "limitations": "Point-robot grid legality only; corner contacts imply zero clearance, not proof of interior collision; no robot footprint, continuous dynamics or Gazebo/real-world collision proof; original source raw paths available for six cases only",
+  "wall_seconds": 11.354782223001166
+}

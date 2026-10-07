@@ -1,0 +1,271 @@
+{
+  "layouts": [
+    {
+      "layout_index": 0,
+      "layout_sha256": "028dd2a3ace6eec59929fbe5c34e78dfbebf8aaaa0802f97667138eaff4b0b4e",
+      "map_path": "DungeonMaps/test/complex/433.png",
+      "map_sha256": "3b3dd8bdadee381fb8c2da2ca8ba448a817f6a149740f6719e323e58dcfb927c",
+      "map_index": 128
+    },
+    {
+      "layout_index": 1,
+      "layout_sha256": "0307a583c891c92dfc9e60a6b3ddef338df85a9e68a225bae7b7a83ceadd5475",
+      "map_path": "DungeonMaps/test/complex/235.png",
+      "map_sha256": "ffce5d11f03a52ea7f07c4dc298468b153dab1600c6db16288cf9010d56f0428",
+      "map_index": 348
+    },
+    {
+      "layout_index": 2,
+      "layout_sha256": "0386c63538d4027bd8b9f10ab38e22a812d3e17fe92e1fb0124d59ac266be84c",
+      "map_path": "DungeonMaps/test/complex/59.png",
+      "map_sha256": "ff0f82cb482856d0a10936ebcdbf77b441010829f8c3994cef6871de9cbe7089",
+      "map_index": 44
+    },
+    {
+      "layout_index": 3,
+      "layout_sha256": "04193df2c7a2b6693951f17718cbc625cce69cf5bc4ed18d66e7f252fbe601a5",
+      "map_path": "DungeonMaps/test/complex/355.png",
+      "map_sha256": "6ba80d996b3dbebc7b7832a19bfaba6ed541e159e0f18260f557dc8d677cbb39",
+      "map_index": 215
+    },
+    {
+      "layout_index": 4,
+      "layout_sha256": "04560fbb9c118f5108b0b1855e0c477d9625d132194ca77f093c4f1b9fa943cb",
+      "map_path": "DungeonMaps/test/complex/465.png",
+      "map_sha256": "1213a4a5d18a98f77702fd851b1b13a8c3a8276d5bc8e4ae3121b69b7de97365",
+      "map_index": 93
+    },
+    {
+      "layout_index": 5,
+      "layout_sha256": "04c4927cf24096c7174a45004e73392b489d989a599d58145e834f5744f553a4",
+      "map_path": "DungeonMaps/test/complex/395.png",
+      "map_sha256": "db563a1b5b38ffaf1da777a0c63174612675be998dba85078ebfcb9dda0ee464",
+      "map_index": 171
+    },
+    {
+      "layout_index": 6,
+      "layout_sha256": "053ade8b7ad9a21ff1d42bfc70f55ebf0fa297ecf3468adac180eb675410181b",
+      "map_path": "DungeonMaps/test/complex/177.png",
+      "map_sha256": "19a61a50b95aca4373cd089d4ad82c4cbb2add365ba9b0c9f994a7ce7d08387b",
+      "map_index": 413
+    },
+    {
+      "layout_index": 7,
+      "layout_sha256": "05abd3cbf4da3d47e96b0b87739ec3e629a59eb59428bdfcabe006f09d452260",
+      "map_path": "DungeonMaps/test/complex/217.png",
+      "map_sha256": "5035976c796ed45647121493f5d79b25beceb1419c8f0fd101272c39adbdff97",
+      "map_index": 368
+    },
+    {
+      "layout_index": 8,
+      "layout_sha256": "05b595ac4b7e865b107440c3cb19b1ed883571d2fbd11ae0d9dcc97e85b4a342",
+      "map_path": "DungeonMaps/test/complex/159.png",
+      "map_sha256": "0c672b2a8898979f3fb38adcfd52219533533e7977ac9ffc815099b690ba1da1",
+      "map_index": 433
+    },
+    {
+      "layout_index": 9,
+      "layout_sha256": "06077f31ee2cbca1a73fd616f91487606e0f13db71de0462e24adfddbace83c0",
+      "map_path": "DungeonMaps/test/complex/13.png",
+      "map_sha256": "7622605af418bc25c1b5db879a8a78a06da117893e75b4f00c6daf679d5aa669",
+      "map_index": 465
+    },
+    {
+      "layout_index": 10,
+      "layout_sha256": "07277477c9ff286675a6a7615431f1c830ed8eb85d4d874bf402e3266326f0dc",
+      "map_path": "DungeonMaps/test/complex/259.png",
+      "map_sha256": "427b33e36ea7d8a2139b42554a246d9176935201f4c6e24ba85ee5f166c4f10e",
+      "map_index": 322
+    },
+    {
+      "layout_index": 11,
+      "layout_sha256": "09fb0b9bb8e0047843c0e77227222092c335c19c60f0d0fa6dd5301be5b369eb",
+      "map_path": "DungeonMaps/test/complex/493.png",
+      "map_sha256": "94ddd3675fc954cf7ba89fb9d9b2c3c6f8f58d18363f391fdbc881d43b3ab005",
+      "map_index": 62
+    },
+    {
+      "layout_index": 12,
+      "layout_sha256": "0cf5f120f4cb318d057b7ea435683d98d48040f2d2826224f1f8f62d259d92f9",
+      "map_path": "DungeonMaps/test/complex/321.png",
+      "map_sha256": "c40d1e12da3482b960ae0fec89dec56255d947cbfbeffe3a4ffa219cf14fbd36",
+      "map_index": 252
+    },
+    {
+      "layout_index": 13,
+      "layout_sha256": "0d824246a5aef69384deae5c24068f6ffbe7973b0cbc3dc74bef6a1b8449059f",
+      "map_path": "DungeonMaps/test/complex/91.png",
+      "map_sha256": "c0eac499142d2addb89720b41d89ac5bfd2742971fefcea9dcb5899c0ed18443",
+      "map_index": 8
+    },
+    {
+      "layout_index": 14,
+      "layout_sha256": "0dee08a11a5c0bb19ed2410c2aca12986af2305e91cf62dbe76fe85c2b9a819f",
+      "map_path": "DungeonMaps/test/complex/107.png",
+      "map_sha256": "4f799102927367e7526060c89c8f6bf00cdda21c831d04f7124aa443197114c0",
+      "map_index": 490
+    },
+    {
+      "layout_index": 15,
+      "layout_sha256": "0ed438102ecee3dbe3c7df9aba825e7764c5926ffc1d07ce303e5a765a825c1d",
+      "map_path": "DungeonMaps/test/complex/227.png",
+      "map_sha256": "29bca44e488e571da28b4b426e10d6d377c056fee581265985a50d9582e99eec",
+      "map_index": 357
+    },
+    {
+      "layout_index": 16,
+      "layout_sha256": "10efa3868f64369ceb24a53efc2698a64e43635fea6a7aa148cf17875f3ee242",
+      "map_path": "DungeonMaps/test/complex/165.png",
+      "map_sha256": "baf72083ef9373912b7ecd3e2334452f25959796c6c3477d4604dce6d160f7cb",
+      "map_index": 426
+    },
+    {
+      "layout_index": 17,
+      "layout_sha256": "129f91f93be4894089f2bb8726bf8a1ad207c0293285d1284e61ef53d0100152",
+      "map_path": "DungeonMaps/test/complex/25.png",
+      "map_sha256": "34ca8b1b38629684d1c73f957e62c59b86f70acfe4202690008abcd885602dd5",
+      "map_index": 332
+    },
+    {
+      "layout_index": 18,
+      "layout_sha256": "13fb230fbaeac06f452d5657ed302cfa49db6376e3ee8ec977c3d2cdc88feed4",
+      "map_path": "DungeonMaps/test/complex/35.png",
+      "map_sha256": "53b038e4de53480189c91e6e26b1e0e4b031f0f73497f038f888777961273d74",
+      "map_index": 221
+    },
+    {
+      "layout_index": 19,
+      "layout_sha256": "1649f1e2520c6ebd83894fb22b60f7febf2d5e07ba550a53ea7fd9171c5cfbf3",
+      "map_path": "DungeonMaps/test/complex/357.png",
+      "map_sha256": "bd528c09e536abd9f5490131c93b66c63b4c8085d15dddee3b39bc06908052f5",
+      "map_index": 213
+    },
+    {
+      "layout_index": 20,
+      "layout_sha256": "1795172501eee586236a827089825d138755f90eb8058263f3e82a41b25786dc",
+      "map_path": "DungeonMaps/test/complex/257.png",
+      "map_sha256": "2cfa29824241d80da80e995355536fe2b8fc8f59f3a7b559a4426c23598fd477",
+      "map_index": 324
+    },
+    {
+      "layout_index": 21,
+      "layout_sha256": "18e9250f379b22820cdae94ac02b6789c9ad61843e37395e2652c6e7f9d36590",
+      "map_path": "DungeonMaps/test/complex/381.png",
+      "map_sha256": "dda810e4ee82555a0e52854c49e57e552e04b596ef85420e7bc3f6d87deaa966",
+      "map_index": 186
+    },
+    {
+      "layout_index": 22,
+      "layout_sha256": "1b671574fd1eb5bf91b278f7cc0a6a5921a63f229f9b552d1b32606874a02268",
+      "map_path": "DungeonMaps/test/complex/229.png",
+      "map_sha256": "7513fd1a25887491eac657170d285bc302a2ee00587edb76d38b143282556307",
+      "map_index": 355
+    },
+    {
+      "layout_index": 23,
+      "layout_sha256": "1c6a9eb54b3137ce37b206f3fe708ddbe435aac83761c4f78d43e00f27dd3b51",
+      "map_path": "DungeonMaps/test/complex/47.png",
+      "map_sha256": "e810d5ddf987278ad7b7dfb012e4da7d9e6461761d84acbf51f73c4d346b6e43",
+      "map_index": 88
+    },
+    {
+      "layout_index": 24,
+      "layout_sha256": "20a38f9652c710e8ab9e90fe5f6ff98ecc71235d7128a80a9b415cf72b138ed6",
+      "map_path": "DungeonMaps/test/complex/183.png",
+      "map_sha256": "67f7292c79b6feb4bf99e41a887478e5e04a0c94ef3503c687eef6be0aa10dbd",
+      "map_index": 406
+    },
+    {
+      "layout_index": 25,
+      "layout_sha256": "24ac783165ae33a5a4667db98b5234023102bdaf530e93421360bde64a0bd48c",
+      "map_path": "DungeonMaps/test/complex/279.png",
+      "map_sha256": "e2edba2ad0ec12b50a632272d40ae30a05b697db72e12af633186fc61b020d24",
+      "map_index": 300
+    },
+    {
+      "layout_index": 26,
+      "layout_sha256": "28ff783879cc8e7d41d651ebeae29c9cf58f52bbf9d134cb038a235d6ead3238",
+      "map_path": "DungeonMaps/test/complex/167.png",
+      "map_sha256": "64e9714e010bc1349fdf19b6c23ca6934a4d4bf2cd29099f34b464ed1845afa6",
+      "map_index": 424
+    },
+    {
+      "layout_index": 27,
+      "layout_sha256": "3d356a0db5ee35876c7b70db94fea48b92ec21f7f29e42614627a2e8c14252df",
+      "map_path": "DungeonMaps/test/complex/437.png",
+      "map_sha256": "29557c27beca3c9029e21851c6fa0cb13efaf1103361b3891a4d9b8d1abecff7",
+      "map_index": 124
+    },
+    {
+      "layout_index": 28,
+      "layout_sha256": "3ed95162a7090ba822b5ed7d740d7035c144e3c4e43b57aff39cd685e4926103",
+      "map_path": "DungeonMaps/test/complex/281.png",
+      "map_sha256": "de2745ede5cb8544d85250851485132ae5a1663836348fb81fb7546e21599ba1",
+      "map_index": 297
+    },
+    {
+      "layout_index": 29,
+      "layout_sha256": "681ac4b9d5effe1c04dfe57dedb92fe1cd95a12ad72a87dfcc9ea28fcaab6790",
+      "map_path": "DungeonMaps/test/complex/487.png",
+      "map_sha256": "5d920a7f734947afac28f5c127ce3922439cde0a805c4ea57f22dde3481022a2",
+      "map_index": 69
+    }
+  ],
+  "conditions": [
+    {
+      "name": "low",
+      "X_g": 0.0,
+      "K": 0.0
+    },
+    {
+      "name": "medium",
+      "X_g": 6.5,
+      "K": 6.5
+    },
+    {
+      "name": "high",
+      "X_g": 13.0,
+      "K": 13.0
+    }
+  ],
+  "methods": [
+    "ir2",
+    "frontier_rendezvous"
+  ],
+  "target_episodes": 180,
+  "num_robots": 5,
+  "step_limit": 384,
+  "success": "every personal belief >=99% ground-truth free area",
+  "seed_base": 20261006,
+  "device": "cuda",
+  "ir2": "released Stage2; strict load; eval/no_grad/greedy; both information-isolation corrections",
+  "baseline": "Dijkstra to nearest reachable positive-frontier-utility node; else nearest reachable known peer indicator; else least-visited legal non-self neighbor (oldest visit, distance, index ties). Uses observation and own route history only; not paper Pursuit.",
+  "noise": "X_g and K fixed together at 0,6.5,13; sensitivity conditions, not random independent noise draws",
+  "initialization": "original starting marker and original robot placement; identical within every pair",
+  "units": "map coordinates; original physical-link model unchanged; meter/radio calibration remains unresolved",
+  "failure_policy": "all attempts retained; no retries, map substitutions or outcome-based tuning",
+  "primary": "paired success rates including execution failures; report each condition",
+  "secondary": "steps including exploration timeouts; distance comparisons primarily on jointly successful pairs; separately show timeout distances",
+  "stability_rule": "predeclared engineering screening criterion: >=24/30 successes in each condition and max-min <=4/30; only for tested communication conditions, not a universal standard",
+  "statistical_plan": "paired differences; bootstrap resample layout groups, keeping all three conditions together; 5000 samples fixed RNG; no inference about training variability",
+  "limitations": "only exact/rotation/reflection geometry exclusion from provided training directory; cannot prove checkpoint training history; no near-duplicate audit; some layouts occurred in prior descriptive tests, so this is a validation set, not a future tuning holdout",
+  "checkpoint_sha256": "cd72ac7dbf164b8be089394154794416fc969a47d79c1072c437f6f2aa363cf3",
+  "core_sha256": {
+    "env.py": "6cad60ce769e35d5f3404229d081b665b70a4e70749a11e6f48214c61b2c0bd9",
+    "sensor.py": "a7a71eabcb0dde3b586dddfb21f7b5f77ef3bd1d7462f2bda094f7945b8e8f73",
+    "test_multi_robot_worker.py": "f8ac603e8f7119064423f03dc0887ac3c2aa4c4d2b3da3ccc9709956d56190c4",
+    "test_parameter.py": "6616067502c3493138a9e61835669320c1509cf07fa95fe73334c4f2c9a8d309",
+    "graph_generator.py": "dc1fedf48624981d3958c95200eb8e8440221edd87b7b42341900f4b06af3d04",
+    "node.py": "d156b1089d75f05a4323e0ece65362b9e850d7a2c7b0690f4d360ad8fb043e53",
+    "graph.py": "b1d5d41810d68273b0a588dca960c4eb10261f4acf6e0ab7744321b25c46f822",
+    "robot.py": "14c40c58d8aca4a09c17a22ebd8e72f00107278ac802a5930bacba8042572d97",
+    "model.py": "2a0c4d91497fc5b5db981e2b91f1b8ed4ed11550bfaee3a67c5d6d1a967fd637",
+    "ss_realistic_model.py": "dee2f76a4673dd663138acfe1a4654f2cccb0ba103dac0346d5c7bace0f26b92"
+  },
+  "candidate_manifest_sha256": "5ca740f2beff0e46cb60aa68c7a31921572ffe4dddf629b8f3ae43eb06c5938b",
+  "code_sha256": {
+    "control_env.py": "123e6f3833465f0534227565f2d946947e672a7ccb8c3bcc6b5f84a4b2bdf268",
+    "independent_policies.py": "ae3f0789913e9a7741eaa3326a2c96e50f890c702d850bd8afdfd1961b4e34de",
+    "evaluate_independent.py": "4b14f93264f5735711b660bee65cb7d95fe950595efd003694987baaf8d3d0ca"
+  }
+}

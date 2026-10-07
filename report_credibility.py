@@ -1,0 +1,97 @@
+"""Summarize fixed-weight evaluation and forensic audits without training."""
+import hashlib,json,statistics,subprocess
+from collections import defaultdict,Counter
+from pathlib import Path
+from audit_map_split import fingerprints
+
+ROOT=Path(__file__).resolve().parent
+OUT=ROOT/'reproduction_results/credibility_20261006'
+KINDS=('corridor','hybrid','complex')
+
+
+def main():
+    split=json.loads((OUT/'map_split_audit.json').read_text())
+    traj=json.loads((OUT/'trajectory_audit.json').read_text())
+    proof=json.loads((OUT/'official_pair_proof.json').read_text())
+    comparison=json.loads((ROOT/'reproduction_results/connectivity_control_20261006/comparison.json').read_text())
+    assert comparison['complete'] and comparison['independent_checks_pass']
+    assert traj['counts_by_mode']=={'both':300,'map_only':6,'original':6}
+    assert all(t.get('invalid_poses',0)==t.get('obstructed_segments_8_connected',0)==t.get('obstacle_interior_crossings',0)==0 for t in traj['totals'].values())
+    assert proof['occupancy_pixel_differences']==0 and all(x['matches_official_commit'] for x in proof['files'].values())
+    subprocess.run(['git','diff','--quiet','HEAD','--','DungeonMaps/train','DungeonMaps/test'],cwd=ROOT,check=True)
+    overlap={r['test'] for r in split['test_training_matches']}
+    exact_overlap={r['test'] for r in split['test_training_matches'] if r['exact_geometry_training_matches']}
+    evaluations={mode:[json.loads(l) for l in (ROOT/path).read_text().splitlines()] for mode,path in [('original','reproduction_results/pretrained_stage2_20261005/episodes.jsonl'),('corrected','reproduction_results/connectivity_control_20261006/both/episodes.jsonl')]}
+    selected_groups=defaultdict(lambda:defaultdict(list))
+    for row in evaluations['original']:
+        name='DungeonMaps/test/'+row['map_type']+'/'+row['map_file']
+        _,sym,_=fingerprints(ROOT/name)
+        selected_groups[row['map_type']][sym].append(name)
+    strata={}
+    for kind in KINDS:
+        strata[kind]={}
+        for label,is_overlap in [('overlapping_geometry',True),('no_detected_overlap',False)]:
+            strata[kind][label]={}
+            for mode,rows in evaluations.items():
+                chosen=[r for r in rows if r['map_type']==kind and (('DungeonMaps/test/'+kind+'/'+r['map_file']) in overlap)==is_overlap]
+                strata[kind][label][mode]=dict(n=len(chosen),success=sum(r['success'] for r in chosen),steps_mean=statistics.mean(r['steps'] for r in chosen) if chosen else None)
+    eligible_groups=defaultdict(lambda:defaultdict(list))
+    for name in split['eligible_geometry_disjoint_test_maps']:
+        _,sym,_=fingerprints(ROOT/name);eligible_groups[name.split('/')[2]][sym].append(name)
+    manifest={kind:[dict(layout_sha256=h,representative=min(paths),all_start_or_orientation_variants=sorted(paths)) for h,paths in sorted(groups.items())] for kind,groups in eligible_groups.items()}
+    (OUT/'geometry_disjoint_candidate_manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2))
+    result=dict(selected_exact_overlap_count=len(exact_overlap),selected_overlap_up_to_symmetry=len(overlap),selected_unique_layouts={k:len(v) for k,v in selected_groups.items()},selected_layout_groups={k:dict(v) for k,v in selected_groups.items()},stratified_evaluation=strata,all_test_overlap_counts=dict(Counter(r['test'].split('/')[2] for r in split['all_test_training_matches'])),eligible_unique_layout_counts={k:len(v) for k,v in eligible_groups.items()},limitations='No matched geometry is not proof of unfamiliarity to checkpoint; subgroup selection is post hoc and Complex disjoint subgroup has only 14 episodes; near-duplicates not audited')
+    (OUT/'geometry_stratification.json').write_text(json.dumps(result,ensure_ascii=False,indent=2))
+    lines=['# IR2 已发布权重：复现与可信度核验报告','',
+        '结论：公开 Stage2 权重确实可执行多机器人探索；本次评估数据可追溯、指标核算一致。可以把模型与方法作为研究起点，但不能把公开测试集的接近论文成绩当作独立泛化证据，也不能认为论文所有实验数据已证实。公开数据划分和信息隔离存在需处理的问题。未发现足以认定作者造假的证据。','',
+        '## 已完成范围','',
+        '- 原实现 300 例；两处信息隔离修复后的相同地图/种子配对 300 例；仅地图修复 6 例。全部使用原始 Stage2 checkpoint，没有训练、替换权重或重跑筛选。',
+        '- 原 300 例逐行重新汇总；6 例原实现从轨迹和最终个人地图独立核算；修复后的全部 306 例保存原始轨迹、动作事件、通信分组和最终地图并独立核算。',
+        '- 信息隔离定向测试原实现 6/8、仅地图修复 7/8、两处修复 8/8。',
+        '- 15,999 张公开训练 PNG、1,300 张公开测试 PNG 的障碍布局指纹；忽略起点灰度标记，核验旋转/镜像八种变换。',
+        '- 312 例保存轨迹的运动合法性检查；两份具体重合地图与官方固定 commit 的原始文件逐字节核对。','',
+        '## 300 例对照已完成','',
+        '| 地图 | 论文表 II Stage2 成功率 | 原实现成功率 | 两处修复后成功率 | 原平均步数 | 修复后平均步数 |',
+        '|---|---:|---:|---:|---:|---:|']
+    for kind,paper in zip(KINDS,[94,100,87]):
+        r=comparison['paired'][kind]
+        lines.append(f"| {kind} | {paper}% | {r['baseline_success']}% | {r['corrected_success']}% | {r['baseline_steps_mean']:.2f} | {r['corrected_steps_mean']:.2f} |")
+    lines += ['',
+        '300 例均正常执行，没有执行错误。失败案例全部计入，分别在原定 196/384 步上限结束。所有新案例的独立距离、覆盖率、步数、成功判定和复制隔离检查通过；原源码、权重、选取地图及对照脚本哈希保持一致。',
+        '配对成功状态变化：Corridor 丢失 6、新增 5；Complex 丢失 9、新增 9；Hybrid 不变。因此相同汇总成功率并不表示逐例行为未变化。配对步数和距离差的原 episode bootstrap 区间均包含 0；这不证明两种实现等效，且地图变体之间存在相关性，不能将这些区间解释为独立训练或独立新布局的置信区间。',
+        '原坐标路程均值为 5645.22、2402.94、12291.13。若仅按名义地图大小推断 0.25 m/px，换算为 1411.31、600.74、3072.78 m，与论文 1212、581、2892 m 并非逐项一致。ss_realistic_model.py 则明确使用 1 m/px 的注释和计算；通信物理尺度没有完成统一标定，本核验未擅自把这一疑点消除。','',
+        '## 关键发现：公开测试布局与训练布局重合','',
+        '本次 100 张 Complex 地图中，51 张与公开训练地图的自由/障碍二值布局完全一致，另外 35 张可经旋转或镜像与训练布局一致，共 86/100。Corridor 和 Hybrid 本次各 100 张未发现上述精确/对称重合；这不排除近似布局或实际训练过程使用其他数据。',
+        f"整个公开 Complex 测试目录的重合比例为 {result['all_test_overlap_counts'].get('complex',0)}/500；不仅是本次取样的问题。公开训练目录有 9999 张 easy 和 6000 张 difficult PNG，easy 数量比论文描述少 1 张；此数量差本身不构成造假证据。",'',
+        '具体证据：test/complex/97.png 与 train/difficult/img_2748.png 均从官方 commit '+proof['official_commit']+' 直接读取，下载字节与本地文件一致。两图原始像素有 '+str(proof['raw_pixel_differences'])+' 个差异，但障碍/自由布局差异为 0；两个起点标记的位置不同。因此“图片文件哈希不同”不足以证明测试布局未见。','',
+        '| 所选 Complex 子集 | 例数 | 原实现成功 | 修复后成功 |',
+        '|---|---:|---:|---:|',
+        '| 与训练布局重合（含旋转/镜像） | 86 | 76 | 74 |',
+        '| 未发现精确/对称重合 | 14 | 12 | 14 |','',
+        '上述子集是在发现重合后做的描述性拆分；14 例不足以取代独立的 100 例泛化实验。它说明未发现重合的部分仍能探索成功，不能据此估计真实泛化成功率或证明/否定记忆训练地图。',
+        '论文 VI-C1 称每类 100 张地图在训练时未见。但作者实际训练读取清单、测试 100 张清单和原始日志未公开核实；因此这里证明的是发布目录的布局重合，不能直接断言论文表 II 使用了这些相同病例或权重确实见过每个重合布局。研究时必须解决该不确定性。','',
+        '## 地图变体与轨迹边界','',
+        '所选每类 100 个测试文件，按旋转/镜像归为布局后分别只有 '+', '.join(k+': '+str(result['selected_unique_layouts'][k]) for k in KINDS)+' 个组。改变起点或朝向仍是有意义的任务变化，但不能当作 100 个独立的新环境布局。统计与拆分应以布局组为单位。',
+        '两处修复 300 例包含 141054 个保存位置、139754 段动作；所有位置都在自由栅格内。常规 8 连通栅格检查及按像素边界分割的连续点线段检查均未发现穿过障碍内部。原实现另 6 例和仅地图修复 6 例也通过。',
+        '4 连通栅格 convention 对修复后 15 段、原实现 6 例中的 2 段报警；直接调用原碰撞函数确认这些段正向被判碰撞、反向被判无碰撞。连续点线段检查表明没有进入障碍内部。这属于角点接触/离散检查方向不一致，不能称为穿墙；但没有机器人足迹和安全余量保证，真实机器人需障碍膨胀、对称碰撞检查及局部导航。','',
+        '## 可以如何在它的基础上研究','',
+        '可以复用注意力策略、图构建方法和已发布权重，作为“相同已发布权重”的工程与方法基线。若研究声称严格分布式通信，应采用隔离修复并报告其定义；修复未知地形的通信估计方式并不唯一，且权重是在原环境训练，输入分布变化须说明。',
+        '研究前需要按障碍布局组去重并与所有已知训练布局隔离；候选清单 geometry_disjoint_candidate_manifest.json 已准备，不按成功结果选择。公开目录中未发现训练精确/对称重合的独立布局候选数为 '+', '.join(k+': '+str(result['eligible_unique_layout_counts'].get(k,0)) for k in KINDS)+'。它们不是“保证权重从未见过”的数据，近似重复未排除；尤其若不足 100 个独立 Complex 布局，应另行生成新测试布局并预先冻结。',
+        '沿用相同机器人数量、传感器、通信、起点、步数上限及成功标准比较自己的方法和基线，保留所有失败，统一物理单位，按布局组报告多种子结果。整个验证过程不要求重新训练发布的 IR2 权重。',
+        '本核验没有复现另行训练的消融模型、Stage1 课程训练、论文全部训练曲线、Gazebo Pursuit/Preplanned 比较或真实机器人实验，也没有验证论文摘要的全部性能优势。实际训练过程、每个作者原始测量和科研诚信无法仅凭发布权重证实。','',
+        '## 来源与证据文件','',
+        '- [论文最新版 v3：VI-C1 和表 II](https://arxiv.org/html/2409.04730v3#S6.SS3.SSS1)。[官方项目仓库](https://github.com/marmotlab/IR2-Multi-Robot-RL-Exploration)。',
+        '- 官方固定版本重合图：[测试图](https://github.com/marmotlab/IR2-Multi-Robot-RL-Exploration/blob/'+proof['official_commit']+'/DungeonMaps/test/complex/97.png)，[训练图](https://github.com/marmotlab/IR2-Multi-Robot-RL-Exploration/blob/'+proof['official_commit']+'/DungeonMaps/train/difficult/img_2748.png)。',
+        '- map_split_audit.json：全部布局匹配与候选路径；official_pair_proof.json：官方下载哈希和独立像素核对。',
+        '- trajectory_audit.json：逐例轨迹检查及所有边角报警；geometry_stratification.json：按重合拆分的结果与布局组。',
+        '- ../connectivity_control_20261006/对照报告.md、comparison.json：完整配对结果；manifest.json：配置和哈希。',
+        '- ../audit_20261006/审计报告.md：此前指标与信息隔离审计。','']
+    (OUT/'可信度核验报告.md').write_text('\n'.join(lines))
+    provenance=dict(checkpoint_sha256=hashlib.sha256((ROOT/'model/stage2/checkpoint.pth').read_bytes()).hexdigest(),scripts_sha256={name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in ['audit_map_split.py','audit_trajectories.py','report_credibility.py']},official_commit=proof['official_commit'],no_retraining=True)
+    (OUT/'provenance.json').write_text(json.dumps(provenance,indent=2))
+    print(json.dumps({k:result[k] for k in ['selected_exact_overlap_count','selected_overlap_up_to_symmetry','selected_unique_layouts','eligible_unique_layout_counts']},ensure_ascii=False,indent=2))
+    print(OUT/'可信度核验报告.md')
+
+
+if __name__=='__main__':
+    main()

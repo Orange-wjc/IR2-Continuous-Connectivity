@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "checks": {
+    "corridor": {
+      "count": 100,
+      "successes": 93,
+      "sizes": {
+        "(640, 480)": 100
+      }
+    },
+    "hybrid": {
+      "count": 100,
+      "successes": 100,
+      "sizes": {
+        "(500, 500)": 100
+      }
+    },
+    "complex": {
+      "count": 100,
+      "successes": 88,
+      "sizes": {
+        "(1000, 1000)": 100
+      }
+    }
+  },
+  "unique_attempts": 300,
+  "csv_rows": 300,
+  "checkpoint_unchanged": true,
+  "no_map_load_fallback": true,
+  "success_matches_individual_coverage": true,
+  "all_unsuccessful_episodes_reached_step_limit": true
+}

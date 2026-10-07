@@ -1,0 +1,191 @@
+{
+  "complete": true,
+  "episodes": 180,
+  "paired_conditions": 90,
+  "per_condition": {
+    "low": {
+      "ir2": {
+        "attempts": 30,
+        "successes": 26,
+        "success_rate": 0.8666666666666667,
+        "execution_errors": 0,
+        "exploration_timeouts": 4,
+        "steps_execution_ok_mean": 179.13333333333333,
+        "distance_success_mean": 10700.422600287047,
+        "distance_timeout_mean": 22835.846155695963,
+        "min_coverage_mean": 0.9784364576489115,
+        "connectivity_mean": 0.10794945997104712
+      },
+      "frontier_rendezvous": {
+        "attempts": 30,
+        "successes": 25,
+        "success_rate": 0.8333333333333334,
+        "execution_errors": 0,
+        "exploration_timeouts": 5,
+        "steps_execution_ok_mean": 272.53333333333336,
+        "distance_success_mean": 8894.812729592895,
+        "distance_timeout_mean": 11797.064300217242,
+        "min_coverage_mean": 0.9725200408235408,
+        "connectivity_mean": 0.14482520102642138
+      }
+    },
+    "medium": {
+      "ir2": {
+        "attempts": 30,
+        "successes": 29,
+        "success_rate": 0.9666666666666667,
+        "execution_errors": 0,
+        "exploration_timeouts": 1,
+        "steps_execution_ok_mean": 158.2,
+        "distance_success_mean": 10957.70968748883,
+        "distance_timeout_mean": 21773.75516082218,
+        "min_coverage_mean": 0.9980330114149223,
+        "connectivity_mean": 0.056427131811038915
+      },
+      "frontier_rendezvous": {
+        "attempts": 30,
+        "successes": 23,
+        "success_rate": 0.7666666666666667,
+        "execution_errors": 0,
+        "exploration_timeouts": 7,
+        "steps_execution_ok_mean": 300.6333333333333,
+        "distance_success_mean": 9503.740268388747,
+        "distance_timeout_mean": 12409.33718873421,
+        "min_coverage_mean": 0.9507228343943005,
+        "connectivity_mean": 0.12444030165955496
+      }
+    },
+    "high": {
+      "ir2": {
+        "attempts": 30,
+        "successes": 26,
+        "success_rate": 0.8666666666666667,
+        "execution_errors": 0,
+        "exploration_timeouts": 4,
+        "steps_execution_ok_mean": 200.26666666666668,
+        "distance_success_mean": 12113.307885997545,
+        "distance_timeout_mean": 23557.014230872275,
+        "min_coverage_mean": 0.9913205963366366,
+        "connectivity_mean": 0.022370797326885676
+      },
+      "frontier_rendezvous": {
+        "attempts": 30,
+        "successes": 18,
+        "success_rate": 0.6,
+        "execution_errors": 0,
+        "exploration_timeouts": 12,
+        "steps_execution_ok_mean": 331.6333333333333,
+        "distance_success_mean": 10296.963894567565,
+        "distance_timeout_mean": 12829.710726770705,
+        "min_coverage_mean": 0.9360020969664897,
+        "connectivity_mean": 0.10501383761396225
+      }
+    }
+  },
+  "paired": {
+    "low": {
+      "paired": 30,
+      "ir2_only_success": 4,
+      "baseline_only_success": 3,
+      "success_delta_pp": {
+        "mean": 3.3333333333333335,
+        "ci95": [
+          -13.333333333333334,
+          20.0
+        ],
+        "layout_blocks": 30
+      },
+      "joint_success_pairs": 22,
+      "joint_success_distance_delta": {
+        "mean": 1996.8394198437848,
+        "ci95": [
+          567.9351175878076,
+          3662.9014255129973
+        ],
+        "layout_blocks": 22
+      }
+    },
+    "medium": {
+      "paired": 30,
+      "ir2_only_success": 7,
+      "baseline_only_success": 1,
+      "success_delta_pp": {
+        "mean": 20.0,
+        "ci95": [
+          3.3333333333333335,
+          36.666666666666664
+        ],
+        "layout_blocks": 30
+      },
+      "joint_success_pairs": 22,
+      "joint_success_distance_delta": {
+        "mean": 1121.5706247095907,
+        "ci95": [
+          -453.51793574018404,
+          2867.0636987180765
+        ],
+        "layout_blocks": 22
+      }
+    },
+    "high": {
+      "paired": 30,
+      "ir2_only_success": 12,
+      "baseline_only_success": 4,
+      "success_delta_pp": {
+        "mean": 26.666666666666668,
+        "ci95": [
+          3.3333333333333335,
+          50.0
+        ],
+        "layout_blocks": 30
+      },
+      "joint_success_pairs": 14,
+      "joint_success_distance_delta": {
+        "mean": 1528.5049235478816,
+        "ci95": [
+          -303.39335186868794,
+          3298.777692560598
+        ],
+        "layout_blocks": 14
+      }
+    }
+  },
+  "aggregate_success_delta_pp_layout_bootstrap": {
+    "mean": 16.666666666666668,
+    "ci95": [
+      3.3333333333333326,
+      31.11111111111111
+    ],
+    "layout_blocks": 30
+  },
+  "aggregate_steps_delta_layout_bootstrap": {
+    "mean": -122.4,
+    "ci95": [
+      -143.09055555555557,
+      -101.49944444444444
+    ],
+    "layout_blocks": 30
+  },
+  "stability": {
+    "ir2": {
+      "successes_by_condition": [
+        26,
+        29,
+        26
+      ],
+      "layouts_successful_in_all_three": 23,
+      "screen_pass": true
+    },
+    "frontier_rendezvous": {
+      "successes_by_condition": [
+        25,
+        23,
+        18
+      ],
+      "layouts_successful_in_all_three": 14,
+      "screen_pass": false
+    }
+  },
+  "validation": "source/weights/maps/protocol hashes; episode uniqueness; paired identities and initial positions; independent accounting; action guards and copy isolation",
+  "interpretation": "IR2 minus baseline; success delta positive favors IR2; distance/steps delta negative favors IR2; distance intervals condition on both succeeding; layout bootstrap is descriptive, not independent training variability"
+}

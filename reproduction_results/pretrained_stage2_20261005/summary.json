@@ -1,0 +1,95 @@
+{
+  "corridor": {
+    "attempted": 100,
+    "execution_failures": 0,
+    "successful": 93,
+    "success_percent_all_attempts": 93.0,
+    "steps_execution_ok": {
+      "mean": 95.88,
+      "std_population": 38.10440394495104
+    },
+    "steps_success_only": {
+      "mean": 88.34408602150538,
+      "std_population": 27.385144165018318
+    },
+    "distance_execution_ok_coordinate_units": {
+      "mean": 5645.221211079949,
+      "std_population": 2385.530664122841
+    },
+    "distance_success_only_coordinate_units": {
+      "mean": 5188.292904145749,
+      "std_population": 1748.7900878175626
+    },
+    "mean_explored_all": {
+      "mean": 0.99395189453125,
+      "std_population": 0.02540978115513738
+    },
+    "paper_stage2_reference": {
+      "success_percent": 94,
+      "steps": 91,
+      "distance": 1212
+    }
+  },
+  "hybrid": {
+    "attempted": 100,
+    "execution_failures": 0,
+    "successful": 100,
+    "success_percent_all_attempts": 100.0,
+    "steps_execution_ok": {
+      "mean": 49.41,
+      "std_population": 9.385195789113832
+    },
+    "steps_success_only": {
+      "mean": 49.41,
+      "std_population": 9.385195789113832
+    },
+    "distance_execution_ok_coordinate_units": {
+      "mean": 2402.940581194264,
+      "std_population": 600.6823972871819
+    },
+    "distance_success_only_coordinate_units": {
+      "mean": 2402.940581194264,
+      "std_population": 600.6823972871819
+    },
+    "mean_explored_all": {
+      "mean": 0.9986146232488835,
+      "std_population": 0.0022272972575933642
+    },
+    "paper_stage2_reference": {
+      "success_percent": 100,
+      "steps": 48.8,
+      "distance": 581
+    }
+  },
+  "complex": {
+    "attempted": 100,
+    "execution_failures": 0,
+    "successful": 88,
+    "success_percent_all_attempts": 88.0,
+    "steps_execution_ok": {
+      "mean": 179.21,
+      "std_population": 94.04204325725809
+    },
+    "steps_success_only": {
+      "mean": 151.2840909090909,
+      "std_population": 59.59102069020824
+    },
+    "distance_execution_ok_coordinate_units": {
+      "mean": 12291.129193373763,
+      "std_population": 4870.48519031993
+    },
+    "distance_success_only_coordinate_units": {
+      "mean": 11056.373657934397,
+      "std_population": 3679.947030254395
+    },
+    "mean_explored_all": {
+      "mean": 0.988478161180602,
+      "std_population": 0.047970024830345535
+    },
+    "paper_stage2_reference": {
+      "success_percent": 87,
+      "steps": 185.8,
+      "distance": 2892
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "checkpoint_sha256": "cd72ac7dbf164b8be089394154794416fc969a47d79c1072c437f6f2aa363cf3",
+  "original_core_sha256": {
+    "env.py": "6cad60ce769e35d5f3404229d081b665b70a4e70749a11e6f48214c61b2c0bd9",
+    "sensor.py": "a7a71eabcb0dde3b586dddfb21f7b5f77ef3bd1d7462f2bda094f7945b8e8f73",
+    "test_multi_robot_worker.py": "f8ac603e8f7119064423f03dc0887ac3c2aa4c4d2b3da3ccc9709956d56190c4",
+    "test_parameter.py": "6616067502c3493138a9e61835669320c1509cf07fa95fe73334c4f2c9a8d309",
+    "graph_generator.py": "dc1fedf48624981d3958c95200eb8e8440221edd87b7b42341900f4b06af3d04",
+    "node.py": "d156b1089d75f05a4323e0ece65362b9e850d7a2c7b0690f4d360ad8fb043e53",
+    "graph.py": "b1d5d41810d68273b0a588dca960c4eb10261f4acf6e0ab7744321b25c46f822",
+    "robot.py": "14c40c58d8aca4a09c17a22ebd8e72f00107278ac802a5930bacba8042572d97",
+    "model.py": "2a0c4d91497fc5b5db981e2b91f1b8ed4ed11550bfaee3a67c5d6d1a967fd637",
+    "ss_realistic_model.py": "dee2f76a4673dd663138acfe1a4654f2cccb0ba103dac0346d5c7bace0f26b92"
+  },
+  "baseline": "/home/robot/test/IR2-Continuous-Connectivity/IR2-Multi-Robot-RL-Exploration/reproduction_results/pretrained_stage2_20261005",
+  "baseline_sha256": "1494c1e8b5162ee3202574eedab0ebd7ab352b5720a61d393e02b4ec1ba9d586",
+  "seed": 20261005,
+  "policy": "released Stage2, eval, no_grad, greedy",
+  "communication": "unchanged original signal-strength physical model",
+  "mode_both": "copy-on-write at sensor; stale-link prediction from personal belief; unknown=obstacle",
+  "mode_map_only": "copy-on-write at sensor only",
+  "initialization": "unchanged original begin; same initial cached beliefs",
+  "pilot_cases": [
+    [
+      "corridor",
+      0
+    ],
+    [
+      "corridor",
+      9
+    ],
+    [
+      "hybrid",
+      0
+    ],
+    [
+      "hybrid",
+      1
+    ],
+    [
+      "complex",
+      0
+    ],
+    [
+      "complex",
+      5
+    ]
+  ],
+  "full_both_target": 300,
+  "workers": 8,
+  "code_sha256": {
+    "control_env.py": "123e6f3833465f0534227565f2d946947e672a7ccb8c3bcc6b5f84a4b2bdf268",
+    "evaluate_control.py": "d38702053e55d0621f2ace8bc2fd7ecef5bcd37888eb85932bf0e716adec7a8b"
+  },
+  "failure_policy": "retain all attempts including exploration and execution failures; no retry/substitution"
+}

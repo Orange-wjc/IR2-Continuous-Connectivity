@@ -1,0 +1,392 @@
+{
+  "aggregate300": {
+    "corridor": {
+      "passed": true,
+      "count": 100,
+      "successes": 93,
+      "failures": 7,
+      "steps_mean": 95.88,
+      "distance_mean_coordinate_units": 5645.221211079949,
+      "distance_std_population": 2385.5306641228403
+    },
+    "hybrid": {
+      "passed": true,
+      "count": 100,
+      "successes": 100,
+      "failures": 0,
+      "steps_mean": 49.41,
+      "distance_mean_coordinate_units": 2402.940581194264,
+      "distance_std_population": 600.6823972871819
+    },
+    "complex": {
+      "passed": true,
+      "count": 100,
+      "successes": 88,
+      "failures": 12,
+      "steps_mean": 179.21,
+      "distance_mean_coordinate_units": 12291.129193373763,
+      "distance_std_population": 4870.485190319931
+    }
+  },
+  "raw_replays6": [
+    {
+      "name": "corridor_0",
+      "passed": true,
+      "disjoint_sensor_footprint_leak_events": 7,
+      "first_disjoint_footprint_leak": [
+        {
+          "round": 2,
+          "actor": 1,
+          "component": [
+            1,
+            2
+          ],
+          "observer": 0,
+          "changed_pixels": 626,
+          "new_free": 157,
+          "actor_observer_distance": 234.3608329051593,
+          "actor_position": [
+            117,
+            381
+          ],
+          "observer_position": [
+            104,
+            147
+          ]
+        }
+      ],
+      "checks": {
+        "execution_ok": true,
+        "distance_matches_original": true,
+        "steps_match_original": true,
+        "every_robot_actions_equal_rounds": true,
+        "coverage_matches_original": true,
+        "zero_false_free_cells": true,
+        "success_matches_original": true,
+        "replay_matches_old_run": true,
+        "round_event_count_consistent": true,
+        "all_events_ok": true
+      },
+      "independent_steps": 90,
+      "independent_max_distance": 5374.345291288188,
+      "independent_robot_distances": [
+        5287.149910876134,
+        5374.345291288188,
+        4182.908007783654,
+        4142.135601745576
+      ],
+      "independent_coverages": [
+        0.9999921875,
+        0.9999921875,
+        0.9999921875,
+        0.9999921875
+      ],
+      "false_free_cells": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "success": true,
+      "alias_leak_events": 25,
+      "raw_map_sha256": "248e7960391bd2cc24435aa3d752ee8e942da9e059b1ca766aeafa194de9e63f"
+    },
+    {
+      "name": "corridor_9",
+      "passed": true,
+      "disjoint_sensor_footprint_leak_events": 3,
+      "first_disjoint_footprint_leak": [
+        {
+          "round": 4,
+          "actor": 2,
+          "component": [
+            0,
+            2
+          ],
+          "observer": 1,
+          "changed_pixels": 3810,
+          "new_free": 3286,
+          "actor_observer_distance": 196.0,
+          "actor_position": [
+            235,
+            440
+          ],
+          "observer_position": [
+            235,
+            244
+          ]
+        }
+      ],
+      "checks": {
+        "execution_ok": true,
+        "distance_matches_original": true,
+        "steps_match_original": true,
+        "every_robot_actions_equal_rounds": true,
+        "coverage_matches_original": true,
+        "zero_false_free_cells": true,
+        "success_matches_original": true,
+        "replay_matches_old_run": true,
+        "round_event_count_consistent": true,
+        "all_events_ok": true
+      },
+      "independent_steps": 196,
+      "independent_max_distance": 10393.081306446818,
+      "independent_robot_distances": [
+        9044.218934184852,
+        10110.503747069384,
+        10393.081306446818,
+        8847.422746405033
+      ],
+      "independent_coverages": [
+        1.0,
+        0.5789296875,
+        1.0,
+        1.0
+      ],
+      "false_free_cells": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "success": false,
+      "alias_leak_events": 28,
+      "raw_map_sha256": "76e10e22c456a6f627162fdebd9b2307eefa744897cff577f9936ac331725575"
+    },
+    {
+      "name": "hybrid_0",
+      "passed": true,
+      "disjoint_sensor_footprint_leak_events": 0,
+      "first_disjoint_footprint_leak": [],
+      "checks": {
+        "execution_ok": true,
+        "distance_matches_original": true,
+        "steps_match_original": true,
+        "every_robot_actions_equal_rounds": true,
+        "coverage_matches_original": true,
+        "zero_false_free_cells": true,
+        "success_matches_original": true,
+        "replay_matches_old_run": true,
+        "round_event_count_consistent": true,
+        "all_events_ok": true
+      },
+      "independent_steps": 48,
+      "independent_max_distance": 2206.8650016339147,
+      "independent_robot_distances": [
+        1952.2028676712453,
+        1991.2881045414265,
+        2206.8650016339147,
+        1923.0338589887785
+      ],
+      "independent_coverages": [
+        0.9997123595505618,
+        0.9997123595505618,
+        0.9997123595505618,
+        0.9997123595505618
+      ],
+      "false_free_cells": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "success": true,
+      "alias_leak_events": 17,
+      "raw_map_sha256": "adb71495079fad29d11a5f01237e034efd02728071588369f946b95577960c29"
+    },
+    {
+      "name": "hybrid_1",
+      "passed": true,
+      "disjoint_sensor_footprint_leak_events": 2,
+      "first_disjoint_footprint_leak": [
+        {
+          "round": 11,
+          "actor": 2,
+          "component": [
+            2
+          ],
+          "observer": 0,
+          "changed_pixels": 1581,
+          "new_free": 942,
+          "actor_observer_distance": 173.11268006705922,
+          "actor_position": [
+            387,
+            92
+          ],
+          "observer_position": [
+            255,
+            204
+          ]
+        }
+      ],
+      "checks": {
+        "execution_ok": true,
+        "distance_matches_original": true,
+        "steps_match_original": true,
+        "every_robot_actions_equal_rounds": true,
+        "coverage_matches_original": true,
+        "zero_false_free_cells": true,
+        "success_matches_original": true,
+        "replay_matches_old_run": true,
+        "round_event_count_consistent": true,
+        "all_events_ok": true
+      },
+      "independent_steps": 55,
+      "independent_max_distance": 2702.639029660307,
+      "independent_robot_distances": [
+        2084.3948714632315,
+        2702.639029660307,
+        1800.6284319728104,
+        2283.9150982103047
+      ],
+      "independent_coverages": [
+        0.9998202247191011,
+        0.9998202247191011,
+        0.9998202247191011,
+        0.9998202247191011
+      ],
+      "false_free_cells": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "success": true,
+      "alias_leak_events": 14,
+      "raw_map_sha256": "5537236bd66b5176a19273e5f19ce6834d8ebc9a4b3bcfb416a777b2194e16cd"
+    },
+    {
+      "name": "complex_0",
+      "passed": true,
+      "disjoint_sensor_footprint_leak_events": 9,
+      "first_disjoint_footprint_leak": [
+        {
+          "round": 7,
+          "actor": 0,
+          "component": [
+            0
+          ],
+          "observer": 3,
+          "changed_pixels": 3338,
+          "new_free": 2390,
+          "actor_observer_distance": 175.6502206090274,
+          "actor_position": [
+            469,
+            469
+          ],
+          "observer_position": [
+            571,
+            326
+          ]
+        }
+      ],
+      "checks": {
+        "execution_ok": true,
+        "distance_matches_original": true,
+        "steps_match_original": true,
+        "every_robot_actions_equal_rounds": true,
+        "coverage_matches_original": true,
+        "zero_false_free_cells": true,
+        "success_matches_original": true,
+        "replay_matches_old_run": true,
+        "round_event_count_consistent": true,
+        "all_events_ok": true
+      },
+      "independent_steps": 188,
+      "independent_max_distance": 14384.552226602897,
+      "independent_robot_distances": [
+        14384.552226602897,
+        11250.547811328463,
+        13403.81001916305,
+        11922.396437441017,
+        12517.067565262323
+      ],
+      "independent_coverages": [
+        0.9999418181818182,
+        0.9999418181818182,
+        0.9999418181818182,
+        0.9999418181818182,
+        0.9999418181818182
+      ],
+      "false_free_cells": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "success": true,
+      "alias_leak_events": 27,
+      "raw_map_sha256": "87782434f46c1f0c4fea26f29740f909f91242cb115f46d77b953a3e2282a2d0"
+    },
+    {
+      "name": "complex_5",
+      "passed": true,
+      "disjoint_sensor_footprint_leak_events": 10,
+      "first_disjoint_footprint_leak": [
+        {
+          "round": 1,
+          "actor": 4,
+          "component": [
+            3,
+            4
+          ],
+          "observer": 2,
+          "changed_pixels": 876,
+          "new_free": 143,
+          "actor_observer_distance": 168.0773631397161,
+          "actor_position": [
+            754,
+            183
+          ],
+          "observer_position": [
+            591,
+            224
+          ]
+        }
+      ],
+      "checks": {
+        "execution_ok": true,
+        "distance_matches_original": true,
+        "steps_match_original": true,
+        "every_robot_actions_equal_rounds": true,
+        "coverage_matches_original": true,
+        "zero_false_free_cells": true,
+        "success_matches_original": true,
+        "replay_matches_old_run": true,
+        "round_event_count_consistent": true,
+        "all_events_ok": true
+      },
+      "independent_steps": 384,
+      "independent_max_distance": 18494.279425295616,
+      "independent_robot_distances": [
+        15705.18757373221,
+        18494.279425295616,
+        16111.799187370538,
+        16609.03437705816,
+        17092.206767535827
+      ],
+      "independent_coverages": [
+        0.9141974025974026,
+        0.9141974025974026,
+        0.9141974025974026,
+        0.9141974025974026,
+        0.9141974025974026
+      ],
+      "false_free_cells": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "success": false,
+      "alias_leak_events": 59,
+      "raw_map_sha256": "fe98fe03c1e565fb88b10f96e6cb7b6d8b7ea1dfdd0d10634a032c9e7893fdd5"
+    }
+  ],
+  "old_demo_distance": 2206.8650016339147,
+  "old_demo_distance_matches": true,
+  "scope": "300 summary rows reaggregated; six raw trajectory/final personal-map replays independently calculated. Not a raw-level audit of all 300.",
+  "physical_unit": "coordinate units audited; 0.25 m/pixel inferred from paper sizes and image dimensions, not metadata or signal-model calibration"
+}

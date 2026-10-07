@@ -1,0 +1,21 @@
+{
+  "official_commit": "1ef6d224ae18503f4763c3cec20e05a737f95783",
+  "files": {
+    "DungeonMaps/test/complex/97.png": {
+      "sha256": "cee830138c921d0a28552e91df564a909ae04f05c2a17270dd8d2c0ab8f9a4e7",
+      "matches_official_commit": true
+    },
+    "DungeonMaps/train/difficult/img_2748.png": {
+      "sha256": "31ae5ac49dae5a630b4edc9c9a85cbdb67559a32d2493f8bc18ddd6f81f32a90",
+      "matches_official_commit": true
+    }
+  },
+  "shape": [
+    1000,
+    1000
+  ],
+  "raw_pixel_differences": 1250,
+  "occupancy_pixel_differences": 0,
+  "test_start_marker_pixels": 625,
+  "train_start_marker_pixels": 625
+}

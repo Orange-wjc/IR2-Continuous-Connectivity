@@ -1,0 +1,17 @@
+{
+  "corridor": {
+    "selected": 100,
+    "unique_file_hashes": 100,
+    "exact_matches_in_training": 0
+  },
+  "hybrid": {
+    "selected": 100,
+    "unique_file_hashes": 100,
+    "exact_matches_in_training": 0
+  },
+  "complex": {
+    "selected": 100,
+    "unique_file_hashes": 100,
+    "exact_matches_in_training": 0
+  }
+}

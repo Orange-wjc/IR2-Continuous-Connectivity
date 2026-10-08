@@ -2,10 +2,16 @@
 !train/
 train/*
 !train/demo
+!train/wall_aware_hybrid3_recovery_v3_5_a/
 
 !model/
 model/*
 !model/demo
+!model/wall_aware_hybrid3_recovery_v3_5_a/
+# Required frozen policy anchor for v3.5-A training and resume.
+!model/wall_aware_hybrid3_balanced_v3_4/
+model/wall_aware_hybrid3_balanced_v3_4/*
+!model/wall_aware_hybrid3_balanced_v3_4/checkpoint_960.pth
 
 !model_inference/
 model_inference/*

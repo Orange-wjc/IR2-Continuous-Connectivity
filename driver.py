@@ -15,7 +15,7 @@ import socket
 from torch.utils.tensorboard import SummaryWriter
 from model import (PolicyNet, QNet, expand_policy_input_state_dict,
                    movement_anchor_kl, require_checkpoint_metadata)
-from robot import REPLAY_FIELD_COUNT
+from robot import REPLAY_FIELD_COUNT, stack_graph_masks
 from runner import RLRunner
 from datetime import datetime
 
@@ -294,6 +294,7 @@ def main():
         perf_metrics[n] = []
 
     experience_buffer = []
+    replay_capacity_reported = False
     for i in range(REPLAY_FIELD_COUNT):     # SAC tensors plus aligned team metadata
         experience_buffer.append([])
     
@@ -332,6 +333,14 @@ def main():
                 if len(experience_buffer[0]) >= REPLAY_SIZE:
                     for i in range(len(experience_buffer)):
                         experience_buffer[i] = experience_buffer[i][-REPLAY_SIZE:]
+                    if not replay_capacity_reported:
+                        mask_bytes = sum(t.numel() * t.element_size()
+                                         for field in (5, 14)
+                                         for t in experience_buffer[field])
+                        print('Replay at capacity: {} transitions; graph masks {:.3f} GiB; dtype {}'.format(
+                            len(experience_buffer[0]), mask_bytes / 2**30,
+                            experience_buffer[5][0].dtype), flush=True)
+                        replay_capacity_reported = True
 
                 indices = range(len(experience_buffer[0]))
 
@@ -348,7 +357,7 @@ def main():
                     current_inputs_batch = torch.stack(rollouts[2])
                     node_padding_mask_batch = torch.stack(rollouts[3])
                     edge_padding_mask_batch = torch.stack(rollouts[4])
-                    edge_mask_batch = torch.stack(rollouts[5])
+                    edge_mask_batch = stack_graph_masks(rollouts[5], device)
                     action_batch = torch.stack(rollouts[6])
                     reward_batch = torch.stack(rollouts[7])
                     done_batch = torch.stack(rollouts[8])
@@ -357,7 +366,7 @@ def main():
                     next_current_inputs_batch = torch.stack(rollouts[11])
                     next_node_padding_mask_batch = torch.stack(rollouts[12])
                     next_edge_padding_mask_batch = torch.stack(rollouts[13])
-                    next_edge_mask_batch = torch.stack(rollouts[14])
+                    next_edge_mask_batch = stack_graph_masks(rollouts[14], device)
 
                     ### Set tensors to global GPU config ###
                     if device != local_device:

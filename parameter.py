@@ -47,7 +47,7 @@ else:
 USE_GPU = False         #  Collect training data using GPUs
 USE_GPU_GLOBAL = True   #  Train the network using GPUs
 NUM_GPU = 1
-NUM_META_AGENT = 20      # Balance sampling throughput against asynchronous policy staleness
+NUM_META_AGENT = 8       # Leave RAM headroom after replay fills on the local 32 GB machine
 SUMMARY_WINDOW = 32
 ARCHIVE_CHECKPOINT_EVERY = 320
 FOLDER_NAME = 'wall_aware_hybrid3_recovery_v3_5_a'

@@ -11,6 +11,18 @@ from copy import deepcopy
 REPLAY_FIELD_COUNT = 17
 
 
+def pack_graph_mask(mask):
+    """Store a binary graph mask losslessly, independently of its observation."""
+    if not torch.all((mask == 0) | (mask == 1)).item():
+        raise ValueError('Replay graph masks must contain only 0 and 1')
+    return mask.detach().to(device='cpu', dtype=torch.bool, copy=True)
+
+
+def stack_graph_masks(masks, device):
+    """Restore the original float32 model input, including legacy replay masks."""
+    return torch.stack(masks).to(device=device, dtype=torch.float32)
+
+
 class Robot:
     def __init__(self, robot_id, position, plot=False):
         self.robot_id = robot_id
@@ -35,7 +47,7 @@ class Robot:
         self.episode_buffer[2] += deepcopy(current_index).to('cpu')
         self.episode_buffer[3] += deepcopy(node_padding_mask).to('cpu')
         self.episode_buffer[4] += deepcopy(edge_padding_mask).to('cpu')
-        self.episode_buffer[5] += deepcopy(edge_mask).to('cpu')
+        self.episode_buffer[5] += pack_graph_mask(edge_mask)
 
     def save_action(self, action_index):
         self.episode_buffer[6] += action_index.detach().cpu().unsqueeze(0).unsqueeze(0)
@@ -55,7 +67,7 @@ class Robot:
         self.episode_buffer[11] += deepcopy(current_index).to('cpu')
         self.episode_buffer[12] += deepcopy(node_padding_mask).to('cpu')
         self.episode_buffer[13] += deepcopy(edge_padding_mask).to('cpu')
-        self.episode_buffer[14] += deepcopy(edge_mask).to('cpu')
+        self.episode_buffer[14] += pack_graph_mask(edge_mask)
 
     def save_transition(self, observations, action, reward, terminal,
                         next_observations, episode, team_step, reward_parts):

@@ -1,5 +1,9 @@
 # IR2 Multi-Robot RL Exploration
 
+本实验分支新增了[两机器人、简单地图的有限通信窗口实验入口](finite_contact/README.md)。研究实验请在 conda `ir2_train` 中运行 `finite_contact_train.py`；下文原版训练说明仍对应上游 `driver.py`。
+
+已完成从随机权重开始的两机单图学习与真实续训验收；一键启动、预算、模型与限制见[单图训练指南](finite_contact/RUN_SINGLE_MAP.md)。当前结论限于这一训练图，尚未证明换图泛化。
+
 [IROS 2024] Public code and model for [IR2: Implicit Rendezvous for Robotic Exploration Teams under Sparse Intermittent Connectivity](https://arxiv.org/abs/2409.04730).
 
 Public Website: https://ir2-explore.github.io/

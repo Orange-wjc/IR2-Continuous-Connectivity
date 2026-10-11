@@ -1,0 +1,18 @@
+[
+  {
+    "evaluation": "experiments/actor_rate_20261011_AB_seed1_verify505",
+    "rollouts": 13,
+    "movement_segments": 1452,
+    "wall_crossings": 0,
+    "coverage_recomputed": true,
+    "radio_and_speed_caps_passed": true
+  },
+  {
+    "evaluation": "experiments/actor_rate_20261011_AB_seed1_verify606",
+    "rollouts": 13,
+    "movement_segments": 1548,
+    "wall_crossings": 0,
+    "coverage_recomputed": true,
+    "radio_and_speed_caps_passed": true
+  }
+]

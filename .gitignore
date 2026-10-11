@@ -1,4 +1,5 @@
 # Additional stuff
+experiments/
 !train/
 train/*
 !train/demo

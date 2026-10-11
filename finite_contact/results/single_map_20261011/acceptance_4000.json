@@ -1,0 +1,114 @@
+{
+  "checkpoint": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/actor_rate_20261011_AB_seed1/at_4000.pth",
+  "config": {
+    "seed": 1,
+    "map_size": 256,
+    "train_maps": 1,
+    "validation_maps": 5,
+    "test_maps": 5,
+    "robots": 2,
+    "sensor_range": 70,
+    "grid_points": 14,
+    "nodes": 208,
+    "neighbors": 12,
+    "input_dim": 12,
+    "embedding_dim": 64,
+    "dt": 1.0,
+    "speed": 12.0,
+    "communication_range": 65.0,
+    "bytes_per_second": 2048.0,
+    "max_packet_bytes": 256,
+    "tile_size": 16,
+    "pose_period": 4.0,
+    "estimated_contact_seconds": 4.0,
+    "max_wait_seconds": 8.0,
+    "horizon_seconds": 256.0,
+    "completion": 0.99,
+    "variant": "AB",
+    "content": "learned",
+    "coupled": true,
+    "gamma": 0.995,
+    "learning_rate": 0.0001,
+    "policy_learning_rate": 1e-05,
+    "alpha_learning_rate": 0.0001,
+    "batch_size": 16,
+    "replay_size": 3000,
+    "warmup": 128,
+    "updates_per_decision": 1,
+    "delivery_reward": 1.0,
+    "coverage_reward": "union",
+    "pointer_mode": "centered",
+    "time_penalty": 0.02,
+    "label_sampling": "spread",
+    "content_score_bound": "sender",
+    "delivery_queue_order": "service",
+    "horizon_target": "terminal",
+    "frontier_shaping_scale": 0.0,
+    "success_imitation_weight": 1.0,
+    "success_episode_limit": 3,
+    "torch_threads": 2
+  },
+  "sample_seed": 606,
+  "weights_unchanged": true,
+  "learner_updates": 4000,
+  "content_updates": 300,
+  "imitation_updates": 3662,
+  "complete": true,
+  "accepted_for_single_map_training": true,
+  "groups": {
+    "train_greedy": {
+      "requested": 1,
+      "completed": 1,
+      "successes": 1,
+      "times": [
+        102.62362453440862
+      ],
+      "minimum_coverage": [
+        0.9901985111662531
+      ]
+    },
+    "train_sampled": {
+      "requested": 10,
+      "completed": 10,
+      "successes": 9,
+      "times": [
+        120.64476104269261,
+        165.59902647065667,
+        256.0,
+        184.3024887318879,
+        139.75993923750707,
+        118.3336431505358,
+        137.73629590674244,
+        143.56242741912644,
+        162.1498379924758,
+        137.20329810178725
+      ],
+      "minimum_coverage": [
+        0.9926385442514475,
+        0.9909429280397022,
+        0.9799627791563276,
+        0.9936311000827129,
+        0.990963606286187,
+        0.9937965260545906,
+        0.993424317617866,
+        0.9919768403639372,
+        0.9943548387096774,
+        0.9905086848635236
+      ]
+    },
+    "validation": {
+      "requested": 2,
+      "completed": 2,
+      "successes": 0,
+      "times": [
+        256.0,
+        256.0
+      ],
+      "minimum_coverage": [
+        0.896867759020192,
+        0.9076104949511671
+      ]
+    }
+  },
+  "scope": "Same trained model; repeated action samples are not independent training seeds. Test split unused."
+}

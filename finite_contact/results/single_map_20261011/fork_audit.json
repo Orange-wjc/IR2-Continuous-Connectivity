@@ -1,0 +1,7 @@
+{
+  "all_networks_and_counters_identical": true,
+  "all_training_buffers_and_rng_identical": true,
+  "only_optimizer_change": "policy Adam learning rate 1e-4 to 1e-5",
+  "source_updates": 3000,
+  "source_content_updates": 300
+}

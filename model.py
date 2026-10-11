@@ -9,7 +9,7 @@ import math
 
 
 class SingleHeadAttention(nn.Module):
-    def __init__(self, embedding_dim):
+    def __init__(self, embedding_dim, center_logits=False):
         super(SingleHeadAttention, self).__init__()
         self.input_dim = embedding_dim
         self.embedding_dim = embedding_dim
@@ -17,6 +17,9 @@ class SingleHeadAttention(nn.Module):
         self.key_dim = self.value_dim
         self.tanh_clipping = 10
         self.norm_factor = 1 / math.sqrt(self.key_dim)
+        self.center_logits = center_logits
+        self.track_stats = False
+        self.last_stats = {}
 
         self.w_query = nn.Parameter(torch.Tensor(self.input_dim, self.key_dim))
         self.w_key = nn.Parameter(torch.Tensor(self.input_dim, self.key_dim))
@@ -43,6 +46,20 @@ class SingleHeadAttention(nn.Module):
         K = torch.matmul(k_flat, self.w_key).view(shape_k)
 
         U = self.norm_factor * torch.matmul(Q, K.transpose(1, 2))
+        valid = torch.ones_like(U, dtype=torch.bool) if mask is None else mask == 0
+        raw = U
+        if self.center_logits:
+            # Remove the shared offset BEFORE tanh; padding must not affect it.
+            mean = U.masked_fill(~valid, 0).sum(-1, keepdim=True) / valid.sum(-1, keepdim=True).clamp_min(1)
+            U = U - mean
+        if self.track_stats:
+            with torch.no_grad():
+                values = U[valid]
+                self.last_stats = {
+                    "pointer_raw_abs_max": raw[valid].abs().max().detach(),
+                    "pointer_clip_input_abs_max": values.abs().max().detach(),
+                    "pointer_saturation_fraction": (values.abs() > 5).float().mean().detach(),
+                }
         U = self.tanh_clipping * torch.tanh(U)
 
         if mask is not None:
@@ -205,15 +222,16 @@ class Decoder(nn.Module):
 
 
 class PolicyNet(nn.Module):
-    def __init__(self, input_dim, embedding_dim):
+    def __init__(self, input_dim, embedding_dim, allow_wait=False, center_pointer_logits=False):
         super(PolicyNet, self).__init__()
+        self.allow_wait = allow_wait
         self.initial_embedding = nn.Linear(input_dim, embedding_dim)
 
         self.current_embedding = nn.Linear(embedding_dim * 2, embedding_dim)
 
         self.encoder = Encoder(embedding_dim=embedding_dim, n_head=8, n_layer=6)
         self.decoder = Decoder(embedding_dim=embedding_dim, n_head=8, n_layer=1)
-        self.pointer = SingleHeadAttention(embedding_dim)
+        self.pointer = SingleHeadAttention(embedding_dim, center_logits=center_pointer_logits)
 
     def encode_graph(self, node_inputs, node_padding_mask, edge_mask):
         node_feature = self.initial_embedding(node_inputs)
@@ -230,14 +248,13 @@ class PolicyNet(nn.Module):
 
         current_node_feature = torch.gather(enhanced_node_feature, 1, current_index.repeat(1, 1, embedding_dim))
 
-        if edge_padding_mask is not None:
-            current_mask = edge_padding_mask
-        else:
-            current_mask = None
-        current_mask[:,:,0] = 1 # don't stay at current position
-        
-        if not 0 in current_mask:
-            current_mask[:,:,0] = 0
+        current_mask = (edge_padding_mask.clone() if edge_padding_mask is not None
+                        else torch.zeros_like(edge_inputs))
+        if not self.allow_wait:
+            current_mask[:, :, 0] = 1
+            no_action = current_mask.bool().all(dim=-1, keepdim=True)
+            current_mask[:, :, :1] = torch.where(
+                no_action, torch.zeros_like(current_mask[:, :, :1]), current_mask[:, :, :1])
 
         enhanced_current_node_feature, _ = self.decoder(current_node_feature, enhanced_node_feature, node_padding_mask)
         enhanced_current_node_feature = self.current_embedding(torch.cat((enhanced_current_node_feature, current_node_feature), dim=-1))
@@ -253,8 +270,9 @@ class PolicyNet(nn.Module):
 
 
 class QNet(nn.Module):
-    def __init__(self, input_dim, embedding_dim):
+    def __init__(self, input_dim, embedding_dim, allow_wait=False):
         super(QNet, self).__init__()
+        self.allow_wait = allow_wait
         self.initial_embedding = nn.Linear(input_dim, embedding_dim)
         self.action_embedding = nn.Linear(embedding_dim*3, embedding_dim)
 
@@ -283,14 +301,13 @@ class QNet(nn.Module):
         action_features = self.action_embedding(action_features)
         q_values = self.q_values_layer(action_features)
 
-        if edge_padding_mask is not None:
-            current_mask = edge_padding_mask
-        else:
-            current_mask = None
-        current_mask[:, :, 0] = 1  # don't stay at current position
-        
-        if not 0 in current_mask:
-            current_mask[:,:,0] = 0
+        current_mask = (edge_padding_mask.clone() if edge_padding_mask is not None
+                        else torch.zeros_like(edge_inputs))
+        if not self.allow_wait:
+            current_mask[:, :, 0] = 1
+            no_action = current_mask.bool().all(dim=-1, keepdim=True)
+            current_mask[:, :, :1] = torch.where(
+                no_action, torch.zeros_like(current_mask[:, :, :1]), current_mask[:, :, :1])
         current_mask = current_mask.permute(0, 2, 1)
         zero = torch.zeros_like(q_values).to(q_values.device)
         q_values = torch.where(current_mask == 1, zero, q_values)

@@ -1,0 +1,110 @@
+{
+  "fifo:3": {
+    "success": false,
+    "local_coverage": [
+      1.0,
+      0.9475839648730235
+    ],
+    "union_coverage": 1.0,
+    "free_cells_missing_from_at_least_one_robot": 2483,
+    "unexplored_free_cells": 0,
+    "unexplored_components": [],
+    "queue_bytes": [
+      24887,
+      29
+    ]
+  },
+  "fifo:5": {
+    "success": false,
+    "local_coverage": [
+      0.8639490961417393,
+      0.8639490961417393
+    ],
+    "union_coverage": 0.8639490961417393,
+    "free_cells_missing_from_at_least_one_robot": 6051,
+    "unexplored_free_cells": 6051,
+    "unexplored_components": [
+      4194,
+      1207,
+      650
+    ],
+    "queue_bytes": [
+      0,
+      0
+    ]
+  },
+  "rule:3": {
+    "success": true,
+    "local_coverage": [
+      0.998015663591649,
+      0.9933081421122628
+    ],
+    "union_coverage": 0.998015663591649,
+    "free_cells_missing_from_at_least_one_robot": 317,
+    "unexplored_free_cells": 94,
+    "unexplored_components": [
+      67,
+      27
+    ],
+    "queue_bytes": [
+      3900,
+      136
+    ]
+  },
+  "rule:5": {
+    "success": false,
+    "local_coverage": [
+      0.9861048655454627,
+      0.9861048655454627
+    ],
+    "union_coverage": 0.9861048655454627,
+    "free_cells_missing_from_at_least_one_robot": 618,
+    "unexplored_free_cells": 618,
+    "unexplored_components": [
+      610,
+      8
+    ],
+    "queue_bytes": [
+      0,
+      0
+    ]
+  },
+  "learned:3": {
+    "success": true,
+    "local_coverage": [
+      0.9919148846340589,
+      0.9919148846340589
+    ],
+    "union_coverage": 0.9919148846340589,
+    "free_cells_missing_from_at_least_one_robot": 383,
+    "unexplored_free_cells": 383,
+    "unexplored_components": [
+      272,
+      58,
+      39,
+      13,
+      1
+    ],
+    "queue_bytes": [
+      17461,
+      17461
+    ]
+  },
+  "learned:5": {
+    "success": false,
+    "local_coverage": [
+      0.9854303444554366,
+      0.9854303444554366
+    ],
+    "union_coverage": 0.9854303444554366,
+    "free_cells_missing_from_at_least_one_robot": 648,
+    "unexplored_free_cells": 648,
+    "unexplored_components": [
+      648
+    ],
+    "queue_bytes": [
+      0,
+      0
+    ]
+  }
+}

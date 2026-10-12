@@ -20,7 +20,7 @@ from torch.utils.tensorboard import SummaryWriter
 from finite_contact.config import Config
 from finite_contact.environment import Environment
 from finite_contact.learning import Learner
-from finite_contact.maps import manifest
+from finite_contact.maps import manifest, training_map_index
 
 ROOT = Path(__file__).resolve().parent
 
@@ -58,7 +58,9 @@ def bind_context(learner, env):
 
 def rollout(learner, config, split, index, stage, deadline=None, smoke=False,
             evaluation_policy="greedy", max_updates=None, stop_requested=None,
-            max_content_updates=None):
+            max_content_updates=None, episode_update_limit=None):
+    if episode_update_limit is not None and (episode_update_limit < 0 or stage not in {"movement", "finetune"}):
+        raise ValueError("Per-episode update limits apply to movement/finetune and must be nonnegative")
     env = Environment(config, split, index, scorer=learner.score)
     losses = {}
     decisions = 0
@@ -99,6 +101,10 @@ def rollout(learner, config, split, index, stage, deadline=None, smoke=False,
         if stage in {"movement", "finetune"}:
             bind_context(learner, env)
             next_obs = [env.observation(i) for i in range(2)]
+            if config.compact_replay:
+                from finite_contact.learning import compact_observation
+                observations = [compact_observation(o) for o in observations]
+                next_obs = [compact_observation(o) for o in next_obs]
             for robot in range(2):
                 transition = (observations[robot], actions[robot], float(reward[robot]),
                               duration, next_obs[robot], float(terminated), bool(truncated))
@@ -106,6 +112,8 @@ def rollout(learner, config, split, index, stage, deadline=None, smoke=False,
                 if config.success_imitation_weight > 0:
                     episode_transitions.append(transition)
             for _ in range(config.updates_per_decision):
+                if episode_update_limit is not None and learner.updates - initial_updates >= episode_update_limit:
+                    break
                 if max_updates is not None and learner.updates >= max_updates:
                     break
                 if not smoke or learner.updates - initial_updates < 2:
@@ -116,7 +124,7 @@ def rollout(learner, config, split, index, stage, deadline=None, smoke=False,
                     break
                 losses.update(learner.update_content())
     if terminated and not interrupted and stage in {"movement", "finetune"} and config.success_imitation_weight > 0:
-        learner.remember_success(episode_transitions, env.time)
+        learner.remember_success(episode_transitions, env.time, env.map_info["layout_id"])
     metrics = env.metrics(terminated)
     metrics.update({"map": env.map_info, "decisions": decisions,
                     "truncated": truncated, "interrupted": interrupted,
@@ -196,6 +204,11 @@ def provenance(directory, config):
     for name in ("finite_contact_train.py", "finite_contact_diagnose.py", "finite_contact_report.py",
                  "finite_contact_content_check.py", "finite_contact_verify.py", "finite_contact_single_map.py",
                  "finite_contact_fork.py",
+                 "finite_contact_dataset.py", "finite_contact_multimap.py",
+                 "finite_contact_multimap_report.py",
+                 "finite_contact_multimap_content.py",
+                 "finite_contact_multimap_joint.py", "finite_contact_multiseed.py",
+                 "finite_contact_stability.py",
                  "model.py", "env.py", "sensor.py", "parameter.py",
                  "graph_generator.py", "graph.py", "node.py", "ss_realistic_model.py"):
         shutil.copy2(ROOT / name, snapshot / name)
@@ -215,15 +228,27 @@ def main():
     parser.add_argument("--eval-every", type=int, default=100)
     parser.add_argument("--eval-maps", type=int)
     parser.add_argument("--eval-train", action="store_true", help="Also evaluate the greedy policy on training maps before/throughout training")
+    parser.add_argument("--eval-train-maps", type=int,
+                        help="Fixed prefix of training maps for development monitoring; default all")
     parser.add_argument("--final-eval", action="store_true", help="Evaluate final weights before saving final.pth, within wall budget")
     parser.add_argument("--eval-repeats", type=int, default=1)
     parser.add_argument("--evaluation-policy", choices=["greedy", "sampled", "random"], default="greedy")
     parser.add_argument("--seed", type=int)
     parser.add_argument("--train-maps", type=int)
+    parser.add_argument("--validation-maps", type=int)
+    parser.add_argument("--test-maps", type=int)
+    parser.add_argument("--map-family", choices=["legacy", "simple_rooms_v1"])
+    parser.add_argument("--map-seed", type=int)
+    parser.add_argument("--map-order", choices=["cyclic", "shuffled"])
+    parser.add_argument("--sensor-implementation", choices=["legacy", "vectorized"])
+    parser.add_argument("--success-episode-limit", type=int)
+    parser.add_argument("--success-memory-mode", choices=["fastest", "per_map"])
+    parser.add_argument("--success-sampling", choices=["pooled", "map_tail"])
     parser.add_argument("--bandwidth", type=float)
     parser.add_argument("--horizon", type=float)
     parser.add_argument("--batch-size", type=int)
     parser.add_argument("--warmup", type=int)
+    parser.add_argument("--replay-size", type=int)
     parser.add_argument("--pointer-mode", choices=["legacy", "centered"])
     parser.add_argument("--time-penalty", type=float)
     parser.add_argument("--alpha-learning-rate", type=float,
@@ -273,8 +298,16 @@ def main():
         parser.error("Resume needs latest.pth with replay/RNG; best.pth is for initialization/evaluation")
     cfg = Config.from_checkpoint(saved["config"]) if saved else Config()
     for argument, field in (("variant", "variant"), ("content", "content"), ("seed", "seed"),
-                            ("train_maps", "train_maps"), ("bandwidth", "bytes_per_second"),
+                            ("train_maps", "train_maps"), ("validation_maps", "validation_maps"),
+                            ("test_maps", "test_maps"), ("map_family", "map_family"),
+                            ("map_seed", "map_seed"), ("map_order", "map_order"),
+                            ("sensor_implementation", "sensor_implementation"),
+                            ("success_episode_limit", "success_episode_limit"),
+                            ("success_memory_mode", "success_memory_mode"),
+                            ("success_sampling", "success_sampling"),
+                            ("bandwidth", "bytes_per_second"),
                             ("horizon", "horizon_seconds"), ("batch_size", "batch_size"), ("warmup", "warmup"),
+                            ("replay_size", "replay_size"),
                             ("pointer_mode", "pointer_mode"), ("time_penalty", "time_penalty"),
                             ("alpha_learning_rate", "alpha_learning_rate"),
                             ("label_sampling", "label_sampling"), ("content_score_bound", "content_score_bound"),
@@ -301,8 +334,9 @@ def main():
         cfg.train_maps = 1
         args.episodes = 1
     cfg.validate()
-    if cfg.train_maps > 10 or cfg.validation_maps > 5 or cfg.test_maps > 5:
-        parser.error("The first profile uses at most 10/5/5 distinct simple maps")
+    train_eval_count = args.eval_train_maps or cfg.train_maps
+    if args.eval_train_maps is not None and (not args.eval_train or not 1 <= args.eval_train_maps <= cfg.train_maps):
+        parser.error("--eval-train-maps requires --eval-train and a count within the training split")
     if args.resume and (Config.from_checkpoint(saved["config"]).to_dict() != cfg.to_dict() or saved["stage"] != args.stage):
         parser.error("Resume requires identical config and stage; use --initialize-from for a new experiment")
     device = args.device
@@ -391,7 +425,7 @@ def main():
     completed = start_episode
     best_train = None
     training_evaluation_path = directory / "train_policy.jsonl"
-    best_train_success = successful_history(training_evaluation_path, cfg.train_maps) if args.resume else None
+    best_train_success = successful_history(training_evaluation_path, train_eval_count) if args.resume else None
     best_validation_success = successful_history(directory / "validation.jsonl", args.eval_maps or cfg.validation_maps) if args.resume else None
     if args.resume and training_evaluation_path.exists():
         records = [json.loads(line) for line in training_evaluation_path.read_text().splitlines()]
@@ -400,12 +434,12 @@ def main():
 
     def evaluate_training(episode, phase="periodic"):
         nonlocal best_train, best_train_success
-        results = evaluate(learner, cfg, cfg.train_maps, "train", deadline, stop_requested=should_stop)
+        results = evaluate(learner, cfg, train_eval_count, "train", deadline, stop_requested=should_stop)
         for record in results:
             append_json(training_evaluation_path, {"episode": episode, "phase": phase, **record})
             print(json.dumps({"event": "train_policy", "episode": episode, **record}), flush=True)
-        if len(results) == cfg.train_maps:
-            rank = successful_rank(results, cfg.train_maps)
+        if len(results) == train_eval_count:
+            rank = successful_rank(results, train_eval_count)
             if rank is not None and (best_train_success is None or rank < best_train_success):
                 best_train_success = rank
                 checkpoint(directory / "best_train_success.pth", learner, cfg, args.stage, episode, best,
@@ -447,7 +481,7 @@ def main():
                     or (args.max_updates is not None and learner.updates >= args.max_updates)
                     or (args.max_content_updates is not None and learner.content_updates >= args.max_content_updates)):
                 break
-            metrics, env = rollout(learner, cfg, "train", (episode - 1) % cfg.train_maps,
+            metrics, env = rollout(learner, cfg, "train", training_map_index(cfg, episode),
                                    args.stage, deadline, args.smoke, max_updates=args.max_updates,
                                    stop_requested=should_stop, max_content_updates=args.max_content_updates)
             metrics.update({"episode": episode, "wall_seconds": previous_wall + time.monotonic() - started})

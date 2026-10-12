@@ -1,0 +1,39 @@
+{
+  "groups": {
+    "train": {
+      "maps": 10,
+      "macro_mse": {
+        "learned": 0.013526197569487619,
+        "sender_novelty": 0.11505224931468996,
+        "constant": 0.02028254881424289,
+        "bounded_constant": 0.019846658868668373
+      },
+      "macro_mean_contact_new_cells": {
+        "fifo": 614.6666666666667,
+        "rule": 682.0666666666667,
+        "learned": 1019.8833333333334,
+        "oracle": 1560.8666666666666,
+        "bounded_constant": 577.9833333333333
+      }
+    },
+    "validation": {
+      "maps": 20,
+      "macro_mse": {
+        "learned": 0.012346077978548167,
+        "sender_novelty": 0.11086329611622196,
+        "constant": 0.018351967115246524,
+        "bounded_constant": 0.017786350748972536
+      },
+      "macro_mean_contact_new_cells": {
+        "fifo": 505.9333333333334,
+        "rule": 570.725,
+        "learned": 1056.325,
+        "oracle": 1666.5541666666663,
+        "bounded_constant": 534.7416666666666
+      }
+    }
+  },
+  "gate_passed": true,
+  "constant_training_mean": 0.07411283254623413,
+  "note": "Frozen hypothetical contacts and offline labels, not deployed task completion."
+}

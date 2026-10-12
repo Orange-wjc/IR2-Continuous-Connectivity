@@ -1,0 +1,127 @@
+{
+  "source_snapshot_identity": {
+    "pooled/A_fifo": true,
+    "map_tail/A_fifo": true,
+    "pooled/A_rule": true,
+    "map_tail/A_rule": true,
+    "pooled/AB_learned": true,
+    "map_tail/AB_learned": true
+  },
+  "paired_first_rollout": {
+    "A_fifo": true,
+    "A_rule": true,
+    "AB_learned": true
+  },
+  "map_schedules_equal": true,
+  "optimizer_steps": {
+    "pooled/A_fifo": {
+      "policy_optimizer": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      },
+      "alpha_optimizer": {
+        "state_parameters": 1,
+        "actual_step_delta": 2000
+      },
+      "q_optimizer_0": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      },
+      "q_optimizer_1": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      }
+    },
+    "map_tail/A_fifo": {
+      "policy_optimizer": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      },
+      "alpha_optimizer": {
+        "state_parameters": 1,
+        "actual_step_delta": 2000
+      },
+      "q_optimizer_0": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      },
+      "q_optimizer_1": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      }
+    },
+    "pooled/A_rule": {
+      "policy_optimizer": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      },
+      "alpha_optimizer": {
+        "state_parameters": 1,
+        "actual_step_delta": 2000
+      },
+      "q_optimizer_0": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      },
+      "q_optimizer_1": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      }
+    },
+    "map_tail/A_rule": {
+      "policy_optimizer": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      },
+      "alpha_optimizer": {
+        "state_parameters": 1,
+        "actual_step_delta": 2000
+      },
+      "q_optimizer_0": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      },
+      "q_optimizer_1": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      }
+    },
+    "pooled/AB_learned": {
+      "policy_optimizer": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      },
+      "alpha_optimizer": {
+        "state_parameters": 1,
+        "actual_step_delta": 2000
+      },
+      "q_optimizer_0": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      },
+      "q_optimizer_1": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      }
+    },
+    "map_tail/AB_learned": {
+      "policy_optimizer": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      },
+      "alpha_optimizer": {
+        "state_parameters": 1,
+        "actual_step_delta": 2000
+      },
+      "q_optimizer_0": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      },
+      "q_optimizer_1": {
+        "state_parameters": 90,
+        "actual_step_delta": 2000
+      }
+    }
+  },
+  "test_policy_evaluations": 0
+}

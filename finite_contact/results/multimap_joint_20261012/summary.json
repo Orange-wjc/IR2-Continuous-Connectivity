@@ -1,0 +1,184 @@
+{
+  "scope": "Three-group matched adaptation pilot; one seed, no test policy execution.",
+  "training_seed": 1,
+  "dataset_seed": 20261011,
+  "new_sac_updates_per_group": 2000,
+  "source_sac_updates": 8895,
+  "frozen_head_updates": 5000,
+  "groups": {
+    "A_fifo": {
+      "training_episodes": 100,
+      "distinct_training_maps": 100,
+      "online_successful_training_episodes": 93,
+      "new_sac_updates": 2000,
+      "cumulative_sac_updates": 10895,
+      "weight_change_l2": {
+        "policy": 0.5252997653257634,
+        "critics": 3.942656154365583,
+        "targets": 3.846231550381108,
+        "content": 0.0,
+        "context_encoder": 0.0
+      },
+      "success_memory_maps": 93,
+      "training_physical_audit": {
+        "rollouts": 100,
+        "movement_segments": 13380,
+        "wall_crossings": 0,
+        "coverage_speed_and_radio_caps_passed": true
+      },
+      "validation_final": {
+        "maps": 20,
+        "successes": 18,
+        "mean_capped_time": 176.5031881351601,
+        "mean_minimum_coverage": 0.9790743101770237,
+        "mean_coverage_deficit": 0.1826850922101826,
+        "failed_maps": [
+          1,
+          5
+        ],
+        "physical_audit": {
+          "rollouts": 20,
+          "movement_segments": 2942,
+          "wall_crossings": 0,
+          "coverage_recomputed": true,
+          "radio_and_speed_caps_passed": true
+        }
+      },
+      "validation_initial": {
+        "maps": 20,
+        "successes": 18,
+        "mean_capped_time": 184.34778022993336,
+        "mean_minimum_coverage": 0.9837229916546317,
+        "mean_coverage_deficit": 0.19628796621227293,
+        "failed_maps": [
+          3,
+          5
+        ]
+      },
+      "paired_outcomes": {
+        "gained_success": 1,
+        "lost_success": 1,
+        "both_successful": 17,
+        "both_failed": 1
+      }
+    },
+    "A_rule": {
+      "training_episodes": 100,
+      "distinct_training_maps": 100,
+      "online_successful_training_episodes": 94,
+      "new_sac_updates": 2000,
+      "cumulative_sac_updates": 10895,
+      "weight_change_l2": {
+        "policy": 0.5397989527032848,
+        "critics": 4.508854879603513,
+        "targets": 4.378917644794014,
+        "content": 0.0,
+        "context_encoder": 0.0
+      },
+      "success_memory_maps": 94,
+      "training_physical_audit": {
+        "rollouts": 100,
+        "movement_segments": 12226,
+        "wall_crossings": 0,
+        "coverage_speed_and_radio_caps_passed": true
+      },
+      "validation_final": {
+        "maps": 20,
+        "successes": 19,
+        "mean_capped_time": 150.47159974137497,
+        "mean_minimum_coverage": 0.9892384446391749,
+        "mean_coverage_deficit": 0.13968417507286918,
+        "failed_maps": [
+          5
+        ],
+        "physical_audit": {
+          "rollouts": 20,
+          "movement_segments": 2330,
+          "wall_crossings": 0,
+          "coverage_recomputed": true,
+          "radio_and_speed_caps_passed": true
+        }
+      },
+      "validation_initial": {
+        "maps": 20,
+        "successes": 19,
+        "mean_capped_time": 167.6411406264027,
+        "mean_minimum_coverage": 0.9921609738609616,
+        "mean_coverage_deficit": 0.17481219438627604,
+        "failed_maps": [
+          5
+        ]
+      },
+      "paired_outcomes": {
+        "gained_success": 0,
+        "lost_success": 0,
+        "both_successful": 19,
+        "both_failed": 1
+      }
+    },
+    "AB_learned": {
+      "training_episodes": 100,
+      "distinct_training_maps": 100,
+      "online_successful_training_episodes": 94,
+      "new_sac_updates": 2000,
+      "cumulative_sac_updates": 10895,
+      "weight_change_l2": {
+        "policy": 0.5658573690124664,
+        "critics": 4.452522031018735,
+        "targets": 4.348584429271164,
+        "content": 0.0,
+        "context_encoder": 0.0
+      },
+      "success_memory_maps": 94,
+      "training_physical_audit": {
+        "rollouts": 100,
+        "movement_segments": 10200,
+        "wall_crossings": 0,
+        "coverage_speed_and_radio_caps_passed": true
+      },
+      "validation_final": {
+        "maps": 20,
+        "successes": 20,
+        "mean_capped_time": 125.47955876373548,
+        "mean_minimum_coverage": 0.9930745102116759,
+        "mean_coverage_deficit": 0.1179906467814759,
+        "failed_maps": [],
+        "physical_audit": {
+          "rollouts": 20,
+          "movement_segments": 1908,
+          "wall_crossings": 0,
+          "coverage_recomputed": true,
+          "radio_and_speed_caps_passed": true
+        }
+      },
+      "validation_initial": {
+        "maps": 20,
+        "successes": 19,
+        "mean_capped_time": 175.2048207199112,
+        "mean_minimum_coverage": 0.9926898497180296,
+        "mean_coverage_deficit": 0.1316328099189917,
+        "failed_maps": [
+          5
+        ]
+      },
+      "paired_outcomes": {
+        "gained_success": 1,
+        "lost_success": 0,
+        "both_successful": 19,
+        "both_failed": 0
+      }
+    }
+  },
+  "test_policy_evaluations": 0,
+  "limitations": [
+    "One training seed and one complete adaptation sweep.",
+    "Inherited network/Adam state but fresh mode-consistent replay and success memory.",
+    "Training success counts refer to changing per-episode policies, not the fixed final on all training maps.",
+    "Prior frozen validation is reused only after checking common network identity and evaluation-relevant configuration."
+  ],
+  "combined_physical_audit": {
+    "rollouts": 360,
+    "movement_segments": 42986,
+    "wall_crossings": 0
+  }
+}

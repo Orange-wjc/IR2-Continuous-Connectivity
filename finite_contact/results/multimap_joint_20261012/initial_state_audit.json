@@ -1,0 +1,30 @@
+{
+  "common_sac_updates": 8895,
+  "common_head_updates": 5000,
+  "movement_Adam_moments_exactly_source": true,
+  "common_has_no_inherited_data": true,
+  "groups": {
+    "A_fifo": {
+      "initial_learner_and_Adam_exactly_common": true,
+      "actor_adam_parameters": 90,
+      "actor_adam_step_min": 7395.0,
+      "actor_adam_step_max": 7395.0,
+      "actor_lr": 1e-05
+    },
+    "A_rule": {
+      "initial_learner_and_Adam_exactly_common": true,
+      "actor_adam_parameters": 90,
+      "actor_adam_step_min": 7395.0,
+      "actor_adam_step_max": 7395.0,
+      "actor_lr": 1e-05
+    },
+    "AB_learned": {
+      "initial_learner_and_Adam_exactly_common": true,
+      "actor_adam_parameters": 90,
+      "actor_adam_step_min": 7395.0,
+      "actor_adam_step_max": 7395.0,
+      "actor_lr": 1e-05
+    }
+  },
+  "note": "Cumulative SAC includes the prior single-map 1500 updates; movement Adam was reset before the 7395-step multi-map stage."
+}

@@ -1,0 +1,84 @@
+{
+  "seed_2/AB_learned": {
+    "committed_boundary": 30,
+    "exact_reexecuted_episode_metrics_excluding_wall": [
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "exact_reexecuted_SAC_update_records": 100,
+    "old_last_complete_episode": 35,
+    "archived_discarded_SAC_updates": 100
+  },
+  "seed_2/A_fifo": {
+    "committed_boundary": 40,
+    "exact_reexecuted_episode_metrics_excluding_wall": [
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48
+    ],
+    "exact_reexecuted_SAC_update_records": 160,
+    "old_last_complete_episode": 48,
+    "archived_discarded_SAC_updates": 160
+  },
+  "seed_2/A_rule": {
+    "committed_boundary": 30,
+    "exact_reexecuted_episode_metrics_excluding_wall": [
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38
+    ],
+    "exact_reexecuted_SAC_update_records": 160,
+    "old_last_complete_episode": 38,
+    "archived_discarded_SAC_updates": 160
+  },
+  "seed_3/AB_learned": {
+    "committed_boundary": 30,
+    "exact_reexecuted_episode_metrics_excluding_wall": [
+      31,
+      32,
+      33
+    ],
+    "exact_reexecuted_SAC_update_records": 60,
+    "old_last_complete_episode": 33,
+    "archived_discarded_SAC_updates": 60
+  },
+  "seed_3/A_fifo": {
+    "committed_boundary": 50,
+    "exact_reexecuted_episode_metrics_excluding_wall": [
+      51,
+      52
+    ],
+    "exact_reexecuted_SAC_update_records": 40,
+    "old_last_complete_episode": 52,
+    "archived_discarded_SAC_updates": 40
+  },
+  "seed_3/A_rule": {
+    "committed_boundary": 30,
+    "exact_reexecuted_episode_metrics_excluding_wall": [
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38
+    ],
+    "exact_reexecuted_SAC_update_records": 160,
+    "old_last_complete_episode": 38,
+    "archived_discarded_SAC_updates": 160
+  }
+}

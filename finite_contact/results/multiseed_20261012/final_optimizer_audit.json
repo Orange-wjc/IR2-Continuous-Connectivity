@@ -1,0 +1,44 @@
+{
+  "seed_2/A_fifo": {
+    "actor_Adam_steps": 9395,
+    "new_retained_actor_updates": 2000,
+    "head_updates": 5000,
+    "head_Adam_state_unchanged": true,
+    "executed_training_source_unchanged": true
+  },
+  "seed_2/A_rule": {
+    "actor_Adam_steps": 9395,
+    "new_retained_actor_updates": 2000,
+    "head_updates": 5000,
+    "head_Adam_state_unchanged": true,
+    "executed_training_source_unchanged": true
+  },
+  "seed_2/AB_learned": {
+    "actor_Adam_steps": 9395,
+    "new_retained_actor_updates": 2000,
+    "head_updates": 5000,
+    "head_Adam_state_unchanged": true,
+    "executed_training_source_unchanged": true
+  },
+  "seed_3/A_fifo": {
+    "actor_Adam_steps": 9395,
+    "new_retained_actor_updates": 2000,
+    "head_updates": 5000,
+    "head_Adam_state_unchanged": true,
+    "executed_training_source_unchanged": true
+  },
+  "seed_3/A_rule": {
+    "actor_Adam_steps": 9395,
+    "new_retained_actor_updates": 2000,
+    "head_updates": 5000,
+    "head_Adam_state_unchanged": true,
+    "executed_training_source_unchanged": true
+  },
+  "seed_3/AB_learned": {
+    "actor_Adam_steps": 9395,
+    "new_retained_actor_updates": 2000,
+    "head_updates": 5000,
+    "head_Adam_state_unchanged": true,
+    "executed_training_source_unchanged": true
+  }
+}

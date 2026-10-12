@@ -1,0 +1,578 @@
+[
+  {
+    "seed": 1,
+    "group": "A_fifo",
+    "failures": [
+      {
+        "episode": 27,
+        "map_index": 94,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.03746839640237076,
+        "late_minimum_coverage_gain": 0.03746839640237076,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 23
+      },
+      {
+        "episode": 35,
+        "map_index": 88,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.1754302890554229,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 23
+      },
+      {
+        "episode": 54,
+        "map_index": 4,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 22
+      },
+      {
+        "episode": 64,
+        "map_index": 42,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.09873801776448854,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 23
+      },
+      {
+        "episode": 79,
+        "map_index": 85,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0005297149725973505,
+        "late_minimum_coverage_gain": 0.0005297149725973505,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 24
+      },
+      {
+        "episode": 83,
+        "map_index": 11,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 23
+      },
+      {
+        "episode": 92,
+        "map_index": 16,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 19
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "group": "A_rule",
+    "failures": [
+      {
+        "episode": 11,
+        "map_index": 92,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 22
+      },
+      {
+        "episode": 31,
+        "map_index": 67,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 22
+      },
+      {
+        "episode": 54,
+        "map_index": 4,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 25
+      },
+      {
+        "episode": 87,
+        "map_index": 25,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 22
+      },
+      {
+        "episode": 92,
+        "map_index": 16,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 19
+      },
+      {
+        "episode": 99,
+        "map_index": 12,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.008425791287373308,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 21
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "group": "AB_learned",
+    "failures": [
+      {
+        "episode": 27,
+        "map_index": 94,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.03299208355783978,
+        "late_minimum_coverage_gain": 0.03299208355783978,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 20
+      },
+      {
+        "episode": 35,
+        "map_index": 88,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 20
+      },
+      {
+        "episode": 46,
+        "map_index": 41,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.30620907365143013,
+        "late_minimum_coverage_gain": 0.029392317044557803,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 21
+      },
+      {
+        "episode": 47,
+        "map_index": 45,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 21
+      },
+      {
+        "episode": 66,
+        "map_index": 89,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 24
+      },
+      {
+        "episode": 77,
+        "map_index": 13,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 19
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "group": "A_fifo",
+    "failures": [
+      {
+        "episode": 5,
+        "map_index": 16,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.029536684222022602,
+        "late_minimum_coverage_gain": 0.029536684222022602,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 20
+      },
+      {
+        "episode": 12,
+        "map_index": 92,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.00012541281718991826,
+        "late_minimum_coverage_gain": 0.00012541281718991826,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 22
+      },
+      {
+        "episode": 13,
+        "map_index": 76,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.029321448372926162,
+        "late_minimum_coverage_gain": 0.029321448372926162,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 22
+      },
+      {
+        "episode": 18,
+        "map_index": 29,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.1191081254281483,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 22
+      },
+      {
+        "episode": 29,
+        "map_index": 74,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.018021767631573482,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 19
+      },
+      {
+        "episode": 35,
+        "map_index": 36,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.4646708161655124,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 21
+      },
+      {
+        "episode": 36,
+        "map_index": 78,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 23
+      },
+      {
+        "episode": 41,
+        "map_index": 12,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.021791526402804573,
+        "late_minimum_coverage_gain": 0.0009361990319303182,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 21
+      },
+      {
+        "episode": 57,
+        "map_index": 64,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0009748034499565961,
+        "late_minimum_coverage_gain": 0.0009748034499565961,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 18
+      },
+      {
+        "episode": 58,
+        "map_index": 45,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 20
+      },
+      {
+        "episode": 60,
+        "map_index": 8,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 21
+      },
+      {
+        "episode": 62,
+        "map_index": 94,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.010196045923654085,
+        "late_minimum_coverage_gain": 0.13567787126455833,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 23
+      },
+      {
+        "episode": 70,
+        "map_index": 88,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.1546775920283291,
+        "late_minimum_coverage_gain": 0.14506299925883226,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 22
+      },
+      {
+        "episode": 75,
+        "map_index": 81,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.005795303879218117,
+        "late_minimum_coverage_gain": 0.005795303879218117,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 21
+      },
+      {
+        "episode": 89,
+        "map_index": 85,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.02603752826844319,
+        "late_minimum_coverage_gain": 0.02603752826844319,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 24
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "group": "A_rule",
+    "failures": [
+      {
+        "episode": 16,
+        "map_index": 21,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 19
+      },
+      {
+        "episode": 89,
+        "map_index": 85,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.04164374630727541,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 21
+      },
+      {
+        "episode": 92,
+        "map_index": 34,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 23
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "group": "AB_learned",
+    "failures": [
+      {
+        "episode": 5,
+        "map_index": 16,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 18
+      },
+      {
+        "episode": 18,
+        "map_index": 29,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 19
+      },
+      {
+        "episode": 23,
+        "map_index": 84,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.04881701758194046,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 25
+      },
+      {
+        "episode": 41,
+        "map_index": 12,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 18
+      },
+      {
+        "episode": 61,
+        "map_index": 71,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.12283176835191267,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 20
+      },
+      {
+        "episode": 100,
+        "map_index": 40,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 21
+      }
+    ]
+  },
+  {
+    "seed": 3,
+    "group": "A_fifo",
+    "failures": [
+      {
+        "episode": 16,
+        "map_index": 75,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 22
+      },
+      {
+        "episode": 20,
+        "map_index": 45,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 22
+      },
+      {
+        "episode": 38,
+        "map_index": 85,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.00010186826396108017,
+        "late_minimum_coverage_gain": 0.00010186826396108017,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 21
+      },
+      {
+        "episode": 45,
+        "map_index": 92,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 23
+      },
+      {
+        "episode": 69,
+        "map_index": 33,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.10734252702199032,
+        "late_minimum_coverage_gain": 0.031494595601938125,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 24
+      },
+      {
+        "episode": 95,
+        "map_index": 21,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.06509907898409162,
+        "late_minimum_coverage_gain": 0.04674853474741847,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 21
+      }
+    ]
+  },
+  {
+    "seed": 3,
+    "group": "A_rule",
+    "failures": [
+      {
+        "episode": 7,
+        "map_index": 98,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.08848728246318616,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 23
+      },
+      {
+        "episode": 8,
+        "map_index": 42,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 22
+      },
+      {
+        "episode": 23,
+        "map_index": 8,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 20
+      },
+      {
+        "episode": 44,
+        "map_index": 36,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.08621898834049269,
+        "late_minimum_coverage_gain": 0.00946787060576848,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 26
+      },
+      {
+        "episode": 61,
+        "map_index": 28,
+        "direct_deficit": "synchronization",
+        "late_union_gain": 0.12531041069723015,
+        "late_minimum_coverage_gain": 0.06579645548126922,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 19
+      },
+      {
+        "episode": 72,
+        "map_index": 62,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0012255692446623279,
+        "late_minimum_coverage_gain": 0.0012255692446623279,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 22
+      },
+      {
+        "episode": 95,
+        "map_index": 21,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 17
+      }
+    ]
+  },
+  {
+    "seed": 3,
+    "group": "AB_learned",
+    "failures": [
+      {
+        "episode": 12,
+        "map_index": 9,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.10423749896342982,
+        "late_minimum_coverage_gain": 0.11145202753130445,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 23
+      },
+      {
+        "episode": 15,
+        "map_index": 34,
+        "direct_deficit": "exploration",
+        "late_union_gain": 0.0,
+        "late_minimum_coverage_gain": 0.0,
+        "unfinished_robot_has_reachable_positive": true,
+        "unique_late_joint_positions": 23
+      }
+    ]
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "replayed_complete_training_maps": 10,
+  "replayed_actual_updates": 200,
+  "non_wall_training_metrics_equal": true,
+  "all_replayed_update_records_equal": true,
+  "trajectories_and_raw_arrays_equal": true,
+  "superseded_complete_evaluation_prefix_equal": 4,
+  "extra_executions_physical_audit": {
+    "complete_training_rollouts": 10,
+    "complete_development_rollouts": 4,
+    "movement_segments": 1924,
+    "wall_crossings": 0
+  },
+  "note": "Additional executions and updates excluded from primary fixed-budget counts; interrupted incomplete evaluation is not a completed rollout."
+}

@@ -1,0 +1,358 @@
+{
+  "scope": "One-seed paired continuation diagnostic; shared pretrained chain; development only.",
+  "training_seed": 2,
+  "test_policy_evaluations": 0,
+  "groups": {
+    "A_fifo": {
+      "pooled": {
+        "validation_final": {
+          "maps": 20,
+          "successes": 18,
+          "mean_capped_time": 180.5478363869923,
+          "mean_minimum_coverage": 0.9829594050170394,
+          "mean_coverage_deficit": 0.19166376480686562,
+          "failed_maps": [
+            3,
+            5
+          ]
+        },
+        "training_monitor": {
+          "0": {
+            "maps": 10,
+            "successes": 9,
+            "mean_capped_time": 184.64681072909002,
+            "mean_minimum_coverage": 0.9930254893237936,
+            "mean_coverage_deficit": 0.20170896087271667,
+            "failed_maps": [
+              8
+            ]
+          },
+          "50": {
+            "maps": 10,
+            "successes": 9,
+            "mean_capped_time": 184.69683928611317,
+            "mean_minimum_coverage": 0.9910137425454468,
+            "mean_coverage_deficit": 0.21584076351458364,
+            "failed_maps": [
+              1
+            ]
+          },
+          "100": {
+            "maps": 10,
+            "successes": 9,
+            "mean_capped_time": 182.21166821638712,
+            "mean_minimum_coverage": 0.9889150459841402,
+            "mean_coverage_deficit": 0.21838081856785346,
+            "failed_maps": [
+              5
+            ]
+          }
+        },
+        "training_successes": 92,
+        "new_sac_updates": 2000,
+        "cumulative_sac_updates": 12895,
+        "actor_adam_steps": 11395.0,
+        "frozen_head_updates": 5000,
+        "weight_change_l2": {
+          "policy": 0.3737635307576808,
+          "critics": 3.4629430718460776,
+          "targets": 3.4106610809253186,
+          "content": 0.0,
+          "context_encoder": 0.0
+        }
+      },
+      "map_tail": {
+        "validation_final": {
+          "maps": 20,
+          "successes": 19,
+          "mean_capped_time": 171.94927326767225,
+          "mean_minimum_coverage": 0.9860612585934575,
+          "mean_coverage_deficit": 0.19173428305671839,
+          "failed_maps": [
+            5
+          ]
+        },
+        "training_monitor": {
+          "0": {
+            "maps": 10,
+            "successes": 9,
+            "mean_capped_time": 184.64681072909002,
+            "mean_minimum_coverage": 0.9930254893237936,
+            "mean_coverage_deficit": 0.20170896087271667,
+            "failed_maps": [
+              8
+            ]
+          },
+          "50": {
+            "maps": 10,
+            "successes": 7,
+            "mean_capped_time": 203.11703359461447,
+            "mean_minimum_coverage": 0.9724914326780629,
+            "mean_coverage_deficit": 0.20874251390455295,
+            "failed_maps": [
+              1,
+              4,
+              8
+            ]
+          },
+          "100": {
+            "maps": 10,
+            "successes": 6,
+            "mean_capped_time": 203.90168558152044,
+            "mean_minimum_coverage": 0.9739020704517112,
+            "mean_coverage_deficit": 0.2483835613603173,
+            "failed_maps": [
+              1,
+              4,
+              5,
+              6
+            ]
+          }
+        },
+        "training_successes": 90,
+        "new_sac_updates": 2000,
+        "cumulative_sac_updates": 12895,
+        "actor_adam_steps": 11395.0,
+        "frozen_head_updates": 5000,
+        "weight_change_l2": {
+          "policy": 0.4501200516478534,
+          "critics": 3.7717210573448856,
+          "targets": 3.6586333491980136,
+          "content": 0.0,
+          "context_encoder": 0.0
+        }
+      }
+    },
+    "A_rule": {
+      "pooled": {
+        "validation_final": {
+          "maps": 20,
+          "successes": 18,
+          "mean_capped_time": 147.7251381160344,
+          "mean_minimum_coverage": 0.9916395917012679,
+          "mean_coverage_deficit": 0.1413894392030703,
+          "failed_maps": [
+            5,
+            14
+          ]
+        },
+        "training_monitor": {
+          "0": {
+            "maps": 10,
+            "successes": 9,
+            "mean_capped_time": 158.24026911843708,
+            "mean_minimum_coverage": 0.9887935909249004,
+            "mean_coverage_deficit": 0.18378636843272023,
+            "failed_maps": [
+              8
+            ]
+          },
+          "50": {
+            "maps": 10,
+            "successes": 10,
+            "mean_capped_time": 145.79013698695496,
+            "mean_minimum_coverage": 0.992756561336517,
+            "mean_coverage_deficit": 0.15096393015436055,
+            "failed_maps": []
+          },
+          "100": {
+            "maps": 10,
+            "successes": 10,
+            "mean_capped_time": 143.2674408779591,
+            "mean_minimum_coverage": 0.9917811460332848,
+            "mean_coverage_deficit": 0.15493077549709877,
+            "failed_maps": []
+          }
+        },
+        "training_successes": 94,
+        "new_sac_updates": 2000,
+        "cumulative_sac_updates": 12895,
+        "actor_adam_steps": 11395.0,
+        "frozen_head_updates": 5000,
+        "weight_change_l2": {
+          "policy": 0.38381487180895474,
+          "critics": 3.6730341636662103,
+          "targets": 3.631695628455432,
+          "content": 0.0,
+          "context_encoder": 0.0
+        }
+      },
+      "map_tail": {
+        "validation_final": {
+          "maps": 20,
+          "successes": 20,
+          "mean_capped_time": 146.41430744195472,
+          "mean_minimum_coverage": 0.992013972762804,
+          "mean_coverage_deficit": 0.12960423256197118,
+          "failed_maps": []
+        },
+        "training_monitor": {
+          "0": {
+            "maps": 10,
+            "successes": 9,
+            "mean_capped_time": 158.24026911843708,
+            "mean_minimum_coverage": 0.9887935909249004,
+            "mean_coverage_deficit": 0.18378636843272023,
+            "failed_maps": [
+              8
+            ]
+          },
+          "50": {
+            "maps": 10,
+            "successes": 7,
+            "mean_capped_time": 183.6708350129034,
+            "mean_minimum_coverage": 0.9835406983934243,
+            "mean_coverage_deficit": 0.15828424156087736,
+            "failed_maps": [
+              0,
+              4,
+              8
+            ]
+          },
+          "100": {
+            "maps": 10,
+            "successes": 9,
+            "mean_capped_time": 147.14705467456943,
+            "mean_minimum_coverage": 0.9916076662605515,
+            "mean_coverage_deficit": 0.15633544810460495,
+            "failed_maps": [
+              2
+            ]
+          }
+        },
+        "training_successes": 94,
+        "new_sac_updates": 2000,
+        "cumulative_sac_updates": 12895,
+        "actor_adam_steps": 11395.0,
+        "frozen_head_updates": 5000,
+        "weight_change_l2": {
+          "policy": 0.44355748290061753,
+          "critics": 3.620314970124438,
+          "targets": 3.576100101190638,
+          "content": 0.0,
+          "context_encoder": 0.0
+        }
+      }
+    },
+    "AB_learned": {
+      "pooled": {
+        "validation_final": {
+          "maps": 20,
+          "successes": 18,
+          "mean_capped_time": 123.10014260675386,
+          "mean_minimum_coverage": 0.9883702457648915,
+          "mean_coverage_deficit": 0.1019157809932338,
+          "failed_maps": [
+            13,
+            14
+          ]
+        },
+        "training_monitor": {
+          "0": {
+            "maps": 10,
+            "successes": 10,
+            "mean_capped_time": 149.73757782053534,
+            "mean_minimum_coverage": 0.9928904002233748,
+            "mean_coverage_deficit": 0.1307026711856826,
+            "failed_maps": []
+          },
+          "50": {
+            "maps": 10,
+            "successes": 10,
+            "mean_capped_time": 144.60225560980834,
+            "mean_minimum_coverage": 0.9920080398415871,
+            "mean_coverage_deficit": 0.12798789539049268,
+            "failed_maps": []
+          },
+          "100": {
+            "maps": 10,
+            "successes": 10,
+            "mean_capped_time": 142.0141504516416,
+            "mean_minimum_coverage": 0.9924080540533448,
+            "mean_coverage_deficit": 0.10748726864142208,
+            "failed_maps": []
+          }
+        },
+        "training_successes": 97,
+        "new_sac_updates": 2000,
+        "cumulative_sac_updates": 12895,
+        "actor_adam_steps": 11395.0,
+        "frozen_head_updates": 5000,
+        "weight_change_l2": {
+          "policy": 0.3922350044593744,
+          "critics": 3.788114154164535,
+          "targets": 3.729749327586965,
+          "content": 0.0,
+          "context_encoder": 0.0
+        }
+      },
+      "map_tail": {
+        "validation_final": {
+          "maps": 20,
+          "successes": 20,
+          "mean_capped_time": 120.69395812737454,
+          "mean_minimum_coverage": 0.9919079038847303,
+          "mean_coverage_deficit": 0.10223022067211911,
+          "failed_maps": []
+        },
+        "training_monitor": {
+          "0": {
+            "maps": 10,
+            "successes": 10,
+            "mean_capped_time": 149.73757782053534,
+            "mean_minimum_coverage": 0.9928904002233748,
+            "mean_coverage_deficit": 0.1307026711856826,
+            "failed_maps": []
+          },
+          "50": {
+            "maps": 10,
+            "successes": 10,
+            "mean_capped_time": 154.0292023736315,
+            "mean_minimum_coverage": 0.9927434715904712,
+            "mean_coverage_deficit": 0.11796571551557673,
+            "failed_maps": []
+          },
+          "100": {
+            "maps": 10,
+            "successes": 10,
+            "mean_capped_time": 121.30412126280115,
+            "mean_minimum_coverage": 0.9923995807375651,
+            "mean_coverage_deficit": 0.11075062668061157,
+            "failed_maps": []
+          }
+        },
+        "training_successes": 97,
+        "new_sac_updates": 2000,
+        "cumulative_sac_updates": 12895,
+        "actor_adam_steps": 11395.0,
+        "frozen_head_updates": 5000,
+        "weight_change_l2": {
+          "policy": 0.4810943633977918,
+          "critics": 3.6690616242641103,
+          "targets": 3.638708983781652,
+          "content": 0.0,
+          "context_encoder": 0.0
+        }
+      }
+    }
+  },
+  "paired_conditions": {
+    "A_fifo": {
+      "success_gain": 1,
+      "time_saved_seconds": 8.598563119320033
+    },
+    "A_rule": {
+      "success_gain": 2,
+      "time_saved_seconds": 1.310830674079682
+    },
+    "AB_learned": {
+      "success_gain": 2,
+      "time_saved_seconds": 2.40618447937932
+    }
+  },
+  "combined_physical_audit": {
+    "rollouts": 900,
+    "movement_segments": 109084,
+    "wall_crossings": 0
+  }
+}

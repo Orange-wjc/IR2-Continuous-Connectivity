@@ -1,0 +1,44 @@
+{
+  "reason": "Six-worker replay growth left only 5.6 GiB available at mid-run; proactively reduce to three workers.",
+  "training_code_changed": false,
+  "old_concurrency": 6,
+  "new_concurrency": 3,
+  "status_before_resume": {
+    "seed_3/A_rule/status.json": {
+      "status": "interrupted_or_failed",
+      "group": "A_rule",
+      "completed_episodes": 38,
+      "sac_updates": 9655
+    },
+    "seed_3/AB_learned/status.json": {
+      "status": "interrupted_or_failed",
+      "group": "AB_learned",
+      "completed_episodes": 33,
+      "sac_updates": 9555
+    },
+    "seed_3/A_fifo/status.json": {
+      "status": "interrupted_or_failed",
+      "group": "A_fifo",
+      "completed_episodes": 52,
+      "sac_updates": 9935
+    },
+    "seed_2/A_rule/status.json": {
+      "status": "interrupted_or_failed",
+      "group": "A_rule",
+      "completed_episodes": 38,
+      "sac_updates": 9655
+    },
+    "seed_2/AB_learned/status.json": {
+      "status": "interrupted_or_failed",
+      "group": "AB_learned",
+      "completed_episodes": 35,
+      "sac_updates": 9595
+    },
+    "seed_2/A_fifo/status.json": {
+      "status": "interrupted_or_failed",
+      "group": "A_fifo",
+      "completed_episodes": 48,
+      "sac_updates": 9855
+    }
+  }
+}

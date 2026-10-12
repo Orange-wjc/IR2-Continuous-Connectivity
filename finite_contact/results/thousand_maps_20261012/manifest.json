@@ -1,0 +1,15 @@
+{
+  "scope": "Startup and first-ten-map evidence only; no 1000-map endpoint yet.",
+  "files": {
+    "README.md": "9013642df282a56c0523e6708253334818a4bd4cab2ec9079a8402aa9f0f044e",
+    "background_process.json": "af441e28f9946fdb064896a4349523c02bca7878c92ae58cac4cbef5afb8f37f",
+    "behaviour_67.log": "97cc30b5fd9e891286ecc96cf05a838f794bc988c2dcd78bd19867f44d88f733",
+    "compact_learning_resume.log": "c8a22608d318ee08a8d5a3b595ba2f68c09064eba111bda80033b365696a7804",
+    "dataset_manifest.json": "2f49350418dca5fbad3f475d30d88280f68b67841134fc0b0a0d759197f72a97",
+    "dataset_quality.json": "b20ad49e360fff57af5edc8ed5c535aa77aea83e1256839ebd8ffe0031836a31",
+    "early_training.json": "870672227fd801597fc926cb37eb754faba41fa12fd37ca10588d65f75ad4b69",
+    "pipeline_initial.json": "43db11b81f45052d7a10d4cea20e0fceb11d2fc0ed57c7528b695fa703f8ae61",
+    "pre_run_design.md": "3cdc73f1f5cd8c09991cf2dd91935f3556903f332f305611a844734953dc21a1",
+    "source_identity_before.json": "721a18fec3c837c84ca33323d32070dda52f8ed54a230de1bff8e8ed481607b5"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "source_root": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/stability_20261012",
+  "files": {
+    "plan.json": "aec3f5fd6c2265b22f2e250a6e7ead06d38466e73c6bfdf93274eeb1c83387a6",
+    "summary.json": "037b0f58da70280ded76af9a8a58c3484a43403159ee77e7b40320e63a24754a",
+    "failure_analysis.json": "9c077cf79bc08485ca16c9691fb229e78bf7442081035af6ec82322e08acdd4d",
+    "pair_integrity.json": "5cc327902a6f1360485740d67c70cd276beb59925d933fb448183b358b7cce0a",
+    "source_identity_before.json": "971beb7e49690ba91cc768078ee3609dfd2b62729a8eb3bcb2dde294ec94bfc0",
+    "source_identity_resume.json": "aa96b7b84cced2bb4cc3b20c48577fc3cbcb0238820b5314878665f92087c3c2",
+    "source_identity_after.json": "11e70702cecee092a6944c756a1e53f8ebcb3c28968161c16c609ca841d4c8a6",
+    "training_graph_diagnosis.json": "f132ebea1b06ea736543797f4f971b7b6184758016417a2043345d9f1dd82fa9",
+    "training_failure_summary.json": "a6ffede969769dc95fe70b2067d65fed9221a4ecb5e343e381058188de5ed58f",
+    "success_sampling_diagnosis.json": "1f21653a89c579b470b7c1da5103dff2c9c9be681153669ee6ebae5a56cf5abb",
+    "frontier_range_probe.json": "6b2a7dc100ad5685f8688521d9b27c4487e5f36cea21531faf141498bf2db8d5",
+    "background_process.json": "de51c1e6659948cc10196c925416d83186bc4448fb87d7acfbd77f2b2e41d446",
+    "pre_run_design.md": "872e2ac6d34e08c700e8cc2273a2ddafb2d262e38b37bf9ca57d5774dc1d8ad8",
+    "train_monitor.png": "7491b8640075d5cb53de44af242b9d99064e7169935e598374697529e4ef048f",
+    "train_monitor.pdf": "54981c868989be61a702f9dc5359f358c482b079facffe4385423cdccdb8f6b8",
+    "pooled_AB_learned_failures.png": "5378d566af8684992fe2e84c546e947fb02664ee9c026763f2ab64154de9cd7c",
+    "map_tail_A_fifo_failures.png": "dcb65beedc856c0b6efe4afbd529e355b203d2ed63003a6c58129d76266d92bd"
+  },
+  "note": "Local raw checkpoints and trajectories are excluded. One adaptation seed; development only; test executions zero."
+}

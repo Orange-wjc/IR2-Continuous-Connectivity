@@ -1,0 +1,287 @@
+{
+  "scope": "Local graph heuristic probe; positive current utility is not a proven defect or causal failure mechanism.",
+  "actual_sensor_range": 70,
+  "upstream_utility_calculation_range": 70,
+  "initial_training": [
+    {
+      "map_index": 0,
+      "robots": [
+        {
+          "robot": 0,
+          "current_graph_utility": 63,
+          "observable_frontier_points_inside_60": 6,
+          "new_cells_rescanning_same_pose": 0
+        },
+        {
+          "robot": 1,
+          "current_graph_utility": 59,
+          "observable_frontier_points_inside_60": 5,
+          "new_cells_rescanning_same_pose": 0
+        }
+      ]
+    },
+    {
+      "map_index": 1,
+      "robots": [
+        {
+          "robot": 0,
+          "current_graph_utility": 42,
+          "observable_frontier_points_inside_60": 7,
+          "new_cells_rescanning_same_pose": 0
+        },
+        {
+          "robot": 1,
+          "current_graph_utility": 42,
+          "observable_frontier_points_inside_60": 9,
+          "new_cells_rescanning_same_pose": 0
+        }
+      ]
+    },
+    {
+      "map_index": 2,
+      "robots": [
+        {
+          "robot": 0,
+          "current_graph_utility": 36,
+          "observable_frontier_points_inside_60": 5,
+          "new_cells_rescanning_same_pose": 0
+        },
+        {
+          "robot": 1,
+          "current_graph_utility": 36,
+          "observable_frontier_points_inside_60": 4,
+          "new_cells_rescanning_same_pose": 0
+        }
+      ]
+    },
+    {
+      "map_index": 3,
+      "robots": [
+        {
+          "robot": 0,
+          "current_graph_utility": 64,
+          "observable_frontier_points_inside_60": 7,
+          "new_cells_rescanning_same_pose": 0
+        },
+        {
+          "robot": 1,
+          "current_graph_utility": 67,
+          "observable_frontier_points_inside_60": 7,
+          "new_cells_rescanning_same_pose": 0
+        }
+      ]
+    },
+    {
+      "map_index": 4,
+      "robots": [
+        {
+          "robot": 0,
+          "current_graph_utility": 47,
+          "observable_frontier_points_inside_60": 4,
+          "new_cells_rescanning_same_pose": 0
+        },
+        {
+          "robot": 1,
+          "current_graph_utility": 53,
+          "observable_frontier_points_inside_60": 8,
+          "new_cells_rescanning_same_pose": 0
+        }
+      ]
+    },
+    {
+      "map_index": 5,
+      "robots": [
+        {
+          "robot": 0,
+          "current_graph_utility": 59,
+          "observable_frontier_points_inside_60": 10,
+          "new_cells_rescanning_same_pose": 0
+        },
+        {
+          "robot": 1,
+          "current_graph_utility": 59,
+          "observable_frontier_points_inside_60": 10,
+          "new_cells_rescanning_same_pose": 0
+        }
+      ]
+    },
+    {
+      "map_index": 6,
+      "robots": [
+        {
+          "robot": 0,
+          "current_graph_utility": 64,
+          "observable_frontier_points_inside_60": 13,
+          "new_cells_rescanning_same_pose": 0
+        },
+        {
+          "robot": 1,
+          "current_graph_utility": 64,
+          "observable_frontier_points_inside_60": 14,
+          "new_cells_rescanning_same_pose": 0
+        }
+      ]
+    },
+    {
+      "map_index": 7,
+      "robots": [
+        {
+          "robot": 0,
+          "current_graph_utility": 83,
+          "observable_frontier_points_inside_60": 8,
+          "new_cells_rescanning_same_pose": 0
+        },
+        {
+          "robot": 1,
+          "current_graph_utility": 82,
+          "observable_frontier_points_inside_60": 7,
+          "new_cells_rescanning_same_pose": 0
+        }
+      ]
+    },
+    {
+      "map_index": 8,
+      "robots": [
+        {
+          "robot": 0,
+          "current_graph_utility": 68,
+          "observable_frontier_points_inside_60": 8,
+          "new_cells_rescanning_same_pose": 0
+        },
+        {
+          "robot": 1,
+          "current_graph_utility": 66,
+          "observable_frontier_points_inside_60": 8,
+          "new_cells_rescanning_same_pose": 0
+        }
+      ]
+    },
+    {
+      "map_index": 9,
+      "robots": [
+        {
+          "robot": 0,
+          "current_graph_utility": 54,
+          "observable_frontier_points_inside_60": 6,
+          "new_cells_rescanning_same_pose": 0
+        },
+        {
+          "robot": 1,
+          "current_graph_utility": 46,
+          "observable_frontier_points_inside_60": 6,
+          "new_cells_rescanning_same_pose": 0
+        }
+      ]
+    }
+  ],
+  "prior_training_failures": [
+    {
+      "episode": 5,
+      "map_index": 16,
+      "robots": [
+        {
+          "robot": 0,
+          "current_graph_utility": 0,
+          "observable_frontier_points_inside_60": 0,
+          "new_cells_rescanning_same_pose": 0
+        },
+        {
+          "robot": 1,
+          "current_graph_utility": 0,
+          "observable_frontier_points_inside_60": 0,
+          "new_cells_rescanning_same_pose": 0
+        }
+      ]
+    },
+    {
+      "episode": 18,
+      "map_index": 29,
+      "robots": [
+        {
+          "robot": 0,
+          "current_graph_utility": 0,
+          "observable_frontier_points_inside_60": 0,
+          "new_cells_rescanning_same_pose": 0
+        },
+        {
+          "robot": 1,
+          "current_graph_utility": 0,
+          "observable_frontier_points_inside_60": 0,
+          "new_cells_rescanning_same_pose": 0
+        }
+      ]
+    },
+    {
+      "episode": 23,
+      "map_index": 84,
+      "robots": [
+        {
+          "robot": 0,
+          "current_graph_utility": 0,
+          "observable_frontier_points_inside_60": 0,
+          "new_cells_rescanning_same_pose": 0
+        },
+        {
+          "robot": 1,
+          "current_graph_utility": 0,
+          "observable_frontier_points_inside_60": 0,
+          "new_cells_rescanning_same_pose": 0
+        }
+      ]
+    },
+    {
+      "episode": 41,
+      "map_index": 12,
+      "robots": [
+        {
+          "robot": 0,
+          "current_graph_utility": 0,
+          "observable_frontier_points_inside_60": 0,
+          "new_cells_rescanning_same_pose": 0
+        },
+        {
+          "robot": 1,
+          "current_graph_utility": 0,
+          "observable_frontier_points_inside_60": 0,
+          "new_cells_rescanning_same_pose": 0
+        }
+      ]
+    },
+    {
+      "episode": 61,
+      "map_index": 71,
+      "robots": [
+        {
+          "robot": 0,
+          "current_graph_utility": 5,
+          "observable_frontier_points_inside_60": 0,
+          "new_cells_rescanning_same_pose": 0
+        },
+        {
+          "robot": 1,
+          "current_graph_utility": 0,
+          "observable_frontier_points_inside_60": 0,
+          "new_cells_rescanning_same_pose": 0
+        }
+      ]
+    },
+    {
+      "episode": 100,
+      "map_index": 40,
+      "robots": [
+        {
+          "robot": 0,
+          "current_graph_utility": 0,
+          "observable_frontier_points_inside_60": 0,
+          "new_cells_rescanning_same_pose": 0
+        },
+        {
+          "robot": 1,
+          "current_graph_utility": 0,
+          "observable_frontier_points_inside_60": 0,
+          "new_cells_rescanning_same_pose": 0
+        }
+      ]
+    }
+  ]
+}

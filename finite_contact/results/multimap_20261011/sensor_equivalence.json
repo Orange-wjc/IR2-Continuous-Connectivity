@@ -1,0 +1,7 @@
+{
+  "initial_greedy_maps": 10,
+  "initial_complete_rollout_metrics_exactly_equal": true,
+  "common_actual_sac_updates": 738,
+  "identical_actual_sac_update_records": 738,
+  "scope": "Same initialization, map order and learning settings; computational sensor implementation changed."
+}

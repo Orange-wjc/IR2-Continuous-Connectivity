@@ -1,0 +1,362 @@
+{
+  "adaptation_seeds": [
+    1,
+    2,
+    3
+  ],
+  "groups": {
+    "A_fifo": {
+      "successes": {
+        "mean": 18.666666666666668,
+        "sample_std": 0.5773502691896258,
+        "per_seed": [
+          18,
+          19,
+          19
+        ]
+      },
+      "mean_capped_time": {
+        "mean": 171.97002605823624,
+        "sample_std": 4.17249150075619,
+        "per_seed": [
+          176.5031881351601,
+          171.11678026384675,
+          168.2901097757019
+        ]
+      },
+      "mean_minimum_coverage": {
+        "mean": 0.9856978502890321,
+        "sample_std": 0.00605933942251381,
+        "per_seed": [
+          0.9790743101770237,
+          0.987057152284941,
+          0.9909620884051316
+        ]
+      },
+      "mean_coverage_deficit": {
+        "mean": 0.18228498977602658,
+        "sample_std": 0.010075406922527754,
+        "per_seed": [
+          0.1826850922101826,
+          0.19215438557386244,
+          0.17201549154403478
+        ]
+      }
+    },
+    "A_rule": {
+      "successes": {
+        "mean": 19.0,
+        "sample_std": 1.0,
+        "per_seed": [
+          19,
+          18,
+          20
+        ]
+      },
+      "mean_capped_time": {
+        "mean": 155.51957096210904,
+        "sample_std": 9.356856497240594,
+        "per_seed": [
+          150.47159974137497,
+          166.31635860237708,
+          149.7707545425751
+        ]
+      },
+      "mean_minimum_coverage": {
+        "mean": 0.9899415261536669,
+        "sample_std": 0.002103979996329902,
+        "per_seed": [
+          0.9892384446391749,
+          0.9882791182737971,
+          0.9923070155480289
+        ]
+      },
+      "mean_coverage_deficit": {
+        "mean": 0.14339072036162662,
+        "sample_std": 0.00703968082646765,
+        "per_seed": [
+          0.13968417507286918,
+          0.15150923423482718,
+          0.13897875177718355
+        ]
+      }
+    },
+    "AB_learned": {
+      "successes": {
+        "mean": 18.666666666666668,
+        "sample_std": 1.5275252316519468,
+        "per_seed": [
+          20,
+          17,
+          19
+        ]
+      },
+      "mean_capped_time": {
+        "mean": 136.20505283436634,
+        "sample_std": 11.593999468422062,
+        "per_seed": [
+          125.47955876373548,
+          148.50636286063443,
+          134.62923687872916
+        ]
+      },
+      "mean_minimum_coverage": {
+        "mean": 0.9907702336078451,
+        "sample_std": 0.0032062972336162937,
+        "per_seed": [
+          0.9930745102116759,
+          0.9871084989339858,
+          0.9921276916778735
+        ]
+      },
+      "mean_coverage_deficit": {
+        "mean": 0.12192541514249244,
+        "sample_std": 0.00767720697693796,
+        "per_seed": [
+          0.1179906467814759,
+          0.13077231278149487,
+          0.11701328586450654
+        ]
+      }
+    }
+  },
+  "paired_learned_vs": {
+    "A_fifo": [
+      {
+        "seed": 1,
+        "success_gain": 2,
+        "time_saved_seconds": 51.023629371424605,
+        "fraction_time_saved": 0.2890804971316011
+      },
+      {
+        "seed": 2,
+        "success_gain": -2,
+        "time_saved_seconds": 22.610417403212324,
+        "fraction_time_saved": 0.1321344252056934
+      },
+      {
+        "seed": 3,
+        "success_gain": 0,
+        "time_saved_seconds": 33.660872896972734,
+        "fraction_time_saved": 0.20001694063802178
+      }
+    ],
+    "A_rule": [
+      {
+        "seed": 1,
+        "success_gain": 1,
+        "time_saved_seconds": 24.99204097763949,
+        "fraction_time_saved": 0.16609141539396732
+      },
+      {
+        "seed": 2,
+        "success_gain": -1,
+        "time_saved_seconds": 17.809995741742654,
+        "fraction_time_saved": 0.10708505099202015
+      },
+      {
+        "seed": 3,
+        "success_gain": -1,
+        "time_saved_seconds": 15.141517663845946,
+        "fraction_time_saved": 0.10109795941197375
+      }
+    ]
+  },
+  "aggregation_unit": "One final model per adaptation seed; sample SD across seeds, not 60 IID maps.",
+  "scope": "Adaptation seeds 1, 2, 3 with one shared pretrained movement/head; no test policy execution.",
+  "per_run": [
+    {
+      "seed": 1,
+      "groups": {
+        "A_fifo": {
+          "maps": 20,
+          "successes": 18,
+          "mean_capped_time": 176.5031881351601,
+          "mean_minimum_coverage": 0.9790743101770237,
+          "mean_coverage_deficit": 0.1826850922101826,
+          "failed_maps": [
+            1,
+            5
+          ],
+          "physical_audit": {
+            "rollouts": 20,
+            "movement_segments": 2942,
+            "wall_crossings": 0,
+            "coverage_recomputed": true,
+            "radio_and_speed_caps_passed": true
+          }
+        },
+        "A_rule": {
+          "maps": 20,
+          "successes": 19,
+          "mean_capped_time": 150.47159974137497,
+          "mean_minimum_coverage": 0.9892384446391749,
+          "mean_coverage_deficit": 0.13968417507286918,
+          "failed_maps": [
+            5
+          ],
+          "physical_audit": {
+            "rollouts": 20,
+            "movement_segments": 2330,
+            "wall_crossings": 0,
+            "coverage_recomputed": true,
+            "radio_and_speed_caps_passed": true
+          }
+        },
+        "AB_learned": {
+          "maps": 20,
+          "successes": 20,
+          "mean_capped_time": 125.47955876373548,
+          "mean_minimum_coverage": 0.9930745102116759,
+          "mean_coverage_deficit": 0.1179906467814759,
+          "failed_maps": [],
+          "physical_audit": {
+            "rollouts": 20,
+            "movement_segments": 1908,
+            "wall_crossings": 0,
+            "coverage_recomputed": true,
+            "radio_and_speed_caps_passed": true
+          }
+        }
+      },
+      "directory": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/multimap_joint_20261012_seed1"
+    },
+    {
+      "seed": 2,
+      "groups": {
+        "A_fifo": {
+          "maps": 20,
+          "successes": 19,
+          "mean_capped_time": 171.11678026384675,
+          "mean_minimum_coverage": 0.987057152284941,
+          "mean_coverage_deficit": 0.19215438557386244,
+          "failed_maps": [
+            5
+          ],
+          "physical_audit": {
+            "rollouts": 20,
+            "movement_segments": 2852,
+            "wall_crossings": 0,
+            "coverage_recomputed": true,
+            "radio_and_speed_caps_passed": true
+          }
+        },
+        "A_rule": {
+          "maps": 20,
+          "successes": 18,
+          "mean_capped_time": 166.31635860237708,
+          "mean_minimum_coverage": 0.9882791182737971,
+          "mean_coverage_deficit": 0.15150923423482718,
+          "failed_maps": [
+            1,
+            14
+          ],
+          "physical_audit": {
+            "rollouts": 20,
+            "movement_segments": 2654,
+            "wall_crossings": 0,
+            "coverage_recomputed": true,
+            "radio_and_speed_caps_passed": true
+          }
+        },
+        "AB_learned": {
+          "maps": 20,
+          "successes": 17,
+          "mean_capped_time": 148.50636286063443,
+          "mean_minimum_coverage": 0.9871084989339858,
+          "mean_coverage_deficit": 0.13077231278149487,
+          "failed_maps": [
+            2,
+            14,
+            19
+          ],
+          "physical_audit": {
+            "rollouts": 20,
+            "movement_segments": 2196,
+            "wall_crossings": 0,
+            "coverage_recomputed": true,
+            "radio_and_speed_caps_passed": true
+          }
+        }
+      },
+      "directory": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/multiseed_20261012/seed_2"
+    },
+    {
+      "seed": 3,
+      "groups": {
+        "A_fifo": {
+          "maps": 20,
+          "successes": 19,
+          "mean_capped_time": 168.2901097757019,
+          "mean_minimum_coverage": 0.9909620884051316,
+          "mean_coverage_deficit": 0.17201549154403478,
+          "failed_maps": [
+            0
+          ],
+          "physical_audit": {
+            "rollouts": 20,
+            "movement_segments": 2710,
+            "wall_crossings": 0,
+            "coverage_recomputed": true,
+            "radio_and_speed_caps_passed": true
+          }
+        },
+        "A_rule": {
+          "maps": 20,
+          "successes": 20,
+          "mean_capped_time": 149.7707545425751,
+          "mean_minimum_coverage": 0.9923070155480289,
+          "mean_coverage_deficit": 0.13897875177718355,
+          "failed_maps": [],
+          "physical_audit": {
+            "rollouts": 20,
+            "movement_segments": 2290,
+            "wall_crossings": 0,
+            "coverage_recomputed": true,
+            "radio_and_speed_caps_passed": true
+          }
+        },
+        "AB_learned": {
+          "maps": 20,
+          "successes": 19,
+          "mean_capped_time": 134.62923687872916,
+          "mean_minimum_coverage": 0.9921276916778735,
+          "mean_coverage_deficit": 0.11701328586450654,
+          "failed_maps": [
+            3
+          ],
+          "physical_audit": {
+            "rollouts": 20,
+            "movement_segments": 2080,
+            "wall_crossings": 0,
+            "coverage_recomputed": true,
+            "radio_and_speed_caps_passed": true
+          }
+        }
+      },
+      "directory": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/multiseed_20261012/seed_3"
+    }
+  ],
+  "shared_pretrained_state_and_config_checked": true,
+  "source_identity": {
+    "movement_sha256": "43d41b3b73726d8db534e121c09ee2a691365a4147275c34805aa27de11abb47",
+    "head_sha256": "d414670b948e65fec0d714c216d3487723d921551bafda0c6ef04061b4989ab7",
+    "dataset_seed": 20261011,
+    "sweeps": 1,
+    "updates_per_map": 20,
+    "source_sac_updates": 8895,
+    "new_sac_updates_per_group": 2000,
+    "frozen_head_updates": 5000
+  },
+  "combined_physical_audit": {
+    "rollouts": 1080,
+    "movement_segments": 131104,
+    "wall_crossings": 0
+  },
+  "test_policy_evaluations": 0,
+  "limitations": [
+    "Adaptation seeds share one pretrained movement model and communication head.",
+    "All models use the same 20 development maps; no independent test policy execution.",
+    "Three adaptation seeds provide descriptive robustness evidence, not full independent training replication."
+  ]
+}

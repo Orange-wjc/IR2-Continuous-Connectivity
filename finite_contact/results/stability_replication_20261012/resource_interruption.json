@@ -1,0 +1,51 @@
+{
+  "reason": "Host kernel OOM at 2026-10-12 12:32:49; killed editor and one training worker; no remaining training process.",
+  "archive": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/stability_replication_20261012/resource_interruption_1791779821593486007",
+  "groups": {
+    "A_fifo": {
+      "checkpoint_episode": 200,
+      "checkpoint_sac_updates": 12895,
+      "logged_complete_training_maps": 100,
+      "logged_updates": 2000,
+      "maps_beyond_checkpoint": [],
+      "updates_beyond_checkpoint": 0,
+      "config_seed": 1,
+      "success_sampling": "map_tail"
+    },
+    "A_rule": {
+      "checkpoint_episode": 140,
+      "checkpoint_sac_updates": 11695,
+      "logged_complete_training_maps": 50,
+      "logged_updates": 1000,
+      "maps_beyond_checkpoint": [
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150
+      ],
+      "updates_beyond_checkpoint": 200,
+      "config_seed": 1,
+      "success_sampling": "map_tail"
+    },
+    "AB_learned": {
+      "checkpoint_episode": 140,
+      "checkpoint_sac_updates": 11695,
+      "logged_complete_training_maps": 40,
+      "logged_updates": 800,
+      "maps_beyond_checkpoint": [],
+      "updates_beyond_checkpoint": 0,
+      "config_seed": 1,
+      "success_sampling": "map_tail"
+    }
+  },
+  "discarded_completed_maps": 10,
+  "discarded_actual_sac_updates": 200,
+  "superseded_complete_development_evaluations": 4,
+  "note": "Ten complete training maps and 200 real updates beyond last committed rule checkpoint; four complete FIFO development evaluations superseded. Preserve original raw arrays and all logs; do not include these in final fixed-budget counts."
+}

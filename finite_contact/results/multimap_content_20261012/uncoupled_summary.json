@@ -1,0 +1,44 @@
+{
+  "scope": "Post-primary frozen-weight diagnostic; FIFO rendezvous estimator common to both selectors.",
+  "validation": {
+    "rule": {
+      "successes": 17,
+      "mean_capped_time": 169.4769164549948,
+      "mean_minimum_coverage": 0.9787072802653445,
+      "failed_maps": [
+        0,
+        5,
+        14
+      ],
+      "physical_audit": {
+        "rollouts": 20,
+        "movement_segments": 2598,
+        "wall_crossings": 0,
+        "coverage_recomputed": true,
+        "radio_and_speed_caps_passed": true
+      },
+      "time_difference_from_coupled": 1.8357758285920938
+    },
+    "learned": {
+      "successes": 17,
+      "mean_capped_time": 163.52940534323034,
+      "mean_minimum_coverage": 0.9808661108008303,
+      "failed_maps": [
+        1,
+        5,
+        8
+      ],
+      "physical_audit": {
+        "rollouts": 20,
+        "movement_segments": 2582,
+        "wall_crossings": 0,
+        "coverage_recomputed": true,
+        "radio_and_speed_caps_passed": true
+      },
+      "time_difference_from_coupled": -11.675415376680814
+    }
+  },
+  "new_sac_updates": 0,
+  "new_head_updates": 0,
+  "test_policy_evaluations": 0
+}

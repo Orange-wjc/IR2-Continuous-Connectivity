@@ -1,0 +1,1524 @@
+[
+  {
+    "seed": 1,
+    "group": "A_fifo",
+    "complete_training_maps": 100,
+    "successes": 93,
+    "failures": [
+      {
+        "episode": 27,
+        "map_index": 94,
+        "coverage": [
+          0.9864052721017946,
+          0.9864052721017946
+        ],
+        "union_coverage": 0.9864052721017946,
+        "graph": [
+          {
+            "nodes": 138,
+            "reachable": 138,
+            "positive_nodes": 46,
+            "reachable_positive_nodes": 46,
+            "frontiers": 29
+          },
+          {
+            "nodes": 138,
+            "reachable": 138,
+            "positive_nodes": 47,
+            "reachable_positive_nodes": 47,
+            "frontiers": 29
+          }
+        ]
+      },
+      {
+        "episode": 35,
+        "map_index": 88,
+        "coverage": [
+          0.8235403112904554,
+          0.9989706003458783
+        ],
+        "union_coverage": 0.9989706003458783,
+        "graph": [
+          {
+            "nodes": 114,
+            "reachable": 114,
+            "positive_nodes": 41,
+            "reachable_positive_nodes": 41,
+            "frontiers": 17
+          },
+          {
+            "nodes": 142,
+            "reachable": 142,
+            "positive_nodes": 28,
+            "reachable_positive_nodes": 28,
+            "frontiers": 3
+          }
+        ]
+      },
+      {
+        "episode": 54,
+        "map_index": 4,
+        "coverage": [
+          0.9633204633204633,
+          0.9633204633204633
+        ],
+        "union_coverage": 0.9633204633204633,
+        "graph": [
+          {
+            "nodes": 138,
+            "reachable": 138,
+            "positive_nodes": 32,
+            "reachable_positive_nodes": 32,
+            "frontiers": 28
+          },
+          {
+            "nodes": 138,
+            "reachable": 138,
+            "positive_nodes": 32,
+            "reachable_positive_nodes": 32,
+            "frontiers": 28
+          }
+        ]
+      },
+      {
+        "episode": 64,
+        "map_index": 42,
+        "coverage": [
+          0.8941825696948378,
+          0.9929205874593263
+        ],
+        "union_coverage": 0.9929205874593263,
+        "graph": [
+          {
+            "nodes": 107,
+            "reachable": 107,
+            "positive_nodes": 43,
+            "reachable_positive_nodes": 43,
+            "frontiers": 39
+          },
+          {
+            "nodes": 119,
+            "reachable": 119,
+            "positive_nodes": 26,
+            "reachable_positive_nodes": 26,
+            "frontiers": 9
+          }
+        ]
+      },
+      {
+        "episode": 79,
+        "map_index": 85,
+        "coverage": [
+          0.9893445795896746,
+          0.9893445795896746
+        ],
+        "union_coverage": 0.9893445795896746,
+        "graph": [
+          {
+            "nodes": 142,
+            "reachable": 142,
+            "positive_nodes": 31,
+            "reachable_positive_nodes": 31,
+            "frontiers": 13
+          },
+          {
+            "nodes": 142,
+            "reachable": 142,
+            "positive_nodes": 31,
+            "reachable_positive_nodes": 31,
+            "frontiers": 13
+          }
+        ]
+      },
+      {
+        "episode": 83,
+        "map_index": 11,
+        "coverage": [
+          0.979941730165845,
+          0.979941730165845
+        ],
+        "union_coverage": 0.979941730165845,
+        "graph": [
+          {
+            "nodes": 118,
+            "reachable": 118,
+            "positive_nodes": 11,
+            "reachable_positive_nodes": 11,
+            "frontiers": 11
+          },
+          {
+            "nodes": 118,
+            "reachable": 118,
+            "positive_nodes": 11,
+            "reachable_positive_nodes": 11,
+            "frontiers": 11
+          }
+        ]
+      },
+      {
+        "episode": 92,
+        "map_index": 16,
+        "coverage": [
+          0.8438220517923453,
+          0.8438220517923453
+        ],
+        "union_coverage": 0.8438220517923453,
+        "graph": [
+          {
+            "nodes": 70,
+            "reachable": 69,
+            "positive_nodes": 11,
+            "reachable_positive_nodes": 10,
+            "frontiers": 22
+          },
+          {
+            "nodes": 70,
+            "reachable": 69,
+            "positive_nodes": 11,
+            "reachable_positive_nodes": 10,
+            "frontiers": 22
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "group": "A_rule",
+    "complete_training_maps": 100,
+    "successes": 94,
+    "failures": [
+      {
+        "episode": 11,
+        "map_index": 92,
+        "coverage": [
+          0.9852012875715899,
+          0.9852012875715899
+        ],
+        "union_coverage": 0.9852012875715899,
+        "graph": [
+          {
+            "nodes": 131,
+            "reachable": 131,
+            "positive_nodes": 12,
+            "reachable_positive_nodes": 12,
+            "frontiers": 9
+          },
+          {
+            "nodes": 131,
+            "reachable": 131,
+            "positive_nodes": 12,
+            "reachable_positive_nodes": 12,
+            "frontiers": 9
+          }
+        ]
+      },
+      {
+        "episode": 31,
+        "map_index": 67,
+        "coverage": [
+          0.8600050139974095,
+          1.0
+        ],
+        "union_coverage": 1.0,
+        "graph": [
+          {
+            "nodes": 109,
+            "reachable": 109,
+            "positive_nodes": 29,
+            "reachable_positive_nodes": 29,
+            "frontiers": 38
+          },
+          {
+            "nodes": 124,
+            "reachable": 124,
+            "positive_nodes": 0,
+            "reachable_positive_nodes": 0,
+            "frontiers": 0
+          }
+        ]
+      },
+      {
+        "episode": 54,
+        "map_index": 4,
+        "coverage": [
+          0.9060009857882199,
+          0.9060009857882199
+        ],
+        "union_coverage": 0.9060009857882199,
+        "graph": [
+          {
+            "nodes": 129,
+            "reachable": 129,
+            "positive_nodes": 31,
+            "reachable_positive_nodes": 31,
+            "frontiers": 34
+          },
+          {
+            "nodes": 129,
+            "reachable": 129,
+            "positive_nodes": 31,
+            "reachable_positive_nodes": 31,
+            "frontiers": 34
+          }
+        ]
+      },
+      {
+        "episode": 87,
+        "map_index": 25,
+        "coverage": [
+          0.9890528528265534,
+          0.9890528528265534
+        ],
+        "union_coverage": 0.9890528528265534,
+        "graph": [
+          {
+            "nodes": 119,
+            "reachable": 119,
+            "positive_nodes": 17,
+            "reachable_positive_nodes": 17,
+            "frontiers": 10
+          },
+          {
+            "nodes": 119,
+            "reachable": 119,
+            "positive_nodes": 17,
+            "reachable_positive_nodes": 17,
+            "frontiers": 10
+          }
+        ]
+      },
+      {
+        "episode": 92,
+        "map_index": 16,
+        "coverage": [
+          0.9854864937019149,
+          0.9854864937019149
+        ],
+        "union_coverage": 0.9854864937019149,
+        "graph": [
+          {
+            "nodes": 80,
+            "reachable": 80,
+            "positive_nodes": 8,
+            "reachable_positive_nodes": 8,
+            "frontiers": 14
+          },
+          {
+            "nodes": 80,
+            "reachable": 80,
+            "positive_nodes": 8,
+            "reachable_positive_nodes": 8,
+            "frontiers": 14
+          }
+        ]
+      },
+      {
+        "episode": 99,
+        "map_index": 12,
+        "coverage": [
+          0.9891440750552756,
+          0.9975698663426489
+        ],
+        "union_coverage": 0.9975698663426489,
+        "graph": [
+          {
+            "nodes": 131,
+            "reachable": 131,
+            "positive_nodes": 52,
+            "reachable_positive_nodes": 52,
+            "frontiers": 15
+          },
+          {
+            "nodes": 135,
+            "reachable": 135,
+            "positive_nodes": 39,
+            "reachable_positive_nodes": 39,
+            "frontiers": 7
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "group": "AB_learned",
+    "complete_training_maps": 100,
+    "successes": 94,
+    "failures": [
+      {
+        "episode": 27,
+        "map_index": 94,
+        "coverage": [
+          0.986301653748912,
+          0.986301653748912
+        ],
+        "union_coverage": 0.986301653748912,
+        "graph": [
+          {
+            "nodes": 139,
+            "reachable": 139,
+            "positive_nodes": 16,
+            "reachable_positive_nodes": 16,
+            "frontiers": 11
+          },
+          {
+            "nodes": 140,
+            "reachable": 140,
+            "positive_nodes": 16,
+            "reachable_positive_nodes": 16,
+            "frontiers": 11
+          }
+        ]
+      },
+      {
+        "episode": 35,
+        "map_index": 88,
+        "coverage": [
+          0.8360989870707404,
+          0.999855884048423
+        ],
+        "union_coverage": 0.999855884048423,
+        "graph": [
+          {
+            "nodes": 116,
+            "reachable": 115,
+            "positive_nodes": 20,
+            "reachable_positive_nodes": 19,
+            "frontiers": 24
+          },
+          {
+            "nodes": 143,
+            "reachable": 143,
+            "positive_nodes": 0,
+            "reachable_positive_nodes": 0,
+            "frontiers": 0
+          }
+        ]
+      },
+      {
+        "episode": 46,
+        "map_index": 41,
+        "coverage": [
+          0.6858349508350575,
+          0.96265170744193
+        ],
+        "union_coverage": 0.9920440244864877,
+        "graph": [
+          {
+            "nodes": 91,
+            "reachable": 91,
+            "positive_nodes": 48,
+            "reachable_positive_nodes": 48,
+            "frontiers": 31
+          },
+          {
+            "nodes": 126,
+            "reachable": 124,
+            "positive_nodes": 60,
+            "reachable_positive_nodes": 59,
+            "frontiers": 51
+          }
+        ]
+      },
+      {
+        "episode": 47,
+        "map_index": 45,
+        "coverage": [
+          0.808,
+          0.808
+        ],
+        "union_coverage": 0.808,
+        "graph": [
+          {
+            "nodes": 101,
+            "reachable": 101,
+            "positive_nodes": 33,
+            "reachable_positive_nodes": 33,
+            "frontiers": 30
+          },
+          {
+            "nodes": 101,
+            "reachable": 101,
+            "positive_nodes": 33,
+            "reachable_positive_nodes": 33,
+            "frontiers": 30
+          }
+        ]
+      },
+      {
+        "episode": 66,
+        "map_index": 89,
+        "coverage": [
+          0.8226720647773279,
+          1.0
+        ],
+        "union_coverage": 1.0,
+        "graph": [
+          {
+            "nodes": 92,
+            "reachable": 92,
+            "positive_nodes": 15,
+            "reachable_positive_nodes": 15,
+            "frontiers": 14
+          },
+          {
+            "nodes": 113,
+            "reachable": 113,
+            "positive_nodes": 0,
+            "reachable_positive_nodes": 0,
+            "frontiers": 0
+          }
+        ]
+      },
+      {
+        "episode": 77,
+        "map_index": 13,
+        "coverage": [
+          0.8566837230938386,
+          0.9966803400008458
+        ],
+        "union_coverage": 0.9974203915930139,
+        "graph": [
+          {
+            "nodes": 101,
+            "reachable": 101,
+            "positive_nodes": 37,
+            "reachable_positive_nodes": 37,
+            "frontiers": 24
+          },
+          {
+            "nodes": 121,
+            "reachable": 121,
+            "positive_nodes": 35,
+            "reachable_positive_nodes": 35,
+            "frontiers": 11
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "group": "A_fifo",
+    "complete_training_maps": 100,
+    "successes": 85,
+    "failures": [
+      {
+        "episode": 5,
+        "map_index": 16,
+        "coverage": [
+          0.9779870397786569,
+          0.9779870397786569
+        ],
+        "union_coverage": 0.9779870397786569,
+        "graph": [
+          {
+            "nodes": 81,
+            "reachable": 81,
+            "positive_nodes": 12,
+            "reachable_positive_nodes": 12,
+            "frontiers": 17
+          },
+          {
+            "nodes": 80,
+            "reachable": 80,
+            "positive_nodes": 12,
+            "reachable_positive_nodes": 12,
+            "frontiers": 17
+          }
+        ]
+      },
+      {
+        "episode": 12,
+        "map_index": 92,
+        "coverage": [
+          0.9866017306968772,
+          0.9866017306968772
+        ],
+        "union_coverage": 0.9866017306968772,
+        "graph": [
+          {
+            "nodes": 131,
+            "reachable": 131,
+            "positive_nodes": 12,
+            "reachable_positive_nodes": 12,
+            "frontiers": 10
+          },
+          {
+            "nodes": 131,
+            "reachable": 131,
+            "positive_nodes": 12,
+            "reachable_positive_nodes": 12,
+            "frontiers": 10
+          }
+        ]
+      },
+      {
+        "episode": 13,
+        "map_index": 76,
+        "coverage": [
+          0.9759244252996119,
+          0.9759244252996119
+        ],
+        "union_coverage": 0.9759244252996119,
+        "graph": [
+          {
+            "nodes": 129,
+            "reachable": 129,
+            "positive_nodes": 36,
+            "reachable_positive_nodes": 36,
+            "frontiers": 20
+          },
+          {
+            "nodes": 128,
+            "reachable": 128,
+            "positive_nodes": 36,
+            "reachable_positive_nodes": 36,
+            "frontiers": 20
+          }
+        ]
+      },
+      {
+        "episode": 18,
+        "map_index": 29,
+        "coverage": [
+          0.9999558040350915,
+          0.8808476786069432
+        ],
+        "union_coverage": 0.9999558040350915,
+        "graph": [
+          {
+            "nodes": 119,
+            "reachable": 119,
+            "positive_nodes": 0,
+            "reachable_positive_nodes": 0,
+            "frontiers": 0
+          },
+          {
+            "nodes": 106,
+            "reachable": 106,
+            "positive_nodes": 12,
+            "reachable_positive_nodes": 12,
+            "frontiers": 15
+          }
+        ]
+      },
+      {
+        "episode": 29,
+        "map_index": 74,
+        "coverage": [
+          0.9817701288160989,
+          0.9997918964476724
+        ],
+        "union_coverage": 0.9997918964476724,
+        "graph": [
+          {
+            "nodes": 138,
+            "reachable": 138,
+            "positive_nodes": 38,
+            "reachable_positive_nodes": 38,
+            "frontiers": 21
+          },
+          {
+            "nodes": 143,
+            "reachable": 143,
+            "positive_nodes": 14,
+            "reachable_positive_nodes": 14,
+            "frontiers": 2
+          }
+        ]
+      },
+      {
+        "episode": 35,
+        "map_index": 36,
+        "coverage": [
+          1.0,
+          0.9640571578855089
+        ],
+        "union_coverage": 1.0,
+        "graph": [
+          {
+            "nodes": 132,
+            "reachable": 132,
+            "positive_nodes": 0,
+            "reachable_positive_nodes": 0,
+            "frontiers": 0
+          },
+          {
+            "nodes": 123,
+            "reachable": 123,
+            "positive_nodes": 42,
+            "reachable_positive_nodes": 42,
+            "frontiers": 18
+          }
+        ]
+      },
+      {
+        "episode": 36,
+        "map_index": 78,
+        "coverage": [
+          0.9786180700781016,
+          0.9786180700781016
+        ],
+        "union_coverage": 0.9786180700781016,
+        "graph": [
+          {
+            "nodes": 117,
+            "reachable": 117,
+            "positive_nodes": 41,
+            "reachable_positive_nodes": 41,
+            "frontiers": 22
+          },
+          {
+            "nodes": 117,
+            "reachable": 117,
+            "positive_nodes": 41,
+            "reachable_positive_nodes": 41,
+            "frontiers": 22
+          }
+        ]
+      },
+      {
+        "episode": 41,
+        "map_index": 12,
+        "coverage": [
+          0.9489074358106089,
+          0.9697627631814831
+        ],
+        "union_coverage": 0.9697627631814831,
+        "graph": [
+          {
+            "nodes": 123,
+            "reachable": 123,
+            "positive_nodes": 59,
+            "reachable_positive_nodes": 59,
+            "frontiers": 38
+          },
+          {
+            "nodes": 129,
+            "reachable": 129,
+            "positive_nodes": 28,
+            "reachable_positive_nodes": 28,
+            "frontiers": 20
+          }
+        ]
+      },
+      {
+        "episode": 57,
+        "map_index": 64,
+        "coverage": [
+          0.9891500137743966,
+          0.9891500137743966
+        ],
+        "union_coverage": 0.9891500137743966,
+        "graph": [
+          {
+            "nodes": 129,
+            "reachable": 129,
+            "positive_nodes": 34,
+            "reachable_positive_nodes": 34,
+            "frontiers": 16
+          },
+          {
+            "nodes": 129,
+            "reachable": 129,
+            "positive_nodes": 34,
+            "reachable_positive_nodes": 34,
+            "frontiers": 16
+          }
+        ]
+      },
+      {
+        "episode": 58,
+        "map_index": 45,
+        "coverage": [
+          0.9816787564766839,
+          0.9816787564766839
+        ],
+        "union_coverage": 0.9816787564766839,
+        "graph": [
+          {
+            "nodes": 121,
+            "reachable": 121,
+            "positive_nodes": 21,
+            "reachable_positive_nodes": 21,
+            "frontiers": 9
+          },
+          {
+            "nodes": 121,
+            "reachable": 121,
+            "positive_nodes": 21,
+            "reachable_positive_nodes": 21,
+            "frontiers": 9
+          }
+        ]
+      },
+      {
+        "episode": 60,
+        "map_index": 8,
+        "coverage": [
+          0.9867381910296528,
+          0.9867381910296528
+        ],
+        "union_coverage": 0.9867381910296528,
+        "graph": [
+          {
+            "nodes": 130,
+            "reachable": 130,
+            "positive_nodes": 23,
+            "reachable_positive_nodes": 23,
+            "frontiers": 12
+          },
+          {
+            "nodes": 130,
+            "reachable": 130,
+            "positive_nodes": 23,
+            "reachable_positive_nodes": 23,
+            "frontiers": 12
+          }
+        ]
+      },
+      {
+        "episode": 62,
+        "map_index": 94,
+        "coverage": [
+          0.9566460811538939,
+          0.9645003523023998
+        ],
+        "union_coverage": 0.9645003523023998,
+        "graph": [
+          {
+            "nodes": 136,
+            "reachable": 136,
+            "positive_nodes": 29,
+            "reachable_positive_nodes": 29,
+            "frontiers": 16
+          },
+          {
+            "nodes": 136,
+            "reachable": 136,
+            "positive_nodes": 30,
+            "reachable_positive_nodes": 30,
+            "frontiers": 21
+          }
+        ]
+      },
+      {
+        "episode": 70,
+        "map_index": 88,
+        "coverage": [
+          0.9678415548052376,
+          0.9985794284773121
+        ],
+        "union_coverage": 0.9985794284773121,
+        "graph": [
+          {
+            "nodes": 137,
+            "reachable": 137,
+            "positive_nodes": 34,
+            "reachable_positive_nodes": 34,
+            "frontiers": 21
+          },
+          {
+            "nodes": 141,
+            "reachable": 141,
+            "positive_nodes": 30,
+            "reachable_positive_nodes": 30,
+            "frontiers": 4
+          }
+        ]
+      },
+      {
+        "episode": 75,
+        "map_index": 81,
+        "coverage": [
+          0.9885163166673795,
+          0.9885163166673795
+        ],
+        "union_coverage": 0.9885163166673795,
+        "graph": [
+          {
+            "nodes": 112,
+            "reachable": 112,
+            "positive_nodes": 25,
+            "reachable_positive_nodes": 25,
+            "frontiers": 6
+          },
+          {
+            "nodes": 112,
+            "reachable": 112,
+            "positive_nodes": 25,
+            "reachable_positive_nodes": 25,
+            "frontiers": 6
+          }
+        ]
+      },
+      {
+        "episode": 89,
+        "map_index": 85,
+        "coverage": [
+          0.9892630849785058,
+          0.9892630849785058
+        ],
+        "union_coverage": 0.9892630849785058,
+        "graph": [
+          {
+            "nodes": 141,
+            "reachable": 141,
+            "positive_nodes": 31,
+            "reachable_positive_nodes": 31,
+            "frontiers": 13
+          },
+          {
+            "nodes": 142,
+            "reachable": 142,
+            "positive_nodes": 32,
+            "reachable_positive_nodes": 32,
+            "frontiers": 13
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "group": "A_rule",
+    "complete_training_maps": 100,
+    "successes": 97,
+    "failures": [
+      {
+        "episode": 16,
+        "map_index": 21,
+        "coverage": [
+          0.8771978788724533,
+          0.708810121871802
+        ],
+        "union_coverage": 0.9923248674295283,
+        "graph": [
+          {
+            "nodes": 99,
+            "reachable": 99,
+            "positive_nodes": 29,
+            "reachable_positive_nodes": 29,
+            "frontiers": 34
+          },
+          {
+            "nodes": 79,
+            "reachable": 79,
+            "positive_nodes": 15,
+            "reachable_positive_nodes": 15,
+            "frontiers": 20
+          }
+        ]
+      },
+      {
+        "episode": 89,
+        "map_index": 85,
+        "coverage": [
+          0.9692561579365564,
+          0.9692561579365564
+        ],
+        "union_coverage": 0.9692561579365564,
+        "graph": [
+          {
+            "nodes": 136,
+            "reachable": 136,
+            "positive_nodes": 29,
+            "reachable_positive_nodes": 29,
+            "frontiers": 24
+          },
+          {
+            "nodes": 135,
+            "reachable": 135,
+            "positive_nodes": 29,
+            "reachable_positive_nodes": 29,
+            "frontiers": 24
+          }
+        ]
+      },
+      {
+        "episode": 92,
+        "map_index": 34,
+        "coverage": [
+          0.9882942056317877,
+          0.9882942056317877
+        ],
+        "union_coverage": 0.9882942056317877,
+        "graph": [
+          {
+            "nodes": 118,
+            "reachable": 118,
+            "positive_nodes": 36,
+            "reachable_positive_nodes": 36,
+            "frontiers": 14
+          },
+          {
+            "nodes": 118,
+            "reachable": 118,
+            "positive_nodes": 36,
+            "reachable_positive_nodes": 36,
+            "frontiers": 14
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "group": "AB_learned",
+    "complete_training_maps": 100,
+    "successes": 94,
+    "failures": [
+      {
+        "episode": 5,
+        "map_index": 16,
+        "coverage": [
+          0.9648811979710216,
+          0.9648811979710216
+        ],
+        "union_coverage": 0.9648811979710216,
+        "graph": [
+          {
+            "nodes": 80,
+            "reachable": 80,
+            "positive_nodes": 12,
+            "reachable_positive_nodes": 12,
+            "frontiers": 15
+          },
+          {
+            "nodes": 79,
+            "reachable": 79,
+            "positive_nodes": 12,
+            "reachable_positive_nodes": 12,
+            "frontiers": 15
+          }
+        ]
+      },
+      {
+        "episode": 18,
+        "map_index": 29,
+        "coverage": [
+          0.9436280467593309,
+          0.9436280467593309
+        ],
+        "union_coverage": 0.9436280467593309,
+        "graph": [
+          {
+            "nodes": 110,
+            "reachable": 110,
+            "positive_nodes": 26,
+            "reachable_positive_nodes": 26,
+            "frontiers": 14
+          },
+          {
+            "nodes": 110,
+            "reachable": 110,
+            "positive_nodes": 26,
+            "reachable_positive_nodes": 26,
+            "frontiers": 14
+          }
+        ]
+      },
+      {
+        "episode": 23,
+        "map_index": 84,
+        "coverage": [
+          0.962730627306273,
+          0.9420013023659648
+        ],
+        "union_coverage": 0.9948773605383112,
+        "graph": [
+          {
+            "nodes": 126,
+            "reachable": 126,
+            "positive_nodes": 72,
+            "reachable_positive_nodes": 72,
+            "frontiers": 70
+          },
+          {
+            "nodes": 124,
+            "reachable": 119,
+            "positive_nodes": 71,
+            "reachable_positive_nodes": 66,
+            "frontiers": 87
+          }
+        ]
+      },
+      {
+        "episode": 41,
+        "map_index": 12,
+        "coverage": [
+          1.0,
+          0.9710575065235145
+        ],
+        "union_coverage": 1.0,
+        "graph": [
+          {
+            "nodes": 135,
+            "reachable": 135,
+            "positive_nodes": 0,
+            "reachable_positive_nodes": 0,
+            "frontiers": 0
+          },
+          {
+            "nodes": 130,
+            "reachable": 130,
+            "positive_nodes": 47,
+            "reachable_positive_nodes": 47,
+            "frontiers": 20
+          }
+        ]
+      },
+      {
+        "episode": 61,
+        "map_index": 71,
+        "coverage": [
+          0.9953975669549933,
+          0.936953605624682
+        ],
+        "union_coverage": 1.0,
+        "graph": [
+          {
+            "nodes": 112,
+            "reachable": 112,
+            "positive_nodes": 35,
+            "reachable_positive_nodes": 35,
+            "frontiers": 22
+          },
+          {
+            "nodes": 105,
+            "reachable": 105,
+            "positive_nodes": 25,
+            "reachable_positive_nodes": 25,
+            "frontiers": 56
+          }
+        ]
+      },
+      {
+        "episode": 100,
+        "map_index": 40,
+        "coverage": [
+          0.9739054681010555,
+          0.9739054681010555
+        ],
+        "union_coverage": 0.9739054681010555,
+        "graph": [
+          {
+            "nodes": 139,
+            "reachable": 139,
+            "positive_nodes": 21,
+            "reachable_positive_nodes": 21,
+            "frontiers": 14
+          },
+          {
+            "nodes": 139,
+            "reachable": 139,
+            "positive_nodes": 21,
+            "reachable_positive_nodes": 21,
+            "frontiers": 14
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 3,
+    "group": "A_fifo",
+    "complete_training_maps": 100,
+    "successes": 94,
+    "failures": [
+      {
+        "episode": 16,
+        "map_index": 75,
+        "coverage": [
+          0.960374686853284,
+          1.0
+        ],
+        "union_coverage": 1.0,
+        "graph": [
+          {
+            "nodes": 122,
+            "reachable": 122,
+            "positive_nodes": 51,
+            "reachable_positive_nodes": 51,
+            "frontiers": 27
+          },
+          {
+            "nodes": 133,
+            "reachable": 133,
+            "positive_nodes": 0,
+            "reachable_positive_nodes": 0,
+            "frontiers": 0
+          }
+        ]
+      },
+      {
+        "episode": 20,
+        "map_index": 45,
+        "coverage": [
+          0.9088290155440415,
+          0.9088290155440415
+        ],
+        "union_coverage": 0.9088290155440415,
+        "graph": [
+          {
+            "nodes": 109,
+            "reachable": 109,
+            "positive_nodes": 36,
+            "reachable_positive_nodes": 36,
+            "frontiers": 30
+          },
+          {
+            "nodes": 109,
+            "reachable": 109,
+            "positive_nodes": 36,
+            "reachable_positive_nodes": 36,
+            "frontiers": 30
+          }
+        ]
+      },
+      {
+        "episode": 38,
+        "map_index": 85,
+        "coverage": [
+          0.9897520526455188,
+          0.9897520526455188
+        ],
+        "union_coverage": 0.9897520526455188,
+        "graph": [
+          {
+            "nodes": 142,
+            "reachable": 142,
+            "positive_nodes": 31,
+            "reachable_positive_nodes": 31,
+            "frontiers": 13
+          },
+          {
+            "nodes": 142,
+            "reachable": 142,
+            "positive_nodes": 31,
+            "reachable_positive_nodes": 31,
+            "frontiers": 13
+          }
+        ]
+      },
+      {
+        "episode": 45,
+        "map_index": 92,
+        "coverage": [
+          0.9894862254922453,
+          0.9894862254922453
+        ],
+        "union_coverage": 0.9894862254922453,
+        "graph": [
+          {
+            "nodes": 130,
+            "reachable": 130,
+            "positive_nodes": 24,
+            "reachable_positive_nodes": 24,
+            "frontiers": 18
+          },
+          {
+            "nodes": 131,
+            "reachable": 131,
+            "positive_nodes": 24,
+            "reachable_positive_nodes": 24,
+            "frontiers": 18
+          }
+        ]
+      },
+      {
+        "episode": 69,
+        "map_index": 33,
+        "coverage": [
+          0.9908477243549924,
+          0.9149997929349402
+        ],
+        "union_coverage": 0.9908477243549924,
+        "graph": [
+          {
+            "nodes": 132,
+            "reachable": 132,
+            "positive_nodes": 30,
+            "reachable_positive_nodes": 30,
+            "frontiers": 16
+          },
+          {
+            "nodes": 121,
+            "reachable": 121,
+            "positive_nodes": 33,
+            "reachable_positive_nodes": 33,
+            "frontiers": 28
+          }
+        ]
+      },
+      {
+        "episode": 95,
+        "map_index": 21,
+        "coverage": [
+          0.9953018885477719,
+          0.9769513443110988
+        ],
+        "union_coverage": 0.9953018885477719,
+        "graph": [
+          {
+            "nodes": 111,
+            "reachable": 111,
+            "positive_nodes": 21,
+            "reachable_positive_nodes": 21,
+            "frontiers": 13
+          },
+          {
+            "nodes": 108,
+            "reachable": 108,
+            "positive_nodes": 20,
+            "reachable_positive_nodes": 20,
+            "frontiers": 17
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 3,
+    "group": "A_rule",
+    "complete_training_maps": 100,
+    "successes": 93,
+    "failures": [
+      {
+        "episode": 7,
+        "map_index": 98,
+        "coverage": [
+          0.9240294511378849,
+          0.8355421686746988
+        ],
+        "union_coverage": 0.9240294511378849,
+        "graph": [
+          {
+            "nodes": 96,
+            "reachable": 96,
+            "positive_nodes": 21,
+            "reachable_positive_nodes": 21,
+            "frontiers": 29
+          },
+          {
+            "nodes": 89,
+            "reachable": 89,
+            "positive_nodes": 19,
+            "reachable_positive_nodes": 19,
+            "frontiers": 22
+          }
+        ]
+      },
+      {
+        "episode": 8,
+        "map_index": 42,
+        "coverage": [
+          0.9772007738985138,
+          0.9772007738985138
+        ],
+        "union_coverage": 0.9772007738985138,
+        "graph": [
+          {
+            "nodes": 117,
+            "reachable": 117,
+            "positive_nodes": 24,
+            "reachable_positive_nodes": 24,
+            "frontiers": 16
+          },
+          {
+            "nodes": 117,
+            "reachable": 117,
+            "positive_nodes": 24,
+            "reachable_positive_nodes": 24,
+            "frontiers": 16
+          }
+        ]
+      },
+      {
+        "episode": 23,
+        "map_index": 8,
+        "coverage": [
+          0.904080720352513,
+          0.904080720352513
+        ],
+        "union_coverage": 0.904080720352513,
+        "graph": [
+          {
+            "nodes": 117,
+            "reachable": 117,
+            "positive_nodes": 36,
+            "reachable_positive_nodes": 36,
+            "frontiers": 27
+          },
+          {
+            "nodes": 117,
+            "reachable": 117,
+            "positive_nodes": 36,
+            "reachable_positive_nodes": 36,
+            "frontiers": 27
+          }
+        ]
+      },
+      {
+        "episode": 44,
+        "map_index": 36,
+        "coverage": [
+          0.9831024809327605,
+          0.9063513631980363
+        ],
+        "union_coverage": 0.9831024809327605,
+        "graph": [
+          {
+            "nodes": 131,
+            "reachable": 131,
+            "positive_nodes": 25,
+            "reachable_positive_nodes": 25,
+            "frontiers": 14
+          },
+          {
+            "nodes": 120,
+            "reachable": 119,
+            "positive_nodes": 19,
+            "reachable_positive_nodes": 18,
+            "frontiers": 27
+          }
+        ]
+      },
+      {
+        "episode": 61,
+        "map_index": 28,
+        "coverage": [
+          0.9951607768226679,
+          0.935646821606707
+        ],
+        "union_coverage": 0.9951607768226679,
+        "graph": [
+          {
+            "nodes": 131,
+            "reachable": 131,
+            "positive_nodes": 15,
+            "reachable_positive_nodes": 15,
+            "frontiers": 6
+          },
+          {
+            "nodes": 123,
+            "reachable": 118,
+            "positive_nodes": 20,
+            "reachable_positive_nodes": 17,
+            "frontiers": 54
+          }
+        ]
+      },
+      {
+        "episode": 72,
+        "map_index": 62,
+        "coverage": [
+          0.9872497796125481,
+          0.9872497796125481
+        ],
+        "union_coverage": 0.9872497796125481,
+        "graph": [
+          {
+            "nodes": 118,
+            "reachable": 118,
+            "positive_nodes": 39,
+            "reachable_positive_nodes": 39,
+            "frontiers": 15
+          },
+          {
+            "nodes": 118,
+            "reachable": 118,
+            "positive_nodes": 39,
+            "reachable_positive_nodes": 39,
+            "frontiers": 15
+          }
+        ]
+      },
+      {
+        "episode": 95,
+        "map_index": 21,
+        "coverage": [
+          0.9893245883337984,
+          0.9893245883337984
+        ],
+        "union_coverage": 0.9893245883337984,
+        "graph": [
+          {
+            "nodes": 110,
+            "reachable": 110,
+            "positive_nodes": 43,
+            "reachable_positive_nodes": 43,
+            "frontiers": 19
+          },
+          {
+            "nodes": 110,
+            "reachable": 110,
+            "positive_nodes": 43,
+            "reachable_positive_nodes": 43,
+            "frontiers": 19
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 3,
+    "group": "AB_learned",
+    "complete_training_maps": 100,
+    "successes": 98,
+    "failures": [
+      {
+        "episode": 12,
+        "map_index": 9,
+        "coverage": [
+          0.9884318766066839,
+          0.9884318766066839
+        ],
+        "union_coverage": 0.9884318766066839,
+        "graph": [
+          {
+            "nodes": 130,
+            "reachable": 130,
+            "positive_nodes": 28,
+            "reachable_positive_nodes": 28,
+            "frontiers": 10
+          },
+          {
+            "nodes": 130,
+            "reachable": 130,
+            "positive_nodes": 28,
+            "reachable_positive_nodes": 28,
+            "frontiers": 10
+          }
+        ]
+      },
+      {
+        "episode": 15,
+        "map_index": 34,
+        "coverage": [
+          0.9892046563048709,
+          0.9892046563048709
+        ],
+        "union_coverage": 0.9892046563048709,
+        "graph": [
+          {
+            "nodes": 118,
+            "reachable": 118,
+            "positive_nodes": 23,
+            "reachable_positive_nodes": 23,
+            "frontiers": 11
+          },
+          {
+            "nodes": 118,
+            "reachable": 118,
+            "positive_nodes": 23,
+            "reachable_positive_nodes": 23,
+            "frontiers": 11
+          }
+        ]
+      }
+    ]
+  }
+]

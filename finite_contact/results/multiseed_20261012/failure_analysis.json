@@ -1,0 +1,315 @@
+{
+  "scope": "Post hoc descriptive final-state failures, all seeds and all methods. No causal attribution.",
+  "threshold": 0.99,
+  "groups": {
+    "A_fifo": [
+      {
+        "seed": 1,
+        "map_index": 1,
+        "coverage": [
+          0.9710988800816032,
+          0.8607221029814905
+        ],
+        "union_coverage": 0.9710988800816032,
+        "queue_bytes": [
+          42509,
+          29
+        ],
+        "unexplored_free_cells": 1360,
+        "explored_cells_missing_at_worst_robot": 5194,
+        "unexplored_component_sizes": [
+          1346,
+          14
+        ],
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "time": 256.0,
+        "wait_seconds": [
+          28.878314509799274,
+          29.402434500135183
+        ]
+      },
+      {
+        "seed": 1,
+        "map_index": 5,
+        "coverage": [
+          0.8662199838114938,
+          0.8662199838114938
+        ],
+        "union_coverage": 0.8662199838114938,
+        "queue_bytes": [
+          0,
+          0
+        ],
+        "unexplored_free_cells": 5950,
+        "explored_cells_missing_at_worst_robot": 0,
+        "unexplored_component_sizes": [
+          4643,
+          1307
+        ],
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "time": 256.0,
+        "wait_seconds": [
+          3.583333333333333,
+          32.72470875973681
+        ]
+      },
+      {
+        "seed": 2,
+        "map_index": 5,
+        "coverage": [
+          0.8684683874449141,
+          0.8684683874449141
+        ],
+        "union_coverage": 0.8684683874449141,
+        "queue_bytes": [
+          0,
+          0
+        ],
+        "unexplored_free_cells": 5850,
+        "explored_cells_missing_at_worst_robot": 0,
+        "unexplored_component_sizes": [
+          4643,
+          829,
+          272,
+          106
+        ],
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "time": 256.0,
+        "wait_seconds": [
+          15.021006801004711,
+          14.445965943647654
+        ]
+      },
+      {
+        "seed": 3,
+        "map_index": 0,
+        "coverage": [
+          0.9639158310044386,
+          0.9709230642774946
+        ],
+        "union_coverage": 0.9709230642774946,
+        "queue_bytes": [
+          29,
+          6045
+        ],
+        "unexplored_free_cells": 1415,
+        "explored_cells_missing_at_worst_robot": 341,
+        "unexplored_component_sizes": [
+          1313,
+          102
+        ],
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "time": 256.0,
+        "wait_seconds": [
+          32.14357261895621,
+          20.273689270621823
+        ]
+      }
+    ],
+    "A_rule": [
+      {
+        "seed": 1,
+        "map_index": 5,
+        "coverage": [
+          0.9276913391492041,
+          0.9796294630812123
+        ],
+        "union_coverage": 0.9796294630812123,
+        "queue_bytes": [
+          29,
+          13989
+        ],
+        "unexplored_free_cells": 906,
+        "explored_cells_missing_at_worst_robot": 2310,
+        "unexplored_component_sizes": [
+          879,
+          27
+        ],
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "time": 256.0,
+        "wait_seconds": [
+          7.891605973892588,
+          13.090107967806563
+        ]
+      },
+      {
+        "seed": 2,
+        "map_index": 1,
+        "coverage": [
+          0.98956584567652,
+          0.9833181035765136
+        ],
+        "union_coverage": 0.98956584567652,
+        "queue_bytes": [
+          4233,
+          51
+        ],
+        "unexplored_free_cells": 491,
+        "explored_cells_missing_at_worst_robot": 294,
+        "unexplored_component_sizes": [
+          229,
+          211,
+          46,
+          3,
+          2
+        ],
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "time": 256.0,
+        "wait_seconds": [
+          25.920209548468645,
+          33.75
+        ]
+      },
+      {
+        "seed": 2,
+        "map_index": 14,
+        "coverage": [
+          0.9978924015529673,
+          0.9197337770382695
+        ],
+        "union_coverage": 0.9978924015529673,
+        "queue_bytes": [
+          25849,
+          217
+        ],
+        "unexplored_free_cells": 95,
+        "explored_cells_missing_at_worst_robot": 3523,
+        "unexplored_component_sizes": [
+          89,
+          4,
+          2
+        ],
+        "direct_task_deficit": "local_map_synchronization_below_threshold",
+        "time": 256.0,
+        "wait_seconds": [
+          9.479890445400194,
+          20.83347257484643
+        ]
+      }
+    ],
+    "AB_learned": [
+      {
+        "seed": 2,
+        "map_index": 2,
+        "coverage": [
+          0.9882313903329277,
+          0.9882313903329277
+        ],
+        "union_coverage": 0.9882313903329277,
+        "queue_bytes": [
+          0,
+          0
+        ],
+        "unexplored_free_cells": 532,
+        "explored_cells_missing_at_worst_robot": 0,
+        "unexplored_component_sizes": [
+          330,
+          202
+        ],
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "time": 256.0,
+        "wait_seconds": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "seed": 2,
+        "map_index": 14,
+        "coverage": [
+          0.8990127565169163,
+          0.8990127565169163
+        ],
+        "union_coverage": 0.8990127565169163,
+        "queue_bytes": [
+          0,
+          0
+        ],
+        "unexplored_free_cells": 4552,
+        "explored_cells_missing_at_worst_robot": 0,
+        "unexplored_component_sizes": [
+          4548,
+          4
+        ],
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "time": 256.0,
+        "wait_seconds": [
+          1.5833333333333333,
+          0.0
+        ]
+      },
+      {
+        "seed": 2,
+        "map_index": 19,
+        "coverage": [
+          0.9878437578843552,
+          0.9878437578843552
+        ],
+        "union_coverage": 0.9878437578843552,
+        "queue_bytes": [
+          0,
+          0
+        ],
+        "unexplored_free_cells": 530,
+        "explored_cells_missing_at_worst_robot": 0,
+        "unexplored_component_sizes": [
+          298,
+          140,
+          92
+        ],
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "time": 256.0,
+        "wait_seconds": [
+          1.0,
+          5.916666666666667
+        ]
+      },
+      {
+        "seed": 3,
+        "map_index": 3,
+        "coverage": [
+          0.9936670114627093,
+          0.9875873424669102
+        ],
+        "union_coverage": 0.9936670114627093,
+        "queue_bytes": [
+          6300,
+          161
+        ],
+        "unexplored_free_cells": 300,
+        "explored_cells_missing_at_worst_robot": 288,
+        "unexplored_component_sizes": [
+          272,
+          27,
+          1
+        ],
+        "direct_task_deficit": "local_map_synchronization_below_threshold",
+        "time": 256.0,
+        "wait_seconds": [
+          1.0,
+          7.215519037355621
+        ]
+      }
+    ]
+  },
+  "counts": {
+    "A_fifo": {
+      "failed_rollouts": 4,
+      "team_exploration_below_threshold": 4,
+      "local_map_synchronization_below_threshold": 0,
+      "both_queues_empty_at_failure": 2
+    },
+    "A_rule": {
+      "failed_rollouts": 3,
+      "team_exploration_below_threshold": 2,
+      "local_map_synchronization_below_threshold": 1,
+      "both_queues_empty_at_failure": 0
+    },
+    "AB_learned": {
+      "failed_rollouts": 4,
+      "team_exploration_below_threshold": 3,
+      "local_map_synchronization_below_threshold": 1,
+      "both_queues_empty_at_failure": 3
+    }
+  }
+}

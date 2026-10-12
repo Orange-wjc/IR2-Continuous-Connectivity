@@ -1,0 +1,804 @@
+{
+  "scope": "Post hoc descriptive supplement after every predeclared endpoint; no extra policy executions or model selection.",
+  "confirmation_only_seeds": [
+    1,
+    3
+  ],
+  "test_policy_evaluations": 0,
+  "endpoint_rows": [
+    {
+      "seed": 1,
+      "group": "A_fifo",
+      "pooled": {
+        "maps": 20,
+        "successes": 19,
+        "mean_capped_time": 159.0218899313148,
+        "mean_minimum_coverage": 0.9853900841952988,
+        "mean_coverage_deficit": 0.16882789422485212,
+        "failed_maps": [
+          5
+        ]
+      },
+      "map_tail": {
+        "maps": 20,
+        "successes": 20,
+        "mean_capped_time": 167.46218414133003,
+        "mean_minimum_coverage": 0.9927010058285587,
+        "mean_coverage_deficit": 0.1878140442985119,
+        "failed_maps": []
+      }
+    },
+    {
+      "seed": 1,
+      "group": "A_rule",
+      "pooled": {
+        "maps": 20,
+        "successes": 20,
+        "mean_capped_time": 147.11395404469292,
+        "mean_minimum_coverage": 0.992731072267048,
+        "mean_coverage_deficit": 0.1476438135655769,
+        "failed_maps": []
+      },
+      "map_tail": {
+        "maps": 20,
+        "successes": 19,
+        "mean_capped_time": 146.50947711038677,
+        "mean_minimum_coverage": 0.9914925606471943,
+        "mean_coverage_deficit": 0.13361105958931577,
+        "failed_maps": [
+          13
+        ]
+      }
+    },
+    {
+      "seed": 1,
+      "group": "AB_learned",
+      "pooled": {
+        "maps": 20,
+        "successes": 20,
+        "mean_capped_time": 114.47277139460206,
+        "mean_minimum_coverage": 0.9926655305545656,
+        "mean_coverage_deficit": 0.09748194162612171,
+        "failed_maps": []
+      },
+      "map_tail": {
+        "maps": 20,
+        "successes": 20,
+        "mean_capped_time": 122.01729080831964,
+        "mean_minimum_coverage": 0.992000073371547,
+        "mean_coverage_deficit": 0.09881992058896444,
+        "failed_maps": []
+      }
+    },
+    {
+      "seed": 2,
+      "group": "A_fifo",
+      "pooled": {
+        "maps": 20,
+        "successes": 18,
+        "mean_capped_time": 180.5478363869923,
+        "mean_minimum_coverage": 0.9829594050170394,
+        "mean_coverage_deficit": 0.19166376480686562,
+        "failed_maps": [
+          3,
+          5
+        ]
+      },
+      "map_tail": {
+        "maps": 20,
+        "successes": 19,
+        "mean_capped_time": 171.94927326767225,
+        "mean_minimum_coverage": 0.9860612585934575,
+        "mean_coverage_deficit": 0.19173428305671839,
+        "failed_maps": [
+          5
+        ]
+      }
+    },
+    {
+      "seed": 2,
+      "group": "A_rule",
+      "pooled": {
+        "maps": 20,
+        "successes": 18,
+        "mean_capped_time": 147.7251381160344,
+        "mean_minimum_coverage": 0.9916395917012679,
+        "mean_coverage_deficit": 0.1413894392030703,
+        "failed_maps": [
+          5,
+          14
+        ]
+      },
+      "map_tail": {
+        "maps": 20,
+        "successes": 20,
+        "mean_capped_time": 146.41430744195472,
+        "mean_minimum_coverage": 0.992013972762804,
+        "mean_coverage_deficit": 0.12960423256197118,
+        "failed_maps": []
+      }
+    },
+    {
+      "seed": 2,
+      "group": "AB_learned",
+      "pooled": {
+        "maps": 20,
+        "successes": 18,
+        "mean_capped_time": 123.10014260675386,
+        "mean_minimum_coverage": 0.9883702457648915,
+        "mean_coverage_deficit": 0.1019157809932338,
+        "failed_maps": [
+          13,
+          14
+        ]
+      },
+      "map_tail": {
+        "maps": 20,
+        "successes": 20,
+        "mean_capped_time": 120.69395812737454,
+        "mean_minimum_coverage": 0.9919079038847303,
+        "mean_coverage_deficit": 0.10223022067211911,
+        "failed_maps": []
+      }
+    },
+    {
+      "seed": 3,
+      "group": "A_fifo",
+      "pooled": {
+        "maps": 20,
+        "successes": 18,
+        "mean_capped_time": 176.60338972617205,
+        "mean_minimum_coverage": 0.9848413007111132,
+        "mean_coverage_deficit": 0.17965382955929735,
+        "failed_maps": [
+          1,
+          6
+        ]
+      },
+      "map_tail": {
+        "maps": 20,
+        "successes": 20,
+        "mean_capped_time": 159.22186734337933,
+        "mean_minimum_coverage": 0.9922126578364461,
+        "mean_coverage_deficit": 0.15448906737293305,
+        "failed_maps": []
+      }
+    },
+    {
+      "seed": 3,
+      "group": "A_rule",
+      "pooled": {
+        "maps": 20,
+        "successes": 20,
+        "mean_capped_time": 144.3596671036231,
+        "mean_minimum_coverage": 0.9921884817648199,
+        "mean_coverage_deficit": 0.14182722172303333,
+        "failed_maps": []
+      },
+      "map_tail": {
+        "maps": 20,
+        "successes": 18,
+        "mean_capped_time": 140.25450759547115,
+        "mean_minimum_coverage": 0.987346224069363,
+        "mean_coverage_deficit": 0.1302649538518356,
+        "failed_maps": [
+          13,
+          14
+        ]
+      }
+    },
+    {
+      "seed": 3,
+      "group": "AB_learned",
+      "pooled": {
+        "maps": 20,
+        "successes": 20,
+        "mean_capped_time": 131.73510371218222,
+        "mean_minimum_coverage": 0.9925164843280158,
+        "mean_coverage_deficit": 0.10648297357024797,
+        "failed_maps": []
+      },
+      "map_tail": {
+        "maps": 20,
+        "successes": 20,
+        "mean_capped_time": 107.61709682633177,
+        "mean_minimum_coverage": 0.9921147937906794,
+        "mean_coverage_deficit": 0.10516853686853458,
+        "failed_maps": []
+      }
+    }
+  ],
+  "training_monitor_rows": [
+    {
+      "seed": 1,
+      "group": "A_fifo",
+      "pooled": {
+        "successes": [
+          7,
+          9,
+          10
+        ],
+        "mean_capped_times": [
+          199.82870474250876,
+          181.22879157914275,
+          168.83895605987428
+        ]
+      },
+      "map_tail": {
+        "successes": [
+          7,
+          9,
+          10
+        ],
+        "mean_capped_times": [
+          199.82870474250876,
+          181.7761596153849,
+          167.37286016447817
+        ]
+      }
+    },
+    {
+      "seed": 1,
+      "group": "A_rule",
+      "pooled": {
+        "successes": [
+          10,
+          9,
+          10
+        ],
+        "mean_capped_times": [
+          146.21829303328275,
+          163.1273801729118,
+          157.03300521088934
+        ]
+      },
+      "map_tail": {
+        "successes": [
+          10,
+          9,
+          10
+        ],
+        "mean_capped_times": [
+          146.21829303328275,
+          172.8628034151691,
+          146.16516720413568
+        ]
+      }
+    },
+    {
+      "seed": 1,
+      "group": "AB_learned",
+      "pooled": {
+        "successes": [
+          7,
+          10,
+          9
+        ],
+        "mean_capped_times": [
+          160.04659630011673,
+          136.20270930691987,
+          129.4899268226842
+        ]
+      },
+      "map_tail": {
+        "successes": [
+          7,
+          9,
+          10
+        ],
+        "mean_capped_times": [
+          160.04659630011673,
+          139.56358956021188,
+          137.65556967691282
+        ]
+      }
+    },
+    {
+      "seed": 2,
+      "group": "A_fifo",
+      "pooled": {
+        "successes": [
+          9,
+          9,
+          9
+        ],
+        "mean_capped_times": [
+          184.64681072909002,
+          184.69683928611317,
+          182.21166821638712
+        ]
+      },
+      "map_tail": {
+        "successes": [
+          9,
+          7,
+          6
+        ],
+        "mean_capped_times": [
+          184.64681072909002,
+          203.11703359461447,
+          203.90168558152044
+        ]
+      }
+    },
+    {
+      "seed": 2,
+      "group": "A_rule",
+      "pooled": {
+        "successes": [
+          9,
+          10,
+          10
+        ],
+        "mean_capped_times": [
+          158.24026911843708,
+          145.79013698695496,
+          143.2674408779591
+        ]
+      },
+      "map_tail": {
+        "successes": [
+          9,
+          7,
+          9
+        ],
+        "mean_capped_times": [
+          158.24026911843708,
+          183.6708350129034,
+          147.14705467456943
+        ]
+      }
+    },
+    {
+      "seed": 2,
+      "group": "AB_learned",
+      "pooled": {
+        "successes": [
+          10,
+          10,
+          10
+        ],
+        "mean_capped_times": [
+          149.73757782053534,
+          144.60225560980834,
+          142.0141504516416
+        ]
+      },
+      "map_tail": {
+        "successes": [
+          10,
+          10,
+          10
+        ],
+        "mean_capped_times": [
+          149.73757782053534,
+          154.0292023736315,
+          121.30412126280115
+        ]
+      }
+    },
+    {
+      "seed": 3,
+      "group": "A_fifo",
+      "pooled": {
+        "successes": [
+          10,
+          9,
+          7
+        ],
+        "mean_capped_times": [
+          162.86448402566276,
+          186.80566994749472,
+          197.635189589443
+        ]
+      },
+      "map_tail": {
+        "successes": [
+          10,
+          10,
+          9
+        ],
+        "mean_capped_times": [
+          162.86448402566276,
+          172.24602022540984,
+          174.30690035582268
+        ]
+      }
+    },
+    {
+      "seed": 3,
+      "group": "A_rule",
+      "pooled": {
+        "successes": [
+          9,
+          9,
+          10
+        ],
+        "mean_capped_times": [
+          163.5904902667821,
+          157.0602389258581,
+          146.1533405949553
+        ]
+      },
+      "map_tail": {
+        "successes": [
+          9,
+          10,
+          9
+        ],
+        "mean_capped_times": [
+          163.5904902667821,
+          156.1370121119358,
+          165.57183963050642
+        ]
+      }
+    },
+    {
+      "seed": 3,
+      "group": "AB_learned",
+      "pooled": {
+        "successes": [
+          9,
+          10,
+          10
+        ],
+        "mean_capped_times": [
+          141.35457671671682,
+          112.00230483123771,
+          138.4555003025914
+        ]
+      },
+      "map_tail": {
+        "successes": [
+          9,
+          10,
+          9
+        ],
+        "mean_capped_times": [
+          141.35457671671682,
+          129.41348296918835,
+          136.82639956188243
+        ]
+      }
+    }
+  ],
+  "sampling_changes": {
+    "A_fifo": [
+      {
+        "seed": 1,
+        "success_gain": 1,
+        "time_saved_seconds": -8.440294210015225,
+        "map_tail_gained_success_maps": [
+          5
+        ],
+        "map_tail_lost_success_maps": [],
+        "both_successful": 19,
+        "both_failed": 0
+      },
+      {
+        "seed": 2,
+        "success_gain": 1,
+        "time_saved_seconds": 8.598563119320033,
+        "map_tail_gained_success_maps": [
+          3
+        ],
+        "map_tail_lost_success_maps": [],
+        "both_successful": 18,
+        "both_failed": 1
+      },
+      {
+        "seed": 3,
+        "success_gain": 2,
+        "time_saved_seconds": 17.381522382792724,
+        "map_tail_gained_success_maps": [
+          1,
+          6
+        ],
+        "map_tail_lost_success_maps": [],
+        "both_successful": 18,
+        "both_failed": 0
+      }
+    ],
+    "A_rule": [
+      {
+        "seed": 1,
+        "success_gain": -1,
+        "time_saved_seconds": 0.6044769343061489,
+        "map_tail_gained_success_maps": [],
+        "map_tail_lost_success_maps": [
+          13
+        ],
+        "both_successful": 19,
+        "both_failed": 0
+      },
+      {
+        "seed": 2,
+        "success_gain": 2,
+        "time_saved_seconds": 1.310830674079682,
+        "map_tail_gained_success_maps": [
+          5,
+          14
+        ],
+        "map_tail_lost_success_maps": [],
+        "both_successful": 18,
+        "both_failed": 0
+      },
+      {
+        "seed": 3,
+        "success_gain": -2,
+        "time_saved_seconds": 4.1051595081519565,
+        "map_tail_gained_success_maps": [],
+        "map_tail_lost_success_maps": [
+          13,
+          14
+        ],
+        "both_successful": 18,
+        "both_failed": 0
+      }
+    ],
+    "AB_learned": [
+      {
+        "seed": 1,
+        "success_gain": 0,
+        "time_saved_seconds": -7.54451941371758,
+        "map_tail_gained_success_maps": [],
+        "map_tail_lost_success_maps": [],
+        "both_successful": 20,
+        "both_failed": 0
+      },
+      {
+        "seed": 2,
+        "success_gain": 2,
+        "time_saved_seconds": 2.40618447937932,
+        "map_tail_gained_success_maps": [
+          13,
+          14
+        ],
+        "map_tail_lost_success_maps": [],
+        "both_successful": 18,
+        "both_failed": 0
+      },
+      {
+        "seed": 3,
+        "success_gain": 0,
+        "time_saved_seconds": 24.11800688585045,
+        "map_tail_gained_success_maps": [],
+        "map_tail_lost_success_maps": [],
+        "both_successful": 20,
+        "both_failed": 0
+      }
+    ]
+  },
+  "learned_vs_rule": {
+    "pooled": [
+      {
+        "seed": 1,
+        "success_gain": 0,
+        "time_saved_seconds": 32.641182650090855,
+        "relative_mean_time_reduction_percent": 22.1876863157213
+      },
+      {
+        "seed": 2,
+        "success_gain": 0,
+        "time_saved_seconds": 24.624995509280538,
+        "relative_mean_time_reduction_percent": 16.669468597780714
+      },
+      {
+        "seed": 3,
+        "success_gain": 0,
+        "time_saved_seconds": 12.624563391440887,
+        "relative_mean_time_reduction_percent": 8.745215090014602
+      }
+    ],
+    "map_tail": [
+      {
+        "seed": 1,
+        "success_gain": 1,
+        "time_saved_seconds": 24.492186302067125,
+        "relative_mean_time_reduction_percent": 16.717134471522023
+      },
+      {
+        "seed": 2,
+        "success_gain": 0,
+        "time_saved_seconds": 25.720349314580176,
+        "relative_mean_time_reduction_percent": 17.56682783530352
+      },
+      {
+        "seed": 3,
+        "success_gain": 2,
+        "time_saved_seconds": 32.63741076913938,
+        "relative_mean_time_reduction_percent": 23.270133223292746
+      }
+    ]
+  },
+  "failure_counts": {
+    "1": {
+      "pooled/A_fifo": {
+        "failed_rollouts": 1,
+        "team_exploration_below_threshold": 1,
+        "local_map_synchronization_below_threshold": 0,
+        "both_queues_empty": 1
+      },
+      "map_tail/A_fifo": {
+        "failed_rollouts": 0,
+        "team_exploration_below_threshold": 0,
+        "local_map_synchronization_below_threshold": 0,
+        "both_queues_empty": 0
+      },
+      "pooled/A_rule": {
+        "failed_rollouts": 0,
+        "team_exploration_below_threshold": 0,
+        "local_map_synchronization_below_threshold": 0,
+        "both_queues_empty": 0
+      },
+      "map_tail/A_rule": {
+        "failed_rollouts": 1,
+        "team_exploration_below_threshold": 1,
+        "local_map_synchronization_below_threshold": 0,
+        "both_queues_empty": 1
+      },
+      "pooled/AB_learned": {
+        "failed_rollouts": 0,
+        "team_exploration_below_threshold": 0,
+        "local_map_synchronization_below_threshold": 0,
+        "both_queues_empty": 0
+      },
+      "map_tail/AB_learned": {
+        "failed_rollouts": 0,
+        "team_exploration_below_threshold": 0,
+        "local_map_synchronization_below_threshold": 0,
+        "both_queues_empty": 0
+      }
+    },
+    "2": {
+      "pooled/A_fifo": {
+        "failed_rollouts": 2,
+        "team_exploration_below_threshold": 1,
+        "local_map_synchronization_below_threshold": 1,
+        "both_queues_empty": 1
+      },
+      "map_tail/A_fifo": {
+        "failed_rollouts": 1,
+        "team_exploration_below_threshold": 1,
+        "local_map_synchronization_below_threshold": 0,
+        "both_queues_empty": 1
+      },
+      "pooled/A_rule": {
+        "failed_rollouts": 2,
+        "team_exploration_below_threshold": 2,
+        "local_map_synchronization_below_threshold": 0,
+        "both_queues_empty": 2
+      },
+      "map_tail/A_rule": {
+        "failed_rollouts": 0,
+        "team_exploration_below_threshold": 0,
+        "local_map_synchronization_below_threshold": 0,
+        "both_queues_empty": 0
+      },
+      "pooled/AB_learned": {
+        "failed_rollouts": 2,
+        "team_exploration_below_threshold": 2,
+        "local_map_synchronization_below_threshold": 0,
+        "both_queues_empty": 2
+      },
+      "map_tail/AB_learned": {
+        "failed_rollouts": 0,
+        "team_exploration_below_threshold": 0,
+        "local_map_synchronization_below_threshold": 0,
+        "both_queues_empty": 0
+      }
+    },
+    "3": {
+      "pooled/A_fifo": {
+        "failed_rollouts": 2,
+        "team_exploration_below_threshold": 2,
+        "local_map_synchronization_below_threshold": 0,
+        "both_queues_empty": 1
+      },
+      "map_tail/A_fifo": {
+        "failed_rollouts": 0,
+        "team_exploration_below_threshold": 0,
+        "local_map_synchronization_below_threshold": 0,
+        "both_queues_empty": 0
+      },
+      "pooled/A_rule": {
+        "failed_rollouts": 0,
+        "team_exploration_below_threshold": 0,
+        "local_map_synchronization_below_threshold": 0,
+        "both_queues_empty": 0
+      },
+      "map_tail/A_rule": {
+        "failed_rollouts": 2,
+        "team_exploration_below_threshold": 2,
+        "local_map_synchronization_below_threshold": 0,
+        "both_queues_empty": 2
+      },
+      "pooled/AB_learned": {
+        "failed_rollouts": 0,
+        "team_exploration_below_threshold": 0,
+        "local_map_synchronization_below_threshold": 0,
+        "both_queues_empty": 0
+      },
+      "map_tail/AB_learned": {
+        "failed_rollouts": 0,
+        "team_exploration_below_threshold": 0,
+        "local_map_synchronization_below_threshold": 0,
+        "both_queues_empty": 0
+      }
+    }
+  },
+  "warning": "Shared pretraining and repeated development maps; two confirmation seeds are not enough for a reliable significance claim.",
+  "confirmation_only_sampling": {
+    "A_fifo": {
+      "success_gain": {
+        "per_seed": [
+          1,
+          2
+        ],
+        "mean": 1.5,
+        "sample_sd": 0.7071067811865476
+      },
+      "time_saved_seconds": {
+        "per_seed": [
+          -8.440294210015225,
+          17.381522382792724
+        ],
+        "mean": 4.47061408638875,
+        "sample_sd": 18.258781615329813
+      }
+    },
+    "A_rule": {
+      "success_gain": {
+        "per_seed": [
+          -1,
+          -2
+        ],
+        "mean": -1.5,
+        "sample_sd": 0.7071067811865476
+      },
+      "time_saved_seconds": {
+        "per_seed": [
+          0.6044769343061489,
+          4.1051595081519565
+        ],
+        "mean": 2.3548182212290527,
+        "sample_sd": 2.4753563867479476
+      }
+    },
+    "AB_learned": {
+      "success_gain": {
+        "per_seed": [
+          0,
+          0
+        ],
+        "mean": 0,
+        "sample_sd": 0.0
+      },
+      "time_saved_seconds": {
+        "per_seed": [
+          -7.54451941371758,
+          24.11800688585045
+        ],
+        "mean": 8.286743736066434,
+        "sample_sd": 22.388787055921956
+      }
+    }
+  },
+  "compute_accounting": {
+    "new_retained_training_maps": 1200,
+    "new_retained_sac_updates": 24000,
+    "discarded_replayed_training_maps": 10,
+    "discarded_replayed_sac_updates": 200,
+    "new_actual_sac_updates_including_discarded": 24200,
+    "pilot_retained_sac_updates": 12000,
+    "combined_retained_continuation_updates": 36000,
+    "combined_actual_continuation_updates_including_discarded": 36200,
+    "combined_primary_rollouts": 2700,
+    "additional_complete_rollouts": 14,
+    "combined_complete_executions_including_recovery": 2714,
+    "primary_movement_segments": 318408,
+    "additional_movement_segments": 1924,
+    "all_complete_movement_segments": 320332,
+    "wall_crossings": 0
+  }
+}

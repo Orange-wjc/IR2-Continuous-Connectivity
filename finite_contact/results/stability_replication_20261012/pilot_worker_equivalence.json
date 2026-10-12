@@ -1,0 +1,8 @@
+{
+  "changed_functions": [
+    "prepare"
+  ],
+  "train_worker_ast_identical": true,
+  "report_ast_identical": true,
+  "note": "Only prepare seed inference changed; actual training and reporting unchanged from pilot."
+}

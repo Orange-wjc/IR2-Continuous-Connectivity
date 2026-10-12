@@ -1,0 +1,17 @@
+{
+  "pid": 3884713,
+  "command": [
+    "/home/wyz/anaconda3/envs/ir2_train/bin/python",
+    "-u",
+    "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/finite_contact_scale.py",
+    "--output",
+    "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/thousand_maps_20261012_seed1",
+    "--device",
+    "cuda"
+  ],
+  "started_utc": "2026-10-12T06:37:59.710466+00:00",
+  "session_detached": true,
+  "concurrent_workers": 1,
+  "log": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/thousand_maps_20261012_seed1/coordinator.log",
+  "scope": "One 1000-map sweep per method; 3 methods, 60000 new SAC updates; test policy executions 0."
+}

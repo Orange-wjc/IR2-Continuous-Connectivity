@@ -34,6 +34,8 @@ def window_gain(env, mode, score_cache):
         cache = score_cache[mode][sender]
         for packet in packets:
             if packet.seq not in cache:
+                if mode == 'bounded_constant':
+                    raise RuntimeError('A forced window unexpectedly created a new map packet')
                 cache[packet.seq] = env.packet_scores(sender, [packet], mode)[0] / packet.size
         return max(range(len(packets)), key=lambda i: cache[packets[i].seq])
 
@@ -46,10 +48,12 @@ def window_gain(env, mode, score_cache):
     return gains.tolist()
 
 
-def state_check(env, learner, constant):
+def state_check(env, learner, constant, constant_control=False):
     contexts = learner.contexts(env)
     env.feature_provider = lambda sender, indices: contexts[sender][indices]
     scores = {mode: {} for mode in ['rule', 'learned']}
+    if constant_control:
+        scores['bounded_constant'] = {}
     labels = []
     for sender in range(2):
         packets = env.radio.pending(sender)
@@ -58,6 +62,9 @@ def state_check(env, learner, constant):
         nominal = env.packet_scores(sender, packets, 'fifo')
         for mode, values in [('rule', rule), ('learned', predicted)]:
             scores[mode][sender] = {p.seq: value / p.size for p, value in zip(packets, values)}
+        if constant_control:
+            scores['bounded_constant'][sender] = {
+                p.seq: min(constant * 100., value) / p.size for p, value in zip(packets, nominal)}
         selection = np.linspace(0, len(packets) - 1, min(64, len(packets))).astype(int)
         target = env.beliefs[1 - sender].ravel()
         for i in selection:
@@ -67,9 +74,12 @@ def state_check(env, learner, constant):
                            'learned': float(predicted[i] / 100.),
                            'sender_novelty': float(nominal[i] / 100.), 'constant': constant,
                            'packet_cells': len(packet.cells())})
+            if constant_control:
+                labels[-1]['bounded_constant'] = min(constant, float(nominal[i] / 100.))
+    modes = ['fifo', 'rule', 'learned', 'oracle'] + (['bounded_constant'] if constant_control else [])
     return {'time': env.time, 'labels': labels,
             'forced_contact_gains': {mode: window_gain(env, mode, scores)
-                                     for mode in ['fifo', 'rule', 'learned', 'oracle']}}
+                                     for mode in modes}}
 
 
 def main():
@@ -80,14 +90,18 @@ def main():
     parser.add_argument('--sample-every', type=int, default=16)
     parser.add_argument('--device', choices=['cpu', 'cuda'], default='cpu')
     parser.add_argument('--content-score-bound', choices=['none', 'sender'])
+    parser.add_argument('--training-sampling', type=Path,
+                        help='Map-balanced head sampling.json containing the training-only label mean')
+    parser.add_argument('--constant-control', action='store_true',
+                        help='Also rank packets with the training mean, same local bound and byte cost')
     args = parser.parse_args()
     if Path(sys.prefix) != Path('/home/wyz/anaconda3/envs/ir2_train'):
         parser.error('Use ir2_train Python')
     if args.sample_every < 1 or (args.output.exists() and any(args.output.iterdir())):
         parser.error('Use a positive sample interval and an empty output directory')
     saved = torch.load(args.checkpoint, map_location='cpu')
-    if not saved.get('content_replay') or saved['learner']['content_updates'] == 0:
-        parser.error('Use a trained latest.pth with the supervised replay for the constant baseline')
+    if saved['learner']['content_updates'] == 0 or (not saved.get('content_replay') and not args.training_sampling):
+        parser.error('Use a trained head and its supervised replay or map-balanced training sampling.json')
     cfg = Config.from_checkpoint(saved['config'])
     if args.content_score_bound is not None:
         cfg.content_score_bound = args.content_score_bound
@@ -96,11 +110,14 @@ def main():
     learner.load(saved['learner'])
     learner.policy.eval()
     learner.context_encoder.eval()
-    constant = float(np.mean([x[2] for x in saved['content_replay']]))
+    constant = (float(json.loads(args.training_sampling.read_text())['dataset_mean_target'])
+                if args.training_sampling else float(np.mean([x[2] for x in saved['content_replay']])))
     args.output.mkdir(parents=True, exist_ok=True)
     provenance(args.output, cfg)
     append_json(args.output / 'invocation.jsonl', {'checkpoint': str(args.checkpoint.resolve()),
         'evaluation_dirs': [str(p.resolve()) for p in args.evaluation_dirs],
+        'training_sampling': str(args.training_sampling.resolve()) if args.training_sampling else None,
+        'constant_control': args.constant_control,
         'sample_every': args.sample_every, 'device': args.device, 'constant_training_mean': constant})
     summaries = []
     for directory in args.evaluation_dirs:
@@ -114,7 +131,7 @@ def main():
             states = []
             for index, expected in enumerate(record['trajectory'][1:]):
                 if index % args.sample_every == 0:
-                    row = state_check(env, learner, constant)
+                    row = state_check(env, learner, constant, args.constant_control)
                     row.update({'map': info, 'decision': index, 'source': str(directory)})
                     append_json(args.output / 'states.jsonl', row)
                     states.append(row)
@@ -127,9 +144,11 @@ def main():
                        'content_updates': learner.content_updates, 'movement_updates': learner.updates,
                        'positive_fraction': float(np.mean([x['target'] > 0 for x in labels])),
                        'mse': {mode: float(np.mean([(x[mode] - x['target']) ** 2 for x in labels]))
-                               for mode in ['learned', 'sender_novelty', 'constant']},
+                               for mode in ['learned', 'sender_novelty', 'constant'] +
+                               (['bounded_constant'] if args.constant_control else [])},
                        'mean_contact_new_cells': {mode: float(np.mean([sum(x['forced_contact_gains'][mode]) for x in states]))
-                                                 for mode in ['fifo', 'rule', 'learned', 'oracle']},
+                                                 for mode in ['fifo', 'rule', 'learned', 'oracle'] +
+                                                 (['bounded_constant'] if args.constant_control else [])},
                        'bound_violation_fraction': float(np.mean([x['learned'] * 100 > x['packet_cells'] + 1e-5 for x in labels]))}
             summaries.append(summary)
             append_json(args.output / 'maps.jsonl', summary)
@@ -140,8 +159,8 @@ def main():
         if not group:
             continue
         grouped[split] = {'maps': len(group),
-            'macro_mse': {mode: float(np.mean([x['mse'][mode] for x in group])) for mode in ['learned', 'sender_novelty', 'constant']},
-            'macro_mean_contact_new_cells': {mode: float(np.mean([x['mean_contact_new_cells'][mode] for x in group])) for mode in ['fifo', 'rule', 'learned', 'oracle']}}
+            'macro_mse': {mode: float(np.mean([x['mse'][mode] for x in group])) for mode in group[0]['mse']},
+            'macro_mean_contact_new_cells': {mode: float(np.mean([x['mean_contact_new_cells'][mode] for x in group])) for mode in group[0]['mean_contact_new_cells']}}
     validation = grouped.get('validation')
     passed = bool(validation and validation['macro_mse']['learned'] <= validation['macro_mse']['constant']
                   and all(x['macro_mean_contact_new_cells']['learned'] > x['macro_mean_contact_new_cells']['fifo'] for x in grouped.values()))

@@ -1,0 +1,18 @@
+{
+  "pid": 3033765,
+  "command": [
+    "/home/wyz/anaconda3/envs/ir2_train/bin/python",
+    "-u",
+    "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/finite_contact_stability_replication.py",
+    "--output",
+    "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/stability_replication_20261012",
+    "--device",
+    "cuda",
+    "--workers",
+    "2",
+    "--resume"
+  ],
+  "started_utc": "2026-10-12T04:39:14.564257+00:00",
+  "session_detached": true,
+  "reason": "Resume from full boundaries with two workers after kernel-confirmed host OOM."
+}

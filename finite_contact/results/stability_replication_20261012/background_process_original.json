@@ -1,0 +1,18 @@
+{
+  "pid": 2675301,
+  "command": [
+    "/home/wyz/anaconda3/envs/ir2_train/bin/python",
+    "-u",
+    "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/finite_contact_stability_replication.py",
+    "--output",
+    "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/stability_replication_20261012",
+    "--device",
+    "cuda",
+    "--workers",
+    "3",
+    "--resume"
+  ],
+  "started_utc": "2026-10-12T03:48:05.434282+00:00",
+  "session_detached": true,
+  "prepared_by_launcher": true
+}

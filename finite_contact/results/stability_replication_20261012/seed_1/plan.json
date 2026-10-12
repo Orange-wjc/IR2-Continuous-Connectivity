@@ -1,0 +1,57 @@
+{
+  "scope": "One-seed paired continuation diagnostic; shared pretrained chain; development only.",
+  "seed": 1,
+  "sources": {
+    "A_fifo": {
+      "path": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/multimap_joint_20261012_seed1/A_fifo/latest.pth",
+      "sha256": "9b5da28d7b24b6789e2cb6f73ce664ddf5c72763d42e5cb1fe9e24315ae5846e",
+      "episode": 100,
+      "sac_updates": 10895,
+      "head_updates": 5000
+    },
+    "A_rule": {
+      "path": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/multimap_joint_20261012_seed1/A_rule/latest.pth",
+      "sha256": "f0cf2ba79ca327533d8d542446ecca6c7d8a09afc2b0bb6220a73db08c26761f",
+      "episode": 100,
+      "sac_updates": 10895,
+      "head_updates": 5000
+    },
+    "AB_learned": {
+      "path": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/multimap_joint_20261012_seed1/AB_learned/latest.pth",
+      "sha256": "978d1ace10a12f0a2f363c2a960a849a457a77143a94725155f60448c82a726d",
+      "episode": 100,
+      "sac_updates": 10895,
+      "head_updates": 5000
+    }
+  },
+  "conditions": [
+    "pooled",
+    "map_tail"
+  ],
+  "groups": [
+    "A_fifo",
+    "A_rule",
+    "AB_learned"
+  ],
+  "training_maps": 100,
+  "updates_per_map": 20,
+  "monitor_maps": 10,
+  "monitor_at": [
+    50,
+    100
+  ],
+  "max_hours_per_worker": 2.0,
+  "workers": 2,
+  "status": "complete",
+  "intervention": "Only successful imitation sampling; half whole episode, half final physical-time quarter; equal maps.",
+  "selection": "All fixed endpoints reported; train prefix 0..9 monitoring only; no intermediate validation selection.",
+  "test_policy_evaluations": 0,
+  "resource_changes": [
+    {
+      "previous_workers": 3,
+      "resumed_workers": 2,
+      "time_ns": 1791779955483155908,
+      "reason": "Kernel-confirmed host OOM during full-checkpoint save; training sources and budgets unchanged."
+    }
+  ]
+}

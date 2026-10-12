@@ -1,0 +1,19 @@
+{
+  "same_30_map_probes_exactly_reproduced": true,
+  "groups": {
+    "train": {
+      "learned_beats_bounded_constant_mse": true,
+      "learned_beats_bounded_constant_window_gain": true,
+      "learned_beats_rule_window_gain": true,
+      "learned_window_gain_over_fifo": 1.6592462039045552,
+      "learned_window_gain_over_rule": 1.4952839409637377
+    },
+    "validation": {
+      "learned_beats_bounded_constant_mse": true,
+      "learned_beats_bounded_constant_window_gain": true,
+      "learned_beats_rule_window_gain": true,
+      "learned_window_gain_over_fifo": 2.0878738964290418,
+      "learned_window_gain_over_rule": 1.8508476061150292
+    }
+  }
+}

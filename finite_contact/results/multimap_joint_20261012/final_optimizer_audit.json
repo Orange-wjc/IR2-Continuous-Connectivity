@@ -1,0 +1,20 @@
+{
+  "A_fifo": {
+    "final_actor_Adam_step_min": 9395.0,
+    "final_actor_Adam_step_max": 9395.0,
+    "actual_new_actor_Adam_steps": 2000,
+    "content_Adam_state_unchanged": true
+  },
+  "A_rule": {
+    "final_actor_Adam_step_min": 9395.0,
+    "final_actor_Adam_step_max": 9395.0,
+    "actual_new_actor_Adam_steps": 2000,
+    "content_Adam_state_unchanged": true
+  },
+  "AB_learned": {
+    "final_actor_Adam_step_min": 9395.0,
+    "final_actor_Adam_step_max": 9395.0,
+    "actual_new_actor_Adam_steps": 2000,
+    "content_Adam_state_unchanged": true
+  }
+}

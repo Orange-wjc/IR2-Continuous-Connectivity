@@ -1,0 +1,31 @@
+{
+  "scope": "Adaptation seeds 1, 2, 3 with one shared pretrained movement/head; no test policy execution.",
+  "new_adaptation_seeds": [
+    2,
+    3
+  ],
+  "concurrent_workers": 3,
+  "runs": [
+    {
+      "seed": 1,
+      "directory": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/multimap_joint_20261012_seed1"
+    },
+    {
+      "seed": 2,
+      "directory": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/multiseed_20261012/seed_2"
+    },
+    {
+      "seed": 3,
+      "directory": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/multiseed_20261012/seed_3"
+    }
+  ],
+  "status": "complete",
+  "resource_changes": [
+    {
+      "previous_workers": 6,
+      "resumed_workers": 3,
+      "time_ns": 1791768001837801575,
+      "reason": "Replay memory growth; training algorithm and budgets unchanged."
+    }
+  ]
+}

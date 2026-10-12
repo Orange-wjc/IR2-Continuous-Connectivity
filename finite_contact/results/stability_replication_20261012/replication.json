@@ -1,0 +1,42 @@
+{
+  "scope": "Adaptation seeds 1 and 3 replicate the completed seed-2 pilot; shared pretrained chain; development only.",
+  "pilot_seed": 2,
+  "confirmation_seeds": [
+    1,
+    3
+  ],
+  "concurrent_workers": 2,
+  "runs": [
+    {
+      "seed": 2,
+      "directory": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/stability_20261012",
+      "role": "existing exploratory pilot"
+    },
+    {
+      "seed": 1,
+      "directory": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/stability_replication_20261012/seed_1",
+      "role": "fixed-condition replication"
+    },
+    {
+      "seed": 3,
+      "directory": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/stability_replication_20261012/seed_3",
+      "role": "fixed-condition replication"
+    }
+  ],
+  "status": "complete",
+  "test_policy_evaluations": 0,
+  "previous_adaptation_plan": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/multiseed_20261012/replication.json",
+  "previous_adaptation_plan_sha256": "c49adf6385386385ad5fdc53e0dd8b893ddd1427f29505cb6d42db6bf19b575c",
+  "pilot_plan_sha256": "aec3f5fd6c2265b22f2e250a6e7ead06d38466e73c6bfdf93274eeb1c83387a6",
+  "pilot_summary_sha256": "037b0f58da70280ded76af9a8a58c3484a43403159ee77e7b40320e63a24754a",
+  "selection": "All twelve new fixed endpoints; no early development selection, no test policy executions.",
+  "source_identity_file": "checks/source_identity_resume_1791779955483155908.json",
+  "resource_changes": [
+    {
+      "previous_workers": 3,
+      "resumed_workers": 2,
+      "time_ns": 1791779955483155908,
+      "reason": "Kernel-confirmed host OOM during full-checkpoint save; training sources and budgets unchanged."
+    }
+  ]
+}

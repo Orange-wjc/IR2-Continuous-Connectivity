@@ -1,0 +1,15 @@
+{
+  "pid": 2086722,
+  "command": [
+    "/home/wyz/anaconda3/envs/ir2_train/bin/python",
+    "-u",
+    "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/finite_contact_stability.py",
+    "--output",
+    "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/stability_20261012",
+    "--device",
+    "cuda",
+    "--resume"
+  ],
+  "started_utc": "2026-10-12T02:25:51.948563+00:00",
+  "session_detached": true
+}

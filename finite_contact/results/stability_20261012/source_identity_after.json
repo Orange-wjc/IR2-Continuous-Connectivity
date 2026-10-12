@@ -1,0 +1,8 @@
+{
+  "finite_contact_stability.py": "e828574ebef1f0281434d412bd3f0983b1fed3f9cab522de1e6fbf865de257ba",
+  "finite_contact/config.py": "a1ded39b9fd8b1d794e962599b3d546df259854e9b117a3f1e5ce66f2839909b",
+  "finite_contact/learning.py": "672604f5fe8ebb5a608967789a7f97d509aec29ef2a7b9a8ac726fedfc7706ea",
+  "finite_contact_train.py": "cceb9ee179e46dede16bfbd0ba0003227d0663d787a3eb065fc021afc77f8188",
+  "finite_contact_multimap_joint.py": "9d31a2c78f99925b629995263910814ff7f31997df41e3389f0d4eadfba9754c",
+  "finite_contact_multiseed.py": "192247f2f687322a7b83b8706a28dbd83989a2d466d99710776844674293c25e"
+}

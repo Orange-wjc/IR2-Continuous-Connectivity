@@ -1,0 +1,67 @@
+{
+  "status": "pilot_complete",
+  "scope": "100-map movement feasibility pilot, not AB innovation validation; no test policy evaluation.",
+  "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/fresh_success_20261011_A_seed1/final.pth",
+  "training_seed": 1,
+  "dataset_seed": 20261011,
+  "complete_training_episodes": 100,
+  "distinct_training_maps": 100,
+  "successful_online_training_episodes": 78,
+  "new_sac_updates": 7395,
+  "cumulative_sac_updates": 8895,
+  "success_memory_maps": 78,
+  "content_updates": 0,
+  "weight_change_l2": {
+    "policy": 7.867215995783922,
+    "critics": 12.163791268784198,
+    "targets": 12.14136977875825,
+    "content": 0.0,
+    "context_encoder": 0.0
+  },
+  "validation": {
+    "initial": {
+      "maps": 20,
+      "successes": 7,
+      "mean_minimum_coverage": 0.8726467354863054,
+      "mean_capped_time": 221.62966370501582,
+      "physical_audit": {
+        "rollouts": 20,
+        "movement_segments": 3448,
+        "wall_crossings": 0,
+        "coverage_recomputed": true,
+        "radio_and_speed_caps_passed": true
+      }
+    },
+    "final": {
+      "maps": 20,
+      "successes": 18,
+      "mean_minimum_coverage": 0.9837229916546317,
+      "mean_capped_time": 184.34778022993336,
+      "physical_audit": {
+        "rollouts": 20,
+        "movement_segments": 3058,
+        "wall_crossings": 0,
+        "coverage_recomputed": true,
+        "radio_and_speed_caps_passed": true
+      }
+    }
+  },
+  "test_policy_evaluations": 0,
+  "training_physical_audit": {
+    "rollouts": 100,
+    "movement_segments": 14916,
+    "wall_crossings": 0,
+    "radio_and_speed_caps_passed": true
+  },
+  "limitations": [
+    "One training seed and one sweep; not statistical convergence.",
+    "Warm-started A/FIFO movement only; no multi-map head/AB comparison.",
+    "New dataset differs from the old two-map validation; compare paired new maps only."
+  ],
+  "paired_outcomes": {
+    "both_successful": 7,
+    "gained_success": 11,
+    "lost_success": 0,
+    "both_failed": 2
+  }
+}

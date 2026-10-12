@@ -8,7 +8,27 @@ from torch import nn
 from model import PolicyNet, QNet
 
 
+def compact_observation(observation):
+    """Pack only the binary adjacency mask; retain all other values and dtypes."""
+    adjacency = observation[-1]
+    if adjacency.ndim == 1:
+        return observation
+    if adjacency.dtype != np.uint8 or not np.all((adjacency == 0) | (adjacency == 1)):
+        raise ValueError('Only binary uint8 adjacency masks can be compacted')
+    return (*observation[:-1], np.packbits(adjacency.reshape(-1)))
+
+
+def dense_observation(observation):
+    adjacency = observation[-1]
+    if adjacency.ndim == 2:
+        return observation
+    nodes = observation[0].shape[0]
+    adjacency = np.unpackbits(adjacency, count=nodes * nodes).reshape(nodes, nodes)
+    return (*observation[:-1], adjacency)
+
+
 def tensors(observations, device):
+    observations = [dense_observation(o) for o in observations]
     return tuple(torch.as_tensor(np.stack(parts), device=device)
                  for parts in zip(*observations))
 
@@ -18,6 +38,40 @@ def bellman_target(config, rewards, durations, terminated, truncated, next_value
     # an external training timeout. A failed deadline has no continuation value.
     ended = torch.maximum(terminated, truncated) if config.horizon_target == "terminal" else terminated
     return rewards + config.gamma ** (durations / config.dt) * (1 - ended) * next_value
+
+
+def success_tail_start(episode):
+    """First two-robot decision overlapping the final quarter of physical time."""
+    transitions = episode["transitions"]
+    elapsed = 0.
+    for index in range(0, len(transitions), 2):
+        elapsed += transitions[index][3]
+        if elapsed > .75 * episode["duration"]:
+            return index
+    return max(0, len(transitions) - 2)
+
+
+def sample_success_demonstrations(episodes, batch_size, mode):
+    """Use only stored successful training transitions; no additional action labels."""
+    if mode == "pooled":
+        examples = [x for episode in episodes for x in episode["transitions"]]
+        return random.sample(examples, min(batch_size, len(examples)))
+    if mode != "map_tail":
+        raise ValueError("Unknown success demonstration sampling")
+    if not episodes:
+        return []
+    batch, starts = [], {}
+    for _ in range(batch_size):
+        index = random.randrange(len(episodes))
+        episode = episodes[index]
+        transitions = episode["transitions"]
+        start = 0
+        if random.random() < .5:
+            if index not in starts:
+                starts[index] = success_tail_start(episode)
+            start = starts[index]
+        batch.append(transitions[random.randrange(start, len(transitions))])
+    return batch
 
 
 class ContentHead(nn.Module):
@@ -83,12 +137,20 @@ class Learner:
         c = torch.as_tensor(context, device=self.device)
         return self.content(f, c).cpu().numpy()
 
-    def remember_success(self, transitions, duration):
+    def remember_success(self, transitions, duration, map_key=None):
         """Keep fast complete self-generated episodes, never timeout/partial traces."""
         if (len(transitions) < 2 or len(transitions) % 2 or duration <= 0 or
                 not all(x[5] and not x[6] for x in transitions[-2:])):
             raise ValueError("A success example must end in a completed two-robot task")
-        self.success_episodes.append({"duration": float(duration), "transitions": list(transitions)})
+        if self.config.success_memory_mode == "per_map":
+            if map_key is None:
+                raise ValueError("Per-map success memory requires a training layout identifier")
+            previous = [e for e in self.success_episodes if e.get("map_key") == map_key]
+            if previous and previous[0]["duration"] <= duration:
+                return
+            self.success_episodes = [e for e in self.success_episodes if e.get("map_key") != map_key]
+        self.success_episodes.append({"duration": float(duration), "transitions": list(transitions),
+                                      "map_key": map_key})
         self.success_episodes.sort(key=lambda episode: episode["duration"])
         del self.success_episodes[self.config.success_episode_limit:]
 
@@ -124,9 +186,11 @@ class Learner:
         pointer_stats = self.policy.pointer.last_stats.copy()
         imitation_loss = logp.new_zeros(())
         imitation_saturation = 0.
-        examples = [x for episode in self.success_episodes for x in episode["transitions"]]
-        if self.config.success_imitation_weight > 0 and examples:
-            demonstration = random.sample(examples, min(self.config.batch_size, len(examples)))
+        example_count = sum(len(e["transitions"]) for e in self.success_episodes)
+        demonstration = []
+        if self.config.success_imitation_weight > 0 and example_count:
+            demonstration = sample_success_demonstrations(
+                self.success_episodes, self.config.batch_size, self.config.success_sampling)
             success_obs = tensors([x[0] for x in demonstration], self.device)
             success_actions = torch.tensor([x[1] for x in demonstration], device=self.device).view(-1, 1)
             success_logp = self.policy(*success_obs)
@@ -154,7 +218,9 @@ class Learner:
         self.updates += 1
         result = {"policy_loss": policy_loss.item(), "q1_loss": q_losses[0],
                   "sac_policy_loss": sac_policy_loss.item(), "imitation_loss": imitation_loss.item(),
-                  "imitation_updates": self.imitation_updates, "success_examples": len(examples),
+                  "imitation_updates": self.imitation_updates, "success_examples": example_count,
+                  "imitation_terminal_fraction": (float(np.mean([x[5] for x in demonstration]))
+                                                  if demonstration else 0.),
                   "success_episodes": len(self.success_episodes),
                   "imitation_pointer_saturation_fraction": imitation_saturation,
                   "q2_loss": q_losses[1], "entropy": entropy.mean().item(),
@@ -169,10 +235,13 @@ class Learner:
             self.on_update(result)
         return result
 
-    def update_content(self):
-        if len(self.content_replay) < self.config.batch_size:
-            return {}
-        batch = random.sample(self.content_replay, self.config.batch_size)
+    def update_content(self, batch=None):
+        if batch is None:
+            if len(self.content_replay) < self.config.batch_size:
+                return {}
+            batch = random.sample(self.content_replay, self.config.batch_size)
+        elif len(batch) != self.config.batch_size:
+            raise ValueError("Explicit content batches must match the configured batch size")
         f, c, y = (torch.as_tensor(np.stack(values), device=self.device) for values in zip(*batch))
         prediction = self.content(f, c)
         loss = nn.functional.mse_loss(prediction, y)

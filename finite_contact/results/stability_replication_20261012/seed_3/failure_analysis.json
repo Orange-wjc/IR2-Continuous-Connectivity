@@ -1,0 +1,209 @@
+{
+  "scope": "Post hoc all six fixed endpoints; final-state deficits are not causal module attribution.",
+  "training_seed": 3,
+  "threshold": 0.99,
+  "test_policy_evaluations": 0,
+  "failures": {
+    "pooled/A_fifo": [
+      {
+        "map_index": 1,
+        "coverage": [
+          0.9064113734407209,
+          0.8572369679325074
+        ],
+        "union_coverage": 0.9064113734407209,
+        "queue_bytes": [
+          17054,
+          29
+        ],
+        "unexplored_free_cells": 4404,
+        "explored_cells_missing_at_worst_robot": 2314,
+        "unexplored_component_sizes": [
+          3942,
+          462
+        ],
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "late_union_coverage_gain": 0.0491744055082135,
+        "late_trajectory_records": 27,
+        "unique_late_positions_per_robot": [
+          11,
+          7
+        ],
+        "late_minimum_coverage_gain": 0.0,
+        "time": 256.0,
+        "wait_seconds": [
+          15.499999999999998,
+          20.753542881801977
+        ],
+        "connected_seconds": 221.8474010650375
+      },
+      {
+        "map_index": 6,
+        "coverage": [
+          0.9630035960260864,
+          0.9630035960260864
+        ],
+        "union_coverage": 0.9630035960260864,
+        "queue_bytes": [
+          0,
+          0
+        ],
+        "unexplored_free_cells": 1821,
+        "explored_cells_missing_at_worst_robot": 0,
+        "unexplored_component_sizes": [
+          1780,
+          41
+        ],
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "late_union_coverage_gain": 0.0,
+        "late_trajectory_records": 20,
+        "unique_late_positions_per_robot": [
+          2,
+          3
+        ],
+        "late_minimum_coverage_gain": 0.0,
+        "time": 256.0,
+        "wait_seconds": [
+          29.48773447853215,
+          29.800958257265673
+        ],
+        "connected_seconds": 234.03448096264432
+      }
+    ],
+    "map_tail/A_fifo": [],
+    "pooled/A_rule": [],
+    "map_tail/A_rule": [
+      {
+        "map_index": 13,
+        "coverage": [
+          0.9680575353116496,
+          0.9680575353116496
+        ],
+        "union_coverage": 0.9680575353116496,
+        "queue_bytes": [
+          0,
+          0
+        ],
+        "unexplored_free_cells": 1479,
+        "explored_cells_missing_at_worst_robot": 0,
+        "unexplored_component_sizes": [
+          1471,
+          7,
+          1
+        ],
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "late_union_coverage_gain": 0.0,
+        "late_trajectory_records": 22,
+        "unique_late_positions_per_robot": [
+          8,
+          4
+        ],
+        "late_minimum_coverage_gain": 0.0,
+        "time": 256.0,
+        "wait_seconds": [
+          8.357022603955159,
+          7.5
+        ],
+        "connected_seconds": 226.6429773960448
+      },
+      {
+        "map_index": 14,
+        "coverage": [
+          0.9197337770382695,
+          0.9197337770382695
+        ],
+        "union_coverage": 0.9197337770382695,
+        "queue_bytes": [
+          0,
+          0
+        ],
+        "unexplored_free_cells": 3618,
+        "explored_cells_missing_at_worst_robot": 0,
+        "unexplored_component_sizes": [
+          3614,
+          4
+        ],
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "late_union_coverage_gain": 0.0,
+        "late_trajectory_records": 22,
+        "unique_late_positions_per_robot": [
+          10,
+          13
+        ],
+        "late_minimum_coverage_gain": 0.0,
+        "time": 256.0,
+        "wait_seconds": [
+          1.6666666666666667,
+          8.965519037355621
+        ],
+        "connected_seconds": 238.30964406271153
+      }
+    ],
+    "pooled/AB_learned": [],
+    "map_tail/AB_learned": []
+  },
+  "counts": {
+    "pooled/A_fifo": {
+      "failed_rollouts": 2,
+      "team_exploration_below_threshold": 2,
+      "local_map_synchronization_below_threshold": 0,
+      "both_queues_empty": 1
+    },
+    "map_tail/A_fifo": {
+      "failed_rollouts": 0,
+      "team_exploration_below_threshold": 0,
+      "local_map_synchronization_below_threshold": 0,
+      "both_queues_empty": 0
+    },
+    "pooled/A_rule": {
+      "failed_rollouts": 0,
+      "team_exploration_below_threshold": 0,
+      "local_map_synchronization_below_threshold": 0,
+      "both_queues_empty": 0
+    },
+    "map_tail/A_rule": {
+      "failed_rollouts": 2,
+      "team_exploration_below_threshold": 2,
+      "local_map_synchronization_below_threshold": 0,
+      "both_queues_empty": 2
+    },
+    "pooled/AB_learned": {
+      "failed_rollouts": 0,
+      "team_exploration_below_threshold": 0,
+      "local_map_synchronization_below_threshold": 0,
+      "both_queues_empty": 0
+    },
+    "map_tail/AB_learned": {
+      "failed_rollouts": 0,
+      "team_exploration_below_threshold": 0,
+      "local_map_synchronization_below_threshold": 0,
+      "both_queues_empty": 0
+    }
+  },
+  "paired_conditions": {
+    "A_fifo": {
+      "map_tail_gained_success_maps": [
+        1,
+        6
+      ],
+      "map_tail_lost_success_maps": [],
+      "both_successful": 18,
+      "both_failed": 0
+    },
+    "A_rule": {
+      "map_tail_gained_success_maps": [],
+      "map_tail_lost_success_maps": [
+        13,
+        14
+      ],
+      "both_successful": 18,
+      "both_failed": 0
+    },
+    "AB_learned": {
+      "map_tail_gained_success_maps": [],
+      "map_tail_lost_success_maps": [],
+      "both_successful": 20,
+      "both_failed": 0
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "scope": "Same pretrained weights and optimizer moments; only adaptation RNG/config seed differs.",
+  "seeds": {
+    "1": {
+      "identical_initial_networks_and_Adam": true,
+      "map_order_sha256": "6c9b525859c99d89da1e506ec80a6fc2e9925c0ccaa5cf92da5d2eb944c4237f",
+      "first_ten_maps": [
+        80,
+        84,
+        33,
+        81,
+        93,
+        17,
+        36,
+        82,
+        69,
+        65
+      ]
+    },
+    "2": {
+      "identical_initial_networks_and_Adam": true,
+      "map_order_sha256": "666fe436b6244b022c3bd605ce802420ad9e87f369ee00e8eab78d9c097cf8e6",
+      "first_ten_maps": [
+        83,
+        30,
+        56,
+        24,
+        16,
+        23,
+        2,
+        27,
+        28,
+        13
+      ]
+    },
+    "3": {
+      "identical_initial_networks_and_Adam": true,
+      "map_order_sha256": "f21a458e1e393c72ad92aa91925cfc51873cce4c698619a651978316b1d069ba",
+      "first_ten_maps": [
+        93,
+        67,
+        6,
+        64,
+        96,
+        83,
+        98,
+        42,
+        25,
+        15
+      ]
+    }
+  }
+}

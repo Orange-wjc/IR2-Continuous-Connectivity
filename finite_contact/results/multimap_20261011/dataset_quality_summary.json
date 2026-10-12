@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "family": "simple_rooms_v1",
+  "dataset_seed": 20261011,
+  "counts": {
+    "train": 100,
+    "validation": 20,
+    "test": 20
+  },
+  "unique_geometry": 140,
+  "unique_up_to_rotation_reflection": 140,
+  "room_counts": {
+    "2": 106,
+    "3": 34
+  },
+  "rotation_counts": {
+    "1": 30,
+    "2": 42,
+    "0": 27,
+    "3": 41
+  },
+  "manifest_sha256": "039aac027256e35b2251974b643cda9126527111e1e581d4f9701b92725d7a18",
+  "scope": "Test geometry quality checked; no test policy rollouts or test-based tuning."
+}

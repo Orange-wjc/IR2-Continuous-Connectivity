@@ -1,0 +1,29 @@
+[
+  {
+    "group": "A_fifo",
+    "success_maps": 85,
+    "min_episode_transitions": 98,
+    "max_episode_transitions": 202,
+    "longest_vs_shortest_sampling_ratio": 2.061224489795918,
+    "pooled_tail_fraction": 0.2301397886123423,
+    "replay_terminal_fraction": 0.011833333333333333
+  },
+  {
+    "group": "A_rule",
+    "success_maps": 97,
+    "min_episode_transitions": 80,
+    "max_episode_transitions": 182,
+    "longest_vs_shortest_sampling_ratio": 2.275,
+    "pooled_tail_fraction": 0.22224137931034482,
+    "replay_terminal_fraction": 0.016
+  },
+  {
+    "group": "AB_learned",
+    "success_maps": 94,
+    "min_episode_transitions": 48,
+    "max_episode_transitions": 178,
+    "longest_vs_shortest_sampling_ratio": 3.7083333333333335,
+    "pooled_tail_fraction": 0.23448712536935415,
+    "replay_terminal_fraction": 0.01785036080516521
+  }
+]

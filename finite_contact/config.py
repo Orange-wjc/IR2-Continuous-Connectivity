@@ -9,6 +9,10 @@ class Config:
     train_maps: int = 1  # single-map learnability first; explicitly opt into up to ten later
     validation_maps: int = 5
     test_maps: int = 5
+    map_family: str = "legacy"  # preserve the committed single-map experiment
+    map_seed: int = 20261011  # dataset seed, independent of the learner seed
+    map_order: str = "cyclic"
+    sensor_implementation: str = "legacy"
     robots: int = 2
     sensor_range: int = 70
     grid_points: int = 14
@@ -36,6 +40,7 @@ class Config:
     alpha_learning_rate: float = 1e-4
     batch_size: int = 16
     replay_size: int = 3000
+    compact_replay: bool = False  # lossless bit packing of binary adjacency matrices
     warmup: int = 128
     updates_per_decision: int = 1
     delivery_reward: float = 1.0
@@ -49,6 +54,8 @@ class Config:
     frontier_shaping_scale: float = 0.0  # optional local potential, common to all variants
     success_imitation_weight: float = 0.0  # self-generated successful training episodes only
     success_episode_limit: int = 3
+    success_memory_mode: str = "fastest"  # per_map retains one successful trace per layout
+    success_sampling: str = "pooled"  # optional equal-map, physical-time tail emphasis
     torch_threads: int = 2
 
     def validate(self):
@@ -82,11 +89,31 @@ class Config:
             raise ValueError("Finite-task potential shaping requires terminal deadline targets")
         if self.success_imitation_weight < 0 or self.success_episode_limit < 1:
             raise ValueError("Success imitation needs a nonnegative weight and positive episode limit")
+        if self.success_memory_mode not in {"fastest", "per_map"}:
+            raise ValueError("Unknown success memory mode")
+        if self.success_sampling not in {"pooled", "map_tail"}:
+            raise ValueError("Unknown success demonstration sampling")
+        if self.success_sampling == "map_tail" and self.success_memory_mode != "per_map":
+            raise ValueError("Equal-map tail sampling requires per-map success memory")
+        if self.success_memory_mode == "per_map" and self.success_episode_limit < self.train_maps:
+            raise ValueError("Per-map success memory needs at least one slot per training map")
         if min(self.dt, self.speed, self.bytes_per_second, self.horizon_seconds,
                self.communication_range, self.estimated_contact_seconds) <= 0:
             raise ValueError("Time, speed, capacity and range must be positive")
         if min(self.train_maps, self.validation_maps, self.test_maps) < 1:
             raise ValueError("Every map split must be nonempty")
+        if self.map_family not in {"legacy", "simple_rooms_v1"}:
+            raise ValueError("Unknown map family")
+        if self.map_order not in {"cyclic", "shuffled"}:
+            raise ValueError("Unknown training map order")
+        if self.sensor_implementation not in {"legacy", "vectorized"}:
+            raise ValueError("Unknown sensor implementation")
+        limits = (10, 5, 5) if self.map_family == "legacy" else (10000, 10000, 10000)
+        if any(n > limit for n, limit in zip(
+                (self.train_maps, self.validation_maps, self.test_maps), limits)):
+            raise ValueError("Map counts exceed this family's split limits")
+        if not 0 <= self.map_seed < 2 ** 32 or not 0 <= self.seed < 2 ** 32:
+            raise ValueError("Seeds must be unsigned 32-bit integers")
         if self.grid_points ** 2 + 1 > self.nodes:
             raise ValueError("Node padding must fit the complete simple graph")
         if self.map_size != 256:

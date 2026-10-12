@@ -8,14 +8,15 @@ from env import Env as LegacyEnv
 from graph_generator import Graph_generator
 from sensor import sensor_work
 from .communication import Radio, MAP
-from .maps import simple_map
+from .maps import configured_map
+from .sensing import sensor_work_vectorized
 
 
 class Environment:
     def __init__(self, config, split="train", map_index=0, scorer=None):
         config.validate()
         self.config = config
-        self.truth, self.positions, self.map_info = simple_map(split, map_index)
+        self.truth, self.positions, self.map_info = configured_map(config, split, map_index)
         self.beliefs = [np.full(self.truth.shape, 127, np.uint8) for _ in range(2)]
         self.resolution = 4
         self.time = 0.0
@@ -55,8 +56,9 @@ class Environment:
         self.trajectory[0].update({"coverage": local.tolist(), "union_coverage": union})
 
     def sense(self, robot):
-        self.beliefs[robot] = sensor_work(np.rint(self.positions[robot]).astype(int), self.config.sensor_range,
-                                         self.beliefs[robot], self.truth)
+        sense = sensor_work_vectorized if self.config.sensor_implementation == "vectorized" else sensor_work
+        self.beliefs[robot] = sense(np.rint(self.positions[robot]).astype(int), self.config.sensor_range,
+                                   self.beliefs[robot], self.truth)
 
     def frontiers(self, robot):
         downsampled = block_reduce(self.beliefs[robot], (4, 4), np.min)

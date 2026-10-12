@@ -1,0 +1,16 @@
+{
+  "training_maps": 100,
+  "retained_samples": 188770,
+  "samples_per_map_min": 1299,
+  "samples_per_map_max": 2048,
+  "finite_inputs_and_targets": true,
+  "targets_within_sender_observable_bound": true,
+  "macro_positive_fraction": 0.32273268662370636,
+  "actual_sampled_rows": 80000,
+  "sampled_rows_per_map_min": 714,
+  "sampled_rows_per_map_max": 878,
+  "first_100_updates_mean_mse": 0.10298382569104433,
+  "last_100_updates_mean_mse": 0.01675941357621923,
+  "validation_training_samples": 0,
+  "test_training_samples": 0
+}

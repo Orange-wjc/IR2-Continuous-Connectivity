@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "first_complete_training_maps": 10,
+  "first_actual_sac_updates": 200,
+  "first_online_training_successes": 10,
+  "checkpoint_episode": 10,
+  "checkpoint_sac_updates": 9095,
+  "compact_replay_verified": true,
+  "frozen_head_updates": 5000,
+  "movement_segments": 942,
+  "wall_crossings": 0,
+  "source_identity_matches": true,
+  "test_policy_evaluations": 0,
+  "scope": "Changing training policy; not fixed-endpoint development performance."
+}

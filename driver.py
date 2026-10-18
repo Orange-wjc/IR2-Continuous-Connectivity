@@ -32,6 +32,7 @@ from datetime import datetime
 from baseline_support import prepare_maps, record_setup, Progress, write_json, memory_available_gib
 from baseline_replay import stack_masks
 from contact_module.learning import ContentTrainer
+from contact_module.preparation import load_initialization, prepare_content
 
 
 def writeToTensorBoard(writer, tensorboardData, curr_episode):
@@ -72,7 +73,21 @@ def main():
         metadata = torch.load(MODEL_PATH, map_location='cpu')
         CONTACT_CONFIG.validate_checkpoint(metadata)
         del metadata
+    initial_state = None
+    initialization = None
+    init_path = os.environ.get('IR2_INIT_FROM')
+    if init_path and LOAD_MODEL:
+        raise ValueError('IR2_INIT_FROM starts a new experiment; do not combine it with IR2_RESUME')
+    if init_path:
+        if not CONTACT_CONFIG.enabled:
+            raise ValueError('Shared movement initialization is for the finite-contact experiments')
+        initial_state, initialization = load_initialization(init_path, manifest)
+    elif LOAD_MODEL and not args.check_config:
+        initialization = torch.load(MODEL_PATH, map_location='cpu').get('initialization')
+    if CONTACT_CONFIG.learned and not LOAD_MODEL and initial_state is None and not args.check_config:
+        raise ValueError('finite_learned requires IR2_INIT_FROM=<trained original checkpoint>; random frozen context is disabled')
     setup = record_setup(config, manifest, check_only=args.check_config)
+    setup['initialization'] = initialization
     if args.check_config:
         print(__import__('json').dumps(setup, ensure_ascii=False, indent=2))
         return
@@ -94,9 +109,12 @@ def main():
     setup.update(training_started=True, tensorboard_log_dir=log_dir)
     write_json(Path(BASELINE_DIR) / 'setup.json', setup)
     stopping = [False]
-    def request_stop(*_):
+    received_signal = [None]
+    def request_stop(signum, _frame):
         stopping[0] = True
-        print('Stop requested; finish the current optimizer block and save the checkpoint.', flush=True)
+        received_signal[0] = signal.Signals(signum).name
+        print('Stop requested ({}); finish the current optimizer block and save the checkpoint.'.format(
+            received_signal[0]), flush=True)
     signal.signal(signal.SIGINT, request_stop)
     signal.signal(signal.SIGTERM, request_stop)
 
@@ -112,7 +130,8 @@ def main():
         CONTACT_CONFIG.validate_checkpoint(checkpoint)
         log_alpha = checkpoint['log_alpha'] if CONTINUE_LOG_ALPHA else torch.FloatTensor([INITIAL_LOG_ALPHA]).to(device) 
     else:
-        log_alpha = torch.FloatTensor([INITIAL_LOG_ALPHA]).to(device)
+        log_alpha = (initial_state['log_alpha'].detach().clone().to(device) if initial_state is not None
+                     else torch.FloatTensor([INITIAL_LOG_ALPHA]).to(device))
     log_alpha.requires_grad = True
 
     # Init key networks & params
@@ -139,6 +158,12 @@ def main():
     target_q_update_counter = 1
 
     ### Load models from checkpts ###
+    if initial_state is not None:
+        global_policy_net.load_state_dict(initial_state['policy_model'])
+        global_q_net1.load_state_dict(initial_state['q_net1_model'])
+        global_q_net2.load_state_dict(initial_state['q_net2_model'])
+        print('Shared trained movement initialization: ' + initialization['sha256'], flush=True)
+        del initial_state
     if LOAD_MODEL:
         global_policy_net.load_state_dict(checkpoint['policy_model'])
         global_q_net1.load_state_dict(checkpoint['q_net1_model'])
@@ -156,6 +181,7 @@ def main():
         print("curr_episode set to: ", curr_episode)
         print("log_alpha: ", log_alpha)
         print(global_policy_optimizer.state_dict()['param_groups'][0]['lr'])
+        initialization = checkpoint.get('initialization')
 
     global_target_q_net1.load_state_dict(global_q_net1.state_dict())
     global_target_q_net2.load_state_dict(global_q_net2.state_dict())
@@ -163,7 +189,8 @@ def main():
     global_target_q_net2.eval()
     progress = Progress(BASELINE_DIR, manifest, writer, checkpoint)
     auxiliary = (ContentTrainer(global_policy_net, CONTACT_CONFIG,
-                 (checkpoint or {}).get('contact_learning')) if CONTACT_CONFIG.learned else None)
+                 (checkpoint or {}).get('contact_learning'), provenance=initialization)
+                 if CONTACT_CONFIG.learned else None)
 
     def save_checkpoint():
         state = {"policy_model": global_policy_net.state_dict(),
@@ -183,7 +210,7 @@ def main():
                  "invalid_episodes": progress.invalid,
                  "training_updates": progress.updates,
                  "baseline_progress": progress.snapshot(),
-                 "contact_config": CONTACT_CONFIG.to_dict()}
+                 "contact_config": CONTACT_CONFIG.to_dict(), "initialization": initialization}
         if auxiliary is not None:
             state['contact_learning'] = auxiliary.state_dict()
         temp = Path(MODEL_PATH).with_suffix('.tmp')
@@ -220,9 +247,6 @@ def main():
 
     ### Launch the first job on each runner ###
     job_list = []
-    for i, meta_agent in enumerate(meta_agents):
-        curr_episode += 1
-        job_list.append(meta_agent.job.remote(weights_set, curr_episode))
     
     metric_name = ['travel_dist', 'success_rate', 'explored_rate', 'connectivity_rate', 'agents_connected_percentage']
     training_data = []
@@ -235,6 +259,18 @@ def main():
         experience_buffer.append([])
     
     try:
+        if auxiliary is not None and not auxiliary.ready:
+            write_json(Path(BASELINE_DIR) / 'run_state.json', dict(status='running', phase='content_preparation',
+                pid=os.getpid(), time=datetime.now().astimezone().isoformat()))
+            prepare_content(meta_agents, weights_set, auxiliary, writer, BASELINE_DIR, stopping,
+                            map_count=len(manifest['maps']))
+            weights_set[2] = auxiliary.weights()
+            save_checkpoint()
+        write_json(Path(BASELINE_DIR) / 'run_state.json', dict(status='running', phase='joint_training',
+            pid=os.getpid(), time=datetime.now().astimezone().isoformat()))
+        for meta_agent in meta_agents:
+            curr_episode += 1
+            job_list.append(meta_agent.job.remote(weights_set, curr_episode))
         while not stopping[0]:
             if memory_available_gib() < 4:
                 raise MemoryError('Available host RAM below 4 GiB; stopping this training run')
@@ -433,6 +469,7 @@ def main():
         write_json(Path(BASELINE_DIR) / 'run_state.json', dict(status=state,
             completed_episodes=progress.completed, invalid_episodes=progress.invalid,
             training_updates=progress.updates, checkpoint=MODEL_PATH,
+            received_signal=received_signal[0],
             error=repr(error) if error else None, time=datetime.now().astimezone().isoformat()))
         for a in meta_agents:
             ray.kill(a)

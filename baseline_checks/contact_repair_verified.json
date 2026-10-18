@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "frontier_point": [
+    376,
+    32
+  ],
+  "near_frontier_feature": 1.0,
+  "directed_path_distances": [
+    201.0,
+    101.0,
+    0.0,
+    "unreachable"
+  ],
+  "gain_500_signal": [
+    0.10048867466880498,
+    0.34738564623819,
+    1.0,
+    0.0
+  ],
+  "trained_context_sha256": "997318d48b83ef883905ba49bb08e5e0681515361ed5552c3e7142b8a3ea31e4",
+  "old_finite_resume_rejected": true,
+  "original_checkpoint_still_accepted": true,
+  "readiness_and_provenance_restored": true
+}

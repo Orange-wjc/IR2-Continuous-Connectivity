@@ -2,7 +2,7 @@
 
 当前分支 `research/ir2-modular-contact` 基于已推送的 `baseline/ir2-easy10` / `dcea459d`。
 原版运行 `2` 已由用户暂停：1394有效回合、0无效回合、11104次SAC；模型、日志及十图清单保留本地。
-此分支只完成模块接入与隔离工程检查；尚未开始新的正式训练，也没有证明该接入版优于基线。
+v1运行contact_easy10_1已在2036有效回合后退出，近100成功率50%，尚未证明优于有限通信FIFO。当前修复版本为schema_version=2；不能把v1检查点无缝resume成v2。
 
 ## 当前目标与边界
 
@@ -14,46 +14,42 @@
 旧研究的正结果不能直接视作本版结果。消息头结构与12项本地特征沿用旧实现，图上下文改为当前IR2的128维冻结编码。
 当前实验仅验证学习链路，后续对照必须使用相同通信机制、动作空间和训练预算。
 
+## v2修复与训练流程（2026-10-19）
+
+修复Env.find_frontier已返回原图像素坐标、adapter却再乘resolution的错误。会合信号恢复gain/500、上限4，使用发送方本地有向图的反向Dijkstra路径距离、100像素衰减及路径代价；断开节点信号为0。仍只读取已付费的陈旧位姿或共同起点，不读取队友真值。FIFO采用同一尺度和路径机制，其待发差异估计仍不使用学习头。未修改原SAC数学更新、6维输入、机器人数量、地图或通信预算。
+
+本轮改为显式共享热启动：从原版运行2的1394回合/11104 SAC检查点载入actor、两个critic和温度；优化器、训练计数和移动回放重新建立。冻结消息上下文复制自这个已训练actor，禁止再从随机actor冻结后直接联合训练。源检查点SHA和十图内容SHA校验写入setup及检查点。**这改变了初始化条件，不能将v2与v1的差异全部归因于单个修复；后续FIFO对照必须使用相同源检查点和预算。**
+
+联合训练前，自动用冻结移动策略、合法规则选包在10张训练图各运行两次：第一遍拟合标签、第二遍整回合标签留作校验。每回合最多256标签，消息头最多执行1000次拟合更新，每100次检查留出回合MSE，选择校验最好的头和对应Adam状态。校验未优于训练标签均值的常数预测则保存退出，不放行随机/未学会的消息头。准备数据不进入移动SAC回放，不计入正式联合训练回合；预算及结果写入preparation.json和Preparation/*曲线。它只在训练图上准备消息头，不是独立测试成绩，也不是用户要求暂缓的周期任务评估。
+
 ## 使用方式
 
-先设置conda环境，并进入项目目录。启动第一份改进组（随机初始化，不加载原版模型）：
+新启动命令（已有同名检查点会拒绝覆盖；不要重复执行正在运行的实验）：
 
 ```bash
 conda activate ir2_train
 cd ~/wjc_ws/IR2-Continuous-Connectivity
-IR2_METHOD=finite_learned IR2_RUN_NAME=contact_easy10_1 IR2_AGENTS=8 python -u driver.py
+IR2_METHOD=finite_learned IR2_RUN_NAME=contact_easy10_v2_20261019 IR2_AGENTS=8 \
+IR2_INIT_FROM=model/2/checkpoint.pth python -u driver.py
 ```
 
-模型 `model/contact_easy10_1/checkpoint.pth`；曲线 `train/contact_easy10_1/`；记录 `experiments/contact_easy10_1/`。
-已有同名检查点时拒绝覆盖；中断后继续相同组：
+模型model/contact_easy10_v2_20261019/checkpoint.pth；曲线train/contact_easy10_v2_20261019/；记录experiments/contact_easy10_v2_20261019/。本轮由助手按用户指令启动，实时进度见其中training.log。中断续训使用：
 
 ```bash
-IR2_METHOD=finite_learned IR2_RUN_NAME=contact_easy10_1 IR2_AGENTS=8 IR2_RESUME=1 python -u driver.py
+IR2_METHOD=finite_learned IR2_RUN_NAME=contact_easy10_v2_20261019 IR2_AGENTS=8 \
+IR2_RESUME=1 python -u driver.py
 ```
 
-Ctrl+C等待当前优化块完成再保存。沿用原版限制：移动回放和在途任务不存盘，重启须重新采集2000经验；
-新增的消息头参数、优化器、辅助回放、冻结编码器、更新计数及辅助抽样RNG会保存。
-不允许把原版检查点直接当作finite_learned断点，不允许续训时静默改变通信配置。
-原版 `model/2` 不覆盖、不自动加载；如后续需要共享热启动，另行设计两组一致的初始化方案。
+IR2_INIT_FROM仅用于新实验；与IR2_RESUME互斥。续训恢复消息头、训练来源、准备完成标记、辅助回放/优化器/RNG；已经准备完成则不再预训练。准备过程若中断，未完成的采样准备重新执行，保留日志供核算。原版限制仍在：移动回放及在途任务不存盘，重启须重新收集2000经验。Ctrl+C/SIGTERM完成当前优化块后保存，退出状态记录收到的信号种类，不能据此确定信号发送者。
 
 ```bash
-tensorboard --logdir train/contact_easy10_1 --host 127.0.0.1 --port 6011
+tensorboard --logdir train/contact_easy10_v2_20261019 --host 127.0.0.1 --port 6012
 ```
 
-浏览器 http://127.0.0.1:6011 。重点看 `Progress/Success Rate 100 Percent`、`Perf/Explored Rate`、
-`Contact/Content Updates`、`Contact/Content Loss`、`Contact/unique_cells` 和 `Contact/wait_actions`。
-`Perf/Reward`是采样即时奖励均值；`Perf/Connectivity Rate`是回合末连接状态，不是全程连接率。
+浏览器http://127.0.0.1:6012。先看Preparation/*确认准备完成；联合阶段看Progress/Success Rate 100 Percent、各图成功记录、Perf/Explored Rate、Contact/Content Updates、Contact/Content Loss、Contact/unique_cells。
+Perf/Explored Rate是三个机器人本地覆盖率均值，**不是地图并集**；成功要求每台机器人覆盖率≥99%。Perf/Reward是采样即时奖励均值，Connectivity是回合末连接状态。头的更新总数包含预训练尝试，选中的Adam步数另记在preparation.json。
 
-仅检查配置、不启动采样/梯度：
-
-```bash
-IR2_METHOD=finite_learned IR2_RUN_NAME=contact_easy10_1 IR2_AGENTS=8 python driver.py --check-config
-```
-
-`IR2_METHOD`默认仍为`original`，其默认目录也是原版目录。扩展组默认使用独立目录，推荐显式指定运行名。
-`finite_fifo`和`finite_rule`可用于后续受控对照；本轮不同时启动两份正式训练。
-`IR2_BYTES_PER_SECOND`默认2048；`IR2_CONTACT_COUPLED=0`只关闭收益估计中内容/容量耦合，实际传输仍有限且沿用指定内容策略。
-有限通信各组均可WAIT、同样支付时间/真实交付奖励；FIFO使用未耦合的保守待发地图差异，会合信号不使用学习得分。
+IR2_METHOD默认original；finite_fifo/finite_rule可用于之后的受控对照。本轮只启动finite_learned一份，不定时评估、不设99%自动停止、不启用守护自动重启。FIFO热启动也应设置同一个IR2_INIT_FROM；公平比较需另行记录两组准备采样/计算预算，不把热启动视作从零训练。
 
 ## 独立模块与接入点
 
@@ -93,9 +89,9 @@ Runner同步辅助权重；driver注册辅助更新与保存；Policy/Q可选允
 `check_contact_driver.py`检查：真实driver在临时目录启动/辅助更新/SIGINT保存/续载、配置误用拦截和Ray清理。
 对应`*_verified.json`记录实际结果；完整196步检查另记`contact_full_runtime_verified.json`。
 
-这些是工程验收，不是性能实验，也不计作正式回合。正式训练仅由用户前台启动；无周期评估、自动停止或后台守护。
+这些是工程验收，不是性能实验，也不计作正式回合。v2按本轮用户指令重启，仍无周期评估、收敛自动停止或后台守护。
 下一步先训练一份finite_learned确认成功率/覆盖率上升，再讨论有限通信对照、相同预算比较和独立评估。
 当前接入范围是训练入口；原`test_driver.py`尚未适配有限通信。后续评估必须复用同一模块与配置，
 不能把有限通信模型直接放进原版免费交换的测试环境并报告为本方法成绩。
 
-实际验收结果（2026-10-18）：全部10张原图在8个Ray worker上完成196步上限的完整回合检查（允许任务提前成功），共5820条真实经验；原GPU batch128连续8次更新、辅助头40次更新均完成。主机可用RAM最低约17.79GiB，GPU张量峰值约17.66GiB。最终源码SHA、原模型/日志SHA及地图一致性见`baseline_checks/contact_final_review.json`。正式训练仍未启动。
+实际验收结果（2026-10-18）：全部10张原图在8个Ray worker上完成196步上限的完整回合检查（允许任务提前成功），共5820条真实经验；原GPU batch128连续8次更新、辅助头40次更新均完成。主机可用RAM最低约17.79GiB，GPU张量峰值约17.66GiB。最终源码SHA、原模型/日志SHA及地图一致性见`baseline_checks/contact_final_review.json`。这是2026-10-18的v1接入验收记录，不能替代v2修复后的学习验收。

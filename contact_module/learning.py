@@ -22,7 +22,7 @@ class ContentHead(nn.Module):
 
 
 class ContentTrainer:
-    def __init__(self, policy, config, saved=None):
+    def __init__(self, policy, config, saved=None, provenance=None):
         self.config = config
         # An independent CPU auxiliary model avoids modifying global SAC RNG.
         with torch.random.fork_rng(devices=[]):
@@ -33,6 +33,8 @@ class ContentTrainer:
         self.replay = deque(maxlen=20000)
         self.rng = random.Random(20261018)
         self.updates = 0
+        self.ready = False
+        self.provenance = provenance
         if saved is not None:
             self.head.load_state_dict(saved['head'])
             self.encoder = saved['encoder']
@@ -40,21 +42,23 @@ class ContentTrainer:
             self.replay.extend(saved['replay'])
             self.rng.setstate(saved['rng'])
             self.updates = saved['updates']
+            self.ready = saved.get('ready', False)
+            self.provenance = saved.get('provenance')
 
     def weights(self):
         return dict(head={k:v.detach().cpu().clone() for k,v in self.head.state_dict().items()},
-                    encoder=self.encoder)
+                    encoder=self.encoder, ready=self.ready, provenance=self.provenance)
 
     def state_dict(self):
         return dict(**self.weights(), optimizer=self.optimizer.state_dict(),
                     replay=list(self.replay), rng=self.rng.getstate(), updates=self.updates)
 
-    def update(self, labels):
+    def update(self, labels, steps=4):
         self.replay.extend(labels)
         if len(self.replay) < 128:
             return None
         losses = []
-        for _ in range(4):
+        for _ in range(steps):
             batch = self.rng.sample(list(self.replay), 128)
             features, context, target = (torch.from_numpy(np.stack(a)).float() for a in zip(*batch))
             loss = nn.functional.mse_loss(self.head(features, context), target)

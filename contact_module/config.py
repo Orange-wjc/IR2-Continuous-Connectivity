@@ -6,6 +6,7 @@ import os
 
 @dataclass(frozen=True)
 class ContactConfig:
+    schema_version: int = 2
     method: str = 'original'
     bytes_per_second: float = 2048.
     packet_bytes: int = 512
@@ -16,6 +17,8 @@ class ContactConfig:
     wait_seconds: float = 1.
     time_penalty: float = .02
     coupled: bool = True
+    gain_scale: float = 500.
+    path_decay: float = 100.
 
     @property
     def enabled(self):
@@ -36,6 +39,8 @@ class ContactConfig:
             raise ValueError('Cannot silently change finite-contact configuration on resume')
         if self.learned and 'contact_learning' not in state:
             raise ValueError('Learned checkpoint is missing the auxiliary head/optimizer state')
+        if self.learned and not (state['contact_learning'].get('provenance') or {}).get('training_updates', 0):
+            raise ValueError('Learned checkpoint lacks trained context provenance')
 
     @classmethod
     def from_env(cls):

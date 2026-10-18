@@ -37,6 +37,7 @@ class StopProgress(Progress):
 
 def main():
     sys.argv=['driver.py'];driver.RLRunner=ShortRunner;driver.Progress=StopProgress
+    os.environ['IR2_INIT_FROM']='model/2/checkpoint.pth'
     prepare_maps(driver.config)  # Ray workers import their isolated run's map links.
     source=Path('model/2/checkpoint.pth');sha=hashlib.sha256(source.read_bytes()).hexdigest()
     with tempfile.TemporaryDirectory(prefix='ir2-contact-driver-check-') as directory:
@@ -48,6 +49,10 @@ def main():
         driver.LOAD_MODEL=False;driver.config.LOAD_MODEL=False
         driver.main()
         first=torch.load(paths['MODEL_PATH'],map_location='cpu')
+        source_state=torch.load(source,map_location='cpu')
+        assert all(torch.equal(v,first['policy_model'][k]) for k,v in source_state['policy_model'].items())
+        assert first['contact_learning']['ready']
+        assert first['contact_learning']['provenance']['sha256']==sha
         assert first['completed_episodes']==2 and first['training_updates']==0
         assert first['contact_learning']['updates']>0
         driver.CONTACT_CONFIG.validate_checkpoint(first)
@@ -57,6 +62,7 @@ def main():
             except ValueError:pass
             else:raise AssertionError('Incompatible checkpoint accepted')
         driver.LOAD_MODEL=True;driver.config.LOAD_MODEL=True;driver.CONTINUE_LOG_ALPHA=True
+        del os.environ['IR2_INIT_FROM']
         driver.main()
         second=torch.load(paths['MODEL_PATH'],map_location='cpu')
         assert second['completed_episodes']==4 and second['training_updates']==0

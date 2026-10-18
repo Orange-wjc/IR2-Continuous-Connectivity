@@ -11,17 +11,17 @@
   "auxiliary_head_gradient_and_resume_exact": true,
   "integrated": {
     "metrics": {
-      "contact_seconds": 18.63106122386025,
-      "contact_sent_bytes": 27994,
-      "contact_control_bytes": 2081,
-      "contact_unique_cells": 2731,
-      "contact_duplicate_cells": 2013,
-      "contact_map_packets": 115,
+      "contact_seconds": 18.010019439118885,
+      "contact_sent_bytes": 24931,
+      "contact_control_bytes": 1428,
+      "contact_unique_cells": 2291,
+      "contact_duplicate_cells": 2018,
+      "contact_map_packets": 83,
       "contact_wait_actions": 1
     },
-    "labels": 228,
+    "labels": 225,
     "head_updates": 8,
-    "loss": 0.39325420558452606,
+    "loss": 0.39612605422735214,
     "movement_transitions": 6
   },
   "finite_fifo_and_rule_sampling_passed": true,

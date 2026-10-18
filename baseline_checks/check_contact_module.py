@@ -121,6 +121,10 @@ def integrated_checks():
     assert ok and obs[1][0,0,0].item()==obs[2].item()
     logp=p(*[v.clone() for v in obs]);assert torch.isfinite(logp).all()
     assert logp.exp()[0,0]>0 and abs(float(logp.exp().sum())-1)<1e-5
+    # Bootstrap cannot rank with a random head; joint stage must use the head.
+    assert not contact.content_ready
+    trainer.ready = True
+    contact.content_ready = True
     # Legal ranking and utility do not consult the receiver's current map.
     pair=(0,1);packets=contact.radio.pending(pair)[:8]
     if not packets:

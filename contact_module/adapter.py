@@ -1,4 +1,5 @@
 """Narrow integration boundary between original IR2 and finite-contact logic."""
+import heapq
 import numpy as np
 import torch
 from skimage.measure import block_reduce
@@ -9,6 +10,7 @@ from .learning import build_worker_models
 class ContactAdapter:
     def __init__(self, config, policy, auxiliary, episode):
         self.config = config
+        self.content_ready = bool(auxiliary and auxiliary.get('ready', False))
         self.encoder = self.head = None
         if config.learned:
             if auxiliary is None:
@@ -54,7 +56,8 @@ class ContactAdapter:
         # Initial common start is the sole shared position prior.
         peer_position = env.start_position if peer is None else peer[:2]
         age = self.time - self.radio.peer_pose_time.get(pair, 0.)
-        frontier = env.all_frontiers[sender] * env.resolution
+        # Env.find_frontier already returns full-resolution pixel coordinates.
+        frontier = env.all_frontiers[sender]
         cached = self.contexts.get(sender)
         context_dim = env.contact_embedding_dim
         fs, cs = [], []
@@ -81,6 +84,9 @@ class ContactAdapter:
         if not packets:
             return np.zeros(0)
         mode = mode or self.config.method
+        if mode == 'finite_learned' and not self.content_ready:
+            # Collect labels using a legal rule, never a random content head.
+            mode = 'finite_rule'
         known = self.radio.known_peer[pair].ravel()
         upper = np.array([np.count_nonzero(known[p.cells()['index']]==127) for p in packets],dtype=float)
         if mode == 'finite_fifo':
@@ -213,11 +219,41 @@ class ContactAdapter:
                          else float(self.scores(pair,[packet])[0]))
         return gain
 
+    @staticmethod
+    def path_distances(coords, edges, position):
+        """Distances TO the paid pose's nearest local node, on directed local edges.
+
+        Reverse Dijkstra preserves edge direction; disconnected nodes stay inf.
+        No map truth, peer route history, or graph repair is used here.
+        """
+        nodes = {tuple(p): i for i, p in enumerate(coords)}
+        reverse = [[] for _ in coords]
+        for source, neighbors in edges.items():
+            if source not in nodes:
+                continue
+            for edge in neighbors.values():
+                target = tuple(edge.to_node)
+                if target in nodes:
+                    reverse[nodes[target]].append((nodes[source], float(edge.length)))
+        distances = np.full(len(coords), np.inf)
+        target = int(np.argmin(np.linalg.norm(coords-position, axis=1)))
+        distances[target] = 0.
+        queue = [(0., target)]
+        while queue:
+            distance, node = heapq.heappop(queue)
+            if distance != distances[node]:
+                continue
+            for source, length in reverse[node]:
+                candidate = distance + length
+                if candidate < distances[source]:
+                    distances[source] = candidate
+                    heapq.heappush(queue, (candidate, source))
+        return distances
+
     def utility(self, env, robot):
         coords = env.all_node_coords[robot]
         utility = np.zeros((len(coords),1))
         delta = np.zeros(env.n_agent)
-        area = float(np.prod(env.ground_truth_size))
         for peer in range(env.n_agent):
             if peer == robot:
                 continue
@@ -229,8 +265,10 @@ class ContactAdapter:
             age = self.time-self.radio.peer_pose_time.get(pair,0.)
             # Reuse original single rendezvous input channel, with local
             # stale pose confidence and no ground-truth positions/maps.
-            d = np.linalg.norm(coords-position,axis=1)
-            utility[:,0] += (8.*gain/area)*np.exp(-age/60.)/(1.+d/80.)
+            d = self.path_distances(coords, env.all_graph[robot], position)
+            benefit = np.clip(gain/self.config.gain_scale, 0., 4.) * np.exp(-age/60.)
+            utility[:,0] += np.maximum(0., benefit*np.exp(-d/self.config.path_decay)
+                                       - .002*d/self.config.speed)
         return delta,utility,True
 
     def metrics(self):

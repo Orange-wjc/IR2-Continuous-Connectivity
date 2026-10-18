@@ -1,5 +1,18 @@
 # Additional stuff
 experiments/
+# Local training checkpoints, rollout dumps and preview media. Keep the
+# maintained sources, scripts, audit summaries and handoff documents in Git.
+/preview_*/
+/research_work/**/*.pth
+/research_work/**/*.pt
+/research_work/**/*.ckpt
+/research_work/**/*.npz
+/research_work/**/*.json.gz
+/research_work/**/*.jsonl
+/research_work/**/*.lock
+/research_work/**/events.out.tfevents.*
+/research_work/native_easy10_cycles_20261018/preflight/
+/performance_work/**/*.pstats
 !train/
 train/*
 !train/demo

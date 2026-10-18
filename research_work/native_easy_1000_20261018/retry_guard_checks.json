@@ -1,0 +1,6 @@
+{
+  "actual_training_starts_limited_to": 3,
+  "first_launch_plus_at_most_two_retries": true,
+  "fourth_attempt_refused": true,
+  "test_isolated_from_real_attempt_counter": true
+}

@@ -1,0 +1,29 @@
+usage: driver.py [-h] --output OUTPUT [--dataset DATASET]
+                 [--num-meta-agent WORKERS] [--microbatch MICROBATCH]
+                 [--seed SEED] [--preflight] [--resume]
+                 [--max-hours MAX_HOURS] [--review-interval REVIEW_INTERVAL]
+                 [--no-auto-evaluation] [--no-prefetch]
+
+Native-map, paired IR2 SAC training; easy first, difficult gated by review.
+Original maps/ordering, original hierarchical graph, replay warmup 2000,
+effective batch 128, 8 updates/finished episode, hard targets every 64
+updates. Finite-contact environment and the paired control share byte/time
+constraints.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --output OUTPUT
+  --dataset DATASET
+  --num-meta-agent WORKERS, --workers WORKERS
+                        Parallel map simulations; explicit values also
+                        override saved parallelism on resume
+  --microbatch MICROBATCH
+  --seed SEED
+  --preflight
+  --resume
+  --max-hours MAX_HOURS
+  --review-interval REVIEW_INTERVAL
+  --no-auto-evaluation  Train continuously; evaluate only on explicit request
+                        (persisted on resume)
+  --no-prefetch         Disable exact cross-method CPU/GPU overlap for
+                        engineering comparison

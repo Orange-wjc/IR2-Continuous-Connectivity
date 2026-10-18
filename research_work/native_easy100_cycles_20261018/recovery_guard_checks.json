@@ -1,0 +1,6 @@
+{
+  "three_failures_at_same_progress_blocked": true,
+  "recovery_allowed_after_progress_advances": true,
+  "no_lifetime_launch_limit": true,
+  "isolated_fixture_only": true
+}

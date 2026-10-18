@@ -1,0 +1,689 @@
+{
+  "status": "complete",
+  "time": "2026-10-15T14:15:31.246829+08:00",
+  "seeds": {
+    "101": {
+      "groups": {
+        "B0_fifo": {
+          "successes": 19,
+          "mean_capped_time": 91.82032709232712,
+          "audit": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seeds_20261013/seed_101/B0_fifo/audit.json"
+        },
+        "A_fifo": {
+          "successes": 20,
+          "mean_capped_time": 92.47209068107661,
+          "audit": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seeds_20261013/seed_101/A_fifo/audit.json"
+        },
+        "B_learned": {
+          "successes": 20,
+          "mean_capped_time": 82.52498190261201,
+          "audit": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seeds_20261013/seed_101/B_learned/audit.json"
+        },
+        "AB_learned": {
+          "successes": 20,
+          "mean_capped_time": 78.78185116096155,
+          "audit": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seeds_20261013/seed_101/AB_learned/audit.json"
+        },
+        "AB_uncoupled": {
+          "successes": 20,
+          "mean_capped_time": 80.74321830597992,
+          "audit": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seeds_20261013/seed_101/AB_uncoupled/audit.json"
+        }
+      },
+      "pairs": {
+        "B0_fifo_vs_A_fifo": {
+          "success_gain_for_second": 1,
+          "mean_capped_time_saved_seconds": -0.6517635887494923,
+          "median_capped_time_saved_seconds": 1.0339374439115794,
+          "second_faster_maps": 11,
+          "second_slower_maps": 9,
+          "both_successful_maps": 19,
+          "both_successful_mean_time_saved_seconds": -2.316869069647389,
+          "gained_success_maps": [
+            8
+          ],
+          "lost_success_maps": [],
+          "per_map_time_saved_seconds": [
+            14.32858181135957,
+            18.18103807471124,
+            46.90988784705364,
+            -57.76015907014292,
+            -25.25938529760313,
+            -35.863834072648416,
+            -30.252864156104707,
+            6.679495524634959,
+            30.985240548310543,
+            0.8285582708921879,
+            2.882046462509223,
+            27.260112701689124,
+            1.2393166169309708,
+            12.513283155872102,
+            -4.591241197283679,
+            -2.3016536060045496,
+            -10.631469879468796,
+            -0.49597340821689784,
+            4.920909743987963,
+            -12.60716184546827
+          ]
+        },
+        "B0_fifo_vs_B_learned": {
+          "success_gain_for_second": 1,
+          "mean_capped_time_saved_seconds": 9.295345189715079,
+          "median_capped_time_saved_seconds": 2.509338416979652,
+          "second_faster_maps": 12,
+          "second_slower_maps": 8,
+          "both_successful_maps": 19,
+          "both_successful_mean_time_saved_seconds": 3.227961971246875,
+          "gained_success_maps": [
+            8
+          ],
+          "lost_success_maps": [],
+          "per_map_time_saved_seconds": [
+            29.10251825020613,
+            -7.90229525862209,
+            50.236348172487865,
+            -7.6007972525360685,
+            1.8014980060860353,
+            -18.18171916878123,
+            -15.658568122178735,
+            -46.0845605713466,
+            124.57562634061094,
+            -0.5787905331972212,
+            2.2696626788387277,
+            23.914923871970984,
+            3.8225048070907235,
+            2.7490141551205767,
+            -5.883394344194116,
+            14.297541323224095,
+            -12.473571792325231,
+            6.73150912711305,
+            20.33395209671204,
+            20.435502008021686
+          ]
+        },
+        "B_learned_vs_AB_learned": {
+          "success_gain_for_second": 0,
+          "mean_capped_time_saved_seconds": 3.7431307416504724,
+          "median_capped_time_saved_seconds": 1.7655781684569263,
+          "second_faster_maps": 11,
+          "second_slower_maps": 9,
+          "both_successful_maps": 20,
+          "both_successful_mean_time_saved_seconds": 3.7431307416504724,
+          "gained_success_maps": [],
+          "lost_success_maps": [],
+          "per_map_time_saved_seconds": [
+            -3.6628997296498227,
+            23.805524597869123,
+            23.930991898863567,
+            10.054590517244193,
+            0.7019424684228852,
+            -6.078908290093523,
+            -18.330262527847935,
+            42.94285738854657,
+            -21.97385402126011,
+            3.8673674202166097,
+            2.8292138684909673,
+            3.71035749029879,
+            -4.323902592366082,
+            10.79070631406347,
+            17.54604395331144,
+            -7.711355908606151,
+            -3.7372420915104385,
+            -24.411752362712427,
+            -0.6546299441330916,
+            25.567826383861416
+          ]
+        },
+        "A_fifo_vs_AB_learned": {
+          "success_gain_for_second": 0,
+          "mean_capped_time_saved_seconds": 13.690239520115043,
+          "median_capped_time_saved_seconds": 5.673928818374847,
+          "second_faster_maps": 14,
+          "second_slower_maps": 6,
+          "both_successful_maps": 20,
+          "both_successful_mean_time_saved_seconds": 13.690239520115043,
+          "gained_success_maps": [],
+          "lost_success_maps": [],
+          "per_map_time_saved_seconds": [
+            11.111036709196739,
+            -2.2778087354642054,
+            27.257452224297793,
+            60.213952334851044,
+            27.762825772112052,
+            11.603206613773665,
+            -3.735966493921964,
+            -9.821198707434988,
+            71.61653177104029,
+            2.4600186161272006,
+            2.2168300848204723,
+            0.36516866058065034,
+            -1.7407144022063292,
+            1.0264373133119449,
+            16.253890806401003,
+            8.887839020622494,
+            -5.579344004366874,
+            -17.18426982738248,
+            14.758412408590985,
+            58.61049023735137
+          ]
+        },
+        "AB_uncoupled_vs_AB_learned": {
+          "success_gain_for_second": 0,
+          "mean_capped_time_saved_seconds": 1.9613671450183747,
+          "median_capped_time_saved_seconds": 1.9789663674406235,
+          "second_faster_maps": 11,
+          "second_slower_maps": 9,
+          "both_successful_maps": 20,
+          "both_successful_mean_time_saved_seconds": 1.9613671450183747,
+          "gained_success_maps": [],
+          "lost_success_maps": [],
+          "per_map_time_saved_seconds": [
+            -1.6932612274518277,
+            16.63572858582424,
+            9.567743943489361,
+            6.25161868171287,
+            -7.556203588202592,
+            -23.142813162897028,
+            -32.743884195494,
+            -2.394451225490158,
+            54.77252916386169,
+            -8.06975676440063,
+            2.330687697936284,
+            -9.342790437423659,
+            1.627245036944963,
+            3.416011069067906,
+            4.2494602511796415,
+            9.679138634022067,
+            22.87593638353924,
+            -26.797206653626006,
+            -0.9736650939810971,
+            20.535275801756228
+          ]
+        }
+      },
+      "interaction_seconds": 4.394894330399961
+    },
+    "202": {
+      "groups": {
+        "B0_fifo": {
+          "successes": 20,
+          "mean_capped_time": 148.8203264302176,
+          "audit": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seeds_20261013/seed_202/B0_fifo/audit.json"
+        },
+        "A_fifo": {
+          "successes": 20,
+          "mean_capped_time": 107.70824341150042,
+          "audit": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seeds_20261013/seed_202/A_fifo/audit.json"
+        },
+        "B_learned": {
+          "successes": 20,
+          "mean_capped_time": 102.89469212857527,
+          "audit": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seeds_20261013/seed_202/B_learned/audit.json"
+        },
+        "AB_learned": {
+          "successes": 20,
+          "mean_capped_time": 68.17511423279674,
+          "audit": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seeds_20261013/seed_202/AB_learned/audit.json"
+        },
+        "AB_uncoupled": {
+          "successes": 20,
+          "mean_capped_time": 78.8273944719697,
+          "audit": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seeds_20261013/seed_202/AB_uncoupled/audit.json"
+        }
+      },
+      "pairs": {
+        "B0_fifo_vs_A_fifo": {
+          "success_gain_for_second": 0,
+          "mean_capped_time_saved_seconds": 41.11208301871717,
+          "median_capped_time_saved_seconds": 44.39582300272147,
+          "second_faster_maps": 18,
+          "second_slower_maps": 2,
+          "both_successful_maps": 20,
+          "both_successful_mean_time_saved_seconds": 41.11208301871717,
+          "gained_success_maps": [],
+          "lost_success_maps": [],
+          "per_map_time_saved_seconds": [
+            107.08354596009985,
+            10.990398753800207,
+            -44.94314081419856,
+            61.6231385468442,
+            19.764071009645306,
+            17.12747773093146,
+            50.48773447853219,
+            109.93139192968053,
+            73.86643488216286,
+            34.15440114519883,
+            58.546931665482504,
+            -21.130851116090085,
+            80.13189892962171,
+            18.27365243640176,
+            62.39516227450912,
+            68.22027055932932,
+            56.45496450591175,
+            7.971717747418481,
+            38.30391152691075,
+            12.988548222151167
+          ]
+        },
+        "B0_fifo_vs_B_learned": {
+          "success_gain_for_second": 0,
+          "mean_capped_time_saved_seconds": 45.92563430164232,
+          "median_capped_time_saved_seconds": 41.506556013224305,
+          "second_faster_maps": 18,
+          "second_slower_maps": 2,
+          "both_successful_maps": 20,
+          "both_successful_mean_time_saved_seconds": 45.92563430164232,
+          "gained_success_maps": [],
+          "lost_success_maps": [],
+          "per_map_time_saved_seconds": [
+            120.99278301438713,
+            -19.962521232828536,
+            95.14438288120212,
+            38.18228563548365,
+            42.69817386693184,
+            40.31493815951677,
+            25.025256816975897,
+            31.48920848805372,
+            9.36289200036083,
+            53.73083013677962,
+            39.347215072948984,
+            29.914986913911115,
+            47.80612526395197,
+            -27.668030406472923,
+            75.95811102634745,
+            113.52899555806556,
+            59.02989310787599,
+            21.23264389251254,
+            66.91483883451949,
+            55.46967700232321
+          ]
+        },
+        "B_learned_vs_AB_learned": {
+          "success_gain_for_second": 0,
+          "mean_capped_time_saved_seconds": 34.71957789577852,
+          "median_capped_time_saved_seconds": 36.713734217815116,
+          "second_faster_maps": 15,
+          "second_slower_maps": 5,
+          "both_successful_maps": 20,
+          "both_successful_mean_time_saved_seconds": 34.71957789577852,
+          "gained_success_maps": [],
+          "lost_success_maps": [],
+          "per_map_time_saved_seconds": [
+            43.52436880366247,
+            67.38146729349282,
+            11.37574253644,
+            60.61506135269123,
+            -8.331662932743868,
+            -1.021034529587567,
+            52.80255523330576,
+            70.68883712015771,
+            93.98352059919488,
+            4.233033617393026,
+            52.05145251823207,
+            -7.22614164028797,
+            52.119229679805976,
+            121.88223466198505,
+            19.707968203641485,
+            -1.8125244899000563,
+            -32.7562027010968,
+            18.190332396821148,
+            29.903099631967763,
+            47.08022056039535
+          ]
+        },
+        "A_fifo_vs_AB_learned": {
+          "success_gain_for_second": 0,
+          "mean_capped_time_saved_seconds": 39.533129178703675,
+          "median_capped_time_saved_seconds": 33.061326440589184,
+          "second_faster_maps": 18,
+          "second_slower_maps": 2,
+          "both_successful_maps": 20,
+          "both_successful_mean_time_saved_seconds": 39.533129178703675,
+          "gained_success_maps": [],
+          "lost_success_maps": [],
+          "per_map_time_saved_seconds": [
+            57.43360585794974,
+            36.428547306864075,
+            151.46326623184066,
+            37.17420844133068,
+            14.602439924542665,
+            22.166425898997744,
+            27.340077571749468,
+            -7.753346321469088,
+            29.479977717392842,
+            23.809462608973817,
+            32.85173592569855,
+            43.81969638971323,
+            19.793456014136233,
+            75.94055181911037,
+            33.27091695547982,
+            43.49620050883618,
+            -30.18127409913255,
+            31.45125854191521,
+            58.514026939576496,
+            89.56134934056739
+          ]
+        },
+        "AB_uncoupled_vs_AB_learned": {
+          "success_gain_for_second": 0,
+          "mean_capped_time_saved_seconds": 10.652280239172946,
+          "median_capped_time_saved_seconds": 8.339196219657087,
+          "second_faster_maps": 14,
+          "second_slower_maps": 6,
+          "both_successful_maps": 20,
+          "both_successful_mean_time_saved_seconds": 10.652280239172946,
+          "gained_success_maps": [],
+          "lost_success_maps": [],
+          "per_map_time_saved_seconds": [
+            24.07792457016187,
+            -0.6891722824825166,
+            40.683143961287946,
+            7.187710301891414,
+            -7.7764048149400935,
+            42.86004472522491,
+            16.365461188034438,
+            1.4760030951301815,
+            24.905678152856197,
+            3.447078825303329,
+            17.736775564218803,
+            6.512466460036549,
+            9.490682137422759,
+            15.288754473362495,
+            -7.647003987827958,
+            -0.3017327978774915,
+            -38.781365801163936,
+            -5.387476974816437,
+            11.034722611450505,
+            52.562315376185964
+          ]
+        }
+      },
+      "interaction_seconds": -6.392505122938642
+    },
+    "303": {
+      "groups": {
+        "B0_fifo": {
+          "successes": 17,
+          "mean_capped_time": 149.75691566900073,
+          "audit": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seeds_20261013/seed_303/B0_fifo/audit.json"
+        },
+        "A_fifo": {
+          "successes": 20,
+          "mean_capped_time": 126.60291411071123,
+          "audit": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seeds_20261013/seed_303/A_fifo/audit.json"
+        },
+        "B_learned": {
+          "successes": 20,
+          "mean_capped_time": 102.00888469606633,
+          "audit": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seeds_20261013/seed_303/B_learned/audit.json"
+        },
+        "AB_learned": {
+          "successes": 20,
+          "mean_capped_time": 79.2734291724041,
+          "audit": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seeds_20261013/seed_303/AB_learned/audit.json"
+        },
+        "AB_uncoupled": {
+          "successes": 20,
+          "mean_capped_time": 91.81380596390102,
+          "audit": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seeds_20261013/seed_303/AB_uncoupled/audit.json"
+        }
+      },
+      "pairs": {
+        "B0_fifo_vs_A_fifo": {
+          "success_gain_for_second": 3,
+          "mean_capped_time_saved_seconds": 23.154001558289508,
+          "median_capped_time_saved_seconds": 11.608466764984968,
+          "second_faster_maps": 15,
+          "second_slower_maps": 5,
+          "both_successful_maps": 17,
+          "both_successful_mean_time_saved_seconds": 9.927921379579887,
+          "gained_success_maps": [
+            4,
+            16,
+            19
+          ],
+          "lost_success_maps": [],
+          "per_map_time_saved_seconds": [
+            2.377940241518047,
+            124.83650531345569,
+            2.2990077581605135,
+            74.22057258282307,
+            201.24130538110023,
+            -77.96405785911995,
+            -14.02541808433324,
+            -64.74133002798742,
+            68.18840088247472,
+            13.393820248244651,
+            4.187464745833722,
+            27.032384610301435,
+            30.9338374033768,
+            -10.376713011376793,
+            9.823113281725284,
+            80.89640506018671,
+            40.438795137433345,
+            0.7673126909860741,
+            -103.07458238341124,
+            52.6252671943985
+          ]
+        },
+        "B0_fifo_vs_B_learned": {
+          "success_gain_for_second": 3,
+          "mean_capped_time_saved_seconds": 47.748030972934394,
+          "median_capped_time_saved_seconds": 32.64826043765248,
+          "second_faster_maps": 15,
+          "second_slower_maps": 5,
+          "both_successful_maps": 17,
+          "both_successful_mean_time_saved_seconds": 28.02648596003478,
+          "gained_success_maps": [
+            4,
+            16,
+            19
+          ],
+          "lost_success_maps": [],
+          "per_map_time_saved_seconds": [
+            -1.7608345053252918,
+            61.85533589770978,
+            -7.837541226800866,
+            51.82323364143832,
+            169.25683906086277,
+            34.35166375952129,
+            -0.721119790403975,
+            -15.43446130795219,
+            24.01907583322742,
+            19.03007536905845,
+            14.980870065648674,
+            41.82222940345589,
+            27.743327772819782,
+            57.32035718569752,
+            32.43422671905337,
+            110.88888429858768,
+            176.06228506342163,
+            32.86229415625159,
+            -6.927355951396194,
+            133.19123401381222
+          ]
+        },
+        "B_learned_vs_AB_learned": {
+          "success_gain_for_second": 0,
+          "mean_capped_time_saved_seconds": 22.735455523662235,
+          "median_capped_time_saved_seconds": 21.194030236147796,
+          "second_faster_maps": 17,
+          "second_slower_maps": 3,
+          "both_successful_maps": 20,
+          "both_successful_mean_time_saved_seconds": 22.735455523662235,
+          "gained_success_maps": [],
+          "lost_success_maps": [],
+          "per_map_time_saved_seconds": [
+            -0.8697143409322905,
+            66.64087454435516,
+            26.500691396680544,
+            57.344519357160465,
+            25.91238505522808,
+            20.344093959892135,
+            22.043966512403458,
+            -7.563638156122778,
+            40.487222921995624,
+            -0.549055497956715,
+            19.288885839739464,
+            10.342760670256197,
+            35.83971656613646,
+            11.270118748208013,
+            12.808320278786994,
+            14.92871688224318,
+            17.713410208106893,
+            22.117157626510547,
+            32.75637736878808,
+            27.35230053176521
+          ]
+        },
+        "A_fifo_vs_AB_learned": {
+          "success_gain_for_second": 0,
+          "mean_capped_time_saved_seconds": 47.32948493830712,
+          "median_capped_time_saved_seconds": 35.14772261105422,
+          "second_faster_maps": 17,
+          "second_slower_maps": 3,
+          "both_successful_maps": 20,
+          "both_successful_mean_time_saved_seconds": 47.32948493830712,
+          "gained_success_maps": [],
+          "lost_success_maps": [],
+          "per_map_time_saved_seconds": [
+            -5.008489087775629,
+            3.6597051286092466,
+            16.364142411719165,
+            34.94718041577572,
+            -6.0720812650093805,
+            132.65981557853337,
+            35.34826480633272,
+            41.74323056391245,
+            -3.6821021272516816,
+            5.087199622857085,
+            30.082291159554416,
+            25.132605463410655,
+            32.64920693557944,
+            78.96718894528232,
+            35.41943371611508,
+            44.921196120644154,
+            153.33690013409517,
+            54.212139091776066,
+            128.90360380080313,
+            107.91826735117894
+          ]
+        },
+        "AB_uncoupled_vs_AB_learned": {
+          "success_gain_for_second": 0,
+          "mean_capped_time_saved_seconds": 12.540376791496916,
+          "median_capped_time_saved_seconds": 12.36433038470961,
+          "second_faster_maps": 15,
+          "second_slower_maps": 5,
+          "both_successful_maps": 20,
+          "both_successful_mean_time_saved_seconds": 12.540376791496916,
+          "gained_success_maps": [],
+          "lost_success_maps": [],
+          "per_map_time_saved_seconds": [
+            -7.324375799840553,
+            -21.142964262175838,
+            35.4824053383797,
+            4.774557346482354,
+            5.603005546405832,
+            22.61176516802442,
+            18.299195241344762,
+            -9.833988930932094,
+            -9.73298295655836,
+            54.63040662088014,
+            19.90256037278914,
+            10.584807162778631,
+            18.957968203641485,
+            24.633813579343347,
+            -4.860582410332306,
+            14.14385360664059,
+            1.291296087625831,
+            19.59075486026275,
+            2.528583275730824,
+            50.66745777944766
+          ]
+        }
+      },
+      "interaction_seconds": -0.4185460346272706
+    }
+  },
+  "test_policy_evaluations": 0,
+  "preflight": false,
+  "scope": "Independent neutral B0/FIFO pretraining + independently trained communication head + paired five-method adaptation",
+  "limitations": [
+    "Three complete independent seeds; still a small replication count.",
+    "Same repeatedly used development maps; no held-out test execution.",
+    "Neutral B0/FIFO pretraining is a new protocol, not a matched ranking against the previous A/FIFO-start round."
+  ],
+  "aggregate": {
+    "B0_fifo": {
+      "seed_successes": [
+        19,
+        20,
+        17
+      ],
+      "seed_mean_times": [
+        91.82032709232712,
+        148.8203264302176,
+        149.75691566900073
+      ],
+      "mean_of_seed_means": 130.13252306384848,
+      "sample_std_seed_means": 33.18263958715075
+    },
+    "A_fifo": {
+      "seed_successes": [
+        20,
+        20,
+        20
+      ],
+      "seed_mean_times": [
+        92.47209068107661,
+        107.70824341150042,
+        126.60291411071123
+      ],
+      "mean_of_seed_means": 108.9277494010961,
+      "sample_std_seed_means": 17.098060508145906
+    },
+    "B_learned": {
+      "seed_successes": [
+        20,
+        20,
+        20
+      ],
+      "seed_mean_times": [
+        82.52498190261201,
+        102.89469212857527,
+        102.00888469606633
+      ],
+      "mean_of_seed_means": 95.80951957575121,
+      "sample_std_seed_means": 11.513269283468656
+    },
+    "AB_learned": {
+      "seed_successes": [
+        20,
+        20,
+        20
+      ],
+      "seed_mean_times": [
+        78.78185116096155,
+        68.17511423279674,
+        79.2734291724041
+      ],
+      "mean_of_seed_means": 75.41013152205413,
+      "sample_std_seed_means": 6.270527778203634
+    },
+    "AB_uncoupled": {
+      "seed_successes": [
+        20,
+        20,
+        20
+      ],
+      "seed_mean_times": [
+        80.74321830597992,
+        78.8273944719697,
+        91.81380596390102
+      ],
+      "mean_of_seed_means": 83.79480624728355,
+      "sample_std_seed_means": 7.010411013776134
+    }
+  }
+}

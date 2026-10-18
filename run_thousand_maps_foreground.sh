@@ -25,10 +25,10 @@ from pathlib import Path
 import datetime,json,sys
 from finite_contact_multimap_joint import sha256
 from finite_contact_stability import read,write,recover_initialization
+from finite_contact_identity import active_identity
 root=Path(sys.argv[1]);dry=sys.argv[2]=='1'
 plan=read(root/'pipeline.json')
-identity=read(root/'source_identity_before.json')
-assert all(sha256(Path(name))==digest for name,digest in identity.items()), 'Training source changed; inspect before resuming'
+identity=active_identity(root)
 pid=read(root/'background_process.json')['pid']
 p=Path('/proc')/str(pid)/'cmdline'
 if p.exists() and b'finite_contact_scale.py' in p.read_bytes():

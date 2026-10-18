@@ -1,0 +1,60 @@
+{
+  "checkpoint": "experiments/thousand_maps_20261012_seed1/AB_learned/at_episode_250.pth",
+  "episode": 250,
+  "cumulative_updates": 13895,
+  "optimizer_audit": {
+    "policy_optimizer": {
+      "parameters_with_state": 90,
+      "initial_step_range": [
+        7395,
+        7395
+      ],
+      "final_step_range": [
+        12395,
+        12395
+      ],
+      "increment_per_parameter": 5000
+    },
+    "alpha_optimizer": {
+      "parameters_with_state": 1,
+      "initial_step_range": [
+        7395,
+        7395
+      ],
+      "final_step_range": [
+        12395,
+        12395
+      ],
+      "increment_per_parameter": 5000
+    },
+    "q0_optimizer": {
+      "parameters_with_state": 90,
+      "initial_step_range": [
+        7395,
+        7395
+      ],
+      "final_step_range": [
+        12395,
+        12395
+      ],
+      "increment_per_parameter": 5000
+    },
+    "q1_optimizer": {
+      "parameters_with_state": 90,
+      "initial_step_range": [
+        7395,
+        7395
+      ],
+      "final_step_range": [
+        12395,
+        12395
+      ],
+      "increment_per_parameter": 5000
+    },
+    "content_optimizer_unchanged": true
+  },
+  "frozen_head_weight_change": {
+    "content": 0.0,
+    "context_encoder": 0.0
+  }
+}

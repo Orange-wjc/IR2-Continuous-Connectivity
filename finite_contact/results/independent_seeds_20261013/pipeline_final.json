@@ -1,0 +1,72 @@
+{
+  "status": "complete",
+  "created": "2026-10-13T21:15:06.793434+08:00",
+  "scope": "Independent neutral B0/FIFO pretraining + independently trained communication head + paired five-method adaptation",
+  "preflight": false,
+  "seeds": [
+    101,
+    202,
+    303
+  ],
+  "groups": [
+    "B0_fifo",
+    "A_fifo",
+    "B_learned",
+    "AB_learned",
+    "AB_uncoupled"
+  ],
+  "pretrain_maps": 100,
+  "pretrain_updates_per_map": 90,
+  "head_updates": 5000,
+  "samples_per_map": 2048,
+  "adaptation_maps": 1000,
+  "adaptation_updates_per_map": 20,
+  "test_policy_evaluations": 0,
+  "workers": 1,
+  "notifications": false,
+  "stages_complete": [
+    "101/movement/",
+    "101/head/",
+    "101/adapt/B0_fifo",
+    "101/adapt/A_fifo",
+    "101/adapt/B_learned",
+    "101/adapt/AB_learned",
+    "101/adapt/AB_uncoupled",
+    "202/movement/",
+    "202/head/",
+    "202/adapt/B0_fifo",
+    "202/adapt/A_fifo",
+    "202/adapt/B_learned",
+    "202/adapt/AB_learned",
+    "202/adapt/AB_uncoupled",
+    "303/movement/",
+    "303/head/",
+    "303/adapt/B0_fifo",
+    "303/adapt/A_fifo",
+    "303/adapt/B_learned",
+    "303/adapt/AB_learned",
+    "303/adapt/AB_uncoupled"
+  ],
+  "initial_actor_hashes": [
+    "14b42ce181960ff6f87289d10dd7ede70d52848217b4397ee089bdd0f10884c7",
+    "9b83142417344d3c949d9e1d59860cdd02e397e26b98e96df85c8f2a1d76cbb0",
+    "e46c9e257c33e075872e6ed021e3686019023aee6eb694746add5a9a6e3cc090"
+  ],
+  "active_seed": 303,
+  "active_stage": null,
+  "active_group": null,
+  "updated": "2026-10-15T14:15:04.542669+08:00",
+  "stopped": "2026-10-13T23:14:12.405530+08:00",
+  "source_identity_file": "source_identity_audit_resume_20261014.json",
+  "source_history": [
+    {
+      "time": "2026-10-14T07:34:21.933806+08:00",
+      "previous": "source_identity.json",
+      "active": "source_identity_audit_resume_20261014.json",
+      "reason": "Reviewed audit-only correction; zero additional training or endpoint evaluations for completed B0 stage",
+      "review": "checks/physical_audit_recovery_review.json"
+    }
+  ],
+  "recovery_reason": "physical_audit_terminal_rounding_false_positive",
+  "completed": "2026-10-15T14:15:31.255694+08:00"
+}

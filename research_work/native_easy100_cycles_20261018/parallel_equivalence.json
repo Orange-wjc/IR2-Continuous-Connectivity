@@ -1,0 +1,18 @@
+{
+  "groups": {
+    "IR2_FIFO": {
+      "episode": 8,
+      "full_retained_learning_state_identical": true,
+      "semantic_sha256": "08270cacac0120dd5667ed61fe9da212e0581c186f88985fc0766be9bbb27e8d"
+    },
+    "AB_learned": {
+      "episode": 7,
+      "full_retained_learning_state_identical": true,
+      "semantic_sha256": "19ab688621c9bb67a0cd82aae2594d0ad5646709cb0447f586d44caa8ba39c48"
+    }
+  },
+  "rollout_metrics_identical": true,
+  "gradient_updates_rng_replay_demonstrations_identical": true,
+  "inference_lag_within_each_method": 0,
+  "scope": "Engineering original-map CLI STOP/resume test; not an algorithm performance result"
+}

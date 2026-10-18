@@ -1,6 +1,22 @@
 # IR2 Multi-Robot RL Exploration
 
+**2026-10-18当前状态：用户已暂停10图诊断训练，两组各12回合/9240 SAC保存退出，训练与守护已停止；6009保留历史曲线。main原版复训尚未启动。以下启动说明为历史，未经新指令勿恢复。**
+
+当前用户路线为**固定10张原easy图反复训练，排查学习能力**；原100图连续训练已在两组501回合保存停止。新曲线 http://127.0.0.1:6009 ，6008保留旧100图记录。两组复用共同预训练起点，后续回放/成功缓存只包含这10张；该起点已预训练过100张，不是纯10图从零训练。无自动评估或计划停机，重点看每遍成功率和每张地图跨访问次数的曲线。完整方案见[当前诊断说明](research_work/native_easy10_cycles_20261018/README.md)。以下100/500/1000路线保留作历史。
+
+原图改进模型的当前入口为 `python driver.py --finite-contact --output experiments/<new_run> --dataset experiments/native_easy_20261015_seed101/dataset/native_dataset.json`。当前支持100张原easy小试，以及通过`--from-run`在新目录保留完整状态续训到累计500/1000张；两种均在固定端点自动开发评估后停止。累计1000图的当前计划和进度见[续训说明](research_work/native_easy_1000_20261018/README.md)，500图历史计划保留在原工作目录；维护源码在[native_training](native_training/NATIVE_PLAN.md)，执行时冻结副本。原流程保留为driver_legacy.py。完整预算、后台进度/恢复及证据见[本轮说明](research_work/native_repair_100_20261017/README.md)。不要与已运行的后台试验重复启动。
+
+2026-10-16最新并行配置：NUM_META_AGENT=24；实测采样提速且内存安全，保留24进程。详见[24进程试用记录](research_work/native_workers_24_20261016/README.md)。
+
+2026-10-16最新并行配置：NUM_META_AGENT=16；12/16对比已完成，采样提速且内存安全，已正式保留16进程。详见[16进程试用记录](research_work/native_workers_16_20261016/README.md)。
+
+2026-10-16最新：原easy正式训练已切换NUM_META_AGENT=12；同24原训练图固定模型采样吞吐实测提高18.7%，续训可显式传--num-meta-agent。自动评估仍关闭，常驻监督支持新配置。详见[12进程记录](/home/wyz/wjc_ws/IR2-Continuous-Connectivity/research_work/native_workers_12_20261016/README.md)。
+
+原easy训练已启用每分钟常驻监督和隔离验证后的故障恢复，自动评估保持关闭；主动暂停方法见[监督说明](/home/wyz/wjc_ws/training_supervisor_native_easy/README.md)。
+
 新对话接手请先阅读[实验计划与新对话交接](finite_contact/EXPERIMENT_HANDOFF.md)，其中包含目标、当前阶段、恢复命令和后续验收计划。
+
+2026-10-15最新：按用户要求已关闭每512回合自动开发评估，先连续训练，之后仅按用户指定时间评估；检查点和TensorBoard继续保存。原项目easy数据训练已启动，使用冻结的隔离版本 `experiments/native_easy_20261015_seed101/source/driver.py --finite-contact`。全原easy池9999张按几何留出100开发图、9899循环训练；8个CPU采样进程、单GPU、有效批量128、微批量上限64。迁移/提速/恢复与任务差异见[本轮记录](finite_contact/results/native_curriculum_20261015/README.md)。只读进度：`python3 experiments/native_easy_20261015_seed101/checks/progress.py`；TensorBoard：<http://127.0.0.1:6007>。当前先验证easy，不自动启动difficult或测试；不要重复启动、不要修改本轮冻结源码。下文自生成地图实验为历史预实验，原版说明对应保留的默认入口。
 
 本实验分支新增了[两机器人、简单地图的有限通信窗口实验入口](finite_contact/README.md)。研究实验请在 conda `ir2_train` 中运行 `finite_contact_train.py`；下文原版训练说明仍对应上游 `driver.py`。
 

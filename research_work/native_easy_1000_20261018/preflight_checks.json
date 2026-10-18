@@ -1,0 +1,15 @@
+{
+  "full_state_inheritance": true,
+  "only_three_config_fields_changed": true,
+  "original_1000_files_verified": true,
+  "no_shared_prefix_or_head_retraining": true,
+  "correct_next_map_indices": [
+    6,
+    7
+  ],
+  "stop_and_resume": true,
+  "completed_resume_adds_no_sac": true,
+  "parent_preserved": true,
+  "endpoint_geometry_radio_checks_passed": true,
+  "engineering_only": true
+}

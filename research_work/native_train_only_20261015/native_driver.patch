@@ -1,0 +1,53 @@
+--- source_before/native_driver.py
++++ source_after/native_driver.py
+@@ -288,6 +288,12 @@
+     plan['last_review_episode']=point
+     return report
+ 
++def automatic_review_due(plan,completed):
++    # Evaluation is an explicit runtime policy, independent of training budget.
++    return (plan.get('automatic_development_evaluation',True)
++            and len(set(completed.values()))==1
++            and min(completed.values())>=plan.get('last_review_episode',0)+plan['review_interval'])
++
+ def train(root,args):
+     plan=read(root/'pipeline.json')
+     assert plan['source_identity']==identity(),'Frozen training source changed'
+@@ -295,6 +301,11 @@
+     lock=(root/'.coordinator.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+     global_lock=(root.parent/'.native_training.lock').open('a');fcntl.flock(global_lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+     write(root/'coordinator.json',dict(pid=os.getpid(),time=now()))
++    if getattr(args,'no_auto_evaluation',False):
++        plan['automatic_development_evaluation']=False
++    if not plan.get('automatic_development_evaluation',True):
++        print(json.dumps(dict(stage='training_controls',automatic_development_evaluation=False,
++                              evaluation_policy='manual_only')),flush=True)
+     torch.set_num_threads(2)
+     stop=[False]
+     for signum in (signal.SIGTERM,signal.SIGINT):signal.signal(signum,lambda *_:stop.__setitem__(0,True))
+@@ -354,7 +365,7 @@
+             results=[future.result() for future in futures]
+             x=learners[name];cfg=configs[name];directory=root/name
+             hypothetical=completed.copy();hypothetical[name]+=len(results)
+-            review_due=(len(set(hypothetical.values()))==1 and min(hypothetical.values())>=plan.get('last_review_episode',0)+plan['review_interval'])
++            review_due=automatic_review_due(plan,hypothetical)
+             finished_probe=plan['preflight'] and min(hypothetical.values())>=4
+             # The other model is unchanged by the current model's optimizer.
+             # Snapshot it now, overlap its CPU sampling with current GPU updates,
+@@ -386,7 +397,7 @@
+             point=min(completed.values())
+             if plan['preflight'] and point>=4:
+                 evaluate_pair(root,plan,pool,learners,configs,completed);break
+-            if point>=plan.get('last_review_episode',0)+plan['review_interval'] and len(set(completed.values()))==1:
++            if automatic_review_due(plan,completed):
+                 plan.update(stage='easy_development_review',updated=now());write(root/'pipeline.json',plan)
+                 evaluate_pair(root,plan,pool,learners,configs,completed)
+                 plan['stage']='easy_paired_training';write(root/'pipeline.json',plan)
+@@ -416,6 +427,7 @@
+     p.add_argument('--seed',type=int,default=101);p.add_argument('--preflight',action='store_true')
+     p.add_argument('--resume',action='store_true');p.add_argument('--max-hours',type=float,default=48)
+     p.add_argument('--review-interval',type=int,default=512)
++    p.add_argument('--no-auto-evaluation',action='store_true',help='Train continuously; evaluate only on explicit request (persisted on resume)')
+     p.add_argument('--no-prefetch',action='store_true',help='Disable exact cross-method CPU/GPU overlap for engineering comparison')
+     args=p.parse_args();root=args.output.resolve()
+     if not args.resume:

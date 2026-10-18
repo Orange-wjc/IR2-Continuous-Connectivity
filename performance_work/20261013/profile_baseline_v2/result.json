@@ -1,0 +1,140 @@
+{
+  "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/performance_work/20261013/baseline",
+  "cuda": true,
+  "device": "NVIDIA GeForce RTX 3090",
+  "torch_version": "2.3.1+cu121",
+  "torch_threads": 2,
+  "profiled": true,
+  "traced": false,
+  "warmup_rollouts": 1,
+  "warmup_updates": 20,
+  "rows": [
+    {
+      "map_index": 0,
+      "episode": 1,
+      "metrics": {
+        "success": true,
+        "time": 225.28971984277635,
+        "coverage": [
+          0.9907800110639867,
+          1.0
+        ],
+        "union_coverage": 1.0,
+        "coverage_deficit": 0.26948484752688523,
+        "union_completion_time": 66.02302504659384,
+        "total_distance": 4406.750080421129,
+        "wait_seconds": [
+          12.190495178801587,
+          10.204727345333065
+        ],
+        "wait_disconnected_seconds": [
+          0.0,
+          2.3570226039551585
+        ],
+        "wait_without_new_map_seconds": [
+          8.607161845468253,
+          4.954727345333066
+        ],
+        "synchronization_idle_seconds": [
+          21.729933088021184,
+          39.22511070496938
+        ],
+        "sent_bytes": 357447,
+        "delivered_bytes": 357297,
+        "control_bytes": 36799,
+        "novel_received_cells": 9257,
+        "duplicate_received_cells": 49393,
+        "connected_seconds": 88.97780247787014,
+        "queue_bytes": [
+          18369,
+          27193
+        ],
+        "reward_components": {
+          "exploration": [
+            14.59683175932755,
+            14.59683175932755
+          ],
+          "delivery": [
+            6.95392420675,
+            11.460609863768749
+          ],
+          "time": [
+            -4.482307060413661,
+            -4.482307060413661
+          ],
+          "distance": [
+            -4.571490908912624,
+            -4.203003676349456
+          ],
+          "completion": [
+            19.8005,
+            19.8005
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 0,
+          "layout_id": "simple_rooms_v1:20261011:train:0",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "42c0a8064e3e93ffd565a9653298052baa08f5e2b98112365e49037d7a73e71e",
+          "canonical_sha256": "0871343f54c276dcf079b8895279d62f8cdd73004740cb09d6aa0401f38dc00c",
+          "units": "map_units",
+          "starts": [
+            [
+              183.0,
+              169.0
+            ],
+            [
+              195.0,
+              169.0
+            ]
+          ],
+          "rooms": 2,
+          "rotation": 1,
+          "bounds_before_rotation": [
+            16,
+            12,
+            239,
+            238
+          ],
+          "doors_before_rotation": [
+            [
+              120,
+              172,
+              7,
+              34
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              39,
+              40,
+              13,
+              19
+            ]
+          ]
+        },
+        "decisions": 80,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8895,
+        "return": [
+          32.29745799675127,
+          37.17263088633318
+        ]
+      },
+      "rollout_seconds": 32.88075552601367,
+      "update_seconds": 1.6096674839500338,
+      "total_seconds": 34.490423009963706,
+      "decisions": 80,
+      "group": "AB_learned"
+    }
+  ],
+  "peak_rss_mib": 1233.55078125
+}

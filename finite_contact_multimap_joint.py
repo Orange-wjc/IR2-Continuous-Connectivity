@@ -22,6 +22,7 @@ from finite_contact.maps import configured_map, training_map_index
 from finite_contact_train import append_json, checkpoint, evaluate, provenance, rollout
 from finite_contact_multimap_content import weight_change
 from finite_contact_multimap_report import audit_segments, physical_audit, rows
+from finite_contact.memory import load_checkpoint
 
 ROOT = Path(__file__).resolve().parent
 GROUPS = {'A_fifo': ('A', 'fifo'), 'A_rule': ('A', 'rule'), 'AB_learned': ('AB', 'learned')}
@@ -127,15 +128,27 @@ def archive_after_checkpoint(directory, episode, updates):
                'updates.jsonl': lambda r: r['updates'] <= updates}
     archive = directory / ('superseded_' + str(time.time_ns()))
     archive.mkdir()
+    accounting={'restored_episode':episode,'restored_sac_updates':updates,
+                'extra_complete_episode_ids':[],'extra_sac_updates':0,'incomplete_lines':{}}
     for name, retain in filters.items():
         path = directory / name
         if not path.exists():
             continue
-        records = rows(path)
         shutil.move(str(path), str(archive / name))
-        for record in records:
-            if retain(record):
-                append_json(path, record)
+        with (archive/name).open('rb') as source, path.open('wb') as output:
+            for line in source:
+                if not line.endswith(b'\n'):
+                    accounting['incomplete_lines'][name]=1
+                    break
+                if not line.strip():continue
+                record=json.loads(line)
+                if retain(record):output.write(line)
+                elif name=='training.jsonl':accounting['extra_complete_episode_ids'].append(record['episode'])
+                elif name=='updates.jsonl':accounting['extra_sac_updates']+=1
+    for ep in accounting['extra_complete_episode_ids']:
+        p=directory/('training_map_%03d.npz'%ep)
+        if p.exists():shutil.copy2(p,archive/p.name)
+    (archive/'recovery.json').write_text(json.dumps(accounting,indent=2))
 
 
 def train_group(root, plan, group, device, resume=None):
@@ -148,7 +161,15 @@ def train_group(root, plan, group, device, resume=None):
     torch.set_num_threads(cfg.torch_threads)
     seed_episode(cfg.seed, 0)
     learner = Learner(cfg, device)
-    state = torch.load(resume, map_location='cpu') if resume else common
+    state = load_checkpoint(resume) if resume else common
+    learner.lossless_observations = plan.get('memory_profile') == 'rtx3090_32gb_lossless_v1'
+    if learner.lossless_observations:
+        profile=json.loads((ROOT/'finite_contact/profiles/rtx3090_32gb.json').read_text())
+        for field,key in [('batch_size','batch_size'),('embedding_dim','embedding_dim'),
+                          ('replay_size','replay_transitions'),('success_episode_limit','success_maps'),
+                          ('torch_threads','torch_threads')]:
+            assert getattr(cfg,field)==profile[key], 'Hardware profile differs from the fixed experiment'
+        assert plan.get('workers')==profile['workers']==1
     learner.load(state['learner'], optimizers=True)
     learner.content.requires_grad_(False).eval()
     learner.context_encoder.requires_grad_(False).eval()
@@ -165,6 +186,7 @@ def train_group(root, plan, group, device, resume=None):
         snapshot = directory / ('resume_' + str(time.time_ns()))
         snapshot.mkdir()
         provenance(snapshot, cfg)
+        del state
     else:
         provenance(directory, cfg)
         checkpoint(directory / 'initial.pth', learner, cfg, 'finetune', 0, None, 0., full=False)
@@ -181,6 +203,8 @@ def train_group(root, plan, group, device, resume=None):
     deadline = started + plan['max_hours_per_group'] * 3600
     status = {'status': 'training', 'group': group, 'completed_episodes': completed}
     def save_status():
+        import resource
+        status['peak_rss_mib']=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024
         (directory / 'status.json').write_text(json.dumps(status, indent=2))
     save_status()
     try:
@@ -291,7 +315,7 @@ def report(root, plan):
         assert json.loads((directory / 'status.json').read_text())['status'] == 'complete'
         cfg = group_config(common, group)
         initial = torch.load(directory / 'initial.pth', map_location='cpu')
-        final = torch.load(directory / 'latest.pth', map_location='cpu')
+        final = load_checkpoint(directory / 'latest.pth')
         assert identical(initial['learner'], common['learner']), 'Unequal initial network/Adam states'
         assert initial['config'] == final['config'] == cfg.to_dict()
         assert not initial.get('replay') and not initial.get('success_episodes')

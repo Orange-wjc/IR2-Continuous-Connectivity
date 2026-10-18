@@ -1,0 +1,83 @@
+{
+  "status": "passed",
+  "cpu": [
+    {
+      "workers": 1,
+      "elapsed_seconds": 172.6147582400008,
+      "episodes": 4,
+      "logical_replay_hashes": [
+        "214fa6a98b8a755dd7724bdde85f13100cfea8b458b6994591677983e4e35684",
+        "b5317646e1ff8611507c8cecf4e6f566836c4c9aca2eaa1e1dad58794066aebc",
+        "4bbc530a4a8f980a7333decdd8fcf86a250edef586c27154ca7429ac914e77c8",
+        "9e25999921d9e1c1315ecf3f99745e4965dc203c0ec26a2a21ab8bcadbaa09f0"
+      ],
+      "worker_peak_rss_mib": 744.0546875,
+      "max_nodes": 186
+    },
+    {
+      "workers": 2,
+      "elapsed_seconds": 95.22307974199066,
+      "episodes": 4,
+      "logical_replay_hashes": [
+        "214fa6a98b8a755dd7724bdde85f13100cfea8b458b6994591677983e4e35684",
+        "b5317646e1ff8611507c8cecf4e6f566836c4c9aca2eaa1e1dad58794066aebc",
+        "4bbc530a4a8f980a7333decdd8fcf86a250edef586c27154ca7429ac914e77c8",
+        "9e25999921d9e1c1315ecf3f99745e4965dc203c0ec26a2a21ab8bcadbaa09f0"
+      ],
+      "worker_peak_rss_mib": 549.7265625,
+      "max_nodes": 186
+    },
+    {
+      "workers": 4,
+      "elapsed_seconds": 50.26990446000127,
+      "episodes": 4,
+      "logical_replay_hashes": [
+        "214fa6a98b8a755dd7724bdde85f13100cfea8b458b6994591677983e4e35684",
+        "b5317646e1ff8611507c8cecf4e6f566836c4c9aca2eaa1e1dad58794066aebc",
+        "4bbc530a4a8f980a7333decdd8fcf86a250edef586c27154ca7429ac914e77c8",
+        "9e25999921d9e1c1315ecf3f99745e4965dc203c0ec26a2a21ab8bcadbaa09f0"
+      ],
+      "worker_peak_rss_mib": 558.55078125,
+      "max_nodes": 186
+    }
+  ],
+  "cuda": [
+    {
+      "microbatch_limit": 16,
+      "actual_microbatch": 16,
+      "max_nodes": 168,
+      "three_updates_seconds": 1.2782451649545692,
+      "peak_cuda_mib": 823.345703125
+    },
+    {
+      "microbatch_limit": 32,
+      "actual_microbatch": 32,
+      "max_nodes": 168,
+      "three_updates_seconds": 1.1465440330212004,
+      "peak_cuda_mib": 1514.533203125
+    },
+    {
+      "microbatch_limit": 64,
+      "actual_microbatch": 64,
+      "max_nodes": 168,
+      "three_updates_seconds": 1.0905133960186504,
+      "peak_cuda_mib": 2785.34033203125
+    },
+    {
+      "microbatch_limit": 128,
+      "actual_microbatch": 74,
+      "max_nodes": 168,
+      "three_updates_seconds": 1.0964648150256835,
+      "peak_cuda_mib": 3090.61474609375
+    }
+  ],
+  "cuda_resume_exact": true,
+  "parallel_replay_exact": true,
+  "train_rollouts": 12,
+  "new_engineering_sac_updates": 19,
+  "prior_failed_hash_probe_train_rollouts": 4,
+  "prior_failed_hash_probe_sac_updates": 0,
+  "validation_policy_executions": 0,
+  "test_policy_executions": 0,
+  "note": "Four full native training maps, process startup included; not a complete long-run speed guarantee"
+}

@@ -1,0 +1,18 @@
+{
+  "files": {
+    "HUMAN_REVIEW.md": "a208dead6bb4084f56398ec4f9468d7d395a6585dea2862145cd642f31d3bb99",
+    "PERFORMANCE_REVIEW.md": "d228d57513f341d520f66cd711e59a3dd21bc795bac0cb279388880ffa4a8748",
+    "README.md": "96d03987f0b0a250f286e1f969bd26eb7b6a763f9090f14c5478702ea3082881",
+    "RESULTS_ANALYSIS.md": "85117bd85d12c713b4c035b4e5034238bc3b0f56947e82a6d78d5f7dfb47d67b",
+    "ablation_results.pdf": "333433af3131820dd8af091f8be72cb2a5c2685b6babc4a5042891c0f39dc0c3",
+    "ablation_results.png": "c9f24cd21dacbd9e20ea09a96cda8f490e7e7397c388d8d9d2c74c02d90737e8",
+    "ablation_summary.json": "5d6e7a7155758f682b3940514802d85d193f0e928228de07524e395459c2a6b1",
+    "final_readonly_review.json": "5dcc3b57cd6002afcfbcc3139f7e6996ce0c1dab9e46d0c488785bd96fe7b42f",
+    "performance_summary.json": "d03812226eba8efc7e4ad4e9bc047c5745331c214a1638ec2c24716fb9751d8b",
+    "pre_run_design.md": "0f1b7a9dd0a8f841eac883053771cca5dceb54a3833fee98c3e1f74c92e2cb31",
+    "preflight.json": "d0a5edd3051482527951106e21231a51817dc3103355ffd10d6beead6141e997",
+    "reference_artifacts.json": "ad46b91ea0dd56a1dd3daaeab4ab2e15e17c7c6e706e1d64e9d9061f1470b6cd",
+    "source_identity_after.json": "e0a86831a13c71759dc7390c9a4ab99f63930f6bf53b8fb3d81793b4a6ad2ddb",
+    "source_identity_before.json": "e0a86831a13c71759dc7390c9a4ab99f63930f6bf53b8fb3d81793b4a6ad2ddb"
+  }
+}

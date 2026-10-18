@@ -1,0 +1,9 @@
+{
+  "stop_checkpoint_resume": true,
+  "finite_budget": true,
+  "completed_resume_no_new_sac": true,
+  "frozen_source_identity": true,
+  "geometry_radio_pass": true,
+  "engineering_only": true,
+  "root": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/native_repair_100_preflight_v2_20261017"
+}

@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "analysis_time": "2026-10-15T14:43:03.757020+08:00",
+  "scripts": {
+    "research_work/independent_seeds_20261013/analysis_20261015/analyze_results.py": "318460e6c3fce62bb39f69c780e1848aaa953c7145da92a777e648ab5a5a4a5e",
+    "research_work/independent_seeds_20261013/analysis_20261015/write_report.py": "d789bc9a09cbea85ddfddfa3fb0e2f2b66580e70e066f6037ce0f687a567c9c2"
+  },
+  "commands": [
+    "/home/wyz/anaconda3/envs/ir2_train/bin/python research_work/independent_seeds_20261013/analysis_20261015/analyze_results.py",
+    "/home/wyz/anaconda3/envs/ir2_train/bin/python research_work/independent_seeds_20261013/analysis_20261015/write_report.py"
+  ],
+  "extra_training_updates": 0,
+  "extra_policy_evaluations": 0,
+  "geometry_schema_note": "An initial analysis-only aggregation assumed boundary_contacts existed in original seed101 common-stage audit; no completed analysis output was produced. All six common stages were then reaudited with the reviewed geometry checker. Original failure log retained outside source.",
+  "analysis_log_sha256": "64ab5d00289af3f343d6697be1485e49597289f245caf28e788ecb84039b773a",
+  "environment": {
+    "python": "/home/wyz/anaconda3/envs/ir2_train/bin/python",
+    "numpy": "1.24.4",
+    "matplotlib": "3.7.5",
+    "torch": "2.3.1+cu121"
+  },
+  "final_analysis_script_execution": "passed",
+  "verified_at": "2026-10-15T14:44:26.872703+08:00"
+}

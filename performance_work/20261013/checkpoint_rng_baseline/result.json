@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/performance_work/20261013/baseline",
+  "cuda": true,
+  "prefix_sha256": "e3db3fc83c371b6584bbc7fec1c672cc6fec36deb081dd0e6e8daee39e483b95",
+  "continuation_sha256": "cd2a889dc7694fdef67ab7f083d4b9ce5eaaabd9fef845075010ae1967a92d09",
+  "restored_sha256": "cd2a889dc7694fdef67ab7f083d4b9ce5eaaabd9fef845075010ae1967a92d09",
+  "rng_restored_from_checkpoint": [
+    "python",
+    "numpy",
+    "torch_cpu",
+    "torch_cuda"
+  ],
+  "continuation_reseeded": false,
+  "training_rollouts": 3,
+  "sac_updates": 60,
+  "test_policy_evaluations": 0
+}

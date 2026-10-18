@@ -1,0 +1,12 @@
+{
+  "time": "2026-10-18T07:28:20.705869+08:00",
+  "user_request": "Stop 1000-map route; fixed 100 original easy maps repeatedly; no automatic evaluation or success-threshold stop; user watches TensorBoard",
+  "old_run": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/native_easy_1000_20261018_seed101",
+  "stop_requested": true,
+  "new_parent_run": "experiments/native_easy_repair_100_20261017_seed101",
+  "old_run_stopped": true,
+  "old_completed_episodes": {
+    "IR2_FIFO": 511,
+    "AB_learned": 510
+  }
+}

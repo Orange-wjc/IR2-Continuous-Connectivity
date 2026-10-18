@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "source_files_unchanged": 60,
+  "formal_training_actually_running": true,
+  "shared_sac_updates": 216,
+  "paired_warmup_episodes": 8,
+  "groups": {
+    "IR2_FIFO": {
+      "committed_episodes": 24,
+      "sac_updates": 344,
+      "frozen_head_updates": 5000,
+      "policy_changed": true,
+      "frozen_head_context_optimizer": true
+    },
+    "AB_learned": {
+      "committed_episodes": 16,
+      "sac_updates": 280,
+      "frozen_head_updates": 5000,
+      "policy_changed": true,
+      "frozen_head_context_optimizer": true
+    }
+  },
+  "test_policy_evaluations": 0,
+  "tensorboard": "http://127.0.0.1:6007",
+  "resource_snapshot": {
+    "system_available_ram_gib": 19,
+    "gpu_used_mib_including_desktop": 4549,
+    "rollout_workers": 8
+  }
+}

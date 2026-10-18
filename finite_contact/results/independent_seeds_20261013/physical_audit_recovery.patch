@@ -1,0 +1,148 @@
+--- before/finite_contact_independent.py
++++ after/finite_contact_independent.py
+@@ -23,8 +23,14 @@
+ def identity():
+  return {str(p.relative_to(ROOT)):digest(p) for p in sorted(ROOT.rglob('*')) if p.is_file() and '__pycache__' not in p.parts and p.suffix in ('.py','.json','.md')}
+ def verify(root):
+- assert identity()==read(root/'source_identity.json'),'Frozen independent source changed'
+- return read(root/'pipeline.json')
++ plan=read(root/'pipeline.json');name=plan.get('source_identity_file','source_identity.json')
++ if name!='source_identity.json':
++  review=read(root/'checks/physical_audit_recovery_review.json')
++  assert review['status']=='passed' and review['source_identity_file']==name
++  assert review['source_identity_sha256']==digest(root/name)
++  assert review['original_source_identity_sha256']==digest(root/'source_identity.json')
++ assert identity()==read(root/name),'Frozen independent source changed'
++ return plan
+ def status(path,**value):
+  write(path/'status.json',dict(time=now(),peak_rss_mib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024,**value))
+ def provenance(path,cfg):
+@@ -136,7 +142,14 @@
+   old=joint.evaluate
+   joint.evaluate=lambda learner,cfg,count,directory,stop_requested:old(learner,cfg,2,split='train',repeats=10,directory=directory,stop_requested=stop_requested)
+  small=dict(max_hours_per_group=12,workers=1,memory_profile=None if plan['preflight'] else 'rtx3090_32gb_lossless_v1',sweeps=1,updates_per_map=plan['adaptation_updates_per_map'],source_sac_updates=common['learner']['updates'],new_sac_updates_per_group=plan['adaptation_maps']*plan['adaptation_updates_per_map'])
+- d=path/name;resume=d/'latest.pth' if (d/'latest.pth').exists() else None;joint.train_group(path,small,name,'cuda',resume)
++ d=path/name;resume=d/'latest.pth' if (d/'latest.pth').exists() else None
++ committed=(d/'status.json').exists() and read(d/'status.json')['status']=='complete'
++ if not committed:joint.train_group(path,small,name,'cuda',resume)
++ else:
++  assert (d/'final.pth').exists() and resume is not None
++  records=rows(d/'training.jsonl');assert len(records)==plan['adaptation_maps']
++  assert [v['episode'] for v in records]==list(range(1,plan['adaptation_maps']+1))
++  print(json.dumps(dict(stage='audit_only',seed=seed,group=name,new_training_updates=0,new_policy_evaluations=0)),flush=True)
+  cfg=group_config(common,name);initial=torch.load(d/'initial.pth',map_location='cpu');final=load_checkpoint(d/'latest.pth')
+  assert identical(initial['learner'],common['learner']);assert final['learner']['updates']==small['source_sac_updates']+small['new_sac_updates_per_group'];assert final['learner']['content_updates']==plan['head_updates']
+  assert all(identical(initial['learner'][k],final['learner'][k]) for k in ('content','context_encoder'))
+--- before/finite_contact_multimap_report.py
++++ after/finite_contact_multimap_report.py
+@@ -20,16 +20,49 @@
+     return [json.loads(s) for s in path.read_text().splitlines() if s.strip()]
+ 
+ 
+-def audit_segments(truth,trajectory):
+-    positions=np.array([s['positions'] for s in trajectory])
+-    segments=0
+-    for a,b in zip(positions[:-1],positions[1:]):
+-        for start,end in zip(a,b):
+-            x0,y0=np.rint(start).astype(int);x1,y1=np.rint(end).astype(int)
+-            yy,xx=line(y0,x0,y1,x1)
+-            assert np.all(truth[yy,xx]==255),'Wall crossing'
+-            segments+=1
+-    return segments
++def audit_segments(truth, trajectory, return_details=False):
++    """Audit actual continuous point trajectories against occupied cell interiors.
++
++    Grid coordinates denote cell centers. Rounding a truncated final edge first
++    changes its geometry and can rasterize an adjacent occupied cell. Zero-length
++    boundary/corner contacts are recorded separately, not interior penetration.
++    This point model does not certify clearance for finite-radius robots.
++    """
++    positions = np.asarray([s['positions'] for s in trajectory], dtype=np.float64)
++    assert np.isfinite(positions).all(), 'Non-finite trajectory'
++    limit = np.array([truth.shape[1] - 1, truth.shape[0] - 1])
++    assert np.all(positions >= 0) and np.all(positions <= limit), 'Trajectory outside map'
++    segments, boundary_contacts = 0, 0
++    for a, b in zip(positions[:-1], positions[1:]):
++        for start, end in zip(a, b):
++            delta = end - start
++            low = np.maximum(0, np.ceil(np.minimum(start, end) - .5).astype(int))
++            high = np.minimum(limit, np.floor(np.maximum(start, end) + .5).astype(int))
++            yy, xx = np.nonzero(truth[low[1]:high[1]+1, low[0]:high[0]+1] != 255)
++            if len(xx):
++                centers = np.column_stack((xx + low[0], yy + low[1])).astype(float)
++                lower, upper = centers - .5, centers + .5
++                enter, leave = np.zeros(len(xx)), np.ones(len(xx))
++                interior = np.ones(len(xx), dtype=bool)
++                for axis in (0, 1):
++                    if delta[axis] == 0:
++                        interior &= ((start[axis] > lower[:, axis] + 1e-10)
++                                     & (start[axis] < upper[:, axis] - 1e-10))
++                    else:
++                        x = (lower[:, axis] - start[axis]) / delta[axis]
++                        y = (upper[:, axis] - start[axis]) / delta[axis]
++                        enter = np.maximum(enter, np.minimum(x, y))
++                        leave = np.minimum(leave, np.maximum(x, y))
++                penetration = interior & (leave - enter > 1e-10)
++                if np.all(delta == 0):
++                    penetration = interior
++                assert not penetration.any(), 'Wall crossing: occupied cell interior'
++                boundary_contacts += int(np.count_nonzero((leave >= enter - 1e-10) & ~penetration))
++            segments += 1
++    details = {'movement_segments': segments, 'wall_crossings': 0,
++               'boundary_contacts': boundary_contacts, 'geometry_model': 'continuous point / pixel interiors',
++               'geometry_tolerance': 1e-10}
++    return details if return_details else segments
+ 
+ 
+ def physical_audit(directory,config):
+--- before/finite_contact_stability.py
++++ after/finite_contact_stability.py
+@@ -199,7 +199,7 @@
+     return {'rollouts': count, 'movement_segments': segments, 'wall_crossings': 0}
+ 
+ 
+-def audit_record(record, trace, truth, beliefs, cfg):
++def audit_record(record, trace, truth, beliefs, cfg, geometry_details=False):
+     assert not record['interrupted']
+     assert hashlib.sha256(truth.tobytes()).hexdigest() == record['map']['sha256']
+     free = truth == 255
+@@ -217,7 +217,7 @@
+         elapsed = b['time'] - a['time']
+         lengths = np.linalg.norm(np.array(b['positions'])-a['positions'],axis=1)
+         assert elapsed > 0 and np.all(lengths <= cfg.speed*elapsed+1e-6)
+-    return audit_segments(truth, trajectory)
++    return audit_segments(truth, trajectory, return_details=geometry_details)
+ 
+ 
+ def report(root):
+--- before/finite_contact_thousand_analysis.py
++++ after/finite_contact_thousand_analysis.py
+@@ -108,7 +108,7 @@
+     records = rows(directory/(log+'.jsonl'))[:count]
+     traces = rows(directory/('evaluation_trajectories.jsonl' if evaluation else 'trajectories.jsonl'))[:count]
+     assert len(records) == len(traces) == count
+-    segments, failures = 0, []
++    segments, failures, boundary_contacts = 0, [], 0
+     for index, (record, trace) in enumerate(zip(records, traces)):
+         expected_split = 'validation' if evaluation else 'train'
+         assert record['map'] == trace['map'] and record['map']['split'] == expected_split
+@@ -121,7 +121,9 @@
+             assert record['map']['index'] == training_map_index(cfg, index+1)
+             path = directory/('training_map_%03d.npz' % (index+1))
+         with np.load(path) as data:
+-            segments += audit_record(record, trace, data['truth'], data['beliefs'], cfg)
++            geometry = audit_record(record, trace, data['truth'], data['beliefs'], cfg, geometry_details=True)
++            segments += geometry['movement_segments']
++            boundary_contacts += geometry['boundary_contacts']
+             if not record['success']:
+                 failures.append(failure_detail(record, data['truth'], data['beliefs']))
+             np.testing.assert_array_equal(data['positions'], trace['trajectory'][-1]['positions'])
+@@ -129,6 +131,8 @@
+         if not record['success']:
+             assert abs(record['time'] - cfg.horizon_seconds) < 1e-6
+     return {'rollouts': count, 'movement_segments': segments, 'wall_crossings': 0,
++            'boundary_contacts': boundary_contacts,
++            'geometry_model': 'continuous point / pixel interiors',
+             'coverage_union_and_per_segment_speed_recomputed': True,
+             'radio_and_time_caps_passed': True, 'failures': failures}
+ 

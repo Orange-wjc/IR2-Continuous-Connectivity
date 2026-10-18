@@ -1,0 +1,9 @@
+{
+  "status": "complete",
+  "time": "2026-10-13T20:57:22.046305+08:00",
+  "exact_equivalence": true,
+  "checkpoint_rng_equivalence": true,
+  "speedup": 1.2244549717378286,
+  "new_multiseed_experiment_started": false,
+  "report": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/finite_contact/results/performance_20261013/RESULTS.md"
+}

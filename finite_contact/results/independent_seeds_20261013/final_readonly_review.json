@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "source_files": 54,
+  "original_snapshot_files": 54,
+  "development_rows_recomputed": 300,
+  "training_rows_checked": 15000,
+  "sac_update_rows_checked": 300000,
+  "head_updates_from_stage_audits": 15000,
+  "movement_updates_from_stage_audits": 27000,
+  "head_update_rows_checked": 15000,
+  "movement_sac_update_rows_checked": 27000,
+  "paired_maps_identical": true,
+  "summary_matches_raw_records": true,
+  "physical": {
+    "rollouts": 15900,
+    "movement_segments": 1349336,
+    "wall_crossings": 0,
+    "boundary_contacts": 1008
+  },
+  "newly_recomputed_development_audits": {
+    "rollouts": 300,
+    "movement_segments": 21698,
+    "boundary_contacts": 3,
+    "radio_events": 1202069
+  },
+  "models_checked": 15,
+  "extra_training_updates": 0,
+  "extra_policy_evaluations": 0,
+  "common_stage_rollouts_reaudited": 600,
+  "training_audit_scope": "Existing adaptation full physical/radio audits inspected and aggregated; all 600 common-stage and 300 development rollouts reaudited from retained trajectories/maps/events.",
+  "protected_previous_manifest_verified": true,
+  "input_files_hashed": 505
+}

@@ -1,0 +1,16 @@
+{
+  "pid": 3321224,
+  "time": "2026-10-12T22:24:33.298189+08:00",
+  "command": [
+    "/usr/bin/nice",
+    "-n",
+    "10",
+    "/home/wyz/anaconda3/envs/ir2_train/bin/python",
+    "-u",
+    "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/finite_contact_thousand_analysis.py",
+    "--experiment",
+    "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/thousand_maps_20261012_seed1",
+    "--watch"
+  ],
+  "scope": "Reviewed lineage and recovery accounting; CPU-only terminal audit and analysis."
+}

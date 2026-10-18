@@ -1,0 +1,109 @@
+{
+  "scope": "Read-only configuration comparison; not a causal explanation",
+  "generated_config_file": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seeds_20261013/seed_101/AB_learned/config.json",
+  "native_config_protocol": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/native_easy_20261015_seed101/manual_evaluations/20261017_ep00010060/protocol.json",
+  "differences": {
+    "batch_size": {
+      "generated": 16,
+      "native": 128
+    },
+    "dataset_manifest": {
+      "generated": null,
+      "native": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/native_easy_20261015_seed101/dataset/native_dataset.json"
+    },
+    "dynamic_padding": {
+      "generated": null,
+      "native": true
+    },
+    "embedding_dim": {
+      "generated": 64,
+      "native": 128
+    },
+    "grid_points": {
+      "generated": 14,
+      "native": 50
+    },
+    "horizon_seconds": {
+      "generated": 256.0,
+      "native": 3000.0
+    },
+    "learning_rate": {
+      "generated": 0.0001,
+      "native": 1e-05
+    },
+    "map_family": {
+      "generated": "simple_rooms_v1",
+      "native": "dungeon_easy"
+    },
+    "map_order": {
+      "generated": "shuffled",
+      "native": "cyclic"
+    },
+    "map_size": {
+      "generated": 256,
+      "native": 640
+    },
+    "max_decisions": {
+      "generated": null,
+      "native": 196
+    },
+    "native_graph": {
+      "generated": null,
+      "native": true
+    },
+    "native_test_set": {
+      "generated": null,
+      "native": ""
+    },
+    "neighbors": {
+      "generated": 12,
+      "native": 30
+    },
+    "nodes": {
+      "generated": 208,
+      "native": 2048
+    },
+    "replay_size": {
+      "generated": 12000,
+      "native": 10000
+    },
+    "sensor_range": {
+      "generated": 70,
+      "native": 80
+    },
+    "success_imitation_weight": {
+      "generated": 1.0,
+      "native": 0.0
+    },
+    "success_memory_mode": {
+      "generated": "per_map",
+      "native": "fastest"
+    },
+    "test_maps": {
+      "generated": 20,
+      "native": 500
+    },
+    "train_maps": {
+      "generated": 1000,
+      "native": 9899
+    },
+    "validation_maps": {
+      "generated": 20,
+      "native": 100
+    },
+    "warmup": {
+      "generated": 16,
+      "native": 2000
+    }
+  },
+  "initialization": {
+    "generated_movement_sac_updates": 9000,
+    "native_movement_sac_updates": 216,
+    "generated_head_collection_maps": 100,
+    "native_head_collection_maps": 16,
+    "head_supervised_updates_both": 5000,
+    "generated_adaptation_updates_per_episode": 20,
+    "native_adaptation_updates_per_episode": 8
+  },
+  "warning": "Several training changes accompany map/graph migration; current validation cannot isolate which change drives a performance difference."
+}

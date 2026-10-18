@@ -1,0 +1,32 @@
+{
+  "time": "2026-10-12T21:55:36.037640+08:00",
+  "cause": "Host RAM OOM, confirmed by kernel; not normal endpoint completion.",
+  "killed_pid": 1309824,
+  "kernel_time_local": "2026-10-12 21:30:38+08:00",
+  "kernel_anon_rss_kib": 24911352,
+  "last_completed_log_episode": 890,
+  "last_status_episode": 889,
+  "saved_checkpoint_episode": 880,
+  "saved_checkpoint_sac_updates": 26495,
+  "last_logged_sac_updates": 26695,
+  "logged_complete_maps_not_in_checkpoint": [
+    881,
+    882,
+    883,
+    884,
+    885,
+    886,
+    887,
+    888,
+    889,
+    890
+  ],
+  "logged_updates_not_in_checkpoint": 200,
+  "checkpoint_zip_crc_passed": true,
+  "checkpoint_full_unpickle_not_attempted": "Avoid loading 4.3 GiB numpy replay pickle into RAM; metadata header and ZIP CRC checked only.",
+  "incomplete_checkpoint_temporary_file": "A_rule/latest.tmp (0 bytes)",
+  "A_fifo_status": "not_started",
+  "pipeline_complete": false,
+  "preserved_evidence_directory": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/thousand_maps_20261012_seed1/oom_20261012_213038",
+  "preservation_note": "Full checkpoint and communication log preserved with hard links; small logs and episode 881-890 arrays copied. Original files and source unchanged."
+}

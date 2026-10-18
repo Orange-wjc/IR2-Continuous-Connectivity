@@ -1,0 +1,410 @@
+{
+  "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/performance_work/20261013/optimized",
+  "cuda": true,
+  "device": "NVIDIA GeForce RTX 3090",
+  "torch_version": "2.3.1+cu121",
+  "torch_threads": 2,
+  "profiled": false,
+  "traced": false,
+  "warmup_rollouts": 1,
+  "warmup_updates": 20,
+  "rows": [
+    {
+      "map_index": 0,
+      "episode": 1,
+      "metrics": {
+        "success": true,
+        "time": 225.28971984277635,
+        "coverage": [
+          0.9907800110639867,
+          1.0
+        ],
+        "union_coverage": 1.0,
+        "coverage_deficit": 0.26948484752688523,
+        "union_completion_time": 66.02302504659384,
+        "total_distance": 4406.750080421129,
+        "wait_seconds": [
+          12.190495178801587,
+          10.204727345333065
+        ],
+        "wait_disconnected_seconds": [
+          0.0,
+          2.3570226039551585
+        ],
+        "wait_without_new_map_seconds": [
+          8.607161845468253,
+          4.954727345333066
+        ],
+        "synchronization_idle_seconds": [
+          21.729933088021184,
+          39.22511070496938
+        ],
+        "sent_bytes": 357447,
+        "delivered_bytes": 357297,
+        "control_bytes": 36799,
+        "novel_received_cells": 9257,
+        "duplicate_received_cells": 49393,
+        "connected_seconds": 88.97780247787014,
+        "queue_bytes": [
+          18369,
+          27193
+        ],
+        "reward_components": {
+          "exploration": [
+            14.59683175932755,
+            14.59683175932755
+          ],
+          "delivery": [
+            6.95392420675,
+            11.460609863768749
+          ],
+          "time": [
+            -4.482307060413661,
+            -4.482307060413661
+          ],
+          "distance": [
+            -4.571490908912624,
+            -4.203003676349456
+          ],
+          "completion": [
+            19.8005,
+            19.8005
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 0,
+          "layout_id": "simple_rooms_v1:20261011:train:0",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "42c0a8064e3e93ffd565a9653298052baa08f5e2b98112365e49037d7a73e71e",
+          "canonical_sha256": "0871343f54c276dcf079b8895279d62f8cdd73004740cb09d6aa0401f38dc00c",
+          "units": "map_units",
+          "starts": [
+            [
+              183.0,
+              169.0
+            ],
+            [
+              195.0,
+              169.0
+            ]
+          ],
+          "rooms": 2,
+          "rotation": 1,
+          "bounds_before_rotation": [
+            16,
+            12,
+            239,
+            238
+          ],
+          "doors_before_rotation": [
+            [
+              120,
+              172,
+              7,
+              34
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              39,
+              40,
+              13,
+              19
+            ]
+          ]
+        },
+        "decisions": 80,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8895,
+        "return": [
+          32.29745799675127,
+          37.17263088633318
+        ]
+      },
+      "rollout_seconds": 16.438478742027655,
+      "update_seconds": 1.615493740013335,
+      "total_seconds": 18.05397248204099,
+      "decisions": 80,
+      "group": "AB_learned"
+    },
+    {
+      "map_index": 37,
+      "episode": 2,
+      "metrics": {
+        "success": true,
+        "time": 206.48726184842116,
+        "coverage": [
+          0.9924124354031663,
+          1.0
+        ],
+        "union_coverage": 1.0,
+        "coverage_deficit": 0.12120376742646145,
+        "union_completion_time": 195.0014940149526,
+        "total_distance": 4265.831884130608,
+        "wait_seconds": [
+          0.0,
+          1.6666666666666667
+        ],
+        "wait_disconnected_seconds": [
+          0.0,
+          1.6666666666666667
+        ],
+        "wait_without_new_map_seconds": [
+          0.0,
+          1.6666666666666667
+        ],
+        "synchronization_idle_seconds": [
+          26.972301614061422,
+          28.849565071896915
+        ],
+        "sent_bytes": 406440,
+        "delivered_bytes": 406317,
+        "control_bytes": 42528,
+        "novel_received_cells": 17041,
+        "duplicate_received_cells": 49456,
+        "connected_seconds": 130.89353733037245,
+        "queue_bytes": [
+          306,
+          6761
+        ],
+        "reward_components": {
+          "exploration": [
+            14.542847735317036,
+            14.542847735317036
+          ],
+          "delivery": [
+            15.022150126999996,
+            18.907615627
+          ],
+          "time": [
+            -4.108698349139252,
+            -4.108698349139252
+          ],
+          "distance": [
+            -4.289415318322234,
+            -4.2049226106040205
+          ],
+          "completion": [
+            20.0,
+            20.0
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 37,
+          "layout_id": "simple_rooms_v1:20261011:train:37",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "7083fa22916fa2ae2916ab26438242d2e7661d4a9c809d1f20dd052f9896dbe3",
+          "canonical_sha256": "599c9b12a706ba05552e68e31d680f1b668c5627787b53019275c364c0a78676",
+          "units": "map_units",
+          "starts": [
+            [
+              159.0,
+              107.0
+            ],
+            [
+              147.0,
+              107.0
+            ]
+          ],
+          "rooms": 2,
+          "rotation": 3,
+          "bounds_before_rotation": [
+            15,
+            22,
+            243,
+            242
+          ],
+          "doors_before_rotation": [
+            [
+              131,
+              82,
+              4,
+              41
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              96,
+              129,
+              19,
+              20
+            ],
+            [
+              206,
+              138,
+              15,
+              20
+            ]
+          ]
+        },
+        "decisions": 73,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8915,
+        "return": [
+          41.16688419485554,
+          45.13684240257376
+        ]
+      },
+      "rollout_seconds": 12.181307179969735,
+      "update_seconds": 1.6004368559806608,
+      "total_seconds": 13.781744035950396,
+      "decisions": 73,
+      "group": "AB_learned"
+    },
+    {
+      "map_index": 470,
+      "episode": 3,
+      "metrics": {
+        "success": true,
+        "time": 186.3842785061258,
+        "coverage": [
+          0.992827868852459,
+          0.9986484129752354
+        ],
+        "union_coverage": 0.9986484129752354,
+        "coverage_deficit": 0.12641396511689776,
+        "union_completion_time": 170.0015066848293,
+        "total_distance": 3699.052104831119,
+        "wait_seconds": [
+          8.737734478532143,
+          4.916666666666667
+        ],
+        "wait_disconnected_seconds": [
+          2.3570226039551585,
+          0.0
+        ],
+        "wait_without_new_map_seconds": [
+          6.380711874576984,
+          0.0
+        ],
+        "synchronization_idle_seconds": [
+          27.096399585531454,
+          23.763414212261374
+        ],
+        "sent_bytes": 390614,
+        "delivered_bytes": 390600,
+        "control_bytes": 40100,
+        "novel_received_cells": 22536,
+        "duplicate_received_cells": 41649,
+        "connected_seconds": 143.55777975335644,
+        "queue_bytes": [
+          442,
+          4146
+        ],
+        "reward_components": {
+          "exploration": [
+            15.248713684600627,
+            15.248713684600627
+          ],
+          "delivery": [
+            28.22233414400001,
+            16.616990295
+          ],
+          "time": [
+            -3.7082967072817112,
+            -3.7082967072817112
+          ],
+          "distance": [
+            -3.5975202700545985,
+            -3.76767937657766
+          ],
+          "completion": [
+            20.0,
+            20.0
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 470,
+          "layout_id": "simple_rooms_v1:20261011:train:470",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "b23430cfb24de03fc231cdfd2b3ba0afcb7d022265266f773ccad95249a6e206",
+          "canonical_sha256": "11b908c0d29bf072c4859bf19cd2a01d937023036b89326121f8aba7841407a8",
+          "units": "map_units",
+          "starts": [
+            [
+              116.0,
+              209.0
+            ],
+            [
+              128.0,
+              209.0
+            ]
+          ],
+          "rooms": 3,
+          "rotation": 1,
+          "bounds_before_rotation": [
+            14,
+            13,
+            235,
+            234
+          ],
+          "doors_before_rotation": [
+            [
+              78,
+              106,
+              7,
+              32
+            ],
+            [
+              163,
+              60,
+              7,
+              42
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              51,
+              52,
+              15,
+              13
+            ],
+            [
+              97,
+              57,
+              11,
+              18
+            ]
+          ]
+        },
+        "decisions": 66,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8935,
+        "return": [
+          56.16523085126431,
+          44.38972789574126
+        ]
+      },
+      "rollout_seconds": 8.371234860038385,
+      "update_seconds": 1.6050156919518486,
+      "total_seconds": 9.976250551990233,
+      "decisions": 66,
+      "group": "AB_learned"
+    }
+  ],
+  "peak_rss_mib": 1258.2421875
+}

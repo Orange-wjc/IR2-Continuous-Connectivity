@@ -1,0 +1,16 @@
+{
+  "status": "running_not_yet_effectiveness_verified",
+  "stage": "easy_shared_warmup",
+  "shared_maps": 7,
+  "shared_sac_updates": 630,
+  "last_checkpoint": "2026-10-17T09:21:29.373409+08:00",
+  "minimum_available_gib": 21.424297332763672,
+  "new_run_source_verified": true,
+  "old_run_protected": true,
+  "root_entry_engineering_checks_passed": true,
+  "successful_imitation_so_far": 0,
+  "automatic_endpoint_analysis": true,
+  "large_scale_started": false,
+  "hard_cgroup_memory_limit_effective": false,
+  "external_low_memory_guard_active": true
+}

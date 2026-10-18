@@ -1,0 +1,25 @@
+--- before/graph_generator.py
++++ after/graph_generator.py
+@@ -192,15 +192,17 @@
+                 labeled_map, _ = label(robot_belief[y0:y1, x0:x1] == 255)    # Obstacles = 1, free = 255
+                 padded_labeled_map[y0:y1, x0:x1] = labeled_map
+                 local_occupancy_map = padded_labeled_map[candidate_node_coords[:,1], candidate_node_coords[:,0]]
+-                robot_location = self.node_coords[self.find_index_from_coords(self.node_coords, position)]
+-                pose_idx = self.find_index_from_coords(candidate_node_coords, robot_location)  # robot_location guaranteed to be in local_occupancy_map
+-                connected_coords = np.argwhere(local_occupancy_map == local_occupancy_map[pose_idx])
+-                connected_coords = candidate_node_coords[connected_coords[:,0]]
++                # A paid peer pose can lie between grid nodes; a small known
++                # patch can also contain no uniform candidates. Query the
++                # occupancy component at the actual pose instead of indexing
++                # an absent graph node (find_index_from_coords returns -1).
++                pose_component = padded_labeled_map[position[1], position[0]]
++                connected_coords = candidate_node_coords[local_occupancy_map == pose_component]
+                 robots_local_nodes[id].update([tuple(coord) for coord in connected_coords])
+ 
+         # # Combine all pose filtered node idx
+         robots_local_nodes_combined = [node for robot_local_nodes in robots_local_nodes for node in robot_local_nodes]
+-        robots_local_nodes_combined = np.array(list(set(robots_local_nodes_combined)))
++        robots_local_nodes_combined = np.array(list(set(robots_local_nodes_combined))).reshape(-1, 2)
+ 
+         robot_locations = [position for position in robot_location_belief if position is not None]
+         old_node_coords = copy.deepcopy(self.node_coords)

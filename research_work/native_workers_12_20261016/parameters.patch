@@ -1,0 +1,110 @@
+--- before/driver.py
++++ after/driver.py
+@@ -4,6 +4,9 @@
+ ##############################################################################
+ 
+ from parameter import *
++
++# Parallel map simulations; each simulation still contains two robots.
++NUM_META_AGENT = 12
+ import torch
+ import torch.optim as optim
+ import torch.nn as nn
+@@ -350,6 +353,6 @@
+     if '--finite-contact' in sys.argv:
+         sys.argv.remove('--finite-contact')
+         from native_driver import main as finite_contact_main
+-        finite_contact_main()
++        finite_contact_main(default_num_meta_agent=NUM_META_AGENT)
+     else:
+         main()
+--- before/native_driver.py
++++ after/native_driver.py
+@@ -294,13 +294,39 @@
+             and len(set(completed.values()))==1
+             and min(completed.values())>=plan.get('last_review_episode',0)+plan['review_interval'])
+ 
++def positive_worker_count(value):
++    try:value=int(value)
++    except (TypeError,ValueError):raise argparse.ArgumentTypeError('NUM_META_AGENT must be a positive integer')
++    if value<=0:raise argparse.ArgumentTypeError('NUM_META_AGENT must be a positive integer')
++    return value
++
++def apply_runtime_workers(plan,args):
++    previous=plan['workers']
++    requested=getattr(args,'workers',None)
++    workers=previous if requested is None else positive_worker_count(requested)
++    if workers!=previous:
++        plan.setdefault('parallelism_changes',[]).append(dict(time=now(),previous_workers=previous,
++            workers=workers,reason='Explicit --num-meta-agent/--workers override on resume',
++            rollout_wave_changed=True,updates_per_completed_episode=8))
++    plan['workers']=workers
++    plan['NUM_META_AGENT']=workers
++    return plan
++
++def next_wave_size(completed,name,workers):
++    # Catch up a partial old wave before using a new parallel wave width.
++    gap=max(completed.values())-completed[name]
++    return min(workers,gap) if gap>0 else workers
++
+ def train(root,args):
+     plan=read(root/'pipeline.json')
+     assert plan['source_identity']==identity(),'Frozen training source changed'
+     assert plan['dataset_sha256']==digest(root/'dataset/native_dataset.json')
+     lock=(root/'.coordinator.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+     global_lock=(root.parent/'.native_training.lock').open('a');fcntl.flock(global_lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
++    plan=apply_runtime_workers(plan,args)
+     write(root/'coordinator.json',dict(pid=os.getpid(),time=now()))
++    print(json.dumps(dict(stage='parallelism',NUM_META_AGENT=plan['workers'],
++                          effective_batch=plan['effective_batch'],microbatch=plan['microbatch'])),flush=True)
+     if getattr(args,'no_auto_evaluation',False):
+         plan['automatic_development_evaluation']=False
+     if not plan.get('automatic_development_evaluation',True):
+@@ -356,7 +382,7 @@
+             if time.monotonic()-started>plan['wall_guard_hours']*3600:break
+             if pending is None:
+                 name=min(GROUPS,key=lambda n:completed[n]);x=learners[name];cfg=configs[name]
+-                count=plan['workers']
++                count=next_wave_size(completed,name,plan['workers'])
+                 if plan['preflight']:count=min(count,4-completed[name])
+                 if count<=0:break
+                 jobs=jobs_for(cfg,x,root/name,completed[name]+1,count)
+@@ -372,7 +398,7 @@
+             # and preserve exactly the weights an unprefetched alternating loop uses.
+             next_name=min(GROUPS,key=lambda n:hypothetical[n])
+             if plan.get('cross_method_prefetch',False) and next_name!=name and not review_due and not finished_probe and not stop[0]:
+-                count=plan['workers']
++                count=next_wave_size(hypothetical,next_name,plan['workers'])
+                 if plan['preflight']:count=min(count,4-hypothetical[next_name])
+                 jobs=jobs_for(configs[next_name],learners[next_name],root/next_name,hypothetical[next_name]+1,count)
+                 pending=(next_name,[pool.submit(run_episode,job) for job in jobs])
+@@ -420,17 +446,26 @@
+             write(root/'uncommitted_cpu_work.json',dict(group=role,episodes=episodes,retained_sac_updates=0,
+                 note='CPU prefetch completed after the last committed training boundary; archive on resume'))
+ 
+-def main():
++def build_parser():
+     p=argparse.ArgumentParser(description=__doc__)
+     p.add_argument('--output',type=Path,required=True);p.add_argument('--dataset',type=Path)
+-    p.add_argument('--workers',type=int,default=4);p.add_argument('--microbatch',type=int,default=32)
++    p.add_argument('--num-meta-agent','--workers',dest='workers',type=positive_worker_count,default=None,
++                   help='Parallel map simulations; explicit values also override saved parallelism on resume')
++    p.add_argument('--microbatch',type=int,default=32)
+     p.add_argument('--seed',type=int,default=101);p.add_argument('--preflight',action='store_true')
+     p.add_argument('--resume',action='store_true');p.add_argument('--max-hours',type=float,default=48)
+     p.add_argument('--review-interval',type=int,default=512)
+     p.add_argument('--no-auto-evaluation',action='store_true',help='Train continuously; evaluate only on explicit request (persisted on resume)')
+     p.add_argument('--no-prefetch',action='store_true',help='Disable exact cross-method CPU/GPU overlap for engineering comparison')
+-    args=p.parse_args();root=args.output.resolve()
++    return p
++
++def main(default_num_meta_agent=None):
++    if default_num_meta_agent is None:
++        from driver import NUM_META_AGENT
++        default_num_meta_agent=NUM_META_AGENT
++    p=build_parser();args=p.parse_args();root=args.output.resolve()
+     if not args.resume:
++        if args.workers is None:args.workers=positive_worker_count(default_num_meta_agent)
+         if args.dataset is None:p.error('--dataset is required for a new run')
+         prepare(root,args)
+     train(root,args)

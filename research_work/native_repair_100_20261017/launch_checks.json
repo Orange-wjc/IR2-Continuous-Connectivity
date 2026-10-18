@@ -1,0 +1,20 @@
+{
+  "old_run_protected": true,
+  "old_supervisor_paused": true,
+  "legacy_driver_preserved": true,
+  "training_original_files": 100,
+  "development_original_files": 100,
+  "generated_maps": 0,
+  "heldout_geometry_disjoint": true,
+  "source_frozen": true,
+  "physical_graph_and_model_unchanged": [
+    "finite_contact/environment.py",
+    "native_environment.py",
+    "graph_generator.py",
+    "model.py",
+    "finite_contact/communication.py"
+  ],
+  "pid": 2200658,
+  "stage": "easy_shared_warmup",
+  "time": "2026-10-17T09:16:24.227818+08:00"
+}

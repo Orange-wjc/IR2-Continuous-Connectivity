@@ -1,0 +1,85 @@
+{
+  "status": "passed",
+  "time": "2026-10-12T22:29:30.164200+08:00",
+  "replayed_episode_ids": [
+    881,
+    882,
+    883,
+    884,
+    885,
+    886,
+    887,
+    888,
+    889,
+    890
+  ],
+  "training_records_exact_except_wall_seconds": 10,
+  "actual_update_records_exact": 200,
+  "trajectory_records_exact": 10,
+  "array_files_exact": 10,
+  "communication_events_exact": 62000,
+  "movement_segments": 1246,
+  "wall_crossings": 0,
+  "saved_checkpoint_episode": 890,
+  "saved_checkpoint_cumulative_sac": 26695,
+  "checkpoint_bytes": 356201918,
+  "optimizer_audit_from_restored_880": {
+    "policy_optimizer": {
+      "parameters_with_state": 90,
+      "initial_step_range": [
+        24995,
+        24995
+      ],
+      "final_step_range": [
+        25195,
+        25195
+      ],
+      "increment_per_parameter": 200
+    },
+    "alpha_optimizer": {
+      "parameters_with_state": 1,
+      "initial_step_range": [
+        24995,
+        24995
+      ],
+      "final_step_range": [
+        25195,
+        25195
+      ],
+      "increment_per_parameter": 200
+    },
+    "q0_optimizer": {
+      "parameters_with_state": 90,
+      "initial_step_range": [
+        24995,
+        24995
+      ],
+      "final_step_range": [
+        25195,
+        25195
+      ],
+      "increment_per_parameter": 200
+    },
+    "q1_optimizer": {
+      "parameters_with_state": 90,
+      "initial_step_range": [
+        24995,
+        24995
+      ],
+      "final_step_range": [
+        25195,
+        25195
+      ],
+      "increment_per_parameter": 200
+    },
+    "content_optimizer_unchanged": true
+  },
+  "worker_status_at_check": {
+    "status": "training",
+    "group": "A_rule",
+    "completed_episodes": 898,
+    "peak_rss_mib": 2575.03515625,
+    "sac_updates": 26855
+  },
+  "scope": "Storage engineering preserves the actual CUDA training trajectory across the interrupted boundary."
+}

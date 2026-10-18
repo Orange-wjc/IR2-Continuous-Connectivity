@@ -1,0 +1,139 @@
+{
+  "same_100_development_maps": true,
+  "new_policy_rollouts": 0,
+  "gradient_updates": 0,
+  "groups": {
+    "fifo": {
+      "success_100": 53,
+      "success_500": 49,
+      "lost_success_count": 6,
+      "gained_success_count": 2,
+      "lost_success_maps": [
+        {
+          "map": "DungeonMaps/train/easy/img_9642.png",
+          "previous_time": 391.25137978267145,
+          "current_time": 641.3283458156922,
+          "decisions": 196,
+          "stop_reason": "decision_limit",
+          "union_coverage": 1.0,
+          "min_local_coverage": 0.8998161764705882,
+          "total_distance": 11584.310330107533,
+          "wait_seconds": [
+            7.859654917914941,
+            10.520488274079936
+          ]
+        },
+        {
+          "map": "DungeonMaps/train/easy/img_7312.png",
+          "previous_time": 273.7233880614465,
+          "current_time": 870.6908623273711,
+          "decisions": 196,
+          "stop_reason": "decision_limit",
+          "union_coverage": 1.0,
+          "min_local_coverage": 0.9820642605633803,
+          "total_distance": 14528.959081568686,
+          "wait_seconds": [
+            14.421732570816241,
+            10.540916216855232
+          ]
+        },
+        {
+          "map": "DungeonMaps/train/easy/img_4424.png",
+          "previous_time": 344.41487227076095,
+          "current_time": 723.2654893550566,
+          "decisions": 196,
+          "stop_reason": "decision_limit",
+          "union_coverage": 1.0,
+          "min_local_coverage": 0.851577352661597,
+          "total_distance": 12799.061648496152,
+          "wait_seconds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "map": "DungeonMaps/train/easy/img_2352.png",
+          "previous_time": 309.54709283110725,
+          "current_time": 576.1746984555182,
+          "decisions": 196,
+          "stop_reason": "decision_limit",
+          "union_coverage": 0.8637624547101449,
+          "min_local_coverage": 0.8637624547101449,
+          "total_distance": 10721.07085059401,
+          "wait_seconds": [
+            9.410513406369592,
+            2.083333333333333
+          ]
+        },
+        {
+          "map": "DungeonMaps/train/easy/img_1964.png",
+          "previous_time": 413.7273192610889,
+          "current_time": 528.9979130720546,
+          "decisions": 196,
+          "stop_reason": "decision_limit",
+          "union_coverage": 1.0,
+          "min_local_coverage": 0.8463084065495208,
+          "total_distance": 8379.887299040982,
+          "wait_seconds": [
+            59.86420079489696,
+            84.0499707977026
+          ]
+        },
+        {
+          "map": "DungeonMaps/train/easy/img_1566.png",
+          "previous_time": 290.8959526716021,
+          "current_time": 723.5729482615774,
+          "decisions": 196,
+          "stop_reason": "decision_limit",
+          "union_coverage": 0.7687939776490066,
+          "min_local_coverage": 0.6702323054635762,
+          "total_distance": 12117.071242148202,
+          "wait_seconds": [
+            3.355137023199566,
+            34.52939797293006
+          ]
+        }
+      ],
+      "gained_success_maps": [
+        "DungeonMaps/train/easy/img_9602.png",
+        "DungeonMaps/train/easy/img_4568.png"
+      ],
+      "failure_stop_reasons": {
+        "decision_limit": 51
+      },
+      "failures_union_at_least_99": 4
+    },
+    "ab": {
+      "success_100": 55,
+      "success_500": 57,
+      "lost_success_count": 1,
+      "gained_success_count": 3,
+      "lost_success_maps": [
+        {
+          "map": "DungeonMaps/train/easy/img_6936.png",
+          "previous_time": 545.1786627535378,
+          "current_time": 670.313706473372,
+          "decisions": 196,
+          "stop_reason": "decision_limit",
+          "union_coverage": 1.0,
+          "min_local_coverage": 0.9682601072607261,
+          "total_distance": 11647.165518848884,
+          "wait_seconds": [
+            21.669764812814226,
+            37.44402494980321
+          ]
+        }
+      ],
+      "gained_success_maps": [
+        "DungeonMaps/train/easy/img_9309.png",
+        "DungeonMaps/train/easy/img_7151.png",
+        "DungeonMaps/train/easy/img_4784.png"
+      ],
+      "failure_stop_reasons": {
+        "decision_limit": 43
+      },
+      "failures_union_at_least_99": 9
+    }
+  },
+  "interpretation": "Observed endpoint regressions are retained, not removed. Decision-limit failures do not by themselves identify a code bug or prove convergence. Engineering/paired budget checks at 500 passed; continue both groups without tuning rewards or filtering hard maps."
+}

@@ -1,0 +1,17 @@
+{
+  "files": {
+    "NEXT_EXPERIMENT_DRAFT.md": "fd1c4ebd5e57ccabfa44f07ad8edfc93fa0aa2c82a3918a73919135750090eed",
+    "RESULTS.md": "ed55a24cb4dce63600662b4127205b764d29ac1f6201bcf7cdd69b71881cf5cd",
+    "additional_dependency_identity.json": "e6a30023ae62a7c87bc56260be30e10f732616c891e5cec88b93cf0558252642",
+    "baseline_identity.json": "e0a86831a13c71759dc7390c9a4ab99f63930f6bf53b8fb3d81793b4a6ad2ddb",
+    "baseline_profile.txt": "ae93e4e126463977063fd9e2704ff4ed2412db434cbf85411457b56c9bab01d2",
+    "checkpoint_rng_review.json": "6104e1f64482e583759f3b932b1f80504cb0418d77818b9d184d82f32e888a6b",
+    "compute_accounting.json": "c0f0978bd0c65d725640748e753e110f5f2fd18e492e4ad9ea70dfb988f65e87",
+    "equivalence_review.json": "b24fe206af48b2936138fd7e28d5d0392690cc572a541b37f74935db96bb72c7",
+    "final_review.json": "99cc1f89d47f8e1fb22862bbb2fe9510ac55f8bda89cfaa154c5760114316990",
+    "optimization.patch": "02e6eb54de06a2e55fb0273a1b4336dd3e95d3f16d1c75ac2417595a1b540b5a",
+    "optimized_identity.json": "3c6dcb9ef55e858530237e1321ebeb51d19a2fc767c1afdb300275d3d6a734b5",
+    "regression_checks.log": "4aeb57271895f7e043ad3bbdcfbcc5bb9340212af8b4a834239fde165831e7ff",
+    "timing_review.json": "448c0e421eaa9881fad5f672b8a063bee7fe1b3387e3da3434655922d991db5c"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/thousand_maps_20261012_seed1/oom_20261012_213038/rule_latest_episode880.pth",
+  "output": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/thousand_maps_20261012_seed1/memory_recovery/A_rule_latest.pth",
+  "source_sha256": "57833533bf6d34fe7d281131b47290b7438c26bea6f86154a2680fd4403c9bb4",
+  "output_sha256": "563251096cb8829c0f13467c7eaf8ae67e15ae9cabd41c02e61debc0865627ba",
+  "logical_sha256_before_and_after": "88d5ba86954d2f88c610d645bd1743db481726b62daf33beb1c0a04792d3d553",
+  "episode": 880,
+  "updates": 26495,
+  "replay_transitions": 12000,
+  "success_episodes": 833,
+  "unique_observations_encoded": 191160,
+  "original_array_bytes": 3298656960,
+  "compressed_payload_bytes": 299955801,
+  "source_file_bytes": 4592205998,
+  "output_file_bytes": 351988566,
+  "peak_rss_kib": 8762880,
+  "virtual_memory_cap_gib": 22,
+  "wall_seconds": 58.21468499299954,
+  "unchanged": "All networks, Adam states, RNG states, config, replay order/values, success ordering/values, episode and update counters."
+}

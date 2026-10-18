@@ -1,0 +1,25 @@
+{
+  "changed_files": [
+    "finite_contact_independent.py",
+    "finite_contact_multimap_report.py",
+    "finite_contact_stability.py",
+    "finite_contact_thousand_analysis.py"
+  ],
+  "changed_functions": {
+    "finite_contact_independent.py": [
+      "adapt",
+      "verify"
+    ],
+    "finite_contact_multimap_report.py": [
+      "audit_segments"
+    ],
+    "finite_contact_stability.py": [
+      "audit_record"
+    ],
+    "finite_contact_thousand_analysis.py": [
+      "audit_rollouts"
+    ]
+  },
+  "all_other_source_files_unchanged": true,
+  "training_dynamics_model_optimizer_and_budget_code_unchanged": true
+}

@@ -1,0 +1,13 @@
+{
+  "time": "2026-10-18T04:53:00.615331+08:00",
+  "available_memory_gib": 23.164012908935547,
+  "experiment_status": "pilot_complete",
+  "stage": "pilot_review_complete",
+  "completed_episodes": {
+    "IR2_FIFO": 500,
+    "AB_learned": 500
+  },
+  "target": 500,
+  "unit_state": "inactive",
+  "notifications": false
+}

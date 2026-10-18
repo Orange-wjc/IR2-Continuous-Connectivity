@@ -1,0 +1,99 @@
+--- a/finite_contact/environment.py
++++ b/finite_contact/environment.py
+@@ -196,6 +196,24 @@
+         age = max(0., self.time - self.radio.peer_pose_time[sender])
+         return gain * np.exp(-age / 60.)
+ 
++    def action_inputs(self, robot):
++        """Exact action candidates/mask without constructing unused map features."""
++        cfg = self.config
++        coords, edges, _, _ = self.graph_data[robot]
++        if len(coords) > cfg.nodes:
++            raise RuntimeError("Node padding overflow; episode is not silently discarded")
++        lookup = {tuple(p): i for i, p in enumerate(coords)}
++        neighbors = [0] + [lookup[p] for p in edges.get(tuple(coords[0]), {}) if lookup[p] != 0]
++        neighbors = neighbors[:cfg.neighbors]
++        action_mask = np.ones((1, cfg.neighbors), np.int64)
++        action_mask[0, :len(neighbors)] = 0
++        if self.wait[robot] >= cfg.max_wait_seconds and len(neighbors) > 1:
++            action_mask[0, 0] = 1
++        candidates = np.zeros((1, cfg.neighbors), np.int64)
++        candidates[0, :len(neighbors)] = neighbors
++
++        return candidates, action_mask
++
+     def observation(self, robot, include_rendezvous=True):
+         cfg = self.config
+         coords, edges, utility, visited = self.graph_data[robot]
+@@ -208,14 +226,7 @@
+         for i, point in enumerate(coords):
+             for destination in edges.get(tuple(point), {}):
+                 adjacency[i, lookup[destination]] = 0
+-        neighbors = [0] + [lookup[p] for p in edges.get(tuple(coords[0]), {}) if lookup[p] != 0]
+-        neighbors = neighbors[:cfg.neighbors]
+-        action_mask = np.ones((1, cfg.neighbors), np.int64)
+-        action_mask[0, :len(neighbors)] = 0
+-        if self.wait[robot] >= cfg.max_wait_seconds and len(neighbors) > 1:
+-            action_mask[0, 0] = 1
+-        candidates = np.zeros((1, cfg.neighbors), np.int64)
+-        candidates[0, :len(neighbors)] = neighbors
++        candidates, action_mask = self.action_inputs(robot)
+ 
+         peer = self.radio.peer_pose[robot]
+         age = max(0., self.time - self.radio.peer_pose_time[robot])
+@@ -309,10 +320,10 @@
+         for robot, action in enumerate(actions):
+             # Validation only needs candidate indices and masks. Recomputing
+             # rendezvous would rescore the entire packet queue without using it.
+-            obs = self.observation(robot, include_rendezvous=False)
+-            if not 0 <= action < cfg.neighbors or obs[4][0, action]:
++            candidates, action_mask = self.action_inputs(robot)
++            if not 0 <= action < cfg.neighbors or action_mask[0, action]:
+                 raise ValueError("Invalid or masked movement action")
+-            targets[robot] = self.graph_data[robot][0][obs[1][0, action]]
++            targets[robot] = self.graph_data[robot][0][candidates[0, action]]
+         lengths = np.linalg.norm(targets - start, axis=1)
+         travel_times = lengths / cfg.speed
+         duration = min(max(cfg.dt, float(travel_times.max())), cfg.horizon_seconds - self.time)
+--- a/finite_contact_train.py
++++ b/finite_contact_train.py
+@@ -69,6 +69,10 @@
+     episode_transitions = []
+     terminated = truncated = interrupted = False
+     interruption_reason = None
++    # A post-step observation is unchanged until the next env.step. Policy SAC
++    # updates do not modify the frozen context/content models in these stages.
++    pending_observations = None
++    context_ready = False
+     while not (terminated or truncated):
+         if stop_requested is not None and stop_requested():
+             interruption_reason = "requested_stop"
+@@ -85,8 +89,11 @@
+             contexts = learner.contexts(env)
+             env.feature_provider = lambda sender, indices: contexts[sender][indices]
+         else:
+-            bind_context(learner, env)
+-        observations = [env.observation(i) for i in range(2)]
++            if not context_ready:
++                bind_context(learner, env)
++        observations = (pending_observations if pending_observations is not None
++                        else [env.observation(i) for i in range(2)])
++        pending_observations = None
+         if stage == "content":
+             for robot in range(2):
+                 learner.content_replay.extend(env.collect_labels(robot))
+@@ -96,11 +103,14 @@
+                               (stage == "movement" and learner.updates == 0
+                                and len(learner.replay) < config.warmup))
+         reward, duration, terminated, truncated = env.step(actions)
++        context_ready = False
+         returns += reward
+         decisions += 1
+         if stage in {"movement", "finetune"}:
+             bind_context(learner, env)
++            context_ready = True
+             next_obs = [env.observation(i) for i in range(2)]
++            pending_observations = next_obs
+             if config.compact_replay:
+                 from finite_contact.learning import compact_observation
+                 observations = [compact_observation(o) for o in observations]

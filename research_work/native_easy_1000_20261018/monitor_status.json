@@ -1,0 +1,13 @@
+{
+  "time": "2026-10-18T07:28:09.371490+08:00",
+  "available_memory_gib": 20.137897491455078,
+  "experiment_status": "running",
+  "stage": "easy_paired_training",
+  "completed_episodes": {
+    "IR2_FIFO": 510,
+    "AB_learned": 510
+  },
+  "target": 1000,
+  "unit_state": "active",
+  "notifications": false
+}

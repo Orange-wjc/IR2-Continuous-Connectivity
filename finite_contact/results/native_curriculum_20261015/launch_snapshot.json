@@ -1,0 +1,15 @@
+{
+  "pid": 3031860,
+  "command": [
+    "/home/wyz/anaconda3/envs/ir2_train/bin/python",
+    "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/native_easy_20261015_seed101/source/driver.py",
+    "--finite-contact",
+    "--output",
+    "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/native_easy_20261015_seed101",
+    "--resume"
+  ],
+  "time": "2026-10-15T15:57:59.621834+08:00",
+  "mode": "detached original-map easy training, paired FIFO/AB, 8 CPU workers/1 GPU",
+  "tensorboard_pid": 3031861,
+  "tensorboard_url": "http://127.0.0.1:6007"
+}

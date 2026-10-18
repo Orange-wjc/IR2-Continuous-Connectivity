@@ -1,0 +1,55 @@
+{
+  "stage": "easy_fixed_pool_training",
+  "time": "2026-10-18T07:40:42.188723+08:00",
+  "completed_episodes": {
+    "IR2_FIFO": 102,
+    "AB_learned": 101
+  },
+  "progress": {
+    "IR2_FIFO": {
+      "episode": 102,
+      "learner_updates": 11040,
+      "imitation_updates": 10170,
+      "success_episodes": 43,
+      "committed": "2026-10-18T07:40:41.729872+08:00"
+    },
+    "AB_learned": {
+      "episode": 101,
+      "learner_updates": 11020,
+      "imitation_updates": 10150,
+      "success_episodes": 48,
+      "committed": "2026-10-18T07:40:21.909413+08:00"
+    }
+  },
+  "fixed_train_maps": 100,
+  "no_planned_episode_limit": true,
+  "no_planned_walltime_limit": true,
+  "no_auto_evaluation": true,
+  "no_stop_at_99": true,
+  "pure100_parent": true,
+  "full_state_inheritance_verified": true,
+  "old_1000_route_stopped": true,
+  "original_data_and_physical_learning_files_unchanged": true,
+  "historical_results_protected": true,
+  "tensorboard_http_verified": {
+    "url": "http://127.0.0.1:6008",
+    "runs": [
+      "IR2_FIFO",
+      "AB_learned"
+    ],
+    "training_success_and_cycle_tags_present": true,
+    "series": {
+      "IR2_FIFO": {
+        "points": 100,
+        "latest_episode": 100,
+        "latest_success_rate_percent": 43.0
+      },
+      "AB_learned": {
+        "points": 100,
+        "latest_episode": 100,
+        "latest_success_rate_percent": 48.0
+      }
+    }
+  },
+  "source_snapshot_verified": true
+}

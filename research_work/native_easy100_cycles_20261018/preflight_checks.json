@@ -1,0 +1,22 @@
+{
+  "full_state_inheritance": true,
+  "fixed_pool_maps": 100,
+  "wrap_indices_verified": [
+    98,
+    99,
+    0,
+    1
+  ],
+  "no_episode_or_walltime_limit": true,
+  "no_success_threshold_stop_at_99": true,
+  "no_automatic_evaluation": true,
+  "inherited_and_live_tensorboard_scalars": true,
+  "stop_and_resume": true,
+  "parent_preserved": true,
+  "no_prefix_or_head_retraining": true,
+  "engineering_only": true,
+  "final_episodes": {
+    "IR2_FIFO": 8,
+    "AB_learned": 7
+  }
+}

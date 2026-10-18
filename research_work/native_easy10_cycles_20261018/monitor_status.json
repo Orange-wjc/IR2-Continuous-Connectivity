@@ -1,0 +1,9 @@
+{
+  "time": "2026-10-18T13:23:10.560516+08:00",
+  "status": "stopped_by_user",
+  "completed_episodes": {
+    "IR2_FIFO": 12,
+    "AB_learned": 12
+  },
+  "automatic_evaluation": false
+}

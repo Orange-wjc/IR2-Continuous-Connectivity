@@ -1,3 +1,3 @@
-# 1000图实验的启动证据
+# 1000 张简单地图的固定终点证据
 
-仅保存启动计划、地图审计和行为检查，训练仍进行中；pipeline_initial不是实时进度，尚无终点结果。完整原始输出与模型位于本机experiments/thousand_maps_20261012_seed1。正式训练两机99%，测试策略执行0。详见[实验记录](../../THOUSAND_MAP_EXPERIMENT.md)。
+三组固定预算与原汇总审计均完成，补充逐图分析见 [RESULTS_ANALYSIS.md](RESULTS_ANALYSIS.md)。仅单适应种子、共享预训练链、重复使用的 20 张开发图；通信头沿用 100 图版本且冻结，测试策略执行 0。全部模型与原始数据保留本机 experiments/thousand_maps_20261012_seed1，本目录只保存小型证据。

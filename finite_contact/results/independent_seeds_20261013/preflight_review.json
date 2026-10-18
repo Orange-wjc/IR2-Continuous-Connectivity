@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "full_chains": 2,
+  "completed_stages": 14,
+  "adaptation_groups": 10,
+  "independent_initial_actors": true,
+  "fixed_budget_checked": true,
+  "frozen_head_checked": true,
+  "physical_and_communication_audits": true,
+  "development_policy_evaluations": 0,
+  "test_policy_evaluations": 0,
+  "source_files": 54,
+  "successful_preflight_path": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seed_preflight_20261013_v2",
+  "failed_preflight_preserved": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/independent_seed_preflight_20261013",
+  "successful_preflight_sac_updates": 48,
+  "successful_preflight_supervised_updates": 8,
+  "failed_preflight_sac_updates": 4
+}

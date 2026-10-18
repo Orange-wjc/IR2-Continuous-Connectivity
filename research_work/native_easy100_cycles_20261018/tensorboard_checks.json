@@ -1,0 +1,21 @@
+{
+  "url": "http://127.0.0.1:6008",
+  "runs": [
+    "IR2_FIFO",
+    "AB_learned"
+  ],
+  "training_success_and_cycle_tags_present": true,
+  "series": {
+    "IR2_FIFO": {
+      "points": 103,
+      "latest_episode": 103,
+      "success_rate_percent": 43.0
+    },
+    "AB_learned": {
+      "points": 102,
+      "latest_episode": 102,
+      "success_rate_percent": 49.0
+    }
+  },
+  "live_new_training_points_verified": true
+}

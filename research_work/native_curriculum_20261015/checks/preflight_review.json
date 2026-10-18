@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "unit_tests": 9,
+  "real_cuda_driver_entry": true,
+  "cross_method_prefetch_learner_adam_replay_rng_exact": {
+    "common_start.pth": {
+      "learner_replay_rng_exact": true,
+      "updates": 16
+    },
+    "IR2_FIFO/initial.pth": {
+      "learner_replay_rng_exact": true,
+      "updates": 16
+    },
+    "AB_learned/initial.pth": {
+      "learner_replay_rng_exact": true,
+      "updates": 16
+    },
+    "IR2_FIFO/latest.pth": {
+      "learner_replay_rng_exact": true,
+      "updates": 32
+    },
+    "AB_learned/latest.pth": {
+      "learner_replay_rng_exact": true,
+      "updates": 32
+    }
+  },
+  "paired_sac_updates_equal": true,
+  "paired_warmup_episodes": 2,
+  "source_identity_matches_current": true,
+  "serial_prefetch_source_difference": [
+    "native_driver.py"
+  ],
+  "difference_note": "Only added an assertion that matched episode counts have matched SAC counts; nominal state updates unchanged. Patch retained.",
+  "validation_policy_executions": 0,
+  "test_policy_executions": 0,
+  "preflight_weights_used_for_formal_training": false
+}

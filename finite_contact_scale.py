@@ -13,12 +13,14 @@ from finite_contact_dataset import audit_dataset
 from finite_contact_multimap_joint import prepare, report, sha256
 from finite_contact_multiseed import run_worker_queue
 from finite_contact_stability import read, write, recover_initialization
+from finite_contact_identity import active_identity
 
 ROOT=Path(__file__).resolve().parent
 SOURCES=('finite_contact_scale.py','finite_contact_multimap_joint.py','finite_contact_train.py',
          'finite_contact_multiseed.py','finite_contact_stability.py','finite_contact/config.py',
          'finite_contact/learning.py','finite_contact/environment.py','finite_contact/maps.py',
-         'finite_contact/sensing.py','finite_contact_dataset.py')
+         'finite_contact/sensing.py','finite_contact_dataset.py','finite_contact/memory.py',
+         'finite_contact_identity.py','finite_contact/profiles/rtx3090_32gb.json')
 
 
 def execute(args):
@@ -35,6 +37,7 @@ def execute(args):
                     worker_order=['AB_learned','A_rule','A_fifo'],
                     reference_root=None,
                     success_sampling='pooled',compact_replay=True,
+                    memory_profile='rtx3090_32gb_lossless_v1',
                     training_history='Source movement/head used original 100 training maps; no new test policy executions.')
         write(root/'pipeline.json',plan)
         saved=torch.load(root/'common_start.pth',map_location='cpu')
@@ -43,9 +46,7 @@ def execute(args):
         write(root/'dataset_ready.json',{'passed':True,'manifest_sha256':sha256(root/'dataset/manifest.json')})
     else:
         plan=read(root/'pipeline.json')
-        identity=read(root/'source_identity_before.json')
-        if any(sha256(ROOT/name)!=digest for name,digest in identity.items()):
-            raise ValueError('Executed source changed; explicit recovery review is required')
+        identity=active_identity(root)
         if not (root/'dataset_ready.json').exists():
             if (root/'dataset').exists():
                 (root/'dataset').rename(root/('dataset_incomplete_'+str(__import__('time').time_ns())))

@@ -1,0 +1,36 @@
+{
+  "requested_at": "2026-10-18T13:22:40.963034+08:00",
+  "reason": "User explicitly requested pausing current training",
+  "before_stop": {
+    "status": "running",
+    "stage": "easy_fixed_pool_training",
+    "updated": "2026-10-18T13:22:26.548315+08:00",
+    "completed_episodes": {
+      "IR2_FIFO": 12,
+      "AB_learned": 11
+    },
+    "sac_updates": {
+      "IR2_FIFO": 9240,
+      "AB_learned": 9220
+    }
+  },
+  "verified_at": "2026-10-18T13:23:31.372388+08:00",
+  "status": "stopped_by_request",
+  "checkpoint_checks": {
+    "IR2_FIFO": {
+      "episode": 12,
+      "sac_updates": 9240,
+      "checkpoint": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/native_easy10_cycles_20261018_seed101/IR2_FIFO/latest.pth",
+      "verified": true
+    },
+    "AB_learned": {
+      "episode": 12,
+      "sac_updates": 9240,
+      "checkpoint": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/native_easy10_cycles_20261018_seed101/AB_learned/latest.pth",
+      "verified": true
+    }
+  },
+  "training_service": "inactive",
+  "monitor_service": "inactive",
+  "automatic_resume": false
+}

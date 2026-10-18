@@ -105,6 +105,10 @@ def rollout(learner, config, split, index, stage, deadline=None, smoke=False,
                 from finite_contact.learning import compact_observation
                 observations = [compact_observation(o) for o in observations]
                 next_obs = [compact_observation(o) for o in next_obs]
+            if getattr(learner, 'lossless_observations', False):
+                from finite_contact.memory import pack_observation
+                observations = [pack_observation(o) for o in observations]
+                next_obs = [pack_observation(o) for o in next_obs]
             for robot in range(2):
                 transition = (observations[robot], actions[robot], float(reward[robot]),
                               duration, next_obs[robot], float(terminated), bool(truncated))
@@ -181,7 +185,9 @@ def checkpoint(path, learner, config, stage, episode, best, elapsed, full=True):
                       "torch_rng": torch.get_rng_state(),
                       "cuda_rng": torch.cuda.get_rng_state_all() if torch.cuda.is_available() else None})
     temporary = path.with_suffix(".tmp")
-    torch.save(state, temporary)
+    if getattr(learner, 'lossless_observations', False):
+        state['observation_storage'] = 'lossless-zlib-v1'
+    torch.save(state, temporary, pickle_protocol=4 if getattr(learner, 'lossless_observations', False) else 2)
     temporary.replace(path)
 
 

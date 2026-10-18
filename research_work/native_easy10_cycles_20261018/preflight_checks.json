@@ -1,0 +1,43 @@
+{
+  "checks": {
+    "engineered_short_decision_limit_not_performance_evidence": true,
+    "two_cycles_and_resume": true,
+    "no_episode_or_walltime_cap": true,
+    "manual_evaluation_only": true,
+    "no_automatic_review_even_at_99": true,
+    "no_endpoint_stop": true,
+    "no_eval_or_shared_retraining_artifacts": true,
+    "IR2_FIFO_continuous_log": true,
+    "IR2_FIFO_wrap_order": true,
+    "IR2_FIFO_only_ten_original_maps": true,
+    "IR2_FIFO_permap_stats_survive_resume": true,
+    "IR2_FIFO_checkpoint_matches_log": true,
+    "IR2_FIFO_exact_updates_per_episode": true,
+    "IR2_FIFO_only_diagnostic_replay": true,
+    "IR2_FIFO_short_preflight_config": true,
+    "AB_learned_continuous_log": true,
+    "AB_learned_wrap_order": true,
+    "AB_learned_only_ten_original_maps": true,
+    "AB_learned_permap_stats_survive_resume": true,
+    "AB_learned_checkpoint_matches_log": true,
+    "AB_learned_exact_updates_per_episode": true,
+    "AB_learned_only_diagnostic_replay": true,
+    "AB_learned_short_preflight_config": true,
+    "identical_initial_learner_replay_rng": true,
+    "IR2_FIFO_tensorboard_cycle_and_map_stats": true,
+    "IR2_FIFO_tensorboard_cycles_match_log": true,
+    "AB_learned_tensorboard_cycle_and_map_stats": true,
+    "AB_learned_tensorboard_cycles_match_log": true,
+    "historical_results_unchanged": true
+  },
+  "passed": true,
+  "first_counts": {
+    "IR2_FIFO": 21,
+    "AB_learned": 20
+  },
+  "last_counts": {
+    "IR2_FIFO": 24,
+    "AB_learned": 23
+  },
+  "scope": "Real original PNGs with 8-decision rollouts; engineering only, not learnability evidence"
+}

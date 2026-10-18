@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "time": "2026-10-14T07:34:21.933806+08:00",
+  "reason": "Legacy audit rounds a fractional terminal position and tests a different segment; actual continuous point trajectory does not enter an occupied cell interior.",
+  "source_identity_file": "source_identity_audit_resume_20261014.json",
+  "source_identity_sha256": "7169ef2cfbc6d7dce86b2842a5f9a42802cfb99d6cb9b42accbec3b5720947b9",
+  "original_source_identity_sha256": "804cc1337161b398ce80dce234bb8fc844a64fedac11f2f1dc276c1b90de6f15",
+  "changed_files": [
+    "finite_contact_independent.py",
+    "finite_contact_multimap_report.py",
+    "finite_contact_stability.py",
+    "finite_contact_thousand_analysis.py"
+  ],
+  "changed_functions": {
+    "finite_contact_independent.py": [
+      "adapt",
+      "verify"
+    ],
+    "finite_contact_multimap_report.py": [
+      "audit_segments"
+    ],
+    "finite_contact_stability.py": [
+      "audit_record"
+    ],
+    "finite_contact_thousand_analysis.py": [
+      "audit_rollouts"
+    ]
+  },
+  "training_model_environment_reward_maps_budget_unchanged": true,
+  "tests": 11,
+  "independent_exact_rational_oracle_cases": 1000,
+  "retained_rollouts_reviewed": 1220,
+  "retained_movement_segments_reviewed": 101880,
+  "interior_wall_crossings": 0,
+  "boundary_contacts": 68,
+  "geometry_model": "zero-radius point trajectories; occupied unit-cell interiors; boundary-only contacts recorded separately",
+  "expected_extra_training_updates": 0,
+  "expected_extra_policy_evaluations": 0,
+  "legacy_failure_preserved": true,
+  "recovery_completed_at": "2026-10-14T07:37:28.036568+08:00",
+  "retained_B0_artifacts_unchanged": 11,
+  "actual_extra_training_updates": 0,
+  "actual_extra_policy_evaluations": 0,
+  "B0_post_recovery_audit_passed": true
+}

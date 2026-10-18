@@ -1,0 +1,113 @@
+{
+  "duration_seconds": 75.04390000000001,
+  "thread_cpu_percent": {
+    "1028926": 97.4,
+    "1029047": 0.0,
+    "1029120": 0.0,
+    "1029121": 0.04,
+    "1029122": 0.0,
+    "1030534": 2.49
+  },
+  "total_process_cpu_percent": 99.93,
+  "host_cpu_idle_percent": 92.04,
+  "host_iowait_percent": 0.009,
+  "swap_pages": {
+    "pswpin": 2,
+    "pswpout": 0
+  },
+  "io_delta": {
+    "rchar": 0,
+    "wchar": 317352874,
+    "syscr": 0,
+    "syscw": 44673,
+    "read_bytes": 4096,
+    "write_bytes": 317497344,
+    "cancelled_write_bytes": 0
+  },
+  "gpu_util_percent": {
+    "n": 75,
+    "mean": 24.16,
+    "min": 8.0,
+    "max": 97.0
+  },
+  "gpu_power_watts": {
+    "n": 75,
+    "mean": 145.637,
+    "min": 114.66,
+    "max": 302.0
+  },
+  "gpu_temperature": {
+    "n": 75,
+    "mean": 44.28,
+    "min": 42.0,
+    "max": 50.0
+  },
+  "phase_estimates": [
+    {
+      "episode": 840,
+      "updates_observed": 20,
+      "update_block_estimate": 1.587,
+      "first_to_last_update": 1.507,
+      "logging_checkpoint_observed": 2.159
+    },
+    {
+      "episode": 841,
+      "updates_observed": 20,
+      "update_block_estimate": 1.585,
+      "first_to_last_update": 1.506,
+      "rollout_estimate": 8.248,
+      "logging_checkpoint_observed": 0.05,
+      "episode_wall_observed": 9.883
+    },
+    {
+      "episode": 842,
+      "updates_observed": 20,
+      "update_block_estimate": 1.587,
+      "first_to_last_update": 1.508,
+      "rollout_estimate": 8.904,
+      "logging_checkpoint_observed": 0.05,
+      "episode_wall_observed": 10.542
+    },
+    {
+      "episode": 843,
+      "updates_observed": 20,
+      "update_block_estimate": 1.587,
+      "first_to_last_update": 1.507,
+      "rollout_estimate": 7.197,
+      "logging_checkpoint_observed": 0.05,
+      "episode_wall_observed": 8.834
+    },
+    {
+      "episode": 844,
+      "updates_observed": 20,
+      "update_block_estimate": 1.639,
+      "first_to_last_update": 1.557,
+      "rollout_estimate": 8.856,
+      "logging_checkpoint_observed": 0.05,
+      "episode_wall_observed": 10.545
+    },
+    {
+      "episode": 845,
+      "updates_observed": 20,
+      "update_block_estimate": 1.587,
+      "first_to_last_update": 1.507,
+      "rollout_estimate": 7.148,
+      "logging_checkpoint_observed": 0.05,
+      "episode_wall_observed": 8.785
+    },
+    {
+      "episode": 846,
+      "updates_observed": 20,
+      "update_block_estimate": 1.637,
+      "first_to_last_update": 1.556,
+      "rollout_estimate": 12.616,
+      "logging_checkpoint_observed": 0.05,
+      "episode_wall_observed": 14.304
+    }
+  ],
+  "checkpoint_replacements": [
+    10.1453
+  ],
+  "started_at": "2026-10-13T15:54:41.582704+08:00",
+  "method": "50 ms log observation; update block extrapolates first update from mean of 19 observed intervals; not instrumented profiling"
+}

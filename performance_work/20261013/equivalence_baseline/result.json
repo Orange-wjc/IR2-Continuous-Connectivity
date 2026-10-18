@@ -1,0 +1,2620 @@
+{
+  "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/performance_work/20261013/baseline",
+  "cuda": true,
+  "device": "NVIDIA GeForce RTX 3090",
+  "torch_version": "2.3.1+cu121",
+  "torch_threads": 2,
+  "profiled": false,
+  "traced": true,
+  "warmup_rollouts": 1,
+  "warmup_updates": 20,
+  "rows": [
+    {
+      "map_index": 0,
+      "episode": 1,
+      "metrics": {
+        "success": true,
+        "time": 164.41914334458062,
+        "coverage": [
+          0.9905136558280575,
+          0.9905136558280575
+        ],
+        "union_coverage": 0.9905136558280575,
+        "coverage_deficit": 0.17738267608315586,
+        "union_completion_time": 164.41914334458062,
+        "total_distance": 2888.2543335120345,
+        "wait_seconds": [
+          28.17956424526594,
+          31.684617790733267
+        ],
+        "wait_disconnected_seconds": [
+          0.0,
+          0.0
+        ],
+        "wait_without_new_map_seconds": [
+          13.905874974644112,
+          18.42024638268869
+        ],
+        "synchronization_idle_seconds": [
+          14.655874974644114,
+          13.630368552515096
+        ],
+        "sent_bytes": 511024,
+        "delivered_bytes": 511024,
+        "control_bytes": 48073,
+        "novel_received_cells": 10557,
+        "duplicate_received_cells": 74982,
+        "connected_seconds": 149.64545407395877,
+        "queue_bytes": [
+          85,
+          34
+        ],
+        "reward_components": {
+          "exploration": [
+            14.41567272471162,
+            14.41567272471162
+          ],
+          "delivery": [
+            13.349974150249997,
+            7.680886720499997
+          ],
+          "time": [
+            -3.274607979057517,
+            -3.274607979057517
+          ],
+          "distance": [
+            -2.906009694490428,
+            -2.8473940136379348
+          ],
+          "completion": [
+            19.9,
+            19.9
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 0,
+          "layout_id": "simple_rooms_v1:20261011:train:0",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "42c0a8064e3e93ffd565a9653298052baa08f5e2b98112365e49037d7a73e71e",
+          "canonical_sha256": "0871343f54c276dcf079b8895279d62f8cdd73004740cb09d6aa0401f38dc00c",
+          "units": "map_units",
+          "starts": [
+            [
+              183.0,
+              169.0
+            ],
+            [
+              195.0,
+              169.0
+            ]
+          ],
+          "rooms": 2,
+          "rotation": 1,
+          "bounds_before_rotation": [
+            16,
+            12,
+            239,
+            238
+          ],
+          "doors_before_rotation": [
+            [
+              120,
+              172,
+              7,
+              34
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              39,
+              40,
+              13,
+              19
+            ]
+          ]
+        },
+        "decisions": 71,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8895,
+        "return": [
+          41.485029201413674,
+          35.87455745251617
+        ]
+      },
+      "rollout_seconds": 6.854857727012131,
+      "update_seconds": 1.59924381604651,
+      "total_seconds": 8.454101543058641,
+      "decisions": 71,
+      "policy_inputs_actions_sha256": "f9a96df711535bff72d5fd6a8bc3f394acd4458d0b255a617b8a595bc60c5706",
+      "trajectory_sha256": "7984e62c61fc579ea5cf2ee0eb06f856208e924a09de7f1c39a00923aec173d1",
+      "communication_sha256": "019535076036a54c33e6e6cfbe70e2dcf8308d2b0d138248e48dc5cb88112dc1",
+      "final_environment_sha256": "ee2930524043bafec36875f63458cb0f683e02678912ac723924f1f4361570d1",
+      "learner_replay_rng_sha256": "8ee26f43cf3305c841b82f9080fa6b746ccf4c5555ba97fe8579e524744429e2",
+      "group": "B0_fifo"
+    },
+    {
+      "map_index": 37,
+      "episode": 2,
+      "metrics": {
+        "success": true,
+        "time": 198.81326454661968,
+        "coverage": [
+          0.9987900910507752,
+          0.9908539086211139
+        ],
+        "union_coverage": 0.9987900910507752,
+        "coverage_deficit": 0.19336247407851068,
+        "union_completion_time": 161.5611586600429,
+        "total_distance": 3331.721846093349,
+        "wait_seconds": [
+          48.89862616442355,
+          44.96504925237622
+        ],
+        "wait_disconnected_seconds": [
+          16.916666666666668,
+          15.714045207910317
+        ],
+        "wait_without_new_map_seconds": [
+          33.62493689380171,
+          25.629610032466154
+        ],
+        "synchronization_idle_seconds": [
+          14.753640462991878,
+          11.365726039001872
+        ],
+        "sent_bytes": 473049,
+        "delivered_bytes": 472958,
+        "control_bytes": 43411,
+        "novel_received_cells": 15277,
+        "duplicate_received_cells": 64252,
+        "connected_seconds": 118.59783838232322,
+        "queue_bytes": [
+          5819,
+          153
+        ],
+        "reward_components": {
+          "exploration": [
+            14.498949415808791,
+            14.498949415808791
+          ],
+          "delivery": [
+            6.65255674925,
+            23.798275715000003
+          ],
+          "time": [
+            -3.9590332492790288,
+            -3.9590332492790288
+          ],
+          "distance": [
+            -3.2310909314722394,
+            -3.405003001183328
+          ],
+          "completion": [
+            20.0,
+            20.0
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 37,
+          "layout_id": "simple_rooms_v1:20261011:train:37",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "7083fa22916fa2ae2916ab26438242d2e7661d4a9c809d1f20dd052f9896dbe3",
+          "canonical_sha256": "599c9b12a706ba05552e68e31d680f1b668c5627787b53019275c364c0a78676",
+          "units": "map_units",
+          "starts": [
+            [
+              159.0,
+              107.0
+            ],
+            [
+              147.0,
+              107.0
+            ]
+          ],
+          "rooms": 2,
+          "rotation": 3,
+          "bounds_before_rotation": [
+            15,
+            22,
+            243,
+            242
+          ],
+          "doors_before_rotation": [
+            [
+              131,
+              82,
+              4,
+              41
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              96,
+              129,
+              19,
+              20
+            ],
+            [
+              206,
+              138,
+              15,
+              20
+            ]
+          ]
+        },
+        "decisions": 83,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8915,
+        "return": [
+          33.96138198430753,
+          50.93318888034644
+        ]
+      },
+      "rollout_seconds": 8.347569656034466,
+      "update_seconds": 1.5954495440237224,
+      "total_seconds": 9.943019200058188,
+      "decisions": 83,
+      "policy_inputs_actions_sha256": "fb2bbaf3992b722ab5608ba7bc2b0b00a109dcd26ac934d56b8f8f9d0f3f5e67",
+      "trajectory_sha256": "e2fed3009083cd4a8f0d0ce8861bd6e6cbef4b2fab189e16f2fc3f3d88f77bf5",
+      "communication_sha256": "1a0a231a6f5cacc637eae0990ee5c704ecc71b6e7fa7dd806a4beb87c67f9e4f",
+      "final_environment_sha256": "0d3be165d30e4ee94cfb813828131ead25ebc03edcc46c203a1b1a8af1b2001c",
+      "learner_replay_rng_sha256": "7b5627bd3510fe30058d751a602d1486a2b90141a13e149c910ff90fb2076c87",
+      "group": "B0_fifo"
+    },
+    {
+      "map_index": 470,
+      "episode": 3,
+      "metrics": {
+        "success": true,
+        "time": 178.4968204216518,
+        "coverage": [
+          0.9952694454133241,
+          1.0
+        ],
+        "union_coverage": 1.0,
+        "coverage_deficit": 0.22080707470206076,
+        "union_completion_time": 175.2468204216518,
+        "total_distance": 3287.101774018922,
+        "wait_seconds": [
+          24.048852370688955,
+          29.672204932385224
+        ],
+        "wait_disconnected_seconds": [
+          3.0,
+          3.916666666666667
+        ],
+        "wait_without_new_map_seconds": [
+          14.132185704022287,
+          18.7066858950296
+        ],
+        "synchronization_idle_seconds": [
+          9.59704920424558,
+          19.7503865010737
+        ],
+        "sent_bytes": 489060,
+        "delivered_bytes": 489051,
+        "control_bytes": 46996,
+        "novel_received_cells": 15189,
+        "duplicate_received_cells": 66345,
+        "connected_seconds": 157.91302141072467,
+        "queue_bytes": [
+          204,
+          3867
+        ],
+        "reward_components": {
+          "exploration": [
+            15.273433217104115,
+            15.273433217104115
+          ],
+          "delivery": [
+            10.723742438499997,
+            19.502071782499996
+          ],
+          "time": [
+            -3.553485150223478,
+            -3.553485150223478
+          ],
+          "distance": [
+            -3.4607138882327066,
+            -3.0847549182385534
+          ],
+          "completion": [
+            20.0,
+            20.0
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 470,
+          "layout_id": "simple_rooms_v1:20261011:train:470",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "b23430cfb24de03fc231cdfd2b3ba0afcb7d022265266f773ccad95249a6e206",
+          "canonical_sha256": "11b908c0d29bf072c4859bf19cd2a01d937023036b89326121f8aba7841407a8",
+          "units": "map_units",
+          "starts": [
+            [
+              116.0,
+              209.0
+            ],
+            [
+              128.0,
+              209.0
+            ]
+          ],
+          "rooms": 3,
+          "rotation": 1,
+          "bounds_before_rotation": [
+            14,
+            13,
+            235,
+            234
+          ],
+          "doors_before_rotation": [
+            [
+              78,
+              106,
+              7,
+              32
+            ],
+            [
+              163,
+              60,
+              7,
+              42
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              51,
+              52,
+              15,
+              13
+            ],
+            [
+              97,
+              57,
+              11,
+              18
+            ]
+          ]
+        },
+        "decisions": 71,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8935,
+        "return": [
+          38.98297661714794,
+          48.137264931142084
+        ]
+      },
+      "rollout_seconds": 5.87706911197165,
+      "update_seconds": 1.6069599319598638,
+      "total_seconds": 7.484029043931514,
+      "decisions": 71,
+      "policy_inputs_actions_sha256": "4983de515345121190770ddc22b63b9e9d8fa04779263652b75f626211f51133",
+      "trajectory_sha256": "27936012eb84c795d721b01108ec7752eb1327c027c8d6bf8d03865d3ffb6f9d",
+      "communication_sha256": "afc8932b4540fb118634c44983740666566741b3f852542bb056b8ba2d56145f",
+      "final_environment_sha256": "df35881b70e38155040a82f94efa6ec25344bed159b75efcd588c5c4c0e917ce",
+      "learner_replay_rng_sha256": "5904c97640fb486ae38dfae417d950018adc99aa7a55d646f32d0cea8c17f827",
+      "group": "B0_fifo"
+    },
+    {
+      "map_index": 0,
+      "episode": 1,
+      "metrics": {
+        "success": true,
+        "time": 143.91706206344767,
+        "coverage": [
+          0.9914151658573566,
+          0.993894318437929
+        ],
+        "union_coverage": 0.993894318437929,
+        "coverage_deficit": 0.2402046592811173,
+        "union_completion_time": 136.51122392302358,
+        "total_distance": 2507.437186941661,
+        "wait_seconds": [
+          25.31174994928822,
+          21.380711874576985
+        ],
+        "wait_disconnected_seconds": [
+          0.0,
+          4.25
+        ],
+        "wait_without_new_map_seconds": [
+          7.76289757859927,
+          15.464045207910317
+        ],
+        "synchronization_idle_seconds": [
+          17.864093828605537,
+          14.324469562619493
+        ],
+        "sent_bytes": 456422,
+        "delivered_bytes": 456215,
+        "control_bytes": 41561,
+        "novel_received_cells": 9934,
+        "duplicate_received_cells": 66853,
+        "connected_seconds": 120.19292773634501,
+        "queue_bytes": [
+          4949,
+          10603
+        ],
+        "reward_components": {
+          "exploration": [
+            14.478328222642244,
+            14.478328222642244
+          ],
+          "delivery": [
+            15.432863842249999,
+            4.3465197918437495
+          ],
+          "time": [
+            -2.8641107911826302,
+            -2.8641107911826302
+          ],
+          "distance": [
+            -2.4073094891982048,
+            -2.585705807152111
+          ],
+          "completion": [
+            20.0,
+            20.0
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 0,
+          "layout_id": "simple_rooms_v1:20261011:train:0",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "42c0a8064e3e93ffd565a9653298052baa08f5e2b98112365e49037d7a73e71e",
+          "canonical_sha256": "0871343f54c276dcf079b8895279d62f8cdd73004740cb09d6aa0401f38dc00c",
+          "units": "map_units",
+          "starts": [
+            [
+              183.0,
+              169.0
+            ],
+            [
+              195.0,
+              169.0
+            ]
+          ],
+          "rooms": 2,
+          "rotation": 1,
+          "bounds_before_rotation": [
+            16,
+            12,
+            239,
+            238
+          ],
+          "doors_before_rotation": [
+            [
+              120,
+              172,
+              7,
+              34
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              39,
+              40,
+              13,
+              19
+            ]
+          ]
+        },
+        "decisions": 55,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8895,
+        "return": [
+          44.63977178451141,
+          33.375031416151245
+        ]
+      },
+      "rollout_seconds": 5.366396147001069,
+      "update_seconds": 1.615273778035771,
+      "total_seconds": 6.98166992503684,
+      "decisions": 55,
+      "policy_inputs_actions_sha256": "40b2c6638a7bae7419e65c3c2dfe6aea04cbde87fb927dbf19506f5d9276bced",
+      "trajectory_sha256": "a6bcb70bc9c0aaea9b62b853a7fbdf2f61f9212cec93a06d4681e0b58b21671e",
+      "communication_sha256": "e23a0e49375c954f4bb75923e62490f860b9db73ecde1f837b28e0f9baaccd12",
+      "final_environment_sha256": "1150b7fcaf22260a1661281680ee50ce66a0e42d0e89d958b23b53a106d51424",
+      "learner_replay_rng_sha256": "9cd155663eeb7bfa0294d7da165f1b680f7e12f67700df62e5adf13c71cfb835",
+      "group": "A_fifo"
+    },
+    {
+      "map_index": 37,
+      "episode": 2,
+      "metrics": {
+        "success": true,
+        "time": 236.91028013218124,
+        "coverage": [
+          0.9965343286030678,
+          0.9937248790091051
+        ],
+        "union_coverage": 0.9965343286030678,
+        "coverage_deficit": 0.16772010177765423,
+        "union_completion_time": 226.99361346551456,
+        "total_distance": 4524.58846038158,
+        "wait_seconds": [
+          35.726556657718355,
+          17.2880606786664
+        ],
+        "wait_disconnected_seconds": [
+          6.166666666666667,
+          0.0
+        ],
+        "wait_without_new_map_seconds": [
+          23.503579716022017,
+          5.621394011999733
+        ],
+        "synchronization_idle_seconds": [
+          23.2575366199775,
+          20.49936794286859
+        ],
+        "sent_bytes": 457592,
+        "delivered_bytes": 457554,
+        "control_bytes": 42411,
+        "novel_received_cells": 18098,
+        "duplicate_received_cells": 58727,
+        "connected_seconds": 175.4807158869153,
+        "queue_bytes": [
+          7279,
+          3745
+        ],
+        "reward_components": {
+          "exploration": [
+            14.47782961585391,
+            14.47782961585391
+          ],
+          "delivery": [
+            15.370579881249999,
+            20.688868729499994
+          ],
+          "time": [
+            -4.716731224673911,
+            -4.716731224673911
+          ],
+          "distance": [
+            -4.253179716036613,
+            -4.759182205853867
+          ],
+          "completion": [
+            20.0,
+            20.0
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 37,
+          "layout_id": "simple_rooms_v1:20261011:train:37",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "7083fa22916fa2ae2916ab26438242d2e7661d4a9c809d1f20dd052f9896dbe3",
+          "canonical_sha256": "599c9b12a706ba05552e68e31d680f1b668c5627787b53019275c364c0a78676",
+          "units": "map_units",
+          "starts": [
+            [
+              159.0,
+              107.0
+            ],
+            [
+              147.0,
+              107.0
+            ]
+          ],
+          "rooms": 2,
+          "rotation": 3,
+          "bounds_before_rotation": [
+            15,
+            22,
+            243,
+            242
+          ],
+          "doors_before_rotation": [
+            [
+              131,
+              82,
+              4,
+              41
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              96,
+              129,
+              19,
+              20
+            ],
+            [
+              206,
+              138,
+              15,
+              20
+            ]
+          ]
+        },
+        "decisions": 93,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8915,
+        "return": [
+          40.87849855639338,
+          45.69078491482613
+        ]
+      },
+      "rollout_seconds": 10.797407781996299,
+      "update_seconds": 1.615229437011294,
+      "total_seconds": 12.412637219007593,
+      "decisions": 93,
+      "policy_inputs_actions_sha256": "8f18d585bf9492a0ae382d376ddf637391951b7b189832039fd1f2dbab0665a5",
+      "trajectory_sha256": "83a1f51925371bd63f9a705bcd19c0b60f67b60e91baeb9649d18cb3e52a6f8b",
+      "communication_sha256": "df8a6c1b9710f13ad330448d11a0824856c9c1c31313bc57203f74860f888b90",
+      "final_environment_sha256": "6b58eecb2d3f3a1ef7182a2729e30962a85fc15ec91662d607cbcc64472f3e54",
+      "learner_replay_rng_sha256": "a8765ca09b5753dcbadcac8ec09b8cd8a1c34ad14c9e7fb56d565ad20a71ab65",
+      "group": "A_fifo"
+    },
+    {
+      "map_index": 470,
+      "episode": 3,
+      "metrics": {
+        "success": true,
+        "time": 189.0164292492001,
+        "coverage": [
+          0.990299093128706,
+          0.990299093128706
+        ],
+        "union_coverage": 0.990299093128706,
+        "coverage_deficit": 0.16142420599113907,
+        "union_completion_time": 189.0164292492001,
+        "total_distance": 3653.9129834515497,
+        "wait_seconds": [
+          23.473604719293718,
+          9.21551903735562
+        ],
+        "wait_disconnected_seconds": [
+          0.0,
+          0.0
+        ],
+        "wait_without_new_map_seconds": [
+          14.7974809485367,
+          6.916666666666667
+        ],
+        "synchronization_idle_seconds": [
+          19.294069273347166,
+          21.556916847441173
+        ],
+        "sent_bytes": 498401,
+        "delivered_bytes": 498381,
+        "control_bytes": 48067,
+        "novel_received_cells": 10805,
+        "duplicate_received_cells": 72204,
+        "connected_seconds": 159.6872334130965,
+        "queue_bytes": [
+          187,
+          293
+        ],
+        "reward_components": {
+          "exploration": [
+            15.08062172719741,
+            15.08062172719741
+          ],
+          "delivery": [
+            15.352721414250004,
+            6.147866337249998
+          ],
+          "time": [
+            -3.7620456404127003,
+            -3.7620456404127003
+          ],
+          "distance": [
+            -3.494803758661764,
+            -3.7818602368981833
+          ],
+          "completion": [
+            19.9,
+            19.9
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 470,
+          "layout_id": "simple_rooms_v1:20261011:train:470",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "b23430cfb24de03fc231cdfd2b3ba0afcb7d022265266f773ccad95249a6e206",
+          "canonical_sha256": "11b908c0d29bf072c4859bf19cd2a01d937023036b89326121f8aba7841407a8",
+          "units": "map_units",
+          "starts": [
+            [
+              116.0,
+              209.0
+            ],
+            [
+              128.0,
+              209.0
+            ]
+          ],
+          "rooms": 3,
+          "rotation": 1,
+          "bounds_before_rotation": [
+            14,
+            13,
+            235,
+            234
+          ],
+          "doors_before_rotation": [
+            [
+              78,
+              106,
+              7,
+              32
+            ],
+            [
+              163,
+              60,
+              7,
+              42
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              51,
+              52,
+              15,
+              13
+            ],
+            [
+              97,
+              57,
+              11,
+              18
+            ]
+          ]
+        },
+        "decisions": 72,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8935,
+        "return": [
+          43.07649374237295,
+          33.58458218713653
+        ]
+      },
+      "rollout_seconds": 7.580023419985082,
+      "update_seconds": 1.6017040259903297,
+      "total_seconds": 9.181727445975412,
+      "decisions": 72,
+      "policy_inputs_actions_sha256": "c37a6f27342e903ff0b63de2f926f515bdd9a635bb604168b2d839085dd1e6c7",
+      "trajectory_sha256": "cc01bca67dcbe0c8b35f01d01f8451ad5a13cc0d902ea5d69a14460809ca1e1d",
+      "communication_sha256": "442c78c2aa688057bdf6a11a7ba0b4a549f99c1872920c09d3450daae65b06af",
+      "final_environment_sha256": "35b19b731892b2da522988d622390cd006632005f24d46e617217ac9b8b5f3ed",
+      "learner_replay_rng_sha256": "f943a89a4f2cd0ea09eed740ff548a414d4f2b2d5cb085d181238811d66b7cd8",
+      "group": "A_fifo"
+    },
+    {
+      "map_index": 0,
+      "episode": 1,
+      "metrics": {
+        "success": true,
+        "time": 152.4986986455986,
+        "coverage": [
+          0.9912512549429385,
+          0.9922347204294466
+        ],
+        "union_coverage": 0.9922347204294466,
+        "coverage_deficit": 0.2223097702383537,
+        "union_completion_time": 73.20632378648574,
+        "total_distance": 2693.3665083280835,
+        "wait_seconds": [
+          19.239208307977446,
+          28.550958257265677
+        ],
+        "wait_disconnected_seconds": [
+          0.0,
+          0.0
+        ],
+        "wait_without_new_map_seconds": [
+          5.583333333333333,
+          5.264371408044575
+        ],
+        "synchronization_idle_seconds": [
+          19.46229404761333,
+          13.297727651000564
+        ],
+        "sent_bytes": 368656,
+        "delivered_bytes": 368589,
+        "control_bytes": 37425,
+        "novel_received_cells": 26635,
+        "duplicate_received_cells": 34052,
+        "connected_seconds": 90.98617127091028,
+        "queue_bytes": [
+          170,
+          199
+        ],
+        "reward_components": {
+          "exploration": [
+            14.448761856188662,
+            14.448761856188662
+          ],
+          "delivery": [
+            31.698489903750012,
+            21.37896790175
+          ],
+          "time": [
+            -3.0368879820689845,
+            -3.0368879820689845
+          ],
+          "distance": [
+            -2.7209955557712133,
+            -2.6445895051476764
+          ],
+          "completion": [
+            19.8005,
+            19.8005
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 0,
+          "layout_id": "simple_rooms_v1:20261011:train:0",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "42c0a8064e3e93ffd565a9653298052baa08f5e2b98112365e49037d7a73e71e",
+          "canonical_sha256": "0871343f54c276dcf079b8895279d62f8cdd73004740cb09d6aa0401f38dc00c",
+          "units": "map_units",
+          "starts": [
+            [
+              183.0,
+              169.0
+            ],
+            [
+              195.0,
+              169.0
+            ]
+          ],
+          "rooms": 2,
+          "rotation": 1,
+          "bounds_before_rotation": [
+            16,
+            12,
+            239,
+            238
+          ],
+          "doors_before_rotation": [
+            [
+              120,
+              172,
+              7,
+              34
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              39,
+              40,
+              13,
+              19
+            ]
+          ]
+        },
+        "decisions": 65,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8895,
+        "return": [
+          60.189868222098454,
+          49.946752270721994
+        ]
+      },
+      "rollout_seconds": 10.097541116003413,
+      "update_seconds": 1.602568682981655,
+      "total_seconds": 11.700109798985068,
+      "decisions": 65,
+      "policy_inputs_actions_sha256": "73335a3046b7cdf57f3406071c063a21c1bec863a5624d9764bce53a5acb3345",
+      "trajectory_sha256": "8c76285500eef73b9cd7aaf2f5aa3df58aa8b18036308a9439810c581d55892b",
+      "communication_sha256": "e6a220c2853854a46c9c8f3865c4cb14c43b05b893b60307e9f315c96dc6f57b",
+      "final_environment_sha256": "b5b04b2ab72ed2f3f7d94af1781a7a0b5e1da524062a1182116064806d09959c",
+      "learner_replay_rng_sha256": "d903a315c591ac2a08e5ac74e9b7ac46367b3fadd470b5b998137a6949408fc9",
+      "group": "B_learned"
+    },
+    {
+      "map_index": 37,
+      "episode": 2,
+      "metrics": {
+        "success": true,
+        "time": 127.62318799320457,
+        "coverage": [
+          0.9930276433434501,
+          0.9930276433434501
+        ],
+        "union_coverage": 0.9930276433434501,
+        "coverage_deficit": 0.1484478540535443,
+        "union_completion_time": 127.62318799320457,
+        "total_distance": 2210.301622386878,
+        "wait_seconds": [
+          17.916666666666664,
+          23.75449999128928
+        ],
+        "wait_disconnected_seconds": [
+          0.0,
+          1.0
+        ],
+        "wait_without_new_map_seconds": [
+          3.0,
+          5.25
+        ],
+        "synchronization_idle_seconds": [
+          18.509281028357208,
+          10.87412643452277
+        ],
+        "sent_bytes": 390122,
+        "delivered_bytes": 390122,
+        "control_bytes": 39422,
+        "novel_received_cells": 22991,
+        "duplicate_received_cells": 41364,
+        "connected_seconds": 113.7517939812048,
+        "queue_bytes": [
+          85,
+          0
+        ],
+        "reward_components": {
+          "exploration": [
+            14.39740873026208,
+            14.39740873026208
+          ],
+          "delivery": [
+            21.89281314525001,
+            23.912756226500004
+          ],
+          "time": [
+            -2.5413875756912883,
+            -2.5413875756912883
+          ],
+          "distance": [
+            -2.1808796795271586,
+            -2.2222337801374534
+          ],
+          "completion": [
+            20.0,
+            20.0
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 37,
+          "layout_id": "simple_rooms_v1:20261011:train:37",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "7083fa22916fa2ae2916ab26438242d2e7661d4a9c809d1f20dd052f9896dbe3",
+          "canonical_sha256": "599c9b12a706ba05552e68e31d680f1b668c5627787b53019275c364c0a78676",
+          "units": "map_units",
+          "starts": [
+            [
+              159.0,
+              107.0
+            ],
+            [
+              147.0,
+              107.0
+            ]
+          ],
+          "rooms": 2,
+          "rotation": 3,
+          "bounds_before_rotation": [
+            15,
+            22,
+            243,
+            242
+          ],
+          "doors_before_rotation": [
+            [
+              131,
+              82,
+              4,
+              41
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              96,
+              129,
+              19,
+              20
+            ],
+            [
+              206,
+              138,
+              15,
+              20
+            ]
+          ]
+        },
+        "decisions": 55,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8915,
+        "return": [
+          51.56795462029363,
+          53.54654360093333
+        ]
+      },
+      "rollout_seconds": 7.471540954953525,
+      "update_seconds": 1.625924051972106,
+      "total_seconds": 9.097465006925631,
+      "decisions": 55,
+      "policy_inputs_actions_sha256": "f308c072668a55e48dedf18150a23c0f91eda803c6a4d2b26354d5ae0a9196ad",
+      "trajectory_sha256": "8bad1d2eb5aec96522fc6865fe05fbf00a69093c21a511d5c9a776bd251dfd74",
+      "communication_sha256": "b971405b00950d96b1299a4b50e2982b80f5639e7bee689aea7bc2add4048efd",
+      "final_environment_sha256": "62facf76080eac6929fb6544551bb6f3b0f082eafac916b06496de2f08c9f830",
+      "learner_replay_rng_sha256": "a2ce7b0f0469735067e146e0429623fc050bac72694d5d09a73d361f8ebd9af9",
+      "group": "B_learned"
+    },
+    {
+      "map_index": 470,
+      "episode": 3,
+      "metrics": {
+        "success": true,
+        "time": 182.23906661105875,
+        "coverage": [
+          0.9950296477153819,
+          0.9990190094175095
+        ],
+        "union_coverage": 0.9990190094175095,
+        "coverage_deficit": 0.16126511293423873,
+        "union_completion_time": 176.29056461714475,
+        "total_distance": 3598.2115946579406,
+        "wait_seconds": [
+          14.59279043742368,
+          11.581870944806676
+        ],
+        "wait_disconnected_seconds": [
+          0.0,
+          0.0
+        ],
+        "wait_without_new_map_seconds": [
+          2.3570226039551585,
+          1.652434500135188
+        ],
+        "synchronization_idle_seconds": [
+          13.085468019229443,
+          25.367037599162476
+        ],
+        "sent_bytes": 398947,
+        "delivered_bytes": 398887,
+        "control_bytes": 43963,
+        "novel_received_cells": 25080,
+        "duplicate_received_cells": 39475,
+        "connected_seconds": 156.6742421829997,
+        "queue_bytes": [
+          204,
+          2735
+        ],
+        "reward_components": {
+          "exploration": [
+            15.254056220025282,
+            15.254056220025282
+          ],
+          "delivery": [
+            21.032149118100964,
+            28.88414777400751
+          ],
+          "time": [
+            -3.625342917867093,
+            -3.625342917867093
+          ],
+          "distance": [
+            -3.6904980802554688,
+            -3.4717228458040172
+          ],
+          "completion": [
+            20.0,
+            20.0
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 470,
+          "layout_id": "simple_rooms_v1:20261011:train:470",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "b23430cfb24de03fc231cdfd2b3ba0afcb7d022265266f773ccad95249a6e206",
+          "canonical_sha256": "11b908c0d29bf072c4859bf19cd2a01d937023036b89326121f8aba7841407a8",
+          "units": "map_units",
+          "starts": [
+            [
+              116.0,
+              209.0
+            ],
+            [
+              128.0,
+              209.0
+            ]
+          ],
+          "rooms": 3,
+          "rotation": 1,
+          "bounds_before_rotation": [
+            14,
+            13,
+            235,
+            234
+          ],
+          "doors_before_rotation": [
+            [
+              78,
+              106,
+              7,
+              32
+            ],
+            [
+              163,
+              60,
+              7,
+              42
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              51,
+              52,
+              15,
+              13
+            ],
+            [
+              97,
+              57,
+              11,
+              18
+            ]
+          ]
+        },
+        "decisions": 66,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8935,
+        "return": [
+          48.970364340003705,
+          57.041138230361675
+        ]
+      },
+      "rollout_seconds": 7.485263754031621,
+      "update_seconds": 1.6250065449858084,
+      "total_seconds": 9.11027029901743,
+      "decisions": 66,
+      "policy_inputs_actions_sha256": "3edf70a0298a1fffdd22cc41b40f0fbe713780ff6526ec232c9765597e6a07c2",
+      "trajectory_sha256": "c551ffa3ee44f45e395c62a9905909288c3c1919a56ce5c66e98e22a1f0c067c",
+      "communication_sha256": "d553b53ef68f2c0d04dd5ef9340fa1d522e82b3a5783f4a8e2efe8441cf96dfe",
+      "final_environment_sha256": "5d4edaa3eb0ef7c20362750bbecd8de1fb6b71a83e4c520de98520037f604de1",
+      "learner_replay_rng_sha256": "2896ca65dbf2277db04f27c98ff3fdc73c6517324d348f8f03c4815221d97722",
+      "group": "B_learned"
+    },
+    {
+      "map_index": 0,
+      "episode": 1,
+      "metrics": {
+        "success": true,
+        "time": 225.28971984277635,
+        "coverage": [
+          0.9907800110639867,
+          1.0
+        ],
+        "union_coverage": 1.0,
+        "coverage_deficit": 0.26948484752688523,
+        "union_completion_time": 66.02302504659384,
+        "total_distance": 4406.750080421129,
+        "wait_seconds": [
+          12.190495178801587,
+          10.204727345333065
+        ],
+        "wait_disconnected_seconds": [
+          0.0,
+          2.3570226039551585
+        ],
+        "wait_without_new_map_seconds": [
+          8.607161845468253,
+          4.954727345333066
+        ],
+        "synchronization_idle_seconds": [
+          21.729933088021184,
+          39.22511070496938
+        ],
+        "sent_bytes": 357447,
+        "delivered_bytes": 357297,
+        "control_bytes": 36799,
+        "novel_received_cells": 9257,
+        "duplicate_received_cells": 49393,
+        "connected_seconds": 88.97780247787014,
+        "queue_bytes": [
+          18369,
+          27193
+        ],
+        "reward_components": {
+          "exploration": [
+            14.59683175932755,
+            14.59683175932755
+          ],
+          "delivery": [
+            6.95392420675,
+            11.460609863768749
+          ],
+          "time": [
+            -4.482307060413661,
+            -4.482307060413661
+          ],
+          "distance": [
+            -4.571490908912624,
+            -4.203003676349456
+          ],
+          "completion": [
+            19.8005,
+            19.8005
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 0,
+          "layout_id": "simple_rooms_v1:20261011:train:0",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "42c0a8064e3e93ffd565a9653298052baa08f5e2b98112365e49037d7a73e71e",
+          "canonical_sha256": "0871343f54c276dcf079b8895279d62f8cdd73004740cb09d6aa0401f38dc00c",
+          "units": "map_units",
+          "starts": [
+            [
+              183.0,
+              169.0
+            ],
+            [
+              195.0,
+              169.0
+            ]
+          ],
+          "rooms": 2,
+          "rotation": 1,
+          "bounds_before_rotation": [
+            16,
+            12,
+            239,
+            238
+          ],
+          "doors_before_rotation": [
+            [
+              120,
+              172,
+              7,
+              34
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              39,
+              40,
+              13,
+              19
+            ]
+          ]
+        },
+        "decisions": 80,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8895,
+        "return": [
+          32.29745799675127,
+          37.17263088633318
+        ]
+      },
+      "rollout_seconds": 21.671171195979696,
+      "update_seconds": 1.6205700529972091,
+      "total_seconds": 23.291741248976905,
+      "decisions": 80,
+      "policy_inputs_actions_sha256": "0aef1cb3c9d8fc268d514dc58975a7ccbb189e874c623354bd4098299ea99105",
+      "trajectory_sha256": "6b27d8e863c5328171b67add053a82abee95a7ac321d7182e04c2a870c8857f6",
+      "communication_sha256": "330bc8201235da16cb079aac1bf0d7ea4a3628f3d52357d88d90559efe9690c4",
+      "final_environment_sha256": "fea9a194efa2e8ad1c46874b845a31311485e8fb6aa6fdbc169c4d0e6059a00c",
+      "learner_replay_rng_sha256": "55c9719878fd819339c40f90573e8ea881f0b11d376ed86729756bb46777189a",
+      "group": "AB_learned"
+    },
+    {
+      "map_index": 37,
+      "episode": 2,
+      "metrics": {
+        "success": true,
+        "time": 206.48726184842116,
+        "coverage": [
+          0.9924124354031663,
+          1.0
+        ],
+        "union_coverage": 1.0,
+        "coverage_deficit": 0.12120376742646145,
+        "union_completion_time": 195.0014940149526,
+        "total_distance": 4265.831884130608,
+        "wait_seconds": [
+          0.0,
+          1.6666666666666667
+        ],
+        "wait_disconnected_seconds": [
+          0.0,
+          1.6666666666666667
+        ],
+        "wait_without_new_map_seconds": [
+          0.0,
+          1.6666666666666667
+        ],
+        "synchronization_idle_seconds": [
+          26.972301614061422,
+          28.849565071896915
+        ],
+        "sent_bytes": 406440,
+        "delivered_bytes": 406317,
+        "control_bytes": 42528,
+        "novel_received_cells": 17041,
+        "duplicate_received_cells": 49456,
+        "connected_seconds": 130.89353733037245,
+        "queue_bytes": [
+          306,
+          6761
+        ],
+        "reward_components": {
+          "exploration": [
+            14.542847735317036,
+            14.542847735317036
+          ],
+          "delivery": [
+            15.022150126999996,
+            18.907615627
+          ],
+          "time": [
+            -4.108698349139252,
+            -4.108698349139252
+          ],
+          "distance": [
+            -4.289415318322234,
+            -4.2049226106040205
+          ],
+          "completion": [
+            20.0,
+            20.0
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 37,
+          "layout_id": "simple_rooms_v1:20261011:train:37",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "7083fa22916fa2ae2916ab26438242d2e7661d4a9c809d1f20dd052f9896dbe3",
+          "canonical_sha256": "599c9b12a706ba05552e68e31d680f1b668c5627787b53019275c364c0a78676",
+          "units": "map_units",
+          "starts": [
+            [
+              159.0,
+              107.0
+            ],
+            [
+              147.0,
+              107.0
+            ]
+          ],
+          "rooms": 2,
+          "rotation": 3,
+          "bounds_before_rotation": [
+            15,
+            22,
+            243,
+            242
+          ],
+          "doors_before_rotation": [
+            [
+              131,
+              82,
+              4,
+              41
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              96,
+              129,
+              19,
+              20
+            ],
+            [
+              206,
+              138,
+              15,
+              20
+            ]
+          ]
+        },
+        "decisions": 73,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8915,
+        "return": [
+          41.16688419485554,
+          45.13684240257376
+        ]
+      },
+      "rollout_seconds": 14.424054067989346,
+      "update_seconds": 1.6005489999661222,
+      "total_seconds": 16.024603067955468,
+      "decisions": 73,
+      "policy_inputs_actions_sha256": "edd8b0fc2a5fc1bb04db56ea0cb8dac344c9182709a55bff3954cb3243483acb",
+      "trajectory_sha256": "24190cdb012d5b9e35df28948b6c9254230a1a5733fadbeb35e8a2276a12c9d2",
+      "communication_sha256": "0cdb8d597278957ad000d30219ae3533166b22108619ecfaafdd90f9db067645",
+      "final_environment_sha256": "a9cd36b66578fbf32e65ff2d374b2ff939f217b016418188e673b9508390da09",
+      "learner_replay_rng_sha256": "052f80e387d98d06c35972c95bccd53f63695ca2cf46f14d1405b7888653988d",
+      "group": "AB_learned"
+    },
+    {
+      "map_index": 470,
+      "episode": 3,
+      "metrics": {
+        "success": true,
+        "time": 186.3842785061258,
+        "coverage": [
+          0.992827868852459,
+          0.9986484129752354
+        ],
+        "union_coverage": 0.9986484129752354,
+        "coverage_deficit": 0.12641396511689776,
+        "union_completion_time": 170.0015066848293,
+        "total_distance": 3699.052104831119,
+        "wait_seconds": [
+          8.737734478532143,
+          4.916666666666667
+        ],
+        "wait_disconnected_seconds": [
+          2.3570226039551585,
+          0.0
+        ],
+        "wait_without_new_map_seconds": [
+          6.380711874576984,
+          0.0
+        ],
+        "synchronization_idle_seconds": [
+          27.096399585531454,
+          23.763414212261374
+        ],
+        "sent_bytes": 390614,
+        "delivered_bytes": 390600,
+        "control_bytes": 40100,
+        "novel_received_cells": 22536,
+        "duplicate_received_cells": 41649,
+        "connected_seconds": 143.55777975335644,
+        "queue_bytes": [
+          442,
+          4146
+        ],
+        "reward_components": {
+          "exploration": [
+            15.248713684600627,
+            15.248713684600627
+          ],
+          "delivery": [
+            28.22233414400001,
+            16.616990295
+          ],
+          "time": [
+            -3.7082967072817112,
+            -3.7082967072817112
+          ],
+          "distance": [
+            -3.5975202700545985,
+            -3.76767937657766
+          ],
+          "completion": [
+            20.0,
+            20.0
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 470,
+          "layout_id": "simple_rooms_v1:20261011:train:470",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "b23430cfb24de03fc231cdfd2b3ba0afcb7d022265266f773ccad95249a6e206",
+          "canonical_sha256": "11b908c0d29bf072c4859bf19cd2a01d937023036b89326121f8aba7841407a8",
+          "units": "map_units",
+          "starts": [
+            [
+              116.0,
+              209.0
+            ],
+            [
+              128.0,
+              209.0
+            ]
+          ],
+          "rooms": 3,
+          "rotation": 1,
+          "bounds_before_rotation": [
+            14,
+            13,
+            235,
+            234
+          ],
+          "doors_before_rotation": [
+            [
+              78,
+              106,
+              7,
+              32
+            ],
+            [
+              163,
+              60,
+              7,
+              42
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              51,
+              52,
+              15,
+              13
+            ],
+            [
+              97,
+              57,
+              11,
+              18
+            ]
+          ]
+        },
+        "decisions": 66,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8935,
+        "return": [
+          56.16523085126431,
+          44.38972789574126
+        ]
+      },
+      "rollout_seconds": 9.60567744798027,
+      "update_seconds": 1.6046076239435934,
+      "total_seconds": 11.210285071923863,
+      "decisions": 66,
+      "policy_inputs_actions_sha256": "39afb6de07bace456fde08cc2a96f7f255fa2fe5569c40209312e0100b6cd5bd",
+      "trajectory_sha256": "5e962601a72af4493d0b93ec3d2c649d87114e89c91f116369e27f5e462255d6",
+      "communication_sha256": "b2233b97a521e3f2570bc06e6307c7c0742fb60029d40eed12fedbc4feb18459",
+      "final_environment_sha256": "83667fce0b3efa5f972939dc33548dbf1125530ec5033a2c750d3579266b360d",
+      "learner_replay_rng_sha256": "734876ee97c9305eebc9cd4b590d331aa5678b5bbd193d8ecbb942bff504be60",
+      "group": "AB_learned"
+    },
+    {
+      "group": "AB_learned",
+      "resume_equivalence": true,
+      "continuation": {
+        "map_index": 37,
+        "episode": 4,
+        "metrics": {
+          "success": true,
+          "time": 134.32021684434505,
+          "coverage": [
+            0.9969239602985809,
+            0.990648839307686
+          ],
+          "union_coverage": 0.9969239602985809,
+          "coverage_deficit": 0.13550845036775894,
+          "union_completion_time": 98.76925858707939,
+          "total_distance": 2598.6119305928955,
+          "wait_seconds": [
+            15.552173411967383,
+            1.6666666666666667
+          ],
+          "wait_disconnected_seconds": [
+            11.097704741377907,
+            1.6666666666666667
+          ],
+          "wait_without_new_map_seconds": [
+            11.764371408044573,
+            1.6666666666666667
+          ],
+          "synchronization_idle_seconds": [
+            20.458052192157147,
+            14.412547201824294
+          ],
+          "sent_bytes": 235548,
+          "delivered_bytes": 235243,
+          "control_bytes": 28145,
+          "novel_received_cells": 17340,
+          "duplicate_received_cells": 19865,
+          "connected_seconds": 57.50753281443186,
+          "queue_bytes": [
+            123484,
+            118289
+          ],
+          "reward_components": {
+            "exploration": [
+              14.484514517420637,
+              14.484514517420637
+            ],
+            "delivery": [
+              21.971457280250004,
+              12.56397481275
+            ],
+            "time": [
+              -2.673674005648859,
+              -2.673674005648859
+            ],
+            "distance": [
+              -2.350240317641923,
+              -2.825881326367347
+            ],
+            "completion": [
+              19.8005,
+              19.8005
+            ],
+            "frontier_shaping": [
+              0.0,
+              0.0
+            ]
+          },
+          "map": {
+            "split": "train",
+            "index": 37,
+            "layout_id": "simple_rooms_v1:20261011:train:37",
+            "family": "simple_rooms_v1",
+            "dataset_seed": 20261011,
+            "sha256": "7083fa22916fa2ae2916ab26438242d2e7661d4a9c809d1f20dd052f9896dbe3",
+            "canonical_sha256": "599c9b12a706ba05552e68e31d680f1b668c5627787b53019275c364c0a78676",
+            "units": "map_units",
+            "starts": [
+              [
+                159.0,
+                107.0
+              ],
+              [
+                147.0,
+                107.0
+              ]
+            ],
+            "rooms": 2,
+            "rotation": 3,
+            "bounds_before_rotation": [
+              15,
+              22,
+              243,
+              242
+            ],
+            "doors_before_rotation": [
+              [
+                131,
+                82,
+                4,
+                41
+              ]
+            ],
+            "obstacles_before_rotation": [
+              [
+                96,
+                129,
+                19,
+                20
+              ],
+              [
+                206,
+                138,
+                15,
+                20
+              ]
+            ]
+          },
+          "decisions": 50,
+          "truncated": false,
+          "interrupted": false,
+          "interruption_reason": null,
+          "learner_updates": 8955,
+          "return": [
+            51.23255747437985,
+            41.349433998154424
+          ]
+        },
+        "rollout_seconds": 14.116816840018146,
+        "update_seconds": 1.596618149022106,
+        "total_seconds": 15.713434989040252,
+        "decisions": 50,
+        "policy_inputs_actions_sha256": "13f8fee5e48d8faf2f6b1d1697c57057c203698ab1d637da5dc93175ba6733fe",
+        "trajectory_sha256": "74aa417f807a38ffe051d05f22b188640314beab365401ef091339134f8a0347",
+        "communication_sha256": "00992a30638098292fc2e3a8fee2af609f7ac721bdb4ec365cd09fb04597e23e",
+        "final_environment_sha256": "735a0765dfd3fbe5f5427ae05692ca5c3ceacbd6e1209dea0816028e440dd628",
+        "learner_replay_rng_sha256": "184778082e199df3ba83b41b88ec0cb93af567e62f6e5420afddf886061cfd3c"
+      }
+    },
+    {
+      "map_index": 0,
+      "episode": 1,
+      "metrics": {
+        "success": true,
+        "time": 167.77729716074865,
+        "coverage": [
+          0.9923371647509579,
+          0.9942631179953695
+        ],
+        "union_coverage": 0.9942631179953695,
+        "coverage_deficit": 0.160165656892081,
+        "union_completion_time": 167.77729716074865,
+        "total_distance": 3267.394125771538,
+        "wait_seconds": [
+          16.187673467671377,
+          9.215519037355621
+        ],
+        "wait_disconnected_seconds": [
+          2.2391714737574007,
+          0.0
+        ],
+        "wait_without_new_map_seconds": [
+          4.2391714737574,
+          7.215519037355621
+        ],
+        "synchronization_idle_seconds": [
+          21.451733746585234,
+          16.416824255590182
+        ],
+        "sent_bytes": 422479,
+        "delivered_bytes": 422375,
+        "control_bytes": 39038,
+        "novel_received_cells": 17144,
+        "duplicate_received_cells": 53780,
+        "connected_seconds": 119.28870227003159,
+        "queue_bytes": [
+          136,
+          2502
+        ],
+        "reward_components": {
+          "exploration": [
+            14.484271002417692,
+            14.484271002417692
+          ],
+          "delivery": [
+            12.694814206249998,
+            21.438569732500007
+          ],
+          "time": [
+            -3.3397689786003557,
+            -3.3397689786003557
+          ],
+          "distance": [
+            -3.1109913973384336,
+            -3.396812699698524
+          ],
+          "completion": [
+            19.8005,
+            19.8005
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 0,
+          "layout_id": "simple_rooms_v1:20261011:train:0",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "42c0a8064e3e93ffd565a9653298052baa08f5e2b98112365e49037d7a73e71e",
+          "canonical_sha256": "0871343f54c276dcf079b8895279d62f8cdd73004740cb09d6aa0401f38dc00c",
+          "units": "map_units",
+          "starts": [
+            [
+              183.0,
+              169.0
+            ],
+            [
+              195.0,
+              169.0
+            ]
+          ],
+          "rooms": 2,
+          "rotation": 1,
+          "bounds_before_rotation": [
+            16,
+            12,
+            239,
+            238
+          ],
+          "doors_before_rotation": [
+            [
+              120,
+              172,
+              7,
+              34
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              39,
+              40,
+              13,
+              19
+            ]
+          ]
+        },
+        "decisions": 66,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8895,
+        "return": [
+          40.528824832728894,
+          48.9867590566188
+        ]
+      },
+      "rollout_seconds": 13.421091619005892,
+      "update_seconds": 1.603133307013195,
+      "total_seconds": 15.024224926019087,
+      "decisions": 66,
+      "policy_inputs_actions_sha256": "badf733476a821294d4e5f3f8bf199ff966b8d2191947724f0c625acefa1ef6e",
+      "trajectory_sha256": "4fa8b7badd1739193ddcc398fec62af6ac242cdfc965c2da3bfe50ffde15ec23",
+      "communication_sha256": "6a26fb64e358f6c385b835ff00a5454bc45dbdd664a8ea4cadd1bc3745a7245d",
+      "final_environment_sha256": "d891101d17c6935e1fc0d346942a3216da8e7f28c7af907d8a5574cf07971b15",
+      "learner_replay_rng_sha256": "0b5b016da206dc682f415727dd395bcb2504b7ec46151938317c2e6b73e6e222",
+      "group": "A_rule"
+    },
+    {
+      "map_index": 37,
+      "episode": 2,
+      "metrics": {
+        "success": true,
+        "time": 156.90176715012427,
+        "coverage": [
+          0.9903207284062013,
+          0.9903207284062013
+        ],
+        "union_coverage": 0.9903207284062013,
+        "coverage_deficit": 0.1698689624479362,
+        "union_completion_time": 156.90176715012427,
+        "total_distance": 2854.9142616609565,
+        "wait_seconds": [
+          21.556310275029663,
+          21.58907364229144
+        ],
+        "wait_disconnected_seconds": [
+          0.0,
+          0.0
+        ],
+        "wait_without_new_map_seconds": [
+          4.972976941696327,
+          1.25
+        ],
+        "synchronization_idle_seconds": [
+          22.875165513491332,
+          9.873463064356406
+        ],
+        "sent_bytes": 393672,
+        "delivered_bytes": 393672,
+        "control_bytes": 37471,
+        "novel_received_cells": 22834,
+        "duplicate_received_cells": 42941,
+        "connected_seconds": 120.3542493673675,
+        "queue_bytes": [
+          51,
+          68
+        ],
+        "reward_components": {
+          "exploration": [
+            14.344199626876389,
+            14.344199626876389
+          ],
+          "delivery": [
+            30.118149619249998,
+            15.376188303000003
+          ],
+          "time": [
+            -3.1237009491495993,
+            -3.1237009491495993
+          ],
+          "distance": [
+            -2.6887893390347064,
+            -2.997462752199347
+          ],
+          "completion": [
+            20.0,
+            20.0
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 37,
+          "layout_id": "simple_rooms_v1:20261011:train:37",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "7083fa22916fa2ae2916ab26438242d2e7661d4a9c809d1f20dd052f9896dbe3",
+          "canonical_sha256": "599c9b12a706ba05552e68e31d680f1b668c5627787b53019275c364c0a78676",
+          "units": "map_units",
+          "starts": [
+            [
+              159.0,
+              107.0
+            ],
+            [
+              147.0,
+              107.0
+            ]
+          ],
+          "rooms": 2,
+          "rotation": 3,
+          "bounds_before_rotation": [
+            15,
+            22,
+            243,
+            242
+          ],
+          "doors_before_rotation": [
+            [
+              131,
+              82,
+              4,
+              41
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              96,
+              129,
+              19,
+              20
+            ],
+            [
+              206,
+              138,
+              15,
+              20
+            ]
+          ]
+        },
+        "decisions": 64,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8915,
+        "return": [
+          58.64985895794209,
+          43.599224228527426
+        ]
+      },
+      "rollout_seconds": 10.765480417991057,
+      "update_seconds": 1.5936239999718964,
+      "total_seconds": 12.359104417962953,
+      "decisions": 64,
+      "policy_inputs_actions_sha256": "d21bf23fa8d24c1ece27f641cbccbc36193b97a4071569b56ff101b1d6c73544",
+      "trajectory_sha256": "e53d9d88ac0c447ac58455e47f33b6aaf489c873f26e5f18bc90f13a2f436d4b",
+      "communication_sha256": "8e3389e219cabd2d506b6fc0a5a00bfba0485869684ab49652273558ed9501cd",
+      "final_environment_sha256": "4876f47e09cb994110bd244bf7cb1a5f051462f18fa447d493acdb62e9c8ad2d",
+      "learner_replay_rng_sha256": "9b04880ae582a1dfef2191f6507b9f78d6181a57f8bb0f5ec4b3b6029d893093",
+      "group": "A_rule"
+    },
+    {
+      "map_index": 470,
+      "episode": 3,
+      "metrics": {
+        "success": true,
+        "time": 225.2386746966929,
+        "coverage": [
+          0.9907132891524242,
+          0.9987792117195675
+        ],
+        "union_coverage": 0.9987792117195675,
+        "coverage_deficit": 0.2089243092203832,
+        "union_completion_time": 213.7583373755316,
+        "total_distance": 4447.860917477604,
+        "wait_seconds": [
+          15.65440114519881,
+          14.170155416314282
+        ],
+        "wait_disconnected_seconds": [
+          7.380711874576984,
+          3.0
+        ],
+        "wait_without_new_map_seconds": [
+          10.737734478532143,
+          6.298852370688953
+        ],
+        "synchronization_idle_seconds": [
+          22.098978004819056,
+          27.898738370586557
+        ],
+        "sent_bytes": 403093,
+        "delivered_bytes": 403084,
+        "control_bytes": 42534,
+        "novel_received_cells": 17873,
+        "duplicate_received_cells": 48010,
+        "connected_seconds": 115.09440485031872,
+        "queue_bytes": [
+          153,
+          5228
+        ],
+        "reward_components": {
+          "exploration": [
+            15.25652829988882,
+            15.25652829988882
+          ],
+          "delivery": [
+            9.59333473225,
+            26.003985133500002
+          ],
+          "time": [
+            -4.484105799076334,
+            -4.484105799076334
+          ],
+          "distance": [
+            -4.481247594774468,
+            -4.379063615270444
+          ],
+          "completion": [
+            19.8005,
+            19.8005
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 470,
+          "layout_id": "simple_rooms_v1:20261011:train:470",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "b23430cfb24de03fc231cdfd2b3ba0afcb7d022265266f773ccad95249a6e206",
+          "canonical_sha256": "11b908c0d29bf072c4859bf19cd2a01d937023036b89326121f8aba7841407a8",
+          "units": "map_units",
+          "starts": [
+            [
+              116.0,
+              209.0
+            ],
+            [
+              128.0,
+              209.0
+            ]
+          ],
+          "rooms": 3,
+          "rotation": 1,
+          "bounds_before_rotation": [
+            14,
+            13,
+            235,
+            234
+          ],
+          "doors_before_rotation": [
+            [
+              78,
+              106,
+              7,
+              32
+            ],
+            [
+              163,
+              60,
+              7,
+              42
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              51,
+              52,
+              15,
+              13
+            ],
+            [
+              97,
+              57,
+              11,
+              18
+            ]
+          ]
+        },
+        "decisions": 88,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8935,
+        "return": [
+          35.68500963828801,
+          52.19784401904201
+        ]
+      },
+      "rollout_seconds": 17.14057839801535,
+      "update_seconds": 1.635966962960083,
+      "total_seconds": 18.776545360975433,
+      "decisions": 88,
+      "policy_inputs_actions_sha256": "8e2ef3eebd84bcf872f62c761cda3c095ecf43b694a204dd50496c03bb1f3421",
+      "trajectory_sha256": "9c80df1b8fdb55b3d936b3619bb71b5fc32e272657133ffb72fed25e5e45a606",
+      "communication_sha256": "9bee5e7dc1ea957106aa28caba4a8bde1c4fe6ad974ded78b6f9ebf519e37bba",
+      "final_environment_sha256": "6e56d0408170e4933fbb1939933d6ae6def29c140711a51517dacb12176ad60a",
+      "learner_replay_rng_sha256": "1c11d0e9d97249758f6d52f6236589da28c2882da3960b00e96bf95470aacdb7",
+      "group": "A_rule"
+    },
+    {
+      "map_index": 0,
+      "episode": 1,
+      "metrics": {
+        "success": true,
+        "time": 193.37923178243085,
+        "coverage": [
+          0.9989550679205852,
+          0.991374188128752
+        ],
+        "union_coverage": 0.9989550679205852,
+        "coverage_deficit": 0.24725037176153444,
+        "union_completion_time": 60.88879619441068,
+        "total_distance": 3370.7237809502776,
+        "wait_seconds": [
+          39.536586849221095,
+          24.273689270621826
+        ],
+        "wait_disconnected_seconds": [
+          4.666666666666667,
+          0.0
+        ],
+        "wait_without_new_map_seconds": [
+          9.333333333333334,
+          5.916666666666667
+        ],
+        "synchronization_idle_seconds": [
+          19.619537782398126,
+          22.435001250097592
+        ],
+        "sent_bytes": 379358,
+        "delivered_bytes": 379234,
+        "control_bytes": 37677,
+        "novel_received_cells": 21686,
+        "duplicate_received_cells": 41025,
+        "connected_seconds": 94.62055223968582,
+        "queue_bytes": [
+          7450,
+          221
+        ],
+        "reward_components": {
+          "exploration": [
+            14.59301398303522,
+            14.59301398303522
+          ],
+          "delivery": [
+            24.090801143750003,
+            19.134492095
+          ],
+          "time": [
+            -3.851201742038537,
+            -3.851201742038537
+          ],
+          "distance": [
+            -3.209000398620427,
+            -3.5062808793988696
+          ],
+          "completion": [
+            20.0,
+            20.0
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 0,
+          "layout_id": "simple_rooms_v1:20261011:train:0",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "42c0a8064e3e93ffd565a9653298052baa08f5e2b98112365e49037d7a73e71e",
+          "canonical_sha256": "0871343f54c276dcf079b8895279d62f8cdd73004740cb09d6aa0401f38dc00c",
+          "units": "map_units",
+          "starts": [
+            [
+              183.0,
+              169.0
+            ],
+            [
+              195.0,
+              169.0
+            ]
+          ],
+          "rooms": 2,
+          "rotation": 1,
+          "bounds_before_rotation": [
+            16,
+            12,
+            239,
+            238
+          ],
+          "doors_before_rotation": [
+            [
+              120,
+              172,
+              7,
+              34
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              39,
+              40,
+              13,
+              19
+            ]
+          ]
+        },
+        "decisions": 85,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8895,
+        "return": [
+          51.62361298612624,
+          46.370023456597806
+        ]
+      },
+      "rollout_seconds": 15.059313922945876,
+      "update_seconds": 1.5949410070315935,
+      "total_seconds": 16.65425492997747,
+      "decisions": 85,
+      "policy_inputs_actions_sha256": "b17d34f10b2c63e2750fb45fe232996e4e235aa12a0ecbc5e97c8c1355becd91",
+      "trajectory_sha256": "2104bc8aba24301f2fb9363dc399d5cb0d43466a0de242986870155bdaf5753e",
+      "communication_sha256": "61c9e23875792fc5944492ea5be0ad2c4c7baffa86cdb440b8c0e3559b9cea54",
+      "final_environment_sha256": "e7c5d1c146bcccdc4183ca9733fb4100ae51e9f759ba81cc329efa0d00ba13a4",
+      "learner_replay_rng_sha256": "ab643ee882cd84c6b40c27de650531f273cab5478e274c5ecc5e241b1035be26",
+      "group": "AB_uncoupled"
+    },
+    {
+      "map_index": 37,
+      "episode": 2,
+      "metrics": {
+        "success": true,
+        "time": 98.5682959640718,
+        "coverage": [
+          0.9935608235583627,
+          0.9935198096956771
+        ],
+        "union_coverage": 0.9935608235583627,
+        "coverage_deficit": 0.11161670279646342,
+        "union_completion_time": 95.21127336011664,
+        "total_distance": 1732.6904476086838,
+        "wait_seconds": [
+          14.448501993913977,
+          23.697478535112488
+        ],
+        "wait_disconnected_seconds": [
+          1.5833333333333333,
+          0.0
+        ],
+        "wait_without_new_map_seconds": [
+          1.5833333333333333,
+          4.655874974644112
+        ],
+        "synchronization_idle_seconds": [
+          9.744565372938153,
+          4.8551753921220335
+        ],
+        "sent_bytes": 377154,
+        "delivered_bytes": 377060,
+        "control_bytes": 37588,
+        "novel_received_cells": 21089,
+        "duplicate_received_cells": 41192,
+        "connected_seconds": 92.0791244903144,
+        "queue_bytes": [
+          4486,
+          1055
+        ],
+        "reward_components": {
+          "exploration": [
+            14.405519918279877,
+            14.405519918279877
+          ],
+          "delivery": [
+            21.3944700065,
+            20.598827118750002
+          ],
+          "time": [
+            -1.9628229241262867,
+            -1.9628229241262867
+          ],
+          "distance": [
+            -1.77820008076902,
+            -1.673235237107361
+          ],
+          "completion": [
+            19.9,
+            19.9
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 37,
+          "layout_id": "simple_rooms_v1:20261011:train:37",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "7083fa22916fa2ae2916ab26438242d2e7661d4a9c809d1f20dd052f9896dbe3",
+          "canonical_sha256": "599c9b12a706ba05552e68e31d680f1b668c5627787b53019275c364c0a78676",
+          "units": "map_units",
+          "starts": [
+            [
+              159.0,
+              107.0
+            ],
+            [
+              147.0,
+              107.0
+            ]
+          ],
+          "rooms": 2,
+          "rotation": 3,
+          "bounds_before_rotation": [
+            15,
+            22,
+            243,
+            242
+          ],
+          "doors_before_rotation": [
+            [
+              131,
+              82,
+              4,
+              41
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              96,
+              129,
+              19,
+              20
+            ],
+            [
+              206,
+              138,
+              15,
+              20
+            ]
+          ]
+        },
+        "decisions": 40,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8915,
+        "return": [
+          51.95896691988456,
+          51.26828887579623
+        ]
+      },
+      "rollout_seconds": 6.719387977966107,
+      "update_seconds": 1.6116760079748929,
+      "total_seconds": 8.331063985941,
+      "decisions": 40,
+      "policy_inputs_actions_sha256": "04c36b64a5b02df86c941f7e0a8df57cecc47e9cc93c4fd873307fa23f85977d",
+      "trajectory_sha256": "cfc00139f7592c13d623a46f88c1d9d0034f64c554145169b90563ac25278c4f",
+      "communication_sha256": "818b24f59908fdc652cda155b81c9b2dfdb5dc68c50c1c5d1530d5d93b515faf",
+      "final_environment_sha256": "f5b71eb99bec1f54dac48547001d77b462a673c87532b90359ef747c4781765c",
+      "learner_replay_rng_sha256": "dcefb4da00ff85430d5cdb2412941d9aff3d72cc248783f2f2aa92c20a177a1f",
+      "group": "AB_uncoupled"
+    },
+    {
+      "map_index": 470,
+      "episode": 3,
+      "metrics": {
+        "success": true,
+        "time": 187.5202353973629,
+        "coverage": [
+          0.9900374956400418,
+          0.9906696895709801
+        ],
+        "union_coverage": 0.9906696895709801,
+        "coverage_deficit": 0.15462406578139243,
+        "union_completion_time": 184.2702353973629,
+        "total_distance": 3522.3732156581127,
+        "wait_seconds": [
+          35.310276119842925,
+          21.45128687082414
+        ],
+        "wait_disconnected_seconds": [
+          20.737734478532143,
+          4.25
+        ],
+        "wait_without_new_map_seconds": [
+          20.737734478532143,
+          5.25
+        ],
+        "synchronization_idle_seconds": [
+          6.761489382693403,
+          17.986317116522667
+        ],
+        "sent_bytes": 391704,
+        "delivered_bytes": 391662,
+        "control_bytes": 41877,
+        "novel_received_cells": 23867,
+        "duplicate_received_cells": 39902,
+        "connected_seconds": 109.02257813714668,
+        "queue_bytes": [
+          272,
+          1539
+        ],
+        "reward_components": {
+          "exploration": [
+            15.07970089673439,
+            15.07970089673439
+          ],
+          "delivery": [
+            17.999521110499995,
+            29.5384625375
+          ],
+          "time": [
+            -3.7311654293364147,
+            -3.7311654293364147
+          ],
+          "distance": [
+            -3.4731824256727704,
+            -3.537884248586278
+          ],
+          "completion": [
+            20.0,
+            20.0
+          ],
+          "frontier_shaping": [
+            0.0,
+            0.0
+          ]
+        },
+        "map": {
+          "split": "train",
+          "index": 470,
+          "layout_id": "simple_rooms_v1:20261011:train:470",
+          "family": "simple_rooms_v1",
+          "dataset_seed": 20261011,
+          "sha256": "b23430cfb24de03fc231cdfd2b3ba0afcb7d022265266f773ccad95249a6e206",
+          "canonical_sha256": "11b908c0d29bf072c4859bf19cd2a01d937023036b89326121f8aba7841407a8",
+          "units": "map_units",
+          "starts": [
+            [
+              116.0,
+              209.0
+            ],
+            [
+              128.0,
+              209.0
+            ]
+          ],
+          "rooms": 3,
+          "rotation": 1,
+          "bounds_before_rotation": [
+            14,
+            13,
+            235,
+            234
+          ],
+          "doors_before_rotation": [
+            [
+              78,
+              106,
+              7,
+              32
+            ],
+            [
+              163,
+              60,
+              7,
+              42
+            ]
+          ],
+          "obstacles_before_rotation": [
+            [
+              51,
+              52,
+              15,
+              13
+            ],
+            [
+              97,
+              57,
+              11,
+              18
+            ]
+          ]
+        },
+        "decisions": 69,
+        "truncated": false,
+        "interrupted": false,
+        "interruption_reason": null,
+        "learner_updates": 8935,
+        "return": [
+          45.8748741522252,
+          57.34911375631168
+        ]
+      },
+      "rollout_seconds": 9.59474016301101,
+      "update_seconds": 1.602341849997174,
+      "total_seconds": 11.197082013008185,
+      "decisions": 69,
+      "policy_inputs_actions_sha256": "cc36863184821731d21e1c951325834d1c69ad8312bf52ecc7cea08d92a69feb",
+      "trajectory_sha256": "11252631070257b56bb232e4e7022bba9916667066b3f027b163618a4a858d28",
+      "communication_sha256": "75a57c119a75aed0106b3421550567d75d019a1e133dfdfea32a06e3bd1b0365",
+      "final_environment_sha256": "a13c6bc07ed73ceeb1c5a20d23f316f41b916f15bbd406dc544a7f8935ad55e7",
+      "learner_replay_rng_sha256": "5799193f92aba392cc368f093e036fc64fa464ff0f6822c728684c6ecda0cc73",
+      "group": "AB_uncoupled"
+    }
+  ],
+  "peak_rss_mib": 1280.6328125
+}

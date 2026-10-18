@@ -1,0 +1,75 @@
+{
+  "time": "2026-10-17T08:48:31.720591+08:00",
+  "easy_episodes_per_method": 10060,
+  "groups": {
+    "IR2_FIFO": {
+      "successes": 56,
+      "maps": 100,
+      "mean_capped_time": 1410.638903745058,
+      "mean_actual_time": 371.2807219746127,
+      "mean_union_coverage": 0.8749387436799948,
+      "mean_min_local_coverage": 0.8394888575189143,
+      "both_success_mean_time": 161.85518525903248,
+      "both_success_mean_distance": 3014.079738543208,
+      "both_success_mean_sent_bytes": 304854.1785714286,
+      "failed_decision_limit": 44,
+      "failed_union_already_99": 3,
+      "sac_updates": 80632
+    },
+    "AB_learned": {
+      "successes": 59,
+      "maps": 100,
+      "mean_capped_time": 1375.0570681578806,
+      "mean_actual_time": 460.4097074880833,
+      "mean_union_coverage": 0.9173593835183804,
+      "mean_min_local_coverage": 0.8701703786222802,
+      "both_success_mean_time": 224.2744472794636,
+      "both_success_mean_distance": 4197.9656321007815,
+      "both_success_mean_sent_bytes": 499804.48214285716,
+      "failed_decision_limit": 41,
+      "failed_union_already_99": 4,
+      "sac_updates": 80632
+    }
+  },
+  "both_success_maps": 56,
+  "paired_map_hashes_verified": 100,
+  "AB_only_success": 3,
+  "FIFO_only_success": 0,
+  "capped_time_reduction_percent": 2.5223914846466022,
+  "both_success_time_increase_percent": 38.56488250316821,
+  "total_development_policy_executions": 200,
+  "new_sac_updates": 0,
+  "training_policy_executions": 0,
+  "test_policy_evaluations": 0,
+  "wall_seconds": 500.52093989693094,
+  "min_available_memory_gib": 14.029598236083984,
+  "max_used_memory_gib": 16.427776336669922,
+  "source_files_verified": 60,
+  "unchanged_training_checksums": {
+    "dataset/native_dataset.json": "ec0ba72c58e37e5d7b2926c061c967cb351230f43cb05c10601633269f88dab3",
+    "IR2_FIFO/latest.pth": "1c4669143dd57797f19a2de12ee06bb8bc806f7b2915941b27323a993eb3a16a",
+    "AB_learned/latest.pth": "0f24aea5c1f7981ffd6859b6b47ea91eabd6637684eb104fbd5af94488ad4def"
+  },
+  "checkpoint_review": {
+    "IR2_FIFO": {
+      "episode": 10060,
+      "sac_updates": 80632,
+      "checkpoint_sha256": "1c4669143dd57797f19a2de12ee06bb8bc806f7b2915941b27323a993eb3a16a",
+      "rollout_weights_sha256": "28f80f3de0d32840477bd1d4187388aec83ff9769ccf8ba37dcda0bb9fe7674c",
+      "model_semantic_digest": "f015be84c74e0ffab2cdae3d1bdb079234a36fab8b2b64f814f77923f131e8cc",
+      "checkpoint_time": "2026-10-17T08:37:24.030649+08:00"
+    },
+    "AB_learned": {
+      "episode": 10060,
+      "sac_updates": 80632,
+      "checkpoint_sha256": "0f24aea5c1f7981ffd6859b6b47ea91eabd6637684eb104fbd5af94488ad4def",
+      "rollout_weights_sha256": "cc2f17746f03fa870c285c4a45cc6c3cff239f4cec4bce426bc2cc2786b4f673",
+      "model_semantic_digest": "3e063233adf5c999383c1359b084790f7891ecc539e78a4b8717d8aa54abd596",
+      "checkpoint_time": "2026-10-17T08:39:00.242747+08:00"
+    }
+  },
+  "scope": "Fixed geometry-group-held-out native easy development maps; greedy frozen models, one seed",
+  "geometry_wall_crossings": 0,
+  "radio_capacity_audits_passed": true,
+  "training_remains_paused": true
+}

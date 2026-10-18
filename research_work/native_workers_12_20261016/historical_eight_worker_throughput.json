@@ -1,0 +1,8 @@
+{
+  "first_episode": 4872,
+  "last_episode": 5128,
+  "paired_completed_rollouts": 512,
+  "wall_seconds": 4442.833289,
+  "rollouts_per_minute": 6.914506577606585,
+  "scope": "Historical complete training including CPU+GPU; different maps, not controlled causal speed comparison"
+}

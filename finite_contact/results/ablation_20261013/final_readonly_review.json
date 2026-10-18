@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-10-13T16:29:18.504615+08:00",
+  "source_files_verified": 32,
+  "preexisting_manifest_files_verified": 8,
+  "fixed_endpoint_rows_recomputed": 120,
+  "paired_comparisons_recomputed": 6,
+  "optimizer_increment_per_parameter": 20000,
+  "test_policy_evaluations": 0,
+  "passed": true,
+  "policy_rollouts_executed_by_this_review": 0
+}

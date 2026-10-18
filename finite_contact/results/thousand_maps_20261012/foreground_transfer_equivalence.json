@@ -1,0 +1,162 @@
+{
+  "status": "passed",
+  "time": "2026-10-13T01:19:53.116375+08:00",
+  "episodes": [
+    51,
+    52,
+    53,
+    54,
+    55,
+    56
+  ],
+  "extra_complete_training_rollouts": 6,
+  "extra_sac_updates": 120,
+  "excluded_comparison_fields": [
+    "training.jsonl:wall_seconds"
+  ],
+  "comparisons": {
+    "training.jsonl": {
+      "records": 6,
+      "mismatches": 0
+    },
+    "trajectories.jsonl": {
+      "records": 6,
+      "mismatches": 0
+    },
+    "updates.jsonl": {
+      "records": 120,
+      "mismatches": 0
+    },
+    "communication.jsonl": {
+      "records": 37876,
+      "mismatches": 0
+    }
+  },
+  "extra_complete_rollouts_physical_audit": {
+    "rollouts": 6,
+    "movement_segments": 742,
+    "wall_crossings": 0
+  },
+  "partial_interrupted_rollouts": [
+    {
+      "episode": 57,
+      "success": false,
+      "time": 12.297378541243651,
+      "coverage": [
+        0.518011054403761,
+        0.4476186442472629
+      ],
+      "union_coverage": 0.5694076787869804,
+      "coverage_deficit": null,
+      "union_completion_time": null,
+      "total_distance": 235.62015292892264,
+      "wait_seconds": [
+        1.0,
+        0.0
+      ],
+      "wait_disconnected_seconds": [
+        0.0,
+        0.0
+      ],
+      "wait_without_new_map_seconds": [
+        0.0,
+        0.0
+      ],
+      "synchronization_idle_seconds": [
+        3.6315991507686256,
+        0.3281451876417876
+      ],
+      "sent_bytes": 50370,
+      "delivered_bytes": 50225,
+      "control_bytes": 6022,
+      "novel_received_cells": 4428,
+      "duplicate_received_cells": 3500,
+      "connected_seconds": 12.297378541243651,
+      "queue_bytes": [
+        99807,
+        86453
+      ],
+      "reward_components": {
+        "exploration": [
+          5.203721369147202,
+          5.203721369147202
+        ],
+        "delivery": [
+          2.00542695,
+          6.820783884
+        ],
+        "time": [
+          -0.24509765984756154,
+          -0.24509765984756154
+        ],
+        "distance": [
+          -0.18356716011385762,
+          -0.28624170731367093
+        ],
+        "completion": [
+          0.0,
+          0.0
+        ],
+        "frontier_shaping": [
+          0.0,
+          0.0
+        ]
+      },
+      "map": {
+        "split": "train",
+        "index": 885,
+        "layout_id": "simple_rooms_v1:20261011:train:885",
+        "family": "simple_rooms_v1",
+        "dataset_seed": 20261011,
+        "sha256": "c2b7fd5cab6211102c4044f4668bda0f1b8016e51d60251134bcf37ec01e0ca3",
+        "canonical_sha256": "1d940e1d35fe5e4c077baccd2028a5ea03de85e5c681b613904e96b888501012",
+        "units": "map_units",
+        "starts": [
+          [
+            82.0,
+            132.0
+          ],
+          [
+            82.0,
+            144.0
+          ]
+        ],
+        "rooms": 2,
+        "rotation": 0,
+        "bounds_before_rotation": [
+          17,
+          15,
+          232,
+          243
+        ],
+        "doors_before_rotation": [
+          [
+            114,
+            121,
+            8,
+            34
+          ]
+        ],
+        "obstacles_before_rotation": [
+          [
+            163,
+            119,
+            13,
+            19
+          ]
+        ]
+      },
+      "decisions": 6,
+      "truncated": false,
+      "interrupted": true,
+      "interruption_reason": "requested_stop",
+      "learner_updates": 10015,
+      "return": [
+        6.780483499185784,
+        11.49316588598597
+      ]
+    }
+  ],
+  "partial_rollouts_note": "Incomplete executions retained separately; no complete trajectory/array was saved for them.",
+  "array_files_identical": 6
+}

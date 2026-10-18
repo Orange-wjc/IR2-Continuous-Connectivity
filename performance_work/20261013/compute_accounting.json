@@ -1,0 +1,21 @@
+{
+  "probe_training_rollouts": 58,
+  "probe_sac_updates": 1160,
+  "probe_supervised_head_updates": 0,
+  "probe_map_split": "train",
+  "probe_maps": [
+    0,
+    37,
+    470
+  ],
+  "research_retained_training_updates_added": 0,
+  "test_policy_evaluations": 0,
+  "regression_suite": {
+    "tests": 51,
+    "skipped_cuda_test": 1,
+    "passed": true
+  },
+  "earlier_core_smoke_tests": 33,
+  "regression_internal_rollouts_and_updates": "additional test-only computation, not included in the standalone probe counts",
+  "failed_launches_before_any_rollout": 2
+}

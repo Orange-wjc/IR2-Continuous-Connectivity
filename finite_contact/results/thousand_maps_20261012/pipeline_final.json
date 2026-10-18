@@ -1,0 +1,52 @@
+{
+  "scope": "1000-map simple-room movement adaptation; one shared pretrained chain, one adaptation seed, frozen 100-map communication head.",
+  "movement_source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/multimap_20261011_vectorized_seed1/movement_A/latest.pth",
+  "movement_sha256": "43d41b3b73726d8db534e121c09ee2a691365a4147275c34805aa27de11abb47",
+  "head_source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/multimap_content_20261012_seed1/head/final.pth",
+  "head_sha256": "d414670b948e65fec0d714c216d3487723d921551bafda0c6ef04061b4989ab7",
+  "common_sha256": "376acac2554bb2699771c7c1991f4045a83c17b3b4507d8c201438cacb86ca34",
+  "reference_root": null,
+  "seed": 1,
+  "dataset_seed": 20261011,
+  "training_maps": 1000,
+  "sweeps": 1,
+  "updates_per_map": 20,
+  "new_sac_updates_per_group": 20000,
+  "source_sac_updates": 8895,
+  "frozen_head_updates": 5000,
+  "actor_learning_rate": 1e-05,
+  "critic_learning_rate": 0.0001,
+  "max_hours_per_group": 12,
+  "groups": [
+    "A_fifo",
+    "A_rule",
+    "AB_learned"
+  ],
+  "status": "complete",
+  "replay_policy": "All groups collect new, mode-consistent observations; no FIFO replay/SIL transfer.",
+  "schedule": "One complete sampled team rollout per map, then exactly K actual SAC updates.",
+  "episode_rng": "(training_seed + episode * 10007) modulo 2**32",
+  "workers": 1,
+  "test_policy_evaluations": 0,
+  "worker_order": [
+    "AB_learned",
+    "A_rule",
+    "A_fifo"
+  ],
+  "success_sampling": "pooled",
+  "compact_replay": true,
+  "training_history": "Source movement/head used original 100 training maps; no new test policy executions.",
+  "source_identity_file": "source_identity_memory_resume.json",
+  "memory_profile": "rtx3090_32gb_lossless_v1",
+  "source_history": [
+    {
+      "stage": "original_and_completed_learned",
+      "identity": "source_identity_before.json"
+    },
+    {
+      "stage": "lossless_memory_recovery",
+      "identity": "source_identity_memory_resume.json",
+      "review": "checks/memory_recovery_review.json"
+    }
+  ]
+}

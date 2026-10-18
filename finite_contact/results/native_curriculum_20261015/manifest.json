@@ -1,0 +1,15 @@
+{
+  "files": {
+    "source_identity.json": "8394f05f40069a87c8ee479e17cbc02251b4da5d2075f462e85679fa368c6801",
+    "preflight_review.json": "ba6b986bd6d3a141d2ebf756a57b7981ba9abd35fac075b531cf6519c417d9c9",
+    "launch_snapshot.json": "e4296b009e89d69058267091e6e3aef0b7226d69f91dfcb0d9d1b8d17394b8e8",
+    "README.md": "f77e5dbfbee82bc3677ff25a889eaabeb3f390969a755e9eb978abc0fd5f9974",
+    "launch_readiness_review.json": "32b99d16499aad847ca01a4c7c3c6c4c220420a353ba5be06eded48f34830d4f",
+    "post_launch_review.json": "89684c03c1467ae3f8376637ebba3f13d080a7e51a2e110017631abbd30412eb",
+    "performance_review.json": "39c26d75e09c4ae3a902eec29257b50da90086d7af2860ca3b29eeb4baf116e2",
+    "TRAINING_PLAN.md": "2b538938ed4c76456a4618bdd5ea5a14e3d631776bfc7a848b88e1729c9d55eb",
+    "serial_prefetch_source_difference.patch": "540fd267ac40b5ce1eddfedb4693cbbec180b98d4c0f5d44010a58e0ce7cfab5",
+    "parallel_capacity_review.json": "b703f7676caebd4343030c1ea88ce102358cce912faed5c5c6075400b82e16ae",
+    "integration_tests.log": "c2733f01ea44ca672e6a2c3e83f985d6c57ebe77698d1eb5994ff05ea1771f91"
+  }
+}

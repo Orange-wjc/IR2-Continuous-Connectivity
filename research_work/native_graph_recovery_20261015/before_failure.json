@@ -1,0 +1,22 @@
+{
+  "error": "IndexError('index -1 is out of bounds for axis 0 with size 0')",
+  "file": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/research_work/native_graph_recovery_20261015/source/graph_generator.py",
+  "function": "update_graph",
+  "line": 197,
+  "id": 0,
+  "position": [
+    282,
+    177
+  ],
+  "robot_location": [
+    287,
+    244
+  ],
+  "pose_idx": -1,
+  "x0": 262,
+  "x1": 302,
+  "y0": 157,
+  "y1": 197,
+  "candidate_node_coords": [],
+  "local_occupancy_map": []
+}

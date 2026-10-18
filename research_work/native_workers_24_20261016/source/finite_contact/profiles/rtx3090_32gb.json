@@ -1,0 +1,18 @@
+{
+  "profile": "rtx3090_32gb_lossless_v1",
+  "hardware": {"gpu": "NVIDIA GeForce RTX 3090", "vram_gib": 24, "host_ram_gib": 32},
+  "workers": 1,
+  "torch_threads": 2,
+  "device": "cuda",
+  "batch_size": 16,
+  "embedding_dim": 64,
+  "replay_transitions": 12000,
+  "success_maps": 1000,
+  "observation_storage": "lossless-zlib-v1",
+  "checkpoint_pickle_protocol": 4,
+  "checkpoint_load": "streamed CPU storage reconstruction",
+  "checkpoint_every_complete_maps": 10,
+  "migration_address_space_cap_gib": 22,
+  "training_rss_target_gib": 8,
+  "scope": "Memory engineering only. Preserve weights, network architecture, optimizer states, observation values, all replay/success samples, RNG draws, maps and fixed SAC budget."
+}

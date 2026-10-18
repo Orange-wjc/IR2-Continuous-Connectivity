@@ -1,0 +1,17 @@
+{
+  "pid": 3321223,
+  "time": "2026-10-12T22:24:33.298189+08:00",
+  "command": [
+    "/bin/bash",
+    "run_thousand_maps_foreground.sh"
+  ],
+  "log": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/thousand_maps_20261012_seed1/checks/memory_recovery_foreground.log",
+  "scope": "Resume A_rule at committed episode 880, skip completed AB_learned, then train FIFO and run fixed-endpoint audit.",
+  "environment_overrides": {
+    "CUDA_VISIBLE_DEVICES": "0",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MALLOC_ARENA_MAX": "2"
+  }
+}

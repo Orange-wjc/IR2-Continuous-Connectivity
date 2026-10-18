@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "paired_maps": [
+    {
+      "map_index": 0,
+      "baseline_seconds": 23.91324480896583,
+      "optimized_seconds": 18.05397248204099,
+      "speedup": 1.324541999427178
+    },
+    {
+      "map_index": 37,
+      "baseline_seconds": 15.838369122997392,
+      "optimized_seconds": 13.781744035950396,
+      "speedup": 1.1492282168121961
+    },
+    {
+      "map_index": 470,
+      "baseline_seconds": 11.445257025014143,
+      "optimized_seconds": 9.976250551990233,
+      "speedup": 1.147250358776409
+    }
+  ],
+  "baseline_seconds": 51.196870956977364,
+  "optimized_seconds": 41.81196706998162,
+  "speedup": 1.2244549717378286,
+  "time_reduction_percent": 18.331010687903614,
+  "baseline_peak_rss_mib": 1255.23828125,
+  "optimized_peak_rss_mib": 1258.2421875,
+  "sample_size": 3,
+  "profiled": false,
+  "traced": false,
+  "includes_checkpoint_io": false
+}

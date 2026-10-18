@@ -1,0 +1,36 @@
+[
+  {
+    "workers": 4,
+    "wall_seconds": 146.96274458104745,
+    "episodes": 8,
+    "worker_peak_rss_mib": 564.9453125,
+    "logical_hashes": [
+      "44ba15b33f21fac4964014acd4f428eaed6b25568ae3e90a1882ee8d3f4f479d",
+      "3b5c1272406170797304dafe85fe9160d934a9a5e87eb6af464846278a9cc0a8",
+      "ec53776fc02c6ff5449d5ba0c4a8ec32311ce8a65e8ae12fe81eaf40808d2fd9",
+      "70beb3d7edef99c855c95bb47880900a20ce565d44cc53f136816ca8028c2448",
+      "6b46702aa17f2de4dc456fc05407aea7d69e6c79bc3ee2e9148cd7ffe3060f43",
+      "31f8acc0e07f71bd727a35fcbf4b135ab45612ab3f237db80c283d8de5e41f3d",
+      "455369ade5cbe8f3bfc1b39a29498071b5db835794b61c9eae4d1d37a1806d85",
+      "e5023b0ce6ff4a48b3020a53f8bcc4f0d7df568821e0642e5594d165ea1104b6"
+    ],
+    "max_graph_nodes": 239
+  },
+  {
+    "workers": 8,
+    "wall_seconds": 82.61123184999451,
+    "episodes": 8,
+    "worker_peak_rss_mib": 555.296875,
+    "logical_hashes": [
+      "44ba15b33f21fac4964014acd4f428eaed6b25568ae3e90a1882ee8d3f4f479d",
+      "3b5c1272406170797304dafe85fe9160d934a9a5e87eb6af464846278a9cc0a8",
+      "ec53776fc02c6ff5449d5ba0c4a8ec32311ce8a65e8ae12fe81eaf40808d2fd9",
+      "70beb3d7edef99c855c95bb47880900a20ce565d44cc53f136816ca8028c2448",
+      "6b46702aa17f2de4dc456fc05407aea7d69e6c79bc3ee2e9148cd7ffe3060f43",
+      "31f8acc0e07f71bd727a35fcbf4b135ab45612ab3f237db80c283d8de5e41f3d",
+      "455369ade5cbe8f3bfc1b39a29498071b5db835794b61c9eae4d1d37a1806d85",
+      "e5023b0ce6ff4a48b3020a53f8bcc4f0d7df568821e0642e5594d165ea1104b6"
+    ],
+    "max_graph_nodes": 239
+  }
+]

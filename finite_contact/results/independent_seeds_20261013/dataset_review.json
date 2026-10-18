@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "manifest_matches_previous": true,
+  "counts": {
+    "train": 1000,
+    "validation": 20,
+    "test": 20
+  },
+  "dataset_seed": 20261011,
+  "manifest_sha256": "2f49350418dca5fbad3f475d30d88280f68b67841134fc0b0a0d759197f72a97",
+  "quality_sha256": "b20ad49e360fff57af5edc8ed5c535aa77aea83e1256839ebd8ffe0031836a31",
+  "test_policy_evaluations": 0
+}

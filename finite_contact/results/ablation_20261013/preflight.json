@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "ablation_behavior_and_worker_checks": 6,
+  "memory_checks_including_actual_cuda_resume": 5,
+  "files": {
+    "experiments/ablation_20261013_seed1/checks/ir2_ablation_checks.log": "7b809903478dfd01e3f06bcc1915c165a6f89c40044bb5cd8d4aa1ac38baf22e",
+    "experiments/ablation_20261013_seed1/checks/ir2_ablation_cuda_checks.log": "42b17921a2bcbaca9a726b712558270b9e8ce13aad768299ea75191672b009f2",
+    "tests/test_finite_contact_ablation.py": "8122984987cbea4761f6d4a6c832b85795bbc261871677d3acb7f88d0e363f8a",
+    "tests/test_finite_contact_memory.py": "26fae8b032f69c70dd2dfb10e2dd94244250fe1c43b31ae508e1392a838efb6e"
+  }
+}

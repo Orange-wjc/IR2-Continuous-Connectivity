@@ -1,0 +1,142 @@
+{
+  "native": {
+    "IR2_FIFO": {
+      "episode": 10060,
+      "updates": 80632,
+      "variant": "B0",
+      "content": "fifo",
+      "coupled": true,
+      "content_updates": 5000,
+      "imitation_updates": 0,
+      "successful_episodes_stored": 0,
+      "log_alpha": -9.748468399047852,
+      "optimizer_lrs": {
+        "policy_optimizer": 1e-05,
+        "alpha_optimizer": 0.0001
+      },
+      "critic_lr": 1e-05,
+      "content_adam_steps": [
+        5000
+      ],
+      "policy_adam_steps": [
+        80632
+      ],
+      "replay_size": 10000,
+      "content_equals_common": true,
+      "context_equals_common": true,
+      "policy_differs_from_common": true,
+      "stored_replay_rendezvous_diagnostic": {
+        "sample_count": 512,
+        "any_positive_fraction": 0.822265625,
+        "legal_candidate_positive_fraction": 0.787109375,
+        "mean_max": 3.1382773429991175,
+        "caveat": "Different replay maps/states; this is signal presence, not causal effect or performance"
+      }
+    },
+    "AB_learned": {
+      "episode": 10060,
+      "updates": 80632,
+      "variant": "AB",
+      "content": "learned",
+      "coupled": true,
+      "content_updates": 5000,
+      "imitation_updates": 0,
+      "successful_episodes_stored": 0,
+      "log_alpha": -9.788262367248535,
+      "optimizer_lrs": {
+        "policy_optimizer": 1e-05,
+        "alpha_optimizer": 0.0001
+      },
+      "critic_lr": 1e-05,
+      "content_adam_steps": [
+        5000
+      ],
+      "policy_adam_steps": [
+        80632
+      ],
+      "replay_size": 10000,
+      "content_equals_common": true,
+      "context_equals_common": true,
+      "policy_differs_from_common": true,
+      "stored_replay_rendezvous_diagnostic": {
+        "sample_count": 512,
+        "any_positive_fraction": 0.814453125,
+        "legal_candidate_positive_fraction": 0.470703125,
+        "mean_max": 0.49229658333185355,
+        "caveat": "Different replay maps/states; this is signal presence, not causal effect or performance"
+      },
+      "rendezvous_feature_forward_sensitivity": {
+        "stored_observations": 16,
+        "changed_distributions": 11,
+        "mean_max_probability_change": 0.1501328154699877,
+        "maximum_probability_change": 0.9533921480178833,
+        "scope": "Offline actor forward only, no sampled action, no environment step and no SAC"
+      }
+    }
+  },
+  "generated": {
+    "B0_fifo": {
+      "episode": 1000,
+      "updates": 29000,
+      "variant": "B0",
+      "content": "fifo",
+      "coupled": true,
+      "content_updates": 5000,
+      "imitation_updates": 28530,
+      "successful_episodes_stored": 972,
+      "log_alpha": -4.8173322677612305,
+      "optimizer_lrs": {
+        "policy_optimizer": 1e-05,
+        "alpha_optimizer": 0.0001
+      },
+      "critic_lr": 0.0001,
+      "content_adam_steps": [
+        5000
+      ],
+      "policy_adam_steps": [
+        29000
+      ],
+      "replay_size": 12000,
+      "stored_replay_rendezvous_diagnostic": {
+        "sample_count": 512,
+        "any_positive_fraction": 0.998046875,
+        "legal_candidate_positive_fraction": 0.998046875,
+        "mean_max": 3.985843749716878,
+        "caveat": "Different replay maps/states; this is signal presence, not causal effect or performance"
+      }
+    },
+    "AB_learned": {
+      "episode": 1000,
+      "updates": 29000,
+      "variant": "AB",
+      "content": "learned",
+      "coupled": true,
+      "content_updates": 5000,
+      "imitation_updates": 28550,
+      "successful_episodes_stored": 987,
+      "log_alpha": -4.800380706787109,
+      "optimizer_lrs": {
+        "policy_optimizer": 1e-05,
+        "alpha_optimizer": 0.0001
+      },
+      "critic_lr": 0.0001,
+      "content_adam_steps": [
+        5000
+      ],
+      "policy_adam_steps": [
+        29000
+      ],
+      "replay_size": 12000,
+      "stored_replay_rendezvous_diagnostic": {
+        "sample_count": 512,
+        "any_positive_fraction": 0.982421875,
+        "legal_candidate_positive_fraction": 0.97265625,
+        "mean_max": 0.8212621721933147,
+        "caveat": "Different replay maps/states; this is signal presence, not causal effect or performance"
+      }
+    }
+  },
+  "common_start_updates": 216,
+  "common_context_matches_warmup_policy": true,
+  "trained_head_differs_from_pre_head": true
+}

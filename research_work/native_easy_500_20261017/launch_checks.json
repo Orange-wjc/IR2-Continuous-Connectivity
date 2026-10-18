@@ -1,0 +1,46 @@
+{
+  "source_frozen_verified": true,
+  "parent_and_old_formal_protected": true,
+  "full_state_inheritance_verified": true,
+  "no_prefix_or_head_retrained": true,
+  "critical_training_functions_ast_identical": [
+    "save_state",
+    "restore_state",
+    "jobs_for",
+    "commit_episode",
+    "group_config",
+    "rng_state",
+    "restore_rng",
+    "recover_logs",
+    "configuration",
+    "shared_initialization",
+    "evaluate_pair"
+  ],
+  "train_maps": 500,
+  "development_maps": 100,
+  "previous100_order_preserved": true,
+  "next_map_index": 100,
+  "new_updates_per_map": 20,
+  "completed_episodes": {
+    "IR2_FIFO": 102,
+    "AB_learned": 101
+  },
+  "progress": {
+    "IR2_FIFO": {
+      "episode": 102,
+      "learner_updates": 11040,
+      "imitation_updates": 10170,
+      "success_episodes": 44,
+      "committed": "2026-10-17T19:49:49.846386+08:00"
+    },
+    "AB_learned": {
+      "episode": 101,
+      "learner_updates": 11020,
+      "imitation_updates": 10150,
+      "success_episodes": 49,
+      "committed": "2026-10-17T19:49:09.815876+08:00"
+    }
+  },
+  "stage": "easy_paired_training",
+  "time": "2026-10-17T19:49:50.304461+08:00"
+}

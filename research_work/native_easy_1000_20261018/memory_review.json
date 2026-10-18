@@ -1,0 +1,18 @@
+{
+  "IR2_FIFO": {
+    "checkpoint_mib": 375.5202007293701,
+    "retained_success_maps": 228,
+    "successful_transitions": 47316,
+    "compressed_success_payload_mib": 266.07157039642334,
+    "projected_1000_success_map_payload_gib": 1.1396294647599,
+    "projection_note": "Payload-only extrapolation at current mean; Python overhead, graph growth and replay are additional. Runtime memory guards remain authoritative."
+  },
+  "AB_learned": {
+    "checkpoint_mib": 317.7982769012451,
+    "retained_success_maps": 245,
+    "successful_transitions": 40606,
+    "compressed_success_payload_mib": 210.85490798950195,
+    "projected_1000_success_map_payload_gib": 0.8404612085040735,
+    "projection_note": "Payload-only extrapolation at current mean; Python overhead, graph growth and replay are additional. Runtime memory guards remain authoritative."
+  }
+}

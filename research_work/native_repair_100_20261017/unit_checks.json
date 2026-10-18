@@ -1,0 +1,23 @@
+{
+  "numerical_checks": [
+    {
+      "microbatch": 16,
+      "max_parameter_error_vs_validated_recipe": 1.4551915228366852e-11,
+      "imitation_loss": 1.192913293838501,
+      "checkpoint_restore_exact": true,
+      "commit_success_chain": true
+    },
+    {
+      "microbatch": 2,
+      "max_parameter_error_vs_validated_recipe": 2.551823854446411e-06,
+      "imitation_loss": 1.1929135771933943,
+      "checkpoint_restore_exact": true,
+      "commit_success_chain": true
+    }
+  ],
+  "alpha_guard": true,
+  "native_graphs_retained": true,
+  "actual_training_map_rollouts": 0,
+  "actual_development_rollouts": 0,
+  "fixture_updates_only": true
+}

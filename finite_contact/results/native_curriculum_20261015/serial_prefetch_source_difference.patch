@@ -1,0 +1,11 @@
+--- serial/native_driver.py
++++ prefetch/native_driver.py
+@@ -378,6 +378,8 @@
+             write(directory/'status.json',state)
+             if not plan.get('paired_learning_enabled') and len(set(completed.values()))==1 and min(len(v.replay) for v in learners.values())>=cfg.warmup:
+                 plan.update(paired_learning_enabled=True,paired_warmup_episodes=min(completed.values()))
++            if len(set(completed.values()))==1:
++                assert len({v.updates for v in learners.values()})==1,'Paired SAC budgets diverged'
+             plan.update(active_group=name,completed_episodes=completed.copy(),sac_updates={g:v.updates for g,v in learners.items()},updated=now())
+             write(root/'pipeline.json',plan)
+             print(json.dumps(dict(stage='easy',group=name,episode=completed[name],updates=x.updates)),flush=True)

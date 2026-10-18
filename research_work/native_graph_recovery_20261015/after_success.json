@@ -1,0 +1,112 @@
+{
+  "metric": {
+    "success": false,
+    "time": 706.3571544913934,
+    "coverage": [
+      0.9094609375,
+      0.9843515625
+    ],
+    "union_coverage": 1.0,
+    "coverage_deficit": 0.0986002513381193,
+    "union_completion_time": 439.5120328387428,
+    "total_distance": 13360.956615931336,
+    "wait_seconds": [
+      20.055462692476926,
+      17.65750490342741
+    ],
+    "wait_disconnected_seconds": [
+      11.95599772875754,
+      15.336106857230057
+    ],
+    "wait_without_new_map_seconds": [
+      11.95599772875754,
+      16.65750490342741
+    ],
+    "synchronization_idle_seconds": [
+      148.11206234068297,
+      113.47622771858785
+    ],
+    "sent_bytes": 1033488,
+    "delivered_bytes": 1033161,
+    "control_bytes": 102438,
+    "novel_received_cells": 79463,
+    "duplicate_received_cells": 91573,
+    "connected_seconds": 257.3829770500401,
+    "queue_bytes": [
+      146861,
+      260191
+    ],
+    "reward_components": {
+      "exploration": [
+        19.33775133589706,
+        19.33775133589706
+      ],
+      "delivery": [
+        83.67668805130505,
+        74.10160526693366
+      ],
+      "time": [
+        -14.004608625288935,
+        -14.004608625288935
+      ],
+      "distance": [
+        -12.826823885740561,
+        -13.705557021817926
+      ],
+      "completion": [
+        0.0,
+        0.0
+      ],
+      "frontier_shaping": [
+        0.0,
+        0.0
+      ]
+    },
+    "map": {
+      "split": "train",
+      "index": 817,
+      "layout_id": "DungeonMaps/train/easy/img_9253.png",
+      "family": "dungeon_easy",
+      "source_file": "DungeonMaps/train/easy/img_9253.png",
+      "file_sha256": "2120727ca0b31692a4de3f055f3d490d1630a3a83e009bcf53cc3867164e1084",
+      "sha256": "3d5c239005d6d8cd2ee447270efd461fb4e81aff0e0e76a7b4839b3824440ba4",
+      "units": "native map pixels",
+      "native_shape": [
+        480,
+        640
+      ],
+      "starts": [
+        [
+          123.0,
+          109.0
+        ],
+        [
+          104.0,
+          98.0
+        ]
+      ]
+    },
+    "episode": 818,
+    "action_seed": 8185827,
+    "decisions": 196,
+    "truncated": true,
+    "interrupted": false,
+    "return_values": [
+      76.18300687617244,
+      65.72919095572375
+    ],
+    "stop_reason": "decision_limit",
+    "capped_time": 3000.0,
+    "wall_seconds": 129.14284352597315,
+    "peak_graph_nodes": 227
+  },
+  "audit": {
+    "movement_segments": 392,
+    "wall_crossings": 0,
+    "boundary_contacts": 0,
+    "geometry_model": "continuous point / pixel interiors",
+    "geometry_tolerance": 1e-10,
+    "radio_events": 18126,
+    "radio_totals_and_capacity_passed": true
+  }
+}

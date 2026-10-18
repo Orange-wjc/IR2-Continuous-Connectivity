@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "checked_at": "2026-10-18T13:14:25.727368+08:00",
+  "checks": {
+    "running_and_not_preflight": true,
+    "fixed_ten_maps_and_manual_evaluation": true,
+    "no_scheduled_or_success_stop": true,
+    "source_snapshot_intact": true,
+    "data_manifest_intact": true,
+    "IR2_FIFO_real_task_limits": true,
+    "IR2_FIFO_unchanged_learning_recipe": true,
+    "IR2_FIFO_empty_initial_replay_success": true,
+    "IR2_FIFO_first_map_and_real_updates": true,
+    "IR2_FIFO_first_trajectory_matches_old_common_start": true,
+    "IR2_FIFO_http_tensorboard_live_map_and_training_tags": true,
+    "AB_learned_real_task_limits": true,
+    "AB_learned_unchanged_learning_recipe": true,
+    "AB_learned_empty_initial_replay_success": true,
+    "AB_learned_first_map_and_real_updates": true,
+    "AB_learned_first_trajectory_matches_old_common_start": true,
+    "AB_learned_http_tensorboard_live_map_and_training_tags": true,
+    "identical_initial_learner_and_rng": true,
+    "historical_files_unchanged": true,
+    "previous100_remains_saved_and_stopped": true,
+    "services_active_without_restart": true
+  },
+  "completed_episodes": {
+    "IR2_FIFO": 2,
+    "AB_learned": 1
+  },
+  "first_records": {
+    "IR2_FIFO": {
+      "episode": 1,
+      "decisions": 196,
+      "success": false,
+      "stop_reason": "decision_limit",
+      "learner_updates": 9020,
+      "new_sac_updates": 20
+    },
+    "AB_learned": {
+      "episode": 1,
+      "decisions": 196,
+      "success": false,
+      "stop_reason": "decision_limit",
+      "learner_updates": 9020,
+      "new_sac_updates": 20
+    }
+  },
+  "services": {
+    "ir2-native-easy10-cycles-20261018": {
+      "MainPID": "974176",
+      "NRestarts": "0",
+      "ActiveState": "active"
+    },
+    "ir2-native-easy10-cycles-review-20261018": {
+      "MainPID": "974179",
+      "NRestarts": "0",
+      "ActiveState": "active"
+    },
+    "ir2-native-easy10-tensorboard-20261018": {
+      "MainPID": "974181",
+      "NRestarts": "0",
+      "ActiveState": "active"
+    }
+  },
+  "tensorboard_url": "http://127.0.0.1:6009",
+  "scope": "Actual 196-decision ten-map training launch; not convergence evidence"
+}

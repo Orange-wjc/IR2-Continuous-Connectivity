@@ -1,0 +1,60 @@
+{
+  "status": "passed",
+  "unchanged_original_png_files": 17299,
+  "unchanged_old_source_files": 54,
+  "preflights": [
+    {
+      "run": "native_preflight_20261015",
+      "sac_updates": 48,
+      "head_updates": 4,
+      "validation_policy_executions": 0,
+      "test_policy_executions": 0
+    },
+    {
+      "run": "native_preflight_20261015_v2",
+      "sac_updates": 48,
+      "head_updates": 4,
+      "validation_policy_executions": 0,
+      "test_policy_executions": 0
+    },
+    {
+      "run": "native_entry_serial_preflight_20261015",
+      "sac_updates": 48,
+      "head_updates": 4,
+      "validation_policy_executions": 0,
+      "test_policy_executions": 0
+    },
+    {
+      "run": "native_entry_prefetch_preflight_20261015",
+      "sac_updates": 48,
+      "head_updates": 4,
+      "validation_policy_executions": 0,
+      "test_policy_executions": 0
+    },
+    {
+      "run": "native_entry_serial_preflight_20261015_v2",
+      "sac_updates": 48,
+      "head_updates": 4,
+      "validation_policy_executions": 0,
+      "test_policy_executions": 0
+    },
+    {
+      "run": "native_entry_prefetch_preflight_20261015_v2",
+      "sac_updates": 48,
+      "head_updates": 4,
+      "validation_policy_executions": 0,
+      "test_policy_executions": 0
+    }
+  ],
+  "preflight_sac_updates": 288,
+  "preflight_head_updates": 24,
+  "performance_probe_sac_updates": 19,
+  "cpu_unit_fixture_sac_updates": 16,
+  "performance_probe_full_training_rollouts": 32,
+  "note": "All engineering runs are outside the formal run. Performance rollouts include 4 initial hash-helper failure rollouts, 12 successful FIFO timings, 16 AB timings. Preflights also include explicitly redirected train-map evaluations. No formal weights transferred.",
+  "chosen_workers": 8,
+  "chosen_microbatch": 64,
+  "effective_batch": 128,
+  "cross_method_prefetch": true,
+  "formal_seed": 101
+}

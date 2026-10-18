@@ -1,0 +1,102 @@
+{
+  "status": "passed",
+  "time": "2026-10-12T22:23:25.046008+08:00",
+  "authorization": "用户明确要求：继续中断训练，同时解决内存不足、改进代码并适配这台机器。",
+  "scope": "Lossless memory/serialization engineering only; no network, optimizer, training budget, data schedule or sampling change.",
+  "source_identity_file": "source_identity_memory_resume.json",
+  "source_identity_sha256": "f262248d85e93c89af421ded808c7dd34fa3963a4fc2339d27acddddd3329354",
+  "original_source_identity_file": "source_identity_before.json",
+  "original_source_identity_sha256": "721a18fec3c837c84ca33323d32070dda52f8ed54a230de1bff8e8ed481607b5",
+  "changed_original_sources": {
+    "finite_contact_scale.py": {
+      "before": "6b601ea9be33c8c52b352a28d94b2bb75c3622c0689feada121e9efe53c2e7f9",
+      "after": "344d83b493928f1277d570172f53a57ca6eb20c47f8ab059ee715d37f3e4bb47"
+    },
+    "finite_contact_multimap_joint.py": {
+      "before": "78377768cbb4f88c4d6e2b1e2438c258c29bd362883302d35a8287ae98a616af",
+      "after": "b8c117269ad5ef10b203a860eb4187835316353bfc20c3814b7b5b24a3025783"
+    },
+    "finite_contact_train.py": {
+      "before": "703adeea1c8732bfe877d2a769d87b31236b8420e9eaf5a3d6f1e70c03c1daba",
+      "after": "93f733be021f83fd47db761eee4c360c18d645fd4ee5332868c6e7b91f3ff3df"
+    },
+    "finite_contact/learning.py": {
+      "before": "83e570d73ce9aedfb227157bdf80c2fde3311887de675a71f06f1ac37374e278",
+      "after": "2d34663b3fd30de1cf95b4889449754da0671db15d4f5589f3fc8b00a249117c"
+    }
+  },
+  "new_dependencies": [
+    "finite_contact/memory.py",
+    "finite_contact_identity.py",
+    "finite_contact_memory_recovery.py",
+    "finite_contact_thousand_analysis.py",
+    "run_thousand_maps_foreground.sh",
+    "finite_contact/profiles/rtx3090_32gb.json"
+  ],
+  "migration_checks": {
+    "A_rule": {
+      "status": "passed",
+      "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/thousand_maps_20261012_seed1/oom_20261012_213038/rule_latest_episode880.pth",
+      "output": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/thousand_maps_20261012_seed1/memory_recovery/A_rule_latest.pth",
+      "source_sha256": "57833533bf6d34fe7d281131b47290b7438c26bea6f86154a2680fd4403c9bb4",
+      "output_sha256": "563251096cb8829c0f13467c7eaf8ae67e15ae9cabd41c02e61debc0865627ba",
+      "logical_sha256_before_and_after": "88d5ba86954d2f88c610d645bd1743db481726b62daf33beb1c0a04792d3d553",
+      "episode": 880,
+      "updates": 26495,
+      "replay_transitions": 12000,
+      "success_episodes": 833,
+      "unique_observations_encoded": 191160,
+      "original_array_bytes": 3298656960,
+      "compressed_payload_bytes": 299955801,
+      "source_file_bytes": 4592205998,
+      "output_file_bytes": 351988566,
+      "peak_rss_kib": 8762880,
+      "virtual_memory_cap_gib": 22,
+      "wall_seconds": 58.21468499299954,
+      "unchanged": "All networks, Adam states, RNG states, config, replay order/values, success ordering/values, episode and update counters.",
+      "original_checkpoint_preserved_at": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/thousand_maps_20261012_seed1/oom_20261012_213038/rule_latest_episode880.pth"
+    },
+    "AB_learned": {
+      "status": "passed",
+      "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/thousand_maps_20261012_seed1/AB_learned/latest.pth",
+      "output": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/thousand_maps_20261012_seed1/memory_recovery/AB_learned_latest.pth",
+      "source_sha256": "fdd712f312d1d2d092263b2e8a282aa1f27ae72d9098b228dcd4f07c6dd47264",
+      "output_sha256": "8faf426f65f0e669f79b76bcd5163d650dda43488e3d99d12eec1addc23b191c",
+      "logical_sha256_before_and_after": "2efadeb38849de1bb366ffb35192fa204d3bb9ee7d2069f9c5d5aee1e283672d",
+      "episode": 1000,
+      "updates": 28895,
+      "replay_transitions": 12000,
+      "success_episodes": 980,
+      "unique_observations_encoded": 172696,
+      "original_array_bytes": 2980042176,
+      "compressed_payload_bytes": 279123323,
+      "source_file_bytes": 4154372734,
+      "output_file_bytes": 329022390,
+      "peak_rss_kib": 7989872,
+      "virtual_memory_cap_gib": 22,
+      "wall_seconds": 54.33566917999997,
+      "unchanged": "All networks, Adam states, RNG states, config, replay order/values, success ordering/values, episode and update counters.",
+      "original_checkpoint_preserved_at": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/thousand_maps_20261012_seed1/memory_recovery/AB_learned_original_latest.pth"
+    }
+  },
+  "checks": {
+    "full_behavior_tests": 77,
+    "cpu_cuda_and_identity_tests": 5,
+    "cuda_used": "RTX 3090",
+    "behavior_log_sha256": "e0f1e55fcdaed98c3aaf8a76c4011dce2778903cc55e2604624460a7d28567e3",
+    "cuda_log_sha256": "9a7304ef52357542b7fcb8ef18d8825f411738f006c5851493bdaa96d639d86c",
+    "historical_report_render": "passed; revised recovery accounting tested"
+  },
+  "retained_budget": {
+    "episodes_per_group": 1000,
+    "new_sac_per_group": 20000,
+    "final_cumulative_sac": 28895
+  },
+  "additional_replayed_work_expected": {
+    "foreground_maps": 6,
+    "foreground_updates": 120,
+    "OOM_maps": 10,
+    "OOM_updates": 200
+  },
+  "hardware_profile": "finite_contact/profiles/rtx3090_32gb.json"
+}

@@ -1,0 +1,733 @@
+{
+  "status": "learned_endpoint_audited_other_methods_incomplete",
+  "scope": "Only completed AB_learned fixed endpoint; not a completed three-method comparison.",
+  "test_policy_evaluations": 0,
+  "development": {
+    "maps": 20,
+    "successes": 20,
+    "mean_capped_time": 105.34808714392864,
+    "median_time": 102.97822101663039,
+    "mean_coverage_deficit": 0.095688426867063,
+    "min_time": 73.30207253316067,
+    "max_time": 161.64918874123043,
+    "per_map": [
+      {
+        "index": 0,
+        "time": 134.46497928853526,
+        "coverage": [
+          0.9930133157981259,
+          0.9906912707545619
+        ]
+      },
+      {
+        "index": 1,
+        "time": 161.64918874123043,
+        "coverage": [
+          0.9914784197887668,
+          0.9914784197887668
+        ]
+      },
+      {
+        "index": 2,
+        "time": 74.56978979278267,
+        "coverage": [
+          0.9931644729565313,
+          0.9987833204291561
+        ]
+      },
+      {
+        "index": 3,
+        "time": 118.01150319230895,
+        "coverage": [
+          0.9911549260095839,
+          0.9923793037934602
+        ]
+      },
+      {
+        "index": 4,
+        "time": 73.30207253316067,
+        "coverage": [
+          0.990757330769567,
+          0.9909758335882533
+        ]
+      },
+      {
+        "index": 5,
+        "time": 79.5319841029942,
+        "coverage": [
+          0.9943115388074467,
+          0.9943115388074467
+        ]
+      },
+      {
+        "index": 6,
+        "time": 160.1571022546869,
+        "coverage": [
+          0.9922390849434185,
+          0.9922390849434185
+        ]
+      },
+      {
+        "index": 7,
+        "time": 131.18400703944948,
+        "coverage": [
+          0.9986397201710067,
+          0.9985533531977372
+        ]
+      },
+      {
+        "index": 8,
+        "time": 87.78807949083468,
+        "coverage": [
+          0.9908033073551953,
+          0.9903499492670711
+        ]
+      },
+      {
+        "index": 9,
+        "time": 100.95731685705454,
+        "coverage": [
+          0.9927523764462988,
+          0.9927523764462988
+        ]
+      },
+      {
+        "index": 10,
+        "time": 96.53736775720581,
+        "coverage": [
+          0.9985245045740359,
+          0.9915102263182984
+        ]
+      },
+      {
+        "index": 11,
+        "time": 92.04757325684776,
+        "coverage": [
+          0.9977549711353432,
+          0.9942912123155869
+        ]
+      },
+      {
+        "index": 12,
+        "time": 102.82723321719376,
+        "coverage": [
+          0.9902142119752236,
+          0.9902142119752236
+        ]
+      },
+      {
+        "index": 13,
+        "time": 81.04937577640698,
+        "coverage": [
+          0.9921817632067729,
+          0.9921817632067729
+        ]
+      },
+      {
+        "index": 14,
+        "time": 110.5162216395816,
+        "coverage": [
+          0.9999112590127566,
+          0.9909484193011647
+        ]
+      },
+      {
+        "index": 15,
+        "time": 77.69696075545203,
+        "coverage": [
+          0.9932114995043317,
+          0.9930175423473127
+        ]
+      },
+      {
+        "index": 16,
+        "time": 109.08431340365274,
+        "coverage": [
+          0.9960370155199602,
+          0.9978006473566271
+        ]
+      },
+      {
+        "index": 17,
+        "time": 108.92867577858445,
+        "coverage": [
+          0.9983577816737311,
+          0.9931648210203946
+        ]
+      },
+      {
+        "index": 18,
+        "time": 103.52878918454297,
+        "coverage": [
+          0.9907850179579272,
+          0.9937609030271934
+        ]
+      },
+      {
+        "index": 19,
+        "time": 103.129208816067,
+        "coverage": [
+          0.9906190508956627,
+          0.9906190508956627
+        ]
+      }
+    ]
+  },
+  "training_episodes": 1000,
+  "online_training_successes": 980,
+  "new_sac_updates": 20000,
+  "final_cumulative_sac_updates": 28895,
+  "optimizer_audit": {
+    "policy_optimizer": {
+      "parameters_with_state": 90,
+      "initial_step_range": [
+        7395,
+        7395
+      ],
+      "final_step_range": [
+        27395,
+        27395
+      ],
+      "increment_per_parameter": 20000
+    },
+    "alpha_optimizer": {
+      "parameters_with_state": 1,
+      "initial_step_range": [
+        7395,
+        7395
+      ],
+      "final_step_range": [
+        27395,
+        27395
+      ],
+      "increment_per_parameter": 20000
+    },
+    "q0_optimizer": {
+      "parameters_with_state": 90,
+      "initial_step_range": [
+        7395,
+        7395
+      ],
+      "final_step_range": [
+        27395,
+        27395
+      ],
+      "increment_per_parameter": 20000
+    },
+    "q1_optimizer": {
+      "parameters_with_state": 90,
+      "initial_step_range": [
+        7395,
+        7395
+      ],
+      "final_step_range": [
+        27395,
+        27395
+      ],
+      "increment_per_parameter": 20000
+    },
+    "content_optimizer_unchanged": true
+  },
+  "weight_change_l2": {
+    "policy": 1.4661436168551172,
+    "critics": 14.650415804901746,
+    "targets": 14.628056527306606,
+    "content": 0.0,
+    "context_encoder": 0.0
+  },
+  "training_physical_audit": {
+    "rollouts": 1000,
+    "movement_segments": 89712,
+    "wall_crossings": 0,
+    "coverage_union_and_per_segment_speed_recomputed": true,
+    "radio_and_time_caps_passed": true,
+    "failures": [
+      {
+        "map_index": 691,
+        "coverage": [
+          0.9279314735501795,
+          0.9962958675772658
+        ],
+        "union_coverage": 0.996319018404908,
+        "time": 256.0,
+        "direct_task_deficit": "local_map_synchronization_below_threshold",
+        "unexplored_free_cells": 159,
+        "explored_cells_missing_at_worst_robot": 2954,
+        "queue_bytes": [
+          41887,
+          63808
+        ],
+        "connected_seconds": 65.03085513259443,
+        "wait_seconds": [
+          12.262515178442966,
+          7.634627344007359
+        ]
+      },
+      {
+        "map_index": 713,
+        "coverage": [
+          1.0,
+          0.9648797705713655
+        ],
+        "union_coverage": 1.0,
+        "time": 256.0,
+        "direct_task_deficit": "local_map_synchronization_below_threshold",
+        "unexplored_free_cells": 0,
+        "explored_cells_missing_at_worst_robot": 1592,
+        "queue_bytes": [
+          18041,
+          222
+        ],
+        "connected_seconds": 166.25139213390486,
+        "wait_seconds": [
+          3.530056647916492,
+          15.013509488726138
+        ]
+      },
+      {
+        "map_index": 34,
+        "coverage": [
+          0.9893997528776745,
+          0.9893997528776745
+        ],
+        "union_coverage": 0.9893997528776745,
+        "time": 256.0,
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "unexplored_free_cells": 489,
+        "explored_cells_missing_at_worst_robot": 0,
+        "queue_bytes": [
+          0,
+          0
+        ],
+        "connected_seconds": 222.01079169202254,
+        "wait_seconds": [
+          1.6666666666666667,
+          2.298852370688954
+        ]
+      },
+      {
+        "map_index": 238,
+        "coverage": [
+          0.9042845955923481,
+          0.9042845955923481
+        ],
+        "union_coverage": 0.9042845955923481,
+        "time": 256.0,
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "unexplored_free_cells": 4278,
+        "explored_cells_missing_at_worst_robot": 0,
+        "queue_bytes": [
+          0,
+          0
+        ],
+        "connected_seconds": 203.75662585872627,
+        "wait_seconds": [
+          7.964045207910317,
+          3.25
+        ]
+      },
+      {
+        "map_index": 241,
+        "coverage": [
+          0.8661850053298591,
+          0.8661850053298591
+        ],
+        "union_coverage": 0.8661850053298591,
+        "time": 256.0,
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "unexplored_free_cells": 5649,
+        "explored_cells_missing_at_worst_robot": 0,
+        "queue_bytes": [
+          0,
+          0
+        ],
+        "connected_seconds": 221.71341315077885,
+        "wait_seconds": [
+          7.2736892706218255,
+          2.298852370688954
+        ]
+      },
+      {
+        "map_index": 794,
+        "coverage": [
+          1.0,
+          0.9645198790978842
+        ],
+        "union_coverage": 1.0,
+        "time": 256.0,
+        "direct_task_deficit": "local_map_synchronization_below_threshold",
+        "unexplored_free_cells": 0,
+        "explored_cells_missing_at_worst_robot": 1526,
+        "queue_bytes": [
+          13084,
+          144
+        ],
+        "connected_seconds": 166.6823512980009,
+        "wait_seconds": [
+          14.940355937288492,
+          9.083333333333334
+        ]
+      },
+      {
+        "map_index": 996,
+        "coverage": [
+          0.9995569994093325,
+          0.9671124799594971
+        ],
+        "union_coverage": 0.9995569994093325,
+        "time": 256.0,
+        "direct_task_deficit": "local_map_synchronization_below_threshold",
+        "unexplored_free_cells": 21,
+        "explored_cells_missing_at_worst_robot": 1538,
+        "queue_bytes": [
+          18445,
+          46
+        ],
+        "connected_seconds": 145.77986926400322,
+        "wait_seconds": [
+          8.569101166801854,
+          8.857022603955159
+        ]
+      },
+      {
+        "map_index": 837,
+        "coverage": [
+          0.9780323895560207,
+          0.9780323895560207
+        ],
+        "union_coverage": 0.9780323895560207,
+        "time": 256.0,
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "unexplored_free_cells": 997,
+        "explored_cells_missing_at_worst_robot": 0,
+        "queue_bytes": [
+          0,
+          0
+        ],
+        "connected_seconds": 241.8230813901311,
+        "wait_seconds": [
+          0.0,
+          2.3570226039551585
+        ]
+      },
+      {
+        "map_index": 434,
+        "coverage": [
+          0.7978441715489023,
+          0.9248795946875716
+        ],
+        "union_coverage": 0.9248795946875716,
+        "time": 256.0,
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "unexplored_free_cells": 3603,
+        "explored_cells_missing_at_worst_robot": 6093,
+        "queue_bytes": [
+          7200,
+          53762
+        ],
+        "connected_seconds": 73.25923663413634,
+        "wait_seconds": [
+          16.02100680100471,
+          8.416666666666666
+        ]
+      },
+      {
+        "map_index": 574,
+        "coverage": [
+          0.9622541436464088,
+          0.9622541436464088
+        ],
+        "union_coverage": 0.9622541436464088,
+        "time": 256.0,
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "unexplored_free_cells": 1708,
+        "explored_cells_missing_at_worst_robot": 0,
+        "queue_bytes": [
+          0,
+          0
+        ],
+        "connected_seconds": 214.65376908806732,
+        "wait_seconds": [
+          4.0236892706218255,
+          2.298852370688954
+        ]
+      },
+      {
+        "map_index": 814,
+        "coverage": [
+          0.869772676119739,
+          0.869772676119739
+        ],
+        "union_coverage": 0.869772676119739,
+        "time": 256.0,
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "unexplored_free_cells": 5786,
+        "explored_cells_missing_at_worst_robot": 0,
+        "queue_bytes": [
+          0,
+          0
+        ],
+        "connected_seconds": 240.52918015761645,
+        "wait_seconds": [
+          5.548852370688953,
+          0.6021338224949773
+        ]
+      },
+      {
+        "map_index": 29,
+        "coverage": [
+          0.9507214991271297,
+          0.9507214991271297
+        ],
+        "union_coverage": 0.9507214991271297,
+        "time": 256.0,
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "unexplored_free_cells": 2230,
+        "explored_cells_missing_at_worst_robot": 0,
+        "queue_bytes": [
+          0,
+          0
+        ],
+        "connected_seconds": 207.59061478965845,
+        "wait_seconds": [
+          0.0,
+          7.21551903735562
+        ]
+      },
+      {
+        "map_index": 959,
+        "coverage": [
+          0.997435839252082,
+          0.8917152646985409
+        ],
+        "union_coverage": 0.9977989062606367,
+        "time": 256.0,
+        "direct_task_deficit": "local_map_synchronization_below_threshold",
+        "unexplored_free_cells": 97,
+        "explored_cells_missing_at_worst_robot": 4675,
+        "queue_bytes": [
+          80849,
+          39037
+        ],
+        "connected_seconds": 67.97984584747962,
+        "wait_seconds": [
+          8.7391714737574,
+          0.0
+        ]
+      },
+      {
+        "map_index": 498,
+        "coverage": [
+          1.0,
+          0.9615616992020667
+        ],
+        "union_coverage": 1.0,
+        "time": 256.0,
+        "direct_task_deficit": "local_map_synchronization_below_threshold",
+        "unexplored_free_cells": 0,
+        "explored_cells_missing_at_worst_robot": 1845,
+        "queue_bytes": [
+          14006,
+          175
+        ],
+        "connected_seconds": 229.70177611432243,
+        "wait_seconds": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "map_index": 308,
+        "coverage": [
+          1.0,
+          0.9756986381241931
+        ],
+        "union_coverage": 1.0,
+        "time": 256.0,
+        "direct_task_deficit": "local_map_synchronization_below_threshold",
+        "unexplored_free_cells": 0,
+        "explored_cells_missing_at_worst_robot": 1167,
+        "queue_bytes": [
+          18644,
+          1108
+        ],
+        "connected_seconds": 96.73168359360777,
+        "wait_seconds": [
+          5.000000000000001,
+          18.62493689380171
+        ]
+      },
+      {
+        "map_index": 603,
+        "coverage": [
+          0.9970253718285215,
+          0.9812992125984252
+        ],
+        "union_coverage": 0.9970253718285215,
+        "time": 256.0,
+        "direct_task_deficit": "local_map_synchronization_below_threshold",
+        "unexplored_free_cells": 136,
+        "explored_cells_missing_at_worst_robot": 719,
+        "queue_bytes": [
+          9219,
+          233
+        ],
+        "connected_seconds": 135.93171650029646,
+        "wait_seconds": [
+          9.833333333333334,
+          6.262860744379226
+        ]
+      },
+      {
+        "map_index": 912,
+        "coverage": [
+          0.9265959973229129,
+          0.9265959973229129
+        ],
+        "union_coverage": 0.9265959973229129,
+        "time": 256.0,
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "unexplored_free_cells": 3400,
+        "explored_cells_missing_at_worst_robot": 0,
+        "queue_bytes": [
+          0,
+          0
+        ],
+        "connected_seconds": 191.78178895879344,
+        "wait_seconds": [
+          3.3333333333333335,
+          0.0
+        ]
+      },
+      {
+        "map_index": 620,
+        "coverage": [
+          0.9573130083107417,
+          0.9573130083107417
+        ],
+        "union_coverage": 0.9573130083107417,
+        "time": 256.0,
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "unexplored_free_cells": 1921,
+        "explored_cells_missing_at_worst_robot": 0,
+        "queue_bytes": [
+          0,
+          0
+        ],
+        "connected_seconds": 176.3187763153218,
+        "wait_seconds": [
+          8.3083094747793,
+          2.3570226039551585
+        ]
+      },
+      {
+        "map_index": 176,
+        "coverage": [
+          0.9242456214391221,
+          0.9242456214391221
+        ],
+        "union_coverage": 0.9242456214391221,
+        "time": 256.0,
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "unexplored_free_cells": 3590,
+        "explored_cells_missing_at_worst_robot": 0,
+        "queue_bytes": [
+          361,
+          29
+        ],
+        "connected_seconds": 187.37464110074873,
+        "wait_seconds": [
+          5.548852370688953,
+          0.0
+        ]
+      },
+      {
+        "map_index": 357,
+        "coverage": [
+          0.9870971883425343,
+          0.9870971883425343
+        ],
+        "union_coverage": 0.9870971883425343,
+        "time": 256.0,
+        "direct_task_deficit": "team_exploration_below_threshold",
+        "unexplored_free_cells": 603,
+        "explored_cells_missing_at_worst_robot": 0,
+        "queue_bytes": [
+          17,
+          17
+        ],
+        "connected_seconds": 116.26995167321566,
+        "wait_seconds": [
+          3.25,
+          2.298852370688954
+        ]
+      }
+    ]
+  },
+  "development_physical_audit": {
+    "rollouts": 20,
+    "movement_segments": 1522,
+    "wall_crossings": 0,
+    "coverage_union_and_per_segment_speed_recomputed": true,
+    "radio_and_time_caps_passed": true,
+    "failures": []
+  },
+  "communication_event_audit": {
+    "training": {
+      "events": 6295600,
+      "rollouts": 1000,
+      "transmission_and_delivery_totals_match": true,
+      "per_sender_capacity_passed": true
+    },
+    "development": {
+      "events": 119202,
+      "rollouts": 20,
+      "transmission_and_delivery_totals_match": true,
+      "per_sender_capacity_passed": true
+    }
+  },
+  "previous_100_map_learned_seed1_pooled": {
+    "directory": "experiments/stability_replication_20261012/seed_1/pooled/AB_learned/validation_final",
+    "successes": 20,
+    "mean_capped_time": 114.47277139460206,
+    "relative_time_reduction_percent": 7.971052102180254,
+    "paired": {
+      "success_gain_for_second": 0,
+      "mean_capped_time_saved_seconds": 9.124684250673425,
+      "median_capped_time_saved_seconds": 10.664651954038014,
+      "second_faster_maps": 14,
+      "second_slower_maps": 6,
+      "both_successful_maps": 20,
+      "both_successful_mean_time_saved_seconds": 9.124684250673425,
+      "gained_success_maps": [],
+      "lost_success_maps": [],
+      "per_map_time_saved_seconds": [
+        -59.68918413133673,
+        21.230406801485657,
+        -20.27290546766622,
+        7.539599799164478,
+        -2.8697255223705014,
+        27.251861359388883,
+        -15.497894113423285,
+        21.18049297977268,
+        65.05366452364949,
+        -20.09660026527,
+        35.984940495984816,
+        -4.100569261514579,
+        2.531778859811496,
+        11.513826220986303,
+        9.815477687089725,
+        24.405464933103076,
+        6.699238709282184,
+        15.636361826062654,
+        39.78514175862881,
+        16.392307820639587
+      ]
+    },
+    "limitation": "Different training maps and update budgets; descriptive comparison only, cannot isolate map-count effect."
+  },
+  "failure_class_counts": {
+    "local_map_synchronization_below_threshold": 8,
+    "team_exploration_below_threshold": 12
+  }
+}

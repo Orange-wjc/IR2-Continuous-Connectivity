@@ -1,0 +1,103 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "group": "B0_fifo",
+      "map_index": 0,
+      "exact": true
+    },
+    {
+      "group": "B0_fifo",
+      "map_index": 37,
+      "exact": true
+    },
+    {
+      "group": "B0_fifo",
+      "map_index": 470,
+      "exact": true
+    },
+    {
+      "group": "A_fifo",
+      "map_index": 0,
+      "exact": true
+    },
+    {
+      "group": "A_fifo",
+      "map_index": 37,
+      "exact": true
+    },
+    {
+      "group": "A_fifo",
+      "map_index": 470,
+      "exact": true
+    },
+    {
+      "group": "B_learned",
+      "map_index": 0,
+      "exact": true
+    },
+    {
+      "group": "B_learned",
+      "map_index": 37,
+      "exact": true
+    },
+    {
+      "group": "B_learned",
+      "map_index": 470,
+      "exact": true
+    },
+    {
+      "group": "AB_learned",
+      "map_index": 0,
+      "exact": true
+    },
+    {
+      "group": "AB_learned",
+      "map_index": 37,
+      "exact": true
+    },
+    {
+      "group": "AB_learned",
+      "map_index": 470,
+      "exact": true
+    },
+    {
+      "group": "AB_learned-resume",
+      "map_index": 37,
+      "exact": true
+    },
+    {
+      "group": "A_rule",
+      "map_index": 0,
+      "exact": true
+    },
+    {
+      "group": "A_rule",
+      "map_index": 37,
+      "exact": true
+    },
+    {
+      "group": "A_rule",
+      "map_index": 470,
+      "exact": true
+    },
+    {
+      "group": "AB_uncoupled",
+      "map_index": 0,
+      "exact": true
+    },
+    {
+      "group": "AB_uncoupled",
+      "map_index": 37,
+      "exact": true
+    },
+    {
+      "group": "AB_uncoupled",
+      "map_index": 470,
+      "exact": true
+    }
+  ],
+  "baseline_peak_rss_mib": 1280.6328125,
+  "optimized_peak_rss_mib": 1302.58984375,
+  "test_policy_evaluations": 0
+}

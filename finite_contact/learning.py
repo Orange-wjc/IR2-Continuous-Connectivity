@@ -6,6 +6,7 @@ import numpy as np
 import torch
 from torch import nn
 from model import PolicyNet, QNet
+from finite_contact.memory import PackedObservation
 
 
 def compact_observation(observation):
@@ -19,6 +20,8 @@ def compact_observation(observation):
 
 
 def dense_observation(observation):
+    if isinstance(observation, PackedObservation):
+        observation = observation.unpack()
     adjacency = observation[-1]
     if adjacency.ndim == 2:
         return observation

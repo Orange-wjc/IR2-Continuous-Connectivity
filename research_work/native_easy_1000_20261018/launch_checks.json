@@ -1,0 +1,47 @@
+{
+  "stage": "easy_paired_training",
+  "time": "2026-10-18T07:16:04.514909+08:00",
+  "completed_episodes": {
+    "IR2_FIFO": 501,
+    "AB_learned": 501
+  },
+  "progress": {
+    "IR2_FIFO": {
+      "episode": 501,
+      "learner_updates": 19020,
+      "imitation_updates": 18150,
+      "success_episodes": 229,
+      "committed": "2026-10-18T07:15:43.779763+08:00"
+    },
+    "AB_learned": {
+      "episode": 501,
+      "learner_updates": 19020,
+      "imitation_updates": 18150,
+      "success_episodes": 246,
+      "committed": "2026-10-18T07:16:03.304163+08:00"
+    }
+  },
+  "source_frozen_verified": true,
+  "previous_runs_protected": true,
+  "old_supervisor_pause_preserved": true,
+  "full_state_inheritance_verified": true,
+  "no_prefix_or_head_retraining": true,
+  "operational_driver_functions_ast_identical": [
+    "train",
+    "save_state",
+    "restore_state",
+    "jobs_for",
+    "commit_episode",
+    "rng_state",
+    "restore_rng",
+    "recover_logs",
+    "configuration",
+    "shared_initialization",
+    "evaluate_pair"
+  ],
+  "original_train_files": 1000,
+  "development_files": 100,
+  "next_map_index": 500,
+  "planned_extra_updates_per_method": 10000,
+  "real_service_attempts": 1
+}

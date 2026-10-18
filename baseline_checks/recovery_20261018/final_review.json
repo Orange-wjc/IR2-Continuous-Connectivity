@@ -1,0 +1,11 @@
+{
+  "all_reports_passed": {
+    "repairs_verified.json": true,
+    "cuda_equivalence_verified.json": true,
+    "full_runtime_verified.json": true,
+    "saved_resume_verified.json": true
+  },
+  "production_checkpoint_byte_identical": true,
+  "original_sac_math_byte_identical": true,
+  "formal_training_restarted": false
+}

@@ -6,6 +6,7 @@ actual SIGINT save/cleanup and original checkpoint resume without learning.
 import os
 for key in ('OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','NUMEXPR_NUM_THREADS'):
     os.environ[key]='1'
+os.environ['IR2_RUN_NAME']='ir2_baseline_foreground_check_20261018'
 os.environ.setdefault('MPLBACKEND','Agg')
 os.environ.setdefault('MPLCONFIGDIR','/tmp/ir2-original-check-mpl')
 from pathlib import Path
@@ -14,7 +15,7 @@ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT));os.chdir(R
 import ray,torch
 import driver
 from runner import Runner
-from baseline_support import Progress,write_json
+from baseline_support import Progress,write_json,prepare_maps,sha256
 from tensorboard.backend.event_processing.event_accumulator import EventAccumulator
 
 @ray.remote(num_cpus=1,num_gpus=.25)
@@ -34,6 +35,10 @@ class StopProgress(Progress):
 def main():
     sys.argv=['driver.py']
     checks={}
+    prepare_maps(driver.config)
+    production=[ROOT/'model/ir2_baseline_easy10_20261018/checkpoint.pth',
+                ROOT/'experiments/ir2_baseline_easy10_20261018/progress.jsonl']
+    before={str(p):sha256(p) if p.exists() else None for p in production}
     driver.RLRunner=ShortRunner;driver.Progress=StopProgress
     with tempfile.TemporaryDirectory(prefix='ir2-foreground-check-') as temp:
         temp=Path(temp)
@@ -60,8 +65,8 @@ def main():
         last=EventAccumulator(str(events[-1]));last.Reload()
         assert 'Progress/Success Rate 100 Percent' in last.Tags()['scalars']
         checks['real_tensorboard_events']=True
-        checks['no_production_checkpoint_or_progress_created']=not (ROOT/'model/ir2_baseline_easy10_20261018/checkpoint.pth').exists() and not (ROOT/'experiments/ir2_baseline_easy10_20261018/progress.jsonl').exists()
-        assert checks['no_production_checkpoint_or_progress_created']
+        checks['production_checkpoint_and_progress_unchanged']=before=={str(p):sha256(p) if p.exists() else None for p in production}
+        assert checks['production_checkpoint_and_progress_unchanged']
     result=dict(passed=True,scope='Original driver orchestration with original replay minimum2000; all sampling shortened to two steps, zero SAC updates, temporary checkpoints removed',checks=checks)
     write_json(ROOT/'baseline_checks/foreground_verified.json',result)
     print(json.dumps(result,indent=2),flush=True)

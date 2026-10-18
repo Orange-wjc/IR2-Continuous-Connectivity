@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "scope": "Two original-map 2-step CPU/Ray rollouts and eight unchanged original batch128 CUDA updates; not a learnability experiment",
+  "checks": {
+    "original_env_map_wrap_and_decoding": [
+      [
+        1,
+        "img_9998.png"
+      ],
+      [
+        9,
+        "img_9990.png"
+      ],
+      [
+        10,
+        "img_9999.png"
+      ],
+      [
+        11,
+        "img_9998.png"
+      ],
+      [
+        20,
+        "img_9999.png"
+      ]
+    ],
+    "two_original_runner_jobs": [
+      {
+        "info": {
+          "id": 0,
+          "episode_number": 1
+        },
+        "transitions": 8,
+        "metrics": {
+          "travel_dist": 50.87850542081091,
+          "explored_rate": 0.21948982007575757,
+          "success_rate": 0.0,
+          "connectivity_rate": 1.0,
+          "agents_connected_percentage": 1.0
+        }
+      },
+      {
+        "info": {
+          "id": 1,
+          "episode_number": 2
+        },
+        "transitions": 8,
+        "metrics": {
+          "travel_dist": 65.01315561749642,
+          "explored_rate": 0.0868828125,
+          "success_rate": 0.0,
+          "connectivity_rate": 1.0,
+          "agents_connected_percentage": 1.0
+        }
+      }
+    ],
+    "original_sac_batch128_cuda_block": {
+      "effective_batch": 128,
+      "optimizer_iterations": 8,
+      "policy_loss": -0.6301484107971191,
+      "q1_loss": 0.1583481729030609,
+      "q2_loss": 0.29851800203323364,
+      "alpha_loss": -6.30056095123291,
+      "policy_parameters_changed": true,
+      "peak_cuda_mib": 18084.626953125
+    }
+  }
+}

@@ -108,10 +108,10 @@ def prepare_maps(config):
     return manifest
 
 
-def record_setup(config, manifest):
+def record_setup(config, manifest, check_only=False):
     core = ['driver.py', 'parameter.py', 'runner.py', 'env.py', 'model.py',
             'multi_robot_worker.py', 'graph_generator.py', 'robot.py', 'sensor.py',
-            'ss_realistic_model.py', 'baseline_support.py']
+            'ss_realistic_model.py', 'baseline_support.py', 'baseline_replay.py']
     provenance = dict(created=datetime.now().astimezone().isoformat(),
         branch=subprocess.check_output(['git', 'branch', '--show-current'], text=True).strip(),
         commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
@@ -123,8 +123,15 @@ def record_setup(config, manifest):
         embedding_dim=config.EMBEDDING_DIM, max_episode_steps=config.MAX_EPS_STEPS,
         updates_per_training_iteration=8, resume=config.LOAD_MODEL,
         original_signal_strength_model=config.USE_SIGNAL_STRENGTH_NOT_PROXIMITY,
+        replay_mask_storage='lossless-bitpack-zlib-v1',
+        graph_boundary_repair='Do not append a local candidate when all K slots are global neighbors',
         automatic_evaluation=False, training_started=False)
-    write_json(Path(config.BASELINE_DIR) / 'setup.json', provenance)
+    path = Path(config.BASELINE_DIR) / ('config_check.json' if check_only else 'setup.json')
+    if not check_only and path.exists():
+        previous = json.loads(path.read_text())
+        history = path.parent / 'setup_history'
+        write_json(history / (datetime.now().strftime('%Y%m%d_%H%M%S_%f')+'.json'), previous)
+    write_json(path, provenance)
     return provenance
 
 
@@ -172,13 +179,13 @@ class Progress:
                    task_success=success, completed_episodes=self.completed,
                    invalid_episodes=self.invalid, training_updates=self.updates,
                    replay_size=replay_size, dispatched_episodes=dispatched,
+                   available_memory_gib=memory_available_gib(),
                    metrics={k:float(v) for k,v in metrics.items()},
                    time=datetime.now().astimezone().isoformat())
         with (self.directory / 'progress.jsonl').open('a') as handle:
             handle.write(json.dumps(row, allow_nan=False) + '\n')
         rate = 100 * sum(self.recent) / len(self.recent) if self.recent else None
         state = dict(**row, success_window_size=len(self.recent), success_rate_100_percent=rate,
-                     available_memory_gib=memory_available_gib(),
                      per_map={m:dict(visits=self.visits[m], window_visits=len(a),
                                     success_rate_last10_percent=100*sum(a)/len(a) if a else None)
                               for m,a in self.per_map.items()})

@@ -1,0 +1,16 @@
+{
+  "find_k_neighbor": {
+    "candidate_count": 31,
+    "global_candidates": 30,
+    "local_budget": 0,
+    "mask_size": 30,
+    "reproduced_overflow": true
+  },
+  "find_k_neighbor_custom": {
+    "candidate_count": 31,
+    "global_candidates": 30,
+    "local_budget": 0,
+    "mask_size": 30,
+    "reproduced_overflow": true
+  }
+}

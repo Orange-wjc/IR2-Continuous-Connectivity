@@ -1,0 +1,71 @@
+{
+  "passed": true,
+  "checks": {
+    "graph_zero_budget_reproduced_and_fixed": true,
+    "legal_graphs_unchanged": true,
+    "mask_roundtrip_bitwise_all_values_and_dtypes": true,
+    "all_15_replay_columns_unchanged_on_original_png": true,
+    "dense_and_packed_batch_collation_identical": true,
+    "full_10000_replay_with_distinct_storage_under_2gib_growth": true
+  },
+  "graph_details": [
+    {
+      "custom": false,
+      "global_neighbors": 0,
+      "old_degree": 30,
+      "new_degree": 30
+    },
+    {
+      "custom": false,
+      "global_neighbors": 5,
+      "old_degree": 30,
+      "new_degree": 30
+    },
+    {
+      "custom": false,
+      "global_neighbors": 29,
+      "old_degree": 30,
+      "new_degree": 30
+    },
+    {
+      "custom": false,
+      "global_neighbors": 30,
+      "old_degree": 31,
+      "new_degree": 30
+    },
+    {
+      "custom": true,
+      "global_neighbors": 0,
+      "old_degree": 30,
+      "new_degree": 30
+    },
+    {
+      "custom": true,
+      "global_neighbors": 5,
+      "old_degree": 30,
+      "new_degree": 30
+    },
+    {
+      "custom": true,
+      "global_neighbors": 29,
+      "old_degree": 30,
+      "new_degree": 30
+    },
+    {
+      "custom": true,
+      "global_neighbors": 30,
+      "old_degree": 31,
+      "new_degree": 30
+    }
+  ],
+  "memory": {
+    "legacy_mask_gib_10000": 9.655952453613281,
+    "legacy_total_tensor_gib_10000": 9.879805147647858,
+    "real_mask_payload_bytes_per_transition": 1254,
+    "real_stored_tensor_and_payload_gib_10000": 0.23553147912025452,
+    "random_dense_binary_mask_payload_bytes": 16211,
+    "full_replay_peak_rss_growth_mib": 426.6796875,
+    "peak_rss_mib": 901.08203125
+  },
+  "scope": "Boundary regression, original-map replay equality and full10000-slot host-memory engineering check; no production gradient or rollout"
+}

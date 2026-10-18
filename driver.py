@@ -15,6 +15,7 @@ import argparse
 import fcntl
 from pathlib import Path
 import signal
+import sys
 import torch
 import torch.optim as optim
 import torch.nn as nn
@@ -28,6 +29,7 @@ from model import PolicyNet, QNet
 from runner import RLRunner
 from datetime import datetime
 from baseline_support import prepare_maps, record_setup, Progress, write_json, memory_available_gib
+from baseline_replay import stack_masks
 
 
 def writeToTensorBoard(writer, tensorboardData, curr_episode):
@@ -61,12 +63,12 @@ def main():
     run_lock = (Path(BASELINE_DIR) / '.training.lock').open('a')
     fcntl.flock(run_lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     manifest = prepare_maps(config)
-    setup = record_setup(config, manifest)
+    if not args.check_config and Path(MODEL_PATH).exists() and not LOAD_MODEL:
+        raise ValueError('Checkpoint already exists; use IR2_RESUME=1 or a new IR2_RUN_NAME')
+    setup = record_setup(config, manifest, check_only=args.check_config)
     if args.check_config:
         print(__import__('json').dumps(setup, ensure_ascii=False, indent=2))
         return
-    if Path(MODEL_PATH).exists() and not LOAD_MODEL:
-        raise ValueError('Checkpoint already exists; use IR2_RESUME=1 or a new IR2_RUN_NAME')
     if not torch.cuda.is_available():
         raise RuntimeError('The original global learner requires a visible CUDA GPU')
     if memory_available_gib() < 6:
@@ -272,7 +274,7 @@ def main():
                     current_inputs_batch = torch.stack(rollouts[2])
                     node_padding_mask_batch = torch.stack(rollouts[3])
                     edge_padding_mask_batch = torch.stack(rollouts[4])
-                    edge_mask_batch = torch.stack(rollouts[5])
+                    edge_mask_batch = stack_masks(rollouts[5])
                     action_batch = torch.stack(rollouts[6])
                     reward_batch = torch.stack(rollouts[7])
                     done_batch = torch.stack(rollouts[8])
@@ -281,7 +283,7 @@ def main():
                     next_current_inputs_batch = torch.stack(rollouts[11])
                     next_node_padding_mask_batch = torch.stack(rollouts[12])
                     next_edge_padding_mask_batch = torch.stack(rollouts[13])
-                    next_edge_mask_batch = torch.stack(rollouts[14])
+                    next_edge_mask_batch = stack_masks(rollouts[14])
 
                     ### Set tensors to global GPU config ###
                     if device != local_device:
@@ -399,7 +401,14 @@ def main():
                     
     
     finally:
+        error = sys.exc_info()[1]
         save_checkpoint()
+        state = ('stopped_memory_guard' if isinstance(error, MemoryError) else
+                 'stopped_by_request' if stopping[0] else 'interrupted_or_failed')
+        write_json(Path(BASELINE_DIR) / 'run_state.json', dict(status=state,
+            completed_episodes=progress.completed, invalid_episodes=progress.invalid,
+            training_updates=progress.updates, checkpoint=MODEL_PATH,
+            error=repr(error) if error else None, time=datetime.now().astimezone().isoformat()))
         for a in meta_agents:
             ray.kill(a)
         writer.close()

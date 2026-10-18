@@ -1,0 +1,71 @@
+{
+  "passed": true,
+  "full_rollouts": [
+    {
+      "info": {
+        "id": 3,
+        "episode_number": 24
+      },
+      "transitions": 588,
+      "rss_mib": 599.5078125,
+      "metrics": {
+        "travel_dist": 7622.73720909867,
+        "explored_rate": 0.203234375,
+        "success_rate": 0.0,
+        "connectivity_rate": 1.0,
+        "agents_connected_percentage": 1.0
+      }
+    },
+    {
+      "info": {
+        "id": 0,
+        "episode_number": 21
+      },
+      "transitions": 588,
+      "rss_mib": 595.2265625,
+      "metrics": {
+        "travel_dist": 6592.677521193341,
+        "explored_rate": 0.5564186789772727,
+        "success_rate": 0.0,
+        "connectivity_rate": 1.0,
+        "agents_connected_percentage": 1.0
+      }
+    },
+    {
+      "info": {
+        "id": 1,
+        "episode_number": 22
+      },
+      "transitions": 588,
+      "rss_mib": 609.671875,
+      "metrics": {
+        "travel_dist": 6667.247490823592,
+        "explored_rate": 0.24329427083333333,
+        "success_rate": 0.0,
+        "connectivity_rate": 0.0,
+        "agents_connected_percentage": 0.6666666666666667
+      }
+    },
+    {
+      "info": {
+        "id": 2,
+        "episode_number": 23
+      },
+      "transitions": 588,
+      "rss_mib": 606.703125,
+      "metrics": {
+        "travel_dist": 7229.424570186431,
+        "explored_rate": 0.5393868944636678,
+        "success_rate": 0.0,
+        "connectivity_rate": 0.0,
+        "agents_connected_percentage": 0.6666666666666667
+      }
+    }
+  ],
+  "compact_replay_capacity": 10000,
+  "min_available_memory_gib": 19.249481201171875,
+  "parent_peak_rss_mib": 1090.91796875,
+  "production_checkpoint_unchanged": true,
+  "elapsed_seconds": 156.10885485401377,
+  "scope": "Four3-robot196-step real original-map jobs and full-capacity compact replay; no learner updates or production resume"
+}

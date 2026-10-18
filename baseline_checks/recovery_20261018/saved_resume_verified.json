@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "actual_checkpoint_loaded": true,
+  "initial_completed": 18,
+  "resumed_completed": 20,
+  "training_updates": 120,
+  "new_sac_updates": 0,
+  "all_networks_optimizers_temperature_preserved": true,
+  "production_checkpoint_unchanged": true,
+  "sigint_save_and_ray_cleanup": true,
+  "run_state_recorded": true,
+  "scope": "Actual saved checkpoint copied to temporary output; only2-step samples, no new gradient; temporary model removed"
+}

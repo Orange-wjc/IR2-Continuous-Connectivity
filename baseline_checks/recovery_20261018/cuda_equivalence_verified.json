@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "all_15_collated_tensors_bitwise_equal": true,
+  "effective_batch": 128,
+  "optimizer_iterations_each": 8,
+  "all_networks_optimizers_and_temperature_equivalent": true,
+  "all_final_tensors_bitwise_equal": true,
+  "max_absolute_state_error": 0.0,
+  "peak_cuda_dense_mib": 18079.09228515625,
+  "peak_cuda_packed_mib": 18079.67822265625,
+  "scope": "Engineering updates on copies with a repeated two-step original-map sample; production checkpoint not changed"
+}

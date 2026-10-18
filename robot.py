@@ -5,6 +5,7 @@
 
 import torch
 from copy import deepcopy
+from baseline_replay import pack_mask_rows
 
 class Robot:
     def __init__(self, robot_id, position, plot=False):
@@ -30,7 +31,7 @@ class Robot:
         self.episode_buffer[2] += deepcopy(current_index).to('cpu')
         self.episode_buffer[3] += deepcopy(node_padding_mask).to('cpu')
         self.episode_buffer[4] += deepcopy(edge_padding_mask).to('cpu')
-        self.episode_buffer[5] += deepcopy(edge_mask).to('cpu')
+        self.episode_buffer[5] += pack_mask_rows(edge_mask)
 
     def save_action(self, action_index):
         self.episode_buffer[6] += action_index.unsqueeze(0).unsqueeze(0)
@@ -50,4 +51,4 @@ class Robot:
         self.episode_buffer[11] += deepcopy(current_index).to('cpu')
         self.episode_buffer[12] += deepcopy(node_padding_mask).to('cpu')
         self.episode_buffer[13] += deepcopy(edge_padding_mask).to('cpu')
-        self.episode_buffer[14] += deepcopy(edge_mask).to('cpu')
+        self.episode_buffer[14] += pack_mask_rows(edge_mask)

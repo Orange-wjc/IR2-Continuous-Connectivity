@@ -587,6 +587,9 @@ class Graph_generator:
         max_neighbours = self.k_size - num_global_neighbours
         num_neighbours = len(node_coords) if len(node_coords) < max_neighbours else max_neighbours
 
+        if num_neighbours <= 0:
+            return neighbor_index_list
+
         for neighbor_index in sorted_index:
             neighbor_index_list.append(neighbor_index)
             dist = dist_list[k]
@@ -679,6 +682,9 @@ class Graph_generator:
         
         max_neighbours = self.k_size - num_global_neighbours
         num_neighbours = len(node_coords) if len(node_coords) < max_neighbours else max_neighbours
+
+        if num_neighbours <= 0:
+            return neighbor_index_list
 
         for neighbor_index in sorted_index:
             neighbor_index_list.append(neighbor_index)

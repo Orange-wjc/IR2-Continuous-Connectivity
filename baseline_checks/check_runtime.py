@@ -22,6 +22,7 @@ import parameter as config
 from model import PolicyNet,QNet
 from baseline_support import prepare_maps,write_json
 from runner import Runner
+from baseline_replay import stack_masks
 
 def main():
     torch.set_num_threads(2);torch.manual_seed(101);np.random.seed(101);random.seed(101)
@@ -71,7 +72,8 @@ def main():
                'edge_padding_mask_batch','edge_mask_batch','action_batch','reward_batch','done_batch',
                'next_node_inputs_batch','next_edge_inputs_batch','next_current_inputs_batch',
                'next_node_padding_mask_batch','next_edge_padding_mask_batch','next_edge_mask_batch']
-        values={name:torch.stack(rows).cuda() for name,rows in zip(names,rollouts)}
+        values={name:(stack_masks(rows) if i in (5,14) else torch.stack(rows)).cuda()
+                for i,(name,rows) in enumerate(zip(names,rollouts))}
         nets={name:cls(config.INPUT_DIM,config.EMBEDDING_DIM).cuda() for name,cls in [
             ('global_policy_net',PolicyNet),('global_q_net1',QNet),('global_q_net2',QNet),
             ('global_target_q_net1',QNet),('global_target_q_net2',QNet)]}

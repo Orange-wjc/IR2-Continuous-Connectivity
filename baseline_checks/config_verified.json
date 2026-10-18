@@ -1,19 +1,20 @@
 {
-  "created": "2026-10-18T13:53:35.114989+08:00",
+  "created": "2026-10-18T14:23:14.155575+08:00",
   "branch": "baseline/ir2-easy10",
-  "commit": "139c0f59d8b365535a7f7bc9417da14303532138",
+  "commit": "4515660b45129ce3297e51bcdd10a0f9fe4bc2cd",
   "source_sha256": {
-    "driver.py": "c6f4af913ca0495db2a376af9f54d564288c5d9c741972f77dcc8ef2daa02d51",
+    "driver.py": "160e24ccf1f3c07a35c13ef3f0e32809e90b1cf4b84ccdef33d339343326a9e1",
     "parameter.py": "3d1c967f2acbdcedabb3385b2fd17a0bb78ee02175ea40ea1c0b348353ddc622",
-    "runner.py": "6c079b4fb6db70646ac3f484647445b602fe760528645ac2cc3886c79e6d1ec7",
+    "runner.py": "2d061acbf683b28a52473a5bdc88d527bafd4990aa2a60dc8562cde51ec53ef5",
     "env.py": "6cad60ce769e35d5f3404229d081b665b70a4e70749a11e6f48214c61b2c0bd9",
     "model.py": "2a0c4d91497fc5b5db981e2b91f1b8ed4ed11550bfaee3a67c5d6d1a967fd637",
     "multi_robot_worker.py": "687f7f33699be20892a25e81948e73b68bf8b60d1ebbf46396615cb5f56f94af",
-    "graph_generator.py": "dc1fedf48624981d3958c95200eb8e8440221edd87b7b42341900f4b06af3d04",
-    "robot.py": "14c40c58d8aca4a09c17a22ebd8e72f00107278ac802a5930bacba8042572d97",
+    "graph_generator.py": "79fbc2d582dedd97b527bc01544d1eed729e472c9a9ad86bd04694cadce6f63f",
+    "robot.py": "b60c355ee5af3afd5d592e2aea359edc0c4669d3d9c7ebd0a649e65884d65544",
     "sensor.py": "a7a71eabcb0dde3b586dddfb21f7b5f77ef3bd1d7462f2bda094f7945b8e8f73",
     "ss_realistic_model.py": "dee2f76a4673dd663138acfe1a4654f2cccb0ba103dac0346d5c7bace0f26b92",
-    "baseline_support.py": "44cdd87707e526050ce3bf3d6681a3ba8cada75de163f8c6db87a9570c24e940"
+    "baseline_support.py": "47af0cd47a42fe177dfc94b98f5474c33789af2b2d7cd13ef5d246d4a3999fde",
+    "baseline_replay.py": "42ba9b678021a1e9d11c0537c5d4d8c744b6989b70307d43a36d3a81d5dc84ec"
   },
   "map_manifest": {
     "source_directory": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy",
@@ -92,6 +93,8 @@
   "updates_per_training_iteration": 8,
   "resume": false,
   "original_signal_strength_model": true,
+  "replay_mask_storage": "lossless-bitpack-zlib-v1",
+  "graph_boundary_repair": "Do not append a local candidate when all K slots are global neighbors",
   "automatic_evaluation": false,
   "training_started": false
 }

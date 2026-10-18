@@ -1,0 +1,17 @@
+{
+  "time": "2026-10-18T14:10:51.865380+08:00",
+  "source_and_checkpoint_sha256": {
+    "driver.py": "90c1663926ae14a4d5e3c64d3cec117eb5b0202c1c46f36952d4d1b0433ec5f7",
+    "parameter.py": "3d1c967f2acbdcedabb3385b2fd17a0bb78ee02175ea40ea1c0b348353ddc622",
+    "runner.py": "2d061acbf683b28a52473a5bdc88d527bafd4990aa2a60dc8562cde51ec53ef5",
+    "baseline_support.py": "b27df4869ed4775b73384737a218eaebef1578c49aabbb54f78fd10385358a07",
+    "robot.py": "14c40c58d8aca4a09c17a22ebd8e72f00107278ac802a5930bacba8042572d97",
+    "multi_robot_worker.py": "687f7f33699be20892a25e81948e73b68bf8b60d1ebbf46396615cb5f56f94af",
+    "graph_generator.py": "dc1fedf48624981d3958c95200eb8e8440221edd87b7b42341900f4b06af3d04",
+    "model.py": "2a0c4d91497fc5b5db981e2b91f1b8ed4ed11550bfaee3a67c5d6d1a967fd637",
+    "env.py": "6cad60ce769e35d5f3404229d081b665b70a4e70749a11e6f48214c61b2c0bd9",
+    "checkpoint.pth": "52d575aa8909ba72640320323ef892df8716d9cba55884c15d7e81790862add6"
+  },
+  "archive": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/ir2_baseline_easy10_20261018/before_memory_graph_repair_20261018",
+  "formal_training_restarted": false
+}

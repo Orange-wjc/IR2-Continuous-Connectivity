@@ -251,7 +251,6 @@ def main():
             
             ### Start training when replay buffer is filled ###
             if curr_episode % 1 == 0 and len(experience_buffer[0]) >= MINIMUM_BUFFER_SIZE:
-                print("training")
 
                 ### Keep buffer size to max REPLAY_SIZE ###
                 if len(experience_buffer[0]) >= REPLAY_SIZE:
@@ -389,7 +388,6 @@ def main():
             
              ### Hard Q updates to get target Q-networks every 1024 steps ###
             if target_q_update_counter > 64:
-                print("update target q net")
                 target_q_update_counter = 1
                 global_target_q_net1.load_state_dict(global_q_net1.state_dict())
                 global_target_q_net2.load_state_dict(global_q_net2.state_dict())

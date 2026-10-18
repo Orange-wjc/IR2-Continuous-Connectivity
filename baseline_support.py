@@ -3,11 +3,61 @@
 No policy, reward, replay sampling or optimizer logic lives in this module.
 """
 from collections import deque
+from contextlib import contextmanager, redirect_stdout
 from datetime import datetime
 import hashlib
 import json
 from pathlib import Path
+import re
 import subprocess
+import sys
+
+
+class _WorkerOutput:
+    """Keep routine worker chatter in a file; pass other messages through."""
+    def __init__(self, detail, console):
+        self.detail = detail
+        self.console = console
+        self.pending = ''
+
+    def _emit(self, line):
+        plain = re.sub(r'\x1b\[[0-9;]*m', '', line).strip()
+        routine = (re.fullmatch(r'starting episode \d+ on metaAgent \d+', plain)
+                   or re.fullmatch(r'\[Eps \d+ Completed\] Steps: .*', plain))
+        if plain and not routine:
+            self.console.write(line)
+            self.console.flush()
+
+    def write(self, value):
+        self.detail.write(value)
+        self.pending += value
+        while '\n' in self.pending:
+            line, self.pending = self.pending.split('\n', 1)
+            self._emit(line + '\n')
+        return len(value)
+
+    def flush(self):
+        self.detail.flush()
+        self.console.flush()
+
+    def finish(self):
+        if self.pending:
+            self._emit(self.pending)
+            self.pending = ''
+        self.flush()
+
+
+@contextmanager
+def quiet_worker_output(directory, worker_id):
+    directory = Path(directory) / 'worker_logs'
+    directory.mkdir(parents=True, exist_ok=True)
+    with (directory / ('worker_%d.log' % worker_id)).open('a', buffering=1) as detail:
+        output = _WorkerOutput(detail, sys.stdout)
+        with redirect_stdout(output):
+            try:
+                yield
+            finally:
+                output.finish()
 
 
 def write_json(path, value):
@@ -142,8 +192,9 @@ class Progress:
             self.writer.add_scalar('Progress/Invalid Rollouts', self.invalid, step)
             self.writer.add_scalar('Maps/'+name+'/Success Last10 Percent',
                                    state['per_map'][name]['success_rate_last10_percent'], self.visits[name])
-        print(json.dumps(dict(stage='progress', episode=episode, map=name,
-            completed=self.completed, invalid=self.invalid, task_success=success,
-            recent_success_percent=rate, window_size=len(self.recent),
-            replay=replay_size, sac_updates=self.updates,
-            min_map_visits=min(self.visits.values())), ensure_ascii=False), flush=True)
+        if not valid or self.completed % 10 == 0:
+            print(json.dumps(dict(stage='progress' if valid else 'warning', episode=episode, map=name,
+                completed=self.completed, invalid=self.invalid, task_success=success,
+                recent_success_percent=rate, window_size=len(self.recent),
+                replay=replay_size, sac_updates=self.updates,
+                min_map_visits=min(self.visits.values())), ensure_ascii=False), flush=True)

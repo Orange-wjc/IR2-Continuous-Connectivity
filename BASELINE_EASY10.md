@@ -36,6 +36,8 @@ python driver.py --check-config
 
 `baseline_support.prepare_maps` 在 `experiments/<运行名>/maps` 创建仅含这10张的原文件符号链接，并写 `map_manifest.json` 保存源路径及SHA。原Env仍直接执行 `episode_number % map_count`，因此任务1读`img_9998.png`，任务9读`img_9990.png`，任务10读`img_9999.png`，任务11再次读`img_9998.png`。只限制池大小，不限制总回合，持续循环直到用户Ctrl+C。
 
+终端每10个有效回合输出一次汇总；无效回合警告、报错和模型保存提示保留。逐回合JSON继续写progress.jsonl，TensorBoard逐回合更新；worker的启动/完成等详细输出写到experiments同名目录下worker_logs/worker_*.log。运行中的进程保持已加载版本，此日志调整在下次启动时生效，不为更新日志自动重启或中断训练。
+
 原Ray异步派发会使任务完成顺序不同；不要把任务编号或 `completed/10` 直接解释为所有图恰好训练了相同遍数。前台JSON含：
 
 - `episode`：原项目分配的任务编号；`completed`：已返回的有效回合数。

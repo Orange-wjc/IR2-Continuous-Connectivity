@@ -1,0 +1,8 @@
+{
+  "logging_only_ast_check": true,
+  "worker_details_preserved": true,
+  "worker_warnings_visible": true,
+  "tensorboard_and_progress_math_unchanged": true,
+  "running_source_archive": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/experiments/ir2_baseline_easy10_20261018/source_before_quiet_logging_20261018",
+  "running_training_restarted": false
+}

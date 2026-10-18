@@ -25,7 +25,7 @@ python driver.py --check-config
 
 - 保留原版 `env.py`、`model.py`、`multi_robot_worker.py`、`graph_generator.py`、`robot.py`、`sensor.py`、`ss_realistic_model.py`，逐文件SHA与main相同。
 - 原SAC损失、Actor/Q/温度更新顺序、梯度裁剪、固定目标熵、硬目标更新与每次8批更新保持；GPU更新数学代码块与main逐字一致，仅增加统计计数。没有加入SIL、消息头、WAIT、有限字节传输或新的奖励。
-- 仍为原easy的随机3～5机器人、6维输入、128维嵌入、196步、原信号强度通信与原完成规则。不要把之前两机器人适配实验的99%本地覆盖定义套到这里。
+- 按用户最新要求，本轮easy固定3台机器人（NUM_ROBOTS_MIN=NUM_ROBOTS_MAX=3，原版easy默认为随机3～5台）。保留6维输入、128维嵌入、196步、原信号强度通信与原完成规则。后续改进组也须使用相同三机设置进行公平比较。
 - 学习率1e-5、batch128、回放10000、开始学习前至少2000条经验、gamma .995及原目标更新方式不变。回放未满时前台 `sac_updates=0` 是收集阶段，不表示学习故障。
 - 本机改为NUM_GPU=1、NUM_META_AGENT默认4，worker Torch1线程、learner2线程、Ray对象存储1GiB，关闭非必要训练GIF。可以在启动时显式 `IR2_AGENTS=8` 改采样数，但当前仅默认4的调度与短检查通过，不宣称8/12/24个worker在长训练时都内存安全。
 - 启动要求主机至少6GiB可用RAM，循环中可用RAM低于4GiB则保存并退出；不自动改变学习算法或无限重启。较长训练会逐步填满原版稠密回放，短检查不代表已验证全程峰值。
@@ -77,5 +77,7 @@ IR2_RESUME=1 python -u driver.py 2>&1 | tee -a experiments/ir2_baseline_easy10_2
 `baseline_checks/main_identity.json`保存main源码SHA；config_verified.json保存准备配置；runtime_verified.json记录真实原PNG解码/循环、两个短2步Ray采样、原batch128连续8次CUDA更新、每个优化器真实8步、有限损失和参数变化，显存峰值约17.7GiB。GPU检查重复短轨迹只用于工程内存/梯度检查，不证明学习效果。
 
 `foreground_verified.json`记录独立临时目录的真实driver前台SIGINT保存、Ray退出、检查点恢复和TensorBoard事件；原回放门槛不变，短采样不足2000经验，所以SAC=0。临时模型已移除，正式运行没有模型或progress.jsonl。检查脚本在baseline_checks，可复核，不作为训练结果。
+
+上述运行检查完成于最初的3～5台配置；后续按用户要求固定3台，仅重新核验配置与地图，未重跑采样或训练。最新config_verified.json及正式启动时的setup.json记录固定三机设置。
 
 尚未验证：这10张图多遍训练后的学习曲线、充分收敛表现、其他地图泛化和全量数据的资源峰值。用户前台启动后再观察，不提前宣称原版复现成功或保证99%。旧研究实验及STOP保持。

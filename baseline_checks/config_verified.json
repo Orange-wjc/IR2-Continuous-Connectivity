@@ -1,10 +1,10 @@
 {
-  "created": "2026-10-18T13:51:30.502426+08:00",
+  "created": "2026-10-18T13:53:35.114989+08:00",
   "branch": "baseline/ir2-easy10",
-  "commit": "1ef6d224ae18503f4763c3cec20e05a737f95783",
+  "commit": "139c0f59d8b365535a7f7bc9417da14303532138",
   "source_sha256": {
     "driver.py": "c6f4af913ca0495db2a376af9f54d564288c5d9c741972f77dcc8ef2daa02d51",
-    "parameter.py": "e0cbae3bfa44a55b87bad6735408c91a68f2c9f7eb16f42710d766b90991bb55",
+    "parameter.py": "3d1c967f2acbdcedabb3385b2fd17a0bb78ee02175ea40ea1c0b348353ddc622",
     "runner.py": "6c079b4fb6db70646ac3f484647445b602fe760528645ac2cc3886c79e6d1ec7",
     "env.py": "6cad60ce769e35d5f3404229d081b665b70a4e70749a11e6f48214c61b2c0bd9",
     "model.py": "2a0c4d91497fc5b5db981e2b91f1b8ed4ed11550bfaee3a67c5d6d1a967fd637",
@@ -84,7 +84,7 @@
   "learning_rate": 1e-05,
   "robots": [
     3,
-    5
+    3
   ],
   "input_dim": 6,
   "embedding_dim": 128,

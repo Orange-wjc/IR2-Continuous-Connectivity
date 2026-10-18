@@ -21,7 +21,7 @@ if TRAIN_SET_NAME == "easy":
     MAX_EPS_STEPS=196    
     K_SIZE = 30
     NUM_ROBOTS_MIN=3
-    NUM_ROBOTS_MAX=5
+    NUM_ROBOTS_MAX=3  # User-requested fixed three-robot easy baseline.
     NODE_COORDS_SCALING_FACTOR=1/640    
     NODE_UTILITY_SCALING_FACTOR=1/50    
     GLOBAL_GRAPH_NODE_COORDS_THRESH=200       # Num node coords before start to perform graph merger

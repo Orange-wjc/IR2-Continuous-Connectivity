@@ -24,7 +24,10 @@ from ss_realistic_model import SS_realistic_model
 
 
 class Env():
-    def __init__(self, map_index, n_agent, k_size=20, plot=False, test=False):
+    def __init__(self, map_index, n_agent, k_size=20, plot=False, test=False, contact=None):
+        self.contact = contact
+        self.contact_embedding_dim = EMBEDDING_DIM
+        self.contact_peer_radius = OTHER_AGENT_KNN_RAD
         self.n_agent = n_agent
         self.test = not sys.modules['TRAINING'] 
         if self.test:
@@ -96,6 +99,8 @@ class Env():
             self.max_comms_proximity = np.random.randint(PROXIMITY_COMMS_RANGE_MIN, PROXIMITY_COMMS_RANGE_MAX, 1)[0]  
         
         self.begin()
+        if self.contact is not None:
+            self.contact.reset(self)
 
 
     def find_index_from_coords(self, position, agent_id):
@@ -231,124 +236,134 @@ class Env():
         # Belief Propogation (hopping through graph)
         ################################################
 
-        ### Map & Pose Belief Merger ###
-        for group_ids in self.group_ids_list:
-            if robot_id in group_ids:
+        if self.contact is not None:
+            success, communication_reward = self.contact.exchange(
+                self, all_robot_positions_gt, dist_travelled, robot_id, sim_step)
+            if not success:
+                return success, None, None
+            individual_reward += communication_reward
+        else:
+            ### Map & Pose Belief Merger ###
+            for group_ids in self.group_ids_list:
+                if robot_id in group_ids:
 
-                ### [Local Update] Merging map beliefs for agents that are connected ###
-                merged_belief = self.merge_beliefs( [self.all_robot_belief[id][id] for id in group_ids] )
-                for own_id in group_ids:
-                    self.all_robot_belief[own_id][own_id] = merged_belief
-                    self.all_robot_belief_step_updated[own_id][own_id] = sim_step
-                    self.all_downsampled_belief[own_id] = block_reduce(self.all_robot_belief[own_id][own_id].copy(), block_size=(self.resolution, self.resolution), func=np.min)
+                    ### [Local Update] Merging map beliefs for agents that are connected ###
+                    merged_belief = self.merge_beliefs( [self.all_robot_belief[id][id] for id in group_ids] )
+                    for own_id in group_ids:
+                        self.all_robot_belief[own_id][own_id] = merged_belief
+                        self.all_robot_belief_step_updated[own_id][own_id] = sim_step
+                        self.all_downsampled_belief[own_id] = block_reduce(self.all_robot_belief[own_id][own_id].copy(), block_size=(self.resolution, self.resolution), func=np.min)
 
-                    for other_id_in_group in group_ids:
+                        for other_id_in_group in group_ids:
 
-                        if own_id != other_id_in_group:
-                            self.all_robot_belief[own_id][other_id_in_group] = merged_belief
-                            self.all_robot_belief_step_updated[own_id][other_id_in_group] = sim_step
+                            if own_id != other_id_in_group:
+                                self.all_robot_belief[own_id][other_id_in_group] = merged_belief
+                                self.all_robot_belief_step_updated[own_id][other_id_in_group] = sim_step
                 
-                        ### [Global Update] Merging map beliefs of other agents' beliefs of other agents ###
-                        for other_id_out_group in range(self.n_agent):
-                            if other_id_out_group not in group_ids:
+                            ### [Global Update] Merging map beliefs of other agents' beliefs of other agents ###
+                            for other_id_out_group in range(self.n_agent):
+                                if other_id_out_group not in group_ids:
 
-                                own_step_updated = self.all_robot_belief_step_updated[own_id][other_id_out_group]
-                                other_step_updated = self.all_robot_belief_step_updated[other_id_in_group][other_id_out_group]
+                                    own_step_updated = self.all_robot_belief_step_updated[own_id][other_id_out_group]
+                                    other_step_updated = self.all_robot_belief_step_updated[other_id_in_group][other_id_out_group]
 
-                                # # Cond 1: Own belief is None, but other's belief is not None
-                                # # Cond 2: Own belief is more outdated and other's belief not None
-                                if own_step_updated < other_step_updated and \
-                                    self.all_robot_belief[other_id_in_group][other_id_out_group] is not None:
+                                    # # Cond 1: Own belief is None, but other's belief is not None
+                                    # # Cond 2: Own belief is more outdated and other's belief not None
+                                    if own_step_updated < other_step_updated and \
+                                        self.all_robot_belief[other_id_in_group][other_id_out_group] is not None:
 
-                                    self.all_robot_belief[own_id][other_id_out_group] = \
-                                            self.all_robot_belief[other_id_in_group][other_id_out_group]
-                                    self.all_robot_belief_step_updated[own_id][other_id_out_group] = \
-                                            self.all_robot_belief_step_updated[other_id_in_group][other_id_out_group]
+                                        self.all_robot_belief[own_id][other_id_out_group] = \
+                                                self.all_robot_belief[other_id_in_group][other_id_out_group]
+                                        self.all_robot_belief_step_updated[own_id][other_id_out_group] = \
+                                                self.all_robot_belief_step_updated[other_id_in_group][other_id_out_group]
 
 
-                ### Merging position beliefs for agents that are connected, and agents' belief of other agents (if not as outdated) ###
-                for own_id in group_ids:
+                    ### Merging position beliefs for agents that are connected, and agents' belief of other agents (if not as outdated) ###
+                    for own_id in group_ids:
                     
-                    for other_id_in_group in group_ids:
+                        for other_id_in_group in group_ids:
                         
-                        # [Local Update] Updating positions belief with agents in direct connectivity
-                        if own_id != other_id_in_group:
-                            self.all_robot_positions_belief[own_id][other_id_in_group] = all_robot_positions_gt[other_id_in_group]
-                            self.all_robot_positions_step_updated[own_id][other_id_in_group] = sim_step
+                            # [Local Update] Updating positions belief with agents in direct connectivity
+                            if own_id != other_id_in_group:
+                                self.all_robot_positions_belief[own_id][other_id_in_group] = all_robot_positions_gt[other_id_in_group]
+                                self.all_robot_positions_step_updated[own_id][other_id_in_group] = sim_step
 
-                        # [Global Update] Merging in belief of other agents' belief of other agents
-                        for other_id_out_group in range(self.n_agent):
-                            if other_id_out_group not in group_ids:
+                            # [Global Update] Merging in belief of other agents' belief of other agents
+                            for other_id_out_group in range(self.n_agent):
+                                if other_id_out_group not in group_ids:
                                 
-                                own_step_updated = self.all_robot_positions_step_updated[own_id][other_id_out_group]
-                                other_step_updated = self.all_robot_positions_step_updated[other_id_in_group][other_id_out_group]
+                                    own_step_updated = self.all_robot_positions_step_updated[own_id][other_id_out_group]
+                                    other_step_updated = self.all_robot_positions_step_updated[other_id_in_group][other_id_out_group]
                                 
-                                # # Cond 1: Own belief is None, but other's belief is not None
-                                # # Cond 2: Own belief is more outdated and other's belief not None
-                                if own_step_updated < other_step_updated and \
-                                    self.all_robot_positions_belief[other_id_in_group][other_id_out_group] is not None:
+                                    # # Cond 1: Own belief is None, but other's belief is not None
+                                    # # Cond 2: Own belief is more outdated and other's belief not None
+                                    if own_step_updated < other_step_updated and \
+                                        self.all_robot_positions_belief[other_id_in_group][other_id_out_group] is not None:
 
-                                    self.all_robot_positions_belief[own_id][other_id_out_group] = \
-                                            self.all_robot_positions_belief[other_id_in_group][other_id_out_group]
-                                    self.all_robot_positions_step_updated[own_id][other_id_out_group] = \
-                                            self.all_robot_positions_step_updated[other_id_in_group][other_id_out_group]
+                                        self.all_robot_positions_belief[own_id][other_id_out_group] = \
+                                                self.all_robot_positions_belief[other_id_in_group][other_id_out_group]
+                                        self.all_robot_positions_step_updated[own_id][other_id_out_group] = \
+                                                self.all_robot_positions_step_updated[other_id_in_group][other_id_out_group]
 
-                ### Merge route history belief of all agents 
-                for own_id in group_ids:
+                    ### Merge route history belief of all agents
+                    for own_id in group_ids:
                     
-                    for other_id_in_group in group_ids:
+                        for other_id_in_group in group_ids:
                         
-                        # [Local Update] Updating positions belief with agents in direct connectivity
-                        if own_id != other_id_in_group:
-                            self.all_robot_global_graph_belief[own_id][other_id_in_group] = copy.deepcopy(self.all_robot_global_graph_belief[other_id_in_group][other_id_in_group])
-                            self.all_robot_global_graph_step_updated[own_id][other_id_in_group] = copy.deepcopy(sim_step)
+                            # [Local Update] Updating positions belief with agents in direct connectivity
+                            if own_id != other_id_in_group:
+                                self.all_robot_global_graph_belief[own_id][other_id_in_group] = copy.deepcopy(self.all_robot_global_graph_belief[other_id_in_group][other_id_in_group])
+                                self.all_robot_global_graph_step_updated[own_id][other_id_in_group] = copy.deepcopy(sim_step)
 
-                        # [Global Update] Merging in belief of other agents' belief of other agents
-                        for other_id_out_group in range(self.n_agent):
-                            if other_id_out_group not in group_ids:
+                            # [Global Update] Merging in belief of other agents' belief of other agents
+                            for other_id_out_group in range(self.n_agent):
+                                if other_id_out_group not in group_ids:
                                 
-                                own_step_updated = self.all_robot_global_graph_step_updated[own_id][other_id_out_group]
-                                other_step_updated = self.all_robot_global_graph_step_updated[other_id_in_group][other_id_out_group]
+                                    own_step_updated = self.all_robot_global_graph_step_updated[own_id][other_id_out_group]
+                                    other_step_updated = self.all_robot_global_graph_step_updated[other_id_in_group][other_id_out_group]
                                 
-                                # # Cond 1: Own belief is None, but other's belief is not None
-                                # # Cond 2: Own belief is more outdated and other's belief not None
-                                if own_step_updated < other_step_updated and \
-                                    self.all_robot_global_graph_belief[other_id_in_group][other_id_out_group] is not None:
+                                    # # Cond 1: Own belief is None, but other's belief is not None
+                                    # # Cond 2: Own belief is more outdated and other's belief not None
+                                    if own_step_updated < other_step_updated and \
+                                        self.all_robot_global_graph_belief[other_id_in_group][other_id_out_group] is not None:
 
-                                    self.all_robot_global_graph_belief[own_id][other_id_out_group] = \
-                                            copy.deepcopy(self.all_robot_global_graph_belief[other_id_in_group][other_id_out_group])
-                                    self.all_robot_global_graph_step_updated[own_id][other_id_out_group] = \
-                                            copy.deepcopy(self.all_robot_global_graph_step_updated[other_id_in_group][other_id_out_group])
+                                        self.all_robot_global_graph_belief[own_id][other_id_out_group] = \
+                                                copy.deepcopy(self.all_robot_global_graph_belief[other_id_in_group][other_id_out_group])
+                                        self.all_robot_global_graph_step_updated[own_id][other_id_out_group] = \
+                                                copy.deepcopy(self.all_robot_global_graph_step_updated[other_id_in_group][other_id_out_group])
 
 
-                    ### Update of essential params after map update ### 
-                    if own_id == robot_id: 
-                        all_curr_frontiers[robot_id] = self.find_frontier(self.all_downsampled_belief[robot_id])
-                        success = self.update_graph(robot_id, all_curr_frontiers[robot_id], eps=curr_eps, step=sim_step)
-                        if not success:
-                            return success, None, None
+                        ### Update of essential params after map update ###
+                        if own_id == robot_id:
+                            all_curr_frontiers[robot_id] = self.find_frontier(self.all_downsampled_belief[robot_id])
+                            success = self.update_graph(robot_id, all_curr_frontiers[robot_id], eps=curr_eps, step=sim_step)
+                            if not success:
+                                return success, None, None
 
         ###################################################################
 
-        ### Removing agents' pose belief if belief within comms range, but cannot comms that agent  ###
-        for other_id in range(len(self.all_robot_positions_belief[robot_id])):
-            if robot_id != other_id and self.all_robot_positions_belief[robot_id][other_id] is not None:
+        # Original pose invalidation queries true peer link locations. Finite
+        # mode uses paid state packets and pose age, never this free side channel.
+        if self.contact is None:
+            ### Removing agents' pose belief if belief within comms range, but cannot comms that agent  ###
+            for other_id in range(len(self.all_robot_positions_belief[robot_id])):
+                if robot_id != other_id and self.all_robot_positions_belief[robot_id][other_id] is not None:
 
-                if USE_SIGNAL_STRENGTH_NOT_PROXIMITY:
-                    belief_in_comms_range = self.ss_realistic_model.is_within_signal_strength(self.ground_truth, self.all_robot_positions_belief[robot_id][robot_id], self.all_robot_positions_belief[robot_id][other_id])
-                    gt_in_comms_range = self.ss_realistic_model.is_within_signal_strength(self.ground_truth, self.all_robot_positions_gt[robot_id], self.all_robot_positions_gt[other_id])
-                else:
-                    belief_in_comms_range = (np.linalg.norm(self.all_robot_positions_belief[robot_id][other_id] - self.all_robot_positions_belief[robot_id][robot_id]) < self.max_comms_proximity)
-                    gt_in_comms_range = (np.linalg.norm(self.all_robot_positions_gt[other_id] - self.all_robot_positions_gt[robot_id]) < self.max_comms_proximity)
-                if belief_in_comms_range and not gt_in_comms_range:
-                    self.all_robot_positions_missing_counts[robot_id][other_id] += 1
-                elif (belief_in_comms_range and gt_in_comms_range) or (not belief_in_comms_range and gt_in_comms_range):
-                    self.all_robot_positions_missing_counts[robot_id][other_id] = 0
+                    if USE_SIGNAL_STRENGTH_NOT_PROXIMITY:
+                        belief_in_comms_range = self.ss_realistic_model.is_within_signal_strength(self.ground_truth, self.all_robot_positions_belief[robot_id][robot_id], self.all_robot_positions_belief[robot_id][other_id])
+                        gt_in_comms_range = self.ss_realistic_model.is_within_signal_strength(self.ground_truth, self.all_robot_positions_gt[robot_id], self.all_robot_positions_gt[other_id])
+                    else:
+                        belief_in_comms_range = (np.linalg.norm(self.all_robot_positions_belief[robot_id][other_id] - self.all_robot_positions_belief[robot_id][robot_id]) < self.max_comms_proximity)
+                        gt_in_comms_range = (np.linalg.norm(self.all_robot_positions_gt[other_id] - self.all_robot_positions_gt[robot_id]) < self.max_comms_proximity)
+                    if belief_in_comms_range and not gt_in_comms_range:
+                        self.all_robot_positions_missing_counts[robot_id][other_id] += 1
+                    elif (belief_in_comms_range and gt_in_comms_range) or (not belief_in_comms_range and gt_in_comms_range):
+                        self.all_robot_positions_missing_counts[robot_id][other_id] = 0
 
-                if self.all_robot_positions_missing_counts[robot_id][other_id] >= REMOVE_POSE_BELIEF_MISSING_COUNT:
-                    self.all_robot_positions_belief[robot_id][other_id] = None
-                    self.all_robot_belief[robot_id][other_id] = None
-                    self.all_robot_positions_missing_counts[robot_id][other_id] = 0
+                    if self.all_robot_positions_missing_counts[robot_id][other_id] >= REMOVE_POSE_BELIEF_MISSING_COUNT:
+                        self.all_robot_positions_belief[robot_id][other_id] = None
+                        self.all_robot_belief[robot_id][other_id] = None
+                        self.all_robot_positions_missing_counts[robot_id][other_id] = 0
 
         ### Done only if all agents have explored most of the map ###
         done = self.check_done()
@@ -461,6 +476,8 @@ class Env():
 
     def generate_rendezvous_utility_layer(self, robot_id, eps):
         """ Generate map-delta utility layer for robot observation """
+        if self.contact is not None:
+            return self.contact.utility(self, robot_id)
 
         rendezvous_utility_inputs = np.zeros((len(self.all_node_coords[robot_id]), 1))
         max_map_area = self.ground_truth_size[0] * self.ground_truth_size[1]

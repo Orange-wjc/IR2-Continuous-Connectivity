@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "production_files_unchanged": {
+    "model/2/checkpoint.pth": "997318d48b83ef883905ba49bb08e5e0681515361ed5552c3e7142b8a3ea31e4",
+    "experiments/2/progress.jsonl": "a7a7e9dd8d3c56325c1fcc7a223bb52588e30f55547fd7c44aff5ead64a08701"
+  },
+  "protocol_budget_and_no_shortcuts": true,
+  "original_mode_15_columns_and_metrics_exact": true,
+  "sender_score_and_utility_no_receiver_truth": true,
+  "wait_has_positive_time": true,
+  "auxiliary_head_gradient_and_resume_exact": true,
+  "integrated": {
+    "metrics": {
+      "contact_seconds": 18.63106122386025,
+      "contact_sent_bytes": 27994,
+      "contact_control_bytes": 2081,
+      "contact_unique_cells": 2731,
+      "contact_duplicate_cells": 2013,
+      "contact_map_packets": 115,
+      "contact_wait_actions": 1
+    },
+    "labels": 228,
+    "head_updates": 8,
+    "loss": 0.39325420558452606,
+    "movement_transitions": 6
+  },
+  "finite_fifo_and_rule_sampling_passed": true,
+  "scope": "Isolated engineering rollouts and auxiliary updates; not a learning/effectiveness experiment"
+}

@@ -107,6 +107,7 @@ def record_setup(config, manifest, check_only=False):
     core = ['driver.py', 'parameter.py', 'runner.py', 'env.py', 'model.py',
             'multi_robot_worker.py', 'graph_generator.py', 'robot.py', 'sensor.py',
             'ss_realistic_model.py', 'baseline_support.py', 'baseline_replay.py']
+    core += [str(p) for p in sorted(Path('contact_module').glob('*.py'))]
     provenance = dict(created=datetime.now().astimezone().isoformat(),
         branch=subprocess.check_output(['git', 'branch', '--show-current'], text=True).strip(),
         commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
@@ -120,7 +121,8 @@ def record_setup(config, manifest, check_only=False):
         original_signal_strength_model=config.USE_SIGNAL_STRENGTH_NOT_PROXIMITY,
         replay_mask_storage='lossless-bitpack-zlib-v1',
         graph_boundary_repair='Do not append a local candidate when all K slots are global neighbors',
-        automatic_evaluation=False, training_started=False)
+        automatic_evaluation=False, training_started=False,
+        contact_config=config.CONTACT_CONFIG.to_dict())
     path = Path(config.BASELINE_DIR) / ('config_check.json' if check_only else 'setup.json')
     if not check_only and path.exists():
         previous = json.loads(path.read_text())
@@ -187,6 +189,9 @@ class Progress:
         write_json(self.directory / 'status.json', state)
         if valid:
             step = self.completed
+            for metric_name, value in metrics.items():
+                if metric_name.startswith('contact_'):
+                    self.writer.add_scalar('Contact/' + metric_name[8:], value, step)
             self.writer.add_scalar('Progress/Success Rate 100 Percent', rate, step)
             self.writer.add_scalar('Progress/Window Size', len(self.recent), step)
             self.writer.add_scalar('Progress/SAC Updates', self.updates, step)

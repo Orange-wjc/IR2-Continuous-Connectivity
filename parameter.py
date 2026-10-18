@@ -5,6 +5,8 @@
 
 import os
 import sys
+from contact_module.config import ContactConfig
+CONTACT_CONFIG = ContactConfig.from_env()
 sys.modules['TRAINING'] = True   # False = Inference Testing                                                                                            
 
 # --- MAPS --- #
@@ -52,7 +54,9 @@ NUM_META_AGENT = int(os.environ.get('IR2_AGENTS', '4'))
 if not 1 <= NUM_META_AGENT <= 24:
     raise ValueError('IR2_AGENTS must be between 1 and 24')
 SUMMARY_WINDOW = 32
-FOLDER_NAME = os.environ.get('IR2_RUN_NAME', 'ir2_baseline_easy10_20261018')
+FOLDER_NAME = os.environ.get('IR2_RUN_NAME',
+    'ir2_' + CONTACT_CONFIG.method + '_easy10' if CONTACT_CONFIG.enabled
+    else 'ir2_baseline_easy10_20261018')
 if not FOLDER_NAME or any(c not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-' for c in FOLDER_NAME):
     raise ValueError('IR2_RUN_NAME must be a simple folder name')
 BASELINE_DIR = f'experiments/{FOLDER_NAME}'

@@ -205,8 +205,9 @@ class Decoder(nn.Module):
 
 
 class PolicyNet(nn.Module):
-    def __init__(self, input_dim, embedding_dim):
+    def __init__(self, input_dim, embedding_dim, allow_wait=False):
         super(PolicyNet, self).__init__()
+        self.allow_wait = allow_wait
         self.initial_embedding = nn.Linear(input_dim, embedding_dim)
 
         self.current_embedding = nn.Linear(embedding_dim * 2, embedding_dim)
@@ -234,7 +235,7 @@ class PolicyNet(nn.Module):
             current_mask = edge_padding_mask
         else:
             current_mask = None
-        current_mask[:,:,0] = 1 # don't stay at current position
+        current_mask[:,:,0] = 0 if self.allow_wait else 1
         
         if not 0 in current_mask:
             current_mask[:,:,0] = 0
@@ -253,8 +254,9 @@ class PolicyNet(nn.Module):
 
 
 class QNet(nn.Module):
-    def __init__(self, input_dim, embedding_dim):
+    def __init__(self, input_dim, embedding_dim, allow_wait=False):
         super(QNet, self).__init__()
+        self.allow_wait = allow_wait
         self.initial_embedding = nn.Linear(input_dim, embedding_dim)
         self.action_embedding = nn.Linear(embedding_dim*3, embedding_dim)
 
@@ -287,7 +289,7 @@ class QNet(nn.Module):
             current_mask = edge_padding_mask
         else:
             current_mask = None
-        current_mask[:, :, 0] = 1  # don't stay at current position
+        current_mask[:, :, 0] = 0 if self.allow_wait else 1
         
         if not 0 in current_mask:
             current_mask[:,:,0] = 0

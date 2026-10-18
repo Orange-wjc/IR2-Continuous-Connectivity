@@ -31,6 +31,7 @@ from runner import RLRunner
 from datetime import datetime
 from baseline_support import prepare_maps, record_setup, Progress, write_json, memory_available_gib
 from baseline_replay import stack_masks
+from contact_module.learning import ContentTrainer
 
 
 def writeToTensorBoard(writer, tensorboardData, curr_episode):
@@ -66,6 +67,11 @@ def main():
     manifest = prepare_maps(config)
     if not args.check_config and Path(MODEL_PATH).exists() and not LOAD_MODEL:
         raise ValueError('Checkpoint already exists; use IR2_RESUME=1 or a new IR2_RUN_NAME')
+    if LOAD_MODEL and not args.check_config:
+        # Reject a wrong-method resume before touching setup/logs or starting Ray.
+        metadata = torch.load(MODEL_PATH, map_location='cpu')
+        CONTACT_CONFIG.validate_checkpoint(metadata)
+        del metadata
     setup = record_setup(config, manifest, check_only=args.check_config)
     if args.check_config:
         print(__import__('json').dumps(setup, ensure_ascii=False, indent=2))
@@ -79,8 +85,8 @@ def main():
              include_dashboard=False, object_store_memory=1024**3,
              _temp_dir='/tmp/ir2-original-ray')
     print('Welcome to IR2-MARL Exploration Training Sim!', flush=True)
-    print('Original IR2 | maps={} | robots={}-{} | agents={} | batch={} | LR={}'.format(
-        len(manifest['maps']), NUM_ROBOTS_MIN, NUM_ROBOTS_MAX, NUM_META_AGENT, BATCH_SIZE, LR), flush=True)
+    print('IR2 [{}] | maps={} | robots={}-{} | agents={} | batch={} | LR={}'.format(
+        CONTACT_CONFIG.method, len(manifest['maps']), NUM_ROBOTS_MIN, NUM_ROBOTS_MAX, NUM_META_AGENT, BATCH_SIZE, LR), flush=True)
     log_dir = os.path.join(TRAIN_DIR, datetime.now().strftime('%Y%m%d_%H%M%S') + '_' + socket.gethostname())
     writer = SummaryWriter(log_dir, flush_secs=10)
     os.makedirs(MODEL_DIR, exist_ok=True)
@@ -103,18 +109,19 @@ def main():
     if LOAD_MODEL:
         print('Loading Model...')
         checkpoint = torch.load(MODEL_PATH)
+        CONTACT_CONFIG.validate_checkpoint(checkpoint)
         log_alpha = checkpoint['log_alpha'] if CONTINUE_LOG_ALPHA else torch.FloatTensor([INITIAL_LOG_ALPHA]).to(device) 
     else:
         log_alpha = torch.FloatTensor([INITIAL_LOG_ALPHA]).to(device)
     log_alpha.requires_grad = True
 
     # Init key networks & params
-    global_policy_net = PolicyNet(INPUT_DIM, EMBEDDING_DIM).to(device)
-    global_q_net1 = QNet(INPUT_DIM, EMBEDDING_DIM).to(device)
-    global_q_net2 = QNet(INPUT_DIM, EMBEDDING_DIM).to(device)
+    global_policy_net = PolicyNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled).to(device)
+    global_q_net1 = QNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled).to(device)
+    global_q_net2 = QNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled).to(device)
 
-    global_target_q_net1 = QNet(INPUT_DIM, EMBEDDING_DIM).to(device)
-    global_target_q_net2 = QNet(INPUT_DIM, EMBEDDING_DIM).to(device)
+    global_target_q_net1 = QNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled).to(device)
+    global_target_q_net2 = QNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled).to(device)
     
     global_policy_optimizer = optim.Adam(global_policy_net.parameters(), lr=LR)
     global_q_net1_optimizer = optim.Adam(global_q_net1.parameters(), lr=LR)
@@ -155,6 +162,8 @@ def main():
     global_target_q_net1.eval()
     global_target_q_net2.eval()
     progress = Progress(BASELINE_DIR, manifest, writer, checkpoint)
+    auxiliary = (ContentTrainer(global_policy_net, CONTACT_CONFIG,
+                 (checkpoint or {}).get('contact_learning')) if CONTACT_CONFIG.learned else None)
 
     def save_checkpoint():
         state = {"policy_model": global_policy_net.state_dict(),
@@ -173,7 +182,10 @@ def main():
                  "completed_episodes": progress.completed,
                  "invalid_episodes": progress.invalid,
                  "training_updates": progress.updates,
-                 "baseline_progress": progress.snapshot()}
+                 "baseline_progress": progress.snapshot(),
+                 "contact_config": CONTACT_CONFIG.to_dict()}
+        if auxiliary is not None:
+            state['contact_learning'] = auxiliary.state_dict()
         temp = Path(MODEL_PATH).with_suffix('.tmp')
         torch.save(state, temp)
         temp.replace(MODEL_PATH)
@@ -196,6 +208,8 @@ def main():
         q_net1_weights = global_q_net1.to(local_device).state_dict()
     weights_set.append(policy_weights)
     weights_set.append(q_net1_weights)
+    if auxiliary is not None:
+        weights_set.append(auxiliary.weights())
 
     ### Allow for batch training parallization across GPU ###
     dp_policy = nn.DataParallel(global_policy_net)              # Policy Net
@@ -251,6 +265,12 @@ def main():
             if not success:
                 progress.record(info, False, {}, len(experience_buffer[0]), curr_episode)
                 continue
+
+            if auxiliary is not None:
+                content_loss = auxiliary.update(info.get('contact_labels', []))
+                if content_loss is not None:
+                    writer.add_scalar('Contact/Content Loss', content_loss, progress.completed + 1)
+                writer.add_scalar('Contact/Content Updates', auxiliary.updates, progress.completed + 1)
             
             ### Start training when replay buffer is filled ###
             if curr_episode % 1 == 0 and len(experience_buffer[0]) >= MINIMUM_BUFFER_SIZE:
@@ -388,6 +408,8 @@ def main():
                 q_net1_weights = global_q_net1.to(local_device).state_dict()
             weights_set.append(policy_weights)
             weights_set.append(q_net1_weights)
+            if auxiliary is not None:
+                weights_set.append(auxiliary.weights())
 
             
              ### Hard Q updates to get target Q-networks every 1024 steps ###

@@ -1,0 +1,169 @@
+{
+  "passed": true,
+  "workers": 8,
+  "robots": 3,
+  "rollout_steps": 8,
+  "actual_distinct_transitions": 192,
+  "effective_gpu_batch": 128,
+  "original_sac_gpu_iterations": 8,
+  "auxiliary_optimizer_updates": 32,
+  "peak_cuda_mib": 18079.09228515625,
+  "min_host_available_gib": 17.475563049316406,
+  "elapsed_seconds": 20.649942505988292,
+  "rollouts": [
+    {
+      "episode": 8,
+      "transitions": 24,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 309.9708547058782,
+        "explored_rate": 0.08476302083333333,
+        "success_rate": 0.0,
+        "connectivity_rate": 0.0,
+        "agents_connected_percentage": 0.6666666666666667,
+        "contact_seconds": 81.86848828793885,
+        "contact_sent_bytes": 62182.0,
+        "contact_control_bytes": 4692.0,
+        "contact_unique_cells": 6962.0,
+        "contact_duplicate_cells": 3755.0,
+        "contact_map_packets": 259.0,
+        "contact_wait_actions": 1.0
+      }
+    },
+    {
+      "episode": 7,
+      "transitions": 24,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 259.4881337589661,
+        "explored_rate": 0.12982135052447552,
+        "success_rate": 0.0,
+        "connectivity_rate": 0.0,
+        "agents_connected_percentage": 0.6666666666666667,
+        "contact_seconds": 82.38643046438963,
+        "contact_sent_bytes": 72637.0,
+        "contact_control_bytes": 8479.0,
+        "contact_unique_cells": 6217.0,
+        "contact_duplicate_cells": 5482.0,
+        "contact_map_packets": 412.0,
+        "contact_wait_actions": 0.0
+      }
+    },
+    {
+      "episode": 6,
+      "transitions": 24,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 275.04528157647394,
+        "explored_rate": 0.0829765625,
+        "success_rate": 0.0,
+        "connectivity_rate": 0.0,
+        "agents_connected_percentage": 0.6666666666666667,
+        "contact_seconds": 83.2324888170736,
+        "contact_sent_bytes": 113903.0,
+        "contact_control_bytes": 8718.0,
+        "contact_unique_cells": 7194.0,
+        "contact_duplicate_cells": 12346.0,
+        "contact_map_packets": 452.0,
+        "contact_wait_actions": 1.0
+      }
+    },
+    {
+      "episode": 4,
+      "transitions": 24,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 379.63596378502626,
+        "explored_rate": 0.08215625,
+        "success_rate": 0.0,
+        "connectivity_rate": 1.0,
+        "agents_connected_percentage": 1.0,
+        "contact_seconds": 103.91262637375645,
+        "contact_sent_bytes": 128111.0,
+        "contact_control_bytes": 11062.0,
+        "contact_unique_cells": 12446.0,
+        "contact_duplicate_cells": 9402.0,
+        "contact_map_packets": 577.0,
+        "contact_wait_actions": 0.0
+      }
+    },
+    {
+      "episode": 3,
+      "transitions": 24,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 297.90349945535945,
+        "explored_rate": 0.2079728950403691,
+        "success_rate": 0.0,
+        "connectivity_rate": 1.0,
+        "agents_connected_percentage": 1.0,
+        "contact_seconds": 86.01775122526278,
+        "contact_sent_bytes": 99524.0,
+        "contact_control_bytes": 9640.0,
+        "contact_unique_cells": 8993.0,
+        "contact_duplicate_cells": 7620.0,
+        "contact_map_packets": 487.0,
+        "contact_wait_actions": 1.0
+      }
+    },
+    {
+      "episode": 2,
+      "transitions": 24,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 204.6395193668856,
+        "explored_rate": 0.10084375,
+        "success_rate": 0.0,
+        "connectivity_rate": 0.0,
+        "agents_connected_percentage": 0.0,
+        "contact_seconds": 69.77320037764177,
+        "contact_sent_bytes": 79930.0,
+        "contact_control_bytes": 5727.0,
+        "contact_unique_cells": 7752.0,
+        "contact_duplicate_cells": 6146.0,
+        "contact_map_packets": 319.0,
+        "contact_wait_actions": 0.0
+      }
+    },
+    {
+      "episode": 1,
+      "transitions": 24,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 243.66791412148234,
+        "explored_rate": 0.2475339330808081,
+        "success_rate": 0.0,
+        "connectivity_rate": 0.0,
+        "agents_connected_percentage": 0.6666666666666667,
+        "contact_seconds": 81.04128433171127,
+        "contact_sent_bytes": 124594.0,
+        "contact_control_bytes": 9978.0,
+        "contact_unique_cells": 10473.0,
+        "contact_duplicate_cells": 10910.0,
+        "contact_map_packets": 508.0,
+        "contact_wait_actions": 2.0
+      }
+    },
+    {
+      "episode": 5,
+      "transitions": 24,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 255.63069433072326,
+        "explored_rate": 0.26880835423634336,
+        "success_rate": 0.0,
+        "connectivity_rate": 0.0,
+        "agents_connected_percentage": 0.6666666666666667,
+        "contact_seconds": 78.00893130197824,
+        "contact_sent_bytes": 96073.0,
+        "contact_control_bytes": 6998.0,
+        "contact_unique_cells": 9211.0,
+        "contact_duplicate_cells": 7309.0,
+        "contact_map_packets": 395.0,
+        "contact_wait_actions": 2.0
+      }
+    }
+  ],
+  "production_files_unchanged": true,
+  "scope": "Isolated engineering samples and copy-only gradients; no formal training/effectiveness evidence"
+}

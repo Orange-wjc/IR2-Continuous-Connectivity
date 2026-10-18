@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "checked_reports": {
+    "baseline_checks/contact_module_verified.json": "41e0b53f66625dc2eab95f07aac75651fee507bb22e5dd0878c7ecb9894ddb11",
+    "baseline_checks/contact_driver_verified.json": "d067eae369c67ae900bfa86854107f44f6fa507f805cc12c0dc291b6971dbc8c",
+    "baseline_checks/contact_full_runtime_verified.json": "a6c59348a3f76e6cb5a2b761657935fb2b0746aa4f37e885d5450002d1defc26"
+  },
+  "current_source_matches_full_runtime_check": true,
+  "original_sac_math_block_ast_unchanged": true,
+  "maps_identical_to_original_run2": true,
+  "production_model_and_progress_unchanged": true,
+  "full_maps_checked": 10,
+  "parallel_samplers": 8,
+  "robots": 3,
+  "min_available_host_gib": 17.79053497314453,
+  "peak_cuda_mib": 18079.09228515625,
+  "real_movement_transitions": 5820,
+  "original_sac_engineering_updates": 8,
+  "auxiliary_engineering_updates": 40,
+  "scope": "Engineering readiness only; improved-method formal training not started; no effectiveness or generalization claim"
+}

@@ -1,0 +1,219 @@
+{
+  "passed": true,
+  "workers": 8,
+  "robots": 3,
+  "rollout_steps": 196,
+  "actual_distinct_transitions": 5820,
+  "effective_gpu_batch": 128,
+  "original_sac_gpu_iterations": 8,
+  "auxiliary_optimizer_updates": 40,
+  "peak_cuda_mib": 18079.09228515625,
+  "min_host_available_gib": 17.79053497314453,
+  "elapsed_seconds": 412.6008759189863,
+  "rollouts": [
+    {
+      "episode": 8,
+      "transitions": 588,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 6466.743097136205,
+        "explored_rate": 0.15040625,
+        "success_rate": 0.0,
+        "connectivity_rate": 1.0,
+        "agents_connected_percentage": 1.0,
+        "contact_seconds": 2163.0360957716707,
+        "contact_sent_bytes": 505530.0,
+        "contact_control_bytes": 85681.0,
+        "contact_unique_cells": 25265.0,
+        "contact_duplicate_cells": 53185.0,
+        "contact_map_packets": 2123.0,
+        "contact_wait_actions": 36.0
+      }
+    },
+    {
+      "episode": 4,
+      "transitions": 588,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 7761.025353720999,
+        "explored_rate": 0.1993203125,
+        "success_rate": 0.0,
+        "connectivity_rate": 1.0,
+        "agents_connected_percentage": 1.0,
+        "contact_seconds": 2381.754335145298,
+        "contact_sent_bytes": 657772.0,
+        "contact_control_bytes": 91903.0,
+        "contact_unique_cells": 58048.0,
+        "contact_duplicate_cells": 47825.0,
+        "contact_map_packets": 2808.0,
+        "contact_wait_actions": 21.0
+      }
+    },
+    {
+      "episode": 6,
+      "transitions": 588,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 6759.757767523484,
+        "explored_rate": 0.22252864583333334,
+        "success_rate": 0.0,
+        "connectivity_rate": 0.0,
+        "agents_connected_percentage": 0.0,
+        "contact_seconds": 2158.243422583097,
+        "contact_sent_bytes": 691000.0,
+        "contact_control_bytes": 76527.0,
+        "contact_unique_cells": 57682.0,
+        "contact_duplicate_cells": 57170.0,
+        "contact_map_packets": 3068.0,
+        "contact_wait_actions": 17.0
+      }
+    },
+    {
+      "episode": 2,
+      "transitions": 588,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 6732.325842822275,
+        "explored_rate": 0.20329687500000002,
+        "success_rate": 0.0,
+        "connectivity_rate": 0.0,
+        "agents_connected_percentage": 0.6666666666666667,
+        "contact_seconds": 2222.007348936184,
+        "contact_sent_bytes": 637095.0,
+        "contact_control_bytes": 77974.0,
+        "contact_unique_cells": 44304.0,
+        "contact_duplicate_cells": 60274.0,
+        "contact_map_packets": 2787.0,
+        "contact_wait_actions": 14.0
+      }
+    },
+    {
+      "episode": 1,
+      "transitions": 588,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 7041.52755471839,
+        "explored_rate": 0.5385396938131314,
+        "success_rate": 0.0,
+        "connectivity_rate": 0.0,
+        "agents_connected_percentage": 0.6666666666666667,
+        "contact_seconds": 2164.165208604094,
+        "contact_sent_bytes": 740509.0,
+        "contact_control_bytes": 104022.0,
+        "contact_unique_cells": 64890.0,
+        "contact_duplicate_cells": 53233.0,
+        "contact_map_packets": 3487.0,
+        "contact_wait_actions": 18.0
+      }
+    },
+    {
+      "episode": 5,
+      "transitions": 588,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 6736.613289245919,
+        "explored_rate": 0.6824179556856187,
+        "success_rate": 0.0,
+        "connectivity_rate": 0.0,
+        "agents_connected_percentage": 0.0,
+        "contact_seconds": 2235.5501539622064,
+        "contact_sent_bytes": 1137335.0,
+        "contact_control_bytes": 102269.0,
+        "contact_unique_cells": 68192.0,
+        "contact_duplicate_cells": 126195.0,
+        "contact_map_packets": 4823.0,
+        "contact_wait_actions": 20.0
+      }
+    },
+    {
+      "episode": 3,
+      "transitions": 588,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 7921.12746742671,
+        "explored_rate": 0.710766291810842,
+        "success_rate": 0.0,
+        "connectivity_rate": 0.0,
+        "agents_connected_percentage": 0.0,
+        "contact_seconds": 2363.894282338635,
+        "contact_sent_bytes": 544237.0,
+        "contact_control_bytes": 46349.0,
+        "contact_unique_cells": 48061.0,
+        "contact_duplicate_cells": 45790.0,
+        "contact_map_packets": 2180.0,
+        "contact_wait_actions": 17.0
+      }
+    },
+    {
+      "episode": 7,
+      "transitions": 528,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 6923.192557013868,
+        "explored_rate": 0.9941269667832168,
+        "success_rate": 1.0,
+        "connectivity_rate": 0.0,
+        "agents_connected_percentage": 0.6666666666666667,
+        "contact_seconds": 1979.1928516137682,
+        "contact_sent_bytes": 1466232.0,
+        "contact_control_bytes": 120870.0,
+        "contact_unique_cells": 90242.0,
+        "contact_duplicate_cells": 163419.0,
+        "contact_map_packets": 5818.0,
+        "contact_wait_actions": 13.0
+      }
+    },
+    {
+      "episode": 10,
+      "transitions": 588,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 6126.382473073419,
+        "explored_rate": 0.1365234375,
+        "success_rate": 0.0,
+        "connectivity_rate": 1.0,
+        "agents_connected_percentage": 1.0,
+        "contact_seconds": 2066.1684123922923,
+        "contact_sent_bytes": 434509.0,
+        "contact_control_bytes": 70631.0,
+        "contact_unique_cells": 27686.0,
+        "contact_duplicate_cells": 39991.0,
+        "contact_map_packets": 1961.0,
+        "contact_wait_actions": 19.0
+      }
+    },
+    {
+      "episode": 9,
+      "transitions": 588,
+      "labels": 256,
+      "metrics": {
+        "travel_dist": 7626.271386989897,
+        "explored_rate": 0.8487030228758169,
+        "success_rate": 0.0,
+        "connectivity_rate": 0.0,
+        "agents_connected_percentage": 0.6666666666666667,
+        "contact_seconds": 2376.065339882308,
+        "contact_sent_bytes": 1510544.0,
+        "contact_control_bytes": 127411.0,
+        "contact_unique_cells": 110793.0,
+        "contact_duplicate_cells": 150013.0,
+        "contact_map_packets": 6019.0,
+        "contact_wait_actions": 18.0
+      }
+    }
+  ],
+  "production_files_unchanged": true,
+  "scope": "Isolated engineering samples and copy-only gradients; no formal training/effectiveness evidence",
+  "source_sha256": {
+    "contact_module/__init__.py": "0927ae010c3c3c47511338ce0181eefdcbd9c72d37c7e0e76ba1d1eb7a7b91b9",
+    "contact_module/learning.py": "6a12857631ecd6ddb928cb59b0b5ccdc0f16885d60d50230741390e19be34ed5",
+    "contact_module/radio.py": "0f2bc761962520376213c6d95afe4c4e028ffb49e6465df4aa8bd0efe6a5b9c2",
+    "contact_module/config.py": "c1804188456af75880252ca16c74e15c3726b28d9e9fd2b6dafd1fb62f711416",
+    "contact_module/adapter.py": "d3fa101367dca3b67a612fa50d26ff29a01c4d1a8e58eccebee964fcd2b1dbb2",
+    "driver.py": "82a9dde224ea5b46ac17bba06b1c05efe2625fd62e81f69a2d2c3593b09e0591",
+    "runner.py": "373d983b71fe3365538d2336788e35428dcea0d1472b03994ff788ed3782c007",
+    "env.py": "541844ab918f62263f6b6c321d0a640e8233bcc6b96f4d91002d98dcf14a3930",
+    "model.py": "810cf81c48faea43fe2924012dc0acdabf0b3702ffb3003b7b874cbaede2e244",
+    "multi_robot_worker.py": "71a4aefdd9088b8939224174617d70a9c7f5679f798f331417514e98037e9fd0"
+  }
+}

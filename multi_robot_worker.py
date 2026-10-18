@@ -14,7 +14,7 @@ from robot import Robot
 
 
 class Worker:
-    def __init__(self, meta_agent_id, n_agent, policy_net, q_net, global_step, device='cuda', greedy=False, save_image=False):
+    def __init__(self, meta_agent_id, n_agent, policy_net, q_net, global_step, device='cuda', greedy=False, save_image=False, contact=None):
         self.device = device
         self.greedy = greedy
         self.n_agent = n_agent
@@ -24,7 +24,8 @@ class Worker:
         self.k_size = K_SIZE
         self.save_image = save_image
 
-        self.env = Env(map_index=self.global_step, n_agent=self.n_agent, k_size=self.k_size, plot=save_image)
+        self.contact = contact
+        self.env = Env(map_index=self.global_step, n_agent=self.n_agent, k_size=self.k_size, plot=save_image, contact=contact)
         self.local_policy_net = policy_net
         self.local_q_net = q_net
 
@@ -135,6 +136,8 @@ class Worker:
         self.perf_metrics['success_rate'] = done
         self.perf_metrics['connectivity_rate'] = self.env.connectivity_rate
         self.perf_metrics['agents_connected_percentage'] = self.env.agents_connected_percentage
+        if self.contact is not None:
+            self.perf_metrics.update(self.contact.metrics())
 
         # save merged gif
         if self.save_image:
@@ -226,9 +229,15 @@ class Worker:
             print(RED, "[Eps {} | Robot {} | Step {}] current_index > len(edge_inputs) ({} >= {}). Skipping eps.".format(eps, robot_id+1, step, current_index, len(edge_inputs)))
             return [], False
         edge = edge_inputs[current_index]
+        if self.contact is not None:
+            # Reserve slot zero for a real WAIT at the current node. Global
+            # neighbors can precede self in the original adjacency ordering.
+            here = current_index.item()
+            edge = [here] + [i for i in edge if i != here][:self.k_size-1]
         if plot:
             self.env.all_curr_vertices[robot_id] = [self.env.all_node_coords[robot_id][e] if e != 0 else None for e in edge]  
 
+        valid_edges = len(edge)
         while len(edge) < self.k_size:
             edge.append(0)
 
@@ -240,8 +249,14 @@ class Worker:
             return [], False
 
         edge_padding_mask = torch.where(edge_inputs == 0, one, edge_padding_mask)
+        if self.contact is not None:
+            # Index zero is a real graph node, not always a padding sentinel.
+            edge_padding_mask.zero_()
+            edge_padding_mask[:, :, valid_edges:] = 1
 
         observations = node_inputs, edge_inputs, current_index, node_padding_mask, edge_padding_mask, edge_mask
+        if self.contact is not None:
+            self.contact.observe(robot_id, observations)
         return observations, True   # success
 
 

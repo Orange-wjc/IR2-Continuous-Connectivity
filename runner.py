@@ -14,6 +14,7 @@ from multi_robot_worker import Worker
 class Runner(object):
     def __init__(self, meta_agent_id):
         self.meta_agent_id = meta_agent_id
+        torch.set_num_threads(1)
         self.device = torch.device('cuda') if USE_GPU else torch.device('cpu')
         self.local_network = PolicyNet(INPUT_DIM, EMBEDDING_DIM)
         self.local_q_net = QNet(INPUT_DIM, EMBEDDING_DIM)
@@ -31,7 +32,7 @@ class Runner(object):
 
     def do_job(self, episode_number):
         """ Execute simulation episode and gather experience tuples & metrics """
-        save_img = True if episode_number % SAVE_IMG_GAP == 0 else False
+        save_img = SAVE_TRAINING_GIFS and episode_number % SAVE_IMG_GAP == 0
         n_agent = np.random.randint(NUM_ROBOTS_MIN, NUM_ROBOTS_MAX+1, 1)[0]    
         worker = Worker(self.meta_agent_id, n_agent, self.local_network, self.local_q_net, episode_number, device=self.device, save_image=save_img, greedy=False)
         succeess = worker.work(episode_number)

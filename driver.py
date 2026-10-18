@@ -3,7 +3,18 @@
 # Driver of training program, maintain & update the global network.
 ##############################################################################
 
+import os
+for _name in ('OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS', 'NUMEXPR_NUM_THREADS'):
+    os.environ.setdefault(_name, '1')
+os.environ.setdefault('MPLBACKEND', 'Agg')
+os.environ.setdefault('MPLCONFIGDIR', '/tmp/ir2-original-mpl')
+
 from parameter import *
+import parameter as config
+import argparse
+import fcntl
+from pathlib import Path
+import signal
 import torch
 import torch.optim as optim
 import torch.nn as nn
@@ -16,16 +27,7 @@ from torch.utils.tensorboard import SummaryWriter
 from model import PolicyNet, QNet
 from runner import RLRunner
 from datetime import datetime
-
-ray.init()
-print("Welcome to IR2-MARL Exploration Training Sim!")
-
-log_dir = os.path.join(TRAIN_DIR, datetime.now().strftime('%b%d_%H-%M-%S') + '_' + socket.gethostname()) 
-writer = SummaryWriter(log_dir)
-if not os.path.exists(MODEL_DIR):
-    os.makedirs(MODEL_DIR)
-if not os.path.exists(GIFS_DIR):
-    os.makedirs(GIFS_DIR)
+from baseline_support import prepare_maps, record_setup, Progress, write_json, memory_available_gib
 
 
 def writeToTensorBoard(writer, tensorboardData, curr_episode):
@@ -52,12 +54,49 @@ def writeToTensorBoard(writer, tensorboardData, curr_episode):
 
     
 def main():
+    parser = argparse.ArgumentParser(description='Original IR2 training on a fixed ten-map subset')
+    parser.add_argument('--check-config', action='store_true', help='Verify map links/configuration without starting Ray or training')
+    args = parser.parse_args()
+    Path(BASELINE_DIR).mkdir(parents=True, exist_ok=True)
+    run_lock = (Path(BASELINE_DIR) / '.training.lock').open('a')
+    fcntl.flock(run_lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    manifest = prepare_maps(config)
+    setup = record_setup(config, manifest)
+    if args.check_config:
+        print(__import__('json').dumps(setup, ensure_ascii=False, indent=2))
+        return
+    if Path(MODEL_PATH).exists() and not LOAD_MODEL:
+        raise ValueError('Checkpoint already exists; use IR2_RESUME=1 or a new IR2_RUN_NAME')
+    if not torch.cuda.is_available():
+        raise RuntimeError('The original global learner requires a visible CUDA GPU')
+    if memory_available_gib() < 6:
+        raise MemoryError('Need at least 6 GiB available host RAM before starting')
+    torch.set_num_threads(2)
+    ray.init(address='local', num_cpus=NUM_META_AGENT + 2, num_gpus=NUM_GPU,
+             include_dashboard=False, object_store_memory=1024**3,
+             _temp_dir='/tmp/ir2-original-ray')
+    print('Welcome to IR2-MARL Exploration Training Sim!', flush=True)
+    print('Original IR2 | maps={} | robots={}-{} | agents={} | batch={} | LR={}'.format(
+        len(manifest['maps']), NUM_ROBOTS_MIN, NUM_ROBOTS_MAX, NUM_META_AGENT, BATCH_SIZE, LR), flush=True)
+    log_dir = os.path.join(TRAIN_DIR, datetime.now().strftime('%Y%m%d_%H%M%S') + '_' + socket.gethostname())
+    writer = SummaryWriter(log_dir, flush_secs=10)
+    os.makedirs(MODEL_DIR, exist_ok=True)
+    os.makedirs(GIFS_DIR, exist_ok=True)
+    setup.update(training_started=True, tensorboard_log_dir=log_dir)
+    write_json(Path(BASELINE_DIR) / 'setup.json', setup)
+    stopping = [False]
+    def request_stop(*_):
+        stopping[0] = True
+        print('Stop requested; finish the current optimizer block and save the checkpoint.', flush=True)
+    signal.signal(signal.SIGINT, request_stop)
+    signal.signal(signal.SIGTERM, request_stop)
 
     ### Defining model & params ###
     device = torch.device('cuda') if USE_GPU_GLOBAL else torch.device('cpu')
     local_device = torch.device('cuda') if USE_GPU else torch.device('cpu')
 
     # Special handling for log alpha
+    checkpoint = None
     if LOAD_MODEL:
         print('Loading Model...')
         checkpoint = torch.load(MODEL_PATH)
@@ -112,6 +151,32 @@ def main():
     global_target_q_net2.load_state_dict(global_q_net2.state_dict())
     global_target_q_net1.eval()
     global_target_q_net2.eval()
+    progress = Progress(BASELINE_DIR, manifest, writer, checkpoint)
+
+    def save_checkpoint():
+        state = {"policy_model": global_policy_net.state_dict(),
+                 "q_net1_model": global_q_net1.state_dict(),
+                 "q_net2_model": global_q_net2.state_dict(),
+                 "log_alpha": log_alpha,
+                 "policy_optimizer": global_policy_optimizer.state_dict(),
+                 "q_net1_optimizer": global_q_net1_optimizer.state_dict(),
+                 "q_net2_optimizer": global_q_net2_optimizer.state_dict(),
+                 "log_alpha_optimizer": log_alpha_optimizer.state_dict(),
+                 "episode": curr_episode,
+                 "policy_lr_decay": policy_lr_decay.state_dict(),
+                 "q_net1_lr_decay": q_net1_lr_decay.state_dict(),
+                 "q_net2_lr_decay": q_net2_lr_decay.state_dict(),
+                 "log_alpha_lr_decay": log_alpha_lr_decay.state_dict(),
+                 "completed_episodes": progress.completed,
+                 "invalid_episodes": progress.invalid,
+                 "training_updates": progress.updates,
+                 "baseline_progress": progress.snapshot()}
+        temp = Path(MODEL_PATH).with_suffix('.tmp')
+        torch.save(state, temp)
+        temp.replace(MODEL_PATH)
+        writer.flush()
+        print('Saved model: {} | completed={} | SAC updates={}'.format(
+            MODEL_PATH, progress.completed, progress.updates), flush=True)
     
     ### Launch meta agents ###
     meta_agents = [RLRunner.remote(i) for i in range(NUM_META_AGENT)]
@@ -153,10 +218,14 @@ def main():
         experience_buffer.append([])
     
     try:
-        while True:
+        while not stopping[0]:
+            if memory_available_gib() < 4:
+                raise MemoryError('Available host RAM below 4 GiB; stopping this training run')
             
             ### Get done jobs ###
-            done_id, job_list = ray.wait(job_list)
+            done_id, job_list = ray.wait(job_list, timeout=1)
+            if not done_id:
+                continue
             done_jobs = ray.get(done_id)
             
             success = True
@@ -177,6 +246,7 @@ def main():
             job_list.append(meta_agents[info['id']].job.remote(weights_set, curr_episode))
             
             if not success:
+                progress.record(info, False, {}, len(experience_buffer[0]), curr_episode)
                 continue
             
             ### Start training when replay buffer is filled ###
@@ -281,6 +351,7 @@ def main():
                     log_alpha_optimizer.zero_grad()
                     alpha_loss.backward()
                     log_alpha_optimizer.step()
+                    progress.updates += 1
 
                     target_q_update_counter += 1
                     #print("target q update counter", target_q_update_counter % 1024)
@@ -291,6 +362,8 @@ def main():
                 data = [reward_batch.mean().item(), value_prime_batch.mean().item(), policy_loss.item(), q1_loss.item(),
                         entropy.mean().item(), policy_grad_norm.item(), q_grad_norm.item(), log_alpha.item(), alpha_loss.item(), *perf_data]
                 training_data.append(data)
+
+            progress.record(info, True, metrics, len(experience_buffer[0]), curr_episode)
 
             ### Log training stats to tensorboard ###
             if len(training_data) >= SUMMARY_WINDOW:
@@ -324,31 +397,20 @@ def main():
                 global_target_q_net2.eval()
 
             if curr_episode % 32 == 0:
-                print('Saving model', end='\n')
-                checkpoint = {"policy_model": global_policy_net.state_dict(),
-                                "q_net1_model": global_q_net1.state_dict(),
-                                "q_net2_model": global_q_net2.state_dict(),
-                                "log_alpha": log_alpha,
-                                "policy_optimizer": global_policy_optimizer.state_dict(),
-                                "q_net1_optimizer": global_q_net1_optimizer.state_dict(),
-                                "q_net2_optimizer": global_q_net2_optimizer.state_dict(),
-                                "log_alpha_optimizer": log_alpha_optimizer.state_dict(),
-                                "episode": curr_episode,
-                                "policy_lr_decay": policy_lr_decay.state_dict(),
-                                "q_net1_lr_decay": q_net1_lr_decay.state_dict(),
-                                "q_net2_lr_decay": q_net2_lr_decay.state_dict(),
-                                "log_alpha_lr_decay": log_alpha_lr_decay.state_dict()
-                        }
-                path_checkpoint = "./" + MODEL_PATH
-                torch.save(checkpoint, path_checkpoint)
-                print('Saved model', end='\n')
+                save_checkpoint()
                     
     
-    except KeyboardInterrupt:
-        print("CTRL_C pressed. Killing remote workers")
+    finally:
+        save_checkpoint()
         for a in meta_agents:
             ray.kill(a)
+        writer.close()
+        ray.shutdown()
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    finally:
+        if ray.is_initialized():
+            ray.shutdown()

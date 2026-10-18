@@ -1,5 +1,7 @@
 # IR2 Multi-Robot RL Exploration
 
+本地原版10图基线分支：`baseline/ir2-easy10`（基于main）。保持原版IR²模型、环境和SAC规则，用10张原easy地图循环训练；默认单GPU/4个Ray worker。前台启动仍为 `python -u driver.py`，准备/检查、完整命令、曲线和中断保存见 [BASELINE_EASY10.md](BASELINE_EASY10.md)。正式训练等待用户手动启动；短工程预检不等于学习效果。下文为原作者说明。
+
 [IROS 2024] Public code and model for [IR2: Implicit Rendezvous for Robotic Exploration Teams under Sparse Intermittent Connectivity](https://arxiv.org/abs/2409.04730).
 
 Public Website: https://ir2-explore.github.io/

@@ -3,6 +3,7 @@
 # Training parameters.
 #######################################################################
 
+import os
 import sys
 sys.modules['TRAINING'] = True   # False = Inference Testing                                                                                            
 
@@ -10,6 +11,10 @@ sys.modules['TRAINING'] = True   # False = Inference Testing
 # TODO: Set train set
 TRAIN_SET_NAME = "easy"          # stage 1: "easy" ; stage 2: "difficult"
 TRAIN_SET_DIR = "DungeonMaps/train/" + TRAIN_SET_NAME
+TRAIN_SET_SOURCE_DIR = TRAIN_SET_DIR
+# Fixed original-map subset for the baseline learnability check. The driver
+# creates byte-verified symlinks; Env's original selection/modulo is unchanged.
+TRAIN_MAP_LIMIT = 10
 
 # Stage 1: Easy Train Set
 if TRAIN_SET_NAME == "easy":
@@ -42,17 +47,24 @@ else:
 # --- GENERAL --- #
 USE_GPU = False         #  Collect training data using GPUs
 USE_GPU_GLOBAL = True   #  Train the network using GPUs
-NUM_GPU = 4
-NUM_META_AGENT = 32      # Number of parallel sims
+NUM_GPU = 1
+NUM_META_AGENT = int(os.environ.get('IR2_AGENTS', '4'))
+if not 1 <= NUM_META_AGENT <= 24:
+    raise ValueError('IR2_AGENTS must be between 1 and 24')
 SUMMARY_WINDOW = 32
-FOLDER_NAME = 'mar_test_new5' 
+FOLDER_NAME = os.environ.get('IR2_RUN_NAME', 'ir2_baseline_easy10_20261018')
+if not FOLDER_NAME or any(c not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-' for c in FOLDER_NAME):
+    raise ValueError('IR2_RUN_NAME must be a simple folder name')
+BASELINE_DIR = f'experiments/{FOLDER_NAME}'
+TRAIN_SET_DIR = f'{BASELINE_DIR}/maps'
 MODEL_DIR = f'model/{FOLDER_NAME}'
 TRAIN_DIR = f'train/{FOLDER_NAME}'
 GIFS_DIR = f'gifs/{FOLDER_NAME}'
 MODEL_PATH = MODEL_DIR + '/checkpoint.pth' 
-LOAD_MODEL = False
-CONTINUE_LOG_ALPHA = False  # Continue from log_alpha saved from model checkpoint
+LOAD_MODEL = os.environ.get('IR2_RESUME', '0') == '1'
+CONTINUE_LOG_ALPHA = LOAD_MODEL
 SAVE_IMG_GAP = 201  
+SAVE_TRAINING_GIFS = False  # Visualization only; avoids slowing the CPU workers.
 VIZ_GRAPH_EDGES=True
 VIZ_GRAPH_EDGES_GROUND_TRUTH=False
 

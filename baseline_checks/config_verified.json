@@ -1,0 +1,97 @@
+{
+  "created": "2026-10-18T13:51:30.502426+08:00",
+  "branch": "baseline/ir2-easy10",
+  "commit": "1ef6d224ae18503f4763c3cec20e05a737f95783",
+  "source_sha256": {
+    "driver.py": "c6f4af913ca0495db2a376af9f54d564288c5d9c741972f77dcc8ef2daa02d51",
+    "parameter.py": "e0cbae3bfa44a55b87bad6735408c91a68f2c9f7eb16f42710d766b90991bb55",
+    "runner.py": "6c079b4fb6db70646ac3f484647445b602fe760528645ac2cc3886c79e6d1ec7",
+    "env.py": "6cad60ce769e35d5f3404229d081b665b70a4e70749a11e6f48214c61b2c0bd9",
+    "model.py": "2a0c4d91497fc5b5db981e2b91f1b8ed4ed11550bfaee3a67c5d6d1a967fd637",
+    "multi_robot_worker.py": "687f7f33699be20892a25e81948e73b68bf8b60d1ebbf46396615cb5f56f94af",
+    "graph_generator.py": "dc1fedf48624981d3958c95200eb8e8440221edd87b7b42341900f4b06af3d04",
+    "robot.py": "14c40c58d8aca4a09c17a22ebd8e72f00107278ac802a5930bacba8042572d97",
+    "sensor.py": "a7a71eabcb0dde3b586dddfb21f7b5f77ef3bd1d7462f2bda094f7945b8e8f73",
+    "ss_realistic_model.py": "dee2f76a4673dd663138acfe1a4654f2cccb0ba103dac0346d5c7bace0f26b92",
+    "baseline_support.py": "44cdd87707e526050ce3bf3d6681a3ba8cada75de163f8c6db87a9570c24e940"
+  },
+  "map_manifest": {
+    "source_directory": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy",
+    "available_maps": 9999,
+    "selection": "First PNGs in original reverse filename ordering; no score-based selection",
+    "map_count": 10,
+    "maps": [
+      {
+        "name": "img_9999.png",
+        "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9999.png",
+        "sha256": "3d32a10c75e38f8b03a2b4523ba2a9f4380c78a8662856270b1037ef9fa9db32"
+      },
+      {
+        "name": "img_9998.png",
+        "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9998.png",
+        "sha256": "07e2691bcb68dfbda4dc76b3cdc0c599a39686c2ca0824fd52508301420c7988"
+      },
+      {
+        "name": "img_9997.png",
+        "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9997.png",
+        "sha256": "a7cecd79436a98fac8b7f2995715f34ae26a66e4bb1eb4339e9380e87913fed4"
+      },
+      {
+        "name": "img_9996.png",
+        "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9996.png",
+        "sha256": "48e599899f14853fe897019d381fd1b7f813cb2074797f57d113575609aa42cd"
+      },
+      {
+        "name": "img_9995.png",
+        "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9995.png",
+        "sha256": "f46f4de0ba9d6ed8cc4a63cfb0d5c9f7648c006a0b0e78adc44912da23b445da"
+      },
+      {
+        "name": "img_9994.png",
+        "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9994.png",
+        "sha256": "27e8141d57f93deea525a1d12093db05bbb49368ec7ace2d811eea3a9a2ada3e"
+      },
+      {
+        "name": "img_9993.png",
+        "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9993.png",
+        "sha256": "c45c3707b5c314defe7fd8b29ea87c570e540d6abed41e0e532572bd8c0c273e"
+      },
+      {
+        "name": "img_9992.png",
+        "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9992.png",
+        "sha256": "7d15581c34b68c1d1e05ca55f2731da559eac287ac0c395d6fbf683f33e9e155"
+      },
+      {
+        "name": "img_9991.png",
+        "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9991.png",
+        "sha256": "31b96e6d2d56c63fe40f680a6fd2aaabccfd1f8cf39d38caec5f818ea6a2734d"
+      },
+      {
+        "name": "img_9990.png",
+        "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9990.png",
+        "sha256": "52456b4a3326047b504f51b94bfc19fbe8aa1edcc1137373aaa05a7d6997693f"
+      }
+    ],
+    "episode_index_rule": "episode_number % map_count (original Env rule)",
+    "generated_maps": 0,
+    "resized_maps": 0
+  },
+  "num_meta_agent": 4,
+  "num_gpu": 1,
+  "batch_size": 128,
+  "replay_size": 10000,
+  "minimum_buffer_size": 2000,
+  "learning_rate": 1e-05,
+  "robots": [
+    3,
+    5
+  ],
+  "input_dim": 6,
+  "embedding_dim": 128,
+  "max_episode_steps": 196,
+  "updates_per_training_iteration": 8,
+  "resume": false,
+  "original_signal_strength_model": true,
+  "automatic_evaluation": false,
+  "training_started": false
+}

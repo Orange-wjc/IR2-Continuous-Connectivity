@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "scope": "Original driver orchestration with original replay minimum2000; all sampling shortened to two steps, zero SAC updates, temporary checkpoints removed",
+  "checks": {
+    "fresh": {
+      "completed": 2,
+      "sac_updates": 0,
+      "saved_on_sigint": true,
+      "ray_shutdown": true,
+      "original_checkpoint_keys": true,
+      "stats_preserved": true
+    },
+    "resume": {
+      "completed": 4,
+      "sac_updates": 0,
+      "saved_on_sigint": true,
+      "ray_shutdown": true,
+      "original_checkpoint_keys": true,
+      "stats_preserved": true
+    },
+    "real_tensorboard_events": true,
+    "no_production_checkpoint_or_progress_created": true
+  }
+}

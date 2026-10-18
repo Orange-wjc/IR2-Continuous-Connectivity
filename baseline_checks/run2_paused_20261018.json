@@ -1,0 +1,188 @@
+{
+  "run_name": "2",
+  "state": {
+    "status": "stopped_by_request",
+    "completed_episodes": 1394,
+    "invalid_episodes": 0,
+    "training_updates": 11104,
+    "checkpoint": "model/2/checkpoint.pth",
+    "error": null,
+    "time": "2026-10-18T19:01:52.844152+08:00"
+  },
+  "last_status": {
+    "episode": 1403,
+    "map": "img_9996.png",
+    "valid_rollout": true,
+    "task_success": true,
+    "completed_episodes": 1394,
+    "invalid_episodes": 0,
+    "training_updates": 11104,
+    "replay_size": 10000,
+    "dispatched_episodes": 1406,
+    "available_memory_gib": 17.334510803222656,
+    "metrics": {
+      "travel_dist": 2079.5210994349663,
+      "explored_rate": 1.0,
+      "success_rate": 1.0,
+      "connectivity_rate": 0.0,
+      "agents_connected_percentage": 0.0
+    },
+    "time": "2026-10-18T19:01:52.760900+08:00",
+    "success_window_size": 100,
+    "success_rate_100_percent": 80.0,
+    "per_map": {
+      "img_9999.png": {
+        "visits": 139,
+        "window_visits": 10,
+        "success_rate_last10_percent": 50.0
+      },
+      "img_9998.png": {
+        "visits": 141,
+        "window_visits": 10,
+        "success_rate_last10_percent": 100.0
+      },
+      "img_9997.png": {
+        "visits": 140,
+        "window_visits": 10,
+        "success_rate_last10_percent": 100.0
+      },
+      "img_9996.png": {
+        "visits": 141,
+        "window_visits": 10,
+        "success_rate_last10_percent": 100.0
+      },
+      "img_9995.png": {
+        "visits": 140,
+        "window_visits": 10,
+        "success_rate_last10_percent": 50.0
+      },
+      "img_9994.png": {
+        "visits": 139,
+        "window_visits": 10,
+        "success_rate_last10_percent": 100.0
+      },
+      "img_9993.png": {
+        "visits": 137,
+        "window_visits": 10,
+        "success_rate_last10_percent": 30.0
+      },
+      "img_9992.png": {
+        "visits": 139,
+        "window_visits": 10,
+        "success_rate_last10_percent": 100.0
+      },
+      "img_9991.png": {
+        "visits": 138,
+        "window_visits": 10,
+        "success_rate_last10_percent": 80.0
+      },
+      "img_9990.png": {
+        "visits": 140,
+        "window_visits": 10,
+        "success_rate_last10_percent": 100.0
+      }
+    }
+  },
+  "setup": {
+    "created": "2026-10-18T15:00:43.385195+08:00",
+    "branch": "baseline/ir2-easy10",
+    "commit": "b96a206018f201593222ecf2455e50e63b735f33",
+    "source_sha256": {
+      "driver.py": "3e95005d0ecf1c120cca7d4d39bfa5b83548008a5ab7d77087d396004233d467",
+      "parameter.py": "3d1c967f2acbdcedabb3385b2fd17a0bb78ee02175ea40ea1c0b348353ddc622",
+      "runner.py": "186dd6650e1c4350413c993f9f7af0c56e6f01fc5056b7ab80a604b2c0ed1eda",
+      "env.py": "6cad60ce769e35d5f3404229d081b665b70a4e70749a11e6f48214c61b2c0bd9",
+      "model.py": "2a0c4d91497fc5b5db981e2b91f1b8ed4ed11550bfaee3a67c5d6d1a967fd637",
+      "multi_robot_worker.py": "687f7f33699be20892a25e81948e73b68bf8b60d1ebbf46396615cb5f56f94af",
+      "graph_generator.py": "79fbc2d582dedd97b527bc01544d1eed729e472c9a9ad86bd04694cadce6f63f",
+      "robot.py": "b60c355ee5af3afd5d592e2aea359edc0c4669d3d9c7ebd0a649e65884d65544",
+      "sensor.py": "a7a71eabcb0dde3b586dddfb21f7b5f77ef3bd1d7462f2bda094f7945b8e8f73",
+      "ss_realistic_model.py": "dee2f76a4673dd663138acfe1a4654f2cccb0ba103dac0346d5c7bace0f26b92",
+      "baseline_support.py": "f91fe9fe4d405c38c1d81bb198e9dfc39a9850802962a1b2420c59cccc017d11",
+      "baseline_replay.py": "42ba9b678021a1e9d11c0537c5d4d8c744b6989b70307d43a36d3a81d5dc84ec"
+    },
+    "map_manifest": {
+      "source_directory": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy",
+      "available_maps": 9999,
+      "selection": "First PNGs in original reverse filename ordering; no score-based selection",
+      "map_count": 10,
+      "maps": [
+        {
+          "name": "img_9999.png",
+          "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9999.png",
+          "sha256": "3d32a10c75e38f8b03a2b4523ba2a9f4380c78a8662856270b1037ef9fa9db32"
+        },
+        {
+          "name": "img_9998.png",
+          "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9998.png",
+          "sha256": "07e2691bcb68dfbda4dc76b3cdc0c599a39686c2ca0824fd52508301420c7988"
+        },
+        {
+          "name": "img_9997.png",
+          "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9997.png",
+          "sha256": "a7cecd79436a98fac8b7f2995715f34ae26a66e4bb1eb4339e9380e87913fed4"
+        },
+        {
+          "name": "img_9996.png",
+          "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9996.png",
+          "sha256": "48e599899f14853fe897019d381fd1b7f813cb2074797f57d113575609aa42cd"
+        },
+        {
+          "name": "img_9995.png",
+          "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9995.png",
+          "sha256": "f46f4de0ba9d6ed8cc4a63cfb0d5c9f7648c006a0b0e78adc44912da23b445da"
+        },
+        {
+          "name": "img_9994.png",
+          "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9994.png",
+          "sha256": "27e8141d57f93deea525a1d12093db05bbb49368ec7ace2d811eea3a9a2ada3e"
+        },
+        {
+          "name": "img_9993.png",
+          "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9993.png",
+          "sha256": "c45c3707b5c314defe7fd8b29ea87c570e540d6abed41e0e532572bd8c0c273e"
+        },
+        {
+          "name": "img_9992.png",
+          "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9992.png",
+          "sha256": "7d15581c34b68c1d1e05ca55f2731da559eac287ac0c395d6fbf683f33e9e155"
+        },
+        {
+          "name": "img_9991.png",
+          "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9991.png",
+          "sha256": "31b96e6d2d56c63fe40f680a6fd2aaabccfd1f8cf39d38caec5f818ea6a2734d"
+        },
+        {
+          "name": "img_9990.png",
+          "source": "/home/wyz/wjc_ws/IR2-Continuous-Connectivity/DungeonMaps/train/easy/img_9990.png",
+          "sha256": "52456b4a3326047b504f51b94bfc19fbe8aa1edcc1137373aaa05a7d6997693f"
+        }
+      ],
+      "episode_index_rule": "episode_number % map_count (original Env rule)",
+      "generated_maps": 0,
+      "resized_maps": 0
+    },
+    "num_meta_agent": 8,
+    "num_gpu": 1,
+    "batch_size": 128,
+    "replay_size": 10000,
+    "minimum_buffer_size": 2000,
+    "learning_rate": 1e-05,
+    "robots": [
+      3,
+      3
+    ],
+    "input_dim": 6,
+    "embedding_dim": 128,
+    "max_episode_steps": 196,
+    "updates_per_training_iteration": 8,
+    "resume": true,
+    "original_signal_strength_model": true,
+    "replay_mask_storage": "lossless-bitpack-zlib-v1",
+    "graph_boundary_repair": "Do not append a local candidate when all K slots are global neighbors",
+    "automatic_evaluation": false,
+    "training_started": true,
+    "tensorboard_log_dir": "train/2/20261018_150045_wyz"
+  },
+  "scope": "Original IR2 fixed ten-map training diagnostic, not held-out evaluation or improved method evidence; model and event files stay local."
+}

@@ -9,7 +9,7 @@ import ray
 import numpy as np
 from model import PolicyNet, QNet
 from multi_robot_worker import Worker
-from baseline_support import quiet_worker_output
+from baseline_support import worker_output
 
 
 class Runner(object):
@@ -44,7 +44,7 @@ class Runner(object):
 
     def job(self, weights_set, episode_number):
         """ Executes simulation episode """
-        with quiet_worker_output(BASELINE_DIR, self.meta_agent_id):
+        with worker_output(BASELINE_DIR, self.meta_agent_id):
             print("\n", GREEN, "starting episode {} on metaAgent {}".format(episode_number, self.meta_agent_id), NC)
 
             # Set the local weights to the global weight values from the master network

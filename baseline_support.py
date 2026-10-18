@@ -8,25 +8,20 @@ from datetime import datetime
 import hashlib
 import json
 from pathlib import Path
-import re
 import subprocess
 import sys
 
 
 class _WorkerOutput:
-    """Keep routine worker chatter in a file; pass other messages through."""
+    """Write every worker message to both its file and the console."""
     def __init__(self, detail, console):
         self.detail = detail
         self.console = console
         self.pending = ''
 
     def _emit(self, line):
-        plain = re.sub(r'\x1b\[[0-9;]*m', '', line).strip()
-        routine = (re.fullmatch(r'starting episode \d+ on metaAgent \d+', plain)
-                   or re.fullmatch(r'\[Eps \d+ Completed\] Steps: .*', plain))
-        if plain and not routine:
-            self.console.write(line)
-            self.console.flush()
+        self.console.write(line)
+        self.console.flush()
 
     def write(self, value):
         self.detail.write(value)
@@ -48,7 +43,7 @@ class _WorkerOutput:
 
 
 @contextmanager
-def quiet_worker_output(directory, worker_id):
+def worker_output(directory, worker_id):
     directory = Path(directory) / 'worker_logs'
     directory.mkdir(parents=True, exist_ok=True)
     with (directory / ('worker_%d.log' % worker_id)).open('a', buffering=1) as detail:
@@ -199,9 +194,8 @@ class Progress:
             self.writer.add_scalar('Progress/Invalid Rollouts', self.invalid, step)
             self.writer.add_scalar('Maps/'+name+'/Success Last10 Percent',
                                    state['per_map'][name]['success_rate_last10_percent'], self.visits[name])
-        if not valid or self.completed % 10 == 0:
-            print(json.dumps(dict(stage='progress' if valid else 'warning', episode=episode, map=name,
-                completed=self.completed, invalid=self.invalid, task_success=success,
-                recent_success_percent=rate, window_size=len(self.recent),
-                replay=replay_size, sac_updates=self.updates,
-                min_map_visits=min(self.visits.values())), ensure_ascii=False), flush=True)
+        print(json.dumps(dict(stage='progress' if valid else 'warning', episode=episode, map=name,
+            completed=self.completed, invalid=self.invalid, task_success=success,
+            recent_success_percent=rate, window_size=len(self.recent),
+            replay=replay_size, sac_updates=self.updates,
+            min_map_visits=min(self.visits.values())), ensure_ascii=False), flush=True)

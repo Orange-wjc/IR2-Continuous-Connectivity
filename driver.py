@@ -8,6 +8,7 @@ for _name in ('OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS', 'NUM
     os.environ.setdefault(_name, '1')
 os.environ.setdefault('MPLBACKEND', 'Agg')
 os.environ.setdefault('MPLCONFIGDIR', '/tmp/ir2-original-mpl')
+os.environ.setdefault('RAY_DEDUP_LOGS', '0')
 
 from parameter import *
 import parameter as config
@@ -253,6 +254,7 @@ def main():
             
             ### Start training when replay buffer is filled ###
             if curr_episode % 1 == 0 and len(experience_buffer[0]) >= MINIMUM_BUFFER_SIZE:
+                print("training", flush=True)
 
                 ### Keep buffer size to max REPLAY_SIZE ###
                 if len(experience_buffer[0]) >= REPLAY_SIZE:
@@ -390,6 +392,7 @@ def main():
             
              ### Hard Q updates to get target Q-networks every 1024 steps ###
             if target_q_update_counter > 64:
+                print("update target q net", flush=True)
                 target_q_update_counter = 1
                 global_target_q_net1.load_state_dict(global_q_net1.state_dict())
                 global_target_q_net2.load_state_dict(global_q_net2.state_dict())

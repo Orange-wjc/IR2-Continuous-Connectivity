@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "real_prefix_300_success": 58.333333333333336,
+  "real_block_301_600_success": 59.0,
+  "no_future_data": true,
+  "resume_boundary_exact": true,
+  "per_map_failure_detected": true,
+  "duplicate_history_detected": true,
+  "report_plot_and_tensorboard_written": true,
+  "no_policy_updates_or_evaluation": true
+}

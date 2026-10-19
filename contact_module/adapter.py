@@ -23,6 +23,10 @@ class ContactAdapter:
         self.time = 0.
         self.waits = 0
         self._rank_cache = {}
+        self.reward_sums = dict(frontier=0., exploration=0., rendezvous=0., distance_cost=0.,
+                                time_cost=0., delivery=0.)
+        self.empty_waits = self.positive_empty_waits = 0
+        self.last_delivery_novel = self.last_delivery_reward = 0.
 
     def reset(self, env):
         self.radio = Radio(env.ground_truth_size, env.n_agent, self.config)
@@ -155,8 +159,11 @@ class ContactAdapter:
         for i,j in self.radio.pairs:
             # Actual link truth is used by the simulator, not by scoring.
             links[i,j] = tuple(positions[j]) in env.graph_dict.get(tuple(positions[i]),[])
+        before_novel = self.radio.unique_cells
         gains = self.radio.service(beliefs,positions,self.time+movement,
                                    self.config.wait_seconds,links,self.rank)
+        self.last_delivery_novel = self.radio.unique_cells-before_novel
+        self.last_delivery_reward = float(gains[robot]/1000.)
         self.time += duration
         for own in range(env.n_agent):
             env.all_downsampled_belief[own] = block_reduce(beliefs[own].copy(),
@@ -269,11 +276,35 @@ class ContactAdapter:
             benefit = np.clip(gain/self.config.gain_scale, 0., 4.) * np.exp(-age/60.)
             utility[:,0] += np.maximum(0., benefit*np.exp(-d/self.config.path_decay)
                                        - .002*d/self.config.speed)
+        # Match IR2's own-pose exclusion. Otherwise WAIT can repeatedly collect
+        # a positive predicted rendezvous reward without any real delivery.
+        own = env.all_robot_positions_belief[robot][robot]
+        utility[np.linalg.norm(coords-own,axis=1) <= self.config.self_exclusion_radius] = 0.
         return delta,utility,True
 
+    def record_reward(self, distance, known_gain, reward, frontier, exploration, rendezvous):
+        # Diagnostics only; these privileged outcome counters never feed scores.
+        for key,value in dict(frontier=frontier,exploration=exploration,rendezvous=rendezvous,
+                distance_cost=distance/512.,time_cost=self.config.time_penalty*(
+                    distance/self.config.speed+self.config.wait_seconds),delivery=self.last_delivery_reward).items():
+            self.reward_sums[key] += float(value)
+        if distance < 1e-8 and known_gain == 0 and self.last_delivery_novel == 0:
+            self.empty_waits += 1
+            self.positive_empty_waits += int(reward > 1e-8)
+
     def metrics(self):
-        return dict(contact_seconds=self.time,contact_sent_bytes=self.radio.sent_bytes,
+        stats = dict(contact_seconds=self.time,contact_sent_bytes=self.radio.sent_bytes,
                     contact_control_bytes=self.radio.control_bytes,
                     contact_unique_cells=self.radio.unique_cells,
                     contact_duplicate_cells=self.radio.duplicate_cells,
-                    contact_map_packets=self.radio.completed_maps,contact_wait_actions=self.waits)
+                    contact_map_packets=self.radio.completed_maps,contact_wait_actions=self.waits,
+                    contact_empty_waits=self.empty_waits,contact_positive_empty_waits=self.positive_empty_waits)
+        stats.update({'contact_reward_'+k:v for k,v in self.reward_sums.items()})
+        # Ground truth is used ONLY for terminal reporting, never observations.
+        env = self.env
+        local = [env.evaluate_exploration_rate(i) for i in range(env.n_agent)]
+        union = np.any(np.stack([env.all_robot_belief[i][i] == 255 for i in range(env.n_agent)]),axis=0)
+        stats['contact_min_local_coverage'] = float(min(local))
+        stats['contact_union_coverage'] = float(np.count_nonzero(union & (env.ground_truth == 255))/
+                                               np.count_nonzero(env.ground_truth == 255))
+        return stats

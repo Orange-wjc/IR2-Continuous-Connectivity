@@ -20,6 +20,7 @@ from model import PolicyNet,QNet
 from baseline_support import prepare_maps,write_json,memory_available_gib
 from baseline_replay import stack_masks
 from contact_module.learning import ContentTrainer
+from contact_module.preparation import load_initialization,load_content_initialization
 CHECK_STEPS=int(os.environ.get('IR2_CHECK_STEPS','8'))
 CHECK_EPISODES=int(os.environ.get('IR2_CHECK_EPISODES','8'))
 
@@ -34,12 +35,20 @@ class ShortRunner(Runner):
 
 
 def main():
-    torch.set_num_threads(2);prepare_maps(config)
+    torch.set_num_threads(2);manifest=prepare_maps(config)
     protected=[Path('model/2/checkpoint.pth'),Path('experiments/2/progress.jsonl')]
     before={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in protected}
     torch.manual_seed(101)
     p=PolicyNet(6,128,allow_wait=True);q=QNet(6,128,allow_wait=True)
-    auxiliary=ContentTrainer(p,config.CONTACT_CONFIG)
+    provenance=saved=None
+    if os.environ.get('IR2_CHECK_INITIALIZATION'):
+        source,provenance=load_initialization(os.environ['IR2_CHECK_INITIALIZATION'],manifest)
+        p.load_state_dict(source['policy_model']);q.load_state_dict(source['q_net1_model'])
+        if os.environ.get('IR2_CHECK_CONTENT_INIT'):
+            saved,_=load_content_initialization(os.environ['IR2_CHECK_CONTENT_INIT'],
+                config.CONTACT_CONFIG,provenance,source['policy_model'])
+    auxiliary=ContentTrainer(p,config.CONTACT_CONFIG,saved,provenance=provenance)
+    starting_auxiliary_updates=auxiliary.updates
     weights=[p.state_dict(),q.state_dict(),auxiliary.weights()]
     started=time.monotonic();minimum=memory_available_gib()
     ray.init(address='local',num_cpus=10,num_gpus=1,include_dashboard=False,
@@ -68,6 +77,7 @@ def main():
         for a,b in zip(columns,rows):a.extend(b)
         assert all(np.isfinite(v) for v in metrics.values())
         assert metrics['contact_sent_bytes']>0
+        assert metrics['contact_positive_empty_waits']==0
         loss=auxiliary.update(info['contact_labels']);assert loss is not None
         records.append(dict(episode=info['episode_number'],transitions=len(rows[0]),
                             labels=len(info['contact_labels']),metrics={k:float(v) for k,v in metrics.items()}))
@@ -90,6 +100,7 @@ def main():
     report=dict(passed=True,workers=8,robots=3,rollout_steps=CHECK_STEPS,
                 actual_distinct_transitions=len(columns[0]),effective_gpu_batch=128,
                 original_sac_gpu_iterations=8,auxiliary_optimizer_updates=auxiliary.updates,
+                auxiliary_new_updates=auxiliary.updates-starting_auxiliary_updates,
                 peak_cuda_mib=peak,min_host_available_gib=minimum,
                 elapsed_seconds=time.monotonic()-started,rollouts=records,
                 production_files_unchanged=True,

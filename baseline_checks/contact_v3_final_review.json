@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "checks": [
+    "acceptance_verified",
+    "training_review_verified",
+    "contact_wait_reward_verified",
+    "contact_module_verified",
+    "contact_full_runtime_verified",
+    "contact_driver_verified",
+    "contact_repair_verified"
+  ],
+  "original_sac_update_unchanged": true,
+  "source_sha256": {
+    "driver.py": "cf7046548e8ef3ab2eb473cef467ad33211f99b91c2908ba2442f9df0230e969",
+    "baseline_support.py": "72aef9452dd2491834e311eed1a5be49f859d37d2ec269ea2a27a9f688abca08",
+    "training_review.py": "7fb078942887a7202d52a15620e0d6139892baf58c414c6a2b98b87269a36bc3",
+    "env.py": "33c9e910ef4e3d2ef9c88feebe5bce780e07f6d01b577c68ac90a18ca9c2c078",
+    "contact_module/adapter.py": "91d9ad397521b43a6d5f46c9c921a25f328ce059c399e34478f28aaf470f0116",
+    "contact_module/config.py": "2493f90cc73a4600a4611bc0c1e6971eebd58c81b50a843163d13f93bcc9b3ec",
+    "contact_module/preparation.py": "7f7e10f593c3f7be994ff293d3017179cd092261b1f71098cbf47ed3a56ec156"
+  },
+  "production_checkpoint_sha256": {
+    "model/2/checkpoint.pth": "997318d48b83ef883905ba49bb08e5e0681515361ed5552c3e7142b8a3ea31e4",
+    "model/contact_easy10_v2_20261019/checkpoint.pth": "663a08873e79be26d4ea057e097ac997c2ea1dfce4940363d68a090af2d50bfc"
+  },
+  "scope": "Engineering acceptance only; fixed300 training success goal remains outstanding"
+}

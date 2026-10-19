@@ -131,6 +131,9 @@ class Env():
     def single_robot_step(self, robot_id, all_robot_positions_gt, curr_eps, sim_step, dist_travelled): 
         """ Execute policy in environment """
 
+        if self.contact is not None:
+            before_known = np.count_nonzero(self.all_robot_belief[robot_id][robot_id] != 127)
+
         all_curr_frontiers = [[] for _ in range(self.n_agent)]
         all_num_new_frontiers = [[] for _ in range(self.n_agent)]
         self.all_robot_positions_gt = all_robot_positions_gt
@@ -370,6 +373,11 @@ class Env():
 
         # ### Store for tensorboard logs ###
         self.all_explored_rate[robot_id] = self.evaluate_exploration_rate(agent_id=robot_id)
+
+        if self.contact is not None:
+            known_gain = np.count_nonzero(self.all_robot_belief[robot_id][robot_id] != 127)-before_known
+            self.contact.record_reward(dist_travelled,known_gain,individual_reward,
+                all_num_new_frontiers[robot_id]/25.,new_pose_explore_util/50.,new_pose_rendezvous_util)
 
         success = True
         return success, individual_reward, done

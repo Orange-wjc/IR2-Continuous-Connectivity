@@ -32,7 +32,7 @@ from datetime import datetime
 from baseline_support import prepare_maps, record_setup, Progress, write_json, memory_available_gib
 from baseline_replay import stack_masks
 from contact_module.learning import ContentTrainer
-from contact_module.preparation import load_initialization, prepare_content
+from contact_module.preparation import load_initialization, prepare_content, load_content_initialization
 
 
 def writeToTensorBoard(writer, tensorboardData, curr_episode):
@@ -68,10 +68,14 @@ def main():
     manifest = prepare_maps(config)
     if not args.check_config and Path(MODEL_PATH).exists() and not LOAD_MODEL:
         raise ValueError('Checkpoint already exists; use IR2_RESUME=1 or a new IR2_RUN_NAME')
+    resume_auto_review = False
+    resume_content_import = None
     if LOAD_MODEL and not args.check_config:
         # Reject a wrong-method resume before touching setup/logs or starting Ray.
         metadata = torch.load(MODEL_PATH, map_location='cpu')
         CONTACT_CONFIG.validate_checkpoint(metadata)
+        resume_auto_review = metadata.get('automatic_review_control',False)
+        resume_content_import = ((metadata.get('contact_learning') or {}).get('provenance') or {}).get('content_import')
         del metadata
     initial_state = None
     initialization = None
@@ -86,8 +90,20 @@ def main():
         initialization = torch.load(MODEL_PATH, map_location='cpu').get('initialization')
     if CONTACT_CONFIG.learned and not LOAD_MODEL and initial_state is None and not args.check_config:
         raise ValueError('finite_learned requires IR2_INIT_FROM=<trained original checkpoint>; random frozen context is disabled')
+    prepared_aux = None
+    content_initialization = resume_content_import
+    content_path = os.environ.get('IR2_CONTENT_INIT')
+    if content_path:
+        if LOAD_MODEL or not CONTACT_CONFIG.learned or initial_state is None:
+            raise ValueError('IR2_CONTENT_INIT requires a fresh learned run with shared IR2_INIT_FROM')
+        prepared_aux,content_initialization = load_content_initialization(
+            content_path,CONTACT_CONFIG,initialization,initial_state['policy_model'])
     setup = record_setup(config, manifest, check_only=args.check_config)
     setup['initialization'] = initialization
+    setup['content_initialization'] = content_initialization
+    resolved_auto_review = CONTACT_CONFIG.enabled and os.environ.get(
+        'IR2_AUTO_REVIEW','1' if resume_auto_review else '0')=='1'
+    setup['automatic_review_control'] = resolved_auto_review
     if args.check_config:
         print(__import__('json').dumps(setup, ensure_ascii=False, indent=2))
         return
@@ -109,6 +125,9 @@ def main():
     setup.update(training_started=True, tensorboard_log_dir=log_dir)
     write_json(Path(BASELINE_DIR) / 'setup.json', setup)
     stopping = [False]
+    target_reached = [False]
+    review_pause = [False]
+    auto_review = resolved_auto_review
     received_signal = [None]
     def request_stop(signum, _frame):
         stopping[0] = True
@@ -187,9 +206,9 @@ def main():
     global_target_q_net2.load_state_dict(global_q_net2.state_dict())
     global_target_q_net1.eval()
     global_target_q_net2.eval()
-    progress = Progress(BASELINE_DIR, manifest, writer, checkpoint)
+    progress = Progress(BASELINE_DIR, manifest, writer, checkpoint, review_enabled=CONTACT_CONFIG.enabled)
     auxiliary = (ContentTrainer(global_policy_net, CONTACT_CONFIG,
-                 (checkpoint or {}).get('contact_learning'), provenance=initialization)
+                 (checkpoint or {}).get('contact_learning',prepared_aux), provenance=initialization)
                  if CONTACT_CONFIG.learned else None)
 
     def save_checkpoint():
@@ -210,7 +229,8 @@ def main():
                  "invalid_episodes": progress.invalid,
                  "training_updates": progress.updates,
                  "baseline_progress": progress.snapshot(),
-                 "contact_config": CONTACT_CONFIG.to_dict(), "initialization": initialization}
+                 "contact_config": CONTACT_CONFIG.to_dict(), "initialization": initialization,
+                 "automatic_review_control": auto_review}
         if auxiliary is not None:
             state['contact_learning'] = auxiliary.state_dict()
         temp = Path(MODEL_PATH).with_suffix('.tmp')
@@ -219,6 +239,8 @@ def main():
         writer.flush()
         print('Saved model: {} | completed={} | SAC updates={}'.format(
             MODEL_PATH, progress.completed, progress.updates), flush=True)
+    if CONTACT_CONFIG.enabled and not LOAD_MODEL:
+        save_checkpoint()
     
     ### Launch meta agents ###
     meta_agents = [RLRunner.remote(i) for i in range(NUM_META_AGENT)]
@@ -271,6 +293,7 @@ def main():
         for meta_agent in meta_agents:
             curr_episode += 1
             job_list.append(meta_agent.job.remote(weights_set, curr_episode))
+        consecutive_invalid = 0
         while not stopping[0]:
             if memory_available_gib() < 4:
                 raise MemoryError('Available host RAM below 4 GiB; stopping this training run')
@@ -300,7 +323,13 @@ def main():
             
             if not success:
                 progress.record(info, False, {}, len(experience_buffer[0]), curr_episode)
+                consecutive_invalid += 1
+                if auto_review and consecutive_invalid >= 3:
+                    review_pause[0] = True
+                    print('Three consecutive invalid rollouts; saving and pausing for diagnosis.',flush=True)
+                    break
                 continue
+            consecutive_invalid = 0
 
             if auxiliary is not None:
                 content_loss = auxiliary.update(info.get('contact_labels', []))
@@ -423,6 +452,20 @@ def main():
                 training_data.append(data)
 
             progress.record(info, True, metrics, len(experience_buffer[0]), curr_episode)
+            if CONTACT_CONFIG.enabled and progress.completed % 300 == 0:
+                save_checkpoint()
+            if auto_review and progress.acceptance is not None:
+                target_reached[0] = True
+                print('Target reached: at least 297 successes in 300 real attempts; saving and stopping.',flush=True)
+                break
+            report = progress.last_review
+            if auto_review and report is not None:
+                problem_map = any(f.startswith(('never_successful:','coverage_decline:')) for f in report['flags'])
+                if (any(f in report['flags'] for f in ('positive_reward_idle_wait','invalid_rollouts','non_finite_metrics','review_failed')) or
+                    (progress.completed>=600 and report['trend'] in ('falling','no_clear_rise') and problem_map)):
+                    review_pause[0] = True
+                    print('Periodic review requests diagnosis; saving before any further code changes.',flush=True)
+                    break
 
             ### Log training stats to tensorboard ###
             if len(training_data) >= SUMMARY_WINDOW:
@@ -464,7 +507,9 @@ def main():
     finally:
         error = sys.exc_info()[1]
         save_checkpoint()
-        state = ('stopped_memory_guard' if isinstance(error, MemoryError) else
+        state = ('target_reached' if target_reached[0] else
+                 'paused_for_diagnosis' if review_pause[0] else
+                 'stopped_memory_guard' if isinstance(error, MemoryError) else
                  'stopped_by_request' if stopping[0] else 'interrupted_or_failed')
         write_json(Path(BASELINE_DIR) / 'run_state.json', dict(status=state,
             completed_episodes=progress.completed, invalid_episodes=progress.invalid,

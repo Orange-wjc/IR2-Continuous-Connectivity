@@ -2,7 +2,7 @@
 
 当前分支 `research/ir2-modular-contact` 基于已推送的 `baseline/ir2-easy10` / `dcea459d`。
 原版运行 `2` 已由用户暂停：1394有效回合、0无效回合、11104次SAC；模型、日志及十图清单保留本地。
-v1运行contact_easy10_1已在2036有效回合后退出，近100成功率50%，尚未证明优于有限通信FIFO。当前修复版本为schema_version=2；不能把v1检查点无缝resume成v2。
+v1运行contact_easy10_1已在2036有效回合后退出，近100成功率50%，尚未证明优于有限通信FIFO。当前修复版本为schema_version=3；旧版本检查点不可静默续训为新奖励语义。
 
 ## 当前目标与边界
 
@@ -14,42 +14,52 @@ v1运行contact_easy10_1已在2036有效回合后退出，近100成功率50%，�
 旧研究的正结果不能直接视作本版结果。消息头结构与12项本地特征沿用旧实现，图上下文改为当前IR2的128维冻结编码。
 当前实验仅验证学习链路，后续对照必须使用相同通信机制、动作空间和训练预算。
 
-## v2修复与训练流程（2026-10-19）
+## 当前v3：空等待奖励修复与自动训练复查
 
-修复Env.find_frontier已返回原图像素坐标、adapter却再乘resolution的错误。会合信号恢复gain/500、上限4，使用发送方本地有向图的反向Dijkstra路径距离、100像素衰减及路径代价；断开节点信号为0。仍只读取已付费的陈旧位姿或共同起点，不读取队友真值。FIFO采用同一尺度和路径机制，其待发差异估计仍不使用学习头。未修改原SAC数学更新、6维输入、机器人数量、地图或通信预算。
+执行计划见[CONTACT_LEARNING_PLAN.md](CONTACT_LEARNING_PLAN.md)。用户最新指令已授权自动启动、每300回合复查、必要时保存暂停再修复，直到真实连续300尝试至少297成功。此前“只由用户前台启动”和“不自动暂停”要求在此流程中已更新。
 
-本轮改为显式共享热启动：从原版运行2的1394回合/11104 SAC检查点载入actor、两个critic和温度；优化器、训练计数和移动回放重新建立。冻结消息上下文复制自这个已训练actor，禁止再从随机actor冻结后直接联合训练。源检查点SHA和十图内容SHA校验写入setup及检查点。**这改变了初始化条件，不能将v2与v1的差异全部归因于单个修复；后续FIFO对照必须使用相同源检查点和预算。**
+v2保留坐标/路径/预训练修复，但741回合冻结完整轨迹证明：9999出现9次、9995出现7次无新增知识和真实交付仍获正奖励的WAIT。v3恢复原版IR2自身30像素附近会合值清零，其它奖励与原SAC更新保留。配对冻结诊断空等正奖励归零，但旧模型仍失败；不能把工程修复当作已达99%。
 
-联合训练前，自动用冻结移动策略、合法规则选包在10张训练图各运行两次：第一遍拟合标签、第二遍整回合标签留作校验。每回合最多256标签，消息头最多执行1000次拟合更新，每100次检查留出回合MSE，选择校验最好的头和对应Adam状态。校验未优于训练标签均值的常数预测则保存退出，不放行随机/未学会的消息头。准备数据不进入移动SAC回放，不计入正式联合训练回合；预算及结果写入preparation.json和Preparation/*曲线。它只在训练图上准备消息头，不是独立测试成绩，也不是用户要求暂缓的周期任务评估。
+v3新增统计：实际并集、最小个体覆盖、空等待正奖励次数和奖励分量。仅供回合末统计，真值不进入观察/消息评分/动作。成功条件仍是每台机器人自身覆盖≥99%。schema_version=3拒绝把v2模型直接resume成新奖励版本。
 
-## 使用方式
+使用原版model/2共享移动初始化，加v2零联合更新准备快照的消息头，保持v2/v3起点一致：actor/双Q/温度复制，移动优化器与回放重新建立；冻结context逐张量对应已训练actor。辅助头/优化器/回放/RNG从已验证的准备快照载入，跳过重复20回合准备。12项包特征未变；只接受明确版本和相同源actor的准备快照，不能将741回合模型静默作为该受控起点。
 
-新启动命令（已有同名检查点会拒绝覆盖；不要重复执行正在运行的实验）：
+## 自动训练使用方式
+
+助手将按用户指令自动启动唯一实例，启动命令记录如下；**已有实例运行时不要重复执行**：
 
 ```bash
 conda activate ir2_train
 cd ~/wjc_ws/IR2-Continuous-Connectivity
-IR2_METHOD=finite_learned IR2_RUN_NAME=contact_easy10_v2_20261019 IR2_AGENTS=8 \
-IR2_INIT_FROM=model/2/checkpoint.pth python -u driver.py
+IR2_METHOD=finite_learned IR2_RUN_NAME=contact_easy10_v3_20261019 IR2_AGENTS=8 \
+IR2_INIT_FROM=model/2/checkpoint.pth \
+IR2_CONTENT_INIT=experiments/contact_easy10_v2_20261019/prepared_initialization.pth \
+IR2_AUTO_REVIEW=1 python -u driver.py
 ```
 
-模型model/contact_easy10_v2_20261019/checkpoint.pth；曲线train/contact_easy10_v2_20261019/；记录experiments/contact_easy10_v2_20261019/。本轮由助手按用户指令启动，实时进度见其中training.log。中断续训使用：
+新模型model/contact_easy10_v3_20261019/checkpoint.pth；曲线train/contact_easy10_v3_20261019/；日志experiments/contact_easy10_v3_20261019/training.log。
+中断后续训移除两个初始化参数，使用：
 
 ```bash
-IR2_METHOD=finite_learned IR2_RUN_NAME=contact_easy10_v2_20261019 IR2_AGENTS=8 \
-IR2_RESUME=1 python -u driver.py
+IR2_METHOD=finite_learned IR2_RUN_NAME=contact_easy10_v3_20261019 \
+IR2_AGENTS=8 IR2_RESUME=1 IR2_AUTO_REVIEW=1 python -u driver.py
 ```
 
-IR2_INIT_FROM仅用于新实验；与IR2_RESUME互斥。续训恢复消息头、训练来源、准备完成标记、辅助回放/优化器/RNG；已经准备完成则不再预训练。准备过程若中断，未完成的采样准备重新执行，保留日志供核算。原版限制仍在：移动回放及在途任务不存盘，重启须重新收集2000经验。Ctrl+C/SIGTERM完成当前优化块后保存，退出状态记录收到的信号种类，不能据此确定信号发送者。
+目标门槛是连续300真实尝试至少297成功、无无效尝试、10图各至少20次，保存原始窗口证据acceptance.json并保存退出为target_reached。
+成功率用真实计数，不用平滑结果；窗口存入检查点，续训保留。此为训练门槛，不等同独立测试泛化。
+
+每300有效回合自动保存检查点、输出reviews/episode_NNNNNN/{README.md,review.json,curves.png}，写入TensorBoard Review/*。首窗比较最初/最后100，之后比较前后300，兼顾各图最近20、本地覆盖、WAIT和异常。±3个百分点仅作描述性提示，不是显著性判断。
+IR2_AUTO_REVIEW=1时，如连续3个无效回合、周期发现空等正奖励/无效/非有限记录，或600回合后无明确增长且仍有长期失败/退化地图，会保存退出为paused_for_diagnosis。程序不修改源码或参数；后续由当前Codex活动目标继续诊断与受控修复。达到99%以前不得把这种暂停误报成完成。
 
 ```bash
-tensorboard --logdir train/contact_easy10_v2_20261019 --host 127.0.0.1 --port 6012
+tensorboard --logdir train/contact_easy10_v3_20261019 --host 127.0.0.1 --port 6013
 ```
 
-浏览器http://127.0.0.1:6012。先看Preparation/*确认准备完成；联合阶段看Progress/Success Rate 100 Percent、各图成功记录、Perf/Explored Rate、Contact/Content Updates、Contact/Content Loss、Contact/unique_cells。
-Perf/Explored Rate是三个机器人本地覆盖率均值，**不是地图并集**；成功要求每台机器人覆盖率≥99%。Perf/Reward是采样即时奖励均值，Connectivity是回合末连接状态。头的更新总数包含预训练尝试，选中的Adam步数另记在preparation.json。
+重点看Progress/Success Rate 100 Percent、Review/*、Maps/*/Success Last10 Percent、Contact/positive_empty_waits、Contact/min_local_coverage、Contact/union_coverage、Contact/reward_*及Content Loss/Updates。
+Perf/Explored Rate始终是平均个体覆盖，不是并集；Perf/Reward是采样即时奖励均值。连接指标是回合末状态。
 
-IR2_METHOD默认original；finite_fifo/finite_rule可用于之后的受控对照。本轮只启动finite_learned一份，不定时评估、不设99%自动停止、不启用守护自动重启。FIFO热启动也应设置同一个IR2_INIT_FROM；公平比较需另行记录两组准备采样/计算预算，不把热启动视作从零训练。
+IR2_INIT_FROM/IR2_CONTENT_INIT只用于新实验，与resume互斥。自动控制开关会随检查点保存，省略环境变量时沿用；显式IR2_AUTO_REVIEW=0关闭自动暂停/达标停机，仍保留300回合报告。原版模式默认不启用自动控制。
+移动回放及在途任务仍不存盘，续训先重新收集2000经验；辅助模型/优化器/回放/RNG和验收窗口恢复。
 
 ## 独立模块与接入点
 

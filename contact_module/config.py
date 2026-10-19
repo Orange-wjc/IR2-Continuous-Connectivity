@@ -6,7 +6,7 @@ import os
 
 @dataclass(frozen=True)
 class ContactConfig:
-    schema_version: int = 2
+    schema_version: int = 3
     method: str = 'original'
     bytes_per_second: float = 2048.
     packet_bytes: int = 512
@@ -19,6 +19,7 @@ class ContactConfig:
     coupled: bool = True
     gain_scale: float = 500.
     path_decay: float = 100.
+    self_exclusion_radius: float = 30.
 
     @property
     def enabled(self):

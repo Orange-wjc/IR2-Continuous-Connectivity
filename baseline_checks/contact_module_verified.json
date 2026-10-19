@@ -17,7 +17,17 @@
       "contact_unique_cells": 2291,
       "contact_duplicate_cells": 2018,
       "contact_map_packets": 83,
-      "contact_wait_actions": 1
+      "contact_wait_actions": 1,
+      "contact_empty_waits": 0,
+      "contact_positive_empty_waits": 0,
+      "contact_reward_frontier": 2.04,
+      "contact_reward_exploration": 1.2999999999999998,
+      "contact_reward_rendezvous": 3.960863717148199,
+      "contact_reward_distance_cost": 0.28148483060434887,
+      "contact_reward_time_cost": 0.36020038878237776,
+      "contact_reward_delivery": 0.756,
+      "contact_min_local_coverage": 0.17097241950757575,
+      "contact_union_coverage": 0.24992601799242425
     },
     "labels": 225,
     "head_updates": 8,

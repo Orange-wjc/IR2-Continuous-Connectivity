@@ -38,6 +38,8 @@ class StopProgress(Progress):
 def main():
     sys.argv=['driver.py'];driver.RLRunner=ShortRunner;driver.Progress=StopProgress
     os.environ['IR2_INIT_FROM']='model/2/checkpoint.pth'
+    os.environ['IR2_CONTENT_INIT']='experiments/contact_easy10_v2_20261019/prepared_initialization.pth'
+    os.environ['IR2_AUTO_REVIEW']='1'
     prepare_maps(driver.config)  # Ray workers import their isolated run's map links.
     source=Path('model/2/checkpoint.pth');sha=hashlib.sha256(source.read_bytes()).hexdigest()
     with tempfile.TemporaryDirectory(prefix='ir2-contact-driver-check-') as directory:
@@ -52,6 +54,7 @@ def main():
         source_state=torch.load(source,map_location='cpu')
         assert all(torch.equal(v,first['policy_model'][k]) for k,v in source_state['policy_model'].items())
         assert first['contact_learning']['ready']
+        assert first['automatic_review_control']
         assert first['contact_learning']['provenance']['sha256']==sha
         assert first['completed_episodes']==2 and first['training_updates']==0
         assert first['contact_learning']['updates']>0
@@ -63,9 +66,12 @@ def main():
             else:raise AssertionError('Incompatible checkpoint accepted')
         driver.LOAD_MODEL=True;driver.config.LOAD_MODEL=True;driver.CONTINUE_LOG_ALPHA=True
         del os.environ['IR2_INIT_FROM']
+        del os.environ['IR2_CONTENT_INIT']
+        del os.environ['IR2_AUTO_REVIEW']
         driver.main()
         second=torch.load(paths['MODEL_PATH'],map_location='cpu')
         assert second['completed_episodes']==4 and second['training_updates']==0
+        assert second['automatic_review_control']  # Resume retains control without an env override.
         assert second['contact_learning']['updates']>first['contact_learning']['updates']
         assert len(second['contact_learning']['replay'])>len(first['contact_learning']['replay'])
         for key in ('policy_model','q_net1_model','q_net2_model'):
@@ -79,6 +85,7 @@ def main():
                     original_warmup_2000_preserved=True,wrong_method_and_bandwidth_resume_rejected=True,
                     auxiliary_weights_optimizer_buffer_counter_restored=True,
                     sigint_save_and_ray_cleanup=True,production_checkpoint_unchanged=True,
+                    automatic_review_control_persists_on_resume=True,
                     scope='Temporary engineering model only; two2-step returns per launch; not formal training')
         write_json('baseline_checks/contact_driver_verified.json',result)
         print(json.dumps(result,indent=2),flush=True)

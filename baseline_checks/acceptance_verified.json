@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "exact_297_of300_accepted": true,
+  "below_threshold_rejected": true,
+  "invalid_attempts_not_silently_removed": true,
+  "missing_map_rejected": true,
+  "window_restored_from_checkpoint": true,
+  "raw_attempt_evidence_saved": true
+}

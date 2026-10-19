@@ -49,6 +49,40 @@ def validation_loss(head, labels):
     return float(np.mean(squared))
 
 
+def load_content_initialization(path, config, initialization, movement):
+    """Reuse a prepared v2 head with unchanged features for a controlled v3 run.
+
+    Only a zero-joint-update preparation snapshot with exactly the shared actor
+    is accepted. This does not import the741-episode movement policy or replay.
+    """
+    path = Path(path).resolve()
+    state = torch.load(path,map_location='cpu')
+    previous = state.get('contact_config',{})
+    if previous.get('schema_version') not in (2,3):
+        raise ValueError('Content initialization must use the corrected v2/v3 feature contract')
+    allowed = {'schema_version','self_exclusion_radius'}
+    current = config.to_dict()
+    if previous.get('method') != 'finite_learned' or any(
+            previous.get(k) != v for k,v in current.items() if k not in allowed):
+        raise ValueError('Content initialization feature/protocol contract differs')
+    if state.get('completed_episodes') != 0 or state.get('training_updates') != 0:
+        raise ValueError('Only the pre-joint preparation snapshot may initialize this controlled run')
+    aux = state.get('contact_learning',{})
+    if not aux.get('ready') or not aux.get('updates'):
+        raise ValueError('Content initialization is not prepared')
+    if aux.get('provenance',{}).get('sha256') != initialization['sha256']:
+        raise ValueError('Content context source differs from shared movement initialization')
+    if not all(torch.equal(v.detach().cpu(),aux['encoder'][k]) and
+               torch.equal(v.detach().cpu(),state['policy_model'][k]) for k,v in movement.items()):
+        raise ValueError('Content context does not match the shared trained actor')
+    aux = copy.deepcopy(aux)
+    audit = dict(path=str(path),sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
+                 source_schema=previous.get('schema_version'),head_updates=aux['updates'],
+                 feature_contract='unchanged 12 local features + frozen128-dimensional context')
+    aux['provenance'] = dict(aux['provenance'],content_import=audit)
+    return aux,audit
+
+
 def prepare_content(agents, weights, auxiliary, writer, directory, stopping,
                     map_count=10, rounds=2, updates=1000):
     """Frozen movement + rule ranking -> labels -> head fit -> learned ranking.

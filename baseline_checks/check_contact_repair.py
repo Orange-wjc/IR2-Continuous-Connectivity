@@ -57,6 +57,11 @@ def main():
     contact.expected_delivery = lambda pair: 500. if pair == (0, 1) else 0.
     signal = contact.utility(env, 0)[1][:, 0]
     assert signal[2] == 1. and signal[3] == 0. and 0. < signal[0] < signal[1] < signal[2]
+    own = env.all_robot_positions_belief[0][0]
+    env.all_robot_positions_belief[0][0] = coords[2].copy()
+    masked = contact.utility(env,0)[1][:,0]
+    assert masked[2] == 0. and masked[0] == 0.
+    env.all_robot_positions_belief[0][0] = own
     env.all_node_coords[0], env.all_graph[0], env.start_position = old_coords, old_graph, old_start
     # Random head cannot control bootstrap; readiness/provenance survive resume.
     assert not trainer.weights()['ready'] and not contact.content_ready
@@ -65,13 +70,13 @@ def main():
     assert restored.ready and restored.provenance == provenance
     current = dict(contact_config=config.CONTACT_CONFIG.to_dict(), contact_learning=trainer.state_dict())
     config.CONTACT_CONFIG.validate_checkpoint(current)
-    current['contact_config'] = dict(current['contact_config'], schema_version=1)
+    current['contact_config'] = dict(current['contact_config'], schema_version=2)
     try:
         config.CONTACT_CONFIG.validate_checkpoint(current)
     except ValueError:
         pass
     else:
-        raise AssertionError('v1 auxiliary data accepted by v2')
+        raise AssertionError('v2 reward semantics accepted by v3 resume')
     ContactConfig().validate_checkpoint(source)
     report = dict(passed=True, frontier_point=point.tolist(), near_frontier_feature=float(features[0, 9]),
                   directed_path_distances=[201., 101., 0., 'unreachable'],

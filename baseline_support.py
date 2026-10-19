@@ -7,6 +7,7 @@ from contextlib import contextmanager, redirect_stdout
 from datetime import datetime
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -107,6 +108,7 @@ def record_setup(config, manifest, check_only=False):
     core = ['driver.py', 'parameter.py', 'runner.py', 'env.py', 'model.py',
             'multi_robot_worker.py', 'graph_generator.py', 'robot.py', 'sensor.py',
             'ss_realistic_model.py', 'baseline_support.py', 'baseline_replay.py']
+    core += ['training_review.py']
     core += [str(p) for p in sorted(Path('contact_module').glob('*.py'))]
     provenance = dict(created=datetime.now().astimezone().isoformat(),
         branch=subprocess.check_output(['git', 'branch', '--show-current'], text=True).strip(),
@@ -122,6 +124,10 @@ def record_setup(config, manifest, check_only=False):
         replay_mask_storage='lossless-bitpack-zlib-v1',
         graph_boundary_repair='Do not append a local candidate when all K slots are global neighbors',
         automatic_evaluation=False, training_started=False,
+        training_review_interval=300 if config.CONTACT_CONFIG.enabled else None,
+        automatic_review_control=os.environ.get('IR2_AUTO_REVIEW','0')=='1',
+        acceptance=dict(window_attempts=300,minimum_successes=297,all_maps_minimum_visits=20,
+                        invalid_attempts_allowed=0),
         contact_config=config.CONTACT_CONFIG.to_dict())
     path = Path(config.BASELINE_DIR) / ('config_check.json' if check_only else 'setup.json')
     if not check_only and path.exists():
@@ -139,7 +145,7 @@ def memory_available_gib():
 
 
 class Progress:
-    def __init__(self, directory, manifest, writer, resume=None):
+    def __init__(self, directory, manifest, writer, resume=None, review_enabled=False):
         self.directory = Path(directory)
         self.writer = writer
         self.maps = [m['name'] for m in manifest['maps']]
@@ -149,8 +155,16 @@ class Progress:
         self.completed = (resume or {}).get('completed_episodes', 0)
         self.invalid = (resume or {}).get('invalid_episodes', 0)
         self.updates = (resume or {}).get('training_updates', 0)
+        self.review = None
+        self.last_review = None
+        self.acceptance = None
+        self.acceptance_recent = deque(maxlen=300)
+        if review_enabled:
+            from training_review import TrainingReview
+            self.review = TrainingReview(directory, self.maps, writer)
         saved = (resume or {}).get('baseline_progress')
         if saved:
+            self.acceptance_recent.extend(saved.get('acceptance_recent',[]))
             self.recent.extend(saved['recent'])
             self.visits.update(saved['visits'])
             for name, values in saved['per_map'].items():
@@ -158,7 +172,8 @@ class Progress:
 
     def snapshot(self):
         return dict(recent=list(self.recent), visits=self.visits.copy(),
-                    per_map={name:list(a) for name,a in self.per_map.items()})
+                    per_map={name:list(a) for name,a in self.per_map.items()},
+                    acceptance_recent=list(self.acceptance_recent))
 
     def record(self, info, valid, metrics, replay_size, dispatched):
         episode = info['episode_number']
@@ -172,6 +187,8 @@ class Progress:
         else:
             self.invalid += 1
             success = None
+        self.acceptance_recent.append(dict(episode=episode,map=name,valid=bool(valid),
+                                           success=bool(success)))
         row = dict(episode=episode, map=name, valid_rollout=bool(valid),
                    task_success=success, completed_episodes=self.completed,
                    invalid_episodes=self.invalid, training_updates=self.updates,
@@ -204,3 +221,22 @@ class Progress:
             recent_success_percent=rate, window_size=len(self.recent),
             replay=replay_size, sac_updates=self.updates,
             min_map_visits=min(self.visits.values())), ensure_ascii=False), flush=True)
+        self.last_review = None
+        if valid and self.review is not None:
+            try:
+                self.last_review = self.review.maybe_record(self.completed)
+            except Exception as exc:
+                # A plotting/reporting failure must not discard model updates.
+                error = dict(stage='training_review_error',completed=self.completed,error=repr(exc))
+                write_json(self.directory/'reviews'/('error_{:06d}.json'.format(self.completed)),error)
+                self.last_review = dict(flags=['review_failed'],trend='no_clear_rise',error=repr(exc))
+                print(json.dumps(error,ensure_ascii=False),flush=True)
+            attempts = list(self.acceptance_recent)
+            count = sum(r['success'] for r in attempts)
+            visits = {m:sum(r['map']==m for r in attempts) for m in self.maps}
+            if len(attempts)==300 and count>=297 and all(r['valid'] for r in attempts) and min(visits.values())>=20:
+                self.acceptance = dict(completed_episodes=self.completed,window_attempts=300,
+                    successes=count,success_percent=100*count/300,per_map_visits=visits,
+                    invalid_attempts=0,training_updates=self.updates,attempts=attempts,
+                    scope='Training criterion only; no held-out performance claim')
+                write_json(self.directory/'acceptance.json',self.acceptance)

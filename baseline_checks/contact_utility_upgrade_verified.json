@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "weights_temperature_optimizers_and_schedulers_exact": true,
+  "head_context_optimizer_and_auxiliary_rng_exact": true,
+  "inherited_sac_updates": 3728,
+  "inherited_head_updates": 2928,
+  "new_condition_acceptance_empty": true,
+  "stale_auxiliary_replay_cleared": true,
+  "prior_exposure_recorded": true,
+  "old_schema_resume_rejected": true,
+  "scope": "Prepared checkpoint audit, no optimization; sampler streams rebuild on driver restart"
+}

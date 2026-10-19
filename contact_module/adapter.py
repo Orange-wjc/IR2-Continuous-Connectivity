@@ -29,6 +29,8 @@ class ContactAdapter:
         self.last_delivery_novel = self.last_delivery_reward = 0.
         self.empty_wait_details = []
         self.last_utility_pose = {}
+        self._utility_known_counts = {}
+        self.utility_recoveries = 0
 
     def reset(self, env):
         self.radio = Radio(env.ground_truth_size, env.n_agent, self.config)
@@ -195,9 +197,46 @@ class ContactAdapter:
         env.all_explored_rate[robot] = env.evaluate_exploration_rate(robot)
         frontier = env.find_frontier(env.all_downsampled_belief[robot])
         success = env.update_graph(robot,frontier,eps=step,step=step)
+        if success:
+            # The graph and its frontier set now match this local map. Repair
+            # caches here, before the next observation/reward uses them.
+            self.refresh_frontier_utility(env, robot)
         # Same real-delivery/time terms for all finite communication methods.
         reward = gains[robot]/1000. - self.config.time_penalty*duration
         return success, reward
+
+    def refresh_frontier_utility(self, env, robot):
+        """Recover unvisited zero-utility nodes after locally known map growth.
+
+        Original IR2 treats a zero utility as permanent. Incremental paid map
+        deliveries can reveal a line of sight from an existing, unvisited node
+        to a frontier. Its cached zero then suppresses a real local goal. Use
+        only this robot's map/frontiers/own route, preserving visited zeros.
+        """
+        from node import Node
+
+        belief = env.all_robot_belief[robot][robot]
+        known = int(np.count_nonzero(belief != 127))
+        if self._utility_known_counts.get(robot) == known:
+            return 0
+        generator = env.all_graph_generator[robot]
+        visited = {tuple(point) for point in generator.route_node}
+        recovered = 0
+        for index, node in enumerate(generator.nodes_list):
+            if not node.zero_utility_node or tuple(node.coords) in visited:
+                continue
+            fresh = Node(node.coords, env.all_frontiers[robot], belief)
+            if fresh.utility <= 0:
+                continue
+            node.observable_frontiers = fresh.observable_frontiers
+            node.utility = fresh.utility
+            node.zero_utility_node = False
+            generator.node_utility[index] = fresh.utility
+            env.all_node_utility[robot][index] = fresh.utility
+            recovered += 1
+        self.utility_recoveries += recovered
+        self._utility_known_counts[robot] = known
+        return recovered
 
     def expected_delivery(self, pair):
         packets = self.radio.pending(pair)
@@ -311,6 +350,7 @@ class ContactAdapter:
                     contact_duplicate_cells=self.radio.duplicate_cells,
                     contact_map_packets=self.radio.completed_maps,contact_wait_actions=self.waits,
                     contact_empty_waits=self.empty_waits,contact_positive_empty_waits=self.positive_empty_waits)
+        stats['contact_utility_recoveries'] = float(self.utility_recoveries)
         stats.update({'contact_reward_'+k:v for k,v in self.reward_sums.items()})
         # Ground truth is used ONLY for terminal reporting, never observations.
         env = self.env

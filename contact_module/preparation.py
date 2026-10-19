@@ -58,8 +58,8 @@ def load_content_initialization(path, config, initialization, movement):
     path = Path(path).resolve()
     state = torch.load(path,map_location='cpu')
     previous = state.get('contact_config',{})
-    if previous.get('schema_version') not in (2,3,4):
-        raise ValueError('Content initialization must use a corrected v2-v4 feature contract')
+    if previous.get('schema_version') not in (2,3,4,5):
+        raise ValueError('Content initialization must use a corrected v2-v5 feature contract')
     allowed = {'schema_version','self_exclusion_radius'}
     current = config.to_dict()
     if previous.get('method') != 'finite_learned' or any(

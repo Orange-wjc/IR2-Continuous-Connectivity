@@ -99,7 +99,11 @@ def main():
                     sigint_save_and_ray_cleanup=True,production_checkpoint_unchanged=True,
                     automatic_review_control_persists_on_resume=True,
                     scope='Temporary engineering model only; two2-step returns per launch; not formal training')
-        write_json('baseline_checks/'+('contact_pose_driver_verified.json' if upgrade else 'contact_driver_verified.json'),result)
+        report_name=os.environ.get('IR2_DRIVER_CHECK_REPORT',
+            'contact_pose_driver_verified.json' if upgrade else 'contact_driver_verified.json')
+        if Path(report_name).name!=report_name or not report_name.endswith('.json'):
+            raise ValueError('IR2_DRIVER_CHECK_REPORT must be a JSON filename')
+        write_json('baseline_checks/'+report_name,result)
         print(json.dumps(result,indent=2),flush=True)
 
 

@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "fixture_sha256": "b03281c9623349b2c10f6ac74c17581883d9b212271289d30e99b3b96cbade65",
+  "node": [
+    52,
+    156
+  ],
+  "cached_before": 0,
+  "fresh_after": 7,
+  "reachable_graph_distance": 2478.9291089804387,
+  "actual_visited_zero_preserved": true,
+  "known_map_growth_reactivates_existing_unvisited_node": true,
+  "no_truth_or_peer_map_access": true,
+  "own_belief_unchanged": true,
+  "repeated_unchanged_map_is_idempotent": true,
+  "scope": "Captured local-state regression, not learned-policy performance"
+}

@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "checks": [
+    "contact_utility_cache_verified.json",
+    "contact_utility_upgrade_verified.json",
+    "contact_utility_driver_verified.json",
+    "contact_module_verified.json",
+    "contact_wait_reward_verified.json",
+    "contact_full_runtime_verified.json"
+  ],
+  "sac_block_unchanged_from_v4": true,
+  "progress_update_counter_is_only_main_sac_block_difference": true,
+  "original_sac_math_byte_identical_after_removing_counter": true,
+  "full_runtime_hashes_match_current_source": true,
+  "changed_semantics": "Only recover unvisited zero-utility local nodes at finite map/graph update; original mode, radio and SAC math unchanged.",
+  "inherited_sac_updates": 3728,
+  "inherited_head_updates": 2928,
+  "formal_v5_completed": 0,
+  "scope": "Engineering checks only; still requires raw300 >=297 successes with all10 maps and no invalid/reward anomalies."
+}

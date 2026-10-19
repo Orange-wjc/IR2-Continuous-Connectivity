@@ -20,6 +20,7 @@
       "contact_wait_actions": 0,
       "contact_empty_waits": 0,
       "contact_positive_empty_waits": 0,
+      "contact_utility_recoveries": 0.0,
       "contact_reward_frontier": 2.3200000000000003,
       "contact_reward_exploration": 0.92,
       "contact_reward_rendezvous": 2.7046061126458296,

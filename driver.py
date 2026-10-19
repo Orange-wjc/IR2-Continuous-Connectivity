@@ -475,9 +475,11 @@ def main():
                 break
             report = progress.last_review
             if auto_review and report is not None:
-                problem_map = any(f.startswith(('never_successful:','coverage_decline:')) for f in report['flags'])
-                if (any(f in report['flags'] for f in ('positive_reward_idle_wait','invalid_rollouts','non_finite_metrics','review_failed')) or
-                    (progress.completed>=600 and report['trend'] in ('falling','no_clear_rise') and problem_map)):
+                # Performance flags require review; they are not a deadline
+                # for convergence or an automatic reason to cancel rollouts.
+                if any(f in report['flags'] for f in (
+                        'positive_reward_idle_wait','invalid_rollouts','non_finite_metrics',
+                        'review_failed','progress_history_requires_audit')):
                     review_pause[0] = True
                     print('Periodic review requests diagnosis; saving before any further code changes.',flush=True)
                     break

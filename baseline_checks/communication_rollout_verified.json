@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "steps": 12,
+  "robots": 3,
+  "actual_actions": 36,
+  "zero_adapter_physical_actions_rewards_wire_and_metrics_exact": true,
+  "frozen_context_bit_exact": true,
+  "original_replay_columns_exact_except_added_features": true,
+  "actual_and_next_state12_fields_recorded": true,
+  "all_next_decision_states_exact": true,
+  "current_node_only_communication_state": true,
+  "source_sha256": "69a88fb0e77c347558114a16d6f75221c187a3fdccf6ccb2b8f97ecbe1e2f45d",
+  "scope": "Paired CPU engineering rollout, no optimization or formal success counting"
+}

@@ -205,7 +205,7 @@ class Decoder(nn.Module):
 
 
 class PolicyNet(nn.Module):
-    def __init__(self, input_dim, embedding_dim, allow_wait=False):
+    def __init__(self, input_dim, embedding_dim, allow_wait=False, contact_state_dim=0):
         super(PolicyNet, self).__init__()
         self.allow_wait = allow_wait
         self.initial_embedding = nn.Linear(input_dim, embedding_dim)
@@ -215,9 +215,18 @@ class PolicyNet(nn.Module):
         self.encoder = Encoder(embedding_dim=embedding_dim, n_head=8, n_layer=6)
         self.decoder = Decoder(embedding_dim=embedding_dim, n_head=8, n_layer=1)
         self.pointer = SingleHeadAttention(embedding_dim)
+        self.contact_state_dim = contact_state_dim
+        self.communication_embedding = None
+        if contact_state_dim:
+            from contact_module.state import make_projection
+            self.communication_embedding = make_projection(contact_state_dim, embedding_dim)
 
     def encode_graph(self, node_inputs, node_padding_mask, edge_mask):
-        node_feature = self.initial_embedding(node_inputs)
+        if self.contact_state_dim:
+            from contact_module.state import graph_embedding
+            node_feature = graph_embedding(self, node_inputs)
+        else:
+            node_feature = self.initial_embedding(node_inputs)
         enhanced_node_feature = self.encoder(src=node_feature, key_padding_mask=node_padding_mask, attn_mask=edge_mask)
 
         return enhanced_node_feature
@@ -248,13 +257,16 @@ class PolicyNet(nn.Module):
         return logp
 
     def forward(self, node_inputs, edge_inputs, current_index, node_padding_mask=None, edge_padding_mask=None, edge_mask=None):
+        if self.contact_state_dim:
+            from contact_module.state import validate_actor_input
+            validate_actor_input(self, node_inputs)
         enhanced_node_feature = self.encode_graph(node_inputs, node_padding_mask, edge_mask)
         logp = self.output_policy(enhanced_node_feature, edge_inputs, current_index, edge_padding_mask, node_padding_mask)
         return logp
 
 
 class QNet(nn.Module):
-    def __init__(self, input_dim, embedding_dim, allow_wait=False):
+    def __init__(self, input_dim, embedding_dim, allow_wait=False, contact_state_dim=0):
         super(QNet, self).__init__()
         self.allow_wait = allow_wait
         self.initial_embedding = nn.Linear(input_dim, embedding_dim)
@@ -264,9 +276,18 @@ class QNet(nn.Module):
         self.decoder = Decoder(embedding_dim=embedding_dim, n_head=8, n_layer=1)
 
         self.q_values_layer = nn.Linear(embedding_dim, 1)
+        self.contact_state_dim = contact_state_dim
+        self.communication_embedding = None
+        if contact_state_dim:
+            from contact_module.state import make_projection
+            self.communication_embedding = make_projection(contact_state_dim, embedding_dim)
 
     def encode_graph(self, node_inputs, node_padding_mask, edge_mask):
-        embedding_feature = self.initial_embedding(node_inputs)
+        if self.contact_state_dim:
+            from contact_module.state import graph_embedding
+            embedding_feature = graph_embedding(self, node_inputs)
+        else:
+            embedding_feature = self.initial_embedding(node_inputs)
         embedding_feature = self.encoder(src=embedding_feature, key_padding_mask=node_padding_mask, attn_mask=edge_mask)
 
         return embedding_feature
@@ -301,6 +322,9 @@ class QNet(nn.Module):
 
     def forward(self, node_inputs, edge_inputs, current_index, node_padding_mask=None, edge_padding_mask=None,
                 edge_mask=None):
+        if self.contact_state_dim:
+            from contact_module.state import validate_actor_input
+            validate_actor_input(self, node_inputs)
         enhanced_node_feature = self.encode_graph(node_inputs, node_padding_mask, edge_mask)
         q_values, attention_weights = self.output_q_values(enhanced_node_feature, edge_inputs, current_index, edge_padding_mask, node_padding_mask)
         return q_values, attention_weights

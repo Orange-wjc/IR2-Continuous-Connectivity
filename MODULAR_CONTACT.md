@@ -2,19 +2,27 @@
 
 当前分支 `research/ir2-modular-contact` 基于已推送的 `baseline/ir2-easy10` / `dcea459d`。
 原版运行 `2` 已由用户暂停：1394有效回合、0无效回合、11104次SAC；模型、日志及十图清单保留本地。
-v1运行contact_easy10_1已在2036有效回合后退出，近100成功率50%，尚未证明优于有限通信FIFO。当前修复版本为schema_version=6；旧版本检查点不可静默续训为新的决策经验语义。
+v1运行contact_easy10_1已在2036有效回合后退出，近100成功率50%，尚未证明优于有限通信FIFO。当前版本为schema_version=7；v6已在600复查后保存停止。旧版本检查点不可静默续训为新的通信状态语义。
 
 ## 当前目标与边界
 
 先在与运行2逐字相同的10张原easy图上，固定3台机器人，确认改进模块接入原训练器后能学习。
-保留原图网络6维输入/128嵌入、原SAC数学更新、LR=1e-5、batch128、replay10000、热身2000、每回合8批更新、196步上限。
+保留原图网络6维图特征/128嵌入、原SAC数学更新、LR=1e-5、batch128、replay10000、热身2000、每回合8批更新、196步上限。候选v7仅为有限模式新增6维本机通信投影，实际node输入12；原模式仍6维。
 继续使用无损压缩回放及RAM保护；没有搬回旧研究的环境、SAC/SIL训练器或地图生成器。
 
 这是以IR2为主体、借鉴BLMRE信息价值思想的第一版迁移，不是完整BLMRE网络复现。
 旧研究的正结果不能直接视作本版结果。消息头结构与12项本地特征沿用旧实现，图上下文改为当前IR2的128维冻结编码。
 当前实验仅验证学习链路，后续对照必须使用相同通信机制、动作空间和训练预算。
 
-## 当前v6：发送者真实交付奖励与下一决策状态
+## 当前v7：本机通信状态，学习效果仍待真实训练
+
+原6维空间输入没有显式近期收包/队列信息。候选保留它们，新增预计发送收益、己方队列字节、完整付费收包新鲜度、上次收到的新free/known量与年龄、付费位姿创建年龄；只在当前节点放置，其他/填充节点0。Radio的历史只在整包付费完成后更新，actor只读自身接收历史/己方队列，不读GT或真实链路。零初始化6→128无偏投影保留旧输出和RNG，参数在旧参数之后，新增移动可训练权重仅2304个；冻结内容上下文仍只读原6维。
+
+全部动作包括WAIT保持可用，不引入硬等待约束，也不改奖励。原SAC更新块与v6逐字节相同。schema7严格要求所有投影；显式升级工具upgrade_communication_checkpoint.py保留全部旧权重/旧Adam moment/调度器/温度及辅助状态，只加零投影和新Adam参数ID，重建原本不保存的移动回放，新条件验收从0开始。State Policy Weight Norm和State Q1 Weight Norm用于核对实际更新。
+
+CPU检查、原图36动作配对、实际driver两次保存/续载、完整8worker十图196步及原GPU batch128×8检查均已通过：3300经验、显存17.66GiB、主机可用最低15.75GiB，新增投影在原SAC中确实更新。正式prepared模型保留v6最终600的SAC12608/头7436，新条件窗口重置；仍不能声称学习或99%改善。启动事实以experiments/contact_easy10_v7_20261019/launcher.json为准。详见[COMMUNICATION_STATE_PLAN.md](COMMUNICATION_STATE_PLAN.md)。
+
+## 历史v6：发送者真实交付奖励与下一决策状态
 
 v5保存停止于527有效/0无效、SAC7880/消息头5036、近100成功64%。冻结轨迹确认发送者在其它机器人时隙的交付奖励遗漏，以及提前封存的下一状态与下次实际决策不一致。v6单独模块contact_module/transitions.py按每机自身决策区间结算全部真实发送收益，下一状态取下一实际决策观察；末条在全部动作/付费交换后封存。原SAC、6维输入、各奖励系数、真实动作/协议/成功判据不变，模块关闭时仍逐项等价。
 
@@ -40,20 +48,20 @@ v3在77回合/552 SAC后发现初始自身位置未同步，9997实际自位置�
 
 ## 自动训练使用方式
 
-助手将按用户指令自动启动唯一实例，启动命令记录如下；**已有实例运行时不要重复执行**：
+工程检查已通过，助手按用户指令自动部署启动唯一实例，命令记录如下；**已有实例运行时不要重复执行**：
 
 ```bash
 conda activate ir2_train
 cd ~/wjc_ws/IR2-Continuous-Connectivity
-IR2_METHOD=finite_learned IR2_RUN_NAME=contact_easy10_v6_20261019 IR2_AGENTS=8 \
+IR2_METHOD=finite_learned IR2_RUN_NAME=contact_easy10_v7_20261019 IR2_AGENTS=8 \
 IR2_RESUME=1 IR2_AUTO_REVIEW=1 python -u driver.py
 ```
 
-新模型model/contact_easy10_v6_20261019/checkpoint.pth；曲线train/contact_easy10_v6_20261019/；日志experiments/contact_easy10_v6_20261019/training.log。
+部署后新模型model/contact_easy10_v7_20261019/checkpoint.pth；曲线train/contact_easy10_v7_20261019/；日志experiments/contact_easy10_v7_20261019/training.log。
 中断后续训移除两个初始化参数，使用：
 
 ```bash
-IR2_METHOD=finite_learned IR2_RUN_NAME=contact_easy10_v6_20261019 \
+IR2_METHOD=finite_learned IR2_RUN_NAME=contact_easy10_v7_20261019 \
 IR2_AGENTS=8 IR2_RESUME=1 IR2_AUTO_REVIEW=1 python -u driver.py
 ```
 
@@ -64,7 +72,7 @@ IR2_AGENTS=8 IR2_RESUME=1 IR2_AUTO_REVIEW=1 python -u driver.py
 IR2_AUTO_REVIEW=1时，如连续3个无效回合、周期发现空等正奖励/无效/非有限记录，或600回合后无明确增长且仍有长期失败/退化地图，会保存退出为paused_for_diagnosis。程序不修改源码或参数；后续由当前Codex活动目标继续诊断与受控修复。达到99%以前不得把这种暂停误报成完成。
 
 ```bash
-tensorboard --logdir train/contact_easy10_v6_20261019 --host 127.0.0.1 --port 6013
+tensorboard --logdir train/contact_easy10_v7_20261019 --host 127.0.0.1 --port 6013
 ```
 
 重点看Progress/Success Rate 100 Percent、Review/*、Maps/*/Success Last10 Percent、Contact/positive_empty_waits、Contact/min_local_coverage、Contact/union_coverage、Contact/reward_*及Content Loss/Updates。
@@ -83,6 +91,8 @@ IR2_INIT_FROM/IR2_CONTENT_INIT只用于新实验，与resume互斥。自动控�
 | `contact_module/learning.py` | 12维特征＋冻结图上下文消息头、独立辅助优化与恢复 |
 | `contact_module/adapter.py` | 本地特征、信息排序、预计交付收益、IR2状态适配 |
 | `contact_module/transitions.py` | 自身决策区间、发送者交付奖励守恒、实际下一状态 |
+| `contact_module/state.py` | 本机通信观测、当前节点打包、零初始化状态投影 |
+| `contact_module/state_upgrade.py` | 显式v6→v7权重/Adam参数ID扩展及新条件验收 |
 
 原文件只有明确接口：Env在信息传播处选择原路径/有限传输；Worker采集冻结本地图上下文并设置WAIT候选；
 Runner同步辅助权重；driver注册辅助更新与保存；Policy/Q可选允许WAIT；Progress增加通信指标和源码SHA。
@@ -113,7 +123,7 @@ Runner同步辅助权重；driver注册辅助更新与保存；Policy/Q可选允
 `check_contact_driver.py`检查：真实driver在临时目录启动/辅助更新/SIGINT保存/续载、配置误用拦截和Ray清理。
 对应`*_verified.json`记录实际结果；完整196步检查另记`contact_full_runtime_verified.json`。
 
-这些是工程验收，不是性能实验，也不计作正式回合。当前v6按用户最新指令自动训练，每300回合复查，遇实现错误保存停训后修复；达到连续300回合至少297成功时保存退出。没有启动独立测试集周期评估。
+这些是工程验收，不是性能实验，也不计作正式回合。当前v7按用户最新指令自动训练，每300回合复查，遇实现错误保存停训后修复；达到连续300回合至少297成功时保存退出。没有启动独立测试集周期评估。
 下一步先训练一份finite_learned确认成功率/覆盖率上升，再讨论有限通信对照、相同预算比较和独立评估。
 当前接入范围是训练入口；原`test_driver.py`尚未适配有限通信。后续评估必须复用同一模块与配置，
 不能把有限通信模型直接放进原版免费交换的测试环境并报告为本方法成绩。

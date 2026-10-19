@@ -53,7 +53,7 @@ class ContactAdapter:
         nodes, _, _, padding, _, adjacency = observations
         count = len(self.env.all_node_coords[robot])
         with torch.no_grad():
-            local = nodes.detach().cpu().clone()
+            local = nodes.detach().cpu()[..., :self.encoder.initial_embedding.in_features].clone()
             local[:, :, 3] = 0.  # No recursive rendezvous/content feedback.
             embedding = self.encoder.encode_graph(local, padding.cpu(), adjacency.cpu())
         self.contexts[robot] = (self.env.all_node_coords[robot].copy(), embedding[0,:count].numpy())

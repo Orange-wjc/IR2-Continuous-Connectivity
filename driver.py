@@ -33,6 +33,7 @@ from baseline_support import prepare_maps, record_setup, Progress, write_json, m
 from baseline_replay import stack_masks
 from contact_module.learning import ContentTrainer
 from contact_module.preparation import load_initialization, prepare_content, load_content_initialization
+from contact_module.state import zero_projection_import
 
 
 def writeToTensorBoard(writer, tensorboardData, curr_episode):
@@ -154,12 +155,17 @@ def main():
     log_alpha.requires_grad = True
 
     # Init key networks & params
-    global_policy_net = PolicyNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled).to(device)
-    global_q_net1 = QNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled).to(device)
-    global_q_net2 = QNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled).to(device)
+    global_policy_net = PolicyNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled,
+                                 contact_state_dim=CONTACT_CONFIG.state_dim).to(device)
+    global_q_net1 = QNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled,
+                         contact_state_dim=CONTACT_CONFIG.state_dim).to(device)
+    global_q_net2 = QNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled,
+                         contact_state_dim=CONTACT_CONFIG.state_dim).to(device)
 
-    global_target_q_net1 = QNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled).to(device)
-    global_target_q_net2 = QNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled).to(device)
+    global_target_q_net1 = QNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled,
+                               contact_state_dim=CONTACT_CONFIG.state_dim).to(device)
+    global_target_q_net2 = QNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled,
+                               contact_state_dim=CONTACT_CONFIG.state_dim).to(device)
     
     global_policy_optimizer = optim.Adam(global_policy_net.parameters(), lr=LR)
     global_q_net1_optimizer = optim.Adam(global_q_net1.parameters(), lr=LR)
@@ -178,9 +184,9 @@ def main():
 
     ### Load models from checkpts ###
     if initial_state is not None:
-        global_policy_net.load_state_dict(initial_state['policy_model'])
-        global_q_net1.load_state_dict(initial_state['q_net1_model'])
-        global_q_net2.load_state_dict(initial_state['q_net2_model'])
+        global_policy_net.load_state_dict(zero_projection_import(global_policy_net, initial_state['policy_model']))
+        global_q_net1.load_state_dict(zero_projection_import(global_q_net1, initial_state['q_net1_model']))
+        global_q_net2.load_state_dict(zero_projection_import(global_q_net2, initial_state['q_net2_model']))
         print('Shared trained movement initialization: ' + initialization['sha256'], flush=True)
         del initial_state
     if LOAD_MODEL:
@@ -452,6 +458,11 @@ def main():
                 training_data.append(data)
 
             progress.record(info, True, metrics, len(experience_buffer[0]), curr_episode)
+            if CONTACT_CONFIG.state_dim:
+                writer.add_scalar('Contact/State Policy Weight Norm',
+                    global_policy_net.communication_embedding.weight.detach().norm().item(), progress.completed)
+                writer.add_scalar('Contact/State Q1 Weight Norm',
+                    global_q_net1.communication_embedding.weight.detach().norm().item(), progress.completed)
             if CONTACT_CONFIG.enabled and progress.completed % 300 == 0:
                 save_checkpoint()
             if auto_review and metrics.get('contact_positive_empty_waits',0)>0:

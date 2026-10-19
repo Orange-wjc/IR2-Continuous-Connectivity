@@ -1,0 +1,15 @@
+{
+  "cpu_checks": [
+    "communication_state_verified.json",
+    "communication_rollout_verified.json",
+    "communication_upgrade_verified.json",
+    "contact_module_verified.json",
+    "contact_wait_reward_verified.json"
+  ],
+  "sac_math_byte_identical_to_v6": true,
+  "pre_gpu_status": "CPU ready; full Ray/GPU/driver resume checks deferred until sole formal v6 stops",
+  "formal_training_started": false,
+  "candidate_source_root": "/home/wyz/wjc_ws/IR2-contact-state-v7",
+  "config_check_node_input_dim": 12,
+  "utility_cache_regression_passed": true
+}

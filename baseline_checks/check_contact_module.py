@@ -104,7 +104,7 @@ def original_equivalence():
 
 def integrated_checks():
     seeds(303)
-    p=PolicyNet(6,128,allow_wait=True);q=QNet(6,128,allow_wait=True)
+    p=PolicyNet(6,128,allow_wait=True,contact_state_dim=config.CONTACT_CONFIG.state_dim);q=QNet(6,128,allow_wait=True,contact_state_dim=config.CONTACT_CONFIG.state_dim)
     trainer=ContentTrainer(p,config.CONTACT_CONFIG)
     before={k:v.clone() for k,v in trainer.head.state_dict().items()}
     contact=ContactAdapter(config.CONTACT_CONFIG,p,trainer.weights(),1)
@@ -116,7 +116,7 @@ def integrated_checks():
     assert len(w.episode_buffer[0])==6
     assert contact.time>0 and contact.radio.sent_bytes>0 and len(contact.labels)>0
     for obs_i in (0,9):
-        for a in w.episode_buffer[obs_i]:assert a.shape[-1]==6
+        for a in w.episode_buffer[obs_i]:assert a.shape[-1]==6+config.CONTACT_CONFIG.state_dim
     obs,ok=w.get_observations(w.robot_list[0].robot_position,0,1,2)
     assert ok and obs[1][0,0,0].item()==obs[2].item()
     logp=p(*[v.clone() for v in obs]);assert torch.isfinite(logp).all()
@@ -156,7 +156,7 @@ def control_mode_checks():
     try:
         for mode in ('finite_fifo','finite_rule'):
             seeds(404)
-            p=PolicyNet(6,128,allow_wait=True);q=QNet(6,128,allow_wait=True)
+            p=PolicyNet(6,128,allow_wait=True,contact_state_dim=config.CONTACT_CONFIG.state_dim);q=QNet(6,128,allow_wait=True,contact_state_dim=config.CONTACT_CONFIG.state_dim)
             contact=ContactAdapter(ContactConfig(method=mode),p,None,1)
             w=workers.Worker(0,3,p,q,1,device='cpu',contact=contact)
             assert w.run_episode(1) and len(w.episode_buffer[0])==3

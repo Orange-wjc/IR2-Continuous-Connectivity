@@ -6,7 +6,7 @@ import os
 
 @dataclass(frozen=True)
 class ContactConfig:
-    schema_version: int = 6
+    schema_version: int = 7
     method: str = 'original'
     bytes_per_second: float = 2048.
     packet_bytes: int = 512
@@ -29,6 +29,10 @@ class ContactConfig:
     def learned(self):
         return self.method == 'finite_learned'
 
+    @property
+    def state_dim(self):
+        return 6 if self.enabled else 0
+
     def to_dict(self):
         return asdict(self)
 
@@ -42,6 +46,15 @@ class ContactConfig:
             raise ValueError('Learned checkpoint is missing the auxiliary head/optimizer state')
         if self.learned and not (state['contact_learning'].get('provenance') or {}).get('training_updates', 0):
             raise ValueError('Learned checkpoint lacks trained context provenance')
+        if self.state_dim:
+            models = [state.get(key, {}) for key in ('policy_model', 'q_net1_model', 'q_net2_model')]
+            if self.learned:
+                models.append(state['contact_learning'].get('encoder', {}))
+            for model in models:
+                base = model.get('initial_embedding.weight')
+                projection = model.get('communication_embedding.weight')
+                if base is None or projection is None or tuple(projection.shape) != (base.shape[0], self.state_dim):
+                    raise ValueError('Schema7 checkpoint lacks its exact communication-state projection')
 
     @classmethod
     def from_env(cls):

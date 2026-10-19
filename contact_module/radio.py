@@ -53,6 +53,11 @@ class Radio:
         self.sent_bytes = self.control_bytes = self.unique_cells = self.duplicate_cells = 0
         self.completed_maps = 0
         self.last_tx = self.last_rx = np.zeros(robots, dtype=int)
+        # Local receiver observations, updated only after complete paid packets.
+        self.last_receive_at = np.full(robots, -np.inf)
+        self.last_novel_receive_at = np.full(robots, -np.inf)
+        self.last_novel_receive_cells = np.zeros(robots)
+        self.last_novel_receive_free = np.zeros(robots)
 
     def packet(self, kind, pair, now, payload, count=0):
         sender, receiver = pair
@@ -138,9 +143,12 @@ class Radio:
                     deliveries.append(packet)
                     self.active[pair] = None
         gains = np.zeros(self.robots)
+        received_novel = np.zeros(self.robots)
+        received_free = np.zeros(self.robots)
         # Delivery begins only after all links have consumed this time slice.
         for packet in deliveries:
             sender, receiver = packet.sender, packet.receiver
+            self.last_receive_at[receiver] = now + duration
             if packet.kind == STATE:
                 self.peer_pose[(receiver, sender)] = np.array(POSE.unpack_from(packet.wire, HEADER.size))
                 self.peer_pose_time[(receiver, sender)] = packet.created
@@ -154,6 +162,8 @@ class Radio:
                 data = packet.cells()
                 target = beliefs[receiver].ravel()
                 novel = target[data['index']] == 127
+                received_novel[receiver] += int(novel.sum())
+                received_free[receiver] += int(np.count_nonzero(novel & (data['value'] == 255)))
                 gains[sender] += int(novel.sum())
                 self.unique_cells += int(novel.sum())
                 self.duplicate_cells += len(data) - int(novel.sum())
@@ -163,6 +173,10 @@ class Radio:
                 self.awaiting_ack[(sender, receiver, packet.seq)] = (packet, now + duration)
                 self.controls[(receiver, sender)].appendleft(self.packet(
                     CONFIRM, (receiver, sender), now + duration, ACK.pack(packet.seq)))
+        updated = received_novel > 0
+        self.last_novel_receive_at[updated] = now + duration
+        self.last_novel_receive_cells[updated] = received_novel[updated]
+        self.last_novel_receive_free[updated] = received_free[updated]
         self.last_tx, self.last_rx = budget - tx, budget - rx
         self.tick += 1
         return gains

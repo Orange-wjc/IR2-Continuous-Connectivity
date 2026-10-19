@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "protocol_service_ticks": 60,
+  "original_wire_queue_ack_pose_credit_and_belief_state_exact": true,
+  "paid_receipts_only_after_complete_packet": true,
+  "receiver_free_vs_occupied_novelty_distinguished": true,
+  "own_information_only_fixture": true,
+  "current_node_only_packing": true,
+  "features": [
+    0.6000000238418579,
+    0.0,
+    1.0,
+    0.11999999731779099,
+    0.20000000298023224,
+    0.15000000596046448
+  ],
+  "models": [
+    {
+      "model": "PolicyNet",
+      "zero_init_output_bit_exact": true,
+      "original_weights_parameter_order_rng_exact": true,
+      "graph_only_context_bit_exact": true,
+      "new_projection_gradients_finite_nonzero": true,
+      "missing_state_rejected": true
+    },
+    {
+      "model": "QNet",
+      "zero_init_output_bit_exact": true,
+      "original_weights_parameter_order_rng_exact": true,
+      "graph_only_context_bit_exact": true,
+      "new_projection_gradients_finite_nonzero": true,
+      "missing_state_rejected": true
+    }
+  ],
+  "scope": "CPU engineering prototype; no formal optimization or learning/99% claim"
+}

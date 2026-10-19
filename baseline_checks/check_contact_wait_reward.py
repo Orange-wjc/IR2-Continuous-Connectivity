@@ -14,6 +14,7 @@ from model import PolicyNet,QNet
 from contact_module.adapter import ContactAdapter
 from contact_module.learning import ContentTrainer
 from contact_module.preparation import load_initialization,load_content_initialization
+from contact_module.state import zero_projection_import
 from multi_robot_worker import Worker
 
 
@@ -24,8 +25,10 @@ def main():
         'experiments/contact_easy10_v2_20261019/prepared_initialization.pth',
         cfg.CONTACT_CONFIG,init,source['policy_model'])
     assert saved['ready'] and saved['updates']==1000
-    p=PolicyNet(6,128,allow_wait=True);p.load_state_dict(source['policy_model'])
-    q=QNet(6,128,allow_wait=True);q.load_state_dict(source['q_net1_model'])
+    p=PolicyNet(6,128,allow_wait=True,contact_state_dim=cfg.CONTACT_CONFIG.state_dim)
+    p.load_state_dict(zero_projection_import(p,source['policy_model']))
+    q=QNet(6,128,allow_wait=True,contact_state_dim=cfg.CONTACT_CONFIG.state_dim)
+    q.load_state_dict(zero_projection_import(q,source['q_net1_model']))
     c=ContactAdapter(cfg.CONTACT_CONFIG,p,ContentTrainer(p,cfg.CONTACT_CONFIG,saved).weights(),4)
     w=Worker(0,3,p,q,4,device='cpu',contact=c)
     # Use the map which exposed the startup pose mismatch, and do not manually

@@ -118,6 +118,8 @@ def record_setup(config, manifest, check_only=False):
         batch_size=config.BATCH_SIZE, replay_size=config.REPLAY_SIZE,
         minimum_buffer_size=config.MINIMUM_BUFFER_SIZE, learning_rate=config.LR,
         robots=[config.NUM_ROBOTS_MIN, config.NUM_ROBOTS_MAX], input_dim=config.INPUT_DIM,
+        communication_state_dim=config.CONTACT_CONFIG.state_dim,
+        node_input_dim=config.INPUT_DIM+config.CONTACT_CONFIG.state_dim,
         embedding_dim=config.EMBEDDING_DIM, max_episode_steps=config.MAX_EPS_STEPS,
         updates_per_training_iteration=8, resume=config.LOAD_MODEL,
         original_signal_strength_model=config.USE_SIGNAL_STRENGTH_NOT_PROXIMITY,

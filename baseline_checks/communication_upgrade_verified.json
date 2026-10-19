@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "source_sha256": "69a88fb0e77c347558114a16d6f75221c187a3fdccf6ccb2b8f97ecbe1e2f45d",
+  "inherited_sac_updates": 10208,
+  "inherited_head_updates": 6236,
+  "old_weights_moments_schedulers_temperature_exact": true,
+  "old_auxiliary_context_head_replay_rng_exact": true,
+  "new_projection_zero_with_fresh_adam_id": true,
+  "cpu_copy_step_updates_projection": true,
+  "new_condition_acceptance_empty": true,
+  "missing_projection_or_old_schema_rejected": true,
+  "scope": "CPU copy engineering only; one local test optimizer step, no formal training/model write"
+}

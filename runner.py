@@ -18,8 +18,10 @@ class Runner(object):
         self.meta_agent_id = meta_agent_id
         torch.set_num_threads(1)
         self.device = torch.device('cuda') if USE_GPU else torch.device('cpu')
-        self.local_network = PolicyNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled)
-        self.local_q_net = QNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled)
+        self.local_network = PolicyNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled,
+                                       contact_state_dim=CONTACT_CONFIG.state_dim)
+        self.local_q_net = QNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled,
+                               contact_state_dim=CONTACT_CONFIG.state_dim)
         self.auxiliary = None
         self.contact_labels = []
         self.contact_diagnostics = []

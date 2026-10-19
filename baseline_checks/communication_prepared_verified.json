@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "source_final_v6_completed": 600,
+  "source_sha256": "3659542a3746d8d182408749a33a90d7adf76b083faa5774a1128006692d055d",
+  "prepared_sha256": "6c58d5b2e99629cbf8273620ca50c595dddae764c59ed222c723e4598820e76f",
+  "actual_written_checkpoint_matches_explicit_expansion": true,
+  "inherited_sac_updates": 12608,
+  "inherited_head_updates": 7436,
+  "new_condition_episodes_and_acceptance_empty": true,
+  "scope": "Actual written prepared checkpoint audit, no optimization"
+}

@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "checks": [
+    "communication_state_verified.json",
+    "communication_rollout_verified.json",
+    "communication_upgrade_verified.json",
+    "communication_prepared_verified.json",
+    "communication_driver_verified.json",
+    "contact_full_runtime_verified.json",
+    "contact_module_verified.json",
+    "contact_wait_reward_verified.json",
+    "contact_utility_cache_verified.json"
+  ],
+  "sac_math_byte_identical_to_v6": true,
+  "all_runtime_hashes_match": true,
+  "graph_input_dim": 6,
+  "communication_state_dim": 6,
+  "node_input_dim": 12,
+  "workers": 8,
+  "robots": 3,
+  "original_maps": 10,
+  "transitions": 3300,
+  "gpu_batch": 128,
+  "sac_iterations": 8,
+  "peak_cuda_mib": 18081.23974609375,
+  "minimum_host_available_gib": 15.750171661376953,
+  "communication_policy_weight_norm": 0.0017331896815449,
+  "communication_q1_weight_norm": 0.00212134700268507,
+  "inherited_sac_updates": 12608,
+  "inherited_head_updates": 7436,
+  "prepared_sha256": "6c58d5b2e99629cbf8273620ca50c595dddae764c59ed222c723e4598820e76f",
+  "scope": "Engineering only; formal raw300>=297 training acceptance remains unmet"
+}

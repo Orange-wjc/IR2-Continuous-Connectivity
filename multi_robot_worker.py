@@ -294,6 +294,8 @@ class Worker:
         observations = node_inputs, edge_inputs, current_index, node_padding_mask, edge_padding_mask, edge_mask
         if self.contact is not None:
             self.contact.observe(robot_id, observations)
+            from contact_module.state import local_state, attach_state
+            observations = attach_state(observations, local_state(self.contact, self.env, robot_id))
         return observations, True   # success
 
 

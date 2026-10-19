@@ -20,6 +20,7 @@ from model import PolicyNet,QNet
 from baseline_support import prepare_maps,write_json,memory_available_gib
 from baseline_replay import stack_masks
 from contact_module.learning import ContentTrainer
+from contact_module.state import zero_projection_import
 from contact_module.preparation import load_initialization,load_content_initialization
 CHECK_STEPS=int(os.environ.get('IR2_CHECK_STEPS','8'))
 CHECK_EPISODES=int(os.environ.get('IR2_CHECK_EPISODES','8'))
@@ -55,7 +56,7 @@ def main():
     protected=[Path('model/2/checkpoint.pth'),Path('experiments/2/progress.jsonl')]
     before={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in protected}
     torch.manual_seed(101)
-    p=PolicyNet(6,128,allow_wait=True);q=QNet(6,128,allow_wait=True)
+    p=PolicyNet(6,128,allow_wait=True,contact_state_dim=config.CONTACT_CONFIG.state_dim);q=QNet(6,128,allow_wait=True,contact_state_dim=config.CONTACT_CONFIG.state_dim)
     provenance=saved=None
     if os.environ.get('IR2_CHECK_RESUME_CHECKPOINT'):
         if os.environ.get('IR2_CHECK_INITIALIZATION'):
@@ -66,7 +67,7 @@ def main():
         saved=source['contact_learning'];provenance=saved.get('provenance')
     if os.environ.get('IR2_CHECK_INITIALIZATION'):
         source,provenance=load_initialization(os.environ['IR2_CHECK_INITIALIZATION'],manifest)
-        p.load_state_dict(source['policy_model']);q.load_state_dict(source['q_net1_model'])
+        p.load_state_dict(zero_projection_import(p,source['policy_model']));q.load_state_dict(zero_projection_import(q,source['q_net1_model']))
         if os.environ.get('IR2_CHECK_CONTENT_INIT'):
             saved,_=load_content_initialization(os.environ['IR2_CHECK_CONTENT_INIT'],
                 config.CONTACT_CONFIG,provenance,source['policy_model'])
@@ -114,14 +115,17 @@ def main():
     path=ROOT/'baseline_checks/recovery_20261018/check_cuda_equivalence.py'
     spec=importlib.util.spec_from_file_location('cuda_check',path)
     check=importlib.util.module_from_spec(spec);spec.loader.exec_module(check)
-    check.PolicyNet=lambda i,e:PolicyNet(i,e,allow_wait=True)
-    check.QNet=lambda i,e:QNet(i,e,allow_wait=True)
+    check.PolicyNet=lambda i,e:PolicyNet(i,e,allow_wait=True,contact_state_dim=config.CONTACT_CONFIG.state_dim)
+    check.QNet=lambda i,e:QNet(i,e,allow_wait=True,contact_state_dim=config.CONTACT_CONFIG.state_dim)
     source=subprocess.check_output(['git','show','main:driver.py'],text=True)
     lo=source.index('                    ### Obtain losses via SAC (Soft Actor-Critic) ###')
     hi=source.index('                perf_data = []',lo)
     code=compile(textwrap.dedent(source[lo:hi]),'original_sac','exec')
     state,peak=check.run(batch,code)
     assert all(torch.isfinite(v).all() for v in state['global_policy_net'].values())
+    state_policy_norm=float(state['global_policy_net']['communication_embedding.weight'].norm())
+    state_q1_norm=float(state['global_q_net1']['communication_embedding.weight'].norm())
+    assert state_policy_norm>0 and state_q1_norm>0
     assert before=={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in protected}
     report=dict(passed=True,workers=8,robots=3,rollout_steps=CHECK_STEPS,
                 actual_distinct_transitions=len(columns[0]),effective_gpu_batch=128,
@@ -131,6 +135,7 @@ def main():
                 elapsed_seconds=time.monotonic()-started,rollouts=records,
                 production_files_unchanged=True,
                 all_own_decision_next_states_exact=True,all_actual_delivery_rewards_conserved=True,
+                communication_policy_weight_norm=state_policy_norm,communication_q1_weight_norm=state_q1_norm,
                 scope='Isolated engineering samples and copy-only gradients; no formal training/effectiveness evidence')
     report['source_sha256']={str(p):hashlib.sha256(p.read_bytes()).hexdigest()
                             for p in list(Path('contact_module').glob('*.py'))+

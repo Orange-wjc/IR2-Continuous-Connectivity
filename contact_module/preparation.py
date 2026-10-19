@@ -58,8 +58,8 @@ def load_content_initialization(path, config, initialization, movement):
     path = Path(path).resolve()
     state = torch.load(path,map_location='cpu')
     previous = state.get('contact_config',{})
-    if previous.get('schema_version') not in (2,3,4,5,6):
-        raise ValueError('Content initialization must use a corrected v2-v6 feature contract')
+    if previous.get('schema_version') not in (2,3,4,5,6,7):
+        raise ValueError('Content initialization must use a corrected v2-v7 feature contract')
     allowed = {'schema_version','self_exclusion_radius'}
     current = config.to_dict()
     if previous.get('method') != 'finite_learned' or any(
@@ -75,7 +75,20 @@ def load_content_initialization(path, config, initialization, movement):
     if not all(torch.equal(v.detach().cpu(),aux['encoder'][k]) and
                torch.equal(v.detach().cpu(),state['policy_model'][k]) for k,v in movement.items()):
         raise ValueError('Content context does not match the shared trained actor')
+    extras = set(aux['encoder'])-set(movement)
+    if extras - {'communication_embedding.weight'}:
+        raise ValueError('Unexpected extra context parameters')
+    for model in (aux['encoder'], state['policy_model']):
+        projection = model.get('communication_embedding.weight')
+        if projection is not None and (tuple(projection.shape) != (128, config.state_dim) or
+                                       torch.count_nonzero(projection).item() != 0):
+            raise ValueError('Fresh prepared context requires a zero communication-state projection')
     aux = copy.deepcopy(aux)
+    # Explicit fresh import: only the new zero projection may be absent. The
+    # frozen encoder remains graph-only; the auxiliary features/context do not
+    # change. Normal schema7 resume still loads every parameter strictly.
+    if config.state_dim and 'communication_embedding.weight' not in aux['encoder']:
+        aux['encoder']['communication_embedding.weight'] = aux['encoder']['initial_embedding.weight'].new_zeros(128, config.state_dim)
     audit = dict(path=str(path),sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
                  source_schema=previous.get('schema_version'),head_updates=aux['updates'],
                  feature_contract='unchanged 12 local features + frozen128-dimensional context')

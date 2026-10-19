@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "checks": [
+    "contact_transition_verified",
+    "contact_transition_upgrade_verified",
+    "contact_transition_driver_verified",
+    "contact_module_verified",
+    "contact_full_runtime_verified"
+  ],
+  "original_sac_driver_model_env_radio_byte_unchanged_from_v5": true,
+  "full_runtime_hashes_match_current_source": true,
+  "all_ten_original_maps": 10,
+  "workers": 8,
+  "robots": 3,
+  "transitions": 3525,
+  "gpu_batch": 128,
+  "sac_gpu_iterations": 8,
+  "peak_cuda_mib": 18079.09228515625,
+  "min_host_available_gib": 15.874813079833984,
+  "all_own_decision_next_states_exact": true,
+  "all_actual_delivery_rewards_conserved": true,
+  "inherited_sac_updates": 7880,
+  "inherited_head_updates": 5036,
+  "scope": "Engineering checks only; raw300>=297 acceptance remains unmet"
+}

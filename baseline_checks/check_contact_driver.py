@@ -83,7 +83,10 @@ def main():
         assert second['completed_episodes']==4 and second['training_updates']==expected_updates
         assert second['automatic_review_control']  # Resume retains control without an env override.
         assert second['contact_learning']['updates']>first['contact_learning']['updates']
-        assert len(second['contact_learning']['replay'])>len(first['contact_learning']['replay'])
+        # A continued head may already have its bounded reservoir full.
+        # Optimizer progress above proves the resumed update; capacity is not
+        # expected to grow once the reservoir reaches its configured limit.
+        assert len(second['contact_learning']['replay'])>=len(first['contact_learning']['replay'])
         for key in ('policy_model','q_net1_model','q_net2_model'):
             assert all(torch.equal(v,second[key][k]) for k,v in first[key].items())
         state=json.loads((Path(paths['BASELINE_DIR'])/'run_state.json').read_text())

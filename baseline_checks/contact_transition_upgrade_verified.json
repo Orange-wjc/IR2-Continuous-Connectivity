@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "all_weights_temperature_optimizers_schedulers_exact": true,
+  "entire_auxiliary_state_replay_rng_exact": true,
+  "inherited_sac_updates": 7880,
+  "inherited_head_updates": 5036,
+  "new_condition_acceptance_empty": true,
+  "old_contract_resume_rejected": true,
+  "automatic_review": true
+}

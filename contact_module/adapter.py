@@ -34,6 +34,11 @@ class ContactAdapter:
 
     def reset(self, env):
         self.radio = Radio(env.ground_truth_size, env.n_agent, self.config)
+        # Outcome-only accounting; never exposed to policy/ranking features.
+        self.delivery_cells = np.zeros(env.n_agent)
+        self.claimed_delivery_cells = np.zeros(env.n_agent)
+        self.initial_delivery_cells = self.delivery_ledger_residual = 0.
+        self.own_slot_delivery_reward = 0.
         # The shared deployment/start prior is known initially, not future data.
         # Break original list aliases so receive(sender->receiver) is local.
         env.all_robot_belief = [[env.all_robot_belief[i][j].copy()
@@ -166,6 +171,7 @@ class ContactAdapter:
         before_novel = self.radio.unique_cells
         gains = self.radio.service(beliefs,positions,self.time+movement,
                                    self.config.wait_seconds,links,self.rank)
+        self.delivery_cells += gains
         self.last_delivery_novel = self.radio.unique_cells-before_novel
         self.last_delivery_reward = float(gains[robot]/1000.)
         self.time += duration
@@ -351,6 +357,9 @@ class ContactAdapter:
                     contact_map_packets=self.radio.completed_maps,contact_wait_actions=self.waits,
                     contact_empty_waits=self.empty_waits,contact_positive_empty_waits=self.positive_empty_waits)
         stats['contact_utility_recoveries'] = float(self.utility_recoveries)
+        stats['contact_initial_delivery_cells'] = float(self.initial_delivery_cells)
+        stats['contact_delivery_ledger_residual'] = float(self.delivery_ledger_residual)
+        stats['contact_own_slot_delivery_reward'] = float(self.own_slot_delivery_reward)
         stats.update({'contact_reward_'+k:v for k,v in self.reward_sums.items()})
         # Ground truth is used ONLY for terminal reporting, never observations.
         env = self.env

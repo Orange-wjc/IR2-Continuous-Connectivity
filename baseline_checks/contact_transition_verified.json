@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "fixtures": {
+    "off_slot_delivery_credited_once": true,
+    "terminal_and_timeout_preserved": true,
+    "initial_condition_not_credited_to_future_action": true
+  },
+  "scope": "Engineering verification, no optimization or acceptance",
+  "frozen_comparison": {
+    "frozen_source": "experiments/contact_easy10_v5_20261019/reviews/episode_000300/checkpoint_300.pth",
+    "steps": 12,
+    "physical_actions_observations_deliveries_and_wire_bytes_identical": true,
+    "previous_next_state_mismatches": 33,
+    "corrected_next_state_mismatches": 0,
+    "unique_delivery_cells": 11065,
+    "previous_credited_cells": 4569.0,
+    "corrected_credited_cells": 11065.0,
+    "initial_cells": 0.0,
+    "reward_residual": 0.0,
+    "all_15_columns_complete": true,
+    "only_actual_missing_delivery_added_to_total_reward": true
+  }
+}

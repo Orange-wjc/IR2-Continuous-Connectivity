@@ -30,6 +30,22 @@ class ShortRunner(Runner):
     def do_job(self,episode):
         import multi_robot_worker
         multi_robot_worker.MAX_EPS_STEPS=CHECK_STEPS
+        if not getattr(multi_robot_worker.Worker, '_decision_check', False):
+            original = multi_robot_worker.Worker.run_episode
+            def audited(worker, number):
+                valid = original(worker, number)
+                if valid:
+                    for robot in worker.robot_list:
+                        rows = robot.episode_buffer
+                        assert len({len(c) for c in rows}) == 1
+                        for index in range(len(rows[0])-1):
+                            for column in range(6):
+                                a, b = rows[9+column][index], rows[column][index+1]
+                                if hasattr(a, 'unpack'): a, b = a.unpack(), b.unpack()
+                                assert torch.equal(a, b), (number, robot.robot_id, index, column)
+                return valid
+            multi_robot_worker.Worker.run_episode = audited
+            multi_robot_worker.Worker._decision_check = True
         np.random.seed(101+episode);torch.manual_seed(101+episode)
         return super().do_job(episode)
 
@@ -41,6 +57,13 @@ def main():
     torch.manual_seed(101)
     p=PolicyNet(6,128,allow_wait=True);q=QNet(6,128,allow_wait=True)
     provenance=saved=None
+    if os.environ.get('IR2_CHECK_RESUME_CHECKPOINT'):
+        if os.environ.get('IR2_CHECK_INITIALIZATION'):
+            raise ValueError('Choose a prepared resume or a fresh initialization')
+        source=torch.load(os.environ['IR2_CHECK_RESUME_CHECKPOINT'],map_location='cpu')
+        config.CONTACT_CONFIG.validate_checkpoint(source)
+        p.load_state_dict(source['policy_model']);q.load_state_dict(source['q_net1_model'])
+        saved=source['contact_learning'];provenance=saved.get('provenance')
     if os.environ.get('IR2_CHECK_INITIALIZATION'):
         source,provenance=load_initialization(os.environ['IR2_CHECK_INITIALIZATION'],manifest)
         p.load_state_dict(source['policy_model']);q.load_state_dict(source['q_net1_model'])
@@ -78,6 +101,9 @@ def main():
         assert all(np.isfinite(v) for v in metrics.values())
         assert metrics['contact_sent_bytes']>0
         assert metrics['contact_positive_empty_waits']==0
+        assert metrics['contact_delivery_ledger_residual']==0
+        assert abs(metrics['contact_reward_delivery']*1000 + metrics['contact_initial_delivery_cells']
+                   - metrics['contact_unique_cells']) < 1e-6
         loss=auxiliary.update(info['contact_labels']);assert loss is not None
         records.append(dict(episode=info['episode_number'],transitions=len(rows[0]),
                             labels=len(info['contact_labels']),metrics={k:float(v) for k,v in metrics.items()}))
@@ -104,6 +130,7 @@ def main():
                 peak_cuda_mib=peak,min_host_available_gib=minimum,
                 elapsed_seconds=time.monotonic()-started,rollouts=records,
                 production_files_unchanged=True,
+                all_own_decision_next_states_exact=True,all_actual_delivery_rewards_conserved=True,
                 scope='Isolated engineering samples and copy-only gradients; no formal training/effectiveness evidence')
     report['source_sha256']={str(p):hashlib.sha256(p.read_bytes()).hexdigest()
                             for p in list(Path('contact_module').glob('*.py'))+

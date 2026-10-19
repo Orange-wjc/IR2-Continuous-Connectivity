@@ -55,6 +55,10 @@ class Worker:
         """ Run simulation episode for multiple robots """
         done = False
         astar_unsuccessful = False
+        transitions = None
+        if self.contact is not None:
+            from contact_module.transitions import DecisionTransitions
+            transitions = DecisionTransitions(self.contact, self.robot_list)
 
         ### Run episode ###
         for step in range(MAX_EPS_STEPS):
@@ -69,6 +73,8 @@ class Worker:
             
                 deciding_robot.observations, success = self.get_observations(deciding_robot.robot_position, robot_id, curr_episode, step, plot=True)
                 if not success: astar_unsuccessful = True; break
+                if transitions is not None:
+                    transitions.begin(robot_id, deciding_robot.observations)
                 deciding_robot.save_observations(deciding_robot.observations)
 
                 ### Forward pass through policy to get next position ###
@@ -90,11 +96,14 @@ class Worker:
                 success, reward, done = self.env.single_robot_step(robot_id, self.all_robot_positions, self.global_step, step, dist_travelled)
                 if not success: astar_unsuccessful = True; break
                 reward_list.append(reward)
+                if transitions is not None:
+                    transitions.action_reward(robot_id, reward)
 
                 ### Update observations + rewards from action ###
                 deciding_robot.observations, success = self.get_observations(deciding_robot.robot_position, robot_id, curr_episode, step, plot=True)
                 if not success: astar_unsuccessful = True; break
-                deciding_robot.save_next_observations(deciding_robot.observations)
+                if transitions is None:
+                    deciding_robot.save_next_observations(deciding_robot.observations)
 
                 ### Save a frame to generate gif of robot trajectories ###
                 if self.save_image:
@@ -110,9 +119,12 @@ class Worker:
                 break
 
             team_reward = self.env.update_env_and_get_team_rewards()
-            for i in range(len(reward_list)):
-                reward_list[i] += team_reward
-                self.robot_list[i].save_reward_done(reward_list[i], done)
+            if transitions is not None:
+                transitions.team_reward(team_reward)
+            else:
+                for i in range(len(reward_list)):
+                    reward_list[i] += team_reward
+                    self.robot_list[i].save_reward_done(reward_list[i], done)
 
             ### [Ground Truth] Save a frame to generate gif of robot trajectories ###
             if self.save_image:
@@ -127,6 +139,23 @@ class Worker:
             
             if done:
                 break
+
+        if transitions is not None and not astar_unsuccessful:
+            # Final observations include the last paid exchanges of every
+            # robot. Time limits retain the original nonterminal bootstrap;
+            # genuine all-robot completion uses done=True for every robot.
+            observations = []
+            for robot_id, robot in enumerate(self.robot_list):
+                success = self.env.update_graph(robot_id,
+                    self.env.find_frontier(self.env.all_downsampled_belief[robot_id]),
+                    eps=curr_episode, step=step)
+                if not success: astar_unsuccessful = True; break
+                observation, success = self.get_observations(
+                    robot.robot_position, robot_id, curr_episode, step, plot=False)
+                if not success: astar_unsuccessful = True; break
+                observations.append(observation)
+            if not astar_unsuccessful:
+                transitions.finish(observations, done)
 
         for robot in self.robot_list:
             for i in range(15):

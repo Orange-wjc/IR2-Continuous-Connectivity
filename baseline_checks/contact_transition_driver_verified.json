@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "actual_driver_fresh_and_resume": false,
+  "actual_driver_upgraded_resume": true,
+  "initial_completed": 2,
+  "resumed_completed": 4,
+  "movement_updates": 7880,
+  "initial_content_updates": 5044,
+  "resumed_content_updates": 5052,
+  "original_warmup_2000_preserved": true,
+  "wrong_method_and_bandwidth_resume_rejected": true,
+  "auxiliary_weights_optimizer_buffer_counter_restored": true,
+  "sigint_save_and_ray_cleanup": true,
+  "production_checkpoint_unchanged": true,
+  "automatic_review_control_persists_on_resume": true,
+  "scope": "Temporary engineering model only; two2-step returns per launch; not formal training"
+}

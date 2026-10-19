@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "weights_temperature_optimizers_and_schedulers_exact": true,
+  "head_context_optimizer_rng_exact": true,
+  "inherited_sac_updates": 552,
+  "inherited_head_updates": 1308,
+  "prior_exposure_recorded": true,
+  "new_condition_acceptance_empty": true,
+  "stale_auxiliary_replay_cleared": true,
+  "scope": "Prepared checkpoint audit, no optimization"
+}

@@ -454,6 +454,10 @@ def main():
             progress.record(info, True, metrics, len(experience_buffer[0]), curr_episode)
             if CONTACT_CONFIG.enabled and progress.completed % 300 == 0:
                 save_checkpoint()
+            if auto_review and metrics.get('contact_positive_empty_waits',0)>0:
+                review_pause[0] = True
+                print('Unexpected positive idle reward; preserving diagnostics and pausing immediately.',flush=True)
+                break
             if auto_review and progress.acceptance is not None:
                 target_reached[0] = True
                 print('Target reached: at least 297 successes in 300 real attempts; saving and stopping.',flush=True)

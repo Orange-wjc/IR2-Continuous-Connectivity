@@ -14,7 +14,7 @@ class Review:
     def maybe_record(self,*a):return None
 
 
-def check(path,failures=3,invalid=False,missing=False):
+def check(path,failures=3,invalid=False,missing=False,reward_anomaly=False):
     path.mkdir(parents=True)
     maps=['map_{}'.format(i) for i in range(10)]
     attempts=[dict(episode=i,map=maps[i%(9 if missing else 10)],valid=True,success=i>=failures)
@@ -26,7 +26,8 @@ def check(path,failures=3,invalid=False,missing=False):
                resume={'completed_episodes':299,'baseline_progress':saved},review_enabled=True)
     p.review=Review()
     assert p.snapshot()['acceptance_recent']==attempts
-    p.record({'episode_number':299},True,{'success_rate':1.,'explored_rate':1.},10000,307)
+    p.record({'episode_number':299},True,{'success_rate':1.,'explored_rate':1.,
+              'contact_positive_empty_waits':int(reward_anomaly)},10000,307)
     return p
 
 
@@ -40,6 +41,7 @@ def main():
         assert check(path/'296',failures=4).acceptance is None
         assert check(path/'invalid',invalid=True).acceptance is None
         assert check(path/'missing',missing=True).acceptance is None
+        assert check(path/'reward_anomaly',reward_anomaly=True).acceptance is None
         evidence=json.loads((path/'297/acceptance.json').read_text())
         assert evidence['successes']==297 and evidence['invalid_attempts']==0
     result=dict(passed=True,exact_297_of300_accepted=True,below_threshold_rejected=True,

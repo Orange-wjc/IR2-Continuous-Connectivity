@@ -27,6 +27,8 @@ class ContactAdapter:
                                 time_cost=0., delivery=0.)
         self.empty_waits = self.positive_empty_waits = 0
         self.last_delivery_novel = self.last_delivery_reward = 0.
+        self.empty_wait_details = []
+        self.last_utility_pose = {}
 
     def reset(self, env):
         self.radio = Radio(env.ground_truth_size, env.n_agent, self.config)
@@ -279,10 +281,12 @@ class ContactAdapter:
         # Match IR2's own-pose exclusion. Otherwise WAIT can repeatedly collect
         # a positive predicted rendezvous reward without any real delivery.
         own = env.all_robot_positions_belief[robot][robot]
+        self.last_utility_pose[robot] = np.asarray(own).copy()
         utility[np.linalg.norm(coords-own,axis=1) <= self.config.self_exclusion_radius] = 0.
         return delta,utility,True
 
-    def record_reward(self, distance, known_gain, reward, frontier, exploration, rendezvous):
+    def record_reward(self, distance, known_gain, reward, frontier, exploration, rendezvous,
+                      robot=None, step=None, position=None):
         # Diagnostics only; these privileged outcome counters never feed scores.
         for key,value in dict(frontier=frontier,exploration=exploration,rendezvous=rendezvous,
                 distance_cost=distance/512.,time_cost=self.config.time_penalty*(
@@ -291,6 +295,14 @@ class ContactAdapter:
         if distance < 1e-8 and known_gain == 0 and self.last_delivery_novel == 0:
             self.empty_waits += 1
             self.positive_empty_waits += int(reward > 1e-8)
+            if reward > 1e-8 and len(self.empty_wait_details)<16:
+                center=self.last_utility_pose.get(robot)
+                self.empty_wait_details.append(dict(robot=robot,step=step,reward=float(reward),
+                    frontier=float(frontier),exploration=float(exploration),rendezvous=float(rendezvous),
+                    delivery=float(self.last_delivery_reward),known_gain=int(known_gain),
+                    delivered_novel=int(self.last_delivery_novel),
+                    position=None if position is None else np.asarray(position).tolist(),
+                    utility_center=None if center is None else center.tolist()))
 
     def metrics(self):
         stats = dict(contact_seconds=self.time,contact_sent_bytes=self.radio.sent_bytes,

@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "checks": [
+    "contact_pose_upgrade_verified",
+    "contact_pose_driver_verified",
+    "contact_wait_reward_verified",
+    "contact_module_verified",
+    "contact_full_runtime_verified",
+    "acceptance_verified",
+    "training_review_verified"
+  ],
+  "source_sha256": {
+    "driver.py": "6d3fe99772af8f3f1a7ebcb10194081da11376f11793e88d918c4ef6d46e412d",
+    "baseline_support.py": "c744d08670d2b53e2b4ca24acd5465dbb4845edc7cf2185d5a0068be4661534f",
+    "training_review.py": "7fb078942887a7202d52a15620e0d6139892baf58c414c6a2b98b87269a36bc3",
+    "multi_robot_worker.py": "f542fdac78db8cd3e6a276aca1f0700f82f794f80ffe642bd0230b246fa71af6",
+    "runner.py": "a6413aa9726ecd21aa3a5046cfbf03108679f146f5aeaa8d0903c88d701fe224",
+    "env.py": "293557f2961e49771be30b8290f0e362fa3a459ff5e46e40f51108449c0dbc86",
+    "contact_module/adapter.py": "7abc29df3f5c4a78cdfcdba3dedc633d4182716df967ee3b3d07f1f78290a91e",
+    "contact_module/config.py": "512dfa4fbac57aba1949b685d4e438365101021cf346063740ae59c56f0a4003",
+    "contact_module/preparation.py": "08fc263a2ea78ffb3f9b7f366ee142d977cba15af606d5db9d4b5d9168f83fc2"
+  },
+  "original_sac_unchanged": true,
+  "prepared_upgrade": true,
+  "inherited_sac_updates": 552,
+  "new_condition_episodes": 0,
+  "scope": "Engineering verification; user300-attempt >=99% goal is not yet met"
+}

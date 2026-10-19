@@ -6,7 +6,7 @@ import os
 
 @dataclass(frozen=True)
 class ContactConfig:
-    schema_version: int = 3
+    schema_version: int = 4
     method: str = 'original'
     bytes_per_second: float = 2048.
     packet_bytes: int = 512

@@ -377,7 +377,8 @@ class Env():
         if self.contact is not None:
             known_gain = np.count_nonzero(self.all_robot_belief[robot_id][robot_id] != 127)-before_known
             self.contact.record_reward(dist_travelled,known_gain,individual_reward,
-                all_num_new_frontiers[robot_id]/25.,new_pose_explore_util/50.,new_pose_rendezvous_util)
+                all_num_new_frontiers[robot_id]/25.,new_pose_explore_util/50.,new_pose_rendezvous_util,
+                robot=robot_id,step=sim_step,position=robot_position)
 
         success = True
         return success, individual_reward, done

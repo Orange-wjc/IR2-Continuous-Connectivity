@@ -2,7 +2,7 @@
 
 当前分支 `research/ir2-modular-contact` 基于已推送的 `baseline/ir2-easy10` / `dcea459d`。
 原版运行 `2` 已由用户暂停：1394有效回合、0无效回合、11104次SAC；模型、日志及十图清单保留本地。
-v1运行contact_easy10_1已在2036有效回合后退出，近100成功率50%，尚未证明优于有限通信FIFO。当前修复版本为schema_version=3；旧版本检查点不可静默续训为新奖励语义。
+v1运行contact_easy10_1已在2036有效回合后退出，近100成功率50%，尚未证明优于有限通信FIFO。当前修复版本为schema_version=4；旧版本检查点不可静默续训为新奖励语义。
 
 ## 当前目标与边界
 
@@ -14,15 +14,17 @@ v1运行contact_easy10_1已在2036有效回合后退出，近100成功率50%，�
 旧研究的正结果不能直接视作本版结果。消息头结构与12项本地特征沿用旧实现，图上下文改为当前IR2的128维冻结编码。
 当前实验仅验证学习链路，后续对照必须使用相同通信机制、动作空间和训练预算。
 
-## 当前v3：空等待奖励修复与自动训练复查
+## 当前v4：空等待奖励修复与自动训练复查
 
 执行计划见[CONTACT_LEARNING_PLAN.md](CONTACT_LEARNING_PLAN.md)。用户最新指令已授权自动启动、每300回合复查、必要时保存暂停再修复，直到真实连续300尝试至少297成功。此前“只由用户前台启动”和“不自动暂停”要求在此流程中已更新。
 
 v2保留坐标/路径/预训练修复，但741回合冻结完整轨迹证明：9999出现9次、9995出现7次无新增知识和真实交付仍获正奖励的WAIT。v3恢复原版IR2自身30像素附近会合值清零，其它奖励与原SAC更新保留。配对冻结诊断空等正奖励归零，但旧模型仍失败；不能把工程修复当作已达99%。
 
-v3新增统计：实际并集、最小个体覆盖、空等待正奖励次数和奖励分量。仅供回合末统计，真值不进入观察/消息评分/动作。成功条件仍是每台机器人自身覆盖≥99%。schema_version=3拒绝把v2模型直接resume成新奖励版本。
+v3新增统计：实际并集、最小个体覆盖、空等待正奖励次数和奖励分量。仅供回合末统计，真值不进入观察/消息评分/动作。成功条件仍是每台机器人自身覆盖≥99%。schema_version=4拒绝把v2模型直接resume成新奖励版本。
 
-使用原版model/2共享移动初始化，加v2零联合更新准备快照的消息头，保持v2/v3起点一致：actor/双Q/温度复制，移动优化器与回放重新建立；冻结context逐张量对应已训练actor。辅助头/优化器/回放/RNG从已验证的准备快照载入，跳过重复20回合准备。12项包特征未变；只接受明确版本和相同源actor的准备快照，不能将741回合模型静默作为该受控起点。
+v3在77回合/552 SAC后发现初始自身位置未同步，9997实际自位置距误用的共同起点约62/55像素，使清零中心偏移。v4在Worker构造与观察边界同步自身已知位置，队友位姿仍只用共同先验/付费消息；增加逐动作异常诊断并遇到空等正奖励立即保存暂停。
+
+当前v4从已停训的v3显式升级：保留actor/双Q/温度、优化器/学习率状态、冻结context、消息头及RNG；累计SAC继承552、头继承1308。新条件回合、各图访问及验收窗口重置，辅助回放清空。旧77回合和全部失败保留，未筛选；不以新旧混合窗口验收。初始权重与优化器逐张量审计见contact_pose_upgrade_verified.json。升级准备工具为baseline_checks/upgrade_contact_pose_checkpoint.py，不允许普通resume静默跨schema。
 
 ## 自动训练使用方式
 
@@ -31,17 +33,15 @@ v3新增统计：实际并集、最小个体覆盖、空等待正奖励次数和
 ```bash
 conda activate ir2_train
 cd ~/wjc_ws/IR2-Continuous-Connectivity
-IR2_METHOD=finite_learned IR2_RUN_NAME=contact_easy10_v3_20261019 IR2_AGENTS=8 \
-IR2_INIT_FROM=model/2/checkpoint.pth \
-IR2_CONTENT_INIT=experiments/contact_easy10_v2_20261019/prepared_initialization.pth \
-IR2_AUTO_REVIEW=1 python -u driver.py
+IR2_METHOD=finite_learned IR2_RUN_NAME=contact_easy10_v4_20261019 IR2_AGENTS=8 \
+IR2_RESUME=1 IR2_AUTO_REVIEW=1 python -u driver.py
 ```
 
-新模型model/contact_easy10_v3_20261019/checkpoint.pth；曲线train/contact_easy10_v3_20261019/；日志experiments/contact_easy10_v3_20261019/training.log。
+新模型model/contact_easy10_v4_20261019/checkpoint.pth；曲线train/contact_easy10_v4_20261019/；日志experiments/contact_easy10_v4_20261019/training.log。
 中断后续训移除两个初始化参数，使用：
 
 ```bash
-IR2_METHOD=finite_learned IR2_RUN_NAME=contact_easy10_v3_20261019 \
+IR2_METHOD=finite_learned IR2_RUN_NAME=contact_easy10_v4_20261019 \
 IR2_AGENTS=8 IR2_RESUME=1 IR2_AUTO_REVIEW=1 python -u driver.py
 ```
 
@@ -52,7 +52,7 @@ IR2_AGENTS=8 IR2_RESUME=1 IR2_AUTO_REVIEW=1 python -u driver.py
 IR2_AUTO_REVIEW=1时，如连续3个无效回合、周期发现空等正奖励/无效/非有限记录，或600回合后无明确增长且仍有长期失败/退化地图，会保存退出为paused_for_diagnosis。程序不修改源码或参数；后续由当前Codex活动目标继续诊断与受控修复。达到99%以前不得把这种暂停误报成完成。
 
 ```bash
-tensorboard --logdir train/contact_easy10_v3_20261019 --host 127.0.0.1 --port 6013
+tensorboard --logdir train/contact_easy10_v4_20261019 --host 127.0.0.1 --port 6013
 ```
 
 重点看Progress/Success Rate 100 Percent、Review/*、Maps/*/Success Last10 Percent、Contact/positive_empty_waits、Contact/min_local_coverage、Contact/union_coverage、Contact/reward_*及Content Loss/Updates。

@@ -28,6 +28,21 @@ def main():
     q=QNet(6,128,allow_wait=True);q.load_state_dict(source['q_net1_model'])
     c=ContactAdapter(cfg.CONTACT_CONFIG,p,ContentTrainer(p,cfg.CONTACT_CONFIG,saved).weights(),4)
     w=Worker(0,3,p,q,4,device='cpu',contact=c)
+    # Use the map which exposed the startup pose mismatch, and do not manually
+    # repair its self poses in the fixture: that hid this defect in the v3 check.
+    probe=ContactAdapter(cfg.CONTACT_CONFIG,p,saved,2)
+    initial=Worker(0,3,p,q,2,device='cpu',contact=probe)
+    probe.expected_delivery=lambda pair:500.
+    for robot in range(3):
+        actual=initial.robot_list[robot].robot_position
+        assert np.array_equal(actual,initial.env.all_robot_positions_belief[robot][robot])
+        for peer in range(3):
+            if peer!=robot:
+                assert np.array_equal(initial.env.all_robot_positions_belief[robot][peer],initial.env.start_position)
+        initial.env.all_robot_positions_belief[robot][robot]=initial.env.start_position.copy()
+        obs,valid=initial.get_observations(actual,robot,2,0);assert valid
+        assert np.array_equal(actual,initial.env.all_robot_positions_belief[robot][robot])
+        assert float(obs[0][0,int(obs[2].item()),3])==0.
     # Fixed predicted gain can be wrong when peers are disconnected. It must
     # still not yield an idle reward, while other nodes retain guidance.
     c.expected_delivery=lambda pair:500.
@@ -35,7 +50,6 @@ def main():
     pos=w.all_robot_positions[0]
     rewards=[]
     for step in range(3):
-        w.env.all_robot_positions_belief[0][0]=pos
         obs,valid=w.get_observations(pos,0,4,step);assert valid
         assert float(obs[0][0,int(obs[2].item()),3])==0.
         valid,reward,_=w.env.single_robot_step(0,w.all_robot_positions,4,step,0.)
@@ -50,6 +64,7 @@ def main():
     result=dict(passed=True,repeated_empty_wait_rewards=rewards[1:],
         empty_wait_positive_rewards=c.positive_empty_waits,useful_wait_not_flagged=True,
         content_init_sha256=audit['sha256'],shared_prepared_head_exact=True,
+        all_initial_self_poses_match_motor_positions=True,peer_poses_not_freely_revealed=True,
         scope='Isolated deterministic regression, not formal training')
     write_json('baseline_checks/contact_wait_reward_verified.json',result)
     print(json.dumps(result,indent=2))

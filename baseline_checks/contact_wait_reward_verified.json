@@ -8,5 +8,7 @@
   "useful_wait_not_flagged": true,
   "content_init_sha256": "eddfd90b32a76a779e58ba5100ad2cd9941a50218309e9130f93752bcb36ea69",
   "shared_prepared_head_exact": true,
+  "all_initial_self_poses_match_motor_positions": true,
+  "peer_poses_not_freely_revealed": true,
   "scope": "Isolated deterministic regression, not formal training"
 }

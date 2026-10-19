@@ -22,6 +22,7 @@ class Runner(object):
         self.local_q_net = QNet(INPUT_DIM, EMBEDDING_DIM, allow_wait=CONTACT_CONFIG.enabled)
         self.auxiliary = None
         self.contact_labels = []
+        self.contact_diagnostics = []
         self.local_network.to(self.device)
         self.local_q_net.to(self.device)
 
@@ -43,6 +44,7 @@ class Runner(object):
         worker = Worker(self.meta_agent_id, n_agent, self.local_network, self.local_q_net, episode_number, device=self.device, save_image=save_img, greedy=False, contact=contact)
         succeess = worker.work(episode_number)
         self.contact_labels = contact.labels if contact is not None else []
+        self.contact_diagnostics = contact.empty_wait_details if contact is not None else []
 
         job_results = worker.episode_buffer
         perf_metrics = worker.perf_metrics
@@ -66,6 +68,8 @@ class Runner(object):
         }
         if CONTACT_CONFIG.learned:
             info['contact_labels'] = self.contact_labels
+        if self.contact_diagnostics:
+            info['contact_diagnostics'] = self.contact_diagnostics
 
         return success, job_results, metrics, info
 

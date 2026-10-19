@@ -38,6 +38,10 @@ class Worker:
             robot = Robot(robot_id=i, position=robot_position, plot=save_image)
             self.robot_list.append(robot)
             self.all_robot_positions.append(robot_position)
+            if self.contact is not None:
+                # Each robot knows its own deployed pose. Peer poses remain
+                # the common prior until their paid radio packets arrive.
+                self.env.all_robot_positions_belief[i][i] = robot_position.copy()
 
         self.perf_metrics = dict()
         self.episode_buffer = []
@@ -156,6 +160,10 @@ class Worker:
 
     def get_observations(self, robot_position, robot_id, eps, step, plot=True):
         """ Get robot's observation of environment (neural network inputs) """
+        if self.contact is not None:
+            # Motor/localization pose is authoritative for SELF, including the
+            # very first observation. Do not synchronize any peer this way.
+            self.env.all_robot_positions_belief[robot_id][robot_id] = np.asarray(robot_position).copy()
     
         # Rendezvous Utility Layer (Gen first because it involves A* path planning, and potentially regen graph if no path found)
         map_delta_unnormalized, rendezvous_utility_inputs, success = self.env.generate_rendezvous_utility_layer(robot_id, eps)

@@ -188,13 +188,15 @@ class Progress:
             self.invalid += 1
             success = None
         self.acceptance_recent.append(dict(episode=episode,map=name,valid=bool(valid),
-                                           success=bool(success)))
+                                           success=bool(success),
+                                           reward_anomaly=metrics.get('contact_positive_empty_waits',0)>0))
         row = dict(episode=episode, map=name, valid_rollout=bool(valid),
                    task_success=success, completed_episodes=self.completed,
                    invalid_episodes=self.invalid, training_updates=self.updates,
                    replay_size=replay_size, dispatched_episodes=dispatched,
                    available_memory_gib=memory_available_gib(),
                    metrics={k:float(v) for k,v in metrics.items()},
+                   diagnostics=info.get('contact_diagnostics',[]),
                    time=datetime.now().astimezone().isoformat())
         with (self.directory / 'progress.jsonl').open('a') as handle:
             handle.write(json.dumps(row, allow_nan=False) + '\n')
@@ -234,9 +236,10 @@ class Progress:
             attempts = list(self.acceptance_recent)
             count = sum(r['success'] for r in attempts)
             visits = {m:sum(r['map']==m for r in attempts) for m in self.maps}
-            if len(attempts)==300 and count>=297 and all(r['valid'] for r in attempts) and min(visits.values())>=20:
+            if (len(attempts)==300 and count>=297 and min(visits.values())>=20 and
+                all(r['valid'] and not r.get('reward_anomaly',False) for r in attempts)):
                 self.acceptance = dict(completed_episodes=self.completed,window_attempts=300,
                     successes=count,success_percent=100*count/300,per_map_visits=visits,
-                    invalid_attempts=0,training_updates=self.updates,attempts=attempts,
+                    invalid_attempts=0,reward_anomalies=0,training_updates=self.updates,attempts=attempts,
                     scope='Training criterion only; no held-out performance claim')
                 write_json(self.directory/'acceptance.json',self.acceptance)
